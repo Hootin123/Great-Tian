@@ -1,0 +1,221 @@
+@charset "UTF-8";
+body {
+  width: 100%;
+  height: 100%;
+  background: url(../../img/newHongbao/newRegister-bg.png) 0 0 no-repeat;
+  background-size: 100%;
+}
+.sign{
+  position: absolute;
+  width:6rem;
+  height: 0.7rem;
+  left:0.75rem;
+  top:0.15rem;
+
+}
+.logo{
+  width: 1.93rem;
+  height:0.7rem;
+  float: left;
+}
+.logo img,.logo-text img{
+  display: block;
+  width:100%;
+  height: 100%;
+}
+.logo-text{
+  width:2.95rem;
+  height:0.36rem;
+  margin-top: 0.17rem;
+  float: right;
+}
+
+header {
+  margin: 0 auto;
+  margin-top: 3.06rem;
+  width: 3.03rem;
+  height: 0.6rem;
+}
+header .register, header .login {
+  width: 50%;
+  height: 0.57rem;
+  float: left;
+  font-weight: bold;
+  font-size: 0.36rem;
+  font-family: '微软雅黑';
+  color: #fdffda;
+  text-align: center;
+}
+header .active {
+  color: #ffdf00;
+  border-bottom: 0.03rem solid #ffdf00;
+}
+
+.register-main {
+  width: 6.81rem;
+  margin: 0.36rem 0.33rem 0;
+}
+.register-main ul {
+  width: 100%;
+  height: 6.2rem;
+  background: url(../../img/newHongbao/newRegister-main.png) 0 0 no-repeat;
+  background-size: 100% 100%;
+  padding: 0 0.28rem;
+  box-sizing: border-box;
+}
+.register-main ul li {
+  width: 100%;
+  height: 0.99rem;
+  border-bottom: 1px dashed #d2d4aa;
+  position: relative;
+}
+.register-main ul li input {
+  display: block;
+  width: 100%;
+  height: 100%;
+  line-height: 0.99rem;
+  text-indent: 0.1rem;
+  background: none;
+  border: 0;
+  font-size: 0.3rem;
+}
+.register-main ul li b {
+  height: 0.78rem;
+  position: absolute;
+  right: 0.28rem;
+  top: 0.1rem;
+  font-size: 0.26rem;
+  line-height: 0.78rem;
+  color: #f00;
+}
+.register-main ul .phoneCode {
+  border-bottom: 0;
+}
+.register-main ul .phoneCode input {
+  width: 4.32rem;
+  float: left;
+}
+.register-main ul .phoneCode span {
+  width: 1.82rem;
+  height: 0.5rem;
+  margin-top: 0.36rem;
+  float: left;
+  border-left: 1px solid #d2d4aa;
+  font-size: 0.3rem;
+  color: #333;
+  text-align: center;
+}
+.register-main .goRegister {
+  width: 6.8rem;
+  height: 1rem;
+  margin: 0 auto;
+  margin-top: 0.76rem;
+  background: url(../../img/newHongbao/active-footer.png) 0 0 no-repeat;
+  background-size: 100% 100%;
+  font-weight: bold;
+  font-size: 0.36rem;
+  font-family: '微软雅黑';
+  color: #000;
+  line-height: 1rem;
+  text-align: center;
+}
+.register-main .hint {
+  width: 50%;
+  height: 0.6rem;
+  position: absolute;
+  left: 25%;
+  top: 10.3rem;
+  background: rgba(6, 150, 250, 0.8);
+  border-radius: 0.4rem;
+  font-size: 0.28rem;
+  text-align: center;
+  line-height: 0.6rem;
+  color: #f00;
+  font-weight: 600;
+}
+
+.login-main {
+  width: 6.81rem;
+  margin: 0.36rem 0.33rem 0;
+}
+.login-main ul {
+  width: 100%;
+  height: 3.24rem;
+  background: url(../../img/newHongbao/newLogin-main.png) 0 0 no-repeat;
+  background-size: 100% 100%;
+  padding: 0 0.28rem;
+  box-sizing: border-box;
+}
+.login-main ul li {
+  width: 100%;
+  height: 0.99rem;
+  border-bottom: 1px dashed #d2d4aa;
+  position: relative;
+}
+.login-main ul li input {
+  display: block;
+  width: 100%;
+  height: 100%;
+  line-height: 0.99rem;
+  text-indent: 0.1rem;
+  background: none;
+  border: 0;
+  font-size: 0.3rem;
+}
+.login-main ul li b {
+  height: 0.78rem;
+  position: absolute;
+  right: 0.28rem;
+  top: 0.1rem;
+  font-size: 0.26rem;
+  line-height: 0.78rem;
+  color: #f00;
+}
+.login-main ul .code {
+  border-bottom: 0;
+}
+.login-main ul .code input {
+  width: 4.32rem;
+  float: left;
+}
+.login-main ul .code span {
+  width: 1.9rem;
+  height: 0.6rem;
+  margin-top: 0.26rem;
+  float: left;
+}
+.login-main ul .code span img {
+  width: 100%;
+  height: 100%;
+  background-size: 100% 100%;
+}
+.login-main .goLogin {
+  width: 6.8rem;
+  height: 1rem;
+  margin: 0 auto;
+  margin-top: 1.76rem;
+  background: url(../../img/newHongbao/active-footer.png) 0 0 no-repeat;
+  background-size: 100% 100%;
+  font-weight: bold;
+  font-size: 0.36rem;
+  font-family: '微软雅黑';
+  color: #000;
+  line-height: 1rem;
+  text-align: center;
+}
+.login-main .hint {
+  width: 50%;
+  height: 0.6rem;
+  position: absolute;
+  left: 25%;
+  top: 8rem;
+  background: rgba(6, 150, 250, 0.8);
+  border-radius: 0.4rem;
+  font-size: 0.28rem;
+  text-align: center;
+  line-height: 0.6rem;
+  color: #f00;
+  font-weight: 600;
+}
+
+/*# sourceMappingURL=newRegister.css.map */

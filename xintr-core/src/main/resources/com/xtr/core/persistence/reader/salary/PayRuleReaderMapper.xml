@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xtr.core.persistence.reader.salary.PayRuleReaderMapper">
+
+    <resultMap id="BaseResultMap" type="com.xtr.api.domain.salary.PayRuleBean">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="company_id" jdbcType="BIGINT" property="companyId" />
+        <result column="dept_id" jdbcType="BIGINT" property="deptId" />
+        <result column="company_menber_id" jdbcType="BIGINT" property="companyMenberId" />
+        <result column="pay_start_type" jdbcType="INTEGER" property="payStartType" />
+        <result column="pay_start_day" jdbcType="VARCHAR" property="payStartDay" />
+        <result column="pay_end_type" jdbcType="INTEGER" property="payEndType" />
+        <result column="pay_end_day" jdbcType="VARCHAR" property="payEndDay" />
+        <result column="pay_day_type" jdbcType="INTEGER" property="payDayType" />
+        <result column="pay_day" jdbcType="VARCHAR" property="payDay" />
+        <result column="pay_way" jdbcType="INTEGER" property="payWay" />
+        <result column="pay_critical_point" jdbcType="INTEGER" property="payCriticalPoint" />
+        <result column="is_social_security" jdbcType="VARCHAR" property="isSocialSecurity" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, company_id, dept_id, company_menber_id, pay_start_type, pay_start_day, pay_end_type,
+        pay_end_day, pay_day_type, pay_day, pay_way, pay_critical_point, is_social_security,
+        create_time
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from pay_rule
+        where id = #{id,jdbcType=BIGINT} limit 1
+    </select>
+
+    <!--根据企业id查询记薪规则-->
+    <select id="selectByCompanyId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from pay_rule
+        where company_id = #{companyId} limit 1
+    </select>
+
+
+
+</mapper>

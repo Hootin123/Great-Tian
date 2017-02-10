@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xtr.core.persistence.writer.customer.CustomersStationWriterMapper" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from customers_station
+    where station_id = #{stationId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xtr.api.domain.customer.CustomersStationBean" >
+    insert into customers_station (station_id, station_customer_id, station_enter_time, 
+      station_employ_method, station_regular_time, 
+      station_customer_number, station_customer_state, 
+      station_dept_id, station_station_name, station_contract_file, 
+      station_regular_evaluate, station_create_time, 
+      station_update_time,station_dimissing_time)
+    values (#{stationId,jdbcType=BIGINT}, #{stationCustomerId,jdbcType=BIGINT}, #{stationEnterTime,jdbcType=TIMESTAMP}, 
+      #{stationEmployMethod,jdbcType=INTEGER}, #{stationRegularTime,jdbcType=TIMESTAMP}, 
+      #{stationCustomerNumber,jdbcType=VARCHAR}, #{stationCustomerState,jdbcType=INTEGER}, 
+      #{stationDeptId,jdbcType=BIGINT}, #{stationStationName,jdbcType=VARCHAR}, #{stationContractFile,jdbcType=VARCHAR}, 
+      #{stationRegularEvaluate,jdbcType=VARCHAR}, #{stationCreateTime,jdbcType=TIMESTAMP}, 
+      #{stationUpdateTime,jdbcType=TIMESTAMP},#{stationDimissingTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xtr.api.domain.customer.CustomersStationBean" >
+    insert into customers_station
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stationId != null" >
+        station_id,
+      </if>
+      <if test="stationCustomerId != null" >
+        station_customer_id,
+      </if>
+      <if test="stationEnterTime != null" >
+        station_enter_time,
+      </if>
+      <if test="stationEmployMethod != null" >
+        station_employ_method,
+      </if>
+      <if test="stationRegularTime != null" >
+        station_regular_time,
+      </if>
+      <if test="stationCustomerNumber != null" >
+        station_customer_number,
+      </if>
+      <if test="stationCustomerState != null" >
+        station_customer_state,
+      </if>
+      <if test="stationDeptId != null" >
+        station_dept_id,
+      </if>
+      <if test="stationStationName != null" >
+        station_station_name,
+      </if>
+      <if test="stationContractFile != null" >
+        station_contract_file,
+      </if>
+      <if test="stationRegularEvaluate != null" >
+        station_regular_evaluate,
+      </if>
+      <if test="stationCreateTime != null" >
+        station_create_time,
+      </if>
+      <if test="stationUpdateTime != null" >
+        station_update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stationId != null" >
+        #{stationId,jdbcType=BIGINT},
+      </if>
+      <if test="stationCustomerId != null" >
+        #{stationCustomerId,jdbcType=BIGINT},
+      </if>
+      <if test="stationEnterTime != null" >
+        #{stationEnterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stationEmployMethod != null" >
+        #{stationEmployMethod,jdbcType=INTEGER},
+      </if>
+      <if test="stationRegularTime != null" >
+        #{stationRegularTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stationCustomerNumber != null" >
+        #{stationCustomerNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="stationCustomerState != null" >
+        #{stationCustomerState,jdbcType=INTEGER},
+      </if>
+      <if test="stationDeptId != null" >
+        #{stationDeptId,jdbcType=BIGINT},
+      </if>
+      <if test="stationStationName != null" >
+        #{stationStationName,jdbcType=VARCHAR},
+      </if>
+      <if test="stationContractFile != null" >
+        #{stationContractFile,jdbcType=VARCHAR},
+      </if>
+      <if test="stationRegularEvaluate != null" >
+        #{stationRegularEvaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="stationCreateTime != null" >
+        #{stationCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stationUpdateTime != null" >
+        #{stationUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stationDimissingTime != null" >
+        #{stationDimissingTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xtr.api.domain.customer.CustomersStationBean" >
+    update customers_station
+    <set >
+      <if test="stationCustomerId != null" >
+        station_customer_id = #{stationCustomerId,jdbcType=BIGINT},
+      </if>
+      <if test="stationEnterTime != null" >
+        station_enter_time = #{stationEnterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stationEmployMethod != null" >
+        station_employ_method = #{stationEmployMethod,jdbcType=INTEGER},
+      </if>
+      <if test="stationRegularTime != null" >
+        station_regular_time = #{stationRegularTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkRegularTime == 1" >
+        station_regular_time = null,
+      </if>
+      <if test="stationCustomerNumber != null" >
+        station_customer_number = #{stationCustomerNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="stationCustomerState != null" >
+        station_customer_state = #{stationCustomerState,jdbcType=INTEGER},
+      </if>
+      <if test="stationDeptId != null" >
+        station_dept_id = #{stationDeptId,jdbcType=BIGINT},
+      </if>
+      <if test="stationStationName != null" >
+        station_station_name = #{stationStationName,jdbcType=VARCHAR},
+      </if>
+      <if test="stationContractFile != null" >
+        station_contract_file = #{stationContractFile,jdbcType=VARCHAR},
+      </if>
+      <if test="stationRegularEvaluate != null" >
+        station_regular_evaluate = #{stationRegularEvaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="stationCreateTime != null" >
+        station_create_time = #{stationCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stationUpdateTime != null" >
+        station_update_time = #{stationUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where station_id = #{stationId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xtr.api.domain.customer.CustomersStationBean" >
+    update customers_station
+    set station_customer_id = #{stationCustomerId,jdbcType=BIGINT},
+      station_enter_time = #{stationEnterTime,jdbcType=TIMESTAMP},
+      station_employ_method = #{stationEmployMethod,jdbcType=INTEGER},
+      station_regular_time = #{stationRegularTime,jdbcType=TIMESTAMP},
+      station_customer_number = #{stationCustomerNumber,jdbcType=VARCHAR},
+      station_customer_state = #{stationCustomerState,jdbcType=INTEGER},
+      station_dept_id = #{stationDeptId,jdbcType=BIGINT},
+      station_station_name = #{stationStationName,jdbcType=VARCHAR},
+      station_contract_file = #{stationContractFile,jdbcType=VARCHAR},
+      station_regular_evaluate = #{stationRegularEvaluate,jdbcType=VARCHAR},
+      station_create_time = #{stationCreateTime,jdbcType=TIMESTAMP},
+      station_update_time = #{stationUpdateTime,jdbcType=TIMESTAMP}
+    where station_id = #{stationId,jdbcType=BIGINT}
+  </update>
+
+  <!-- 根据customerId更新  离职的员工不更新-->
+  <update id="updateByCustomerId" parameterType="com.xtr.api.domain.customer.CustomersStationBean">
+    update customers_station
+    <set >
+
+      <if test="stationEnterTime != null" >
+        station_enter_time = #{stationEnterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stationEmployMethod != null" >
+        station_employ_method = #{stationEmployMethod,jdbcType=INTEGER},
+      </if>
+      <if test="stationRegularTime != null" >
+        station_regular_time = #{stationRegularTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkRegularTime == 1" >
+        station_regular_time = null,
+      </if>
+      <if test="stationCustomerNumber != null" >
+        station_customer_number = #{stationCustomerNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="stationCustomerState != null" >
+        station_customer_state = #{stationCustomerState,jdbcType=INTEGER},
+      </if>
+      <if test="stationDeptId != null" >
+        station_dept_id = #{stationDeptId,jdbcType=BIGINT},
+      </if>
+      <if test="stationStationName != null" >
+        station_station_name = #{stationStationName,jdbcType=VARCHAR},
+      </if>
+      <if test="stationContractFile != null" >
+        station_contract_file = #{stationContractFile,jdbcType=VARCHAR},
+      </if>
+      <if test="stationRegularEvaluate != null" >
+        station_regular_evaluate = #{stationRegularEvaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="stationCreateTime != null" >
+        station_create_time = #{stationCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stationUpdateTime != null" >
+        station_update_time = #{stationUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stationDimissingTime != null" >
+        station_dimissing_time = #{stationDimissingTime,jdbcType=TIMESTAMP}
+      </if>
+
+    </set>
+    where station_customer_id = #{stationCustomerId,jdbcType=BIGINT}
+    AND
+    station_customer_state !=4
+</update>
+  <!-- 根据员工id更新员工岗位的状态为删除-->
+  <update id="updateCustomerStateByCustomerId" parameterType="com.xtr.api.domain.customer.CustomersStationBean">
+    update customers_station
+    set
+    station_customer_state = 4,
+    station_update_time=#{stationUpdateTime,jdbcType=TIMESTAMP}
+    where
+    station_customer_id = #{stationCustomerId,jdbcType=BIGINT}
+    AND
+    station_customer_state!=4
+  </update>
+
+  <!-- 根据customerId更新部门-->
+  <update id="updateDept">
+    update customers_station set station_dept_id = #{depId}
+    where station_customer_id = #{empId}
+  </update>
+
+  <!-- 自动更新入职的员工到了转正日期为转正-->
+<update id="updateStateByCustomerId" parameterType="com.xtr.api.domain.customer.CustomersStationBean">
+  update
+    customers_station
+  set
+    station_customer_state =#{stationCustomerState,jdbcType=INTEGER},
+     station_update_time = #{stationUpdateTime,jdbcType=TIMESTAMP}
+  where  station_customer_id=#{stationCustomerId,jdbcType=BIGINT}  and station_customer_state= 1
+
+</update>
+
+  <!--批量插入员工岗位信息-->
+  <insert id="insertBatch" parameterType="java.util.List" >
+    insert into customers_station (station_id, station_customer_id, station_enter_time,
+    station_employ_method, station_regular_time,
+    station_customer_number, station_customer_state,
+    station_dept_id, station_station_name, station_contract_file,
+    station_regular_evaluate, station_create_time,
+    station_update_time,station_dimissing_time)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.stationId,jdbcType=BIGINT}, #{item.stationCustomerId,jdbcType=BIGINT}, #{item.stationEnterTime,jdbcType=TIMESTAMP},
+      #{item.stationEmployMethod,jdbcType=INTEGER}, #{item.stationRegularTime,jdbcType=TIMESTAMP},
+      #{item.stationCustomerNumber,jdbcType=VARCHAR}, #{item.stationCustomerState,jdbcType=INTEGER},
+      #{item.stationDeptId,jdbcType=BIGINT}, #{item.stationStationName,jdbcType=VARCHAR}, #{item.stationContractFile,jdbcType=VARCHAR},
+      #{item.stationRegularEvaluate,jdbcType=VARCHAR}, #{item.stationCreateTime,jdbcType=TIMESTAMP},
+      #{item.stationUpdateTime,jdbcType=TIMESTAMP},#{item.stationDimissingTime,jdbcType=TIMESTAMP})
+    </foreach>
+  </insert>
+</mapper>

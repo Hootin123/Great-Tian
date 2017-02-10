@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>差额详情</title>
+    #parse("comm/head.vm")
+    <style type="text/css">
+        .sendersFeesHeader{
+            width: 100%;
+            min-width: 1000px;
+            height: 80px;
+            font-size: 24px;
+            font-family: '微软雅黑';
+            text-align: center;
+            line-height: 80px;
+            border-bottom: 1px solid #dbe9ee;
+        }
+        .sendersFees-main{
+            margin: 30px 3% 0 3%;
+            color: #666666;
+            min-width: 960px;
+        }
+        .sendersFees-main table{
+            width: 100%;
+            font-size: 12px;
+        }
+        .sendersFees-main table tr:nth-child(1){
+            width:100%;
+            height:40px;
+            background:#5b7798;
+            color: #fff;
+        }
+        .sendersFees-main table tr:nth-child(1) td{
+            border-right:1px solid #fff;
+        }
+        .sendersFees-main table tr{
+            width: 100%;
+            text-align: center;
+        }
+        .sendersFees-main table tr td{
+            border:1px solid #dbe9ee;
+        }
+        .sendersFees-main table tr td p{
+            line-height: 50px;
+        }
+        .sendersFees-main table tr .lastTd p{
+            color:#68bdf3;
+            cursor: pointer;
+        }
+        .sendersFees-main table tr td .list-border{
+            border-top:1px solid #dbe9ee;
+        }
+        .sendersFees-main table tr td span{
+            margin-right: 40px;
+        }
+        .sendersFees-footer{
+            width: 100%;
+            height: 80px;
+            margin:0 auto;
+            margin-top: 50px;
+            background:#f1f9fc;
+        }
+        .sendersFees-footer .button{
+            width: 240px;
+            height: 40px;
+            margin:0 auto;
+        }
+        .sendersFees-footer .button input{
+            width: 100%;
+            height: 100%;
+            background:#0696fa;
+            color: #fff;
+            border:0;
+            margin-top: 20px;
+            border-radius:6px;
+            text-align:center;
+            line-height: 40px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .sendersFees-list {
+            margin: 30px 3% 0 3%;
+            color: #666666;
+            min-width: 960px;
+
+        }
+        .sendersFees-list .sendersFees-list-title{
+            width: 100%;
+            height: 50px;
+        }
+        .sendersFees-list  table{
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+
+        }
+        .sendersFees-list table tr{
+            height: 40px;
+
+        }
+        .sendersFees-list table tr:first-child{
+            background: #f1f9fc;
+        }
+        .sendersFees-list table tr td{
+            position: relative;
+        }
+        .sendersFees-list table tr td span{
+            position: absolute;
+            right:0;
+            top: 10px;
+        }
+        .sendersFees-list-explain .explain-title{
+            width: 100%;
+            line-height: 50px;
+        }
+        .sendersFees-list-explain p{
+            line-height: 30px;
+        }
+        .sendersFeesHeader img{
+            position: absolute;
+            top: 24px;
+            right: 30px;
+            margin: auto;
+            cursor: pointer;
+        }
+        .mengban {
+            width: 100%;
+            height: 100%;
+            min-width: 1200px;
+            min-height: 930px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: #000000;
+            opacity: 0.8;
+            z-index: 2;
+        }
+        .sendersDetails{
+            width: 500px;
+            height: 418px;
+            background: #fff;
+            border-radius: 20px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            z-index: 6;
+        }
+        .sendersDetails-title{
+            width: 100%;
+            height: 48px;
+            text-align: center;
+            line-height: 78px;
+            font-size: 18px;
+            color: #333;
+        }
+        .sendersDetails-title b {
+            display: block;
+            width: 38px;
+            height: 38px;
+            background: url(../img/close1.png) 0 0 no-repeat;
+            position: absolute;
+            right: -18px;
+            top: -18px;
+            cursor: pointer;
+        }
+        .sendersDetails-main{
+            width: 100%;
+            margin-top:20px;
+            width: 100%;
+            padding: 0 40px;
+            box-sizing: border-box;
+            font-size: 14px;
+            color: #666;
+        }
+        .sendersDetails-main table{
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+        }
+        .sendersDetails-main table thead tr{
+            background: #5b7798;
+            color: #fff;
+        }
+        .sendersDetails-main table thead tr td{
+            border-right: 1px solid #fff
+        }
+        .sendersDetails-main table tr{
+            height: 40px;
+            background: #fff;
+        }
+        .sendersDetails-main table tr td{
+            border: 1px solid #dbe9ee;
+        }
+        .sendersDetails-main .lastTd p{
+            color:#68bdf3;
+            cursor: pointer;
+        }
+
+        .sendersDetails-footer{
+            width: 100%;
+            height: 80px;
+            margin: 0 auto;
+            margin-top: 50px;
+            background: #f1f9fc;
+        }
+        .sendersDetails-footer .button{
+            width: 240px;
+            height: 36px;
+            margin:0 auto;
+        }
+        .sendersDetails-footer .button input{
+            width: 100%;
+            height: 100%;
+            background:#0696fa;
+            color: #fff;
+            border:0;
+            font-family: '微软雅黑';
+            margin-top: 20px;
+            border-radius:6px;
+            text-align:center;
+            line-height: 36px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<input type="hidden" value="$!{orderDateStr}" id="orderDateStr">
+<div class="sendersFeesHeader">差额详情<b><img src="#springUrl('/resource/img/guanbi.png')"  onclick="cancelAddtion();"/></b></div>
+<div class="sendersFees-main">
+    <table>
+        <tr>
+            <td>序号</td>
+            <td>姓名</td>
+            <td>手机号</td>
+            <td>部门</td>
+            <td>参保地区</td>
+            <td>参保种类</td>
+        ##            <td>补差类型</td>
+        ##            <td>企业部分（元）</td>
+        ##            <td>个人部分（元）</td>
+            <td>补差费用(元)</td>
+            <td>详情</td>
+        </tr>
+        #set ($i=0)
+        #foreach($data in $!{customersSupplementDto.supplementDtos})
+            #set($i=$i+1)
+            <tr>
+                <td>$i</td>
+                <td >$!{data.memberName}</td>
+                <td >$!{data.memberPhone}</td>
+                <td >$!{data.deptName}</td>
+                <td>$!{data.areaName}</td>
+                <td>
+                    <p>社保</p>
+                    <p class='list-border'>公积金</p>
+                </td>
+            ##                <td>
+            ##                    <p>补收费用</p>
+            ##                    <p class='list-border'>补退费用</p>
+            ##                </td>
+            ##                <td>
+            ##                    <p>$!{data.companySbDiff}</p>
+            ##                    <p class='list-border'>$!{data.companyGjjDiff}</p>
+            ##                </td>
+            ##                <td>
+            ##                    <p>$!{data.selfSbDiff}</p>
+            ##                    <p class='list-border'>$!{data.selfGjjDiff}</p>
+            ##                </td>
+                <td>
+                    <p>$!{data.sbDiffInfo}</p>
+                    <p class='list-border'>$!{data.gjjDiffInfo}</p>
+                </td>
+                <td class="lastTd">
+                ##                    <a href="#" onclick="showAddtionDetail();">详情</a>
+                ##                    <p>$!{data.sbHjText}</p>
+                ##                    <p class='list-border'>$!{data.sbHjText}</p>
+                    <p onclick="showAddtionDetail(1,$!{data.supplementCustomerId},$!{data.supplementCompanyOrderId});">详情</p>
+                    <p class='list-border' onclick="showAddtionDetail(2,$!{data.supplementCustomerId},$!{data.supplementCompanyOrderId});">详情</p>
+                </td>
+            </tr>
+        #end
+        #if($!{customersSupplementDto.supplementDtos} and $!{customersSupplementDto.supplementDtos.size()}>0)
+            <tr style="line-height:80px">
+                <td>总计</td>
+                <td colspan="8">$!{customersSupplementDto.companyDiffTotal}元</td>
+            ##                <td colspan="2">企业补差费用：$!{customersSupplementDto.companyDiffTotal}元</td>
+            ##                <td colspan="7">
+            ##                    <span>企业补收费用：$!{customersSupplementDto.companyReceiveTotal}元</span>
+            ##                    <span>企业补退费用：$!{customersSupplementDto.companyBackTotal}元</span>
+            ##                    <span>个人补收费用：$!{customersSupplementDto.selfReceiveTotal}元</span>
+            ##                    <span>个人补退费用：$!{customersSupplementDto.selfBackTotal}元</span>
+            ##                </td>
+            </tr>
+        #end
+    </table>
+</div>
+<div class="sendersFees-list">
+    <div class="sendersFees-list-title">补差费用明细</div>
+    <table>
+        <tr>
+            <td>补差费用（元）</td>
+            <td>补收费用企业部分（元）</td>
+            <td>补收费用个人部分（元）</td>
+            <td>补退费用企业部分（元）</td>
+
+        </tr>
+        <tr>
+            <td>$!{customersSupplementDto.companyDiffTotal} <span>=</span></td>
+            <td>$!{customersSupplementDto.companyReceiveTotal}<span>+</span></td>
+            <td>$!{customersSupplementDto.selfReceiveTotal}<span>—</span></td>
+            <td>$!{customersSupplementDto.companyBackTotal}</td>
+
+        </tr>
+    </table>
+    <div class="sendersFees-list-explain">
+        <div class="explain-title">补差费用收取规则说明：</div>
+        <p>1、补退费用，补退费用个人部分将直接退还员工工资卡；补退费用企业部分将在本期账单中进行抵扣。</p>
+        <p>2、补收费用，补收费用的个人部分和企业部分都将在本期账单中进行增收，企业为员工垫付的补收费用个人部分将在对应的发薪月份抵扣</p>
+        <p>3、补差费用若为负数表示将从本期账单中抵扣，补差费用若为正数则表示将从本期账单中增收。</p>
+    </div>
+</div>
+<div class="sendersFees-footer">
+    <div class="button">
+        <input type="button" name="" value="确认" onclick="cancelAddtionPage();">
+    </div>
+</div>
+<!-- 蒙版 -->
+<div class="mengban" style="display:none;" id="detailShow1"></div>
+<!--补差详情 -->
+<div class="sendersDetails" style="display:none;" id="detailShow2">
+    <div class="sendersDetails-title">补差详情<b></b></div>
+    <div class="sendersDetails-main">
+        <table>
+            <thead>
+            <tr>
+                <td>缴纳月份</td>
+                <td>补差明细</td>
+                <td>补差类型</td>
+                <td>个人部分（元）</td>
+                <td>企业部分（元）</td>
+                <td>备注</td>
+            </tr>
+            </thead>
+            <tbody id="addtionTbody">
+            ##            <tr>
+##                <td>201608</td>
+##                <td>养老保险</td>
+##                <td>补收费用</td>
+##                <td>133.00</td>
+##                <td>123.00</td>
+##                <td></td>
+##            </tr>
+##            <tr>
+##                <td>201608</td>
+##                <td>养老保险</td>
+##                <td>补收费用</td>
+##                <td>133.00</td>
+##                <td>123.00</td>
+##                <td></td>
+##            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="sendersDetails-footer">
+        <div class="button">
+            <input type="button" name="" value='确认' id="sureCancelBtn">
+        </div>
+    </div>
+</div>
+
+</div>
+</body>
+<script>
+    $(function(){
+        $("#sureCancelBtn").click(function(){
+            $("#detailShow1").hide();
+            $("#detailShow2").hide();
+        });
+    });
+    //关闭
+    function cancelAddtionPage(){
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    }
+    //关闭
+    function cancelAddtion() {
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    }
+
+    function showAddtionDetail(type,supplementCustomerId,supplementCompanyOrderId){
+        alert("1111");
+        var currentParams={"payMonth":$("#orderDateStr").val(),"type":type,"supplementCompanyOrderId":supplementCompanyOrderId,"supplementCustomerId":supplementCustomerId};
+        $.ajax({
+            type: "POST",
+            url: BASE_PATH + "/shebaoManger/customerAddtionDetail.htm",
+            dataType: "json",
+            data: currentParams,
+            success: function (data) {
+                console.log(data);
+                if (data.success) {
+                    var supplementDtoList=data.data;
+                    var html="";
+                    for(var i=0;i<supplementDtoList.length;i++){
+                        var dto=supplementDtoList[i];
+                        html += "<tr>";
+                        html += "<td>"+dto.payMonth+"</td>";
+                        html += "<td>"+dto.payName+"</td>";
+                        html += "<td>"+dto.payType+"</td>";
+                        html += "<td>"+dto.paySelfAmount+"</td>";
+                        html += "<td>"+dto.payCompanyAmount+"</td>";
+                        html += "<td></td>";
+                        html += "</tr>";
+                    }
+                    $("#addtionTbody").html(html);
+                    $("#detailShow1").show();
+                    $("#detailShow2").show();
+                } else {
+                    layer.alert(data.message);
+                }
+            }
+        });
+    }
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

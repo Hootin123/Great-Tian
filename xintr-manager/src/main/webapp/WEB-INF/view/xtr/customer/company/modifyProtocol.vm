@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>H+ 员工信息管理</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-table/bootstrap-table.min.css')" rel="stylesheet">
+</head>
+
+<body>
+<div class="col-sm-12">
+    <div class="container-fluid">
+        <div class="row-fluid">
+##            <div class="panel panel-default">
+                <input type="hidden" value="$!{companyId}" id="companyIdHid">
+##                <div class="panel-heading"><strong>修改协议</strong></div>
+##                <form class="form-group" id="queryForm">
+                    #set ($dtype=0)
+                    #set ($ftype=0)
+                    #set ($dno="")
+                    #set ($fno="")
+                    #set ($i=0)
+                    #foreach($protocol in $!{protocolList})
+                            #set($i=$i+1)
+                        #if($protocol.protocolContractType == 1)
+                            #if($protocol.protocolStatus == 1)
+                                #set ($dtype=$protocol.protocolContractType)
+                            #end
+                            #set ($dno=$protocol.protocolPaperNo)
+                        #end
+                        #if($protocol.protocolContractType == 2)
+                            #if($protocol.protocolStatus == 1)
+                                #set ($ftype=$protocol.protocolContractType)
+                            #end
+                            #set ($fno=$protocol.protocolPaperNo)
+                        #end
+                    #end
+                    <div class="col-sm-10" style="margin-top: 20px;">
+                        #if($dtype == 1)
+                            <input type="checkbox" name="dtype" checked="checked"/>代发协议
+                        #end
+                        #if($dtype == 0)
+                            <input type="checkbox" name="dtype"/>代发协议
+                        #end
+                        <label style="margin-top:10px;margin-left:20px;"  control-label">纸质文件编号:</label>
+                        <input type="text" placeholder="纸质文件编号"  style="width:40%;" value="$dno" id="dno"/>
+                    </div>
+                    <div class="col-sm-10" style="margin-top: 40px;">
+                        #if($ftype == 2)
+                            <input type="checkbox" name="ftype" checked="checked" id="ftype">垫发协议
+                        #end
+                        #if($ftype == 0)
+                            <input type="checkbox" name="ftype" id="ftype">垫发协议
+                        #end
+                        <label style="margin-top:10px;margin-left:20px;"  control-label">纸质文件编号:</label>
+                        <input type="text" placeholder="纸质文件编号"  style="width:40%;" value="$fno" id="fno"/>
+                    </div>
+                    <div class="col-sm-1 text-center" style="margin-top: 40px;margin-bottom: 10px;">
+                        <button class="btn btn-primary " type="button" id="sureBtn"><i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;确定
+                        </button>
+                    </div>
+##                </form>
+##            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+<script src="#springUrl('/resource/js/hui/content.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table-mobile.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/validate/jquery.validate.min.js')"></script>
+<script src="#springUrl('/resource/js/comm/jdatagrid.js')"></script>
+<script src="#springUrl('/resource/js/customer/company/modifyProtocol.js')"></script>
+</html>

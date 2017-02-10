@@ -1,0 +1,8 @@
+<div class="main_left">
+    <ul id="main_left_ul" style="padding-top:60px ">
+        <li class="btn1 btn_a0" data-url="account.htm">我的账户</li>
+        <li class="btn2" data-url="payroll.html">发放工资</li>
+        <li class="btn3" data-url="payfor.html">垫付工资</li>
+        <li class="btn4" data-url="payoff.html4">安全中心</li>
+    </ul>
+</div>

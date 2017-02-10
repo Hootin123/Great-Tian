@@ -1,0 +1,13 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Expires" CONTENT="0">
+<meta http-equiv="Cache-Control" CONTENT="no-cache">
+<meta http-equiv="Pragma" CONTENT="no-cache">
+<link rel="stylesheet" href="#springUrl('/resource/css/h5wallet/comm.css')">
+<script src="#springUrl('/resource/js/lasthongbao/zepto.min.js')"></script>
+<script src="#springUrl('/resource/js/layer/layer.js')"></script>
+<script src="#springUrl('/resource/js/h5wallet/rem.js')"></script>
+<script src="#springUrl('/resource/js/h5wallet/dropzone.js')"></script>
+<script>
+    var BASE_PATH = "#springUrl('')";
+</script>

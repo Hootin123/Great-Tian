@@ -1,0 +1,60 @@
+@charset "UTF-8";
+body {
+  width: 100%;
+  height: 100%;
+  background: #f4f4f4;
+  background-size: 100%; }
+
+section {
+  width: 100%;
+  height: 7.28rem;
+  padding: 0.4rem 0.24rem 0 0.24rem;
+  box-sizing: border-box; }
+  section .content {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    padding: 0 0.26rem;
+    box-sizing: border-box;
+    box-shadow: 1px 10px 15px #c8d6db; }
+    section .content h3 {
+      width: 100%;
+      height: 0.76rem;
+      border-bottom: 1px solid #b0ccd7;
+      position: relative; }
+      section .content h3 em {
+        display: block;
+        width: 0.5rem;
+        height: 0.6rem;
+        background: url(../../img/wechatCustomer/lit.png) 0 0 no-repeat;
+        background-size: 100% 100%;
+        position: absolute;
+        left: 0;
+        top: 0.16rem; }
+    section .content textarea {
+      width: 100%;
+      height: 6.08rem;
+      border: 0;
+      text-indent: 0.48rem;
+      font-size: 0.24rem;
+      font-family: '微软雅黑';
+      color: #666;
+      line-height: 0.4rem; }
+
+footer {
+  width: 100%;
+  height: 0.9rem;
+  margin-top: 2.84rem; }
+  footer .complete {
+    width: 6.4rem;
+    height: 100%;
+    margin: 0 auto;
+    background: #0696fa;
+    border-radius: 0.45rem;
+    font-size: 0.34rem;
+    font-family: '微软雅黑';
+    color: #fff;
+    text-align: center;
+    line-height: 0.9rem; }
+
+/*# sourceMappingURL=entry.css.map */

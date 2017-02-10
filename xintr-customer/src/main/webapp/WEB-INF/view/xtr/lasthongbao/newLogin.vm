@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" id='html'>
+<head>
+	#parse("comm/headNew.vm")
+	<meta charset="UTF-8">
+	<title>登录</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1">
+##    <script src="#springUrl('/resource/js/lasthongbao/zepto.min.js')"></script>
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/lasthongbao/newLogin.css')">
+    <script src="#springUrl('/resource/js/lasthongbao/newLogin.js')"></script>
+
+</head>
+<body>
+	<div class="logo">
+		<img src="#springUrl('/resource/img/lasthongbao/logo.png')"/>
+	</div>
+	<form id="loginForm">
+		<ul>
+			<li class='loginPhone'>
+				<input type="text" name="loginPhoneNumber" placeholder="手机号"/>
+				<b></b>
+			</li>
+			<li class='loginPwd'>
+				<input type="password" name="loginPassword" placeholder="请输入薪太软登录密码"/>
+				<b></b>
+			</li>
+		</ul>
+	</form>
+	<div class="forget">忘记密码？</div>
+	<div class="login">免费登录</div>
+	<div class='goRegister'>还没有薪太软账户？去注册</div>
+    <div class="introduce">
+        <img src="#springUrl('/resource/img/lasthongbao/introduce.png')" alt="">
+    </div>
+    <div class="text">请用电脑登录薪太软官网进行体验 <a>www.xintairuan.com</a> </div>
+</body>
+</html>

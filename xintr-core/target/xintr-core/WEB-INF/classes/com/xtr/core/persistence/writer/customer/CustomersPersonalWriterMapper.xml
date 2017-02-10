@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xtr.core.persistence.writer.customer.CustomersPersonalWriterMapper" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from customers_personal
+    where personal_id = #{personalId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xtr.api.domain.customer.CustomersPersonalBean" >
+    insert into customers_personal (personal_id, personal_customer_id, personal_relationer_name, 
+      personal_relationer_phone, personal_domicile_place, 
+      personal_nation, personal_politics_status, 
+      personal_current_place, personal_education_high, 
+      personal_graduate_school, personal_major, 
+      personal_resume, personal_create_time, personal_update_time
+      )
+    values (#{personalId,jdbcType=BIGINT}, #{personalCustomerId,jdbcType=BIGINT}, #{personalRelationerName,jdbcType=VARCHAR}, 
+      #{personalRelationerPhone,jdbcType=VARCHAR}, #{personalDomicilePlace,jdbcType=VARCHAR}, 
+      #{personalNation,jdbcType=VARCHAR}, #{personalPoliticsStatus,jdbcType=VARCHAR}, 
+      #{personalCurrentPlace,jdbcType=VARCHAR}, #{personalEducationHigh,jdbcType=INTEGER},
+      #{personalGraduateSchool,jdbcType=VARCHAR}, #{personalMajor,jdbcType=VARCHAR}, 
+      #{personalResume,jdbcType=VARCHAR}, #{personalCreateTime,jdbcType=TIMESTAMP}, #{personalUpdateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xtr.api.domain.customer.CustomersPersonalBean" >
+    insert into customers_personal
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="personalId != null" >
+        personal_id,
+      </if>
+      <if test="personalCustomerId != null" >
+        personal_customer_id,
+      </if>
+      <if test="personalRelationerName != null" >
+        personal_relationer_name,
+      </if>
+      <if test="personalRelationerPhone != null" >
+        personal_relationer_phone,
+      </if>
+      <if test="personalDomicilePlace != null" >
+        personal_domicile_place,
+      </if>
+      <if test="personalNation != null" >
+        personal_nation,
+      </if>
+      <if test="personalPoliticsStatus != null" >
+        personal_politics_status,
+      </if>
+      <if test="personalCurrentPlace != null" >
+        personal_current_place,
+      </if>
+      <if test="personalEducationHigh != null" >
+        personal_education_high,
+      </if>
+      <if test="personalGraduateSchool != null" >
+        personal_graduate_school,
+      </if>
+      <if test="personalMajor != null" >
+        personal_major,
+      </if>
+      <if test="personalResume != null" >
+        personal_resume,
+      </if>
+      <if test="personalCreateTime != null" >
+        personal_create_time,
+      </if>
+      <if test="personalUpdateTime != null" >
+        personal_update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="personalId != null" >
+        #{personalId,jdbcType=BIGINT},
+      </if>
+      <if test="personalCustomerId != null" >
+        #{personalCustomerId,jdbcType=BIGINT},
+      </if>
+      <if test="personalRelationerName != null" >
+        #{personalRelationerName,jdbcType=VARCHAR},
+      </if>
+      <if test="personalRelationerPhone != null" >
+        #{personalRelationerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="personalDomicilePlace != null" >
+        #{personalDomicilePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="personalNation != null" >
+        #{personalNation,jdbcType=VARCHAR},
+      </if>
+      <if test="personalPoliticsStatus != null" >
+        #{personalPoliticsStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="personalCurrentPlace != null" >
+        #{personalCurrentPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="personalEducationHigh != null" >
+        #{personalEducationHigh,jdbcType=INTEGER},
+      </if>
+      <if test="personalGraduateSchool != null" >
+        #{personalGraduateSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="personalMajor != null" >
+        #{personalMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="personalResume != null" >
+        #{personalResume,jdbcType=VARCHAR},
+      </if>
+      <if test="personalCreateTime != null" >
+        #{personalCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="personalUpdateTime != null" >
+        #{personalUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xtr.api.domain.customer.CustomersPersonalBean" >
+    update customers_personal
+    <set >
+      <if test="personalCustomerId != null" >
+        personal_customer_id = #{personalCustomerId,jdbcType=BIGINT},
+      </if>
+      <if test="personalRelationerName != null" >
+        personal_relationer_name = #{personalRelationerName,jdbcType=VARCHAR},
+      </if>
+      <if test="personalRelationerPhone != null" >
+        personal_relationer_phone = #{personalRelationerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="personalDomicilePlace != null" >
+        personal_domicile_place = #{personalDomicilePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="personalNation != null" >
+        personal_nation = #{personalNation,jdbcType=VARCHAR},
+      </if>
+      <if test="personalPoliticsStatus != null" >
+        personal_politics_status = #{personalPoliticsStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="personalCurrentPlace != null" >
+        personal_current_place = #{personalCurrentPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="personalEducationHigh != null" >
+        personal_education_high = #{personalEducationHigh,jdbcType=INTEGER},
+      </if>
+      <if test="personalGraduateSchool != null" >
+        personal_graduate_school = #{personalGraduateSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="personalMajor != null" >
+        personal_major = #{personalMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="personalResume != null" >
+        personal_resume = #{personalResume,jdbcType=VARCHAR},
+      </if>
+      <if test="personalCreateTime != null" >
+        personal_create_time = #{personalCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="personalUpdateTime != null" >
+        personal_update_time = #{personalUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where personal_id = #{personalId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xtr.api.domain.customer.CustomersPersonalBean" >
+    update customers_personal
+    set personal_customer_id = #{personalCustomerId,jdbcType=BIGINT},
+      personal_relationer_name = #{personalRelationerName,jdbcType=VARCHAR},
+      personal_relationer_phone = #{personalRelationerPhone,jdbcType=VARCHAR},
+      personal_domicile_place = #{personalDomicilePlace,jdbcType=VARCHAR},
+      personal_nation = #{personalNation,jdbcType=VARCHAR},
+      personal_politics_status = #{personalPoliticsStatus,jdbcType=VARCHAR},
+      personal_current_place = #{personalCurrentPlace,jdbcType=VARCHAR},
+      personal_education_high = #{personalEducationHigh,jdbcType=INTEGER},
+      personal_graduate_school = #{personalGraduateSchool,jdbcType=VARCHAR},
+      personal_major = #{personalMajor,jdbcType=VARCHAR},
+      personal_resume = #{personalResume,jdbcType=VARCHAR},
+      personal_create_time = #{personalCreateTime,jdbcType=TIMESTAMP},
+      personal_update_time = #{personalUpdateTime,jdbcType=TIMESTAMP}
+    where personal_id = #{personalId,jdbcType=BIGINT}
+  </update>
+</mapper>

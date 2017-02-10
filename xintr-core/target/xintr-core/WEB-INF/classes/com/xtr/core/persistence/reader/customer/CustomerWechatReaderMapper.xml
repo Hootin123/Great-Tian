@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xtr.core.persistence.reader.customer.CustomerWechatReaderMapper" >
+
+    <resultMap id="BaseResultMap" type="com.xtr.api.domain.customer.CustomerWechatBean" >
+        <id column="wechat_id" property="wechatId" jdbcType="INTEGER"/>
+        <result column="wechat_customer_id" property="wechatCustomerId" jdbcType="BIGINT"/>
+        <result column="wechat_open_id" property="wechatOpenId" jdbcType="VARCHAR"/>
+        <result column="wechat_nick_name" property="wechatNickName" jdbcType="VARCHAR"/>
+        <result column="wechat_bind_time" property="wechatBindTime" jdbcType="TIMESTAMP"/>
+        <result column="wechat_customer_phone" property="wechatCustomerPhone" jdbcType="VARCHAR"/>
+        <result column="wechat_company_id" property="wechatCompanyId" jdbcType="BIGINT"></result>
+    </resultMap>
+    <sql id="Base_Column_List">
+     wechat_id,wechat_customer_id,wechat_open_id,wechat_nick_name,wechat_bind_time,wechat_customer_phone,wechat_company_id
+    </sql>
+    <!-- 根据openId查询员工绑定信息-->
+    <select id="selectCustomerWechatByOpenId" parameterType="java.lang.String" resultMap="BaseResultMap">
+      select <include refid="Base_Column_List"/>
+           from
+      customer_wechat where   wechat_open_id = #{openId}
+    </select>
+    <resultMap id="CustomerWechatBindMap" type="com.xtr.api.dto.customer.CustomerWechatBindDto">
+        <id column="customer_id" property="customerId" jdbcType="BIGINT"/>
+        <result column="customer_company_id" property="customerCompanyId" jdbcType="BIGINT"/>
+        <result column="customer_company_name" property="customerCompanyName" jdbcType="VARCHAR"/>
+        <result column="customer_dep_parentid" property="customerDepParentid" jdbcType="BIGINT"/>
+        <result column="customer_dep_parentname" property="customerDepParentname" jdbcType="VARCHAR"/>
+        <result column="customer_dep_id" property="customerDepId" jdbcType="BIGINT"/>
+        <result column="customer_dep_name" property="customerDepName" jdbcType="VARCHAR"/>
+        <result column="customer_number" property="customerNumber" jdbcType="VARCHAR"/>
+        <result column="customer_logname" property="customerLogname" jdbcType="VARCHAR"/>
+        <result column="customer_password" property="customerPassword" jdbcType="VARCHAR"/>
+        <result column="customer_password_strength" property="customerPasswordStrength" jdbcType="INTEGER"/>
+        <result column="customer_turename" property="customerTurename" jdbcType="VARCHAR"/>
+        <result column="customer_join_time" property="customerJoinTime" jdbcType="TIMESTAMP"/>
+        <result column="customer_salary" property="customerSalary" jdbcType="DECIMAL"/>
+        <result column="customer_place" property="customerPlace" jdbcType="VARCHAR"/>
+        <result column="customer_worktype" property="customerWorktype" jdbcType="VARCHAR"/>
+        <result column="customer_sex" property="customerSex" jdbcType="INTEGER"/>
+        <result column="customer_birthday" property="customerBirthday" jdbcType="DATE"/>
+        <result column="customer_idcard" property="customerIdcard" jdbcType="VARCHAR"/>
+        <result column="customer_idcard_img_front" property="customerIdcardImgFront" jdbcType="VARCHAR"/>
+        <result column="customer_idcard_img_back" property="customerIdcardImgBack" jdbcType="VARCHAR"/>
+        <result column="customer_phone" property="customerPhone" jdbcType="VARCHAR"/>
+        <result column="customer_email" property="customerEmail" jdbcType="VARCHAR"/>
+        <result column="customer_qq" property="customerQq" jdbcType="VARCHAR"/>
+        <result column="customer_bank" property="customerBank" jdbcType="VARCHAR"/>
+        <result column="customer_bankarea" property="customerBankarea" jdbcType="VARCHAR"/>
+        <result column="customer_banknumber" property="customerBanknumber" jdbcType="VARCHAR"/>
+        <result column="customer_contacts" property="customerContacts" jdbcType="VARCHAR"/>
+        <result column="customer_edu" property="customerEdu" jdbcType="VARCHAR"/>
+        <result column="customer_address" property="customerAddress" jdbcType="VARCHAR"/>
+        <result column="customer_credit" property="customerCredit" jdbcType="INTEGER"/>
+        <result column="customer_credit_days" property="customerCreditDays" jdbcType="INTEGER"/>
+        <result column="customer_credit_money" property="customerCreditMoney" jdbcType="DECIMAL"/>
+        <result column="customer_credit_money_oneday" property="customerCreditMoneyOneday" jdbcType="DECIMAL"/>
+        <result column="customer_sign" property="customerSign" jdbcType="INTEGER"/>
+        <result column="customer_ispay" property="customerIspay" jdbcType="INTEGER"/>
+        <result column="customer_pay_pwd" property="customerPayPwd" jdbcType="VARCHAR"/>
+        <result column="customer_pay_pwd_strength" property="customerPayPwdStrength" jdbcType="INTEGER"/>
+        <result column="customer_login_errtimes" property="customerLoginErrtimes" jdbcType="INTEGER"/>
+        <result column="customer_pay_errtimes" property="customerPayErrtimes" jdbcType="INTEGER"/>
+        <result column="customer_references" property="customerReferences" jdbcType="VARCHAR"/>
+        <result column="customer_references_id" property="customerReferencesId" jdbcType="BIGINT"/>
+        <result column="customer_spread_source" property="customerSpreadSource" jdbcType="VARCHAR"/>
+        <result column="customer_spread_source_key" property="customerSpreadSourceKey" jdbcType="VARCHAR"/>
+        <result column="customer_activity" property="customerActivity" jdbcType="INTEGER"/>
+        <result column="customer_client" property="customerClient" jdbcType="INTEGER"/>
+        <result column="customer_addtime" property="customerAddtime" jdbcType="TIMESTAMP"/>
+        <result column="customer_job_status" property="customerJobStatus" jdbcType="INTEGER"/>
+        <result column="customer_login_area" property="customerLoginArea" jdbcType="VARCHAR"/>
+        <result column="customer_login_ip" property="customerLoginIp" jdbcType="VARCHAR"/>
+        <result column="customer_login_time_last" property="customerLoginTimeLast" jdbcType="TIMESTAMP"/>
+        <result column="customer_login_time_now" property="customerLoginTimeNow" jdbcType="TIMESTAMP"/>
+        <result column="customer_addtype" property="customerAddtype" jdbcType="INTEGER"/>
+        <result column="customer_social_number" property="customerSocialNumber" jdbcType="VARCHAR"/>
+        <result column="customer_promote" property="customerPromote" jdbcType="VARCHAR"/>
+        <result column="customer_trueName_isAuthentication" property="customerTruenameIsauthentication"
+                jdbcType="INTEGER"/>
+        <result column="customer_phone_isAuthentication" property="customerPhoneIsauthentication" jdbcType="INTEGER"/>
+        <result column="customer_img" property="customerImg" jdbcType="VARCHAR"/>
+        <result column="customer_place_level" property="customerPlaceLevel" jdbcType="VARCHAR"/>
+        <result column="customer_birthday_month" property="customerBirthdayMonth" jdbcType="VARCHAR"/>
+        <result column="customer_registry" property="customerRegistry" jdbcType="VARCHAR"/>
+        <result column="customer_birth_state" property="customerBirthState" jdbcType="VARCHAR"/>
+        <result column="customer_marriage" property="customerMarriage" jdbcType="VARCHAR"/>
+        <result column="customer_political" property="customerPolitical" jdbcType="VARCHAR"/>
+        <result column="customer_school" property="customerSchool" jdbcType="VARCHAR"/>
+        <result column="customer_degree" property="customerDegree" jdbcType="VARCHAR"/>
+        <result column="customer_major" property="customerMajor" jdbcType="VARCHAR"/>
+        <result column="customer_graduate_date" property="customerGraduateDate" jdbcType="DATE"/>
+        <result column="customer_first_job_date" property="customerFirstJobDate" jdbcType="DATE"/>
+        <result column="customer_agreement_startdate" property="customerAgreementStartdate" jdbcType="DATE"/>
+        <result column="customer_agreement_enddate" property="customerAgreementEnddate" jdbcType="DATE"/>
+        <result column="customer_agreement_type" property="customerAgreementType" jdbcType="VARCHAR"/>
+        <result column="customer_probation" property="customerProbation" jdbcType="VARCHAR"/>
+        <result column="customer_registry_address" property="customerRegistryAddress" jdbcType="VARCHAR"/>
+        <result column="customer_excel_id" property="customerExcelId" jdbcType="BIGINT"/>
+        <result column="customer_english_name" property="customerEnglishName" jdbcType="VARCHAR"/>
+        <result column="customer_age" property="customerAge" jdbcType="INTEGER"/>
+        <result column="customer_is_complement" property="customerIsComplement" jdbcType="INTEGER"/>
+        <result column="customer_current_expense" property="customerCurrentExpense" jdbcType="DECIMAL"/>
+        <result column="customer_current_salary" property="customerCurrentSalary" jdbcType="DECIMAL"/>
+        <result column="customer_probation_salary" property="customerProbationSalary" jdbcType="DECIMAL"/>
+        <result column="customer_regular_salary" property="customerRegularSalary" jdbcType="DECIMAL"/>
+        <result column="customer_regular_time" property="customerRegularTime" jdbcType="TIMESTAMP"/>
+
+        <!-- 新增的字段-->
+        <result column="year" property="year" jdbcType="VARCHAR"/>
+        <result column="month" property="month" jdbcType="VARCHAR"/>
+        <result column="pay_day" property="payDay" jdbcType="TIMESTAMP"/>
+        <result column="payCycleId" property="payCycleId" jdbcType="BIGINT"/>
+        <result column="payrollId" property="payrollId" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <resultMap id="CustomerYearSalaryResultMap" type="com.xtr.api.dto.customer.CustomerYearSalaryDto">
+        <result column="payCycleId" property="payCycleId" jdbcType="BIGINT"/>
+        <result column="company_id" property="companyId" jdbcType="VARCHAR"/>
+        <result column="year" property="year" jdbcType="VARCHAR"/>
+        <result column="month" property="month" jdbcType="VARCHAR"/>
+        <result column="customerPayrollId" property="customerPayrollId" jdbcType="BIGINT"/>
+        <result column="base_wages" property="baseWages"  jdbcType="DECIMAL"/>
+        <result column="real_wage" property="realWage" jdbcType="DECIMAL"/>
+    </resultMap>
+
+
+    <resultMap id="CustomerPayrollWechatBindResultMap" type="com.xtr.api.dto.customer.CustomerPayrollWechatBindDto">
+          <result column="company_name" property="companyName" jdbcType="VARCHAR"/>
+          <result column="customer_turename" property="customerTurename" jdbcType="VARCHAR"/>
+          <result column="customer_number" property="customerNumber" jdbcType="VARCHAR"/>
+          <result column="customer_banknumber" property="customerBanknumber" jdbcType="VARCHAR"/>
+         <result column="real_wage" property="realWage" jdbcType="DECIMAL"/>
+         <result column="pay_day" property="payDay" jdbcType="TIMESTAMP"/>
+        <result column="base_wages" property="baseWages" jdbcType="DECIMAL"/>
+        <result column="absence_day_number" property="absenceDayNumber" jdbcType="DECIMAL"/>
+        <result column="attendance_deduction" property="attendanceDeduction" jdbcType="DECIMAL"/>
+        <result column="total_bonus" property="totalBonus" jdbcType="DECIMAL"/>
+        <result column="pretax" property="pretax" jdbcType="DECIMAL"/>
+        <result column="social_security_fund" property="socialSecurityFund" jdbcType="DECIMAL"/>
+        <result column="should_amount" property="shouldAmount" jdbcType="DECIMAL"/>
+        <result column="personal_tax" property="personalTax" jdbcType="DECIMAL"/>
+        <result column="after_tax" property="afterTax" jdbcType="DECIMAL"/>
+        <result column="month" property="month" jdbcType="VARCHAR"/>
+        <result column="detail_name" property="detailName" jdbcType="VARCHAR"/>
+        <result column="detail_value" property="detailValue" jdbcType="DECIMAL"/>
+
+        <result column="wiped_amount" property="wipedAmount" jdbcType="DECIMAL"/>
+        <result column="appraisals_supplement" property="appraisalsSupplement" jdbcType="DECIMAL"/>
+        <result column="social_security" property="socialSecurity" jdbcType="DECIMAL"/>
+        <result column="fund" property="fund" jdbcType="DECIMAL"/>
+         <result column="add_wages" property="addWages" jdbcType="DECIMAL"/>
+
+    </resultMap>
+
+    <!-- 员工微信个人信息-->
+    <resultMap id="wechatCustomerDto" type="com.xtr.api.dto.customer.CustomerWechatDto">
+        <result column="customer_id" property="customerId" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="customer_sex" property="customerSex" jdbcType="INTEGER"/>
+        <result column="customer_birthday" property="customerBirthday" jdbcType="TIMESTAMP"/>
+        <result column="station_customer_number" property="customerNumber" jdbcType="VARCHAR"/>
+        <result column="dep_name" property="depName" jdbcType="VARCHAR"/>
+        <result column="station_station_name" property="stationStationName" jdbcType="VARCHAR"/>
+        <result column="station_enter_time" property="stationEnterTime" jdbcType="TIMESTAMP"/>
+        <result column="customer_current_salary" property="customerCurrentSalary" jdbcType="DECIMAL"/>
+        <result column="join_city_name" property="joinCityName" jdbcType="VARCHAR"/>
+        <result column="sb_base" property="sbBase" jdbcType="DECIMAL"/>
+        <result column="gjj_base" property="gjjBase" jdbcType="DECIMAL"/>
+        <result column="customer_idcard_img_front" property="customerIdcardImgFront" jdbcType="VARCHAR"/>
+        <result column="customer_idcard_img_back" property="customerIdcardImgBack" jdbcType="VARCHAR"/>
+        <result column="customer_bank" property="customerBank" jdbcType="VARCHAR"/>
+        <result column="customer_idcard" property="customerIdcard" jdbcType="VARCHAR"/>
+        <result column="customer_is_complement" property="customerIsComplement" jdbcType="INTEGER"/>
+        <result column="customer_banknumber" property="customerBanknumber" jdbcType="VARCHAR"/>
+        <result column="customer_phone" property="customerPhone" jdbcType="VARCHAR"/>
+        <result column="customer_birthday_month" property="customerBirthdayMonth" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+
+    <!-- 查询员工最近一次发工资-->
+    <select id="selectCustomerInfoByCondition" parameterType="java.util.Map" resultMap="CustomerWechatBindMap">
+      SELECT
+	a. year,
+	a. month,
+	a.id payCycleId,
+	a.company_id,
+	a.pay_day,
+	b.customer_turename,
+	b.customer_id,
+	b.customer_img
+FROM
+	pay_cycle a
+LEFT JOIN customers b ON a.company_id = b.customer_company_id
+WHERE
+	a.is_generate_payroll = '1'
+AND a.approval_state = '1'
+AND a.company_id = #{companyId}
+AND b.customer_id =#{customerId}
+        <if test="month != null and month != ''">
+            AND a.month =#{month}
+        </if>
+        <if test="year != null and year != ''">
+            AND a.year =#{year}
+        </if>
+ORDER BY
+	a.year desc,
+	a. month desc
+         LIMIT 1
+    </select>
+
+    <!-- 查询员工当前年度的工资列表-->
+    <select id="selectCustomerYearSalarys" parameterType="java.util.Map" resultMap="CustomerYearSalaryResultMap">
+    SELECT
+      a.id as payCycleId,
+      a.company_id,
+      a.year,
+      a.month,
+      b.id as customerPayrollId,
+      b.base_wages,
+      b.real_wage
+    FROM
+    pay_cycle a
+    LEFT JOIN customer_payroll b ON a.id = b.pay_cycle_id
+    WHERE
+    b.customer_id = #{customerId}
+    AND a. YEAR = #{year}
+    and a.id=#{payCycleId}
+   <if test="month != null and month != ''">
+            AND a.month =#{month}
+       </if>
+    ORDER BY
+    a. YEAR DESC ,
+    a. MONTH desc
+    limit 1
+    </select>
+<!-- 查询工资详情-->
+    <select id="selectSalaryDetail" parameterType="java.util.Map" resultMap="CustomerPayrollWechatBindResultMap">
+        SELECT
+  d.company_name,
+  b.customer_dep_name,
+  b.customer_turename,
+  b.customer_company_name,
+  e.station_customer_number as customerNumber,
+  b.customer_banknumber,
+  c.real_wage,
+  a.pay_day,
+  c.base_wages,
+  c.absence_day_number,
+  c.attendance_deduction,
+  c.total_bonus,
+  c.pretax,
+  c.social_security_fund,
+  c.should_amount,
+  c.personal_tax,
+  c.after_tax
+FROM
+	pay_cycle a
+LEFT JOIN customers b ON a.company_id = b.customer_company_id
+LEFT JOIN customer_payroll c ON a.id = c.pay_cycle_id
+LEFT JOIN companys d ON b.customer_company_id = d.company_id
+left join customers_station e on  e.station_customer_id= b.customer_id
+WHERE
+	a.is_generate_payroll = '1'
+AND a.approval_state = '1'
+AND b.customer_id = #{customerId}
+AND a.id = #{payCycleId}
+AND a. YEAR = #{year}
+AND a. MONTH = #{month}
+AND c.id = #{payrollId}
+    </select>
+
+<!-- 查询工资单的津贴明细-->
+    <select id="selectPayrollDetailByPayrollId" parameterType="java.lang.Long" resultMap="CustomerPayrollWechatBindResultMap">
+        select detail_name,detail_value from customer_payroll_detail
+        where customer_payroll_id =#{payrollId}
+    </select>
+
+
+    <!-- 员工微信查询该员工的年度工资单-->
+    <select id="selectYearPayorders" parameterType="java.util.Map" resultMap="CustomerWechatBindMap">
+       select  a.id as payCycleId,a.pay_day,a.month,b.id as payrollId from  pay_cycle a  left join customer_payroll b
+         on  a.id = b.pay_cycle_id
+         left  join  customers  c
+         on  b.customer_id = c.customer_id
+         where  a.company_id =#{companyId}
+         and b.customer_id =#{customerId}
+         and a.year =#{year}
+         and a.approval_state ='1'
+         order by  a.month desc
+    </select>
+
+    <!-- 查询工资单详情-->
+    <select id="selectSalaryDetailBy" parameterType="java.util.Map" resultMap="CustomerPayrollWechatBindResultMap">
+       SELECT
+    a.add_wages,
+    a.base_wages,
+	a.real_wage,
+	d.pay_day,
+	b.customer_banknumber,
+	a.total_bonus,
+	a.should_amount,
+	a.absence_day_number,
+	a.attendance_deduction,
+	a.social_security,
+	a.fund,
+	a.pretax,
+	a.personal_tax,
+	a.after_tax,
+	c.company_name,
+	a.appraisals_supplement,
+	a.wiped_amount
+   FROM
+	customer_payroll a
+    LEFT JOIN customers b ON a.customer_id = b.customer_id
+    LEFT JOIN companys c ON a.company_id = c.company_id
+    LEFT JOIN pay_cycle d ON a.pay_cycle_id = d.id
+    WHERE
+	a.id =#{payrollId}
+    AND a.customer_id =#{customerId}
+    AND a.company_id = #{companyId}
+    AND d.id = #{payCycleId}
+    limit 1
+    </select>
+
+    <!-- 查看员工信息-->
+    <select id="selectCustomerInfo" parameterType="java.lang.Long" resultMap="wechatCustomerDto">
+     SELECT
+    a.customer_birthday_month,
+    a.customer_phone,
+	a.customer_id,
+	a.customer_turename  as name,
+	a.customer_sex,
+	a.customer_birthday,
+	a.customer_banknumber,
+	c.dep_name,
+	b.station_station_name,
+	b.station_enter_time,
+	b.station_customer_number as customerNumber,
+	a.customer_current_salary,
+	d.join_city_name,
+	d.sb_base,
+	d.gjj_base,
+	a.customer_idcard_img_front,
+	a.customer_idcard_img_back,
+	a.customer_bank,
+	a.customer_idcard,
+	a.customer_is_complement
+FROM
+	customers a
+LEFT JOIN customers_station b ON a.customer_id = b.station_customer_id
+LEFT JOIN company_deps c ON b.station_dept_id = c.dep_id
+LEFT JOIN customer_shebao d ON a.customer_id = d.customer_id
+WHERE
+	a.customer_id =#{customerId}
+
+    </select>
+
+</mapper>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>H+ 协议录入1</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-table/bootstrap-table.min.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-datepicker/css/bootstrap-datetimepicker.css')" rel="stylesheet" />
+    <link href="#springUrl('/resource/css/payfor1.css')" rel="stylesheet" />
+</head>
+##<input type="text" class="form-control" name="companyName" value="">
+<body>
+<div class="col-sm-12">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <form method="post" id="queryForm">
+                <div class="panel panel-default" style="margin-top: 10px;">
+                    <input type="hidden" value="$!{companyDetail.companyId}" id="companyIdHid">
+                    <input type="hidden" value="$!{operationShowState}" id="operationShowStateHid">
+##                    <input type="hidden" value="$!{companyDetail.companyNumber}" id="companyNumber" name="companyNumber">
+                    <table data-mobile-responsive="true" class="table table-hover table-bordered">
+                        <tr><td style="width:15%;">企业编号</td><td style="width:30%;">$!{companyDetail.companyNumber}</td><td style="width:15%;">用户名</td><td style="width:30%;">$!{companyDetail.memberLogname}</td></tr>
+                        <tr><td style="width:15%;">企业名称</td><td style="width:30%;"><input type="text" class="form-control" name="companyName" value="$!{companyDetail.companyName}"></td><td style="width:15%;">注册手机</td><td style="width:30%;">$!{companyDetail.companyContactTel}</td></tr>
+                        <tr><td>营业执照编号</td><td><input type="text" class="form-control" name="companyNumber" value="$!{companyDetail.companyNumber}"></td><td>员工人数</td><td><input type="text" class="form-control" name="companyEmployCount" value="$!{companyDetail.companyEmployCount}"></td></tr>
+                        <tr>
+                            <td>经营期限</td>
+                            <td>
+##                                <input type="text" class="form-control" name="companyOpenEndtime" value="$!date.format('yyyy-MM-dd',$!{companyDetail.companyOpenEndtime})">
+                                <input id="companyOpenEndtime" name="companyOpenEndtime" type="text" class="form-control dateTime" required readonly placeholder="点击选择到期时间" value="$!date.format('yyyy-MM-dd',$!{companyDetail.companyOpenEndtime})"/>
+                            </td>
+                            <td>平均每月发工资金额</td>
+                            <td><input type="text" class="form-control" name="companySalaryDivide" value="$!{companyDetail.companySalaryDivide}"></td>
+                        </tr>
+                        <tr><td>单位地址</td><td><input type="text" class="form-control" name="companyAddress" value="$!{companyDetail.companyAddress}"></td><td>开户银行</td><td><input type="text" class="form-control" name="companyBank" value="$!{companyDetail.companyBank}"></td></tr>
+                        <tr><td>法人姓名</td><td><input type="text" class="form-control" name="companyCorporation" value="$!{companyDetail.companyCorporation}"></td><td>开户支行名称</td><td><input type="text" class="form-control" name="companyBankaddress" value="$!{companyDetail.companyBankaddress}"></td></tr>
+                        <tr><td>法人身份证号码</td><td><input type="text" class="form-control" name="companyCorporationIdcard" value="$!{companyDetail.companyCorporationIdcard}"></td><td>对公银行账号</td><td><input type="text" class="form-control" name="companyBanknumber" value="$!{companyDetail.companyBanknumber}"></td></tr>
+                    </table>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading"><strong>充值提现通道</strong></div>
+                    <table id="companyManageTab" data-mobile-responsive="true" class="table table-hover table-bordered">
+                        <tr>
+                            <td style="width:15%;">充值通道</td>
+                            <td style="width:30%;" colspan="2">
+                                #if($companyDetail.companyRechargeChannel==1)
+                                    <input type="radio" checked="checked" value="1" name="companyRechargeChannel">京东通道
+                                #else
+                                    <input type="radio" value="1" name="companyRechargeChannel">京东通道
+                                #end
+                                #if($companyDetail.companyRechargeChannel==2)
+                                    <input type="radio" checked="checked" value="2" name="companyRechargeChannel">易付宝通道
+                                #else
+                                    <input type="radio" value="2" name="companyRechargeChannel">易付宝通道
+                                #end
+##                                #if(!$operationShowState==0)<option value="1">代发协议</option>#end
+##                                <input type="radio" checked="checked" value="1" name="companyRechargeChannel">京东通道
+##                                <input type="radio" checked="" value="2" name="companyRechargeChannel">易付宝通道
+                            </td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2">提现通道</td><td>提现银行账户名</td><td><input type="text" class="form-control" name="companyDepositBankAccountName" value="$!{companyDetail.companyDepositBankAccountName}"></td>
+                        </tr>
+                        <tr>
+
+                            <td>提现银行卡号</td><td><input type="text" class="form-control" name="companyDepositBankNo" value="$!{companyDetail.companyDepositBankNo}"></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading"><strong>征信资料库</strong></div>
+                    #*<a href="companyCreditSearch.htm?companyId=259">creditInfo</a>*#
+##                    <div class="identity-content-boxes clear">
+                    <div>
+                        <div class="identity-content-boxs" style="margin-top:20px;margin-bottom:10px;">
+                            <div class="identity-content-box">
+                                #*<a href="companyCreditSearch.htm?companyId=$!{companyDetail.companyId}" id="downloadFile">下载文件</a>*#
+                                    <a  id="downloadFile">下载文件</a>
+                            </div>
+                            <p>征信资料</p>
+                        </div>
+                    </div>
+##                    <div>
+                </div>
+
+                <div class="text-center" style="margin-top:200px;margin-bottom:20px;">
+                    <button type="button" id="nextBtn" class="btn btn-w-m btn-success" >下一步</button>
+                    <button type="button" class="btn btn-w-m btn-white" onclick="cancelProtocolEnteringFirst()">取消</button>
+                </div>
+##                onclick="onShowProtocolEnteringSecond()"
+            </form>
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+<script src="#springUrl('/resource/js/hui/content.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table-mobile.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-datepicker/js/bootstrap-datetimepicker.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-datepicker/locales/bootstrap-datetimepicker.zh-CN.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/validate/jquery.validate.min.js')"></script>
+<script src="#springUrl('/resource/js/comm/jdatagrid.js')"></script>
+<script src="#springUrl('/resource/js/market/protocol/protocolEnteringFirst.js')"></script>
+</html>

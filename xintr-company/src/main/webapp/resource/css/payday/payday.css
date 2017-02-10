@@ -1,0 +1,889 @@
+.payoff,
+.payfor {
+    padding: 18px 0 0 30px;
+}
+
+.payoff p,
+.payfor p {
+    color: #666666;
+    height: 28px;
+    font-size: 14px;
+}
+
+.payoff span,
+.payfor span {
+    color: #5b7798;
+}
+
+.btn-canel{
+
+}
+
+.payoff .payoff_title,
+.payoff_problem,
+.payfor .payfor_title {
+    font-size: 18px;
+    color: #333333;
+    border-left: 4px solid #5b7798;
+    margin-top: 90px;
+    padding-left: 9px;
+}
+
+.payfor .payfor_title {
+    margin-top: 50px;
+}
+
+.payoff_problem {
+    margin-top: 107px;
+}
+
+.payoff table {
+    border: 1px solid #d3e0f1;
+    width: 888px;
+    height: 87px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.payoff th {
+    background: #e7edf5;
+    color: #5b7798;
+    font-size: 14px;
+    height: 38px;
+}
+
+.payoff td {
+    border: 1px solid #d3e0f1;
+    height: 46px;
+}
+
+.payoff a {
+    display: block;
+    width: 300px;
+    height: 50px;
+    background: #0696fa;
+    border-radius: 8px;
+    color: #FFFFFF;
+    font-size: 18px;
+    text-align: center;
+    line-height: 50px;
+    margin: 138px auto 0;
+}
+
+#payfor_form {
+    font-size: 14px;
+    color: #666666;
+    margin-top: 55px;
+}
+
+#payfor_form ul li span {
+    color: #666666;
+    font-size: 14px;
+    position: absolute;
+    top: 10px;
+}
+
+#payfor_form ul li {
+    margin: 0 0 20px 40px;
+    position: relative;
+}
+
+#payfor_form input,
+#payfor_form label {
+    width: 348px;
+    height: 34px;
+    border: 1px solid #e3e3e3;
+    margin-left: 110px;
+    font-size: 14px;
+    color: #cccccc;
+    padding-left: 10px;
+}
+
+#payfor_form label {
+    display: block;
+    line-height: 34px;
+    color: #000000;
+}
+
+#payfor_form ul li p {
+    color: #ff9966;
+    font-size: 12px;
+    padding: 12px 0 0 119px;
+}
+
+#payfor_form .submit {
+    background: #0696fa;
+    color: #FFFFFF;
+    width: 240px;
+    height: 50px;
+    border: none;
+    cursor: pointer;
+}
+
+#payfor_form .submit,
+#payfor_form a {
+    border-radius: 6px;
+    padding: 0;
+    font-size: 18px;
+}
+
+#payfor_form a {
+    width: 238px;
+    height: 48px;
+    display: inline-block;
+    text-align: center;
+    line-height: 50px;
+    color: #0696fa;
+    border: 1px solid #0696fa;
+    margin-left: 20px;
+}
+
+/*发工资2*/
+
+.wages {
+    float: left;
+    min-width: 1200px;
+    width: 100%;
+    height:100%;
+    position: relative;
+    overflow:auto;
+    /*margin: 40px 3.15% 0 3.15%;*/
+}
+
+.wages .payoff_two_list1 {
+
+    float: left;
+
+}
+
+.payoff_two{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.payoff_two_nav {
+    min-width: 830px;
+    width: 93.6%;
+    height: 40px;
+    line-height: 40px;
+    margin: 60px 3.15% 0 3.5%;
+
+}
+
+.payoff_two ol li {
+    text-align: center;
+    width: 46.85%;
+    height: 40px;
+    float: left;
+    color: #5b7798;
+    cursor: pointer;
+    border: 1px solid #5b7798;
+}
+
+.payoff_two_nav li {
+    border-radius: 0 6px 6px 0;
+}
+
+.payoff_two_nav .nav_first {
+    border-radius: 6px 0 0 6px;
+}
+
+.payoff_two .payoff_two_active {
+    color: #FFFFFF;
+    background: #5b7798;
+}
+
+.payoff_two .payoff_two_logo {
+    width: 5.74%;
+    /*position: absolute;
+    right: 3.15%;
+    top: 62px;*/
+    line-height: normal;
+    border: none;
+    color: #5b7798;
+    font-size: 12px;
+}
+
+.payoff_two .payoff_two_header,
+.payoff_two .payoff_two_header1 {
+    min-width: 950px;
+    height: 126px;
+    background: #e7edf5;
+    border: 1px solid #d3e0f1;
+    position: relative;
+    font-size: 14px;
+    color: #5b7798;
+    width: 93.6%;
+    margin: 20px 3.5% 0 3.5%;
+
+}
+.payoff_two_header div a{
+    display: block;
+    width:100px;
+    height:20px;
+    float:left;
+    margin-right:50px;
+    text-align: center;
+    padding-top:60px;
+    margin-left:30px;
+}
+.payoff_two .payoff_two_header1 {
+    height: 70px;
+    float: left;
+
+}
+.wagesA1 {
+    background: url(../../img/socialLead.png) no-repeat center 0;
+}
+
+.wagesA2 {
+    background: url(../../img/socialPayment.png) no-repeat center 0;
+}
+
+.wagesA3 {
+    background: url(../../img/socialRepair.png) no-repeat center 0;
+}
+
+.wagesA4 {
+    background: url(../../img/socialShut.png) no-repeat center 0;
+}
+
+.wagesA5 {
+    background: url(../../img/socialAdjust.png) no-repeat center 0;
+}
+.triangle,
+.triangle1 {
+    display: block;
+    width: 0px;
+    height: 0px;
+    border-left: 14px solid transparent;
+    border-right: 14px solid transparent;
+    border-bottom: 10px solid #e7edf5;
+    position: absolute;
+    top: -10px;
+}
+
+.triangle {
+    left: 190px;
+}
+
+.triangle1 {
+    right: 21.34%;
+}
+
+.payoff_two .payoff_two_div {
+    font-weight: 700;
+    padding: 36px 40px 0px 40px;
+}
+
+.payoff_two .payoff_two_div1 {
+    padding: 14px 40px 0px 40px;
+    color: #333333;
+    font-weight: bold;
+    position: relative;
+}
+
+.payoff_two_div1 a {
+    display: block;
+    float: left;
+    color: #5b7798;
+    font-size: 12px;
+    font-weight: normal;
+    margin-top: 12px;
+}
+
+.payoff_two_header1_right {
+    position: absolute;
+    top: 12px;
+    right: 2.5%;
+}
+
+.payoff_two_header1_right a {
+    display: block;
+    width: 100px;
+    height: 26px;
+    background: #0696fa;
+    float: left;
+    text-align: center;
+    line-height: 26px;
+    color: #FFFFFF;
+    border-radius: 6px;
+    margin-left: 10px;
+}
+
+.payoff_two_div li {
+    font-weight: normal;
+}
+
+.payoff_two .payoff_two_p1 {
+    display: block;
+    margin-top: 6px;
+    font-weight: normal;
+}
+
+.payoff_two .payoff_two_p2 {
+    padding-left: 40px;
+    margin-top: 25px;
+}
+
+.payoff_two .payoff_two_p2,
+.payoff_two .payoff_two_p1 {
+    font-size: 12px;
+    color: #8fa9c7;
+}
+
+.payoff_two_p2 a {
+    display: inline-block;
+    margin-left: 20px;
+    width: auto;
+    height: 18px;
+    padding-left: 20px;
+    background: url(../../img/templates.png) no-repeat;
+}
+
+.payoff_two .word {
+    float: left;
+}
+
+.payoff_two_month {
+    min-width: 59px;
+    height: 24px;
+    border: 1px solid #b9cce1;
+    border-radius: 6px;
+    color: #666666;
+    font-size: 12px;
+    padding-left: 9px;
+    line-height: 24px;
+    background: #FFFFFF;
+    float: left;
+    overflow: hidden;
+    margin: -3px 8px 0 10px;
+}
+
+.payoff_two_div .img1 {
+    position: absolute;
+    left: 140px;
+    top: 42px;
+    cursor: pointer;
+}
+
+.payoff_two_kalendar {
+    position: absolute;
+    left: 283px;
+    top: 32px;
+    width: 108px;
+    height: 24px;
+    /*background: #FFFFFF;*/
+    /*border-radius: 6px;*/
+    /*border: 1px solid #b9cce1;*/
+    color: #666666;
+    font-size: 12px;
+    padding-left: 10px;
+    line-height: 24px;
+}
+
+.payoff_two_kalendar .img2 {
+    position: absolute;
+    top: 3px;
+    right: 6px;
+    cursor: pointer;
+}
+
+.payoff_two_div .bar {
+    width: 150px;
+    background: #FFFFFF;
+    float: left;
+    margin: 6px 0 0 32px;
+}
+
+.payoff_two_div .bar,
+.payoff_two_div .bar_1 {
+    height: 8px;
+    display: block;
+    border-radius: 4px;
+}
+
+.payoff_two_div .bar_1 {
+    width: 0;
+    background: #35ddaf;
+}
+
+.payoff_two_list,
+.payoff_two_list1 {
+
+    width: 90%;
+    min-width: 888px;
+    text-align: center;
+    margin:0 auto;
+}
+
+.payoff_two_list1 a {
+    display: block;
+    /*width: 118px; */
+    height: 28px;
+    line-height: 28px;
+    background: #d3e0f1;
+    text-align: center;
+    color: #ffffff;
+}
+
+.payoff_two_list1 a.payoff_two table tr {
+    color: #666666;
+}
+
+.payoff_two_list1 tr {
+    height: 48px;
+    border: 1px solid #d3e0f1;
+}
+
+.payoff_two_list tr {
+    height: 72px;
+    border-bottom: 1px dotted #afafaf;
+}
+
+.payoff_two td em {
+    font-size: 12px;
+    color: #999999;
+}
+
+.payoff_two_list a,
+.payoff_two_list1 a {
+    display: inline-block;
+    margin-left: 10px;
+    border-radius: 4px;
+    background: #e7edf5;
+    color: #5b7798;
+}
+
+.payoff_two_list a {
+    width: 50px;
+    height: 20px;
+}
+
+.payoff_two td .cancel {
+    background: #f5e7e7;
+    color: #fa5f5f;
+}
+
+.payoff_two table .payoff_two_list_first {
+    height: 38px;
+    background: #e7edf5;
+    border: 1px solid #d3e0f1;
+}
+
+.payoff_two table .payoff_two_list_last td {
+    border: 1px solid #d3e0f1;
+    width:100%;
+    height:200px;
+    margin-bottom:20px;
+}
+.payoff_two_list_last p{
+    line-height: 50px;
+    padding-left:20px;
+}
+.payoff_two_list1 .list1_btn {
+    display: block;
+    width: 14px;
+    height: 14px;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    background: #FFFFFF;
+    float: left;
+    margin-left: 40px;
+}
+
+.payoff_two_page {
+    position: absolute;
+    right: 3.15%;
+    bottom: 0;
+}
+
+.payoff_two_page span {
+    width: 78px;
+    cursor: pointer;
+}
+
+.payoff_two_page span,
+.payoff_two_page a {
+    display: block;
+    float: left;
+    height: 28px;
+    border: 1px solid #e3e3e3;
+    line-height: 28px;
+    border-radius: 2px;
+    color: #666666;
+    text-align: center;
+    margin: 0 10px;
+}
+
+.payoff_two_page a {
+    width: 38px;
+}
+
+.payoff_two_page .page_active {
+    background: #5b7798;
+    color: #ffffff;
+    border: 0;
+}
+
+.member {
+    float: left;
+    width: 200px;
+    min-height: 800px;
+    background: #edf2f9; /*url(../img/bg.jpg) no-repeat center center;*/
+    position: absolute;
+    left: -200px;
+}
+
+.member dl {
+    position: absolute;
+    left: 64px;
+    top: 67px;
+    border-left: 2px solid #c6d3e5;
+}
+
+.member dt {
+    color: #333333;
+    font-weight: bold;
+}
+
+.member dd {
+    font-size: 12px;
+    color: #8fa9c7;
+    cursor: pointer;
+    margin-top: 33px;
+}
+
+.member dl dt{
+    margin-left:-10px;
+    margin-top: -10px;
+}
+.member dl span{
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius:5px ;
+    background: #c6d3e5;
+    margin-right: 4px;
+
+}
+.member dl dt span{
+    width: 20px;
+    height: 20px;
+    border-radius:10px;
+    background: #8fa9c7;
+    position: relative;
+    top: 4px;
+}
+.member dl dd em{
+    display: inline-block;
+    border: 1px solid #c6d3e5;
+    width: 10px;
+    position: relative;
+    top: -5px;
+}
+
+.member .dd_active {
+    font-weight: bold;
+    color: #5b7798;
+}
+
+.payoff_two_list1 {
+    border: 1px solid #d3e0f1;
+}
+
+.payoff_two_list1 label {
+    display: inline-block;
+    width: 13.5%;
+    text-align: center;
+}
+
+.payoff_two_list1 label input {
+    /*margin-left: -13px;*/
+}
+
+/*input[type=checkbox] {
+	visibility: hidden;
+}*/
+
+.payoff_two_list1 input {
+    position: absolute;
+    left: 4.5%;
+    top: 38%;
+    border: none;
+}
+
+.payoff_two_list1 label em {
+    margin-left: 10px;
+    position: relative;
+    top: -1px;
+}
+
+.payoff_two_list1 .list1_first_li strong {
+    position: absolute;
+    right: 5.6%;
+}
+
+.payoff_two_list1 li {
+    width: 100%;
+    text-align: left;
+    position: relative;
+}
+
+.payoff_two_list1 .list1_first_li {
+    min-width: 888px;
+    height: 38px;
+    background: #e7edf5;
+    line-height: 38px;
+    color: #5b7798;
+}
+
+.payoff_two_list1 li .a1 {
+    display: inline-block;
+    width: 120px;
+}
+
+.payoff_two_list1 li {
+    height: 48px;
+    line-height: 48px;
+}
+
+.payoff_two_list1 li span {
+    display: inline-block;
+    text-align: center;
+}
+
+.payoff_two_list1 li .s0 {
+    width: 10.12%;
+}
+
+.payoff_two_list1 li .s1 {
+    width: 13.06%;
+}
+
+.payoff_two_list1 li .s1 img {
+    margin-top: 15px;
+    margin-right: 10px;
+}
+
+.payoff_two_list1 li .s2 {
+    width: 9.5%;
+}
+
+.payoff_two_list1 li .s3 {
+    width: 15.76%
+}
+
+.payoff_two_list1 li .s4 {
+    width: 21.6%
+}
+
+.payoff_two_list1 li .s5 {
+    width: 8.5%
+}
+
+.payoff_two_list1 li .s6 {
+    width: 16.6%;
+}
+
+.salaryDetails {
+    min-width: 950px;
+}
+
+.salaryDetails table tr {
+    border: 1px solid #d3e0f1;
+
+}
+
+.salaryDetails p, .salaryDetails strong {
+
+    margin:0 auto; /*margin-top: 2.5%;*/
+
+}
+
+.salaryDetails p span {
+    color: #5b7798;
+}
+
+.salaryDetails table td {
+
+    /*border: 1px solid #d3e0f1;*/
+
+}
+.clearTop{
+    width:90%;
+    margin:30px auto;
+}
+
+.salaryDetails strong {
+    display: block;
+    border-left: 8px solid #5b7798;
+    height: 20px;
+    color: #333333;
+    font-size: 18px;
+    line-height:20px;
+    padding-left:10px;
+}
+
+.salaryDetails table {
+    margin:0 auto
+}
+.btn-canel1{
+    width:90%;
+    margin:20px auto 40px;
+    background:#f1f9fc;
+    border:1px solid #dbe9ee;
+    height:80px;
+}
+.btn-canel{
+    width:400px;
+    height:80px;
+    margin:20px auto;
+}
+.btnCanel1{
+    float:left;
+    display: block;
+    width: 240px;
+    height: 40px;
+    border-radius: 6px;
+    background: #0696fa;
+    color: #FFFFFF;
+    line-height: 40px;
+    text-align: center;
+    font-size: 18px;
+}
+.btnCanel2{
+    width:140px;
+    height:38px;
+    border-radius:6px;
+    border: 1px solid #0696fa;
+    color: #0696fa;
+    line-height: 38px;
+    text-align: center;
+    font-size:18px;
+    float:right;
+}
+
+.moveTo {
+    display: block;
+    width: 870px;
+    background: #FFFFFF;
+    margin: 0 auto 0;
+}
+
+
+
+.moveTo_centent {
+    border: 1px solid #d3e0f1;
+    padding: 8%;
+    width: 230px;
+    height: 250px;
+    margin-left: 40px;
+    margin-top: 60px;
+    margin-bottom: -60px;
+    float: left;
+}
+
+.moveTo_centent a {
+    color: #1d232f;
+}
+
+.moveTo_centent div {
+    margin-left: -30px;
+}
+
+.moveTo div em {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    background: #5b7798;
+    position: relative;
+    top: 4px;
+    margin-right: 14px;
+}
+
+.moveTo_centent dd em{
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    margin-right: 4px;
+}
+
+.moveTo div h4 {
+    font-size: 14px;
+    margin-top: -110px;
+    margin-bottom: 50px;
+    margin-left: -60px;
+}
+
+.moveTo dt {
+    font-weight: bold;
+    font-size: 14px;
+    position: relative;
+    left: -10px;
+}
+
+.moveTo dd {
+    border-left: 1px solid #5b7798;
+    padding-left: 26px;
+    padding-top: 20px;
+    background: url(../../img/line.png) no-repeat 0 30px;
+}
+
+.moveTo dd ul {
+    margin-left: 7px;
+    padding: 20px 0 0 18px;
+    border-left: 1px solid #5b7798;
+}
+
+.moveTo ul li {
+    margin-top: 8px;
+}
+
+.moveTo .move_btn {
+    float: none;
+    width: 320px;
+    height: 40px;
+    margin: 80px auto 0;
+}
+
+.move_btn a {
+    display: inline-block;
+    width: 150px;
+    height: 40px;
+    border-radius: 6px;
+    line-height: 40px;
+    text-align: center;
+
+}
+
+.move_btn a:first-child {
+    color: #FFFFFF;
+    background: #0696fa;
+}
+
+.move_btn a:last-child {
+    color: #0696fa;
+    border: 1px solid #0696fa;
+    margin-left: 10px;
+}
+
+.payoffShade{position:absolute;top:33px;left:92px;overflow:hidden;width:68px;height:24px;border:1px solid #b9cce1;border-radius:6px;background:#fff;color:#666}
+.payoffShade img{position:absolute;top:10px;right:6px}
+.payoffShade ul{position:absolute;top:0;left:0}
+.payoffShade ul li{margin-bottom:10px;padding-left:9px;width:61px;height:26px;font-size:9pt;line-height:26px;cursor:pointer}
+
+#salary{
+    display: block;
+    margin: 140px auto 0;
+    width: 300px;
+    height: 50px;
+    border-radius: 6px;
+    background: #0696fa;
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+    line-height: 50px;
+}

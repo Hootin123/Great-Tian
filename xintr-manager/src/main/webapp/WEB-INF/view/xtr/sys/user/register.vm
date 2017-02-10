@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>H+ 用户注册</title>
+    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/hui/plugins/iCheck/custom.css')" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+
+<div class="middle-box loginscreen animated fadeInDown">
+    <div>
+        <div class="text-center">
+
+            <h1 class="logo-name">薪</h1>
+
+        </div>
+        <h3 class="text-center">欢迎注册 薪太软</h3>
+
+        <p class="text-center">创建一个薪太软新账户</p>
+
+        <form id="signupForm" class="form-horizontal m-t">
+            <div class="form-group">
+                <input id="js_phone" name="js_phone" type="text" class="form-control" placeholder="请输入手机号或邮箱地址"
+                       aria-required="true" aria-invalid="false" class="error">
+            </div>
+            <div class="form-group">
+                <input id="js_pwd1" name="js_pwd1" type="password" class="form-control" placeholder="请输入密码"
+                       aria-required="true" aria-invalid="true" class="error"
+                >
+            </div>
+            <div class="form-group">
+                <input id="js_pwd2" name="js_pwd2" type="password" class="form-control" placeholder="请再次输入密码"
+                       aria-required="true" aria-invalid="true" class="error"
+                >
+            </div>
+            <div class="form-group text-left">
+                <div class="checkbox i-checks">
+                    <label class="no-padding">
+                        <input id="agree" name="agree" type="checkbox"><i></i> 我已经认真阅读并同意《薪太软使用协议》</label>
+                </div>
+            </div>
+            <button id="regBtn" type="submit" class="btn btn-primary block full-width m-b">注 册</button>
+
+            <p class="text-muted text-center">
+                <small>已经有账户了？</small>
+                <a href="login.htm">点此登录</a>
+            </p>
+        </form>
+    </div>
+</div>
+
+
+<script src="#springUrl('/resource/js/hui/content.min.js?v=1.0.0')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/validate/jquery.validate.min.js')"></script>
+<script src="#springUrl('/resource/js/comm/validate.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/iCheck/icheck.min.js')"></script>
+<script src="#springUrl('/resource/js/sys/user/register.js')"></script>
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+</body>
+
+</html>

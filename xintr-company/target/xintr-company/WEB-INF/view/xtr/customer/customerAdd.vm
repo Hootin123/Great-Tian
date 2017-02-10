@@ -1,0 +1,407 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title></title>
+    #parse("comm/head.vm")
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/customer/customerAdd.css')"/>
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/js/plugins/laydate/need/laydate.css')"/>
+    <script src="#springUrl('/resource/js/plugins/laydate/laydate.js')"></script>
+    <script src="#springUrl('/resource/js/customer/customerAdd.js')"></script>
+    <script src="#springUrl('/resource/js/comm/validateUtil.js')"></script>
+    <script src="#springUrl('/resource/js/customer/customerMain.js')"></script>
+
+</head>
+<body>
+<div class="header">
+    <h2>新增员工</h2>
+    <img src="#springUrl('/resource/img/salary/guanbi.png')" alt="" id="closeDetailBtn">
+</div>
+<div class="section">
+
+    <div id="customerDiv" style="display:block">
+    <form id="addForm">
+        <table>
+            <tr>
+                <td><em>*</em>姓名</td>
+                <td><input id="customerTurename" type="text" name="customerTurename"  placeholder="请输入姓名"/></td>
+
+
+
+            </tr>
+            <tr>
+                <td><em>*</em>手机号码</td>
+                <td><input type="text" id="customerPhone" name="customerPhone"  placeholder="请输入手机号码"/></td>
+            </tr>
+            <tr>
+                <td><em>*</em>入职日期</td>
+                <td><input type="text" name="customerJoinTime" id="customerJoinTime" class="laydate-icon" readonly="readonly" onclick="laydate()"
+                            style="width: 360px" placeholder="请输入入职日期"/></td>
+
+
+            </tr>
+            <tr>
+                <td><em>*</em>聘用形式</td>
+                <td>
+                    <select name="stationEmployMethod" class="select">
+                        <option value="1">正式</option>
+                        <option value="2">劳务</option>
+                    </select>
+
+                </td>
+            </tr>
+
+            <tr >
+                <td><em>*</em>部门</td>
+
+                <td class="customerDepName">
+                    <input type="text" placeholder="请点击右边树状选择部门" id="customerDepName" name="customerDepName" readonly="readonly" />
+                    <input type="hidden" id="depId" name="customerDepId" />
+##                    <b></b>
+                    <div class="branch" style="display: none">
+##                        <h4>部门</h4>
+                        <div id="dep-base" style="position: relative">
+
+                        </div>
+                    </div>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td><em>*</em>岗位</td>
+                <td><input type="text" id="stationStationName" name="stationStationName" placeholder="请输入工作岗位"/></td>
+            </tr>
+            <tr>
+                <td><em>*</em>转正时间</td>
+                <td><input placeholder="请输入转正时间" type="text" name="stationRegularTime" readonly="readonly" id="stationRegularTime" class="laydate-icon" class="laydate-icon" onclick="laydate({choose:function(datas){dateChange(datas)}})"
+
+                            style="width: 360px"/>&nbsp;&nbsp;<input  type="checkbox" name="isRegular"  id="isRegular" value="2"/>已转正</td>
+
+
+
+              </tr>
+            <tr>
+                <td>试用工资基数 </td>
+                <td><input  placeholder="请输入试用期工资" name="customerCurrentSalary"  id ="customerCurrentSalary" type="text"/></td>
+            </tr>
+
+            <tr>
+                <td>转正月工资基数</td>
+                <td><input placeholder="请输入转正月工资" name="customerRegularSalary" type="text"/></td>
+            </tr>
+
+
+        </table>
+        <div class="footBtn">
+            <div class="addBtn">
+                    <input class="okBtn" type="button" id="addCustomer" value="新增"/>
+                    <input class="cancelBtn" type="button" id="cancelBtn" value="取消">
+            </div>
+        </div>
+    </form>
+    </div>
+</div>
+
+</body>
+
+<script>
+    window.onresize = function(){
+        if(document.body.scrollHeight <= document.body.clientHeight){
+            $("body").css("min-height","700px");
+        }else{
+            $("body").css("min-height", 0);
+        }
+    }
+//    var start = {
+//        elem: '#customerJoinTime',
+//        max: '2099-06-16 23:59:59',
+//        istoday: false,
+//        choose: function(datas){
+//            //end.min = datas;//开始日选好后，重置结束日的最小日期
+//            //end.start = datas;//将结束日的初始值设定为开始日
+//        }
+//    };
+//    var end = {
+//
+//        elem: '#stationRegularTime',
+//        max: '2099-06-16 23:59:59',
+//        istoday: false,
+//        choose: function(datas){
+//            //start.min = datas;//开始日选好后，重置结束日的最小日期
+//        }
+//    };
+//    laydate(start);
+//    laydate(end);
+
+    /**部门的数据接口 start**/
+    $.get(BASE_PATH + '/dept/tree.htm', {}, function(data){
+        if (data.success) {
+            // DeptExtend.initTree(data.data);
+            console.log(data.date);
+            dg($("#dep-base"), data.data)
+        } else {
+            showWarning(data.message);
+        }
+    });
+    /**部门的数据接口 end**/
+    function dg(parent, data){
+        var title = '<span class="dep-item" data-depid="'+data.depId+'" style="display: block; width: 100%;">' + data.depName + '</span>';
+        parent.append(title);
+        if(data.children && data.children.length > 0){
+            var ul = $("<ul>");
+            $.each(data.children, function(index, item){
+                var li =$("<li style='position: relative'>")
+                var i=$("<i class='show'>")
+                li.append(i)
+                dg(li, item)
+
+                ul.append(li);
+//                $('li:has(ul) i').addClass('ali')
+//
+
+            })
+            parent.append(ul);
+            $('li').not(':has(ul)').find('i').removeClass('show')
+            $('.show').html('+');
+            $('.show').parent().find('ul').hide();
+//            $('.branch .dep-item:first').removeClass('dep-item')
+        }
+        $('.branch span:first').removeClass('dep-item')
+        $('.dep-item').on('click',function(){
+            $('#customerDepName').val($(this).html());
+            $('#depId').val($(this).data("depid"));
+            $('.branch').hide();
+            $('.show').off('click')
+        })
+    }
+
+
+
+    $('.customerDepName input').on('click',function(e){
+        e.stopPropagation();
+        $('.show').off('click');
+        $('.branch').toggle();
+        // 判断 是否有子元素
+        $('.show').on('click',function(){
+
+            if($(this).html()=='+'){
+//                console.log(22)
+                $(this).siblings('ul').toggle(200)
+                $(this).html('-');
+            }else{
+//                console.log(111)
+                $(this).siblings('ul').toggle(200);
+                $(this).html('+');
+            }
+
+        })
+    });
+
+
+    // 去除冒泡
+    $(document).on('click',function(){
+        $('.branch').hide();
+        $('.show').off('click')
+    })
+    $('.branch').on('click',function(e){
+        e.stopPropagation()
+    })
+
+    //点击取消
+    $("#cancelBtn").click(function(){
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+
+    });
+//    $(".cancelBtn").click(function(){
+//
+//        parent.allPopClose();
+//    });
+
+   // 点击新增
+    $("#addCustomer").click(function(){
+        var phoneVal =$("#customerPhone").val();//手机号码
+        var customerJoinTime =$("#customerJoinTime").val();//入职日期
+        var depName =$("#customerDepName").val();//部门名称
+        var stationName = $("#stationStationName").val(); //岗位
+        var stationRegularTime =$("#stationRegularTime").val();//转正日期
+        if($("#customerTurename").val()==null||$("#customerTurename").val()==""){
+            layer.alert("请输入姓名");
+            return false;
+        }else if(phoneVal==null||phoneVal==""){
+            layer.alert("请输入手机号");
+            return false;
+        }else if(!/^1[3|4|5|7|8]\d{9}$/.test(phoneVal)){
+            layer.alert("请输入正确的手机号");
+            return false;
+        }else if(customerJoinTime==null||customerJoinTime==""){
+            layer.alert("请输入入职时间");
+            return false;
+        }else if(depName==null||depName==""){
+            layer.alert("请输入部门名称");
+            return false;
+        }else if(stationName==null||stationName==""){
+            layer.alert("请输入岗位信息");
+            return false;
+        }else if(!$("#isRegular").is(':checked')){
+            if(stationRegularTime==null||stationRegularTime==""||stationRegularTime==undefined){
+                layer.alert("请输入转正日期");
+                return false;
+            }else{
+                //入职时间必须小于当前时间
+                if(compareTime(customerJoinTime)){
+                    layer.alert("入职时间必须小于当前时间");
+                    return false;
+                }else if(!compareTimeOther(customerJoinTime,stationRegularTime)){
+                    layer.alert("入职时间不能大于转正时间");
+                    return false;
+                }else if(!compareTime(stationRegularTime)){
+                    layer.alert("转正时间小于当前时间时，必须勾选已转正");
+                    return  false;
+                }
+
+            }
+        }else if($("#isRegular").is(':checked')){
+            //判断当前的转正时间是否晚于当前时间
+            if(stationRegularTime!=null||stationRegularTime!=""||stationRegularTime==undefined){
+                if(compareTime(stationRegularTime)){
+                    layer.alert("勾选转正时，转正时间不能大于当前时间！")
+                    return false;
+                }else if(stationRegularTime!=null&&stationRegularTime!=""&&stationRegularTime!=undefined){
+
+                   if(!compareTimeOther(customerJoinTime,stationRegularTime)) {
+                       layer.alert("转正时间不能早于入职时间");
+                       return false;
+                   }
+                }else if(customerJoinTime!=null||customerJoinTime!=""||customerJoinTime==undefined){
+                    if(compareTime(customerJoinTime)) {
+                        layer.alert("入职时间不能大于当前时间");
+                        return false;
+                    }
+                }
+
+            }else{
+                if(compareTime(customerJoinTime)){
+                    layer.alert("入职时间必须小于当前时间");
+                    return false;
+                }
+            }
+
+        }
+
+
+        $.ajax({
+            type:'POST',
+            url:'cusomerAdd.htm',
+            data: $("#addForm").serialize(),
+            dataType:'json',
+            success:function (resultResponse){
+                if(resultResponse.success){
+                    layer.alert('操作成功',{
+                        title:'处理结果',
+                    },function(index){
+                        //loadCustomerList();
+                        parent.location.reload();
+                        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+                        parent.layer.close(index);
+                    });
+                }else{
+                    layer.alert(resultResponse.message);
+                }
+
+            },
+            error:function(){
+               layer.alert("网络错误！")
+            }
+        });
+    });
+
+
+
+    //比较时间
+    function compareTime(str){
+        if(str!=null) {
+            str = str.replace(/-/g, "/");
+            var endTime = new Date(str);
+            var nowTime = new Date();
+            var time = endTime.getTime() - nowTime.getTime();
+            if (time > 0) {
+                return true
+            } else {
+                return false;
+            }
+        }
+    }
+  function compareTimeOther(str1,str2){
+      if(str1!=null&&str2!=null) {
+          str1 = str1.replace(/-/g, "/");
+          str2 = str2.replace(/-/g, "/");
+          var customerJoinTime = new Date(str1);//入职时间
+          var stationRegularTime = new Date(str2);//转正时间
+          var time = stationRegularTime.getTime() - customerJoinTime.getTime();
+          if (time >= 0) {
+              return true;
+          } else {
+              return false;
+          }
+      }
+  }
+  function dateChange(dates){
+            var str = $("#stationRegularTime").val();
+            if(str!=null
+                    ||str!=""||str!=undefined) {
+                if ( !compareTime(str)) {
+                    $("#isRegular").attr("checked", true);
+                    //添加颜色
+                    $("#customerCurrentSalary").css({
+                        "background-color":"#A9A9A9"
+                    });
+                    $("#customerCurrentSalary").attr("readonly","readonly");
+
+                } else {
+                    $("#isRegular").removeAttr("checked");
+                    //移除样式
+                    $("#customerCurrentSalary").removeAttr("style");
+                    //移除readOnly
+                    $("#customerCurrentSalary").removeAttr("readonly");
+
+                }
+            }
+        }
+
+//点击已转成
+    $("#isRegular").on("click",function(){
+       if( !$(this).is(":checked")){
+           //清空值
+           $("#stationRegularTime").val("");
+           //移除样式
+           $("#customerCurrentSalary").removeAttr("style");
+           //移除readOnly
+           $("#customerCurrentSalary").removeAttr("readonly");
+       }else{
+           //添加颜色
+           $("#customerCurrentSalary").css({
+               "background-color":"#A9A9A9"
+           });
+           $("#customerCurrentSalary").attr("readonly","readonly");
+           $("#stationRegularTime").val("");
+       }
+    });
+    $('#closeDetailBtn').click(function(){
+        onCancelDialog()
+    })
+    function onCancelDialog() {
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    }
+
+
+
+
+</script>
+
+</html>
+

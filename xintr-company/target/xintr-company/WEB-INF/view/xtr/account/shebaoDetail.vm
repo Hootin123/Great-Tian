@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>社保公积金详情</title>
+    #parse("comm/head.vm")
+    <script src="#springUrl('/resource/js/account/shebaoDetail.js')"></script>
+</head>
+<style>
+    body,html{width:100%;}
+    .salaset-title{width: 100%; height: 80px;position: relative;min-width: 1200px;}
+    .salaset-title h2{text-align: center;line-height: 80px;border-bottom: 1px solid #dbe9ee;color:#000;font-size:25px}
+    .salaset-title .topImg{position: absolute;right:25px;top:0;bottom:0;margin:auto;cursor: pointer;}
+    .all{width:90%;margin:0 auto;min-width: 1200px;}
+    .socialTop{width:100%;line-height:50px;color:#333;box-sizing: border-box;border-bottom:0;margin-top:50px;}
+    .socialTop1{padding-left:20px;}
+    .socialTop2{padding-left:100px;}
+    table{width:100%;font-size: 12px;}
+    table tr td{border:1px solid #b8dae6;line-height:30px;text-align: center;color:#333;}
+    .socialCon{border:1px solid #dbe9ee;margin-top:50px;height:150px;line-height: 45px;font-size:16px;}
+    .socialConLeft{float:left;width:50%;padding-left:20px;}
+    .socialConright{float:left;width:50%;}
+    .socialConLeft1{color:#fa5f5f;font-size:18px;}
+    .socialConRight1{padding-left:20px;cursor: pointer;color:#0696fa;}
+    .footer{width:100%;height:80px;background:#f1f9fc;border:1px solid #dbe9ee;box-sizing: border-box;margin-top:20px;margin-bottom:20px;}
+    .footerBtn{width:400px;height:40px;margin:20px auto 20px;}
+    .footerBtn1{width:240px;height:40px;background:#0696fa;color:#fff;float:left;font-family:"微软雅黑";border:0;border-radius:6px;cursor: pointer;font-size:18px}
+    .footerBtn2{width:140px;height:40px;background:#fff;border:1px solid #0696fa;float:right;font-family:"微软雅黑";color:#0696fa;border-radius:6px;cursor:pointer;font-size:18px}
+    .footerBtn3{width:240px;height:40px;background:#0696fa;color:#fff;float:left;font-family:"微软雅黑";border:0;border-radius:6px;cursor: pointer;font-size:18px}
+    .bankRemit h3{margin:20px 0 0 20px;color:#ffa200;}
+    .indentPay{width:100%;position:relative;display:none}
+    .indent{width:100%;height:80px;background:#f1f9fc;border:1px solid #dbe9ee;display: none;margin-top:20px;margin-bottom:20px;font-size:18px}
+    .indentBtn{width:400px;height:40px;margin:20px auto ;}
+    .indentBtn1{width: 240px;height: 40px;float: left; line-height: 40px;text-align: center;border-radius: 6px;color: #fff; background: #0696fa;cursor: pointer;}
+    .indentBtn2{width: 138px;height: 38px;float: right;line-height: 40px; text-align: center;border-radius: 6px;background: #fff;border: 1px solid #0696fa;cursor: pointer;color: #0696fa;}
+    .payWay1{height:50px;line-height:50px;width:30%;float:left;margin-top:25px;}
+    .payWay1 img{vertical-align:top;margin-top:9px;margin-left:15px;}
+    .payWay1 input{margin-left:20px;}
+    .payWay2{height:50px;line-height:50px;width:70%;float:left;margin-top:25px;}
+    .payWay2 img{vertical-align:top;margin-top:13px;margin-left:15px}
+    .payWay2 input{margin-left:20px;}
+    .accountPayRepay{width:100%;height:100px;font-size:25px;line-height:100px;}
+    .accountPayRepay span{float:right;color:#666;}
+    .accountPayRepay .accountPayRepay1{color:#fa5f5f;font-weight:600}
+    .accountPayBalance{width:99.8%;height:100px;border:1px dashed #ffdca9;margin-top:100px;line-height:100px;font-size:18px;color:#666}
+    .accountPayBalance img{vertical-align:top;margin:38px 0 0 20px;}
+    .bankRemitOne{box-sizing: border-box; width:100%;height:80px;background:url(/resource/img/salary/stepBack1.png) no-repeat 50px center;border:1px solid #dbe9ee;line-height:80px;padding-left:70px;font-weight:600;color:#666;margin-top:20px;}
+    .bankRemitOne1{width:100%;height:100px;border:1px solid #dbe9ee;box-sizing: border-box;margin-top:-1px;background:#f1f9fc;}
+    .bankRemitOne1Left{width:20%;height:100px;float:left;border-right:1px solid #dbe9ee;box-sizing: border-box}
+    .bankRemitOne1Left div{line-height:32px;padding-left:50px;color:#666}
+    .bankRemitOne1Right{width:80%;height:100px;float:left;}
+    .bankRemitOne1Right div{line-height:32px;padding-left:30px;color:#666;}
+    .bankRemitToTable{width:100%;height:250px;border:1px solid #dbe9ee;box-sizing:border-box;margin-top:-1px;}
+    .bankRemitTo{box-sizing: border-box; width:100%;height:80px;background:url(/resource/img/salary/stepBack2.png) no-repeat 50px center;border:1px solid #dbe9ee;line-height:80px;padding-left:70px;font-weight:600;color:#666;margin-top:20px;}
+    .bankRemitToTable tr{height:50px;}
+    .bankRemitToTable tr td{border:1px solid #dbe9ee;}
+    .bankRemitToTable1{width:20%;text-align:center;color:#666;}
+    .bankRemitToTable2 input{width:80%;height:50px;padding-left:20px;border:0;}
+
+</style>
+<body>
+##<input type="hidden" value="$!{orderBean.orderSbDetail}" id="orderSbDetail">
+##<input type="hidden" value="$!{orderBean.orderGjjDetail}" id="orderGjjDetail">
+<input type="hidden" value="$!{rechargesBean.rechargeId}" id="rechargeId">
+<div id="orderSbDetail" style="display:none;">$!{orderBean.orderSbDetail}</div>
+<div id="orderGjjDetail" style="display:none;">$!{orderBean.orderGjjDetail}</div>
+<div class="salaset-title">
+    <h2 id="title">社保公积金订单详情</h2>
+##    <img class="topImg" src="#springUrl('/resource/img/salary/guanbi.png')" alt="" id="closeDetailBtn">
+</div>
+<div class="all">
+    <div class="socialTop">
+        <span class="socialTop1">$!{orderBean.joinCityName}</span>
+        <span>$!date.format('yyyyMM',$!{orderBean.orderDate})</span>
+        <span>账单</span>
+        <span class="socialTop2">订单编号：</span>
+        <span>$!{orderBean.orderNumber}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+        <span>提交时间：</span>
+        <span>$!date.format('yyyy-MM-dd HH:mm:ss',$!{rechargesBean.rechargeAddtime})</span>
+##        <span>16:30:00</span>
+    </div>
+    <table>
+        <tr style="background: #f1f8fe; font-weight: 600;">
+            <td rowspan="2">缴费月份</td>
+            <td rowspan="2">缴费类型</td>
+            <td rowspan="2">详情</td>
+            <td colspan="3">费用</td>
+        </tr>
+        <tr style="background: #f1f8fe; font-weight: 600;">
+            <td>代缴费用（元）</td>
+            <td>补差费用（元）</td>
+            <td>服务费（元）</td>
+        </tr>
+        <tr style="background: #feebe7;">
+            <td>$!date.format('yyyyMM',$!{orderBean.orderDate})</td>
+            <td>社保</td>
+            <td id="shebaoTdDtail">
+                <p>续缴：<span>25</span>人</p>
+                <p>补缴：<span>3</span>人</p>
+                <p>停缴：<span>1</span>人</p>
+            </td>
+            <td rowspan="2">$!{orderBean.sbAndGjjAmount}</td>
+            <td rowspan="2">$!{orderBean.priceAddtion}</td>
+            <td rowspan="2">$!{orderBean.priceService}</td>
+        </tr>
+        <tr style="background: #feebe7;">
+            <td>$!date.format('yyyyMM',$!{orderBean.orderDate})</td>
+            <td>公积金</td>
+            <td id="gjjTdDtail">
+                <p>续缴：<span>25</span>人</p>
+                <p>补缴：<span>3</span>人</p>
+                <p>停缴：<span>1</span>人</p>
+            </td>
+##            <td>$!{orderBean.priceSum}</td>
+##            <td>$!{orderBean.priceAddtion}</td>
+##            <td>$!{orderBean.priceService}</td>
+        </tr>
+    </table>
+    <div class="socialCon">
+        <div class="socialConLeft">
+            <div><b>订单总额：<span>$!{orderBean.priceSum}</span>元</b></div>
+            <div>垫付抵扣：<span id="rechargePaymentAmount">$!{rechargesBean.rechargePaymentAmount}</span>元</div>
+            <div  class="socialConLeft1"><b>还需支付：<span>$!{rechargesBean.rechargeRealAmount}</span>元</b></div>
+        </div>
+        <div class="socialConRight">
+            <div>最后支付日期：<span>$!date.format('yyyy-MM-dd HH:mm:ss',$!{orderBean.orderLastTime})</span></div>
+            <div>红包抵扣：<span id="redWalletAmount">$!{redMoney}</span>元<a class="socialConRight1" onclick="showRedDetail();">(查看详情)</a></div>
+        </div>
+    </div>
+    <div class="indentPay">
+        <div class="payWay">
+            <div class="payWay1"><input class="radio1" type="radio" name="btn" checked="checked"><img src="#springUrl('/resource/img/salary/balance.png')" alt="">&nbsp;&nbsp;&nbsp;&nbsp;账户余额支付</div>
+            <div class="payWay2"><input class="radio2" type="radio" name="btn"><img src="#springUrl('/resource/img/salary/Unionpay.png')" alt="">&nbsp;&nbsp;&nbsp;&nbsp;银行汇款</div>
+        </div>
+        <div class="accountPayRepay">
+            <span>元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span class="accountPayRepay1">$!{rechargesBean.rechargeRealAmount}&nbsp;</span>
+            <span>还需支付：</span>
+        </div>
+        <div class="accountPay">
+
+            <div class="accountPayBalance">
+                <img src="#springUrl('/resource/img/salary/bulb.png')" alt="">
+                <span>当前可用余额:</span>
+                <span id="cashAmout">$!{cashAmout}</span>
+                <span>元，点击“确认付款”订单金额将从账户余额中扣除</span>
+            </div>
+        </div>
+        <!--            银行汇款给-->
+        <div class="bankRemit">
+            <h3>请按照如下步骤完成充值：</h3>
+            <div class="bankRemitOne">第一步：通过银行柜台或网银转账转账到如下账户</div>
+            <div class="bankRemitOne1">
+                <div class="bankRemitOne1Left">
+                    <div>账户名称：</div>
+                    <div>账号：</div>
+                    <div>开户支行：</div>
+                </div>
+                <div class="bankRemitOne1Right">
+                    <div>网银在线（北京）科技有限公司客户备付金</div>
+                    <div>341561371394</div>
+                    <div>中国银行股份有限公司北京奥运村支行</div>
+                </div>
+            </div>
+            <div class="bankRemitTo">第二步：将网银转账信息填入对话框，财务审核后会帮助您完成充值</div>
+            <form id="salaryOrderForm">
+                <input type="hidden" value="$!{rechargesBean.excelId}" name="excelId">
+                <input type="hidden" value="${rechargesBean.rechargeRealAmount}" name="rechargeRealAmount">
+                <input type="hidden" value="$!{rechargesBean.rechargeRealAmount}" name="rechargeMoney">
+                <input type="hidden" value="$!{cashAmout}" name="canUserCashAmount">
+                <input type="hidden" value="$!{rechargesBean.rechargePaymentAmount}" name="rechargePaymentAmount">
+                <input type="hidden" value="$!{redMoney}" name="redWalletAmount">
+                <table class="bankRemitToTable">
+                    <tr>
+                        <td class="bankRemitToTable1">付款银行名称：</td>
+                        <td class="bankRemitToTable2"><input class="tableText1" type="text" name="rechargeBank" placeholder="您转账所用银行账户的银行名称"><span class="tableSpan1" style="color:red;">请输入正确的银行名称</span></td>
+                    </tr>
+                    <tr>
+                        <td class="bankRemitToTable1">付款银行账号：</td>
+                        <td class="bankRemitToTable2"><input class="tableText2" type="text" name="rechargeBanknumber" placeholder="您转账所用的银行账号"><span class="tableSpan2" style="color:red;">请输入正确的银行账号</span></td>
+                    </tr>
+                    <tr>
+                        <td class="bankRemitToTable1">银行交易流水号：</td>
+                        <td class="bankRemitToTable2"><input class="tableText3" type="text" name="rechargeSerialNumber" placeholder="您完成交易后，银行给到你的交易号"><span class="tableSpan3" style="color:red;">请输入正确的银行交易号</span></td>
+                    </tr>
+##                    <tr>
+##                        <td class="bankRemitToTable1">充值金额：</td>
+##                        <td class="bankRemitToTable2"><input type="text" placeholder="转账金额（元）"></td>
+##                    </tr>
+                    <tr>
+                        <td class="bankRemitToTable1">备注：</td>
+                        <td class="bankRemitToTable2"><input class="tableText4" type="text" name="rechargeBak" placeholder="您在转账时填写的备注信息"><span class="tableSpan4" style="color:red;">请输入备注</span></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    #if($!{isDedit}=="no")
+        <div class="footer">
+            <div class="footerBtn">
+                <button class="footerBtn3">确认</button>
+            ##            <button class="footerBtn2" id="cancelGoPayBtn">取消</button>
+            </div>
+        </div>
+    #else
+        <div class="footer">
+            <div class="footerBtn">
+                <button class="footerBtn1">前去付款</button>
+                <button class="footerBtn2" id="cancelGoPayBtn">取消</button>
+            </div>
+        </div>
+    #end
+
+
+    <div class="indent">
+        <div class="indentBtn">
+            <div class="indentBtn1" id="surePayBtn">确认付款</div>
+            <div class="indentBtn2" id="cancelSurePayBtn">取消</div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

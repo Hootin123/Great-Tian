@@ -1,0 +1,133 @@
+@charset "UTF-8";
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: url(../../img/h5walletNew/audit-bg.png) 0 0 no-repeat;
+  background-size: cover; }
+
+section {
+  width: 7rem;
+  height: 8.9rem;
+  background: rgba(242, 120, 78, 0.5);
+  margin: 0.9rem auto;
+  border-radius: 0.2rem;
+  padding: 0.5rem 0.25rem 0 0.25rem;
+  box-sizing: border-box; }
+section h3 {
+  width: 100%;
+  height: 1.53rem;
+  text-indent: 0.5rem;
+  font-size: 0.48rem;
+  font-family: '微软雅黑';
+  font-weight: 300;
+  color: #fff; }
+section ul {
+  width: 100%; }
+section ul li {
+  width: 100%;
+  height: 1.14rem;
+  position: relative; }
+section ul li input {
+  display: block;
+  width: 100%;
+  height: 0.8rem;
+  border: 0;
+  border-radius: 0.1rem;
+  text-indent: 0.2rem;
+  line-height: 0.8rem;
+  font-family: '微软雅黑';
+  font-size: 0.3rem;
+  color: #333; }
+section ul li input::-webkit-input-placeholder {
+  color: #ccc; }
+section ul li .show {
+  display: block;
+  width: 0.4rem;
+  height: 0.4rem;
+  background: url(../../img/h5walletNew/icon1.png) 0 0 no-repeat;
+  background-size: 100% 100%;
+  position: absolute;
+  right: 0.3rem;
+  top: 0.2rem; }
+section ul li b {
+  height: 0.78rem;
+  padding-right:0.2rem;
+  position: absolute;
+  right: 0.28rem;
+  top: 0;
+  font-size: 0.16rem;
+  line-height: 0.78rem;
+  color: #f00; }
+section .permit {
+  width: 100%;
+  height: 1.82rem; }
+section .permit dl {
+  width: 100%;
+  height: 100%; }
+section .permit dl dt {
+  width: 2.3rem;
+  height: 1.8rem;
+  float: left;
+  background: #f9cebf;
+  border: 3px dashed #2e1912;
+  font-family: '微软雅黑';
+  font-size: 0.72rem;
+  text-align: center;
+  line-height: 1.8rem;
+  color: #2e1912;
+  position: relative}
+section .permit dl dt img{
+  position: absolute;
+  top:0;
+  left:0;
+  display: block;
+  width:100%;
+  height:100%;
+}
+
+section .permit dl dt input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  right: 0;
+  top: 0;
+  opacity: 0;
+  filter: alpha(opacity=0); }
+section .permit dl dd {
+  width: 3.5rem;
+  height: 100%;
+  float: left;
+  margin-left: 0.5rem;
+  padding-top: 0.3rem;
+  box-sizing: border-box;
+  font-family: '微软雅黑';
+  font-size: 0.24rem;
+  color: #2e1912; }
+
+.hint {
+  width: 50%;
+  height: 0.6rem;
+  position: absolute;
+  left: 25%;
+  top: 9.9rem;
+  background: #ea8668;
+  border-radius: 0.5rem;
+  text-align: center;
+  line-height: 0.6rem;
+  font-size: 0.26rem;
+  color: #f00;
+  font-weight: 600; }
+
+.sub {
+  width: 6.4rem;
+  height: 0.9rem;
+  background: #ea8668;
+  border-radius: 0.38rem;
+  margin-top: 0.72rem;
+  margin: 0 auto;
+  font-family: '微软雅黑';
+  font-size: 0.34rem;
+  color: #fff;
+  text-align: center;
+  line-height: 0.9rem; }

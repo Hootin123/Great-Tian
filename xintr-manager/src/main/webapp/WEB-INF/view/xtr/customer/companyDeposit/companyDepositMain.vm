@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>H+ 企业提现账户管理</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-table/bootstrap-table.min.css')" rel="stylesheet">
+</head>
+
+<body>
+<div class="col-sm-12">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <form class="form-group" id="queryForm">
+                <div class="col-sm-3">
+                    <label style="margin-top:10px;" class="col-sm-3">资料审核</label>
+                    <div class="col-sm-9">
+                        <select class="form-control m-b" id="approveState">
+                            <option value="">不选择</option>
+                            <option value="0">审核中</option>
+                            <option value="1">审核驳回</option>
+                            <option value="2">审核通过</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <label style="margin-top:10px;" class="col-sm-3">签约状态</label>
+                    <div class="col-sm-9">
+                        <select class="form-control m-b" id="ptotocolState">
+                            <option value="">不选择</option>
+                            #foreach($item in $protocolTypeMap.entrySet())
+                                <option value="$item.key">$item.value</option>
+                            #end
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <label style="margin-top:10px;" class="col-sm-3">实名认证</label>
+                    <div class="col-sm-9">
+                        <select class="form-control m-b" id="authState">
+                            <option value="">不选择</option>
+                            <option value="0">未认证</option>
+                            <option value="2">待认证</option>
+                            <option value="1">已认证</option>
+                            <option value="3">认证失败</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" placeholder="根据企业名或手机号模糊检索" class="form-control" name="companyName" id="companyName">
+                </div>
+                <div class="col-sm-1">
+                    <button class="btn btn-primary " type="button" id="queryBtn"><i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;搜索
+                    </button>
+                </div>
+            </form>
+            <table id="data-list"></table>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+<script src="#springUrl('/resource/js/hui/content.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table-mobile.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/validate/jquery.validate.min.js')"></script>
+<script src="#springUrl('/resource/js/comm/jdatagrid.js')"></script>
+<script src="#springUrl('/resource/js/customer/companyDeposit/companyDepositMain.js')"></script>
+</html>

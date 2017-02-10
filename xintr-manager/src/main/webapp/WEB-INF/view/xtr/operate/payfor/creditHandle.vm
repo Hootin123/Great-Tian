@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>放款审核</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-table/bootstrap-table.min.css')" rel="stylesheet">
+</head>
+
+<body>
+<div class="col-sm-12">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <form class="form-group" id="handleForm">
+<br/>
+                <h4 class="m-t-none m-b">确认收到该款项，请慎重！</h4>
+                <hr/>
+                <div class="panel panel-default" style="margin-top: 10px;">
+                    <input type="hidden" value="$!{stationCollaborationBean.itemId}" name="itemId">
+                    #if($!{listBorrowInfoBean} && $!{listBorrowInfoBean.size()} > 0)
+<table data-mobile-responsive="true" class="table table-hover table-bordered">
+                    #foreach($data in $!{listBorrowInfoBean})
+                    <tr>
+                    <td style="width:15%;">付款银行名称:</td>
+                    <td style="width:30%;">
+                     $!{data.borrowBankName}
+                    </td>
+                    </tr>
+                    <tr>
+                    <td style="width:15%;">付款银行账号:</td>
+                    <td style="width:30%;">
+                     $!{data.borrowBankNo}
+                    </td>
+                    </tr>
+                    <tr>
+                    <td style="width:15%;">银行交易流水号:</td>
+                    <td style="width:30%;">
+                     $!{data.borrowSerialNumber}
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>金额:</td>
+                    <td style="width:30%;"> $!{data.borrowAccountMoney}</td>
+                    </tr>
+                    <tr>
+                    <td style="width:15%;">备注:</td>
+                    <td style="width:30%;"> $!{data.borrowRemark}</td>
+                    </tr>
+                     #end
+</table>
+                     #end
+
+                </div>
+                <input type="hidden" id="orderIdVlaue" name="orderId"  value="$!{orderId}">
+                <input type="hidden" id="orderIdVlaue" name="orderMoney"  value="$!{orderMoney}">
+                <input type="hidden" id="orderIdVlaue" name="orderCompanyId"  value="$!{orderCompanyId}">
+                <input type="hidden" id="companyName" name="companyName"  value="$!{companyName}">
+                <input type="hidden" id="orderAddtimeValue" name="orderAddtimeValue"  value="$!{orderAddtime}">
+                <input type="hidden" id="companyContactTel" name="companyContactTel"  value="$!{companyContactTel}">
+                <input type="hidden" id="orderStateValue" name="orderState"  value="6">
+                <div class="text-center" style="20px;">
+                    <button type="button" class="btn btn-w-m btn-success" onclick="creditHandleSubmit()" id="sureBtn">确定</button>
+                    <button type="button" class="btn btn-w-m btn-white" onclick="cancelCooperationIntentHandle()">取消</button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+<script src="#springUrl('/resource/js/hui/content.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table-mobile.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/validate/jquery.validate.min.js')"></script>
+<script src="#springUrl('/resource/js/comm/jdatagrid.js')"></script>
+<script src="#springUrl('/resource/js/market/intent/cooperationIntentHandle.js')"></script>
+<script src="#springUrl('/resource/js/operate/payfor/creditHandle.js')"></script>
+</html>

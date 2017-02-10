@@ -1,0 +1,180 @@
+#####员工工资单
+
+<!DOCTYPE html>
+<html lang="en" id='html'>
+<head>
+    <meta charset="UTF-8">
+    <title>工资单</title>
+    #parse("comm/head.vm")
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1">
+    <script type="text/javascript" src="#springUrl('/resource/js/wechatCustomer/salary.js')"></script>
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/wechatCustomer/payroll.css')">
+</head>
+<body>
+<header>
+    <h3><span>$!{month}</span>月工资单</h3>
+    <p>$!{cuto.companyName}</p>
+</header>
+<section>
+    <div class="top"></div>
+    <div class="content">
+        <div class="userInfo">
+            <ul>
+                <li>姓名：<span>$!{cuto.customerTurename}</span></li>
+                <li>工号：<span>$!{cuto.customerNumber}</span></li>
+                <li>部门：<span>$!{cuto.customerDepName}</span></li>
+                <li>工资卡：<span class='cardNumber'>$!{cuto.customerBanknumber}</span></li>
+                <li>实发工资：<span class='payoff'>$!{cuto.realWage}</span></li>
+                <li>发放日期：<span>$!date.format("yyyy.MM.dd",$!{cuto.payDay})</span></li>
+
+            </ul>
+        </div>
+        <div class="payInfo">
+            <!-- 工资详情 -->
+            <div class="payInfo-main">
+                <div class="title">基本工资</div>
+                <div class="main">
+                    <div class="basePay">
+                        <p>基本工资<span class='date'></span> </p>
+                        <p class=number>$!{cuto.baseWages}</p>
+                        <p>（元）</p>
+                    </div>
+##                    <div class="salaryPay">
+##                        <p>调薪工资<span class='date'>（6.12 - 6.30）</span> </p>
+##                        <p class=number>100.00</p>
+##                        <p>（元）</p>
+##                    </div>
+                </div>
+            </div>
+            <!-- end -->
+            <!-- 出勤 -->
+            <div class="payInfo-main">
+                <div class="title">出勤</div>
+                <div class="main">
+                    <div class="basePay">
+                        <p>缺勤天数</p>
+                        <p>$!{cuto.absenceDayNumber}</p>
+                        <p>（天）</p>
+                    </div>
+                    <div class="salaryPay">
+                        <p>缺勤扣款</p>
+                        <p >$!{cuto.attendanceDeduction}</p>
+                        <p>（元）</p>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end -->
+            <!-- 津贴 -->
+            <div class="payInfo-main">
+                <div class="title">津贴</div>
+                <div class="main">
+                    #foreach($data in $!{allowanceList})
+                        <div class="basePay">
+                            <p>$!{data.detailName}</p>
+                            <p>$!{data.detailValue}</p>
+                            <p>（元）</p>
+                        </div>
+                    #end
+                </div>
+            </div>
+            <!-- end -->
+            <!-- 奖金 -->
+            <div class="payInfo-main">
+                <div class="title">奖金</div>
+                <div class="main">
+                    #foreach($data in $!{bonusList})
+                        <div class="basePay">
+                            <p>$!{data.detailName}</p>
+                            <p>$!{data.detailValue}</p>
+                            <p>（元）</p>
+                        </div>
+                    #end
+                </div>
+            </div>
+            <!-- end -->
+
+            <!-- 税前补发/扣款 -->
+            <div class="payInfo-main">
+                <div class="title">税前补发/扣款 </div>
+                <div class="main">
+                    <div class="basePay">
+                        <p>税前补发/扣款 </p>
+                        <p>$!{cuto.pretax}</p>
+                        <p>（元）</p>
+                    </div>
+                </div>
+            </div>
+            <!-- end -->
+            <!-- 社保公积金 -->
+            <div class="payInfo-main">
+                <div class="title">社保公积金</div>
+                <div class="main">
+                    <div class="basePay">
+                        <p>社保公积金</p>
+                        <p>$!{cuto.socialSecurityFund}</p>
+                        <p>（元）</p>
+                    </div>
+##                    <div class="salaryPay">
+##                        <p>个人合计</p>
+##                        <p >1000.00</p>
+##                        <p>（元）</p>
+##                    </div>
+                </div>
+            </div>
+            <!-- end -->
+            <!-- 应发工资 -->
+            <div class="payInfo-main">
+                <div class="title">应发工资</div>
+                <div class="main">
+                    <div class="basePay">
+                        <p>应发工资</p>
+                        <p>$!{cuto.shouldAmount}</p>
+                        <p>（元）</p>
+                    </div>
+                </div>
+            </div>
+            <!-- end -->
+            <!-- 个人所得税 -->
+            <div class="payInfo-main">
+                <div class="title">个人所得税</div>
+                <div class="main">
+                    <div class="basePay">
+                        <p>个人所得税</p>
+                        <p>$!{cuto.personalTax}</p>
+                        <p>（元）</p>
+                    </div>
+                </div>
+            </div>
+            <!-- end -->
+            <!-- 税后补发/扣款-->
+            <div class="payInfo-main">
+                <div class="title">税后补发</div>
+                <div class="main">
+                    <div class="basePay">
+                        <p>税后补发/扣款</p>
+                        <p>$!{cuto.afterTax}</p>
+                        <p>（元）</p>
+                    </div>
+                </div>
+            </div>
+            <!-- end -->
+            <div class="payInfo-bottom"></div>
+        </div>
+##        <div class="footer"><em>*</em><span>6</span>月社保公积金代缴失败，金额已退回您的工资卡内，请注意查收.</div>
+    </div>
+
+</section>
+
+
+</body>
+<script type="text/javascript">
+    // 银行卡号 中间用*代替
+    var str=$('.cardNumber').text();
+    if(str!=null&&str!=""&&str!=undefined){
+        str1=str.substring(0,4)+"********"+str.substring(str.length-4,str.length);
+        $('.cardNumber').html(str1)
+    }
+
+</script>
+</html>

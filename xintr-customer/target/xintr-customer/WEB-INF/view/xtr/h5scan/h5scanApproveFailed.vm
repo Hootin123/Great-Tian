@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" id='html'>
+<head>
+    <meta charset="UTF-8">
+    <title>审核失败</title>
+    #parse("comm/head.vm")
+    <meta name="viewport" content="width=divce-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/scanCode/fail.css')">
+</head>
+<body>
+<h3>审核失败</h3>
+<input type="hidden" value="$!{companyId}" id="companyId">
+
+<div class="txt">
+    <p>您提交的资料审核未通过</p>
+    <p>原因：#if($!{companyAuditRemark})
+               暂无，请联系客服
+             #else
+                 $!{companyAuditRemark}
+    #end  </p>
+
+</div>
+<footer id="toEdit">请前往修改</footer>
+</body>
+<script>
+    $(function(){
+        $("#toEdit").on("click",function(){
+            window.location.href = BASE_PATH+"/scanCode/toScanApprove.htm?companyId="+$("#companyId").val();
+        });
+    });
+</script>
+</html>

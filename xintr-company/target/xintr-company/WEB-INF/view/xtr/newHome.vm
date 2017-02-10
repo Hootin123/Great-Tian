@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>首页</title>
+    #parse("comm/head.vm")
+    <link rel="stylesheet" href="#springUrl('/resource/css/newHome/home.css')">
+    <script src="#springUrl('/resource/js/newHome/home.js')"></script>
+    <script src="#springUrl('/resource/js/newHome/mainPage.js')"></script>
+    <script src="#springUrl('/resource/js/home/indexlogin1.js')"></script>
+    <style>
+        .pull {width: 100px;height:60px;position: absolute;right:310px;top:40px;z-index:99;background:#fff;display:none}
+        .pull ul li {width:100px;height:30px;text-align: center; line-height: 30px; font-size:14px; color:#333; cursor: pointer;font-size:12px;}
+        .pullBottom{border-radius:0 0 6px 6px;}
+        .pull ul li:hover{background:#ddd;}
+
+        /*重置密码 跟账户设置*/
+        .accouparent1{width: 500px; height: 300px; position:absolute; top: 30%; left: 40%;  z-index: 100; color: #666666; display: none; }
+        .accountset1{ height: 275px; background: #FFFFFF; position: relative; border-radius:20px;}
+        .accountset1 h3{color:#333;padding-top:30px;text-align: center}
+        .aselist1 { padding: 35px 50px 30px 50px; }
+        .aselstfirst1 { color: #999999; margin-bottom: 24px; }
+        .aselstseccond1 { font-weight: bold; color: #666666; margin: 60px 0 22px 0; }
+        .aselstli1 { margin-bottom:24px; height:;  position: relative; display: none; }
+        .aselstli1 img { position: absolute; right: -30px; top: 10px; display: none; }
+        .aselstspan1 { display: inline-block; width: 79px; line-height: 37px; float: left; }
+        .aselstli1 input {padding: 0 20px; width: 278px; height: 34px; border: 1px solid #e3e3e3; position: relative; color: #666666; float: left;line-height:34px}
+        .aseipBtn{width:410px;height:35px;position: absolute;left:0;right:0;margin:auto;bottom:20px;}
+        .aseip11 {width:200px;height:35px;border:0; text-align: center; border-radius: 6px; display: inline-block; float: left;  cursor: pointer; background:#0696fa;color:#fff;font-family: "微软雅黑"}
+        .aseip21 {width:198px;height:35px;text-align: center;border-radius: 6px;display: block;float:right;cursor: pointer;border:1px solid #0696fa; line-height:35px;background:#fff;color:#0696fa;font-family: "微软雅黑"}
+        .aseclose1 { display: block; width: 38px; height: 38px; background: url(../../img/v_close.png) center center no-repeat; border-radius: 19px; text-align: center; line-height: 38px; cursor: pointer; position: absolute; top: -40px; right: -40px;font-family:"微软雅黑"}
+        .error-remind{color:red;font-size: 12px;display: block;height: 30px;line-height: 30px; position: absolute; bottom:-26px ; left:80px;display: none}
+        .phcode1,.phcode { float: left; width: 120px; height: 38px; color: #FFFFFF; background: #0696fa; cursor: pointer; border: none; margin-left: 20px; }
+        .indexshade{ width: 100%; height: 100%; min-width: 1200px; min-height: 930px; position: absolute; left: 0; top: 0; background: #000000; opacity: 0.8; filter:Alpha(opacity=80); z-index: 99; display: none; }
+
+        .dot2{background:url(../../resource/img/newHome/dot2.png) 31px center no-repeat;}
+        .dot3{background:url(../../resource/img/newHome/dot3.png) 31px center no-repeat;}
+
+        .ConTitle{width:95%;height:60px;margin:0 auto;}
+    </style>
+</head>
+<body onload="loadIndexPage()">
+<div class="homeAll">
+
+    <div class=homeHead>
+        #if($!{companyLogoUrl}=="")
+            <img id="companyLogoId" src="#springUrl('/resource/img/newHome/2.2tianjiayuangong.png')" alt="">
+         #else
+             <img id="companyLogoId" src="$!{companyLogo}" alt="">
+        #end
+
+
+    </div>
+    <div class="homeTop">
+        <div class="companyName">
+            <span>$!{companyName}</span>
+            #if($!{auditStatus}=="2")
+                <img  src="#springUrl('/resource/img/newHome/2.2Approve.png')"/>
+            #else
+                <img  src="#springUrl('/resource/img/newHome/2.2notApprove.png')"/>
+            #end
+
+        </div>
+        <div class="topAccount">
+            <img  src="#springUrl('/resource/img/newHome/2.2shouyezhanghu.png')" />
+            <span>$!{memberLogname}</span>
+        </div>
+        <div class="topNews"><span>消息</span></div>
+    ##        <div class="topHelp"><span>帮助中心</span><img   src="#springUrl('/resource/img/newHome/2.2segmentation.png')" alt=""></div>
+        <div class="topOut"><a  href="logout.htm">退出</a></div>
+        <div class="pull">
+            <ul>
+                <li><a href="javascript:void(0);" id="changePhone">账户设置</a></li>
+                <li><a id="modifyPwdBtn"  href="javascript:void(0);">重置密码</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="topCon">
+        <div class="topConTitle">
+            <div class="ConTitle">
+                <div class="topConTitleCon"></div>
+                <div class="topConTitleCon1"></div>
+            </div>
+
+        </div>
+    </div>
+    <div class="content">
+        <div class="contentLeft">
+            <div class="contentLeftCon">
+                <ul id="mainlful">
+
+
+                    <li class="contentLi1 mulactive"  second-menu="0" data-url="/newHomePage.htm"><img src="/resource/img/newHome/2.2shouyemulu11.png" alt=""><span>首页</span></li>
+                    #foreach($menu in $listCompanyMenuBean)
+
+                        <li class="contentLi1 contentLi"  second-menu="$menu.hasSecondMenu" data-url="$menu.url"><img src="$menu.menuIcon" alt=""><span>$menu.menuName</span></li>
+                        #if($menu.childrenMenu)
+                            <ul class="contentDiv1" >
+                                #foreach($childMenu in $menu.childrenMenu)
+                                    <li data-url="$childMenu.url" second-menu="0"   class="divLi">●&nbsp;&nbsp;<span>$childMenu.menuName</span></li>
+                                #end
+                            </ul>
+                        #end
+                    #end
+
+
+                    #if($!{memberIsDefault}==1)
+                        <li class="firmSet"><img src="/resource/img/newHome/2.2shezhimulu1.png" alt=""><span id="company_setting">公司设置</span> </li>
+                    #end
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="contentRight">
+            <iframe marginwidth="0" marginheight="0" id="J_iframe" frameBorder="no" noresize="noresize" name="iframe0"
+                    width="100%" height="100%" frameborder="0"  data-id="index.htm"></iframe>
+        </div>
+    </div>
+
+
+    <div class="footer" id="footer">薪太软（上海）科技发展有限公司 | 沪ICP备16018294号 |<img  src="#springUrl('/resource/img/newHome/police.png')" src='../img/police.png' style="margin:20px 2px 0;"/>沪公网安备 31010602000188号
+        <script type="text/javascript">
+            var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+            document.write(unescape("%3Cspan id='cnzz_stat_icon_1260212442'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1260212442%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));
+        </script>
+    </div>
+
+
+    <!--描述：账户设置密码修改界面-->
+    <div class="accouparent" id="modifyPwdAccouparent">
+        <div class="accountset" id="accountset">
+            <h3 class="asehde">重置密码</h3>
+            <form id="modifyPwdForm">
+                <input type="hidden" value="" name="memberId">
+                <ul class="aselist">
+                    <li class="aselstfirst"><span style="width:100%;" name="memberLogname">我的账户：</span></li>
+                    <li class="aselstfirst"><span style="width:100%;" name="companyName">公司名称：</span></li>
+                    <li class="aselstseccond">修改密码</li>
+                    <li class="aselstli"><span class="aselstspan">原密码</span><input type="password" placeholder="输入原密码" name="memberPassword" /></li>
+                    <li class="aselstli"><span class="aselstspan">新密码</span><input type="password" placeholder="输入新密码" name="newPwd" /></li>
+                    <li class="aselstli" style="margin-bottom: 8px;"><span class="aselstspan">确认密码</span><input type="password" placeholder="重复输入密码" name="confirmNewPwd" /></li>
+                    <li class="aselstli"><span id="verifycodeTip" style="color:red;width:100%;"></span></li>
+                    <li clsss="asebtn">
+                        <div class="aseipBtn">
+                            <input class="aseip1" type="button" id="sureBtn" value="确定" />
+                            <input class="aseip2" type="button" id="cacelBtn" value="取消" />
+                        </div>
+                    </li>
+                </ul>
+            </form>
+            <em class="aseclose" id="aseclose"></em>
+        </div>
+    </div>
+
+
+    <!-- 页面阴影部分-->
+    <div class="indexshade" id="indexshade"></div>
+
+    <!--修改手机-->
+    <div class="accouparent1 accparparent1">
+        <div class="accountset1 accountset1" id="accountset1">
+            <h3>账户设置</h3>
+            <form id="changePhoneForm">
+                <input type="hidden" name="memberId" id="memberId" value="${memberid}"/>
+
+                <ul class="aselist1">
+                    <li class="aselstli1 clear" style="display: block;">
+                        <span class="aselstspan1">姓名</span>
+                        <input value="${userName}" name="userName" id="userName"/>
+                        <img class="login-img1 login-img11" src="resource/img/wrrong.png" />
+                        <img class="login-img2 login-img21" src="resource/img/right.png" />
+                        <i class="error-remind login-wrrong">姓名不能为空!</i>
+                    </li>
+                    <li class="aselstli1 clear" style="display: block;">
+                        <span class="aselstspan1">手机号码</span>
+                        <input style="width: 139px;float: left;" type="text" value="${memberPhone}"  id="memberPhone" name="memberPhone" disabled="disabled" />
+                        <input type="button" style="width: 120px; height: 38px; color: #FFFFFF;padding:0;background:#0696fa" class="phcode" value="修改" />
+
+                    </li>
+                    <li class="aselstli1 clear">
+                        <span class="aselstspan1">短信验证码</span>
+                        <input placeholder="输入短信验证码" maxlength="6" id="smscode1" name="smscode1"/>
+                        <img class="login-img1 login-img11" src="resource/img/wrrong.png" />
+                        <img class="login-img2 login-img21" src="resource/img/right.png" />
+                        <i class="error-remind login-wrrong">请输入正确的验证码！</i>
+                    </li>
+                    <li class="aselstli1 clear">
+                        <span class="aselstspan1">新手机号码</span>
+                        <input style="width: 139px;float: left;"  maxlength="11" name="newMemberPhone" id="newMemberPhone" placeholder="请输入新手机号码" />
+                        <input class="phoneboxcode1 phoneboxcode1 phcode1" type="button" style="width: 120px; height: 38px; color: #FFFFFF;float: left;" class="phcode1" value="获取验证码" />
+                        <img class="login-img1 login-img11" src="resource/img/wrrong.png" />
+                        <img class="login-img2 login-img21" src="resource/img/right.png" />
+                        <div style="clear: both"></div>
+                        <i class="error-remind login-wrrong">请输入正确的手机号码！</i>
+                    </li>
+                    <li class="aselstli1 clear" style="margin-bottom: 33px;">
+                        <span class="aselstspan1">短信验证码</span>
+                        <input placeholder="输入新手机验证码"  maxlength="6" name="smscode2" id="smscode2" />
+                        <img class="login-img1 login-img11" src="resource/img/wrrong.png" />
+                        <img class="login-img2 login-img21" src="resource/img/right.png" />
+                        <i class="error-remind login-wrrong">请输入正确的验证码！</i>
+                    </li>
+                    <li clsss="asebtnbox1">
+                        <div class="aseipBtn">
+                            <input class="aseip11" type="submit" value="确定" />
+                            <input class="aseip21" type="button" value="取消" />
+                        </div>
+                    </li>
+                </ul>
+            </form>
+            <em class="aseclose1" id="aseclose1"></em>
+        </div>
+    </div>
+    <!--end-->
+
+    <div class="indexbox" id="indexbox">
+        <div class="inbox">
+            <span class="insclos"></span>
+        </div>
+    </div>
+##消息盒子弹窗
+    <div class="newsBox" style="display: none">
+        <div class="newsTop">
+            <ul>
+                <li>未读消息</li>
+                <li>已读消息</li>
+            </ul>
+        </div>
+        <div class="newsCon">
+            <!-- 未读消息 start-->
+            <div class="newsNot">
+                <ul>
+                    #foreach($msg in $notReadMsgs)
+                        <li  onclick="showDetail(this);"  li-id="$msg.msgId">
+                            <p class="newsEndText">$msg.msgTitle</p>
+                            <p class="newsEndTime">$msg.addTimeStr</p>
+                            <img   line-id="$msg.msgId"  onclick=deleteMsg(this);   class="newsEndImg" src="/resource/img/newHome/2.2newsShut.png" alt=""/>
+                        </li>
+                    #end
+                </ul>
+            </div>
+            <!-- 已读消息start-->
+            <div class="newsEnd">
+                <ul>
+
+                </ul>
+            </div>
+            <!-- 消息详情-->
+            <div class="newsDetails">
+                <p class="newsDetailsTitle"></p>
+                <div class="newsDetailsCon"></div>
+                <div class="newsDetailsFooter"><img src="/resource/img/newHome/shang.png" alt="" onclick="closeDetail()"></div>
+            </div>
+        </div>
+        <!-- 已读消息end-->
+    </div>
+</div>
+
+<script>
+
+    function validatorFirstData(){
+        var memberPassword=$("[name=memberPassword]").val();
+        var newPwd=$("[name=newPwd]").val();
+        var confirmNewPwd=$("[name=confirmNewPwd]").val();
+        var validatorMsg="OK";
+        console.log(memberPassword);
+        console.log(/^[A-Za-z0-9]+$/.test(memberPassword));
+        if(memberPassword==null || memberPassword=="" || memberPassword==undefined){
+            validatorMsg="请输入原密码";
+        }else if(newPwd==null || newPwd=="" || newPwd==undefined){
+            validatorMsg="请输入新密码";
+        }else if(confirmNewPwd==null || confirmNewPwd=="" || confirmNewPwd==undefined){
+            validatorMsg="请输入确认密码";
+        }else if(memberPassword.length>20){
+            validatorMsg="原密码长度不能超过20位";
+        }else if(newPwd.length>20){
+            validatorMsg="新密码长度不能超过20位";
+        }else if(confirmNewPwd.length>20){
+            validatorMsg="确认密码不能超过20位";
+        }else if (memberPassword.length < 6) {
+            validatorMsg = "原密码长度不能小于6位";
+        }else if (newPwd.length < 6) {
+            validatorMsg = "新密码长度不能小于6位";
+        } else if (confirmNewPwd.length <6) {
+            validatorMsg = "确认密码长度不能小于6位";
+        } else if (!/^[A-Za-z0-9]+$/.test(memberPassword)) {
+            validatorMsg = "原密码只能输入数字或字母";
+        }else if (!/^[A-Za-z0-9]+$/.test(newPwd)) {
+            validatorMsg = "新密码只能输入数字或字母";
+        } else if (!/^[A-Za-z0-9]+$/.test(confirmNewPwd)) {
+            validatorMsg = "确认密码只能输入数字或字母";
+        }else if(confirmNewPwd!=newPwd){
+            validatorMsg="新密码与确认密码不一致";
+        }
+        if(validatorMsg=="OK"){
+            $("#verifycodeTip").text("");
+            return true;
+        }else{
+            $("#verifycodeTip").text(validatorMsg);
+            return false;
+        }
+        $("#sureBtnThird").click(function(){
+            location.href = "/";
+        });
+    }
+
+    $('.divLi').each(function () {
+        $(this).click(function () {
+            $(this).css('color','#4cdbc4').siblings('.divLi').css('color','#fff');
+        })
+    })
+    
+    $('.contentLi1').eq(1).next().addClass('dot2').find('.divLi')
+    $('.contentLi1').eq(2).next().addClass('dot3').find('.divLi')
+
+
+    //账户浮层
+    $('.topAccount,.pull').hover(function(){
+        $('.pull').show()
+
+    },function(){
+        $('.pull').hide()
+    })
+
+
+    // 删除
+    function aneww(){
+        $.ajax({
+            url:'seeMessageBox.htm',
+            dataType:'json',
+            type:'POST',
+            success:function(resultResponse){
+                $('.newsBoxLeft').empty()
+                if (!resultResponse.data && typeof(resultResponse.data)!="undefined"){
+                    //alert(resultResponse.data);
+                }else{
+                    for(var i=0;i<resultResponse.data.length;i++){
+                        var htmlHasRead = "<div class='conte'><div class='succeedAlert' onclick=deleteBtn("+resultResponse.data[i].msgId+","+resultResponse.data[i].msgSign+")>"+resultResponse.data[i].msgTitle+"</div><div class='contentCheck' onclick=deleteBtn("+resultResponse.data[i].msgId+","+resultResponse.data[i].msgSign+") >"+resultResponse.data[i].msgCont+"</div>" + "<div class='deleteRemove' onclick=deleteMsg('"+resultResponse.data[i].msgId+"')>删除</div></div>";
+                        var htmlNoRead ="<div class='conte'><div class='succeedAlert' onclick=deleteBtn("+resultResponse.data[i].msgId+","+resultResponse.data[i].msgSign+")>"+resultResponse.data[i].msgTitle+"</div><div class='contentCheck' style='color:red' onclick=deleteBtn("+resultResponse.data[i].msgId+","+resultResponse.data[i].msgSign+") >"+resultResponse.data[i].msgCont+"</div>" + "<div class='deleteRemove' onclick=deleteMsg('"+resultResponse.data[i].msgId+"')>删除</div></div>";
+                        if(resultResponse.data[i].msgSign==1){
+                            //未读
+                            $('.newsBoxLeft').append(htmlNoRead);
+                        }else{
+                            //console.log("已读")
+                            $('.newsBoxLeft').append(htmlHasRead);
+                        }
+
+                    }
+
+                }
+            }
+        });
+    }
+
+//目录背景切换
+    $('.contentLi1').attr('index', -1);
+    $('.contentLi1').eq(0).attr('index', 1);
+    $('.contentLi1').click(function() {
+        $('.divLi').css('color','#fff');
+        $('.contentLi1').attr('index', -1);
+        $(this).attr('index', 1);
+        for(var i = 0; i < $('.contentLi1').length; i++) {
+            var mysrc = $('.contentLi1').eq(i).find('img').attr('src');
+            var mYsrc = mysrc.substring(mysrc.length - 6, mysrc.length - 4);
+            if(mYsrc > 1) {
+                mysrc = mysrc.replace(mYsrc, mYsrc.charAt(0));
+                $('.contentLi1').eq(i).find('img').attr('src', mysrc);
+            }
+        }
+
+        $('.contentLi1').removeClass('mulactive');
+        oMysrc.call(this, false);
+
+    });
+
+    $('.contentLi1').mouseover(function() {
+        if($(this).attr('index') == -1) {
+            oMysrc.call(this, true);
+        }
+
+    });
+
+    $('.contentLi1').mouseout(function() {
+        if($(this).attr('index') == -1) {
+            oMysrc.call(this, true);
+        }
+
+    });
+
+    function oMysrc(boolen) {
+
+        var mysrc = $(this).find('img').attr('src');
+        var mYsrc = mysrc.substring(mysrc.length - 6, mysrc.length - 4);
+        if(mYsrc > 1 && boolen) {
+            mysrc = mysrc.replace(mYsrc, mYsrc.charAt(0));
+            //consoleconsole.log(mysrc);
+            $(this).removeClass('mulactive');
+        } else {
+
+            mYsrc = mYsrc.replace(/[a-z]/gi, '');
+            if(mYsrc.length >= 2) {
+                var mYsrc1 = mYsrc.charAt(0);
+                mysrc = mysrc.replace(mYsrc, mYsrc1 + mYsrc1);
+            } else {
+                mysrc = mysrc.replace(mYsrc, mYsrc + mYsrc);
+            }
+
+            $(this).addClass('mulactive');
+        }
+        $(this).find('img').attr('src', mysrc);
+
+    }
+</script>
+</body>
+</html>

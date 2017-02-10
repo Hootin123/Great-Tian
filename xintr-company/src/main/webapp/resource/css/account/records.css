@@ -1,0 +1,88 @@
+.account table{
+	width:93.6%;
+}
+.account tr{
+	height: 76px;
+}
+
+.account .first{
+	width: 20%;
+}
+
+.account .seccond{
+	width: 30%;
+	padding-left: 12%;
+}
+.account .third{
+	width: 20%;
+	padding-left:5%;
+}
+.account .fourth{
+	width: 20%;
+	text-align: center;
+	font-size: 12px;
+}
+.account .last{
+	width: 10%;
+	text-align: center;
+}
+
+.account .first_tw{
+	width: 25%;
+}
+.account .seccond_tw{
+	width: 25%;
+	
+}
+.account .third_tw{
+	width: 25%;
+	color: #333333;
+}
+.account .last_tw{
+	width: 25%;
+	min-width: 160px;
+	text-align: center;
+}
+.account .last_tw .a1{
+	display: inline-block;
+	width: 78px;
+	height: 28px;
+	border-radius: 8px;
+	border: 1px solid #fa5f5f;
+	line-height: 30px;
+	text-align: center;
+	color: #fa5f5f;
+	margin-right: 20%;
+}
+.account .last_tw .a2,.account .last .a2{
+	display: inline-block;
+	width: 50px;
+	height: 20px;
+	background: #e7edf5;
+	color: #5b7798;
+	border-radius: 6px;
+	font-size: 12px;
+	line-height: 20px;
+}
+.account table tr{
+	/*text-align: center;*/
+	border-bottom: 1px dashed #b3b3b3;
+}
+.account table td span{
+	margin: 0 auto;
+}
+.account .account_list span{
+	margin-left: 30%; 
+	display: block;
+}
+.account .account_list_tw span{
+	margin-left: 15%; 
+	display: block;
+}
+.last_tw .a1:hover{
+	background: #fa5f5f;
+	color: #FFFFFF;
+}
+.account_nav div{
+	
+}

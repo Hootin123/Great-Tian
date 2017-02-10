@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtr.core.persistence.reader.company.CompanyProtocolsReaderMapper">
+    <resultMap id="BaseResultMap" type="com.xtr.api.domain.company.CompanyProtocolsBean">
+        <id column="protocol_id" jdbcType="BIGINT" property="protocolId" />
+        <result column="protocol_company_id" jdbcType="BIGINT" property="protocolCompanyId" />
+        <result column="protocol_contract_type" jdbcType="INTEGER" property="protocolContractType" />
+        <result column="protocol_paper_no" jdbcType="VARCHAR" property="protocolPaperNo" />
+        <result column="protocol_status" jdbcType="INTEGER" property="protocolStatus" />
+        <result column="protocol_contract_time" jdbcType="TIMESTAMP" property="protocolContractTime" />
+        <result column="protocol_expire_time" jdbcType="TIMESTAMP" property="protocolExpireTime" />
+        <result column="protocol_create_time" jdbcType="TIMESTAMP" property="protocolCreateTime" />
+        <result column="protocol_update_time" jdbcType="TIMESTAMP" property="protocolUpdateTime" />
+        <result column="protocol_current_status" jdbcType="INTEGER" property="protocolCurrentStatus" />
+        <result column="protocol_business_manager" jdbcType="VARCHAR" property="protocolBusinessManager" />
+        <result column="protocol_linkman_name" jdbcType="VARCHAR" property="protocolLinkmanName" />
+        <result column="protocol_linkman_phone" jdbcType="VARCHAR" property="protocolLinkmanPhone" />
+        <result column="protocol_code" jdbcType="VARCHAR" property="protocolCode" />
+        <result column="protocol_rate" jdbcType="DECIMAL" property="protocolRate" />
+        <result column="protocol_serve_rate" jdbcType="DECIMAL" property="protocolServeRate" />
+        <result column="protocol_scale" jdbcType="DECIMAL" property="protocolScale" />
+    </resultMap>
+
+    <resultMap id="ConditionResultMap" type="com.xtr.api.dto.company.CompanyProtocolsDto">
+        <id column="protocol_id" jdbcType="BIGINT" property="protocolId" />
+        <result column="protocol_company_id" jdbcType="BIGINT" property="protocolCompanyId" />
+        <result column="protocol_contract_type" jdbcType="INTEGER" property="protocolContractType" />
+        <result column="protocol_paper_no" jdbcType="VARCHAR" property="protocolPaperNo" />
+        <result column="protocol_status" jdbcType="INTEGER" property="protocolStatus" />
+        <result column="protocol_contract_time" jdbcType="TIMESTAMP" property="protocolContractTime" />
+        <result column="protocol_expire_time" jdbcType="TIMESTAMP" property="protocolExpireTime" />
+        <result column="protocol_create_time" jdbcType="TIMESTAMP" property="protocolCreateTime" />
+        <result column="protocol_update_time" jdbcType="TIMESTAMP" property="protocolUpdateTime" />
+        <result column="protocol_current_status" jdbcType="INTEGER" property="protocolCurrentStatus" />
+        <result column="protocol_business_manager" jdbcType="VARCHAR" property="protocolBusinessManager" />
+        <result column="protocol_linkman_name" jdbcType="VARCHAR" property="protocolLinkmanName" />
+        <result column="protocol_linkman_phone" jdbcType="VARCHAR" property="protocolLinkmanPhone" />
+        <result column="protocol_code" jdbcType="VARCHAR" property="protocolCode" />
+        <result column="company_id" jdbcType="VARCHAR" property="companyId" />
+        <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+        <result column="company_corporation_phone" jdbcType="VARCHAR" property="companyCorporationPhone" />
+        <result column="protocol_rate" jdbcType="DECIMAL" property="protocolRate" />
+        <result column="protocol_serve_rate" jdbcType="DECIMAL" property="protocolServeRate" />
+        <result column="protocol_scale" jdbcType="DECIMAL" property="protocolScale" />
+        <result column="member_logname" jdbcType="VARCHAR" property="memberLogname" />
+        <result column="company_contact_tel" jdbcType="VARCHAR" property="companyContactTel" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        protocol_id, protocol_company_id, protocol_contract_type, protocol_paper_no,protocol_status,
+        protocol_contract_time,protocol_expire_time,protocol_create_time,protocol_update_time,protocol_current_status,
+        protocol_business_manager,protocol_linkman_name,protocol_linkman_phone,protocol_code,protocol_rate,protocol_serve_rate,protocol_scale
+    </sql>
+
+    <!-- 查询公司信息过滤条件 -->
+    <sql id="Protocol_Where_Clause">
+        <if test="protocolBusinessManager != null and protocolBusinessManager != '' ">
+            AND  protocol_business_manager like concat('%',#{protocolBusinessManager,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="protocolCurrentStatus != null ">
+            and protocol_current_status=#{protocolCurrentStatus,jdbcType=INTEGER}
+        </if>
+        <if test="protocolContractType != null ">
+            and protocol_contract_type=#{protocolContractType,jdbcType=INTEGER}
+        </if>
+        <if test="companyName != null and companyName != '' ">
+            AND (companys.company_name like   concat('%',#{companyName,jdbcType=VARCHAR},'%')
+            or companys.company_contact_tel like   concat('%',#{companyName,jdbcType=VARCHAR},'%')
+            or companys.company_id like   concat('%',#{companyName,jdbcType=VARCHAR},'%'))
+        </if>
+    </sql>
+
+    <!-- 根据企业ID查询协议 -->
+    <select id="selectByCompanyId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from company_protocol
+        where protocol_company_id = #{protocolCompanyId,jdbcType=BIGINT}
+    </select>
+
+    <!-- 根据过滤条件查询企业协议 -->
+    <select id="selectProtocolByCondition" parameterType="com.xtr.api.dto.company.CompanyProtocolsDto" resultMap="ConditionResultMap">
+        select
+        <include refid="Base_Column_List" />,companys.company_name,companys.company_corporation_phone,
+        companys.company_id,company_members.member_logname,company_members.member_phone,companys.company_contact_tel
+        from companys
+        left join company_protocol on companys.company_id=company_protocol.protocol_company_id
+        left join company_members on companys.company_id=company_members.member_company_id and company_members.member_isdefault=1
+        where 1=1
+        <include refid="Protocol_Where_Clause"/>
+        order by company_protocol.protocol_update_time desc
+    </select>
+
+    <!-- 查询所有的企业协议信息 -->
+    <select id="selectProtocolAll"  resultMap="ConditionResultMap">
+        select
+        <include refid="Base_Column_List" />,companys.company_name,companys.company_corporation_phone,
+        companys.company_id,company_members.member_logname,company_members.member_phone,companys.company_contact_tel
+        from company_protocol
+        left join companys on companys.company_id=company_protocol.protocol_company_id
+        left join company_members on company_protocol.protocol_company_id=company_members.member_company_id and company_members.member_isdefault=1
+    </select>
+
+    <!-- 根据协议ID查询协议和企业信息 -->
+    <select id="selectProtocolAndCompanyById"  resultMap="ConditionResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List" />,companys.company_name,companys.company_corporation_phone,companys.company_id,companys.company_contact_tel
+        from company_protocol
+        left join companys on companys.company_id=company_protocol.protocol_company_id
+        where company_protocol.protocol_id=#{protocolId,jdbcType=BIGINT}
+    </select>
+
+    <!-- 根据企业ID查询签约\即将到期\冻结的协议 -->
+    <select id="selectDfInfoByState" parameterType="com.xtr.api.domain.company.CompanyProtocolsBean" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from company_protocol
+        where protocol_company_id = #{protocolCompanyId,jdbcType=BIGINT} and protocol_contract_type=#{protocolContractType,jdbcType=INTEGER} and protocol_current_status in(2,3,5);
+    </select>
+
+    <!-- 根据协议类型及指定时间判断协议是否还有效 -->
+    <select id="selectIsUserFulByTypeAndTime" parameterType="com.xtr.api.domain.company.CompanyProtocolsBean" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from company_protocol
+        where protocol_company_id = #{protocolCompanyId,jdbcType=BIGINT}
+        and protocol_contract_type=#{protocolContractType,jdbcType=INTEGER}
+        and protocol_expire_time >=#{protocolExpireTime,jdbcType=TIMESTAMP}
+    </select>
+
+    <!-- 第二个查询列表通过过滤条件查询 -->
+    <select id="selectCompanyProtocolAllByCreateTime"  parameterType="com.xtr.api.dto.company.CompanyProtocolsDto" resultMap="ConditionResultMap">
+        <!--select
+        <include refid="Base_Column_List" />,companys.company_name,companys.company_corporation_phone,
+        companys.company_id,company_members.member_logname,company_members.member_phone,companys.company_contact_tel
+        from companys
+        left join company_protocol on companys.company_id=company_protocol.protocol_company_id
+        left join company_members on companys.company_id=company_members.member_company_id and company_members.member_isdefault=1
+        where 1=1
+        <if test="companyName != null and companyName != '' ">
+            AND (companys.company_name like   concat('%',#{companyName,jdbcType=VARCHAR},'%')
+            or companys.company_contact_tel like   concat('%',#{companyName,jdbcType=VARCHAR},'%'))
+        </if>
+        group by companys.company_id,company_protocol.protocol_contract_type
+        order by company_protocol.protocol_create_time desc-->
+        select
+        <include refid="Base_Column_List" />,B.company_name,B.company_corporation_phone,
+        B.company_id,B.member_logname,B.member_phone,B.company_contact_tel from
+        (
+            select <include refid="Base_Column_List" />,companys.company_name,companys.company_corporation_phone,
+            companys.company_id,company_members.member_logname,company_members.member_phone,companys.company_contact_tel
+            from companys
+            left join company_protocol on companys.company_id=company_protocol.protocol_company_id
+            left join company_members on companys.company_id=company_members.member_company_id and company_members.member_isdefault=1
+            where 1=1
+            <if test="companyName != null and companyName != '' ">
+                AND (companys.company_name like   concat('%',#{companyName,jdbcType=VARCHAR},'%')
+                or companys.company_contact_tel like   concat('%',#{companyName,jdbcType=VARCHAR},'%')
+                or companys.company_id like   concat('%',#{companyName,jdbcType=VARCHAR},'%'))
+            </if>
+            order by company_protocol.protocol_create_time desc
+        )B
+        group by B.company_id,B.protocol_contract_type
+    </select>
+
+    <!-- 根据企业ID查询签约\即将到期\冻结的协议 -->
+    <select id="selectUsefulProtocolsByState" parameterType="com.xtr.api.domain.company.CompanyProtocolsBean" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from company_protocol
+        where protocol_company_id = #{protocolCompanyId,jdbcType=BIGINT}  and protocol_current_status in(2,3,5)
+        order by protocol_contract_type
+    </select>
+
+    <!--批量获取企业协议有效信息-->
+    <select id="selectUsefulProtocolsBatch" parameterType="java.util.List" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from company_protocol
+        where protocol_current_status in(2,3,5) and protocol_company_id in
+        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        order by protocol_contract_type
+    </select>
+    <!-- 根据企业ID查询协议 -->
+    <select id="selectByContractType" parameterType="com.xtr.api.domain.company.CompanyProtocolsBean" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from company_protocol
+        where protocol_company_id = #{protocolCompanyId,jdbcType=BIGINT}
+        <if test="protocolContractType != null ">
+            and protocol_contract_type=#{protocolContractType,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <!-- 根据企业ID查询签约\即将到期\冻结的协议 -->
+    <select id="selectUsefulProtocolsByAddTime" parameterType="com.xtr.api.domain.company.CompanyProtocolsBean" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from company_protocol
+        where protocol_company_id = #{protocolCompanyId,jdbcType=BIGINT} and protocol_contract_type=2  and protocol_current_status in(2,3,5)
+        order by protocol_create_time DESC
+    </select>
+
+    <!-- 根据企业ID查询签约\即将到期\冻结的协议的数量 -->
+    <select id="selectCountByUserfulProtocol" parameterType="com.xtr.api.domain.company.CompanyProtocolsBean" resultType="int">
+        select
+        count(1)
+        from company_protocol
+        where protocol_company_id = #{protocolCompanyId,jdbcType=BIGINT} and protocol_contract_type=#{protocolContractType,jdbcType=INTEGER} and protocol_current_status in(2,3,5)
+    </select>
+
+    <!-- 根据企业ID查询签约\即将到期的协议-->
+    <select id="selectByCorpProtocol" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from company_protocol
+        where protocol_company_id = #{companyId,jdbcType=BIGINT} and protocol_contract_type=#{protocolContractType,jdbcType=INTEGER} and protocol_current_status in(2,3)
+        limit 1
+    </select>
+
+
+    <!-- 根据企业ID获取最新的签约记录 -->
+    <select id="selectProtocolByCompanyId"  parameterType="java.lang.Long" resultMap="ConditionResultMap">
+        select
+        <include refid="Base_Column_List" />,B.company_name,B.company_corporation_phone,
+        B.company_id,B.company_contact_tel from
+        (
+        select <include refid="Base_Column_List" />,companys.company_name,companys.company_corporation_phone,
+        companys.company_id,companys.company_contact_tel
+        from company_protocol
+        left join companys on companys.company_id=company_protocol.protocol_company_id
+        where company_protocol.protocol_company_id = #{protocolCompanyId,jdbcType=BIGINT}
+        order by company_protocol.protocol_create_time desc
+        )B
+        group by B.company_id,B.protocol_contract_type
+    </select>
+
+
+    <!-- 根据企业ID查询签约\即将到期\冻结的代发\垫发协议(此处的sql别人不要调用,方便后面如果要扩展,可能会更改) -->
+    <select id="selectDJAndFFInfoByState" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from company_protocol
+        where protocol_company_id = #{protocolCompanyId,jdbcType=BIGINT} and protocol_contract_type in(1,3) and protocol_current_status in(2,3,5)
+        order by protocol_expire_time desc limit 1
+    </select>
+
+    <select id="selectUsefulProtocolCount" resultType="java.lang.Integer">
+        SELECT
+            count(1)
+        FROM
+            company_protocol
+        WHERE
+            protocol_company_id = #{companyId}
+        AND protocol_contract_type = #{protocolType}
+        AND protocol_current_status >= 2
+        AND protocol_current_status &lt;= 3
+    </select>
+
+    <!-- 获取协议最新的一条数据 -->
+    <select id="selectLastData" parameterType="com.xtr.api.domain.company.CompanyProtocolsBean" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from company_protocol
+        where protocol_company_id = #{protocolCompanyId,jdbcType=BIGINT}
+        and protocol_contract_type=#{protocolContractType,jdbcType=INTEGER}
+        order by protocol_create_time desc
+        limit 1
+    </select>
+
+    <!--获取企业有效协议的数量-->
+    <select id="selectUsefulProtocolForCompany" resultType="java.lang.Integer">
+        SELECT
+        count(1)
+        FROM
+        company_protocol
+        WHERE
+        protocol_company_id = #{companyId}
+        AND protocol_current_status in (2,3)
+    </select>
+
+    <!--获取企业有效协议的-->
+    <select id="selectUsefulListForCompanyId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM
+        company_protocol
+        WHERE
+        protocol_company_id = #{companyId}
+        AND protocol_current_status in (2,3)
+    </select>
+</mapper>

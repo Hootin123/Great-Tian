@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>H+ 协议修改</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-table/bootstrap-table.min.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-datepicker/css/bootstrap-datetimepicker.css')" rel="stylesheet" />
+</head>
+
+<body>
+<div class="col-sm-12">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <form  id="protocolModifyForm">
+                <h1>确定修改合同信息?</h1>
+                <div class="panel panel-default" style="margin-top: 10px;">
+                    <input type="hidden" value="$!{protocolDto.protocolId}" name="protocolId">
+                    <input type="hidden" value="$!date.format('yyyy-MM-dd',$!{protocolDto.protocolExpireTime})" name="protocolExpireTime">
+                    <table data-mobile-responsive="true" class="table table-hover table-bordered">
+
+                        <tr>
+                            <td style="width:15%;">企业名称</td>
+                            <td style="width:30%;">$!{protocolDto.companyName}</td>
+                        </tr>
+                        <tr>
+                            <td style="width:15%;">业务联系人</td>
+                            <td style="width:30%;"><input type="text" class="form-control" name="protocolLinkmanName" value="$!{protocolDto.protocolLinkmanName}"></td>
+                        </tr>
+                        <tr>
+                            <td style="width:15%;">业务联系人手机</td>
+                            <td style="width:30%;"><input type="text" class="form-control" name="protocolLinkmanPhone" value="$!{protocolDto.protocolLinkmanPhone}"></td>
+                        </tr>
+                        <tr>
+                            <td>协议状态</td>
+                            <td>
+                                <select class="form-control m-b"  name="protocolCurrentStatus">
+                                    #if($protocolDto.protocolCurrentStatus==5)<option value="6">解冻</option>#end
+                                    #if($protocolDto.protocolCurrentStatus==2)<option value="5">冻结</option>#end
+                                    #if($protocolDto.protocolCurrentStatus==3)<option value="5">冻结</option>#end
+                                </select>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+                <div class="text-center" style="20px;">
+                    <button type="button" class="btn btn-w-m btn-success" id="sureBtn">确定</button>
+                    <button type="button" class="btn btn-w-m btn-white" onclick="cancelProtocolModify()">取消</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+<script src="#springUrl('/resource/js/hui/content.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table-mobile.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/validate/jquery.validate.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-datepicker/js/bootstrap-datetimepicker.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-datepicker/locales/bootstrap-datetimepicker.zh-CN.js')"></script>
+<script src="#springUrl('/resource/js/comm/jdatagrid.js')"></script>
+<script src="#springUrl('/resource/js/market/protocol/protocolModifyState.js')"></script>
+</html>

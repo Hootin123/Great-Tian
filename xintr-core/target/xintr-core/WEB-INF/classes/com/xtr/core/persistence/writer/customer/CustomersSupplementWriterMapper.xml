@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xtr.core.persistence.writer.customer.CustomersSupplementWriterMapper" >
+
+    <!--批量插入员工岗位信息-->
+    <insert id="insertBatch" parameterType="java.util.List" >
+        insert into customers_supplement (supplement_customer_id, supplement_company_order_id, supplement_sb_company_receive, supplement_sb_company_back,
+        supplement_sb_self_receive, supplement_sb_self_back, supplement_gjj_company_receive, supplement_gjj_company_back,
+        supplement_gjj_self_receive, supplement_gjj_self_back, supplement_sb_receive_detail, supplement_sb_back_detail,
+        supplement_gjj_receive_detail,supplement_gjj_back_detail,supplement_sb_receive_reason,supplement_sb_back_reason,
+        supplement_gjj_receive_reason,supplement_gjj_back_reason,supplement_create_time,supplement_is_back)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.supplementCustomerId}, #{item.supplementCompanyOrderId}, #{item.supplementSbCompanyReceive},#{item.supplementSbCompanyBack}, #{item.supplementSbSelfReceive},
+            #{item.supplementSbSelfBack}, #{item.supplementGjjCompanyReceive},#{item.supplementGjjCompanyBack}, #{item.supplementGjjSelfReceive}, #{item.supplementGjjSelfBack},
+            #{item.supplementSbReceiveDetail}, #{item.supplementSbBackDetail},#{item.supplementGjjReceiveDetail},#{item.supplementGjjBackDetail},
+            #{item.supplementSbReceiveReason},
+            #{item.supplementSbBackReason},#{item.supplementGjjReceiveReason},#{item.supplementGjjBackReason},#{item.supplementCreateTime},#{item.supplementIsBack})
+        </foreach>
+    </insert>
+
+    <!--更新状态-->
+    <update id="updateByPrimaryKeySelective" parameterType="com.xtr.api.domain.customer.CustomersSupplementBean" >
+        update customers_supplement
+        <set >
+            <if test="supplementIsBack != null" >
+                supplement_is_back = #{supplementIsBack,jdbcType=INTEGER},
+            </if>
+            <if test="supplementFailMsg != null and supplementFailMsg!='' ">
+                supplement_fail_msg = #{supplementFailMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="supplementPayStatus != null" >
+                supplement_pay_status = #{supplementPayStatus,jdbcType=INTEGER},
+            </if>
+            <if test="supplementFinanceUser != null and supplementFinanceUser!='' " >
+                supplement_finance_user = #{supplementFinanceUser,jdbcType=VARCHAR},
+            </if>
+            <if test="supplementRemark != null and supplementRemark!='' " >
+                supplement_remark = #{supplementRemark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where supplement_id = #{supplementId,jdbcType=BIGINT}
+    </update>
+
+    <!--删除-->
+    <delete id="deleteByCompanyOrderId" parameterType="java.lang.Long" >
+        delete from customers_supplement where supplement_company_order_id=#{supplementCompanyOrderId}
+    </delete>
+</mapper>

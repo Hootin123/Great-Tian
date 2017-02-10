@@ -1,0 +1,51 @@
+<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<jsp:include page="/201607/meta.jsp"></jsp:include>
+</head>
+<body>
+	<jsp:include page="/201607/top.jsp"></jsp:include>
+	<script>$(function(){showidx(0);})</script>
+	
+	<div class="x-container" style="background: url(/201607/img/xtr2/bg4_02.jpg) no-repeat center 0;padding: 100px 0;">
+		<div class="x-content">
+			<div class="crumb">
+				<a href="/#product">首页</a>
+				<i class="icon-angle-right"></i>
+				<span class="blue">薪酬福利解决方案</span>
+			</div>
+		</div>
+		<div class="x-content" style="border: 1px solid #e2e2e2;box-shadow: 0 7px 20px rgba(0,0,0,.15);background: #fff;border-radius: 10px;">
+			<div class="news-detail-wrap" style="">
+				<h3 style="">工资代发详情</h3>
+				<p class="time">2016-06-29 12:00:35 </p>
+				<div class="news-detail-content">
+<div style="line-height: 40px;font-size: 16px;">
+薪太软工资代发三大核心优势:
+<br /><br />1、免费:工资代发市场价格普遍为 10-20 元/笔;薪太软免费提供,一键发放,让企业享受到更人性化的产品体验; 
+<br />2、安全:所有款项都经中国人民银行监管账户完成流转,专款专用。每笔代发款项都经薪太软、支付机构及银行多道关卡校验,令企业省心更安心。
+<br />3、提高 HR 工作效率,提升员工满意度 
+<br />HR 工作告别纸质工资单,提高效率,绿色环保;员工可实时查询工资明 细,工资提现不再受指定银行卡限制。
+</div>
+<br />
+<p style="text-align: center;"><img src="/201607/img/xtr2/D11.png" style="width: 400px !important;"/></p>
+
+
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	
+	<jsp:include page="/201607/footer.jsp"></jsp:include>
+</body>
+</html>
+
+
+

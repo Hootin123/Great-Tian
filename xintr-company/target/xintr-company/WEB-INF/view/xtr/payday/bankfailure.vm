@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title></title>
+
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/comm/comm.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/payfor1.css')" rel="stylesheet">
+<style>
+ .cause{
+     width:100%;
+     height:100%;
+     overflow: hidden;
+ }
+.cause img{
+    margin:0 auto;
+    display: block;
+    padding-top:150px;
+}
+.cause p{
+    display: block;
+    text-align: center;
+    color:#333;
+    font-size:16px;
+    margin-top:20px;
+
+}
+.cause p span{
+    color:#0696fa;
+}
+.cause a{
+    display: block;
+    width:250px;
+    height:40px;
+    line-height:40px;
+    text-align: center;
+    border-radius: 6px;
+    margin:0 auto;
+    background:#0696fa;
+    color:#fff;
+    margin-top:230px;
+}
+</style>
+</head>
+
+<body>
+<div class="container hide" id="identity" style="padding: 60px 5% 40px; min-width: 1000px">
+<div class="identity-wrap">
+<div class="bg"></div>
+#if($!{paytype} == "1")
+<div class="it active" style="width:15%;">1
+<p>完善信息</p>
+    <p style="font-size:12px;">填写公司基本信息</p>
+</div>
+<div class="it active" style="width:15%;">2
+<p>实名认证</p>
+    <p style="font-size:12px;">对公银行账户验证</p>
+</div>
+<div class="it" style="width:15%;">3
+    <p>上传资料</p>
+    <p style="font-size:12px;">提交企业征信资料</p>
+</div>
+<div class="it" style="width:15%;">4
+    <p>审核通过</p>
+    <p style="font-size:12px;">风控审核并完成签约</p>
+</div>
+#else
+<div class="it active">1
+<p>完善信息</p>
+    <p style="font-size:12px;">填写公司基本信息</p>
+</div>
+<div class="it active">2
+<p>实名认证</p>
+    <p style="font-size:12px;">对公银行账户验证</p>
+</div>
+<div class="it">3
+<p>认证成功</p>
+    <p style="font-size:12px;">提交企业征信资料</p>
+</div>
+#end
+</div>
+<div class="cause">
+<img src="resource/img/error.png" alt="">
+<p class="text1">您三次输入的金额都与打款金额不符，对公账户验证失败</p>
+<p class="text2">请联系客服进行人工验证：<span>400-175-8090</span></p>
+<a style="cursor:pointer;" onclick="parent.location.href='home.htm'">返回</a>
+</div>
+</div>
+</body>
+</html>

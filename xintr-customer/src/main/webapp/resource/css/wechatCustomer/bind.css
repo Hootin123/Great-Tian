@@ -1,0 +1,124 @@
+@charset "UTF-8";
+body {
+  width: 100%;
+  height: 100%;
+  background: #f4f4f4;
+  background-size: 100%; }
+
+section {
+  width: 6.4rem;
+  height: 2.4rem;
+  margin: 0 auto;
+  margin-top: 3.2rem;
+  border-radius: 0.1rem;
+  background: #fff;
+  box-shadow: 1px 10px 15px #c8d6db; }
+  section ul {
+    width: 100%;
+    height: 100%;
+    padding: 0 0.3rem;
+    box-sizing: border-box; }
+    section ul li {
+      width: 100%;
+      height: 1.2rem;
+      border-bottom: 1px solid #b0ccd7;
+      position: relative;
+      overflow: hidden;}
+      section ul li input {
+        display: block;
+        width: 100%;
+        height: 0.6rem;
+        margin-top:0.3rem;
+        border: 0;
+        text-indent: 0.74rem;
+        line-height: 0.6rem;
+        font-size: 0.3rem; }
+      section ul li .show {
+        display: block;
+        width: 0.4rem;
+        height: 0.4rem;
+        /*background: url(../../img/wechatCustomer/icon1.png) 0 0 no-repeat;*/
+        background-size: 100% 100%;
+        position: absolute;
+        right: 0.28rem;
+        top: 0.2rem; }
+      section ul li b {
+        height: 0.78rem;
+        position: absolute;
+        right: 2.2rem;
+        top: 0.64rem;
+        font-size: 0.16rem;
+        line-height: 0.78rem;
+        color: #f00;
+        font-weight: 100; }
+    section ul li:nth-child(1) em {
+      width: 0.29rem;
+      height: 0.44rem;
+      background: url(../../img/wechatCustomer/phone.png) 0 0 no-repeat;
+      background-size: 100% 100%;
+      position: absolute;
+      left: 0;
+      top: 0.4rem; }
+    section ul li:nth-child(1) span {
+      display: block;
+      width: 2.2rem;
+      height: 0.6rem;
+      position: absolute;
+      right: 0;
+      top: 0.4rem;
+      background: #0696fa;
+      border-radius: 0.26rem;
+      font-size: 0.3rem;
+      font-family: '微软雅黑';
+      color: #fff;
+      text-align: center;
+      line-height: 0.6rem; }
+    section ul li img{
+      display: block;
+      position: absolute;
+      top: 0.45rem;
+      right: 0.8rem;
+      display: block;
+      width: 0.5rem;
+      height: 0.5rem;
+    }
+    section ul li:nth-child(2) em {
+      width: 0.41rem;
+      height: 0.31rem;
+      background: url(../../img/wechatCustomer/code.png) 0 0 no-repeat;
+      background-size: 100% 100%;
+      position: absolute;
+      left: 0;
+      top: 0.4rem; }
+  section .hint {
+    width: 50%;
+    height: 0.8rem;
+    position: absolute;
+    left: 25%;
+    top: 6.8rem;
+    background: rgba(6, 150, 250, 0.8);
+    border-radius: 0.4rem;
+    border-radius: 0.4rem;
+    font-size: 0.28rem;
+    text-align: center;
+    line-height: 0.8rem;
+    color: #f00;
+    font-weight: 600; }
+
+footer {
+  width: 100%;
+  height: 0.9rem;
+  margin-top: 2.34rem; }
+  footer .bindPhone {
+    width: 6.4rem;
+    height: 100%;
+    margin: 0 auto;
+    background: #0696fa;
+    border-radius: 0.45rem;
+    font-size: 0.34rem;
+    font-family: '微软雅黑';
+    color: #fff;
+    text-align: center;
+    line-height: 0.9rem; }
+
+/*# sourceMappingURL=bind.css.map */

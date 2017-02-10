@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>新增任务</title>
+    #parse("comm/head.vm")
+</head>
+
+
+<div class="ibox" style="padding-top: 0px">
+
+
+    <div class="ibox-content">
+        <form role="form" class="form-inline" id="editForm">
+            #if($task)##修改数据
+                <input type="text" id="jobId" name="jobId" class="hidden" value="$task.jobId"/>
+                <input type="text" id="jobStatus" name="jobStatus" class="hidden" value="$task.jobStatus"/>
+            #end
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">任务名：</label>
+
+                <input id="jobName" name="jobName" class="form-control" type="text"
+                       #if($task)value="$task.jobName" #end>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">任务组：</label>
+
+                <input id="jobGroup" name="jobGroup" class="form-control" type="text"
+                       #if($task)value="$task.jobGroup" #end>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">cron表达式：</label>
+
+                <input id="cronExpression" name="cronExpression" class="form-control" type="text"
+                       #if($task)value="$task.cronExpression" #end>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">是否同步：</label>
+
+                <select class="form-control m-b" id="isConcurrent" name="isConcurrent">
+                    <option value="0" #if(($task && $task.isConcurrent == 0) || !$task)selected="selected"#end>是
+                    </option>
+                    <option value="1" #if($task && $task.isConcurrent == 1)selected="selected"#end>否</option>
+                </select>
+            </div>
+
+##            <div class="form-group">
+##                <label class="col-sm-3 control-label">类路径：</label>
+##
+##                <input id="beanClass" name="beanClass" class="form-control" type="text"
+##                       #if($task)value="$task.beanClass" #end>
+##            </div>
+
+##            <div class="form-group">
+##                <label class="col-sm-3 control-label">方法名：</label>
+##
+##                <input id="methodName" name="methodName" class="form-control" type="text"
+##                       #if($task)value="$task.methodName" #end>
+##            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">springId：</label>
+
+                <input id="springId" name="springId" class="form-control" type="text"
+                       #if($task)value="$task.springId" #end>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">描述：</label>
+
+                <input id="description" name="description" class="form-control" type="text"
+                       #if($task)value="$task.description" #end>
+            </div>
+
+        </form>
+
+
+    </div>
+</div>
+
+<script src="#springUrl('/resource/js/sys/task/addTask.js')"></script>
+</html>

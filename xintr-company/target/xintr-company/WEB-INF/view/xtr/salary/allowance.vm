@@ -1,0 +1,275 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>津贴设置</title>
+    #parse("comm/head.vm")
+    <link rel="stylesheet" href="#springUrl('/resource/css/salary/allowance.css')">
+
+</head>
+<body>
+<div class="all">
+<div class="nav">薪资设置
+    <img src="#springUrl('/resource/img/salary/guanbi.png')" alt="" id="closeDetailBtn">
+</div>
+<div class="catalogue">
+    <ul>
+        <li class="big">计薪规则<div class="borderWhite1"></div></li>
+        <li class="subsidy">津贴设置<div class="borderWhite2"></div></li>
+        <li class="prize">奖金设置<div class="borderWhite3"></div></li>
+    </ul>
+
+</div>
+<div class="idea">
+    <div class="top">
+        <p><span>注意：</span>对该页面的修改将在保存后立即生效，保存后请重新核对工资单。</p>
+    </div>
+    <div class="cont">
+        <div class="data">
+            <div class="data1">计薪开始日期</div>
+            <div class="data2">当月</div>
+            <div class="data3"><span class="data3Span">$!{startDay}</span>日</div>
+            <div class="data4">计算结束日期</div>
+            <div class="data5">$!{endStr}</div>
+            <div class="data6">
+                <span class="data6Span">$!{endDayStr}</span>日
+            </div>
+            <div class="dataImg"><img src="#springUrl('/resource/img/wenhao.png')" alt="" title="计薪开始日期设置后不能再更改哦"></div>
+        </div>
+##        <ul class="data7">
+##            <li>1</li>
+##            <li>2</li>
+##            <li>3</li>
+##            <li>4</li>
+##            <li>5</li>
+##            <li>6</li>
+##            <li>7</li>
+##            <li>8</li>
+##            <li>9</li>
+##            <li>10</li>
+##            <li>11</li>
+##            <li>12</li>
+##            <li>13</li>
+##            <li>14</li>
+##            <li>15</li>
+##            <li>16</li>
+##            <li>17</li>
+##            <li>18</li>
+##            <li>19</li>
+##            <li>20</li>
+##            <li>21</li>
+##            <li>22</li>
+##            <li>23</li>
+##            <li>24</li>
+##            <li>25</li>
+##            <li>26</li>
+##            <li>27</li>
+##            <li>28</li>
+##            <li>29</li>
+##            <li>30</li>
+##            <li>31</li>
+##        </ul>
+        <div class="send">
+            <div class="send1">发薪日期</div>
+            <div class="send2">当月</div>
+            <div class="send3"><span class="send3Span">5</span>日</div>
+            <div class="sendImg"><img src="#springUrl('/resource/img/wenhao.png')" alt="" title="当日登录平台发送发工资提醒，当日未登录，次日自动消失。"/></div>
+        </div>
+        <ul class="send4">
+            <li>当月</li>
+            <li>次月</li>
+        </ul>
+        <ul class="send5">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+            <li>9</li>
+            <li>10</li>
+            <li>11</li>
+            <li>12</li>
+            <li>13</li>
+            <li>14</li>
+            <li>15</li>
+            <li>16</li>
+            <li>17</li>
+            <li>18</li>
+            <li>19</li>
+            <li>20</li>
+            <li>21</li>
+            <li>22</li>
+            <li>23</li>
+            <li>24</li>
+            <li>25</li>
+            <li>26</li>
+            <li>27</li>
+            <li>28</li>
+            <li>29</li>
+            <li>30</li>
+            <li>31</li>
+        </ul>
+        <div class="way">
+            <div class="way1">计薪方式</div>
+            <div class="way2">21.75天标准计薪法</div>
+            <div class="way3">以11天为临界点</div>
+            <div class="wayImg"><img src="#springUrl('/resource/img/wenhao.png')" alt="" title="如选择21.75标准计薪法，日工资 = 当月工资基数 ÷ 21.75，小于临界点，采用正算法，大于等于临界点时采用反算法；
+如选择实际工作日计薪法，日工资 = 当月工资基数 ÷ 当月计薪天数（包括法定节假日的累计计薪日）"></div>
+        </div>
+        <ul class="way4">
+            <li>21.75天标准计薪法</li>
+            <li>实际工作日计薪法</li>
+        </ul>
+        <ul class="way5">
+            <li>以11天为临界点</li>
+            <li>以21.75天为临界点</li>
+        </ul>
+        #if($!{isSign} == '0')
+            <div class="gold">
+                <div class="gold1">是否计算社保公积金</div>
+                <div class="gold2">
+                    <img class="goldImg1" src="#springUrl('/resource/img/Switch-OFF.png')" alt="">
+                    <img class="goldImg2" src="#springUrl('/resource/img/Switch-ON.png')" alt="">
+                </div>
+                <div class="goldImg"><img src="#springUrl('/resource/img/wenhao.png')" alt="" title="开启后工资表中自动加入社保和公积金列表模块。关闭状态未不显示。"></div>
+            </div>
+        #end
+
+    </div>
+</div>
+<div class="allowance">
+    <div class="top">
+        <p><span>注意：</span>新建津贴确定后，需对页面进行保存更新才能立即生效，保存更新后请重新核对工资单。</p>
+    </div>
+    <div class="conShow">
+    </div>
+
+
+
+    <div class="set">
+        <div class="content1">
+            <div class="name">
+                <span>津贴名称</span>
+                <input type="text" class="allowanceName" placeholder="请输入津贴名称">
+            </div>
+            <div class="remark">
+                <span >备注</span>
+                <input class="remark1" type="text" placeholder="请输入备注信息">
+            </div>
+            <div class="money">
+                <span class="money1">金额</span>
+                <input class="money2" type="text" placeholder="请输入金额">
+                <span class="money3">元</span>
+                <div class="month">每月</div>
+            </div>
+            <div class="money" style="height:40px;"></div>
+            <div class="monthSelect">
+                <ul>
+                    <li class="monthSelect1">每月</li>
+                    <li>每出勤日</li>
+                </ul>
+            </div>
+        </div>
+        <div class="content2">
+            <div class="scope">
+                <span style="float:left;">适合出勤范围：</span>
+                <div class="img">
+                    <img class="img1" src="#springUrl('/resource/img/Switch-OFF.png')" style="display: inline;">
+                    <img class="img2" src="#springUrl('/resource/img/Switch-ON.png')" style="display: none;">
+                </div>
+                <span>&nbsp;缺勤天数大于</span>
+                <input class="dataText" type="text" value="0">
+                <span>天时，不享受该津贴</span>
+            </div>
+            <div class="type">
+                <div class="span1">适合类型：</div>
+                <div class="dept"><input  class="just" type="checkbox">&nbsp;正式</div>
+                <div class="dept1"><input class="service" type="checkbox">&nbsp;劳务</div>
+                <div class="span2">（针对下方所选择的部门及员工）</div>
+            </div>
+            <div class="formcCheckbox">
+                <div class="span3">
+                    <div class="span3Inp1"><input type="checkbox" />&nbsp;转正</div>
+                    <div class="span3Inp2"><input type="checkbox" />&nbsp;试用期</div>
+                </div>
+                <div class="span33">
+                    <div class="span33Inp1"><input type="checkbox" />&nbsp;转正</div>
+                    <div class="span33Inp2"><input type="checkbox" />&nbsp;试用期</div>
+                </div>
+            </div>
+
+            <div class="type">
+                <div class="tryOut">适用部门及员工</div>
+                <div class="tryShow"></div>
+            </div>
+            <div class="type" style="height:40px;">
+                <div class="tryOutAdd">添加</div>
+            </div>
+
+            <div class="save">保存</div>
+            <div class="cancel">取消</div>
+        </div>
+
+
+        <div class="trySeek">
+            <div id="container">
+                <div id="content">
+                    <div class="first"><input id="kw" onKeyup="getContent(this);" placeholder="请输入员工姓名"/></div>
+                    <div id="append"></div>
+                </div>
+            </div>
+            <img class="trySeekImg" src="#springUrl('/resource/img/guanbi.png')" alt="">
+            <div class="trySeekCont">
+
+            </div>
+        </div>
+        <img class="previewImg" src="#springUrl('/resource/img/wenhao.png')" alt="" title="每月：每月固定发放金额数
+每出勤日：出勤日/计薪日*金额数">
+    </div>
+    <div class="btn"><img src="#springUrl('/resource/img/tianjia.png')" alt="">&nbsp;&nbsp;添加津贴</div>
+</div>
+<div class="bonus">
+    <div class="top">
+        <p><span>注意：</span>请在此处输入您需要的项目，也可从常用奖金类型中选取，选中后的奖金类型会出现在算工资的工资表格中。对该页面的修改将在保存后立即生效，保存后请重新核对工资单。</p>
+    </div>
+    <div class="bonusShow">
+        <div class="bonusShow1">您需要的奖金类型：</div>
+        <div class="add"></div>
+        <div class="bonusShow2">
+            <input class="inpShow2" type="text">
+            <div class="imgShow2"></div>
+        </div>
+        <div class="bonusShow3"><img src="#springUrl('/resource/img/jia.png')" alt=""></div>
+    </div>
+    <div class="use">
+        <div class="use1">常用奖金类型</div>
+        <ul>
+            <li>绩效奖金</li>
+            <li>月度奖金</li>
+            <li>季度奖金</li>
+            <li>项目奖金</li>
+            <li>销售奖金</li>
+            <li>加班费</li>
+            <li>提成</li>
+            <li>研发奖金</li>
+            <li>计件奖金</li>
+            <li>业绩奖</li>
+        </ul>
+    </div>
+</div>
+<div class="footerBtn">
+    <div class="footer_allowance">
+        <div class="footerBtn1">保存更新</div>
+        <div class="footerBtn2">取消</div>
+    </div>
+</div>
+<div class="shade"></div>
+
+</div>
+</body>
+<script type="text/javascript" src="#springUrl('/resource/js/salary/allowance.js')"></script>
+</html>

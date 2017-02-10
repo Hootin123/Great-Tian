@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>薪太软 数据字典</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-table/bootstrap-table.min.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/hui/plugins/treeview/bootstrap-treeview.min.css')" rel="stylesheet">
+</head>
+
+<body>
+<div class="col-sm-12" style="height:95%">
+    <div class="container-fluid" style="height:100%">
+        <div class="col-sm-2" style="height:100%">
+            <div class="panel  panel-default" style="height:100%">
+                <div class="panel-heading">数据字典分类</div>
+                <div class="panel-body" id="treeview">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-10" style="height:100%">
+            <div class="panel panel-default" style="height:100%">
+                <div class="panel-heading">
+                    数据字典管理
+                </div>
+                <div class="panel-body">
+                    <div id="toolbar" class="btn-group">
+                        <button id="addBtn" type="button" class="btn btn-primary fa fa-plus-square">
+                            新增
+                        </button>
+                        <button id="deleteBtn" type="button" class="btn btn-primary fa fa-minus-square">
+                            删除
+                        </button>
+                        <button id="editBtn" type="button" class="btn btn-primary fa fa-edit">
+                            编辑
+                        </button>
+                    </div>
+                    <table id="data-list" class="table table-bordered table-hover"></table>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+<script src="#springUrl('/resource/js/hui/content.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table-mobile.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/treeview/bootstrap-treeview.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/rightMenu/BootstrapMenu.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/validate/jquery.validate.min.js')"></script>
+<script src="#springUrl('/resource/js/comm/jdatagrid.js')"></script>
+<script src="#springUrl('/resource/js/sys/dict/dict.js')"></script>
+
+
+</html>

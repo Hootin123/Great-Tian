@@ -1,0 +1,270 @@
+$(function(){
+
+	var fComname = false,faddress = false,fnumber = false,fUsename=false,fphone = false;
+	//.........table切换
+	$('#info').on('click',function(){
+		$('.content').show();
+		$('.compent').hide();
+		$('.log').hide();
+		$('.text').show();
+		$('.add').hide();
+		$('.search').hide();
+		$(this).css({'background':'#5b7798','color': '#fff'}).siblings().css({'background':'#fff','color': '#5b7798'});
+	});
+	$('#operat').on('click',function(){
+		$('.content').hide();
+		$('.compent').show();
+		$('.log').hide();
+		$('.text').hide();
+		$('.add').show();
+		$('.search').hide();
+		$(this).css({'background':'#5b7798','color': '#fff'}).siblings().css({'background':'#fff','color': '#5b7798'});
+	});
+	$('#log').on('click',function(){
+		$('.content').hide();
+		$('.compent').hide();
+		$('.log').show();
+		$('.text').hide();
+		$('.add').hide();
+		$('.search').show();
+		$(this).css({'background':'#5b7798','color': '#fff'}).siblings().css({'background':'#fff','color': '#5b7798'})
+	});
+
+	//...............公司名称验证
+
+	$('#companyName input').blur(function(){
+		testCompanyName()
+	})
+	function testCompanyName(){
+		var reg=/^[\w\u4e00-\u9fa5]{4,20}$/;
+		if($("#companyName input").val()=='' || $("#companyName input").val()==undefined ){
+			$('#companyName span').addClass('error').html('公司名称不能为空！');
+
+		}
+		else if(reg.test($("#companyName input").val())){
+			console.log(22)
+			$('#companyName span').removeClass('error').html('');
+			fComname=true;
+		}
+		else{
+			$('#companyName span').addClass('error').html('请输入正确的公司名称');
+		}
+	}
+	//........上传图片格式验证
+
+
+	//.......公司地址验证
+	$('#compAddress input').blur(function(){
+		testCompAddress()
+	})
+
+
+	function testCompAddress(){
+		var reg=/^[\w\u4e00-\u9fa5]{2,20}$/
+		if($("#compAddress input").val()=='' || $("#compAddress input").val()==undefined ){
+			$('#compAddress span').addClass('error').html('请输入公司地址');
+		}
+		else if(reg.test($("#compAddress input").val())){
+			$('#compAddress span').removeClass('error').html('');
+			faddress=true;
+		}
+		else{
+			$('#compAddress span').addClass('error').html('请输入正确的公司地址')
+		}
+	}
+
+	//............验证营业执照编号
+	$('#busNum input').blur(function(){
+		testBusNum()
+	});
+
+	function testBusNum(){
+		var  reg=/^\d{15}$/;
+		if($("#busNum input").val()=='' || $("#busNum input").val()==undefined ){
+			$('#busNum span').addClass('error').html('请输入营业执照编号！');
+		}
+	 	else if(reg.test($("#busNum input").val())){
+	 		$('#busNum b').removeClass('error').html('');
+			fnumber = true;
+		}
+		else{
+			$('#busNum b').addClass('error').html('请输入正确的营业执照编号');
+		}
+	};
+
+	//.............验证法人代表
+
+	$('#compCorpration input').blur(function(){
+		testCompCorpration()
+	})
+
+	function testCompCorpration(){
+		var reg=/^[\u4e00-\u9fa5]{2,5}$/
+		if($("#compCorpration input").val()=='' || $("#compCorpration input").val()==undefined ){
+			$('#compCorpration span').addClass('error').html('法人代表人姓名不能为空！');
+		}
+		else if(reg.test($("#compCorpration input").val())){
+			$('#compCorpration span').removeClass('error').html('');
+			fUsename=true;
+		}
+		else{
+			$('#compCorpration span').addClass('error').html('请输入正确的法人代表人姓名')
+		}
+	}
+
+
+	//.......验证手机号
+
+	$('#phone input').blur(function(){
+		testPhone()
+	});
+
+	function testPhone(){
+		var  reg=/^1[3|5|7|8]\d{9}$/;
+		if($("#phone input").val()=='' || $("#phone input").val()==undefined ){
+			$('#phone span').addClass('error').html('请输入联系电话');
+		}
+	 	else if(reg.test($("#phone input").val())){
+	 		$('#phone span').removeClass('error').html('');
+			fphone = true;
+		}
+		else{
+			$('#phone span').addClass('error').html('请输入正确的联系电话！')
+		}
+	};
+
+	//.......公司规模选择
+	$('.checkt1').on('click',function(){
+		$('#show1').show();
+		$('#show2').hide();
+		$('#show3').hide();
+		$('#show1 li').on('mouseover',function(){
+			$(this).css('background','#0696fa').siblings().css('background','none')
+		});
+		$('#show1 li').on('click',function(){
+			var content=$(this).html();
+			$('.checkt1').html(content);
+			$('#show1').hide();
+		})
+	});
+
+	//.......行业选择
+	$('.checkt2').on('click',function(){
+		$('#show1').hide();
+		$('#show3').hide();
+		$('#show2').show();
+		$('#show2 li').on('mouseover',function(){
+			$(this).css('background','#0696fa').siblings().css('background','none')
+		});
+		$('#show2 li').on('click',function(){
+			var content=$(this).html();
+			$('.checkt2').html(content);
+			$('#show2').hide();
+		})
+	});
+
+	//.......渠道选择
+	$('.checkt3').on('click',function(){
+		$('#show1').hide();
+		$('#show2').hide();
+		$('#show3').show();
+		$('#show3 li').on('mouseover',function(){
+			$(this).css('background','#0696fa').siblings().css('background','none')
+		});
+		$('#show3 li').on('click',function(){
+			var content=$(this).html();
+			$('.checkt3').html(content);
+			$('#show3').hide();
+		})
+	});
+
+
+	//更新设置
+	$(".btnPre").on('click',function(){
+		console.log(2)
+		    testCompanyName();
+		    testCompCorpration();
+		    testBusNum();
+			testPhone();
+			testCompAddress();
+		if(fComname&faddress&fnumber&fUsename&fphone){
+
+				alert('更新成功')
+
+		}
+	})
+
+
+
+
+
+
+
+
+	//...........添加操作员
+	$('.hint button').on('click',function(){
+		$('.mengban').show();
+		$('.add-user').show();
+		//.....关闭
+		$('.add-user b').on('click',function(){
+			$('.mengban').hide();
+			$('.add-user').hide();
+		})
+	});
+
+	//...........删除/关闭操作员
+	$('#deleat').on('click',function(){
+		$('.mengban').show();
+		$('.close-user').show();
+		//....关闭
+		$('.close-user b').on('click',function(){
+			$('.mengban').hide();
+			$('.close-user').hide();
+		})
+	})
+
+	//...........修改操作员
+
+	$('#amend').on('click',function(){
+		$('.mengban').show();
+		$('.change-pre').show();
+		//....关闭
+		$('.change-pre b').on('click',function(){
+			$('.mengban').hide();
+			$('.change-pre').hide();
+		})
+	})
+
+
+
+
+//......账号状态
+var n=0;
+$('.state p').on('click',function(){
+	console.log(2)
+	n++
+	if(n%2==1){
+		$(this).animate({left:0},function(){
+			$('.state').css('background','#ccc')
+		})
+
+		
+	}else{
+		$(this).animate({left:'23px'},function(){
+			$('.state').css('background','#0696fa')
+		})
+	}
+	
+	
+})
+
+
+//.......取消公司设置
+$('.title em').on('click',function(){
+	$('#content').hide();
+	$('.mengban1').hide()
+	$('.btn').show()
+})
+
+})
+

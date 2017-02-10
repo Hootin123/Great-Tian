@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <!-- Console output -->
+    <appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p %d{MM-dd HH:mm:ss} %m  (%F:%L) \n" />
+        </layout>
+    </appender>
+
+    <!-- 应用程序输出文件设置 -->
+    <appender name="infoLog" class="com.xtr.comm.custom.DailyRollingFileAppenderCustom">
+        <param name="File"
+            value="${catalina.base}/logs/xintr-customer/xintr-customer-info.log" />
+        <param name="DatePattern" value="'daily.'yyyy-MM-dd'.log'" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                value="[%d{yyyy-MM-dd HH:mm:ss\} %-5p] [%t] (%c:%L) - %m%n" />
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="levelMin" value="info" />
+        </filter>
+    </appender>
+    
+    <appender name="warnLog" class="com.xtr.comm.custom.DailyRollingFileAppenderCustom">
+        <param name="File"
+            value="${catalina.base}/logs/xintr-customer/xintr-customer-warn.log" />
+        <param name="DatePattern" value="'daily.'yyyy-MM-dd'.log'" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                value="[%d{yyyy-MM-dd HH:mm:ss\} %-5p] [%t] (%c:%L) - %m%n" />
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="levelMin" value="warn" />
+            <param name="levelMax" value="warn" />
+        </filter>
+    </appender>
+
+    <appender name="errorLog" class="com.xtr.comm.custom.DailyRollingFileAppenderCustom">
+        <param name="File"
+            value="${catalina.base}/logs/xintr-customer/xintr-customer-error.log" />
+        <param name="DatePattern" value="'daily.'yyyy-MM-dd'.log'" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                value="[%d{yyyy-MM-dd HH:mm:ss\} %-5p] [%t] (%c:%L) - %m%n" />
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="levelMin" value="error" />
+        </filter>
+    </appender>
+
+    
+    <!-- 定义mybatis日志输出级别 -->
+    <category name="java.sql">
+        <priority value="info" />
+    </category>
+
+
+    <!-- 定义 应用程序日志输出级别 -->
+    <category name="com.xtr">
+        <priority value="info" />
+        <appender-ref ref="STDOUT" />
+    </category>
+
+    <root>
+        <priority value="info" />
+        <appender-ref ref="infoLog" />
+        <appender-ref ref="warnLog" />
+        <appender-ref ref="errorLog" />
+    </root>
+
+</log4j:configuration>

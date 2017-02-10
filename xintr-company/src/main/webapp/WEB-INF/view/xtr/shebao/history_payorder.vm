@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>历史账单</title>
+    #parse("comm/head.vm")
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/shebao/historyBill.css')">
+    <script src="#springUrl('/resource/js/shebao/historyPayorder.js')"></script>
+</head>
+<body>
+<div class="historyBillHeader">历史账单<b><img src="#springUrl('/resource/img/guanbi.png')"  onclick="cancelHistoryPayOrder();"/></b></div>
+
+<div class="historyBill">
+    <form id="queryForm">
+        <div class="historyBill-title">
+            <span>历史账单：<i onclick="queryHistoryBills();">$!{companyShebaoOrders.size()}</i></span>
+            <span class='search1' onclick="search()">搜索</span>
+            <span class='historyBillDate'>
+
+				账单时间：<input type="text" name="orderDate" readonly="readonly" placeholder="选择日期">
+                <i style="display: none" class="close"><img src="#springUrl('/resource/img/close2.png')" alt=""></i>
+				<em><img src="#springUrl('/resource/img/date.png')"></em>
+                <!-- 时间控件 -->
+				<div class="dateMain" style='display: none'>
+					<div class="date-title">
+						<b class='date-left'>
+							<img src="#springUrl('/resource/img/date-left.png')">
+						</b>
+						<i>2015</i>
+						<b class='date-right'>
+							<img src="#springUrl('/resource/img/date-right.png')">
+						</b>
+					</div>
+					<div class="date-content">
+						<ul>
+							<li>01</li>
+							<li>02</li>
+							<li class='lit'>03</li>
+							<li>04</li>
+							<li>05</li>
+							<li class='lit'>06</li>
+							<li>07</li>
+							<li>08</li>
+							<li class='lit'>09</li>
+							<li>10</li>
+							<li>11</li>
+							<li class='lit'>12</li>
+
+						</ul>
+					</div>
+				</div>
+			</span>
+            <span>
+            账单地区：
+            <select id="historyPayOrder" name="joinCityCode">
+                <option value="">请选择地区</option>
+                #foreach($data in $!{cities})
+                    <option value="$!{data.joinCityCode}">$!{data.joinCityName}</option>
+                #end
+            </select>
+        </span>
+        </div>
+    </form>
+    <div class="historyBill-main">
+        <ul>
+        ##            #foreach($data in $!{companyShebaoOrders})
+##                <!-- 开始-->
+##            <li>
+##                <div class="historyBill-main-top">
+##                    <p><span>$!{data.joinCityName}$!date.format('yyyyMM',$!{data.orderDate})</span>账单</p>
+##                    <p class='submit'>订单编号：<span>$!{data.orderNumber}</span>提交时间：<span>$!date.format('yyyy-MM-dd HH:mm:ss',$!{data.submitTime})</span></p>
+##                    <p class='abnormal' >账单异常详情</p>
+##                </div>
+##                <div class="historyBill-main-table">
+##                    <table>
+##                        <tr>
+##                            <td>缴费月份</td>
+##                            <td>缴费类型</td>
+##                            <td>详情</td>
+##                            <td>费用总额</td>
+##                            <td>账单状态</td>
+##                            <td>操作</td>
+##                        </tr>
+##                        <tr>
+##                            <td>$!date.format('yyyyMM',$!{data.orderDate})</td>
+##                            <td>社保</td>
+##                            <td>$!{data.orderSbDetail}</td>
+##                            <td rowspan="2">
+##                                <p>$!{xtr.money($!{data.priceSum})}元</p>
+##                                #if($!{data.priceService})
+##                                    <p>含服务费：<span price_service="$!{data.priceService}" customer_count="$!{data.customerCount}"
+##                                                  price_single="$!{data.priceSingle}" onclick="showService(this)">$!{xtr.money($!{data.priceService})}元</span></p>
+##                                #end
+##                                #if($!{data.priceAddtion})
+##                                    <p>含补差费用：<a href="#springUrl('/shebao/addtion_detail.htm')">-$!{xtr.money($!{data.priceAddtion})}元</a></p>
+##                                #end
+##                            </td>
+##                            <td rowspan="2">
+##                                #if($!{data.status} == 0)
+##                                    待提交
+##                                #elseif($!{data.status} == 1)
+##                                    已提交
+##                                #end
+##                            </td>
+##                            <td rowspan="2" class='showTd1'>
+##                                <a href="#springUrl('/shebao/payorder_detail.htm?orderId=')$!{data.id}">账单详情</a>
+##                            </td>
+##                        </tr>
+##                        <tr>
+##                            <td>$!date.format('yyyyMM',$!{data.orderDate})</td>
+##                            <td>公积金</td>
+##                            <td>$!{data.orderGjjDetail}</td>
+##                        </tr>
+##                    </table>
+##                </div>
+##            </li>
+##            <!-- 结束-->
+##            #end
+        </ul>
+    </div>
+    <!-- 蒙版 -->
+    <div class="mengban" style="display:none"></div>
+    <!--服务费 -->
+    <div class="service" style="display: none">
+        <div class="service-title">服务费用 <b></b></div>
+        <div class="service-main">
+            <table>
+                <tr>
+                    <td>服务费（元）</td>
+                    <td>单价（元）</td>
+                    <td>人数</td>
+                </tr>
+                <tr>
+                    <td><p class="price_service">0.00 </p><span>=</span></td>
+                    <td><p class="price_single">0.00</p><span class='cheng'>*</span></td>
+                    <td class="customer_count">0</td>
+                </tr>
+            </table>
+            <p class='pTitle list'>服务费收取规则说明：</p>
+            <p class="list">1、服务费按需求人数收取，<i id="serviceSingleAmount">29.80</i>元/人/次。</p>
+            <p class="list">2、停缴需求不收取服务费</p>
+        </div>
+        <div class="service-bottom">
+            <div class="button3">
+                <input type="button" name="" id="serviceSureBtn" value="确认">
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript">
+    //...............时间控件
+    // 年份变化(减)
+    $('.date-left').on('click',function(){
+        var timer=$(this).parent().find('i').text()
+        timer--
+        // if(timer<2016){
+        // 	// judYear()
+        // 	return
+        // }else{
+        getNowDate()
+        $(this).parent().find('i').text(timer)
+        // }
+        judYear()
+    });
+    // 年份变化(加)
+    $('.date-right').on('click',function(){
+        getNowDate()
+        var timer=$(this).parent().find('i').text()
+        timer++
+        $(this).parent().find('i').text(timer)
+        judYear()
+    })
+
+    // 月份变化
+
+    $('.date-content li').hover(
+            function(){
+                $(this).css({'background':'#0696fa','color':'#fff'})
+            },
+            function(){
+                $(this).css({'background':'#fff','color':'#333'})
+            }
+    )
+
+    // 初始化
+    getNowDate()
+    $('.date-title i').html(initY)
+    // 获取当前时间
+    function getNowDate(){
+        nowdate = new Date();
+        initM=parseInt(nowdate.getMonth()+"")+1; // .....当前月
+        initY=parseInt((nowdate.getFullYear())); // .....当前年
+        outM=Add(initM);
+        var obj=$('.date-content li')
+        for (var i = 0; i < obj.length; i++) {
+            // console.log(obj[i].innerHTML)
+            if(obj[i].innerHTML==outM ){
+                obj[i].style.border='1px solid #fa5f5f';
+                // obj[i].style.color='#0696fa';
+            };
+        }
+    }
+
+    // 判断是否是当前的年份
+    function judYear(){
+        if($('.date-title i').html()!=initY){
+            $('.date-content li').css({'border':'0','color':'#333','background':'#fff'})
+            // $('.date-content li:first').css({'background':'#0696fa','color':'#fff'});
+
+
+        }else{
+            $('.date-content li').css({'background':'#fff','color':'#333'});
+        }
+    }
+
+    // 个位数加零
+    function Add(n){
+        if(n<10){
+            return '0'+n ;
+        }else{
+            return n;
+        }
+    }
+    // 日期出现
+    $('.historyBillDate em').on('click',function(e){
+        e.stopPropagation()
+        $('.dateMain').show();
+    })
+
+    // 点击月份
+    $('.date-content li').on('click',function(){
+        var month=$(this).html();
+        var year=$('.historyBillDate .dateMain').find('i').html()
+        $('.historyBillDate input').val(year+'-'+month);//input 赋值
+        $('.dateMain').hide();
+        $('.historyBillDate .close').show();
+
+    });
+
+    $(document).on('click',function(){
+        $('.dateMain').hide()
+    });
+
+    $('.dateMain').on('click',function(e){
+        e.stopPropagation()
+    })
+    function cancelHistoryPayOrder(){
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    }
+
+    //  清空日期
+    $('.historyBillDate .close').on('click',function(){
+        console.log(222)
+        $(this).hide();
+        $('.historyBillDate input').val('');
+
+    })
+    //关闭
+    $('.service-bottom').click(function(){
+        $('.mengban').hide();
+        $('.service').hide();
+    })
+    //    select 字体颜色变化
+    $('#historyPayOrder').change(function(){
+        $(this).css('color','#333')
+    })
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

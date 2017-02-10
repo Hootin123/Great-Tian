@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtr.core.persistence.writer.sbt.SbtBasicWriterMapper">
+
+  <insert id="insert" parameterType="com.xtr.api.domain.sbt.SbtBasicBean">
+    insert into sbt_basic (id, city, month, data, create_time)
+    values (#{id,jdbcType=BIGINT}, #{city,jdbcType=VARCHAR}, #{month,jdbcType=INTEGER}, 
+      #{data,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.xtr.api.domain.sbt.SbtBasicBean">
+    insert into sbt_basic
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="month != null">
+        month,
+      </if>
+      <if test="data != null">
+        data,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="month != null">
+        #{month,jdbcType=INTEGER},
+      </if>
+      <if test="data != null">
+        #{data,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.xtr.api.domain.sbt.SbtBasicBean">
+    update sbt_basic
+    <set>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="month != null">
+        month = #{month,jdbcType=INTEGER},
+      </if>
+      <if test="data != null">
+        data = #{data,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateDataByPrimaryKey" parameterType="com.xtr.api.domain.sbt.SbtBasicBean">
+    update sbt_basic set data = #{data,jdbcType=VARCHAR} where id = #{id,jdbcType=BIGINT}
+  </update>
+
+</mapper>

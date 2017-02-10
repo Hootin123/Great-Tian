@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>H+ 企业信息管理</title>
+    #parse("comm/head.vm")
+    <style>
+        body{
+            padding-left: 20px;
+        }
+        .add-table{
+            width:100%
+        }
+    </style>
+</head>
+
+<body>
+<h3 style="margin-top: 20px;margin-bottom: 20px;">
+    添加&nbsp;<span id="companyNameH3"></span>&nbsp;公司联系小记
+</h3>
+<form id="addForm" class="form-horizontal">
+    <input id="companyId" type="hidden" name="companyId"/>
+<table data-mobile-responsive="true" class="table table-hover table-bordered">
+    <tbody>
+    <tr>
+        <td style="width:10%;">小记标题</td>
+        <td style="width:30%;"><input style="width: 90%" type="text" class="logtext" name="noteTitle"></td>
+    </tr>
+    <tr>
+        <td style="width:10%;">小记内容</td>
+        <td style="width:30%;">
+            <textarea style="height: 200px;width: 90%" name="noteContent"></textarea>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</form>
+<div class="text-center" style="20px;">
+    <button type="button" class="btn btn-w-m btn-success" onclick="CompanyNoteAddExtend.toSubmit()">确定</button>
+    <button type="button" class="btn btn-w-m btn-white"  onclick="CompanyNoteAddExtend.close()">取消</button>
+</div>
+</body>
+<script>
+    $(function(){
+        CompanyNoteAddExtend.init();
+    })
+
+    CompanyNoteAddExtend = {
+        init : function(){
+            $("#companyNameH3").html(parent.companyDetail.name);
+            $("#companyId").val(parent.companyDetail.id);
+        },
+        toSubmit:function(){
+
+            if($("#addForm input[name=noteTitle]").val() == "") {
+                showWarning("请输入小记标题");
+                return;
+            }
+
+            if($("#addForm textarea[name=noteContent]").val() ==　"") {
+                showWarning("请输入小记内容");
+                return;
+            }
+
+            $.ajax({
+                type: 'post',
+                url: BASE_PATH + "/companynote/save.htm",
+                data: $('#addForm').serialize(),
+                success: function (data) {
+                    if (data.success) {
+                        CompanyNoteAddExtend.close();
+                    } else {
+                        showWarning(data.message);
+                    }
+                }
+            });
+        },
+        close:function(){
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+        }
+    }
+</script>
+<script src="#springUrl('/resource/js/hui/plugins/validate/jquery.validate.min.js')"></script>
+</html>

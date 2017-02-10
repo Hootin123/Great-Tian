@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+    #parse("comm/head.vm")
+    <style type="text/css">
+        body,
+        html {width: 100%;height: 100%;min-height:800px}
+        .socialDetails { width: 100%;height: 100%;min-width:1200px;min-height:800px}
+        .socialTop {width: 100%; height: 80px;position: relative;font-weight: 600;font-size:20px;}
+        .socialTop .socialHeadline { text-align: center;line-height: 80px; border-bottom: 1px solid #dbe9ee }
+        .socialTop img {position: absolute; top: 0;bottom: 0; margin: auto;right: 100px; cursor: pointer }
+        .socialCon{width:80%;margin:0 auto;}
+        .socialCon h3{margin-top:50px;color:#666;}
+        table{width:100%;margin-top:10px;margin}
+        table tr td{border:1px solid #dbe9ee;text-align: center}
+        .socialCon1{height:50px;background:#5b7798;color:#fff;text-align: center}
+        .socialCon2,.socialCon3{height:50px;}
+        .socialConTd1{width:14%;}
+        .socialConTd2{width:15%;}
+        .socialConTd3{width:14%;}
+        .socialConTd4{width:12%;}
+        .socialConTd5{width:15%;}
+        .socialConTd6{width:15%;}
+        .socialConTd7{width:15%;}
+        .socialBtn{width:80%;height:80px;background:#f1f9fc;border:1px solid #dbe9ee;margin:16% auto 0;}
+        .socialB{width:400px;height:40px;margin:20px auto;}
+        .socialBtn1{display: block; width:250px;height:40px;text-align: center;line-height: 40px;background:#0696fa;color:#fff;border-radius:6px;cursor:pointer;float:left;}
+        .socialBtn2{display: block; width:128px;height:38px;text-align: center;line-height: 40px;background:#fff;color:#0696fa;border-radius:6px;cursor:pointer;float:right;border:1px solid #0696fa;}
+        .socialContent{width:80%;height:120px;border:1px solid #dbe9ee;margin:30px auto 0;}
+        .socialContentLeft{width:45%;height:120px;float:left;}
+        .socialContentRight{width:55%;height:120px;float:left;}
+        .socialContentLeft1{margin-top:25px;padding-left:20px;}
+        .socialContentLeft2{margin-top:10px;padding-left:20px;}
+        .socialContentLeft3{margin-top:10px; margin-bottom:10px;padding-left:20px;color: red;}
+        .socialContentSpan{color:#666;}
+        .socialContentLeft1Sum{font-weight:600;color:#333;padding-left:40px;}
+        .socialContentLeft2Time{padding-left:14px;}
+        .socialContentRight1{margin-top:25px;padding-left:20px;}
+        .socialContentRight2{margin-top:10px;padding-left:20px;}
+        .socialContentRight1Sum{font-weight:600;color:#333;}
+        .socialContentRight2Sum{font-weight:600;color:#333;}
+        .socialContentRight1Check{color:#0696fa;cursor:pointer;padding-left:20px;}
+        .socialRepay{width:80%;height:100px;margin:0 auto;line-height:100px; font-size:20px;font-weight:600}
+        .socialRepay span{float:right;}
+        .socialRepay1{color:#fa5f5f;}
+        .socialContentRight1 img,.socialContentRight2 img{margin-top:4px;}
+    </style>
+</head>
+<body>
+<div class="socialDetails">
+    <div class="socialTop">
+        <div class="socialHeadline">社保详情</div>
+    </div>
+    <div class="socialCon">
+        <h3>订单状态：
+            #if($!{socialOrderData.orderStatus} == 6)
+                交易成功（已付款）
+            #elseif($!{socialOrderData.orderStatus} == 2 || $!{socialOrderData.orderStatus} == 5)
+                已关闭
+            #elseif($!{socialOrderData.orderStatus} == 1 || $!{socialOrderData.orderStatus} == 3)
+                订单提交
+            #end
+        </h3>
+        <table>
+            <tr class="socialCon1">
+                <td class="socialConTd1">订单创提交时间</td>
+                <td class="socialConTd2">订单号</td>
+                <td class="socialConTd3">类型</td>
+                <td class="socialConTd4">人数</td>
+                <td class="socialConTd5">金额</td>
+                <td class="socialConTd6">总金额</td>
+                <td class="socialConTd7">城市</td>
+            </tr>
+            <tr class="socialCon2">
+                <td rowspan="2">$!date.format('yyyy-MM-dd HH:mm',$!{socialOrderData.orderAddtime})</td>
+                <td rowspan="2">$!{socialOrderData.orderNumber}</td>
+                #if($!{socialOrderData.orderDetail.length()}>0 && $!{socialOrderData.orderStatus}>0)
+                    #set ($detailArray = $socialOrderData.orderDetail.split("\|"))
+                    #set ($detailstr="")
+                #end
+                <td>
+                   社保
+                </td>
+                <td>
+                    #if($!{socialOrderData.orderType} == 2)
+                        缴纳
+                    #end
+                    #if($!{socialOrderData.orderType} == 3)
+                        补缴
+                    #end
+                    #if($!{socialOrderData.orderType} == 4)
+                        停缴
+                    #end
+                    <span>$!{detailArray[1]}</span>
+                </td>
+                <td>
+                    ${xtr.money($detailArray[2])}元
+                </td>
+                <td rowspan="2">
+                    #set($totalMoney = $!{socialOrderData.orderMoney} + $!{socialOrderData.orderMoneyServer})
+                    <span>$!{xtr.money($!{totalMoney})}元</span><br/>
+                    包含服务费&nbsp;<span>$!{xtr.money($!{socialOrderData.orderMoneyServer})}元</span>
+                </td>
+                <td rowspan="2">
+                    上海
+                </td>
+            </tr>
+            <tr class="socialCon3">
+                <td>公积金</td>
+                <td>
+                    #if($!{socialOrderData.orderType} == 2)
+                        缴纳
+                    #end
+                    #if($!{socialOrderData.orderType} == 3)
+                        补缴
+                    #end
+                    #if($!{socialOrderData.orderType} == 4)
+                        停缴
+                    #end
+                    <span>$!{detailArray[4]}</span>
+                </td>
+                <td>
+                    $!{xtr.money($detailArray[5])}元
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="socialContent">
+        <div class="socialContentLeft">
+            <div class="socialContentLeft1">
+                <span class="socialContentSpan">订单金额：</span>
+                <span class="socialContentLeft1Sum">$!{xtr.money($!{orderMoneyTotal})}</span>
+                <span class="socialContentSpan">元</span>
+            </div>
+            <div class="socialContentLeft2">
+                <span class="socialContentSpan">最后支付日期：</span>
+                <span class="socialContentLeft2Time">$!date.format('yyyy-MM-dd',$!{socialOrderData.orderPaydate})</span>
+            </div>
+            #if($!{socialOrderData.orderStatus} == 6)
+                <div class="socialContentLeft3">
+                    <span class="socialContentSpan" style="color: red;">实付款：</span>
+                    <span class="socialContentLeft2Time">$!{xtr.money($!{realMoney})}元</span>
+                </div>
+            #end
+
+        </div>
+        <div class="socialContentRight">
+            #if($!{redMoney})
+                <div class="socialContentRight1">
+                    <img src="#springUrl('/resource/img/greenWin.png')" alt="">
+                    <span class="socialContentSpan">可用红包：</span>
+                    <span class="socialContentRight1Sum">$!{xtr.money($!{redMoney})}</span>
+                    <span class="socialContentSpan">元</span>
+                    <a href="#springUrl('/red_list.htm')" class="socialContentRight1Check">[查看详情]</a>
+                </div>
+            #end
+
+            #*<div class="socialContentRight2">
+                <img src="#springUrl('/resource/img/greenWin.png')" alt="">
+                <span class="socialContentSpan">垫付金额：</span>
+                <span class="socialContentRight2Sum">10,000.50</span>
+                <span class="socialContentSpan">元</span>
+            </div>*#
+        </div>
+    </div>
+    #if($!{socialOrderData.orderStatus} == 3)
+        <div class="socialRepay">
+            <span>元 &nbsp;&nbsp;&nbsp;</span>
+            <span class="socialRepay1">$!{xtr.money($!{realMoney})}</span>
+            <span>还需支付：</span>
+        </div>
+        <div class="socialBtn">
+            <div class="socialB">
+                <a class="socialBtn1" href="#springUrl('/socil/orderPay.htm?orderId=')$!{socialOrderData.orderId}">前去付款</a>
+                <a class="socialBtn2" href="javascript:void(0);" onclick="history.back();">取消</a>
+            </div>
+        </div>
+    #else
+        <div class="socialBtn">
+            <div class="socialB">
+                <a class="socialBtn1" href="javascript:void(0);" onclick="closeBox();">确定</a>
+                <a class="socialBtn2" href="javascript:void(0);" onclick="closeBox();">取消</a>
+            </div>
+        </div>
+    #end
+
+    <script type="text/javascript">
+        function closeBox(){
+//            allPopClose();
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+        }
+    </script>
+</div>
+</body>
+</html>

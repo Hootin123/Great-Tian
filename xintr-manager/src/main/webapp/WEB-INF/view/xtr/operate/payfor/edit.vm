@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>网站新闻编辑</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-table/bootstrap-table.min.css')" rel="stylesheet" />
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-datepicker/css/bootstrap-datetimepicker.css')" rel="stylesheet" />
+    <link href="#springUrl('/resource/css/hui/plugins/dropzone/basic.css')" rel="stylesheet" />
+    <link href="#springUrl('/resource/css/hui/plugins/dropzone/dropzone.css')" rel="stylesheet" />
+</head>
+
+<body>
+<div class="col-sm-12">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="ibox float-e-margins col-sm-8">
+                <div class="ibox-content">
+                    <form class="form-horizontal" id="publishForm">
+
+                        <input type="hidden" name="newsId" id="newsId" value="$!{newsData.newsId}"/>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">&nbsp;</label>
+                            <div class="col-sm-8">
+                                Hi, $!{uname}, <span id="divTime"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">发布类型：</label>
+                            <div class="col-sm-8">
+                                <select name="newsType">
+                                    <option value="5" #if($!{newsData.newsType} == 5)selected #end>HR知识库</option>
+                                    <option value="6" #if($!{newsData.newsType} == 6)selected #end>政策薪解</option>
+                                    <option value="7" #if($!{newsData.newsType} == 7)selected #end>动态推送</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">子类型名称：</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" required name="newsClassName" id="newsClassName" placeholder="输入子类型名称" value="${newsData.newsClassName}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">是否置顶：</label>
+                            <div class="col-sm-8">
+                                <select name="newsIstop">
+                                    <option value="1" #if($!{newsData.newsIstop} == 1)selected #end>置顶</option>
+                                    <option value="0" #if($!{newsData.newsIstop} == 0)selected #end>不置顶</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">新闻标题：</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" required name="newsTitle"
+                                       id="newsTitle" placeholder="输入新闻标题" value="$!{newsData.newsTitle}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">发布时间：</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control dateTime" required name="publisTime"
+                                       id="publisTime" readonly placeholder="点击选择发布时间" value="$!date.format('yyyy-MM-dd HH:mm',$!{newsData.newsReleasetime})" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">关键字：</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" value="$!{newsData.newsKeywords}"
+                                       required name="newsKeywords" id="newsKeywords"
+                                       placeholder="请输入3个关键词，逗号隔开"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">新闻摘要：</label>
+                            <div class="col-sm-8">
+                                <textarea placeholder="请根据文章内容选填摘要，120个字以内"
+                                          class="form-control" name="newsIntro" id="newsIntro"
+                                          >$!{newsData.newsIntro}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">缩略图（234*156）：</label>
+                            <div class="col-sm-8">
+                                <div class="dropzone dz-clickable" id="myDrop" style="background-image: url(${newsData.newsImg}); background-size: cover;">
+                                    <div class="dz-default dz-message" data-dz-message="">
+                                        <span>将文件拖至此处或点击上传.</span>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="newsImg" name="newsImg" value="${newsData.newsImg}"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">新闻内容：</label>
+                            <div class="col-sm-8">
+                                <!-- 加载编辑器的容器 -->
+                                <script id="newsContent" name="newsContent" type="text/plain">$!{newsData.newsContent}</script>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">新闻源：</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="newsLy" id="newsLy" placeholder="输入新闻源" value="$!{newsData.newsLy}"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-8">
+                                <button type="submit" class="btn btn-primary btn-publish"><i class="fa fa-check"></i>&nbsp;修改新闻</button>
+                                <a class="btn btn-success" href="#springUrl('/operate/news/index.htm')"><i class="fa fa-history"></i>&nbsp;返回列表</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+<script src="#springUrl('/resource/js/hui/content.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-datepicker/js/bootstrap-datetimepicker.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-datepicker/locales/bootstrap-datetimepicker.zh-CN.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/validate/jquery.validate.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/dropzone/dropzone.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/validate/messages_zh.min.js')"></script>
+<script type="text/javascript" src="#springUrl('/resource/ueditor/ueditor.config.js')"></script>
+<script type="text/javascript" src="#springUrl('/resource/ueditor/ueditor.all.min.js')"></script>
+<script src="#springUrl('/resource/js/operate/news/edit.js')"></script>
+</html>

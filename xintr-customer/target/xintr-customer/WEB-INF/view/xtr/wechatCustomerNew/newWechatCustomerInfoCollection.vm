@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" id='html'>
+<head>
+	<meta charset="UTF-8">
+	<title>信息采集</title>
+	#parse("comm/head.vm")
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1">
+    <script type="text/javascript" src="#springUrl('/resource/js/hongbao/ajaxfileupload.js')"></script>
+	<script type="text/javascript" src="#springUrl('/resource/js/wechatCustomerNew/collection.js')"></script>
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/wechatCustomerNew/infoCollection.css')">
+</head>
+<body>
+	<header>亲！为了工资顺利到账，请把本页必填项*补充完整。</header>
+	<form  id="collectForm">
+		<!-- 判断页面的状态标识-->
+		<input type="hidden" name="flag" value="$!{Flag}"/>
+		<input type="hidden" name="customerIdcardImgFront"/>
+		<input type="hidden" name="customerIdcardImgBack"/>
+		<input type="hidden" name="customerId" value="$!{customerWechatDto.customerId}"/>
+		<ul>
+			<li>
+				<span>工号</span>
+				<span>$!{customerWechatDto.customerNumber}</span>
+			</li>
+			<li>
+				<span>姓名</span>
+				<span>$!{customerWechatDto.name}</span>
+			</li>
+			<li>
+				<span>手机号</span>
+				<span>$!{customerWechatDto.customerPhone}</span>
+			</li>
+			<li>
+				<span>岗位</span>
+				<span>$!{customerWechatDto.stationStationName}</span>
+			</li>
+		</ul>
+		<ul class='editUl'>
+			<li class='bankNumber'>
+				<label><em>*</em>工资卡卡号</label>
+				<input type="text" name="customerBanknumber" placeholder="请输入13-20位数字"/>
+				<b></b>
+			</li>
+			<li class='openBnak'>
+				<label><em>*</em>工资卡开户行</label>
+				<input type="text" name="customerBank" placeholder="如：招商银行"/>
+				<b></b>
+			</li>
+            <li class='cardNumber'>
+                <label><em>*</em>身份证号码</label>
+                <input type="text" name="" placeholder="请输入身份证号码"/>
+                <b></b>
+            </li>
+			<li class='card'>
+				<label><em>*</em>身份证</label>
+				<div class="pic">
+
+					#if($!{customerWechatDto.customerIdcardImgFront} == "")
+                        +<img src="#springUrl('/resource/img/wechatCustomerNew/error.png')" id="uploadFront"/>
+					#else
+                        <img src= "$!{customerWechatDto.customerIdcardImgFront}"  id="uploadFront"/>
+					#end
+                    <input type="file"  name="file" id="customerFrontFile""/>
+
+
+
+##					<img src="#springUrl('/resource/img/wechatCustomerMew/error.png')" id="upload"/>
+##					<input type="file"  name="file" id="approveFile"  onchange="uploadApproveImg();"/ >
+
+					<span>身份证正面</span>
+##					<i><img  src="#springUrl('/resource/img/wechatCustomerMew/add.png')"/></i>
+				</div>
+				<div class="pic pic1">
+
+					#if($!{customerWechatDto.customerIdcardImgBack} == "")
+                        +<img src="#springUrl('/resource/img/wechatCustomerNew/error.png')" id="uploadBack"/>
+					#else
+                        <img src= "$!{customerWechatDto.customerIdcardImgBack}"  id="uploadBack"/>
+					#end
+                    <input type="file"  name="file" id="customerBackFile""/>
+##					<img  src="#springUrl('/resource/img/wechatCustomerMew/logo.png')" id="upload">
+##					<input type="file"  name="file" id="approveFile" onchange="uploadApproveImg();"/ >
+
+					<span>身份证反面</span>
+##					<i><img  src="#springUrl('/resource/img/wechatCustomerMew/add.png')"></i>
+				</div>	
+				<b></b>
+			</li>
+		</ul>
+	</form>
+	<footer>
+		<div class="affirm">完成</div>
+	</footer>
+</body>
+<script type="text/javascript">
+	$(function(){
+		var fnumber=false,fbank=false,fcard=false,fcardNum=false;
+	    $('.bankNumber input').blur(function(){
+	    	$(this).addClass('show');
+	    	testBankNumber()
+	    })
+	    function testBankNumber(){
+	    	var reg=/^\d{13,20}$/
+	    	if($('.bankNumber input').val()=='' || $('.bankNumber input').val()==undefined){
+	    		$('.bankNumber b').addClass('error').html('请输入工资卡卡号').show();
+	    		$('.bankNumber input').removeClass('show')
+	    		setTimeout(function(){
+	    			$('.bankNumber b').fadeOut(500)
+	    		},1500)
+	    		fnumber=false;
+	    	}else if(reg.test($('.bankNumber input').val())){
+	    		$('.bankNumber b').removeClass('error').html('').hide();
+	    		fnumber=true;
+	    	}else{
+	    		$('.bankNumber b').addClass('error').html('请输入正确的工资卡卡号').show();
+		    		setTimeout(function(){
+		    			$('.bankNumber b').fadeOut(500)
+		    		},1500)
+		    	fnumber=false
+	    	}
+	    };
+	    $('.openBnak input').blur(function(){
+	    	$(this).addClass('show');
+	    	testOpenBnak()
+	    })
+	    function testOpenBnak(){
+	    	if($('.openBnak input').val()=='' || $('.openBnak input').val()==undefined){
+	    		$('.openBnak b').addClass('error').html('请输入工资卡开户行').show();
+	    		$('.openBnak input').removeClass('show')
+	    		setTimeout(function(){
+	    			$('.openBnak b').fadeOut(500)
+	    		},1500)
+	    		fbank=false;
+	    	}else if($(".openBnak input").val().length>=2 && $(".openBnak input").val().length<=16){
+	    		$('.openBnak b').removeClass('error').html('').hide();
+	    		fbank=true;
+	    	}else{
+	    		$('.openBnak b').addClass('error').html('请输入正确的工资卡开户行').show();
+		    		setTimeout(function(){
+		    			$('.openBnak b').fadeOut(500)
+		    		},1500)
+		    	fbank=false
+	    	}
+	    };
+        //...验证身份证号码
+        $('.cardNumber input').blur(function(){
+            $(this).addClass('show');
+            testCardNumber();
+        })
+        function testCardNumber(){
+            var  reg=/^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/;
+            if($('.cardNumber input').val()=='' || $('.cardNumber input').val()==undefined){
+                $('.cardNumber b').addClass('error').html('请输入身份证号码').show();
+                $('.cardNumber input').removeClass('show')
+                setTimeout(function(){
+                    $('.cardNumber b').fadeOut(500);
+                },1500)
+                fcardNum=false;
+            }else if(reg.test($(".cardNumber input").val())){
+                $('.cardNumber b').removeClass('error').html('').hide();
+                fcardNum=true;
+            }else{
+                $('.cardNumber b').addClass('error').html('请输入正确的身份证号码').show();
+                setTimeout(function(){
+                    $('.cardNumber b').fadeOut(500)
+                },1500)
+                fcardNum=false
+            }
+        };
+	     //...验证身份证
+	    function testCard(){
+	        if($('.card').find("input[type='hidden']").val()=='' || $('.card').find("input[type='hidden']")==undefined){
+	            $('.card b').html('请添加身份证').addClass('error').show();
+	            fcard = false;
+	        }else {
+	            $('.card b').html('').removeClass('error').hide();
+	            fcard = true;
+	        }
+
+	    };
+
+
+
+	    //提交
+		var  affirmFlag = true;
+		$(".affirm").click(function(){
+            testBankNumber();
+            testOpenBnak();
+            testCardNumber();
+			if(fnumber&&fbank&&fcardNum){
+               var  customerId = $("input[name='customerId']").val();
+			   var from = $("input[name='flag']").val();
+			   var customerIdcardImgFront = $("input[name='customerIdcardImgFront']").val();
+			   var customerIdcardImgBack  = $("input[name='customerIdcardImgBack']").val();
+               if(customerIdcardImgFront==null||customerIdcardImgFront==""||customerIdcardImgFront==undefined){
+				   alert("身份证正面图片不能为空");
+				   return ;
+			   }
+			   if(customerIdcardImgBack==null||customerIdcardImgBack==""||customerIdcardImgBack==undefined){
+				   alert("身份证背面图片不能为空");
+				   return ;
+			   }
+
+               if(affirmFlag){
+                   affirmFlag=false;
+				   $.ajax({
+					  url:BASE_PATH+'/wechatCustomer/personInfoCollect.htm',
+					  type:'post',
+					  data:$("#collectForm").serialize(),
+					  dataType:'json',
+					  success:function(data){
+						      if(data.success){
+								  affirmFlag=true;
+								  alert("操作成功")
+								  //跳转至信息完善页面
+								  var path = BASE_PATH+"/wechatCustomer/hasCollectionInfo.htm?customerId="+customerId+"&from="+from
+                                  window.location.href=path;
+							  }
+					  },
+					  error:function(){
+						  affirmFlag=true;
+						  alert("网路错误");
+					  }
+
+				   });
+
+
+
+			   }
+
+            }
+		});
+
+
+
+	})
+</script>
+</html>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xtr.core.persistence.reader.sys.SysMenuReaderMapper">
+    <resultMap id="BaseResultMap" type="com.xtr.api.domain.sys.SysMenuBean">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="menu_name" property="menuName" jdbcType="VARCHAR"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="BIGINT"/>
+        <result column="is_delete" property="isDelete" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="actions" property="actions" jdbcType="VARCHAR"/>
+        <result column="child_count" property="childCount" jdbcType="VARCHAR"/>
+        <result column="menu_icon" property="menuIcon" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="ResultMapVo" type="com.xtr.api.dto.sys.SysMenuDto" extends="BaseResultMap">
+        <!--<association column="{id=id}" property="childMenuList" select="getChildMenuByUser"/>-->
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, menu_name, url, parent_id, is_delete, create_time, update_time, sort, actions,menu_icon
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_menu
+        where id = #{id,jdbcType=BIGINT}
+        AND is_delete = 0
+    </select>
+
+
+    <!-- 根据用户id查询父菜单菜单 -->
+    <select id="getRootMenuByUser" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        SELECT DISTINCT
+        <include refid="Base_Column_List"/>
+        FROM sys_menu m
+        WHERE is_delete= 0 AND parent_id IS NULL
+        AND EXISTS (
+        SELECT * FROM sys_role_rel r
+        WHERE r.obj_id = m.id AND r.rel_type = 0
+        AND EXISTS (
+        SELECT 1 FROM sys_role_rel u WHERE u.role_id = r.role_id AND u.rel_type = 1 AND u.obj_id
+        =#{userId,jdbcType=BIGINT}
+        )
+        )
+    </select>
+
+
+    <!-- 根据用户id查询子菜单菜单 -->
+    <select id="getChildMenuByUser" resultMap="BaseResultMap">
+        SELECT DISTINCT
+        <include refid="Base_Column_List"/>
+        FROM sys_menu m
+        WHERE is_delete = 0 AND parent_id IS NOT NULL
+        AND parent_id = #{parentId,jdbcType=BIGINT}
+        <if test="userId != null">
+            AND EXISTS (
+            SELECT * FROM sys_role_rel r
+            WHERE r.obj_id = m.id AND r.rel_type = 0
+            AND EXISTS (
+            SELECT 1 FROM sys_role_rel u WHERE u.role_id = r.role_id AND u.rel_type = 1 AND u.obj_id =
+            #{userId,jdbcType=BIGINT}
+            )
+            )
+        </if>
+        ORDER BY sort
+    </select>
+
+    <!-- 获取顶级菜单 -->
+    <select id="getRootMenu" resultMap="BaseResultMap">
+        <!--select-->
+        <!--<include refid="Base_Column_List"/>-->
+        <!--from sys_menu where is_delete= 0 and parent_id is null-->
+        SELECT
+        a.*,
+        IFNULL(b.child_count,0) as child_count
+        FROM sys_menu a
+        LEFT JOIN (SELECT
+        count(1) AS child_count,
+        parent_id
+        FROM sys_menu
+        WHERE parent_id IS NOT NULL AND LENGTH(trim(parent_id)) &gt; 0
+        AND is_delete = 0
+        GROUP BY parent_id) b
+        on a.id = b.parent_id
+        WHERE 1 = 1
+        AND (ISNULL(a.parent_id) || LENGTH(trim(a.parent_id)) &lt;= 0)
+        AND a.is_delete = 0
+        ORDER BY a.sort
+    </select>
+
+    <!-- 获取子菜单-->
+    <select id="getChildMenu" resultMap="BaseResultMap" parameterType="Object">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_menu where is_delete= 0 and parent_id is not null
+    </select>
+
+    <!-- 根据id查询所有的子按钮-->
+    <select id="selectChildMenuByPk" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_menu
+        WHERE is_delete = 0 and parent_id = #{id,jdbcType=BIGINT} and parent_id IS NOT NULL
+        ORDER BY sort
+    </select>
+
+    <!-- 根据父Id删除子菜单-->
+    <delete id="deleteChildMenuByParentId" parameterType="java.lang.Long">
+        delete from sys_menu
+        where parent_id = #{parentId,jdbcType=BIGINT}
+    </delete>
+
+    <!-- 根据用户id查询所属菜单-->
+    <select id="selectMenuByUserId" resultMap="ResultMapVo" parameterType="java.lang.Long">
+        SELECT
+        DISTINCT m.*
+        FROM sys_menu m
+        WHERE is_delete = 0
+        AND (ISNULL(parent_id) || LENGTH(trim(parent_id)) &lt; 1)
+        <if test="_parameter != null">
+            AND EXISTS (
+            SELECT * FROM sys_role_rel r
+            WHERE r.obj_id = m.id AND r.rel_type = 0
+            AND EXISTS (
+            SELECT 1 FROM sys_role_rel u WHERE u.role_id = r.role_id AND u.rel_type = 1 AND u.obj_id = #{_parameter}
+            )
+            )
+        </if>
+        ORDER BY sort
+    </select>
+
+
+</mapper>

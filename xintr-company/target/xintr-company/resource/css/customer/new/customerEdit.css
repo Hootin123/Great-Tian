@@ -1,0 +1,240 @@
+body{
+	width: 100%;
+	min-width: 1100px;
+	background: #fff;
+}
+.info{
+	width: 100%;
+	padding:20px 30px 0;
+	box-sizing: border-box;
+}
+.comm{
+	width: 100%;
+
+}
+.comm .comm-title{
+	width: 100%;
+	height: 40px;
+	background: #314a5e;
+	font-size: 16px;
+	color: #fff;
+	font-family: '微软雅黑';
+	line-height: 40px;
+	padding: 0 50px;
+	box-sizing: border-box;
+}
+.comm .comm-title span{
+	float: left;
+}
+.comm .comm-title a{
+	float: right;
+	color: #0696fa;
+	cursor: pointer;
+}
+.comm-main{
+	width: 100%;
+	padding: 20px 50px 0;
+	box-sizing: border-box;
+	color: #666;
+}
+.comm-main .commP{
+	width: 100%;
+	height: 80px;
+}
+.comm-main .commSpan{
+	display: block;
+	position: relative;
+
+}
+.comm-main .testFront{
+	display: inline;
+}
+.comm-main .commP .commSpan b{
+	color: #f00;
+	position: absolute;
+	top:45px;
+	left:240px;
+	font-weight: 300;
+	font-size: 14px;
+}
+.comm-main .commP .testFront b{
+	left: 460px;
+	top: 75px;
+}
+.comm-main .commP .commSpan{
+	float: left;
+	/*width: 50%;*/
+}
+.comm-main .commP .commSpan:nth-child(2){
+	float: right;
+}
+.comm-main .commP .commSpan input{
+	width:300px;
+	height: 40px;
+	border:0;
+	border:1px solid  #ddd;
+	float: left;
+	border-radius: 3px;
+	text-indent: 30px;
+}
+.comm-main .commP .commSpan .active:hover{
+	border:1px solid  #324a5e;
+}
+.comm-main .commP .commSpan .active{
+	border:1px solid #cce1e9
+}
+.comm-main .commP .commSpan .error{
+	border:1px solid #f00
+}
+.comm-main .commP .lit input{
+	background: none;
+}
+.comm-main .commP .sex i{
+	width:290px;
+	height: 40px;
+	float: left;
+	padding-top:10px;
+	box-sizing: border-box;
+}
+.comm-main .commP .sex input{
+	vertical-align: top;
+	margin-right:4px;
+	width: 20px;
+	height: 20px;
+	float: none;
+}
+.comm-main .commP .customerDepName input{
+	background: url(/resource/img/customer/new/2.2bumen.png) 260px center no-repeat;
+	cursor: pointer;
+}
+.comm-main .commP .commSpan label{
+	width: 160px;
+	height:40px;
+	float: left;
+	line-height: 40px;
+	text-align: center;
+}
+.comm-main .commP .commSpan label em{
+	color: #f99b15;
+	vertical-align: middle;
+	margin-right: 2px;
+}
+.comm-main .cardPhoto{
+	height: 140px;
+
+}
+.comm-main .cardPhoto .pic{
+	display: block;
+	width: 100px;
+	height: 100px;
+	float: left;
+	border: 1px #cce1e9 dashed;
+	font-size: 50px;
+	line-height: 90px;
+	text-align: center;
+	color: #cce1e9;
+	border-radius: 10px;
+	position: relative;
+	margin-right: 40px;
+
+}
+
+.comm-main .cardPhoto .pic img{
+	display: block;
+	width: 100%;
+	height:100%;
+	position: absolute;
+	top:0;
+	left:0;
+}
+.comm-main .cardPhoto .pic input{
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	right: 0;
+	top: 0;
+	opacity: 0;
+	filter: alpha(opacity=0);
+	cursor: pointer;
+}
+.comm-main .cardPhoto .pic s{
+	font-size: 14px;
+	display: block;
+	position: absolute;
+	left:16px;
+	color: #666;
+	top:70px;
+	text-decoration:none;
+}
+.comm-main .cardPhoto .frontHint{
+	line-height: 100px;
+	color: #f9a225;
+}
+
+.customerDepName .branch{
+	width: 300px;
+	position: absolute;
+	left: 160px;
+	top: 40px;
+	background: #fff;
+	border: 1px solid #d3e0f1;
+	line-height: 20px;
+	box-shadow: 1px 3px 10px 0 #b0ccd7;
+	z-index: 10;
+;}
+.customerDepName .branch h4{
+	min-width:150px;
+	height:30px;
+	border-bottom: 1px solid #ccc;
+	line-height: 30px;
+	text-indent: 5px;
+	font-size: 15px;
+	font-weight: 600;
+	background: #f1f9fc;
+	color: #666;
+
+}
+.customerDepName .branch #dep-base{
+	margin-left: 10px;
+	height: 210px;
+	overflow-y: auto;
+
+}
+.customerDepName .branch ul{
+
+	padding-left: 10px;
+	margin-bottom: 2px;
+	cursor: pointer;
+
+
+}
+/*.customerDepName .branch ul li{*/
+	/*width:100%;*/
+	/*padding-left: 16px;*/
+	/*color: #666;*/
+	/*cursor: pointer;*/
+	/*box-sizing: border-box;*/
+/*}*/
+/*.customerDepName .branch ul li .show{*/
+	/*position: absolute;*/
+	/*left: 0;*/
+	/*top: 6px;*/
+	/*border: 1px solid #f8d37a;*/
+	/*display: block;*/
+	/*width: 13px;*/
+	/*height: 13px;*/
+	/*text-align: center;*/
+	/*line-height: 13px;*/
+	/*color: #0696fa;*/
+/*}*/
+.customerDepName .branch  span:hover{
+	color: #fff;
+	background: #0696fa;
+}
+
+.customerDepName .branch span:first-child{
+	color: #333;
+	font-weight: 600;
+	cursor: pointer;
+}

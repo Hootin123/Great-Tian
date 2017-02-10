@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>员工首页</title>
+    #parse("comm/head.vm")
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/customer/new/customerMain.css')">
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/js/plugins/laydate/need/laydate.css')"/>
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/customer/new/webuploader.css')">
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/customer/new/jquery.treeview.css')">
+    <script type="text/javascript" src="#springUrl('/resource/js/customer/new/customerMain.js')"></script>
+    <script src="#springUrl('/resource/js/plugins/laydate/laydate.js')"></script>
+    <script type="text/javascript" src="#springUrl('/resource/js/customer/new/webuploader.nolog.js')"></script>
+    <script type="text/javascript" src="#springUrl('/resource/js/customer/new/jquery.treeview.js')"></script>
+    <script src="#springUrl('/resource/js/plugins/laypage/laypage.js')"></script>
+    <style>
+        .preTan {
+            display: none;
+            width:500px;
+            height: 110px;
+            background: #fff;
+            /*box-shadow: #ddd 2px 3px 30px 20px;*/
+            position: absolute;
+            left: 0;
+            top: 31%;
+            right: 0;
+            margin: auto;
+            text-align: center;
+            border-radius: 5px;
+
+        }
+        .preTan p {
+            padding-top: 10px;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .preTan p span {
+            color: #1394ff;
+        }
+
+        .progress {
+            width: 90%;
+            margin: 0 auto;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+<!-- 主页Table-->
+<input type="hidden" value="2" id="typeHid">
+<input type="hidden" value="1" id="isSortEnterTime">
+<!-- 首页员工添加标识-->
+<input type="hidden" name="indexFrom" value="$!{from}"/>
+<div class="customer">
+    <div class="customer-title">
+        <div class="customer-title-left">
+            <span class='active' onclick="onCustomerAdd();">添加员工</span>
+            <span onclick='onCustomerBatchImport();'>批量导入员工</span>
+            <span onclick='onCustomerCompletion();'>补全员工资料</span>
+        </div>
+        <div class="customer-title-right">
+            <!-- <div class="section">
+                <input type="text" name="">
+                <div class="bumen">部门</div>
+            </div> -->
+            <div class="search-name">
+                <input type="text" name="" placeholder="搜索员工 部门" id="customerTurename">
+                <div class="search" id="conditionSearch">搜索</div>
+            </div>
+        </div>
+    </div>
+    <div class="customer-main">
+        <div class="customer-main-top">
+            <span param="1">全部<a>2000</a></span>
+            <span class='active1'  param="2">正式<a>50</a></span>
+            <span param="3">试用期<a>56</a></span>
+            <span param="4">即将离职<a>356</a></span>
+            <span class='lastSpan' param="5">已经离职<a>45</a></span>
+        </div>
+        <table id="showCustomerTab">
+            <thead>
+##            <tr>
+##                <td>序号</td>
+##                <td>姓名</td>
+##                <td>手机</td>
+##                <td>部门</td>
+##                <td onclick="sortEnterTime();">入职日期</td>
+##                <td>转正日期</td>
+##                <td>最新基本工资</td>
+##                <td>津贴方案</td>
+##                <td class='lastTd'>状态</td>
+##            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <!-- 分页器 -->
+        <div class="pagePay">
+            <div id="pagePayroll"></div>
+        </div>
+    </div>
+</div>
+<!-- 蒙版 -->
+<div class="mengban" style="display:none"></div>
+<!-- 离职 -->
+<div class="customerDimission" style="display:none;">
+    <input type="hidden" id="dimissCustomerId">
+    <input type="hidden" id="shebaoState">
+    <input type="hidden" id="gjjState">
+    <input type="hidden" id="currentMonth">
+    <input type="hidden" id="shebaoTjMonth">
+    <input type="hidden" id="gjjTjMonth">
+    <input type="hidden" id="companyState">
+    <input type="hidden" id="dimissionCustomerName">
+    <div class="customerDimission-title"><span></span>-离职<b class='btnCloseDimission'></b></div>
+
+    <form id="dimissionForm">
+        <input type="hidden" name="customerId">
+        <div class="customerDimission-hint">注意：离职员工若已缴纳过社保、公积金，系统默认为“是”哦。</div>
+        <div class="customerDimission-main">
+            <ul class='left'>
+                <li>
+                    <em>*</em>最后工作日：
+                </li>
+                <li style="display:none;" id="shebaoDimissTypeFirst">
+                    <em>*</em>缴纳离职月社保：
+                </li>
+                <li style="display:none;" id="gjjDimissTypeFirst">
+                    <em>*</em>缴纳离职月公积金：
+                </li>
+            </ul>
+            <ul class='right'>
+
+                <li class='lastTime'>
+                    <input type="text"  name="stationDimissingTime" id="stationDimissingTime" readonly="readonly" placeholder="点击选择最后工作日时间"  class="laydate-icon" onclick="laydate({choose:function(datas){dateChange(datas),lastDatachange()}})"/>
+                    <b></b>
+                </li>
+                <li class='check checkSocial' id="shebaoDimissTypeSecond" style="display:none;" >
+                    <input type="radio" value="1" name="isSbKeepState">缴纳 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" value="0" name="isSbKeepState">不缴纳
+                    <b></b>
+                </li>
+                <li class="check checkFund" id="gjjDimissTypeSecond" style="display:none;">
+                    <input type="radio" value="1" name="isGjjKeepState">缴纳 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" value="0" name="isGjjKeepState">不缴纳
+                    <b></b>
+                </li>
+
+            </ul>
+        </div>
+    </form>
+##    <div class="customerDimission-hint1" style="display: none"><i>* 提示：</i>离职月社保、公积金已缴纳，系统将于次月自动停缴</div>
+    <div class="customerDimission-footer">
+        <div class="button">
+            <input type="button" name="" value='确定' class='onCustomerDimission' onclick="dimissionSureBtn();">
+##            <input type="button" name="" value='取消' class='btnCloseDimission'>
+        </div>
+    </div>
+</div>
+<!-- 调薪 -->
+<div class="customerUpdateSalary" style="display:none;">
+    <input id="updateSalaryCustomerId" name="updateSalaryCustomerId"  type="hidden"/>
+    <div class="customerUpdateSalary-title"><span id="updateSalaryCustomerName"></span>-调薪<b class='btnCloseUpdateSalary'></b></div>
+    <div class="customerUpdateSalary-hint">注意：此操作可能会导致此员工的本月工资重新核算哦。</div>
+    <div class="customerUpdateSalary-main">
+        <ul class='left'>
+            <li>
+                <em>*</em> 调薪前基本工资：
+            </li>
+            <li>
+                <em>*</em>调薪后基本工资：
+            </li>
+            <li>
+                <em>*</em>生效日期：
+            </li>
+        </ul>
+        <ul class='right'>
+
+            <li >
+                <input type="text" name="customerOldSalary" readonly="readonly" style="background: #f0f0f0;border:0;">
+                <b></b>
+            </li>
+            <li class='baseUpdateSalary' >
+                <input type="text"  name="salary" onkeyup="changeUpdateSalary();">
+                <span id="fd">0</span>
+                <b></b>
+            </li>
+
+            <li class="takeDate">
+                <input type="text" name="date" id="stationDimissingTime" readonly="readonly" placeholder="请选择日期" style="width: 170px" class="laydate-icon" onclick="laydate({choose:function(datas){dateChange(datas),takeDateChange()}})"/>
+                <b></b>
+            </li>
+
+        </ul>
+    </div>
+    <div class="customerUpdateSalary-footer">
+        <div class="button1">
+            <input type="button" name="" value='确定' class='onCustomerUpdateSalary'>
+##            <input type="button" name="" value='取消' class='btnCloseUpdateSalary'>
+        </div>
+    </div>
+</div>
+<!-- 转正 -->
+<div class="customerRegular" style="display:none;">
+    <input type="hidden" id="regularCustomerId">
+    <input type="hidden" id="regularCustomerName">
+    <div class="customerRegular-title"><span>张小雨</span>-更改转正时间<b class='btnCloseRegular'></b></div>
+    <div class="customerRegular-hint">注意：此操作可能会导致此员工的本月工资重新核算哦。</div>
+    <div class="customerRegular-main">
+        <ul class='left'>
+            <li>
+                <em>*</em>转正时间：
+            </li>
+            <li>
+                <em>*</em>更改为：
+            </li>
+
+        </ul>
+        <ul class='right'>
+
+            <li>
+                <input type="text" name="" id="regularTimeOld" readonly="readonly"  style='background: #f0f0f0;border:0;' />
+            </li>
+            <li class='changeDate'>
+                <input type="text" name="" id="regularTimeNew" placeholder="请选择更改后的时间" style="width: 170px"  readonly="readonly" class="laydate-icon" onclick="laydate({choose:function(datas){dateChange(datas)}})">
+                <b></b>
+            </li>
+        </ul>
+    </div>
+    <div class="customerRegular-footer">
+        <div class="button2">
+            <input type="button" name="" value='确定' class='onCustomerRegular' onclick="regularSureBtn();">
+##            <input type="button" name="" value='取消' class='btnCloseRegular'>
+        </div>
+    </div>
+</div>
+<!-- 新增员工 -->
+<div class="customerAdd" style="display: none">
+    <div class="customerAdd-title">新增员工 <b class='btnCloseAdd'></b></div>
+    <div class="customerAdd-hint">注意：新增员工后，若需补充或修改员工资料，请在花名册中<i>点击员工姓名</i>进行资料的编辑哦。</div>
+    <div class="customerAdd-main">
+##        <form id="addCustomerForm">
+            <table>
+                <tr>
+                    <td class="firstTd"><em>*</em>姓名：</td>
+                    <td class='AddUserName'>
+                        <input type="text" name="customerTurename" placeholder="请输入1-20个字符">
+                        <b></b>
+                    </td>
+                    <td class="firstTd"><em>*</em>部门：</td>
+
+                    <td class='customerDepName'>
+                        <input type="text" name="customerDepName" id="customerDepName" placeholder="请选择部门" readonly="readonly">
+                        <input type="hidden" id="depId" name="customerDepId" />
+                        <b></b>
+                        <div class="branch" style="display: none">
+                            <!-- <h4>部门</h4> -->
+                            <div id="dep-base" style="position: relative">
+
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="firstTd"><em>*</em>手机号：</td>
+                    <td class='AddPhone'>
+                        <input type="text" name="customerPhone" placeholder="请输入11位数字">
+                        <b></b>
+                    </td>
+                    <td class="firstTd"><em>*</em>岗位：</td>
+                    <td class="AddStation">
+                        <input type="text" name="stationStationName" placeholder="请输入岗位">
+                        <b></b>
+                    </td>
+                </tr>
+                <tr class='Cstatue'>
+                    <td class="firstTd"><em>*</em>员工状态</td>
+                    <td class='AddState' >
+                        <input type="radio" name="operationType" checked>试用期 &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="operationType">已转正
+                        <span>（注：当月转正员工，请选择<i>试用期</i>）</span>
+                        <b></b>
+                    </td>
+                </tr>
+                <tr id="enterShowTr1">
+                    <td class="firstTd"><em>*</em>入职时间：</td>
+                    <td class='AddEnterDate'>
+                        <input type="text" id="stationEnterTime1" placeholder="设置后不可修改" readonly="readonly" class="laydate-icon" onclick="laydate({choose:function(datas){dateChange(datas),enterDataChange()}})">
+                        <b></b>
+                    </td>
+                    <td class="firstTd"><em>*</em>试用期基本工资：</td>
+                    <td class='AddTryPay'>
+                        <input type="text" id="customerProbationSalary1" placeholder="设置后不可修改" onkeyup="this.value=this.value.replace(/[^0-9.\-]/g,'')"onafterpaste="this.value=this.value.replace(/[^0-9.\-]/g,'')">
+                        <i>元</i>
+                        <b></b>
+                    </td>
+                </tr>
+                <tr id="enterShowTr2">
+                    <td class="firstTd"><em>*</em>转正时间：</td>
+                    <td class='AddTakeDate'>
+                        <input type="text" id="stationRegularTime1" placeholder="请选择日期" readonly="readonly" class="laydate-icon" onclick="laydate({choose:function(datas){dateChange(datas),takeDataChange()}})">
+                        <b></b>
+                    </td>
+                    <td class="firstTd"><em>*</em>转正后基本工资：</td>
+                    <td class='AddTakePay'>
+                        <input type="text" id="customerRegularSalary1" placeholder="请输入转正后的工资"onkeyup="this.value=this.value.replace(/[^0-9.\-]/g,'')"onafterpaste="this.value=this.value.replace(/[^0-9.\-]/g,'')">
+                        <i>元</i>
+                        <b></b>
+                    </td>
+                </tr>
+                <tr id="regularShowTr">
+                    <td class="firstTd"><em>*</em>入职时间：</td>
+                    <td class='AddEnterDateRegular'>
+                        <input type="text" id="stationEnterTime2" placeholder="设置后不可修改" readonly="readonly" class="laydate-icon" onclick="laydate({choose:function(datas){dateChange(datas),changeDateChange()}})">
+                        <b></b>
+                    </td>
+                    <td class="firstTd"><em>*</em>基本工资：</td>
+                    <td class='AddTakePayRegular'>
+                        <input type="text" id="customerRegularSalary2" placeholder="请输入转正后的工资"onkeyup="this.value=this.value.replace(/[^0-9.\-]/g,'')"onafterpaste="this.value=this.value.replace(/[^0-9.\-]/g,'')">
+                        <i>元</i>
+                        <b></b>
+                    </td>
+                </tr>
+            </table>
+##        </form>
+    </div>
+    <div class="customerAdd-footer">
+        <div class="button3">
+            <input type="button" name="" value='确定' class='onCustomerAdd'>
+##            <input type="button" name="" value='取消' class='btnCloseAdd'>
+        </div>
+    </div>
+</div>
+<!-- 批量导入员工 -->
+<div class="customerBatchImport" style="display: none">
+    <div class="customerBatchImport-title">批量导入员工<b class='btnCloseBatchImport' id="closeUploadFile"></b></div>
+    <div class="customerBatchImport-hint">备注：请先下载模板文件，根据要求的格式添加内容。 <i><a href="#springUrl('/resource/upload/salaryfiles/template/addCustomersBatchNew.xlsx')">下载模板文件</a></i></div>
+    <div class="customerBatchImport-main">
+        <div class="customerBatchImport-main-content">
+            <div class="customerBatchImportShow">
+
+##                <div class="upload" data ='1' onclick='onUpload()' id="showA"><span>点击展开上传要求</span><i>></i></div>
+                <div class="text" id="showB">
+                    <p>1、支持WPS、excel2003以上版本文件。</p>
+                    <p>2、文件格式见示例 下载正式员工模板文件</p>
+                    <p>3、格式说明：
+                        <span>（1）姓名（必填），2-20个字符。 如：张三</span>
+                        <span>（2）手机 (必填)，该手机号将作为员工在薪太软登录的个人账号，请填写正确。如：13810184537</span>
+                        <span>（3）入职时间（必填），如果某员工在2016年5月16日入职，则输入 “20150516”、“2015.5.6” “2015-5-6”
+          							“2015/5/6” “2015-05-06” “2015/05/06”中的任意一种格式，且入职日期设定后不能修改。</span>
+                        <span>（4）试用期基本工资，当前计薪月中某员工同时有试用期和正式期时，试用期基本工资必填。工资做多保留两位小数，如		5210.32元</span>
+                    </p>
+                </div>
+                <div class="text1" style="display: none;" id="showC" style="display:none;">
+
+                </div>
+            </div>
+            <!-- 进度条 -->
+##            <div class="progressBar" style="display: none">
+##                <div class="progressBar-main">
+##                    <div class="progressBar-box"></div>
+##                </div>
+##                <div class="progressBar-number">已上传<span></span></div>
+##            </div>
+
+            <div class="preTan" style="display:none;">
+                <p>批量上传 <span></span><span id="uploadProgres">0%</span></p>
+                <div>
+                    <!--用来存放文件信息-->
+                    <div id="thelist" class="uploader-list">
+                    ##                    <p class="state">上传中</p>
+                        <div class="progress progress-striped active">
+                            <div class="progress-bar" role="progressbar" style="width: 14%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="customerBatchImport-footer">
+        <div id="exportFileDiv" style="top: 27px;left: 60px;">导入文件</div>
+        <div class="button4" style="display:none;" id="showSure">
+            <input type="button" name="" value='确定' class='btnCloseBatchImport' id="sureUploadFile">
+        </div>
+        <div class="button4" style="display:none;" id="showCancel">
+            <input type="button" name="" value='取消' class='btnCloseBatchImport' id="cancelUploadFile">
+        </div>
+    </div>
+</div>
+<!-- 提示弹窗 -->
+<div class="hint" style="display:none;" id="showDialogDiv">员工<span>张三</span><i>离职设置成功</i></div>
+<!-- 提示弹窗(没有员工)-->
+#if($!{isShowGuid}==1)
+<div class="noUserName" style="display: none;">您还没有添加员工哦！<img src="#springUrl('/resource/img/customer/new/resize.png')" alt=""></div>
+#else
+<div class="noUserName" style="display: block;">您还没有添加员工哦！<img src="#springUrl('/resource/img/customer/new/resize.png')" alt=""></div>
+#end
+
+
+</body>
+</html>

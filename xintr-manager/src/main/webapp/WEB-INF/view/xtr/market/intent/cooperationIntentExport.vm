@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>H+ 合作意向处理</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-table/bootstrap-table.min.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-datepicker/css/bootstrap-datetimepicker.css')" rel="stylesheet" />
+</head>
+
+<body>
+<div class="col-sm-12">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <form class="form-group" id="handleForm">
+                <div class="panel panel-default" style="margin-top: 10px;">
+                    <table data-mobile-responsive="true" class="table table-hover table-bordered">
+                        <tr>
+                            <td style="width:15%;">开始时间</td>
+                            <td style="width:30%;">
+                                <input id="startTime"  type="text" class="form-control dateTime" required readonly placeholder="点击选择开始时间"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:15%;">结束时间</td>
+                            <td style="width:30%;">
+                                <input id="endTime"  type="text" class="form-control dateTime" required readonly placeholder="点击选择结束时间"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="text-center" style="20px;">
+                    <button type="button" class="btn btn-w-m btn-success" id="stationExportBtn">导出</button>
+                    <button type="button" class="btn btn-w-m btn-white" onclick="onCancel();">取消</button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+<script src="#springUrl('/resource/js/hui/content.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table-mobile.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/validate/jquery.validate.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-datepicker/js/bootstrap-datetimepicker.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-datepicker/locales/bootstrap-datetimepicker.zh-CN.js')"></script>
+<script src="#springUrl('/resource/js/comm/jdatagrid.js')"></script>
+<script>
+    $(function(){
+        $("#startTime").datetimepicker({
+            language: 'zh-CN',
+            format: "yyyy-mm-dd",
+            //format: "yyyy-mm-dd hh:ii",
+//            startDate:new Date(),
+            autoclose: true,
+            todayBtn: true,
+            minView: 2,
+            todayHighlight: true
+        });
+
+        $("#endTime").datetimepicker({
+            language: 'zh-CN',
+            format: "yyyy-mm-dd",
+            //format: "yyyy-mm-dd hh:ii",
+//            startDate:new Date(),
+            autoclose: true,
+            todayBtn: true,
+            minView: 2,
+            todayHighlight: true
+        });
+        $("#stationExportBtn").click(function(){
+            location.href = "batchExportCollaboration.htm?startTime="+$("#startTime").val()+"&endTime="+$("#endTime").val();
+        });
+
+    });
+    /**
+     * 取消合作意向弹出框
+     */
+    function onCancel(){
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    }
+</script>
+</html>

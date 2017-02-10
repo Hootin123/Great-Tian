@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>我的账户</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/account/kkpager_orange.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/account/index.css')" rel="stylesheet">
+##    <script src="#springUrl('/resource/js/account/iMove.js')"></script>
+##    <script src="#springUrl('/resource/js/payday/kkpager.min.js')"></script>
+    <script src="#springUrl('/resource/js/plugins/laypage/laypage.js')"></script>
+</head>
+
+<body>
+<div class="MyTop">
+    <div class="MyTopLeft">
+        <div class="MyTopLeftText1">
+            <span>余额：</span>
+            <span>
+                #if($!{accountData.balance})
+                    $!{xtr.money($!{accountData.balance})}
+                #else
+                    0.00
+                #end
+            </span>
+            <span>（元）</span>
+        </div>
+        <div class="MyTopLeftText2">
+            <span>借款：</span>
+            <span>
+                #if($!{accountData.borrow})
+                    $!{xtr.money($!{accountData.borrow})}
+                #else
+                    0.00
+                #end
+            </span>
+            <span>（元）</span>
+            <span MyTopLeftText2_may>（可用于支付工资或社保）</span>
+        </div>
+        <div class="MyTopLeftText3">
+            <span>红包：</span>
+            <span>
+                #if($!{accountData.redAmout} && $!{accountData.redAmout} > 0)
+                    $!{xtr.money($!{accountData.redAmout})}
+                    <span>（元）</span>
+                    <a class="MyTopLeftText2_particulars" href="#springUrl('/red_list.htm')">[详情]</a>
+                #else
+                    0.00
+                    <span>（元）</span>
+                #end
+            </span>
+
+        </div>
+    </div>
+    <div class="MyTopright">
+
+        #if($!{nocontract} == 1)
+            <a class="MyToprightBtn1" href="javascript:void(0);" onclick="alertBox()">充值</a><a class="MyToprightBtn2" href="javascript:void(0);" onclick="alertBox()">提现</a>
+        #else
+            <a class="MyToprightBtn1" href="#springUrl('/recharge.htm')">充值</a><a href="#springUrl('/withdraw.htm')" class="MyToprightBtn2">提现</a>
+        #end
+
+    </div>
+</div>
+
+<div class="pacity" style="z-index:11;display: none;width:100%;height:100%;opacity: 0.7;background: #000000; position: absolute;left: 0;top: 0; filter:alpha(opacity=70);"></div>
+<div style="display:none" class="aboxbg" id="aboxbg">
+    <h3>提示</h3>
+    <p>对不起，我们只对签约用户受理资金相关服务。<br />如果想了解我们的服务，请拨打客服电话 <a style="color:#0696fa">"400-175-8090" </a></p>
+    <div class="aboxbgBtn">
+        <div class="aboxbgBtn1"">确认</div>
+</div>
+</div>
+
+
+<div class="MyOption">
+    <div class="MyOptionIndent">
+        <h4>订单类型：</h4>
+        <ul id="rechargeType">
+            <li val="">全部</li>
+            <li val="8">社保公积金</li>
+            <li val="3">发工资</li>
+            <li val="9">急速发工资</li>
+            <li val="4">垫工资</li>
+            <li val="1">充值</li>
+            <li val="2">提现</li>
+            <li val="5">借款</li>
+        </ul>
+    </div>
+    <div class="MyOptionTime">
+        <h4>创建时间：</h4>
+        <ul>
+            <li type="dateType" val="0">全部</li>
+            <li type="dateType" val="1">一周内</li>
+            <li type="dateType" val="2">一个月内</li>
+            <li type="dateType" val="3">三个月内</li>
+        </ul>
+    </div>
+    <div class="MyOptionDeal">
+        <h4>订单状态：</h4>
+        <ul>
+            <li val="">全部</li>
+            <li val="0">提交订单</li>
+            <li val="2">交易成功</li>
+            <li val="1">已关闭</li>
+        </ul>
+    </div>
+</div>
+<div class="Mytable">
+    <table>
+        <thead>
+            <tr id="MytableOne">
+                <th class="MytableTime">创建时间</th>
+                <th class="MytableMark">订单号</th>
+                <th class="MytableType">类型</th>
+                <th class="MytablePay">支付方式</th>
+                <th class="MytableSum">总金额（元）</th>
+                <th class="MytableState">交易状态</th>
+                <th class="MytableOperation">交易操作</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+##    <div id="kkpager" style="margin-top:30px;"></div>
+    <div class="pagePay">
+        <div id="pagePayroll"></div>
+    </div>
+</div>
+
+<script type="text/javascript" src="#springUrl('/resource/js/account/index.js')"></script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>修改部门</title>
+    #parse("comm/head.vm")
+    <style>
+        .row{
+            width: 100%;
+            margin-top: 15px;
+        }
+        .row > div{
+            float:left;
+            padding: 10px;
+            padding-bottom: 16px;
+        }
+        .row > div > label{
+            line-height: 36px
+        }
+        .row > div > label >em{
+            color: #f00;
+            margin-right: 4px;
+            vertical-align: middle;
+        }
+        .row > div > b{
+            position: absolute;
+            left: 50px;
+            top:48px;
+            color: #f00;
+            font-weight: 300;
+        }
+        .row .error{
+            border:1px solid #f00
+        }
+        input, select{
+            padding: 0 20px;
+            width: 278px;
+            height: 34px;
+            border: 1px solid #e3e3e3;
+            position: relative;
+            top: -1px;
+            color: #666666;
+            width: 175px;
+        }
+        .footer{
+            width:100%;
+            height:40px;
+            position: absolute;
+            bottom:20px;
+        }
+        .footerBtn{
+            width:200px;
+            height:40px;
+            margin:0 auto;
+        }
+        .okbtn{
+            display: block;
+            width: 200px;
+            height: 40px;
+            line-height: 35px;
+            background: #314a5e;
+            color: #FFFFFF;
+            border: none;
+            float:left;
+            border-radius: 6px;
+            font-family: "微软雅黑";
+            cursor: pointer;
+        }
+        /*.cancelbtn{*/
+        /*width: 200px;*/
+        /*height: 35px;*/
+        /*line-height: 35px;*/
+        /*border: 1px solid #0696FA;*/
+        /*color: #0696FA;*/
+        /*background: #FFFFFF;*/
+        /*float:right;*/
+        /*border-radius: 6px;*/
+        /*font-family: "微软雅黑";*/
+        /*cursor: pointer;*/
+
+        /*}*/
+
+
+    </style>
+</head>
+
+<body>
+<div  class="container-fluid">
+    <div class="row">
+        <input id="id" value="$!id" type="hidden"/>
+        <div style="width: 30%;text-align: right;"><label>原名称</label></div>
+        <div style="width: 30%;">
+            <input id="depName" readonly="readonly" value="$!name"/>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div style="width: 30%;text-align: right;"><label><em>*</em>新名称</label></div>
+    <div style="width: 30%;position: relative" class="newDept">
+    ##            <select id="depParentId">
+    ##                #foreach($dept in $depts)
+    ##                    <option value="$!dept.depId"
+    ##                        #if($deptId == $dept.depId)
+    ##                            selected
+    ##                        #end >$!dept.depName</option>
+    ##                #end
+    ##            </select>
+        <input id="newDeptName" placeholder="请输入新名称"/>
+        <b></b>
+    </div>
+
+</div>
+<div class="footer">
+    <div class="footerBtn">
+        <input class="okbtn btn" type="button" value="确定" onclick="EditDeptExtend.save()">
+    ##            <input class="cancelbtn btn" type="button" value="取消" onclick="AddDeptExtend.close()">
+    </div>
+</div>
+</div>
+
+</body>
+<script>
+    //验证
+    var fdept=false;
+    function testDept(){
+        if($('.newDept input').val()=='' || $('.newDept input').val()==undefined){
+            $('.newDept b').html('请输入新部门名称');
+            $('.newDept input').addClass('error');
+            fdept=false;
+        }else{
+            $('.newDept b').html('');
+            $('.newDept input').removeClass('error');
+            fdept=true;
+        }
+    }
+    EditDeptExtend = {
+        save:function(){
+            testDept()
+            if(fdept){
+                $.post(BASE_PATH + '/dept/modifyDepts.htm', {"newDeptName" : $("#newDeptName").val(), "depId":$("#id").val()}, function(data){
+                    if (data.success) {
+                        parent.DeptExtend.refrehTree();
+                        EditDeptExtend.close();
+                    } else {
+                        showWarning(data.message);
+                    }
+                });
+            }
+        },
+        close:function(){
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+        }
+    }
+
+</script>
+</html>

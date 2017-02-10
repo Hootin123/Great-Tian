@@ -1,0 +1,200 @@
+@charset "UTF-8";
+body {
+  width: 100%;
+  height: 100%;
+  background: url(../../img/newHongbao/reg-bg.png) 0 0 no-repeat;
+  background-size: 100%;
+}
+
+.promt {
+  position: absolute;
+  z-index: 10;
+  left: 2.6rem;
+  top: 4.5rem;
+  width: 2.2rem;
+  height: 1.4rem;
+  border-radius: 0.2rem;
+  background: rgba(6, 150, 250, 0.6);
+  display: none;
+}
+.promt h4 {
+  width: 100%;
+  height: 0.7rem;
+  font-size: 0.3rem;
+  line-height: 0.8rem;
+  text-align: center;
+  color: #fff;
+  font-weight: 300;
+}
+.promt p {
+  width: 0.8rem;
+  height: 0.5rem;
+  background: rgba(43, 96, 215, 0.6);
+  margin: 0 auto;
+  margin-top: 0.1rem;
+  font-size: 0.3rem;
+  text-align: center;
+  line-height: 0.5rem;
+  border-radius: 0.1rem;
+  color: #e3e3e3;
+}
+
+header {
+  width: 100%;
+  height: 0.62rem;
+  margin-top: 0.93rem;
+  box-sizing: border-box;
+  padding-left: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+header .logo {
+  width: 1.73rem;
+  height: 100%;
+  float: left;
+  background: url(../../img/newHongbao/logo.png) 0 0 no-repeat;
+  background-size: 100% 100%;
+}
+/*header em {*/
+  /*display: block;*/
+  /*float: left;*/
+  /*width: 0.01rem;*/
+  /*height: 0.28rem;*/
+  /*background: url(../../img/newHongbao/lit.png) 0 0 no-repeat;*/
+  /*background-size: 100% 100%;*/
+  /*margin-left: 0.32rem;*/
+/*}*/
+header .txt {
+  margin-left: 0.18rem;
+  float: left;
+  font-family: "微软雅黑";
+  font-size: 0.3rem;
+  color: #333;
+  line-height: 0.62rem;
+}
+header .txt p {
+  float: left;
+}
+header .txt p span {
+  color: #f22f2f;
+  margin-left: -0.18rem;
+  margin-right: -0.18rem;
+}
+header .txt p:nth-child(1) {
+  margin-right: 0.2rem;
+}
+
+section {
+  width: 100%;
+  margin-top: 1.06rem;
+}
+section ul {
+  width: 100%;
+  height: 100%;
+}
+section ul li {
+  width: 100%;
+  height: 1.2rem;
+  padding: 0 0.22rem;
+  box-sizing: border-box;
+  position: relative;
+}
+section ul li input {
+  width: 7rem;
+  height: 0.78rem;
+  border: 0;
+  border: 1px solid #d9d9d9;
+  border-radius: 0.08rem;
+  line-height: 0.78rem;
+  text-indent: 0.2rem;
+  font-family: "微软雅黑";
+  font-size: 0.3rem;
+  color: #333;
+}
+section ul li input::-webkit-input-placeholder {
+  color: #ccc;
+}
+section ul li b {
+  height: 0.78rem;
+  position: absolute;
+  right: 0.32rem;
+  top: 0;
+  font-size: 0.16rem;
+  line-height: 0.78rem;
+  color: #f00;
+}
+section ul li:nth-child(6) {
+  position: relative;
+}
+section ul li:nth-child(6) p {
+  width: 2.06rem;
+  height: 0.5rem;
+  margin-top: 0.15rem;
+  position: absolute;
+  right: 0.24rem;
+  top: 0;
+  display: flex;
+  align-items: center;
+  border-left: 1px solid #999;
+}
+/*section ul li:nth-child(6) p em {*/
+  /*display: block;*/
+  /*width: 1px;*/
+  /*height: 0.48rem;*/
+  /*background: url(../img/lit-1.png) 0 0 no-repeat;*/
+  /*background-size: 100% 100%;*/
+/*}*/
+section ul li:nth-child(6) p span {
+  margin-left: 0.26rem;
+  font-size: 0.3rem;
+  font-family: '微软雅黑';
+  color: #0696fa;
+}
+section .reg {
+  height: 0.9rem;
+  width: 7rem;
+  margin: 0 auto;
+  margin-top: 1.2rem;
+  background: #0696fa;
+  border-radius: 0.4rem;
+  font-size: 0.34rem;
+  font-family: '微软雅黑';
+  color: #fff;
+  text-align: center;
+  line-height: 0.9rem;
+}
+section .login {
+  width: 100%;
+  height: 0.4rem;
+  margin-top: 0.55rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.28rem;
+  font-family: '微软雅黑';
+  color: #0696fa;
+}
+/*section .login i {*/
+  /*display: block;*/
+  /*margin-right: 0.2rem;*/
+  /*width: 0.29rem;*/
+  /*height: 0.31rem;*/
+  /*background: url(../../img/newHongbao/login-lit.png) 0 0 no-repeat;*/
+  /*background-size: 100% 100%;*/
+/*}*/
+section .hint {
+  width: 50%;
+  height: 0.8rem;
+  position: absolute;
+  left: 25%;
+  top: 10rem;
+  background: rgba(6, 150, 250, 0.8);
+  border-radius: 0.4rem;
+  font-size: 0.28rem;
+  text-align: center;
+  line-height: 0.8rem;
+  color: #f00;
+  font-weight: 600;
+}
+
+/*# sourceMappingURL=register.css.map */

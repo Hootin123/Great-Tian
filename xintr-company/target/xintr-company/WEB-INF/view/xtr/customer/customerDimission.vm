@@ -1,0 +1,355 @@
+##员工离职页
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>离职</title>
+    #parse("comm/head.vm")
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/customer/customerDimission.css')"/>
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/js/plugins/laydate/need/laydate.css')"/>
+    <script src="#springUrl('/resource/js/plugins/laydate/laydate.js')"></script>
+    <script src="#springUrl('/resource/js/comm/validateUtil.js')"></script>
+</head>
+<body>
+<div class="header">
+    <h2 class='title2'><span>$!{trueUserName}</span><b>&nbsp;—&nbsp;</b>离职</h2>
+    <img src="#springUrl('/resource/img/salary/guanbi.png')" alt="" id="closeDetailBtn">
+</div>
+
+<form id="dimissionForm">
+    <!-- 页面隐藏域-->
+    <input type="hidden" name="customerId" value="$!{customerId}"/>
+    <input type="hidden" name="sbDemand" value="$!{sbDemand}"/>
+    <input type="hidden" name="gjjDemand" value="$!{gjjDemand}"/>
+<section>
+    <div class="top">
+        <p>注1：
+            <span>此操作将使员工离职，员工账号将不能再登录，且此操作不可撤销。</span>
+        </p>
+        <p>注2：
+            <span>离职后社保、公积金减员月将无法更改，请您认真核对。</span>
+        </p>
+    </div>
+    <div class="cont2">
+        <ul class='left'>
+            <li>
+                <span>*</span>离职类型
+            </li>
+            <li>
+                <span>*</span>最后工作日
+            </li>
+            <li id="checkBox" class="check"></li>
+            <li>
+                <span></span>补偿金
+            </li>
+            <li>
+                <span>*</span>离职原因
+            </li>
+        </ul>
+        <ul class='right'>
+            <li>
+                <select name="recordDimissingType">
+                    <option value="1">主动离职</option>
+                    <option value="2">被动离职</option>
+                </select>
+            </li>
+            <li>
+                <input type="text" name="stationDimissingTime" id="stationDimissingTime" readonly="readonly" placeholder="点击选择最后工作日时间" id="stationDimissingTime" class="laydate-icon"  style="width: 286px;" onclick="laydate({choose:function(datas){getSbStopDate(datas)}})" />
+            </li>
+            <li class='check' id="checkBoxId2" >
+                <input  type="checkbox"  id="jiaonaSb" style='width: 15px;height: 15px;vertical-align: middle;margin-left: -116px;'/><a id="sbA">&nbsp;&nbsp;离职月需要交纳社保</a>
+                <input type="hidden" id="hiddenJiaoSb" name="checkSb"/>
+                <input type="checkbox" id="jiaonaGjj" style='width: 15px;height: 15px;vertical-align: middle; margin-left: 70px';/><a id="gjjA">&nbsp;&nbsp;离职月需要交公积金</a>
+                <input type="hidden" id="hiddenJiaonaGjj" name="checkGjj"/>
+            </li>
+
+            <li class="compensation">
+                <input type="text" name="recordCompensation"  placeholder="请输入金额">
+            </li>
+            <li class='txtarea'>
+                <textarea cols=43 rows=4 placeholder="0-300个字符" name="dimissingReason" id="dimissingReason"></textarea>
+            </li>
+        </ul>
+    </div>
+</section>
+</form>
+<footer>
+    <div class="bottom">
+        <div class="bottomBtn">
+            <input type="button" name=""  id="updateBtn" value='更新设置'>
+            <input type="button" name="" class='btnClose' value='取消'>
+        </div>
+    </div>
+</footer>
+<script type="text/javascript">
+    $(function(){
+        var sbDemand =$("input[name='sbDemand']").val();
+        var gjjDemand=$("input[name='gjjDemand']").val();
+        if(gjjDemand=="gjjDemand"){
+            $("#checkBox").show();
+            $("#checkBoxId2").show();
+        }else{
+            //社保显示
+            if(sbDemand=="sbDemand"){
+                $("#checkBox").show();
+                $("#checkBoxId2").show();
+                $("#jiaonaGjj").attr("disabled","disabled");
+            }else{
+                $("#checkBox").hide();
+                $("#checkBoxId2").hide();
+            }
+        }
+        var dimissTime = $("stationDimissingTime").val();
+        if(dimissTime==null||dimissTime==undefined||dimissTime==""){
+            $("#jiaonaSb,#jiaonaGjj").attr("disabled","disabled");
+            $("#gjjA").css("color","#999999");
+            $("#sbA").css("color","#999999");
+        }
+
+
+    });
+
+    $("#jiaonaGjj").click(function(){
+        if($(this).attr("checked")){
+             $("#gjjA").css('color','#666');
+            $("#jiaonaSb").attr("checked","checked");
+            $("#sbA").css('color','#666');
+        }
+    })
+
+
+
+    //控制补偿金
+
+    $(".compensation input").on('keyup', function (event) {
+        //响应鼠标事件，允许左右方向键移动
+        event = window.event || event;
+        if (event.keyCode == 37 | event.keyCode == 39) {
+            return;                                               //先把非数字的都替换掉，除了数字和.
+        }
+
+        $(this).val($(this).val().replace(/[^\d.]/g, "").         //只允许一个小数点
+
+        replace(/^\./g, "").replace(/\.{2,}/g, ".").              //只能输入小数点后两位
+
+        replace(".", "$#$").replace(/\./g, "").replace("$#$", ".").replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'));
+    });
+    $(".compensation input").on('blur', function () {
+
+            //最后一位是小数点的话，移除
+            $(this).val(($(this).val().replace(/\.$/g, "")));
+    });
+
+
+    //取消
+    $('#closeDetailBtn').click(function(){
+        onCancelDialog();
+    })
+    function onCancelDialog() {
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    }
+
+    $(".title2 em").on('click',function(){
+        $('#dimission-content').hide();
+        $('.mengban2').hide()
+        $('.dimission').show()
+    })
+    //点击取消按钮
+    $(".btnClose").click(function(){
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    });
+    //点击更新设置
+    $("#updateBtn").click(function(){
+       //简单校验
+        var stationDimissingTime = $("#stationDimissingTime").val();
+        var dimissingReason =$("#dimissingReason").val();
+        if(stationDimissingTime==null||stationDimissingTime==""){
+            layer.alert("离职日期不能为空！")
+            return false;
+        }else if(dimissingReason==null||dimissingReason==""){
+            layer.alert("请输入离职原因");
+            return false;
+        }
+
+        var checkSbValue,checkGjjValue;
+        if($("#jiaonaSb").attr("checked")){
+            checkSbValue="checkSbValue";
+            $("input[name='checkSb']").val(checkSbValue);
+        }
+        if($("#jiaonaGjj").attr("checked")){
+            checkGjjValue="checkGjjValue";
+            $("input[name='checkGjj']").val(checkGjjValue);
+        }
+
+       //更新设置
+        $.ajax({
+            type:'POST',
+            url:'customerDimission.htm',
+            data:$("#dimissionForm").serialize(),
+            dataType:'json',
+            success:function(resultResponse){
+                if(resultResponse.success){
+                    var mapStr = resultResponse.message;
+                    console.log(mapStr);
+                    layer.alert("操作成功",{
+                        title:'处理结果',
+                    },function(index){
+                        parent.loadCustomerList();
+                        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+                        parent.layer.close(index);
+                    });
+
+                }else{
+                    layer.alert(resultResponse.message);
+                }
+
+            },
+            error:function(){
+                alert("网络错误");
+            }
+
+
+        }) ;
+    });
+
+    //获取社保停缴月份
+    function getSbStopDate(obj) {
+
+
+            var sbDemand =$("input[name='sbDemand']").val();
+            var gjjDemand=$("input[name='gjjDemand']").val();
+            if(sbDemand=="sbDemand"){
+                $("#jiaonaSb").removeAttr("disabled");
+                $("#sbA").css("color","#666");
+            }
+            if(gjjDemand=="gjjDemand"){
+                $("#jiaonaGjj").removeAttr("disabled");
+                $("#gjjA").css("color","#666");
+            }
+
+
+          $("#laydate_clear").click(function(){
+            if(gjjDemand=="gjjDemand"){
+                $("#checkBox").show();
+                $("#checkBoxId2").show();
+            }else{
+                //社保显示
+                if(sbDemand=="sbDemand"){
+                    $("#checkBox").show();
+                    $("#checkBoxId2").show();
+                    $("#jiaonaGjj").attr("disabled","disabled");
+                }else{
+                    $("#checkBox").hide();
+                    $("#checkBoxId2").hide();
+                }
+            }
+            var dimissTime = $("stationDimissingTime").val();
+            if(dimissTime==null||dimissTime==undefined||dimissTime==""){
+                $("#jiaonaSb,#jiaonaGjj").attr("disabled","disabled");
+                $("#gjjA").css("color","#999");
+                $("#sbA").css("color","#999");
+            }
+        })
+        var customerId = $("input[name='customerId']").val();
+        var dimissTime = obj;
+       //判断当前的时间
+        $.ajax({
+           url:BASE_PATH+'/customerManager/judgeDimissTime.htm',
+           data:{"customerId":customerId,"dimissTime":obj},
+           dataType:'json',
+           type:'post',
+           success:function(data){
+              if(data.success){
+                  console.log(data.message);
+                  //不显示
+                  $("#checkBox").hide();
+                  $("#checkBoxId2").hide();
+              }else{
+                  $("#checkBox").show();
+                  $("#checkBoxId2").show();
+              }
+           },
+           error:function(){
+               alert("网络错误，请刷新页面")
+           }
+
+        });
+
+
+
+        //判断时间是否小于当前时间
+//        var dimssTime = obj;
+//        if (!compareTime(obj)) {
+//            $("input[name='stationDimissingTime']").val("");
+//            layer.alert("离职日期不能小于当前日期");
+//            return false;
+//        }
+
+//        //alert(obj)
+//        var stationDimissingTime = obj;
+//        var customerId= $("input[name='customerId']").val();
+//        var checkBoxValue;
+//        //判断checkbox选中
+//        if($("#checkAddMonth").attr('checked')){
+//            checkBoxValue="check";
+//        }else{
+//            checkBoxValue="uncheck";
+//        }
+//
+////        //获取社保停缴月
+//        $.ajax({
+//            url:BASE_PATH+"/customerManager/getSbStopDate.htm",
+//            type:'post',
+//            data:{'stationDimissingTime':stationDimissingTime,'customerId':customerId,'checkBoxValue':checkBoxValue},
+//            dataType:'json',
+//            success:function(data){
+//                if(data.success){
+//                     var map = data.data;
+//                     $("#sbStopDate").val(map.sbStopDateStr);//社保停缴月
+//                     $("#gjjStopDate").val(map.gjjStopDateStr);//公积金停缴月
+//                }else{
+//                    $("#stationDimissingTime").val("");//清空离职日期选项
+//                    alert("获取社保停缴月份失败")
+//                }
+//            },
+//            error:function(){
+//            alert("网络错误，请刷新");
+//           }
+//        });
+    }
+
+
+    function compareTime(str){
+        if(str!=null) {
+            str=str+" 23:59:59";
+            str = str.replace(/-/g, "/");
+            var endTime = new Date(str);
+            var nowTime = new Date();
+            var time = endTime.getTime() - nowTime.getTime();
+            if (time >=0) {
+                return true
+            } else {
+                return false;
+            }
+        }
+    }
+
+
+
+
+//checkbox
+//  $("#checkAddMonth").click(function(){
+//      if($("#checkAddMonth").attr('checked')){
+//          //赋值
+//          $("input[name='checkboxValue']").val($("#checkAddMonth").val());
+//      }else{
+//          $("input[name='checkboxValue']").val("");
+//      }
+//
+ //});
+
+</script>
+</body>
+</html>

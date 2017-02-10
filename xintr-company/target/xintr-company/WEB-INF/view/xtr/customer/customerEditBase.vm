@@ -1,0 +1,443 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title></title>
+    #parse("comm/head.vm")
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/customer/customerAdd.css')"/>
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/customer/customerEdit.css')"/>
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/js/plugins/laydate/need/laydate.css')"/>
+    <link href="#springUrl('/resource/css/customer/dropzone.css')" rel="stylesheet" />
+    <script src="#springUrl('/resource/js/plugins/laydate/laydate.js')"></script>
+##    <script src="#springUrl('/resource/js/customer/customerEdit.js')"></script>
+    <script src="#springUrl('/resource/js/comm/validateUtil.js')"></script>
+    <script src="#springUrl('/resource/js/customer/dropzone.js')"></script>
+
+
+    <style>
+        form tr td{
+            position: relative;
+        }
+        .error{
+            display: none;
+            opacity: 1;
+            filter: alpha(opacity=100);
+            max-width: 500px;
+            min-height: 7px;
+            position: absolute;
+            top: 5px;
+            right: -180px;
+            background-color: #ffe9eb;
+            padding: 10px 18px;
+            z-index: 10;
+            border-radius: 5px;
+            color: #fc2736;
+            font-size: 12px;
+            line-height: 14px
+        }
+        .data{
+            position: relative;
+        }
+        .pt{
+            position: absolute;
+            top:5px;
+            right:-60px;
+            display: flex;
+            -webkit-align-items: center;
+            -moz-align-items: center;
+            -ms-align-items: center;
+            -o-align-items: center;
+            align-items: center;
+
+        }
+        #isRegular{
+
+            width:15px;
+            height: 15px;
+            margin-left: 2px;
+        }
+        .sex,.hire{
+            display: flex;
+            -webkit-align-items: center;
+            -moz-align-items: center;
+            -ms-align-items: center;
+            -o-align-items: center;
+            align-items: center;
+
+        }
+    </style>
+</head>
+<body>
+<section>
+    <header>
+        <div class="contt" style="">
+            <div class="base ali">基本信息</div>
+            <div class="station ali">岗位信息</div>
+            <div class="personal ali">个人信息</div>
+        </div>
+    </header>
+    <!-- ***********基本信息页***********-->
+    <div class="base-content" style="min-width: 1200px">
+        <form id="editBaseForm">
+            <!-- 页面隐藏域-->
+            <input id="customerId" name="customerId" type="hidden" value="$!{customerId}">
+            <input id="companyCheckId" name="companyCheckId" type="hidden" value="$!{companyCheckId}">
+            <table>
+                <tr>
+                    <td ><em>*</em>姓名</td>
+                    <td class="username">$!{customersDto.customerTurename}
+                        <span></span></td>
+                </tr>
+                <tr>
+                    <td ><em></em>英文名</td>
+                    <td class="englishName">$!{customersDto.customerEnglishName}<span></span></td>
+                </tr>
+                <tr>
+                    <td ><em>*</em>性别</td>
+                    <td class="sex">
+                        #if($!{customersDto.customerSex}==1)
+                           男
+                        #elseif($!{customersDto.customerSex}==0)
+                            女
+                        #end
+                        <span></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td ><em>*</em>手机号</td>
+                    <td class="phone">$!{customersDto.customerPhone}
+                        <span></span></td>
+                </tr>
+                <tr>
+                    <td ><em>*</em>生日</td>
+                    <td class="birthday">
+                        $!{customersDto.customerBirthdayMonth}<span></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td ><em></em>年龄</td>
+                    <td class="age">
+                        #if($!{customersDto.customerAge}==0)
+
+                        #else
+                            $!{customersDto.customerAge}
+                        #end
+                        <span></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td ><em></em>婚姻状况</td>
+                    <td>
+                            #if($!{customersDto.customerMarriage}=='1')
+                                未婚
+                            #elseif($!{customersDto.customerMarriage}=='2')
+                                已婚
+                            #elseif($!{customersDto.customerMarriage}=='3')
+                                离异
+                            #end
+                    </td>
+                </tr>
+                <tr>
+                    <td ><em>*</em>身份证号</td>
+                    <td class="card">$!{customersDto.customerIdcard}
+                        <span></span>
+                    </td>
+                </tr>
+                <tr class="front">
+                    <td><em>*</em>身份证照</td>
+                    <td style="width:320px" >
+                        <div class="pic" style="float:left;width:150px;height:150px;border:1px #ccc solid; position: relative; text-align: center;">
+                            <b style="line-height: 150px;font-size: 50px;color: #ccc">+</b>
+                            <p style="position: absolute;left:40px;top:100px;color: #ccc">身份证正面</p>
+                            #if($!{customersDto.customerIdcardImgFront})
+                                <img src="http://xintairuan-img.oss-cn-hangzhou.aliyuncs.com/$!{customersDto.customerIdcardImgFront}" onerror="this.src='/resource/img/error1.png';"  id="preImg" style="position: absolute;top:0;left:0;width:150px;height:150px;cursor:pointer">
+                            #else
+                                <img src="" onerror="this.src='/resource/img/error1.png';"  id="preImg" style="position: absolute;top:0;left:0;width:150px;height:150px;cursor:pointer">
+                            #end
+
+                        </div>
+                        <div class="pic" style="float:left;width:150px;height:150px;border:1px #ccc solid; margin-left: 10px;position: relative; text-align: center;">
+                            <b style="line-height: 150px;font-size: 50px;color: #ccc">+</b>
+                            <p style="position: absolute;left:40px;top:100px;color: #ccc">身份证反面</p>
+                            #if($!{customersDto.customerIdcardImgBack})
+                                <img src="http://xintairuan-img.oss-cn-hangzhou.aliyuncs.com/$!{customersDto.customerIdcardImgBack}" onerror="this.src='/resource/img/error1.png';" id="backImg" style="position: absolute;top:0;left:0;width:150px;height:150px;cursor:pointer">
+                            #else
+                                <img src="" onerror="this.src='/resource/img/error1.png';" id="backImg" style="position: absolute;top:0;left:0;width:150px;height:150px;cursor:pointer">
+                            #end
+                        </div>
+                        <span></span>
+                    </td>
+                    <input type="hidden" id="customerIdcardImgFront" name="customerIdcardImgFront" required value="$!{customersDto.customerIdcardImgFront}" />
+                    <input type="hidden" id="customerIdcardImgBack" name="customerIdcardImgBack" required value="$!{customersDto.customerIdcardImgBack}" />
+
+                </tr>
+                <tr>
+                    <td ><em>*</em>工资卡卡号</td>
+                    <td class="banknumber">$!{customersDto.customerBanknumber}
+                        <span></span></td>
+                </tr>
+                <tr>
+                    <td ><em>*</em>工资卡开户行</td>
+                    <td class="openbank">$!{customersDto.customerBank}
+                        <span></span></td>
+                </tr>
+            </table>
+            <div style="width: 420px; margin-left:200px; margin-top: 20px">
+##                <input class="okBtn" id="baseInfoBtn" type="button" value="确认修改"/>
+##                <input class="cancelBtn" type="button" value="取消">
+            </div>
+        </form>
+
+
+        <div>
+            <div class="history">
+                历史记录
+                <hr>
+                #if($!{recordList} && $!{recordList.size()} > 0)
+                    #foreach($data in $!{recordList})
+                        #if($!{data.recordOperationType}=='1')
+                            $!date.format('yyyy-MM-dd',$!{data.stationEnterTime})&nbsp; | &nbsp;入职(基本工资:$!{data.customerProbationSalary})<br/>
+                        #elseif($!{data.recordOperationType}=='2')
+                            $!date.format('yyyy-MM-dd',$!{data.stationRegularTime})&nbsp; | &nbsp;转正(基本工资:$!{data.customerRegularSalary})<br/>
+                        #elseif($!{data.recordOperationType}=='5')
+                            $!date.format('yyyy-MM-dd',$!{data.recordOperationTime})&nbsp; | &nbsp;调岗(由$!{data.beforeDepName}调到$!{data.afterDepName})<br/>
+                        #elseif($!{data.recordOperationType}=='6')
+                            $!date.format('yyyy-MM-dd',$!{data.recordCreateTime})&nbsp; | &nbsp;调薪(基本工资:$!{data.recordSalaryAfter})<br/>
+                        #end
+                    #end
+                #end
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ***********岗位信息页***********-->
+    <div class="station-content" style="display: none">
+        <form class="infon-comm" id="stationForm">
+            <input id="stationId" name="stationId" type="hidden" value="$!{customersDto.stationId}">
+            <input id="customerId" name="stationCustomerId" type="hidden" value="$!{customerId}">
+            <input id="companyCheckStationId" name="companyCheckStationId" type="hidden" value="$!{companyCheckId}">
+            <!-- 页面隐藏域-->
+            <table>
+                <tr>
+                    <td ><em>*</em>入职日期:</td>
+                    <td class="enterData">
+                        $!date.format('yyyy-MM-dd',$!{customersDto.stationEnterTime})<span></span>
+                    </td>
+                </tr>
+            ##                {max:'$!date.format('yyyy-MM-dd HH:mm:ss ',$date.getDate())'}
+                <tr>
+                    <td ><em>*</em>聘用形式</td>
+                    <td class="hire">
+                        #if($!{customersDto.stationEmployMethod}==1)
+                            正式
+                        #elseif($!{customersDto.stationEmployMethod}==2)
+                             劳务
+                        #end
+                        <span></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td ><em></em>转正日期:</td>
+                <td class="data">
+                    $!date.format('yyyy-MM-dd',$!{customersDto.stationRegularTime})
+                    &nbsp;&nbsp;
+                    #if($!{customersDto.stationCustomerState}==1)
+                        <div class="pt"><input  type="checkbox" disabled  id="isRegular" />已转正</div></td>
+                    #elseif($!{customersDto.stationCustomerState}==2)
+                        <div class="pt"><input  type="checkbox" disabled id="isRegular" checked/>已转正</div></td>
+                    #else
+                        <div class="pt"><input  type="checkbox" disabled id="isRegular" />已转正</div></td>
+                    #end
+                    </td>
+                </tr>
+                <tr>
+                    <td ><em></em>工号:</td>
+                    <td class="customerNumber">$!{customersDto.stationCustomerNumber}<span></span></td>
+                </tr>
+                <tr>
+                    <td ><em></em>司龄(月):</td>
+                    <td>
+                        $!{diffYear}
+                    </td>
+                </tr>
+                <tr>
+                    <td ><em></em>员工状态:</td>
+                    <td>
+                        #if($!{customersDto.stationCustomerState}==1)
+                            入职
+                        #elseif($!{customersDto.stationCustomerState}==2)
+                            转正
+                        #elseif($!{customersDto.stationCustomerState}==3)
+                            离职
+                        #elseif($!{customersDto.stationCustomerState}==4)
+                            删除
+                        #end
+                    </td>
+                </tr>
+                <tr>
+                    <td><em>*</em>部门:</td>
+                    <td class="customerDepName1 customerDepName department">
+                        $!{customersDto.depName}
+                        <input type="hidden" id="stationDeptId" name="stationDeptId" value="$!{customersDto.stationDeptId}"/>
+##                        <span></span>
+##                        <b></b>
+##                        <div class="branch" style="display: none">
+##                            <h4>部门</h4>
+##                            <div id="dep-base"></div>
+##                        </div>
+##                        <span id="departmentSpan"></span>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td ><em>*</em>岗位:</td>
+                    <td class="stations">$!{customersDto.stationStationName}
+                        <span></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td ><em></em>合同文件:</td>
+                    <td class="customerHd">
+                        <p><a id="uploadContract">上传合同文件</a></p>
+                    ##                        <span class="bar">
+                    ##						<em class="bar_1"></em>
+                    ##					    </span>
+                        <input type="hidden" name="stationContractFile">
+                    </td>
+                </tr>
+                <tr>
+                    <td ><em></em>试用期工资:</td>
+                    <td>$!{customersDto.customerProbationSalary}</td>
+                </tr>
+                <tr>
+                    <td ><em></em>转正工资基数:</td>
+                    <td>$!{customersDto.customerRegularSalary}</td>
+                </tr>
+            </table>
+            <div style="width: 420px; margin-left:200px; margin-top: 40px">
+##                <input class="okBtn" type="button" value="确认修改"/>
+##                <input class="cancelBtn" type="button" value="取消">
+            </div>
+
+        </form>
+    </div>
+    <!-- ***********个人信息页***********-->
+    <div class="personal-content" style="display: none">
+        <form class="infon-comm" id="personalForm">
+            <!-- 页面隐藏域-->
+            <input id="customerId" name="personalCustomerId" type="hidden" value="$!{customerId}">
+            <input id="personalId" name="personalId" type="hidden" value="$!{customersDto.personalId}">
+            <input id="companyCheckPersonalId" name="companyCheckPersonalId" type="hidden" value="$!{companyCheckId}">
+            <table>
+                <tr>
+                    <td ><em>*</em>紧急联系人:</td>
+                    <td class="linkman">$!{customersDto.personalRelationerName}
+                        <span></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td ><em>*</em>紧急联系人电话</td>
+                    <td class="emphone">$!{customersDto.personalRelationerPhone}
+                        <span></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td ><em>*</em>户籍所在地:</td>
+                    <td class="chart">$!{customersDto.personalDomicilePlace}
+                        <span></span></td>
+                </tr>
+                <tr>
+                    <td ><em></em>民族:</td>
+                    <td class="nation">
+                        $!{customersDto.personalNation}
+                    </td>
+                </tr>
+                <tr>
+                    <td ><em></em>政治面貌:</td>
+                    <td class="state">$!{customersDto.personalPoliticsStatus}<span></span></td>
+                </tr>
+                <tr>
+                    <td ><em></em>现居住地:</td>
+                    <td class="place">
+                        $!{customersDto.personalCurrentPlace}<span></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td ><em></em>最高学历:</td>
+                    <td class="txtNone">
+                            #if($!{customersDto.personalEducationHigh}==1)
+                                高中及以下
+                            #elseif($!{customersDto.personalEducationHigh}==2)
+                                大专
+                            #elseif($!{customersDto.personalEducationHigh}==3)
+                                本科
+                            #elseif($!{customersDto.personalEducationHigh}==4)
+                                硕士
+                            #elseif($!{customersDto.personalEducationHigh}==5)
+                                博士
+                            #end
+                    </td>
+                </tr>
+                <tr>
+                    <td><em></em>毕业学校:</td>
+                    <td class="school">
+                        $!{customersDto.personalGraduateSchool}<span></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td ><em></em>专业:</td>
+                    <td class="zy">$!{customersDto.personalMajor}<span></span></td>
+                </tr>
+                <tr>
+                    <td ><em></em>简历:</td>
+                    <td class="customerLn">
+                        <p><a id="uploadResume">上传简历文件</a></p>
+                        $!{customersDto.personalResume}
+                    </td>
+                </tr>
+            </table>
+            <div style="width: 420px; margin-left:200px; margin-top: 40px">
+##                <input class="okBtn" type="button" value="确认修改"/>
+##                <input class="cancelBtn" type="button" value="取消">
+            </div>
+        ##        </form>
+        </form>
+    </div>
+
+</section>
+
+
+
+
+
+<script>
+    ##    table切换
+    $(function(){
+        $('.base').on('click',function(){
+            $(this).css('background','#5b7798').siblings().css('background','#fff')
+            $('.base-content').show();
+            $('.station-content').hide();
+            $('.personal-content').hide();
+
+        });
+        $('.station').on('click',function(){
+            $(this).css('background','#5b7798').siblings().css('background','#fff')
+            $('.base-content').hide();
+            $('.station-content').show();
+            $('.personal-content').hide();
+
+        });
+        $('.personal').on('click',function(){
+            $(this).css('background','#5b7798').siblings().css('background','#fff')
+            $('.base-content').hide();
+            $('.station-content').hide();
+            $('.personal-content').show();
+
+        });
+    });
+</script>
+</body>
+</html>

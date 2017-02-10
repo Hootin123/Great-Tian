@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title></title>
+#parse("comm/head.vm")
+<link href="#springUrl('/resource/css/payday/payday.css')" rel="stylesheet">
+<link href="#springUrl('/resource/css/comm/comm.css')" rel="stylesheet">
+<link href="#springUrl('/resource/css/payfor1.css')" rel="stylesheet">
+<script src="#springUrl('/resource/js/payday/jquery-1.11.0.min.js')"></script>
+<script src="#springUrl('/resource/js/payday/test.js')"></script>
+<script src="#springUrl('/resource/js/plugins/dropzone/dropzone.js')"></script>
+<script src="#springUrl('/resource/js/plugins/laydate/laydate.js')"></script>
+<script>
+var typeId=  $!{typeId};
+$(function(){
+  showImage();
+  test3();
+})
+</script>
+</head>
+
+<body>
+<div class="container hide" id="uploadDiv" style="padding:30px 5% 0">
+<div>
+<div class="xtr2-crumb">
+<span>资料审核</span>
+<i class="icon-angle-right"></i>
+<span class="light-blue">上传文件</span>
+</div>
+<div class="" style="">
+<div style="margin: 50px 0 30px;">
+<h2 class="xtr2-h2"><font class="xtr2-h2-type">营业执照</font></h2>
+</div>
+<div class="xtr3-btns clfix" style="padding: 20px;font-size: 12px;color: #8fa9c7;line-height: 20px;font-weight: 100;">
+请上传营业执照清晰彩色原件或数码照，在有效期内且年检齐全（当年成立可无年检）<br />支持.jpg.jpeg.png.bmp格式照片，大小不超过5M
+</div>
+
+<div class="identity-content-boxes1 clear">
+<!--<div class="identity-content-page">
+<img src="img/borrow.png"/>
+<i clsss="identity-page-delebg"></i>
+<i class="identity-page-delete">删除</i>
+<div class="identity-page-upload">
+<div class="identity-page-upload1"></div>
+</div>
+<input type="file" class="identity-page-file" />
+</div>-->
+</div>
+
+<a href="literaturereviewquery.htm" class="identity-page-shure">确定</a>
+
+</div>
+</div>
+</div>
+</body>
+
+</html>

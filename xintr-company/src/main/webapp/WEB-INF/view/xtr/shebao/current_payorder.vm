@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>当前账单</title>
+    #parse("comm/head.vm")
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/shebao/currentBill.css')">
+</head>
+<body>
+<div class="currentHeader">当前账单 <b><img src="/resource/img/salary/guanbi.png" alt="" onclick="cancelCurrentPayOrder();"></b></div>
+<div class="current">
+    <div class="current-title">
+        <span>当前账单：<i id="currentOrderCount" style="cursor: pointer">$!{companyShebaoOrders.size()} </i>&nbsp;&nbsp;待提交账单：<i id="waitApproveOrder" style="cursor: pointer">$!{dtj}</i></span>
+
+        <span>账单地区：
+            <select onchange="loadPage(this)" id="currentOrderArea">
+                <option value="">所有地区</option>
+                #foreach($data in $!{cities})
+                    <option value="$!{data.joinCityCode}">$!{data.joinCityName}</option>
+                #end
+            </select>
+        </span>
+    </div>
+    <div class="current-main">
+        <ul id="cities">
+        </ul>
+    </div>
+</div>
+<!-- 蒙版 -->
+<div class="mengban" style="display:none"></div>
+<!--服务费 -->
+<div class="service" style="display: none">
+    <div class="service-title">服务费用 <b></b></div>
+    <div class="service-main">
+        <table>
+            <tr>
+                <td>服务费（元）</td>
+                <td>单价（元）</td>
+                <td>人数</td>
+            </tr>
+            <tr>
+                <td><p class="price_service">0.00 </p><span>=</span></td>
+                <td><p class="price_single">0.00</p><span class='cheng'>*</span></td>
+                <td class="customer_count">0</td>
+            </tr>
+        </table>
+        <p class='pTitle list'>服务费收取规则说明：</p>
+        <p class="list">1、服务费按需求人数收取，<i id="serviceSingleAmount">29.80</i>元/人/次。</p>
+        <p class="list">2、停缴需求不收取服务费</p>
+    </div>
+    <div class="service-bottom">
+        <div class="button3">
+            <input type="button" name="" id="serviceSureBtn" value="确认">
+        </div>
+    </div>
+</div>
+<!-- 提交订单 -->
+<div class="submitOrder" style="display: none">
+    <div class="submitOrder-title">提交账单<b></b></div>
+    <div class="submitOrder-main">
+        <div class="submitOrder-main-title"></div>
+        <table>
+            <tr>
+                <td>社保费用（元）</td>
+                <td>公积金费用（元）</td>
+                <td>补差费用（元）</td>
+                <td>服务费用（元）</td>
+            </tr>
+            <tr>
+                <td class="price_sb">0.00</td>
+                <td class="price_gjj">0.00</td>
+                <td class="price_addtion">0.00</td>
+                <td class="price_service">10人*29.80/人</td>
+            </tr>
+        </table>
+        <div class="submitOrder-main-hint">提交账单后，员工社保/公积金个人部分将自动从当月的工资计算中扣除请确认是否要提交，且提交后不可撤回</div>
+    </div>
+    <div class="submitOrder-bottom">
+        <div class="button4">
+            <input type="button" value="确认" onclick="submitOrder(this)"/>
+            <input type="button" value="取消" class="close" onclick="hideSubmitOrder();" />
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="#springUrl('/resource/js/shebao/current_payorder.js')"></script>
+</body>
+</html>

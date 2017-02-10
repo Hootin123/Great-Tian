@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" id='html'>
+<head>
+    <meta charset="UTF-8">
+    <title>垫发工资</title>
+    #parse("comm/head.vm")
+    <meta name="viewport" content="width=divce-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/h5wallet/mat.css')">
+</head>
+<body>
+<div class='promt'>
+    <h4 id="showText"></h4>
+    <p id="sureBtn">确定</p>
+</div>
+<section>
+    <input type="hidden" value="$!{companyId}" id="companyId">
+    <h3>工资不够，薪太软来凑</h3>
+    <ul>
+        <li>◆ 资金年化成本低至5%</li>
+        <li>◆ A级风控模型 </li>
+        <li>◆ 百亿级融资能力</li>
+        <li>◆ 21家保理金融机构 </li>
+    </ul>
+</section>
+<div class="next">下一步</div>
+</body>
+<script type="text/javascript">
+    $(function(){
+        //点击确定按钮
+        $("#sureBtn").on("click",function(){
+            $("#showText").text("");
+            $(".promt").css("display","none");
+        });
+        $('.next').on('click',function(){
+            $.ajax({
+                type: 'post',
+                url: 'h5ApproveCheck.htm',
+                data: {"companyId":$("#companyId").val()},
+                async:false,
+                success: function (data) {
+                    console.log(data);
+                    if (data.success) {
+                        var companyBean=data.data;
+                        if(companyBean.companyAuditStatus==0){//待审核，跳到待审核页面
+                            window.location.href='toH5walletApproveWaitPage.htm?companyId='+companyBean.companyId;
+                        }else if(companyBean.companyAuditStatus==1){//审核驳回，跳到审核失败页面
+                            window.location.href='toH5walletApproveFailedPage.htm?companyId='+companyBean.companyId+'&companyAuditRemark='+encodeURIComponent(encodeURIComponent(companyBean.companyAuditRemark));
+                        }else if(companyBean.companyAuditStatus==2){//审核成功，跳到审核成功页面
+                            window.location.href='toH5walletApproveSuccessPage.htm?companyId='+companyBean.companyId;
+                        }else{//未审核，跳到审核页面
+                            window.location.href='toH5walletApprovePage.htm?companyId='+companyBean.companyId;
+                        }
+                    } else {
+                        $("#showText").text(data.message);
+                        $(".promt").css("display","block");
+                    }
+                }
+            });
+        });
+    });
+</script>
+</html>

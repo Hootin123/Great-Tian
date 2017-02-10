@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title></title>
+
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/payday/payday.css')" rel="stylesheet">
+</head>
+
+<body>
+<div class="main_right payoff_two salaryDetails clear" id="salaryDetails">
+
+##    #if($!{data.excelGrantState} == '0')
+##        待处理
+##    #elseif($!{data.excelGrantState} == '1')
+##        发放中
+##    #elseif($!{data.excelGrantState} == '2')
+##        已发放
+##    #elseif($!{data.excelGrantState} == '3')
+##        挂起
+##    #elseif($!{data.excelGrantState} == '4')
+##        仅下发工资单
+##    #elseif($!{data.excelGrantState} == '5')
+##        撤销
+##    #end
+
+    #if($!{excelData.excelGrantState} == 2|| $!{excelData.excelGrantState} == 4)
+        <p>财务&gt;<span>发工资详情</span></p>
+        <strong>
+            #if($!{excelData.excelGrantState} == 2)
+                已发放
+            #elseif($!{excelData.excelGrantState} == 4)
+                仅下发工资单
+            #end
+        </strong>
+        <table class="payoff_two_list">
+            <tr class="payoff_two_list_first">
+                <td>发薪订单号</td>
+                <td>申请时间</td>
+                <td>发薪日</td>
+                <td>实发金额（元）</td>
+            </tr>
+            <tr class="payoff_two_list_last">
+                <td>$!{excelData.excelId}</td>
+                <td>$!date.format('yyyy-MM-dd HH:mm:ss',$!{excelData.excelAddtime})</td>
+                <td>$!date.format('yyyy-MM-dd',$!{excelData.excelPayday})</td>
+                <td>$!{excelData.excelCostTotal}</td>
+            </tr>
+        </table>
+    #end
+
+    <strong>描述</strong>
+    <table class="payoff_two_list">
+        <tr class="payoff_two_list_first">
+            <td>发薪人数</td>
+            <td>发薪金额（元）</td>
+            <td>工资单</td>
+        </tr>
+        <tr class="payoff_two_list_last">
+            <td>$!{excelData.excelPayrollNumber}</td>
+            <td>$!{excelData.excelCostTotal}</td>
+            <td>$!{excelData.excelName}</td>
+    </table>
+
+    <a id="salary" href="#" onclick="history.go(-1)" >确定</a>
+</div>
+</body>
+
+</html>

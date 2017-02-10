@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title></title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/salary/monthlypayroll.css')" rel="stylesheet">
+##    <link href="#springUrl('/resource/css/home/mainPage.css')" rel="stylesheet">
+    <script src="#springUrl('/resource/js/salary/monthlypayroll.js')"></script>
+    <script src="#springUrl('/resource/js/home/mainPage.js')"></script>
+
+</head>
+
+<body>
+<div class="salaset-title">
+    <h2 id="title">$!{payCycleBean.year}年$!{payCycleBean.month}月工资#if($!payCycleBean.approvalState == 1)（已审核）#end</h2>
+    <img src="#springUrl('/resource/img/salary/guanbi.png')" alt="" id="closeDetailBtn">
+</div>
+<div class="salaset">
+    <input id="payCycleId" type="hidden" value="$!{payCycleBean.id}">
+    <input id="currentPayCycle" type="hidden" value="$!{payCycleBean.currentPayCycle}">
+    <input id="isEnd" type="hidden" value="$!{isEnd}">
+    <input id="isStart" type="hidden" value="$!{isStart}">
+    <input type="hidden" id="isSocialSecurity" value="$!{isSocialSecurity}"/>
+
+
+    <div class="salaset-brie">
+        <div class="salaset-brie-span">
+            <span>人数:<b id="peopleNumber">0</b>人</span>
+        ##            <span>人工成本:<b>1458</b>元</span>
+            #if($!{totalWages})<span>发放总额:<b>$!{totalWages}元</b></span>#end
+            #if($!{payDay})<span>发放日期:<b>$!date.format('yyyy-MM-dd',$!{payDay})</b></span>#end
+        ##            0:未发放 1:待发放  2:发放中  3:已发放
+            <span>状态:<b id="isPayOff" data-value="$!{payCycleBean.isPayOff}">
+                #if($!{payCycleBean.isPayOff} == 0)
+                    未发放
+                #elseif($!{payCycleBean.isPayOff} == 1)
+                    待发放
+                #elseif($!{payCycleBean.isPayOff} == 2)
+                    发放中
+                #elseif($!{payCycleBean.isPayOff} == 3)
+                    已发放
+                #end
+            </b></span>
+        </div>
+        <div class="salaset-brie-span1">
+            <a href="javascript:;" class="der">导出</a>
+            <a href="javascript:;" class='active paf'>发工资</a>
+        </div>
+    </div>
+
+    <div class="salaset-list clear">
+
+    </div>
+    <div id="kkpager" style="margin-top:30px;"></div>
+
+    <div class='foot' id="foot">
+        #if($!{payCycleBean.approvalState} == 0)
+            <div class="footBtn footBtn1">
+                <input class="okBtn" type="button" id="addCustomer" value="审核"/>
+                <input class="cancelBtn" type="button" id="cancelBtn" value="取消">
+            </div>
+        #end
+    </div>
+
+</div>
+<!-- *************蒙版***************** -->
+<div class="mengban" style='display: none'></div>
+
+
+<!-- 自定义导出-->
+<div class="deriver" style='display: none'>
+    <h3>自定义导出</h3>
+    <ul id="exportList">
+    </ul>
+    <div class='footer'>
+        <div class="footerBtn">
+            <a href="javascript:;" class="exportBtn oBt" onclick="onExport()">确定</a>
+            <a href="javascript:;" class="exportBtn1 cBt">取消</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

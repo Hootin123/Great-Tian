@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/payday/batchImport.css')" rel="stylesheet">
+    <script src="#springUrl('/resource/js/plugins/dropzone/dropzone.js')"></script>
+    <script src="#springUrl('/resource/js/payday/batchImport.js')"></script>
+</head>
+
+<body>
+<div class="batchImport">
+    <p>批量导入成员</p>
+    <table class="batchImport_tb">
+        <tr>
+            <td style="text-align: left;">批量导入成员到：</td>
+            <td>$!{companyName}</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td style="text-align: left;">请选择要导入的文件：</td>
+            <td><a id="upload" href="#" style="margin-left:7px">上传文件</a></td>
+            <td><a class="a_return" href="orgmember.htm">返回</a></td>
+        </tr>
+    </table>
+    <span style=" display:block; border-bottom: 1px dotted #B9CCE1; margin-top:30px ;"></span>
+    <dl>
+        <dt><em>*</em>&nbsp;导入说明</dt>
+        <dd>1.请使用Excel等软件创建一个xls文件，格式如下<a href="$!{customerPath}">点击下载模板</a></dd>
+        <dd>2.各列内容：编号（必填），公司（必填），部门（必填），姓名（必填），工资卡（必填），身份证（必填）</dd>
+        <dd>3.请使用gb系列编码保存文件，如使用文本编辑器编辑，特殊符号字段需加水英文双引号。</dd>
+    </dl>
+</div>
+</body>
+<html>

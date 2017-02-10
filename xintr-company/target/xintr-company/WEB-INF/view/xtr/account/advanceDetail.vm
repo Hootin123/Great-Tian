@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/account/payoff.css')" rel="stylesheet">
+</head>
+<body>
+<div class="main_right payoff_two salaryDetails clear" id = "salaryDetails">
+    <p>我的账户&gt;<span>垫付详情</span></p>
+    <strong>已放款</strong>
+    <table class="payoff_two_list" >
+        <tr class="payoff_two_list_first">
+            <td>垫付订单号</td>
+            <td>申请时间</td>
+            <td>资金到账时间</td>
+            <td>垫付金额（元）</td>
+        </tr>
+        <tr class="payoff_two_list_last">
+            <td>1234567890</td>
+            <td>2016.06.11</td>
+            <td>0</td>
+            <td>1,000,000.00</td>
+        </tr>
+    </table>
+    <strong>描述</strong>
+    <table class="payoff_two_list">
+        <tr class="payoff_two_list_first">
+            <td>垫付期限</td>
+            <td>计息方式</td>
+            <td>利率</td>
+            <td>服务费</td>
+            <td>还款方式</td>
+            <td>说明</td>
+        </tr>
+        <tr class="payoff_two_list_last">
+            <td>张三</td>
+            <td>15021555898</td>
+            <td>3333555566668888</td>
+            <td>3333555566668888</td>
+            <td>3333555566668888</td>
+            <td>仅下发工资单</td>
+    </table>
+    <strong>还款详情</strong>
+    <table class="payoff_two_list">
+        <tr class="payoff_two_list_first">
+            <td>还款期数</td>
+            <td>还款金额（元）</td>
+            <td>截至还款时间</td>
+            <td>状态</td>
+        </tr>
+        <tr class="payoff_two_list_last">
+            <td>第1期</td>
+            <td>20,000.00</td>
+            <td>2016.07.11</td>
+            <td>已还款</td>
+        </tr>
+    </table>
+    <a href="javscript:viod(0);" onclick="jascript:history.go(-1);">确定</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    background: url(../../img/comm/errorBack.png) no-repeat center;
+    background-size: 100% 100%;
+    overflow: hidden
+}
+
+.content {
+    width: 800px;
+    height: 500px;
+    margin: 0 auto;
+    margin-top: 150px;
+}
+
+.content div {
+    text-align: center
+}
+
+.content1 {
+    width: 100%;
+    background: url(../../img/comm/errorPlug.png) no-repeat center;
+    font-size: 28px;
+    line-height: 30px;
+    color: #666;
+}
+
+.content2 {
+    width: 100%;
+    line-height: 50px;
+    color: #999;
+    font-size: 22px;
+}
+
+.content3 {
+    width: 100%;
+    line-height: 50px;
+    color: #999;
+    font-size: 16px;
+}
+
+.content4 a {
+    margin: 100px auto 0;
+    width: 130px;
+    height: 36px;
+    display: block;
+    background: #0696fa url(../../img/comm/errorFlush.png) no-repeat 25px center;
+    line-height: 36px;
+    color: #fff;
+    border-radius: 18px;
+    padding-left: 20px;
+}

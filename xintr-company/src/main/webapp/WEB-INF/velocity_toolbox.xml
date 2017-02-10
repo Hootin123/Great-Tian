@@ -1,0 +1,22 @@
+<toolbox>
+    <xhtml>true</xhtml>
+
+    <tool>
+        <key>date</key>
+        <scope>application</scope>
+        <class>org.apache.velocity.tools.generic.DateTool</class>
+    </tool>
+    <tool>
+        <key>numberTool</key>
+        <scope>application</scope>
+        <class>org.apache.velocity.tools.generic.NumberTool</class>
+        <parameter name="format" value="#0.0"/>
+    </tool>
+
+    <tool>
+        <key>xtr</key>
+        <scope>application</scope>
+        <class>com.xtr.comm.custom.XtrTools</class>
+    </tool>
+
+</toolbox>

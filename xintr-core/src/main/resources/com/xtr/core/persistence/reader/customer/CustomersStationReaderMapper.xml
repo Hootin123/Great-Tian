@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xtr.core.persistence.reader.customer.CustomersStationReaderMapper" >
+  <resultMap id="BaseResultMap" type="com.xtr.api.domain.customer.CustomersStationBean" >
+    <id column="station_id" property="stationId" jdbcType="BIGINT" />
+    <result column="station_customer_id" property="stationCustomerId" jdbcType="BIGINT" />
+    <result column="station_enter_time" property="stationEnterTime" jdbcType="TIMESTAMP" />
+    <result column="station_employ_method" property="stationEmployMethod" jdbcType="INTEGER" />
+    <result column="station_regular_time" property="stationRegularTime" jdbcType="TIMESTAMP" />
+    <result column="station_customer_number" property="stationCustomerNumber" jdbcType="VARCHAR" />
+    <result column="station_customer_state" property="stationCustomerState" jdbcType="INTEGER" />
+    <result column="station_dept_id" property="stationDeptId" jdbcType="BIGINT" />
+    <result column="station_station_name" property="stationStationName" jdbcType="VARCHAR" />
+    <result column="station_contract_file" property="stationContractFile" jdbcType="VARCHAR" />
+    <result column="station_regular_evaluate" property="stationRegularEvaluate" jdbcType="VARCHAR" />
+    <result column="station_create_time" property="stationCreateTime" jdbcType="TIMESTAMP" />
+    <result column="station_update_time" property="stationUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="station_dimissing_time" property="stationDimissingTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    station_id, station_customer_id, station_enter_time, station_employ_method, station_regular_time, 
+    station_customer_number, station_customer_state, station_dept_id, station_station_name, 
+    station_contract_file, station_regular_evaluate, station_create_time, station_update_time,station_dimissing_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from customers_station
+    where station_id = #{stationId,jdbcType=BIGINT}
+  </select>
+  <!-- 根据用户id查询用户且不是删除的员工岗位信息-->
+  <select id="selectByCustomerId"  resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select
+    <include refid="Base_Column_List" />
+    from customers_station
+    where station_customer_id = #{stationCustomerId,jdbcType=BIGINT}
+    AND
+    station_customer_state != 4
+  </select>
+
+  <!--查询工号是否有重复-->
+  <select id="selectStatonNumberForeach" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM customers_station
+    left join customers on customers_station.station_customer_id=customers.customer_id
+    <where>
+      customers.customer_company_id=#{companyId,jdbcType=BIGINT}
+      and customers_station.station_customer_number in
+      <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+        #{item}
+      </foreach>
+
+    </where>
+  </select>
+
+  <!--查询所有入职员工-->
+  <select id="selectByNoRegular" parameterType="java.util.Map" resultMap="BaseResultMap">
+       select
+          station_customer_id,
+          station_regular_time
+          FROM
+          customers_station
+          where
+          station_customer_state = 1 AND
+          <![CDATA[ station_regular_time <=date('${endTimeStr}') ]]>
+--           and
+--             station_regular_time>=date('${startTimeStr}')
+  </select>
+
+</mapper>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	#parse("comm/head.vm")
+	<meta charset="UTF-8">
+	<title>社保信息详情</title>
+	<script src="#springUrl('/resource/js/shebao/informationDetails.js')"></script>
+</head>
+<style type="text/css">
+	.inforDetalisHeader{
+		width: 100%;
+	    min-width: 1000px;
+	    height: 80px;
+	    font-size: 24px;
+	    font-family: '微软雅黑';
+	    text-align: center;
+	    line-height: 80px;
+	    border-bottom: 1px solid #dbe9ee;
+	    position: relative;
+	}
+	.inforDetalisHeader img{
+		position: absolute;
+	    top: 0;
+	    bottom: 0;
+	    right: 30px;
+	    margin: auto;
+	    cursor: pointer;
+	}
+	.inforDetalisMain{
+		margin: 0 auto;
+		margin-top: 30px;
+		width: 90%;
+	    color: #666666;
+	    min-width: 960px;
+	    font-family: '微软雅黑';
+	}
+	.inforDetalisMain-baseinfo-title, .inforDetalisMain-social-title, .inforDetalisMain-fund-title{
+		width: 100%;
+		height: 40px;
+		background:#f1f9fc;
+    	color: #333;
+    	font-size: 16px;
+    	line-height: 40px;
+    	text-indent: 20px;
+    	font-weight: 600;
+		border:1px solid #dbe9ee;
+	}
+	.inforDetalisMain-baseinfo-main p,.inforDetalisMain-social-main p,.inforDetalisMain-fund-main p{
+		width: 100%;
+		line-height: 40px;
+		color: #666;
+    	font-size: 14px;
+    	padding-left: 40px;
+    	box-sizing: border-box;
+	}
+	.inforDetalisMain-baseinfo-main p span:nth-child(1),.inforDetalisMain-social-main p span:nth-child(1),.inforDetalisMain-fund-main p span:nth-child(1){
+		display: block;
+		width: 250px;
+		float: left;
+	}
+	.inforDetalisMain-social,.inforDetalisMain-fund{
+		margin-top: 20px;
+	}
+	.inforDetalisMain-social .social-title,.inforDetalisMain-fund .fund-title{
+		width: 100%;
+		line-height: 50px;
+		color: #666;
+		font-weight: 600;
+    	font-size: 14px;
+    	text-indent: 40px;
+	}
+	.inforDetalisMain-social table,.inforDetalisMain-fund table{
+		width: 100%;
+		font-size: 12px;
+		color: #666;
+	}
+	.inforDetalisMain-social table thead tr,.inforDetalisMain-fund table thead tr{
+		width:100%;
+		height:40px;
+		background:#5b7798;
+		color: #fff;
+		text-align: center;
+	}
+	.inforDetalisMain-social table thead tr td,.inforDetalisMain-fund table thead tr td{
+		border-right:1px solid #fff;
+	}
+	.inforDetalisMain-social table tbody tr,.inforDetalisMain-fund table tbody tr{
+		width: 100%;
+		height:40px;
+		text-align: center;
+	}
+	.inforDetalisMain-social table tbody tr td ,.inforDetalisMain-fund table tbody tr td{
+		border:1px solid #dbe9ee;
+	}
+	.inforDetalisFooter{
+		width: 90%;
+    	height: 80px;
+    	margin:0 auto;
+    	margin-top: 50px;
+    	background:#f1f9fc;
+        border:1px solid #dbe9ee;
+	}
+	.inforDetalisFooter .button{
+		width: 240px;
+		height: 40px;
+		margin:0 auto;
+	}
+	.inforDetalisFooter input{
+		width: 100%;
+		height: 100%;
+		background:#0696fa;
+		color: #fff;
+		border:0;	
+		margin-top: 20px;
+		border-radius:6px;
+		text-align:center;
+		line-height: 40px;
+		font-size: 18px;
+		font-family: '微软雅黑';
+		cursor: pointer;
+	}
+</style>
+<body>
+
+    <input type="hidden" name="customerId" value="$!{customerId}" id="customerId"/>
+
+	<div class="inforDetalisHeader"><span id="trueName"></span></a><b><img src="/resource/img/salary/guanbi.png"  onclick="gunbi();"/></b></div>
+	<div class="inforDetalisMain">
+		<div class="inforDetalisMain-baseinfo">
+			<div class="inforDetalisMain-baseinfo-title">基础信息</div>
+			<div class="inforDetalisMain-baseinfo-main">
+				<p>
+					<span>部门：  <a id="depName"></a></span>
+					<span>手机号：  <a id="customerPhone"></a></span>
+				</p>
+				<p>
+					<span>参保地区：<a id="joinCityName"></a></span>
+					<span>身份证号码：<a id="customerIdcard"></a></span>
+				</p>
+			</div>
+		</div>	
+		<div class="inforDetalisMain-social">
+			<div class="inforDetalisMain-social-title">社保信息</div>
+			<div class="inforDetalisMain-social-main" id="shebaoParent">
+				<p>
+					<span>缴纳状态：<a id="sbJiaonaState"></a></span>
+					<span>缴纳基数：<a id="sbBase"></a></span>
+				</p>
+##				<p>
+##					<span style="float: none;">缴纳起始年月：201608</span>
+##				</p>
+##				<div class="social-title">社保费用详情：</div>
+##				<table>
+##					<thead>
+##						<tr>
+##							<td>险种</td>
+##							<td>基数（元）</td>
+##							<td>单位比例</td>
+##							<td>单位费用（元）</td>
+##							<td>个人比例</td>
+##							<td>个人费用（元</td>
+##						</tr>
+##					</thead>
+##					<tbody>
+##						<tr>
+##							<td>医疗</td>
+##							<td></td>
+##							<td></td>
+##							<td></td>
+##							<td></td>
+##							<td></td>
+##						</tr>
+##						<tr>
+##							<td>失业</td>
+##							<td></td>
+##							<td></td>
+##							<td></td>
+##							<td></td>
+##							<td></td>
+##						</tr>
+##						<tr>
+##							<td>工伤</td>
+##							<td></td>
+##							<td></td>
+##							<td></td>
+##							<td></td>
+##							<td></td>
+##						</tr>
+##						<tr>
+##							<td>生育</td>
+##							<td></td>
+##							<td></td>
+##							<td></td>
+##							<td></td>
+##							<td></td>
+##						</tr>
+##						<tr>
+##							<td>总计</td>
+##							<td colspan="3">单位费用：2156.00</td>
+##							<td colspan="2">个人费用：261.00</td>
+##						</tr>
+##					</tbody>
+##				</table>
+			</div>
+		</div>
+		<div class="inforDetalisMain-fund">
+			<div class="inforDetalisMain-fund-title">公积金信息</div>
+			<div class="inforDetalisMain-fund-main" id="gjjParent">
+				<p>
+					<span>缴纳状态：<a id="gjjJiaonaState"></a></span>
+					<span>缴纳基数：<a id="gjjBase"></a></span>
+				</p>
+##				<p>
+##					<span style="float: none;">缴纳起始年月：201608</span>
+##				</p>
+##				<div class="fund-title">公积金费用详情：</div>
+##				<table>
+##					<thead>
+##						<tr>
+##							<td>险种</td>
+##							<td>基数（元）</td>
+##							<td>单位比例</td>
+##							<td>单位费用（元）</td>
+##							<td>个人比例</td>
+##							<td>个人费用（元</td>
+##						</tr>
+##					</thead>
+##					<tbody>
+##						<tr>
+##							<td>公积金</td>
+##							<td></td>
+##							<td></td>
+##							<td></td>
+##							<td></td>
+##							<td></td>
+##						</tr>
+##						<tr>
+##							<td>总计</td>
+##							<td colspan="3">单位费用：2156.00</td>
+##							<td colspan="2">个人费用：261.00</td>
+##						</tr>
+##					</tbody>
+##				</table>
+			</div>
+		</div>
+	</div>
+	<div class="inforDetalisFooter">
+		<div class="button">
+			<input type="button" name=""  onclick="confirm();" value='确认'/>
+		</div>
+	</div>
+</body>
+</html>

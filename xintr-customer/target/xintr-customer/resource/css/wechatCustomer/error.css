@@ -1,0 +1,31 @@
+body{
+    width: 100%;
+    height: 100%;
+    background: #fff;
+}
+.error-pic{
+    width: 100%;
+    height: 3.66rem;
+    margin-top: 1.3rem;
+    background: url(../../img/wechatCustomer/errorPage1.png) 0 0 no-repeat;
+    background-size: 100% 100%;
+}
+.error-text{
+    width: 100%;
+    height: 1.1rem;
+    text-align: center;
+    line-height: 1.1rem;
+    font-size: 0.36rem;
+    color: #999;
+}
+.linkPhone{
+    width: 100%;
+    margin-top: 4.46rem;
+    text-align: center;
+    font-size: 0.28rem;
+    color: #333;
+
+}
+.linkPhone span{
+    font-weight: bold;
+}

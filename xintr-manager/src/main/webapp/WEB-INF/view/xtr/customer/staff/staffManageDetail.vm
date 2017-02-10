@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>H+ 员工信息管理</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-table/bootstrap-table.min.css')" rel="stylesheet">
+</head>
+
+<body>
+<div class="col-sm-12">
+    <div class="container-fluid">
+        <div class="row-fluid">
+##            <div class="text-right" style="margin-top:10px;">
+##                <button class="btn btn-primary " type="button" id="backBtn"><i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;返回
+##                </button>
+##            </div>
+            <div class="panel panel-default" style="margin-top:10px;">
+##                <div class="panel-heading"><strong>员工信息</strong></div>
+                <table id="staffManageTab" data-mobile-responsive="true" class="table table-hover table-bordered">
+                    <tr><td style="width:15%;">用户名</td><td style="width:30%;">$!{staffDetail.customerLogname}</td><td style="width:15%;">是否实名认证</td><td style="width:30%;">$!{staffDetail.customerTruenameIsauthentication}</td></tr>
+                    <tr><td>姓名</td><td>$!{staffDetail.customerTurename}</td><td>账户余额</td><td>$!{staffDetail.totalAmount}</td></tr>
+                    <tr><td>手机号码</td><td>$!{staffDetail.customerPhone}</td><td>邮箱绑定</td><td>$!{staffDetail.customerEmail}</td></tr>
+                    <tr><td>身份证号码</td><td>$!{staffDetail.customerIdcard}</td><td>登录密码</td><td></td></tr>
+                    <tr><td>工资卡</td><td>$!{staffDetail.customerBanknumber}</td><td>账户注册时间</td><td>$!date.format('yyyy-MM-dd HH:mm:ss',$!{staffDetail.customerAddtime})</td></tr>
+                    <tr><td>工资</td><td>$!{staffDetail.customerSalary}</td><td>最近登录时间</td><td>$!date.format('yyyy-MM-dd HH:mm:ss',$!{staffDetail.customerLoginTimeNow})</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+<script src="#springUrl('/resource/js/hui/content.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table-mobile.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/validate/jquery.validate.min.js')"></script>
+<script src="#springUrl('/resource/js/comm/jdatagrid.js')"></script>
+<script src="#springUrl('/resource/js/customer/staff/staffManageDetail.js')"></script>
+</html>

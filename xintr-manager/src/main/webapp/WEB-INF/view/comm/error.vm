@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+#parse("comm/head.vm")
+
+<title>#if($errorTitle && $!{errorTitle} != '')
+			$!{errorTitle}
+		#else
+			提示
+		#end</title>
+</head>
+<body>
+  <div style="margin:40px 0;font-size:14px;color:#787878;text-align:center;">
+		#if($errorMsg && $!{errorMsg} != '')
+			$!{errorMsg}
+		#else
+            <div>数据未加载成功!</div>
+		#end	
+      <div style="padding-top:30px;">
+        <span>将于<span style="color:red;font-size:18px;" id="errot_timeout">5</span>秒后跳转至首页</span>
+      </div>
+  </div>
+  <div style="clear:both"></div>
+<script>
+$(function(){
+	var time = 5;
+	var interval_id = setInterval(function(){
+		if(time == 1){
+			window.location.href = "#springUrl('/')";
+			return;
+		}
+		time = time -1;
+		$("#errot_timeout").html(time);
+	},1000);
+});
+</script>
+</body>
+</html>

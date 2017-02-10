@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtr.core.persistence.reader.sbt.SbtBasicReaderMapper">
+
+  <resultMap id="BaseResultMap" type="com.xtr.api.domain.sbt.SbtBasicBean">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="month" jdbcType="INTEGER" property="month" />
+    <result column="data" jdbcType="VARCHAR" property="data" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, city, month, data, create_time
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sbt_basic
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <!--根据月份和城市查询-->
+  <select id="selectByCityAndMonth" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sbt_basic where city = #{city} and month = #{month} order by id desc limit 1
+  </select>
+
+  <select id="selectPrevMonth" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sbt_basic where city = #{city} and month &gt; #{month} order by id asc limit 1
+  </select>
+
+  <select id="selectMaxMonthBasic" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from sbt_basic where city = #{city} order by month desc limit 1
+  </select>
+
+</mapper>

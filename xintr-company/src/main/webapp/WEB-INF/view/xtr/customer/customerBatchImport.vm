@@ -1,0 +1,551 @@
+##<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+##        "http://www.w3.org/TR/html4/strict.dtd">
+##
+##<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+##<head>
+##    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+##    <title></title>
+##    #parse("comm/head.vm")
+##    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/customer/customerSelector.css')"/>
+##    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/js/plugins/laydate/need/laydate.css')"/>
+##    <link href="#springUrl('/resource/css/customer/dropzone.css')" rel="stylesheet" />
+##    <script src="#springUrl('/resource/js/plugins/laydate/laydate.js')"></script>
+##    <script src="#springUrl('/resource/js/comm/validateUtil.js')"></script>
+##    <script src="#springUrl('/resource/js/customer/dropzone.js')"></script>
+##
+##</head>
+##<body>
+##    <input type="hidden" id="newsImg">
+##    备注：请根据下载的excel 表格填写员工资料
+##    <div style="border:1px red solid;width:35%;margin-left:15%;">
+##            （推荐<a href="downloadUserFile.htm?fileName=1b698242-b5a6-4d60-b6ba-c2613721c17f.xlsx">下载模板文件</a>，填写后上传）<br/>
+##            <a onclick="onShowUploadRule();">点击查看上传要求</a>
+##    </div>
+##    <div class="dropzone dz-clickable" id="myDrop" style="width:35%;margin-left:50%;">
+##
+##        <div class="dz-default dz-message" data-dz-message="" style="margin-left:-500px;width:100px;height:50px;">
+##            <input type="button" value="选择文件" id="uploadBtn">
+##        </div>
+##        #*<div class="dz-default dz-message" data-dz-message="" style="margin-left:100px;">
+##            <input type="button" value="222" id="uploadBtn">
+##        </div>*#
+##    </div>
+##    <input type="hidden" id="newsImg" name="newsImg"/>
+##
+####    <div id= "dropzone" style="border:1px red solid;width:300px;height:600px;">
+####        <form action="customerUploadBatch.htm" class= "dropzone"  enctype= "multipart/form-data">
+####            <div style="border:1px red solid;width:300px;height:300px;"></div>
+####            <div style="border:1px red solid;width:300px;height:300px;"></div>
+####            <div class= "fallback">
+####                <input name= "file" type="file" multiple= "" /> //普通的html文件上传表单，文件类型是file，name属性用于action的属性        //注入，即imageUpload action中存在一个属性叫做“file”，保存文件内容
+####            </div>
+####        </form>
+####    </div>
+##
+##    <div style="width: 160px; margin:40px auto;">
+##        <input class="okBtn" type="button" value="确认提交"/>
+##        <input class="cancelBtn" type="button" value="取消"/>
+##    </div>
+##
+##</body>
+##<script>
+##    $(function () {
+##        Dropzone.autoDiscover = false;
+##        var myDropzone = new Dropzone("div#myDrop", {
+##            url: "customerUploadBatch.htm",
+##            acceptedFiles: ".xlsx,.xls",
+##            addRemoveLinks: true,
+##            maxFiles: 1,
+##            dictInvalidFileType: "错误的文件格式",
+##            dictRemoveFile: "移除文件",
+##            dictMaxFilesExceeded: "您只可以上传1个文件"
+##        });
+##
+##        myDropzone.on('error', function (file, errorMessage) {
+##            console.log(errorMessage);
+##            if(errorMessage){
+##                alertWarn(errorMessage);
+##            }
+##        });
+##
+##        myDropzone.on('success', function (file, xhr) {
+##            console.log(xhr);
+##            if(xhr){
+##                $("#newsImg").val(xhr.url);
+##            }
+##        });
+##
+##        $(".okBtn").on("click",function(){
+##            $.ajax({
+##                type: 'post',
+##                url: 'commitUploadFile.htm',
+##                async:false,
+##                data:{"fileName":$("#newsImg").val()},
+##                success: function (resultResponse) {
+##                    console.log(resultResponse);
+##                    if(resultResponse.success){
+##                        layer.alert('上传成功',{
+##                            title:'处理结果',
+##                        },function(index){
+##                            parent.loadCustomerList();
+##                            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+##                            parent.layer.close(index);
+##                        });
+##                    } else {
+##                        layer.alert(resultResponse.message, {icon: 1});
+##                    }
+##                }
+##            });
+##        });
+##
+##        $(".cancelBtn").on("click",function(){
+##            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+##            parent.layer.close(index);
+##        });
+##    });
+##
+##    /**
+##     * 跳转到上传规则页面
+##     */
+##    function onShowUploadRule(){
+##        var index = layer.open({
+##            type: 2,
+##            title: '文件上传要求',
+##            maxmin: false,
+##            shadeClose: false, //点击遮罩关闭层
+##            area: ['700px', '500px'],
+##            content: 'toCustomerUploadRulePage.htm'
+##        });
+##        //窗口最大化
+##//        layer.full(index);
+##    }
+##</script>
+##</html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+    #parse("comm/head.vm")
+##    <link rel="stylesheet" href="css/comm.css" />
+##    <script type="text/javascript" src="js/jquery-1.11.0.js" ></script>
+    <style>
+        body{
+            width: 100%;
+            height: 100%;
+        }
+        .importemp-title{
+            width:100%;
+            min-width: 1200px;
+            height: 80px;
+            line-height: 80px;
+            border-bottom: 1px solid #dbe9ee;
+            color: #333333;
+            text-align: center;
+            position: relative;
+        }
+        .importemp-title img{
+            position: absolute;
+            top:0;
+            bottom:0;
+            right:30px;
+            margin:auto;
+            cursor:pointer;
+        }
+        .importemp-main{
+            width: 1000px;
+            margin: 40px auto 0;
+            color: #666666;
+            font-size: 12px;
+        }
+        .importemp-main p{
+            color: #f99b15;
+            margin: 0 0 20px 20px;
+        }
+        .importemp-mleft,.importemp-mright{
+            width: 495px;
+            height: 295px;
+            background: #f1f9fc;
+            border: 2px dashed #dbe9ee;
+            float: left;
+        }
+
+        .importemp-mright{
+            border-left: none;
+            background: #FFFFFF;
+        }
+        .importemp-mleft .imbtn{
+            display: block;
+            width: 200px;
+            height: 36px;
+            line-height: 36px;
+            text-align: center;
+            background: #0696FA;
+            color: #FFFFFF;
+            margin: 103px auto 0;
+            border-radius: 6px;
+            position: relative;
+            font-size:18px;
+        }
+        .importemp-file{
+            opacity: 0;
+            filter:alpha(opacity=70);
+            width: 200px;
+            height: 36px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .importemp-mlemind{
+            font-kerning: 14px;
+            text-align: center;
+            margin: 20px auto 0;
+            line-height: 20px;
+        }
+        .importemp-mlemind a{
+            color: #0696FA;
+        }
+
+        .importemp-mright .importemp-exl{
+            margin: 100px auto 0;
+            text-align: center;
+        }
+        .importemp-mright i{
+            display: block;
+            margin-top: 13px;
+        }
+
+        .importemp-foot{
+            min-width:1200px;
+            height: 80px;
+            background: #f1f9fc;
+            line-height: 80px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+
+        }
+        .importemp-foot .importempBtn{
+            width: 400px;
+            margin: 20px auto 0;
+        }
+        .importemp-foot input{
+            border-radius: 8px;
+            text-align: center;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .importemp-submit{
+            width: 240px;
+            height: 40px;
+            background: #0696fa;
+            color: #FFFFFF;
+            line-height: 40px;
+            float:left;
+            border: none;
+            font-family: "微软雅黑";
+        }
+        .importemp-btn{
+            width: 138px;
+            height: 38px;
+            background: none;
+            color: #0696fa;
+            text-align: center;
+            line-height: 38px;
+            border: 1px solid #0696fa;
+            float:right;
+            font-family: "微软雅黑";
+        }
+        .importemp-img{
+            width: 0;
+            height: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .importemp-delete{
+            display: none;
+            width: 200px;
+            height: 40px;
+            background: #000000;
+            text-align: center;
+            line-height: 40px;
+            color: #FFFFFF;
+            opacity: 0.5;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<input type="hidden" id="newsImg">
+<div class="importemp-title">
+    <h2>批量导入员工信息</h2>
+    <img src="#springUrl('/resource/img/salary/guanbi.png')" alt="" id="closeDetailBtn">
+</div>
+<form id="up">
+            <div class="importemp-main clear">
+                <p>备注：请根据下载的excel 表格填写员工资料</p>
+                <div class="importemp-mleft">
+                    <a class="imbtn" href="javascript:;">
+                        选择文件
+                        <input type="file" class="importemp-file" />
+                    </a>
+                    <div class="importemp-mlemind">（推荐<a href="#springUrl('/resource/upload/salaryfiles/template/addCustomersBatch.xlsx')">下载模板</a>文件,填写后上传）<br /><a onclick="onShowUploadRule();">[点击查看文件上传要求]</a></div>
+                </div>
+                <div class="importemp-mright">
+                    <div class="importemp-img">
+                        <img class="" src="#springUrl('/resource/img/customer/exl1.png')" />
+                        <i class="importemp-delete">删除</i>
+                    </div>
+                    <div class="importemp-exl">
+                        <img src="#springUrl('/resource/img/customer/exl.png')"" />
+                        <i>或将文件拖拽到此处</i>
+                    </div>
+                </div>
+            </div>
+            <div class="importemp-foot">
+                <div class="importempBtn">
+                    <input class="importemp-submit" type="button" value="确认提交" />
+                    <input class="importemp-btn" type="button" value="取消" />
+                </div>
+            </div>
+</form>
+</body>
+</html>
+<script>
+    $(function(){
+//        关闭
+        $('#closeDetailBtn').click(function(){
+            onCancelDialog()
+        })
+        function onCancelDialog() {
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+        }
+
+
+        $(".importemp-submit").on("click",function(){
+            console.log($("#newsImg").val());
+            if($("#newsImg").val()==null || $("#newsImg").val()==undefined || $("#newsImg").val()==""){
+                layer.alert("请添加上传EXCEL文件", {icon: 1});
+                return false;
+            }
+            $.ajax({
+            type: 'post',
+            url: 'commitUploadFile.htm',
+            async:false,
+            data:{"fileName":$("#newsImg").val()},
+            success: function (resultResponse) {
+                console.log("提交结果");
+                console.log(resultResponse);
+                if(resultResponse.success){
+                    layer.alert('上传成功',{
+                        title:'处理结果',
+                        cancel:function(){
+                            parent.loadCustomerList();
+                            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+                            parent.layer.close(index);
+                        }
+                    },function(index){
+                        parent.loadCustomerList();
+                        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+                        parent.layer.close(index);
+                    });
+                } else {
+                    showWarning(resultResponse.message);
+                }
+            }
+        });
+    });
+
+    $(".importemp-btn").on("click",function(){
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    });
+
+        var oDiv = $(".importemp-mright").get(0); //必须将jq对象转换为js对象，调用原生方法
+        var oDiv1 = $(".importemp-exl");
+        var oImg = $('.importemp-img');
+        var reader = null
+        //进入
+        oDiv.ondragenter = function() {
+//
+        }
+        //移动，需要阻止默认行为，否则直接在本页面中显示文件
+        oDiv.ondragover = function(e) {
+            //alert(1)
+            //return false;
+            e = e || event;
+            e.preventDefault();
+        }
+        //离开
+        oDiv.onleave = function() {
+            oDiv1.show(); //清空内部样式！
+        }
+        //拖拽放置，也需要阻止默认行为
+        oDiv.ondrop = function(e) {
+            //console.log(e)
+            e = e || event;
+            e.preventDefault();
+
+            var fs = e.dataTransfer.files; //获取拖拽过来的对象,文件对象集合
+
+            if(fs.length > 1) {
+//                alert('不能上传多个文件')
+                layer.alert('不能上传多个文件', {icon: 1});
+            }
+
+            upload(fs);
+        }
+
+        /*删除事件*/
+//        $('.importemp-delete').click(function(){
+//            $("#newsImg").val("");
+//            fs = null;
+//            reader = null;
+//            oImg.css({'width':0,'height':0});
+//            $(".importemp-exl").show();
+//        });
+
+        $('.importemp-btn').click(function(){
+            console.log(reader.result);
+        });
+
+        function upload(fs){
+            //打印长度
+            //console.log(fs);
+            //循环多文件拖拽上传
+            for(var i = 0; i < fs.length; i++) {
+                //文件类型
+                var _type = fs[i].name;
+                console.log(_type);
+                //判断文件类型
+                if(_type.indexOf('xlsx') != -1 || _type.indexOf('xls') != -1) {
+                    oDiv1.hide();
+                    //文件大小控制
+                    //console.log(fs[i].size);
+                    //读取文件对象
+                    var reader = new FileReader(); //读取上传的文件
+                    //读为DataUrl,无返回值
+                    reader.readAsDataURL(fs[i]);
+                    //console.log(reader);
+                    reader.onloadstart = function(e) {
+
+                    }
+                    // 这个事件在读取进行中定时触发
+                    reader.onprogress = function(e) {
+
+//                        $("#total").html(e.total);
+                    }
+
+                    //当读取成功时触发，this.result为读取的文件数据
+                    reader.onload = function() {
+                        //文件数据
+                        console.log(this.result);
+                        //添加文件预览
+                        oImg.css({'width':200,'height':200}) //oDiv转换为js对象调用方法
+//                        var oImg = $("<img style='width:100px;' src='' />");
+//                        oImg.attr("src", '图片地址');
+//                        $(oDiv).append(oImg); //oDiv转换为js对象调用方法
+                    }
+                    //无论成功与否都会触发
+                    reader.onloadend = function() {
+
+                        if(reader.error) {
+                            console.log(reader.error);
+//                            alert('上传错误！')
+                            layer.alert('上传错误', {icon: 1});
+                        } else {
+//                            console.log(reader.result);
+                            console.log("上传文件名称:"+_type);
+                            $.ajax({
+                                type: 'post',
+                                url: 'customerUploadBatch.htm',
+                                async:false,
+                                data:{"fileCode":reader.result,"fileName":_type},
+                                success: function (resultResponse) {
+                                    console.log(resultResponse);
+                                    if (resultResponse.success) {
+                                        $("#newsImg").val(resultResponse.data);
+//                                        layer.alert('修改成功',{
+//                                            title:'处理结果',
+//                                        },function(index){
+//                                            //parent.loadCustomerList();
+//                                            //var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+//                                            //parent.layer.close(index);
+//                                            loadCustomerList();
+//                                        });
+                                    } else {
+                                        layer.alert(resultResponse.message, {icon: 1});
+                                    }
+                                }
+                            });
+                            //上传没有错误，ajax发送文件，上传二进制文件
+                        }
+                    }
+                } else {
+//                    alert('请上exc表格！');
+                    layer.alert('请上exc表格！', {icon: 1});
+                }
+            }
+        }
+
+        $('.importemp-img').mouseover(function(){
+            $('.importemp-delete').show();
+            //alert(1)
+        })
+
+        $('.importemp-img').mouseout(function(){
+            $('.importemp-delete').hide();
+        })
+
+
+        /*按钮上传*/
+
+        $('.importemp-file').get(0).onclick = function(){
+            var timer = null;
+            var myurl = null;
+            document.getElementById('up').reset();
+            timer = setInterval(function(){
+                myurl = $('.importemp-file').get(0).files
+                if(myurl.length != 0){
+                    upload(myurl);
+                    clearInterval(timer);
+                }
+            },300)
+//            var myurl = this.files;console.log(myurl.name)
+//            upload(myurl);
+
+        }
+
+        $('.importemp-delete').click(function(){
+            $("#newsImg").val("");
+            reader = null;
+            oImg.css({'width':0,'height':0});
+            $(".importemp-exl").show();
+
+        });
+
+    });
+    /**
+     * 跳转到上传规则页面
+     */
+    function onShowUploadRule(){
+        var index = layer.open({
+            type: 2,
+            title: '文件上传要求',
+            maxmin: false,
+            shadeClose: false, //点击遮罩关闭层
+            area: ['700px', '500px'],
+            content: 'toCustomerUploadRulePage.htm'
+        });
+        //窗口最大化
+        //        layer.full(index);
+    }
+</script>

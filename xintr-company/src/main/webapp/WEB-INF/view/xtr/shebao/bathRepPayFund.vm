@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>批量补缴公积金</title>
+	#parse("comm/head.vm")
+	<style type="text/css">
+		.batchRepPayFundHeader{
+			width: 100%;
+		    min-width: 1000px;
+		    height: 80px;
+		    font-size: 24px;
+		    font-family: '微软雅黑';
+		    text-align: center;
+		    line-height: 80px;
+		    border-bottom: 1px solid #dbe9ee;	
+		    position: relative;
+		}
+		.batchRepPayFundHeader img{
+			position: absolute;
+		    top: 0;
+		    bottom: 0;
+		    right: 30px;
+		    margin: auto;
+		    cursor: pointer;
+		}
+		.batchRepPayFund{
+			margin: 0 auto;
+			margin-top: 30px;
+			width: 90%;
+		    color: #666666;
+		    min-width: 960px;
+		}
+		.batchRepPayFund .batchRepPayFund-title{
+			width: 100%;
+		    height: 40px;
+		    line-height: 40px;
+		    background: #f1f9fc;
+		    padding: 0 100px;
+    		box-sizing: border-box;
+		}
+		.batchRepPayFund .batchRepPayFund-title .dept{
+			width:50%;
+	    	height: 100%;
+	    	float: left;
+		}
+		.batchRepPayFund .batchRepPayFund-title .dept input,.batchRepPayFund .batchRepPayFund-title .address select{
+			width: 200px;
+    		height: 25px;
+    		border:1px solid #dbe9ee;
+    		text-indent: 10px;
+		}
+		.batchRepPayFund .batchRepPayFund-title .address{
+			position: relative;
+			float: left;
+		}
+		.batchRepPayFund .batchRepPayFund-title .address img{
+			position: absolute;
+			right: 10px;
+			top:10px;
+			cursor: pointer;
+		}
+		.batchRepPayFund .batchRepPayFund-title .search{
+			width: 80px;
+	    	height: 26px;
+	    	background:#0696fa;
+	    	float: right;
+	    	margin-top: 7px;
+	    	border-radius:5px;
+	    	text-align: center;
+	    	line-height: 26px;
+	    	color: #fff;
+	    	cursor: pointer;
+		}
+		.batchRepPayFund-table table{
+			margin-top: 30px;
+			width: 100%;
+			text-align: center;
+		    color: #666;
+		    font-size: 12px;
+		}
+		.batchRepPayFund-table table thead tr{
+			width:100%;
+    		height:40px;
+    		background:#5b7798;
+    		color: #fff;
+		}
+		.batchRepPayFund-table table thead tr td{
+			border-right:1px solid #fff;
+		}
+		.batchRepPayFund-table table .firstTd input{
+			vertical-align: top;
+			margin-right: 4px;
+			margin-top: 2px;
+			cursor: pointer;
+		}
+		.batchRepPayFund-table table tbody tr{
+			width:100%;
+			height: 50px;
+		}
+		.batchRepPayFund-table table tbody tr td{
+			border:1px solid #dbe9ee;
+		}
+		
+		.batchRepPayFund-footer{
+			width: 100%;
+			height: 80px;
+			margin:0 auto;
+	    	margin-top: 40px;
+	    	margin-bottom: 20px;
+	    	background:#f1f9fc;
+		}
+		.batchRepPayFund-footer .bottom{
+			width: 400px;
+		    height: 40px;
+		    margin: 20px auto;
+		   /* border: 0;
+		    float: none;
+		    position: relative;*/
+		}
+		.batchRepPayFund-footer .bottom input{
+			width: 240px;
+    		height: 100%;
+    		background:#0696fa;
+    		color: #fff;
+    		border:0;	
+    		margin-top: 20px;
+    		border-radius:6px;
+    		text-align:center;
+    		line-height: 40px;
+    		font-size: 18px;
+    		cursor: pointer;
+    		float: left;
+    		font-family: '微软雅黑'
+		}
+		.batchRepPayFund-footer .bottom .batchRepPayFundClose{
+			margin-left: 10px;
+			width: 140px;
+			height: 40px;
+			float: right;
+			line-height: 40px;
+			border: 1px solid #0696fa;
+			background: #fff;
+			color: #0696fa;
+		}
+
+		/*蒙版*/ 
+		.mengban{
+			width: 100%;
+		    height: 100%;
+		    min-width: 1200px;
+		    min-height: 930px;
+		    position: fixed;
+		    left: 0;
+		    top: 0;
+		    background: #000000;
+		    opacity: 0.8;
+		    z-index: 2;
+		}
+		/*参数设置*/
+		.setRepFund{
+			width: 500px;
+			background: #fff;
+			border-radius: 20px;
+			position: absolute;
+			left: 40%;
+			top:25%;
+			z-index: 6;
+		}
+		.setRepFund-title{
+			width: 100%;
+			height: 48px;
+			text-align: center;
+			line-height: 78px;
+			font-size: 18px;
+			color: #333;
+		}
+		.setRepFund-title b{
+			display: block;
+		    width: 38px;
+		    height: 38px;
+		    background: url(#springUrl('/resource/img/close1.png')) 0 0 no-repeat;
+		    position: absolute;
+		    right: -18px;
+		    top: -18px;
+		    cursor: pointer;
+		}
+		.setRepFund-main{
+			margin-top:50px;
+			width: 100%;
+			padding: 0 40px;
+			box-sizing: border-box;
+			font-size: 14px;
+			color: #666;
+			position: relative;
+		}
+
+		.setRepFund-main .lit{
+			line-height: 68px;
+			margin-left: 40px;
+			height: 68px;
+			position: relative;
+		}
+
+		.setRepFund-main .lit em{
+			color: #f99b15;
+		}
+		.setRepFund-main .lit input{
+			width: 240px;
+			height: 30px;
+			border: 1px solid #dbe9ee;
+		    line-height: 30px;
+		    font-size: 12px;
+		    color: #666;
+		    text-indent: 20px;
+		    background: #fff;
+		    margin-left: 20px;
+		}
+		.setRepFund-main .RepSociaDate label{
+			float: left;
+		}
+		.setRepFund-main .RepSociaDate .p{
+			float: left;
+			 margin-left: 27px;
+			 height: 30px;
+			 margin-top:10px;
+			 border:1px solid #dbe9ee;
+			 border-bottom: 1px solid #dbe9ee;
+			 position: relative;
+		}
+		
+		.setRepFund-main .RepSociaDate input{
+			width: 113px;
+			display: block;
+    		float: left;
+			border: 0;
+			margin-left: 0;
+			
+		}
+		.setRepFund-main .RepSociaDate .p b{
+			float: left;
+			line-height: 30px;
+		}
+		.setRepFund-main .RepSociaDate .startDateImg{
+			position: absolute;
+			left: 87px;
+    		top: 7px;
+    		cursor: pointer;
+		}
+		.setRepFund-main .RepSociaDate .endDateImg{
+			position: absolute;
+			right: 8px;
+    		top: 7px;
+    		cursor: pointer;
+		}
+
+		.setRepFund-main .lit s{
+			position: absolute;
+			font-size: 12px;
+		    left: 85px;
+		    top: 66px;
+		    line-height: 0;
+		    color: #fea811;
+		    text-decoration:none;
+		}
+		.setRepFund-main .lit .s1{
+			left: 120px;
+		}
+		.setRepFund-main .lit .error{
+			max-width: 500px;
+    		min-height: 20px;
+			position: absolute;
+			left: 248px;
+    		top: 20px;
+			background: #f99b15;
+			padding: 5px 18px;
+		    z-index: 10;
+		    border-radius: 5px;
+		    color: #fff;
+		    font-size: 12px;
+		    line-height: 20px;
+
+		}
+		.setRepFund-main .lit .error:before{
+			content: "";
+		    display: block;
+		    border-width: 12px 24px;
+		    position: absolute;
+		    top: 2px;
+		    left: -34px;
+		    border-style: solid dashed dashed;
+		    border-color: transparent #f99b15 transparent transparent;
+		    font-size: 0;
+		    line-height: 0;
+		}
+		.setRepFund-main .RepFundAddress img{
+			position: absolute;
+			right: 95px;
+			top:15px;
+			cursor: pointer;
+		}
+		.setRepFund-footer{
+			width: 380px;
+			height: 36px;
+			margin:30px auto;
+			margin-top:50px;
+		}
+		.setRepFund-footer input{
+			width: 200px;
+			height: 100%;
+			float: left;
+			border-radius: 6px;
+			background: #0696fa;
+			color: #fff;
+			font-size: 18px;
+			font-family: '微软雅黑';
+			text-align: center;
+			line-height: 36px;
+			border:0;
+			cursor: pointer;
+		}
+		.setRepFund-footer .closeBtn{
+			float: right;
+			width: 160px;
+			line-height: 36px;
+			border: 1px solid #0696fa;
+			background: #fff;
+			color: #0696fa;
+		}
+
+
+		/*时间控件*/
+		.dateMain{
+			width: 164px;
+			height: 206px;
+			position: absolute;
+			border: 1px solid #dbe9ee;
+			box-shadow: 1px 5px 7px #e6eff2; 
+			background: #fff;
+			z-index: 10;
+		}
+		.start{
+			left: -56px;
+    		top: 35px;
+		}
+		.end{
+			left: 190px;
+			top: 35px;
+		}
+		.dateMain .date-title{
+			width: 100%;
+			height: 40px;
+			background: #0696fa;
+			text-align: center;
+			line-height: 40px;
+			position: relative;
+			color: #fff;
+		}
+		.dateMain .date-title .date-left{
+			position: absolute;
+			left: 18px;
+			top:15px;
+			cursor: pointer;
+		}
+		.dateMain .date-title .date-right{
+			position: absolute;
+			right: 18px;
+			top:15px;
+			cursor: pointer;
+		}
+		.dateMain .date-content{
+			width: 100%;
+			height: 100%;
+			padding: 20px 20px 0;
+			box-sizing: border-box;
+		}
+		.dateMain .date-content li{
+			float: left;
+			width: 22px;
+			height: 22px;
+			text-align: center;
+			line-height: 22px;
+			margin:0 28px 13px 0;
+			cursor: pointer;
+			border-radius: 5px;
+		}
+		.dateMain .date-content .lit{
+			margin-right: 0;
+		}
+	</style>
+</head>
+<body>
+	<div class="batchRepPayFundHeader">批量补缴公积金-员工选择<b><img src="#springUrl('/resource/img/guanbi.png')"></b></div>
+	<div class="batchRepPayFund">
+		<div class="batchRepPayFund-title">
+			<div class="dept">
+				部门：<input type="text" name="">
+			</div>
+			<div class="address">
+				参保地区：
+				<select>
+					<option>上海</option>
+					<option>成都</option>
+				</select>
+			</div>
+			<div class="search">搜索</div>
+		</div>
+		<div class="batchRepPayFund-table">
+			<table>
+				<thead>
+					<tr>
+						<td class='firstTd checkAll'><input type="checkbox" >序号</td>
+						<td>姓名</td>
+						<td>手机号</td>
+						<td>部门</td>
+						<td>参保地区</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class='firstTd'><input type="checkbox" >1</td>
+						<td>路飞</td>
+						<td>15884561006</td>
+						<td>海贼王</td>
+						<td>东海</td>
+					</tr>
+					<tr>
+						<td class='firstTd'><input type="checkbox" >2</td>
+						<td>新地</td>
+						<td>15884561006</td>
+						<td>海贼王</td>
+						<td>东海</td>
+					</tr>
+					<tr>
+						<td class='firstTd'><input type="checkbox" >3</td>
+						<td>胡子</td>
+						<td>15884561006</td>
+						<td>海贼王</td>
+						<td>东海</td>
+					</tr>
+					<tr>
+						<td class='firstTd'><input type="checkbox" >4</td>
+						<td>花都</td>
+						<td>15884561006</td>
+						<td>海贼王</td>
+						<td>东海</td>
+					</tr>
+					<tr>
+						<td class='firstTd'><input type="checkbox" >5</td>
+						<td>路飞</td>
+						<td>15884561006</td>
+						<td>海贼王</td>
+						<td>东海</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="batchRepPayFund-footer">
+			<div class="bottom">
+				<input type="button" name="" value="确认" class="okBatchRepPayFundBth">
+				<input type="button" name="" value="取消" class='batchRepPayFundClose'>
+			</div>	
+		</div>
+		
+	</div>
+<!-- 蒙版 -->
+	<div class="mengban" style="display:none"></div>
+	<!-- 批量缴纳公积金-参数设置 -->
+	<div class="setRepFund" style="display:none">
+		<div class="setRepFund-title">批量补缴公积金-参数设置<b class='closeBtn'></b></div>
+		<div class="setRepFund-main">
+			<div class='RepSociaDate lit'>
+				<label><em>*</em>补缴月份：</label>
+				<div class='p'>
+					<input type="text" name="" class='startDate' placeholder="起始月" readonly="readonly"><b>—</b>
+					<i class='startDateImg'><img src="#springUrl('/resource/img/date.png')"></i>
+					
+					<!-- 时间控件 -->
+					<div class="dateMain start" style="display:none">
+						<div class="date-title">
+							<em class='date-left'>
+								<img src="#springUrl('/resource/img/date-left.png')">
+							</em>
+							<span>2015</span>
+							<em class='date-right'>
+								<img src="#springUrl('/resource/img/date-right.png')">
+							</em>
+						</div>
+						<div class="date-content">
+							<ul>
+								<li>01</li>
+								<li>02</li>
+								<li class='lit'>03</li>
+								<li>04</li>
+								<li>05</li>
+								<li class='lit'>06</li>
+								<li>07</li>
+								<li>08</li>
+								<li class='lit'>09</li>
+								<li>10</li>
+								<li>11</li>
+								<li class='lit'>12</li>
+
+							</ul>
+						</div>
+					</div>
+					<input type="text" name=""  class='endDate' placeholder="结束月" readonly="readonly">
+					<i class='endDateImg'><img src="#springUrl('/resource/img/date.png')"></i>
+					
+					<!-- 时间控件 -->
+					<div class="dateMain end" style="display:none">
+						<div class="date-title">
+							<em class='date-left'>
+								<img src="#springUrl('/resource/img/date-left.png')">
+							</em>
+							<span>2015</span>
+							<em class='date-right'>
+								<img src="#springUrl('/resource/img/date-right.png')">
+							</em>
+						</div>
+						<div class="date-content">
+							<ul>
+								<li>01</li>
+								<li>02</li>
+								<li class='lit'>03</li>
+								<li>04</li>
+								<li>05</li>
+								<li class='lit'>06</li>
+								<li>07</li>
+								<li>08</li>
+								<li class='lit'>09</li>
+								<li>10</li>
+								<li>11</li>
+								<li class='lit'>12</li>
+
+							</ul>
+						</div>
+					</div>
+					<!-- 时间控件 -->
+				</div>
+				<s class='s1'>可补缴月份：201607-201609</s>
+			</div>
+			<div class='lit RepFundBasis' style="display:block"><em>*</em>社保基数1：<input type="text">
+				<span></span>
+				<s>【201605-201606】基数范围：122.00元-520.00元</s>
+	
+			</div>
+			<div class='lit RepFundBasis1' style="display:block">
+				<em>*</em>社保基数2：<input type="text" name="" placeholder="基数范围 3201-10000">
+				<span></span>
+				<s>【201607-201607】基数范围：126.00元-2634.00元</s>
+			</div>
+		</div>
+		<div class="setRepFund-footer">
+			<input type="button" name="" value='确定' class='okSetRepFundBtn'>
+			<input type="button" name="" class='closeBtn' value='取消'>
+		</div>
+	</div>			
+
+	<!--  -->
+	<script type="text/javascript">
+		//...................时间控件
+
+
+
+		// 年份变化(减)
+		$('.date-left').on('click',function(){
+					
+			var timer=$(this).parent().find('span').text()
+			timer--
+			// if(timer<2016){
+			// 	// judYear()
+			// 	return
+			// }else{
+				getNowDate()
+				$(this).parent().find('span').text(timer)
+			// }
+			judYear()
+		});
+		// 年份变化(加)
+		$('.date-right').on('click',function(){
+			getNowDate()
+			var timer=$(this).parent().find('span').text()
+			timer++
+			$(this).parent().find('span').text(timer)
+			judYear()
+		})
+
+		// 月份变化
+		
+		$('.date-content li').hover(
+			function(){
+				$(this).css({'background':'#0696fa','color':'#fff'})
+			},
+			function(){
+				$(this).css({'background':'#fff','color':'#333'})
+			}
+		)
+
+
+
+		// 初始化
+		getNowDate()
+		$('.date-title span').html(initY)
+
+
+		// 获取当前时间
+		function getNowDate(){
+			nowdate = new Date();
+		 	initM=parseInt(nowdate.getMonth()+"")+1; // .....当前月
+			initY=parseInt((nowdate.getFullYear())); // .....当前年
+		 	outM=Add(initM);
+			var obj=$('.date-content li')
+			for (var i = 0; i < obj.length; i++) {
+				console.log(obj[i].innerHTML)	
+				if(obj[i].innerHTML==outM ){
+					obj[i].style.border='1px solid #fa5f5f';
+					obj[i].style.color='#0696fa';
+				};
+			}
+		}
+
+		// 判断是否是当前的年份
+		function judYear(){
+			if($('.date-title span').html()!=initY){
+				$('.date-content li').css({'border':'0','color':'#333','background':'#fff'})
+				// $('.date-content li:first').css({'background':'#0696fa','color':'#fff'});
+				
+
+			}else{
+				$('.date-content li').css({'background':'#fff','color':'#333'});
+			}
+			
+		}
+
+		// 个位数加零
+		function Add(n){
+		 	if(n<10){
+		 		return '0'+n ;
+		 	}else{
+		 		return n;
+		 	}
+		 }
+
+
+    // 全选与反选
+
+     checkall();
+    var checkFlag=true;
+    function checkall(){
+    	$('.checkAll').bind('click',function(){
+    		if(checkFlag){
+    			$('tbody').find('input').prop('checked','checked');
+
+    		}else{
+    			$('tbody').find('input').prop('checked',false);
+    		}
+    		checkFlag = !checkFlag;
+    	})
+    }
+
+
+    	// 设置出现
+
+    	$('.okBatchRepPayFundBth').on('click',function(){
+    		$('.setRepFund').show()
+	    	$('.mengban').show()
+    	})
+
+
+    	// 验证
+     	var fRepFund=false;
+	    $('.RepFundBasis input').blur(function(){
+	    	testRepFundBasis()
+	    })
+	    function testRepFundBasis(){
+	    	if($('.RepFundBasis input').val()=='' || $('.RepFundBasis input').val()==undefined){
+	    		$('.RepFundBasis span').addClass('error').html('请输入基数').show();
+	    		setTimeout(function(){
+	    			$('.RepFundBasis span').fadeOut(500)
+	    		},1000)
+	    		fRepFund=false;
+	    	}else if(parseInt($('.RepFundBasis input').val())<=10000 && parseInt($('.RepFundBasis input').val())>=3201){
+	    		$('.RepFundBasis span').removeClass('error').html('').hide();
+	    		fRepFund=true;
+	    	}else{
+	    		$('.RepFundBasis span').addClass('error').html('请输入正确的基数').show();
+		    		setTimeout(function(){
+		    			$('.RepFundBasis span').fadeOut(500)
+		    		},1000)
+		    	fRepFund=false
+	    	}
+	    }
+
+
+	    var fRepFund1=false;
+	    $('.RepFundBasis1 input').blur(function(){
+	    	testRepFundBasis1()
+	    })
+	    function testRepFundBasis1(){
+	    	if($('.RepFundBasis input').val()=='' || $('.RepFundBasis1 input').val()==undefined){
+	    		$('.RepFundBasis1 span').addClass('error').html('请输入基数').show();
+	    		setTimeout(function(){
+	    			$('.RepFundBasis1 span').fadeOut(500)
+	    		},1000)
+	    		fRepFund1=false;
+	    	}else if(parseInt($('.RepFundBasis1 input').val())<=10000 && parseInt($('.RepFundBasis1 input').val())>=3201){
+	    		$('.RepFundBasis1 span').removeClass('error').html('').hide();
+	    		fRepFund1=true;
+	    	}else{
+	    		$('.RepFundBasis1 span').addClass('error').html('请输入正确的基数').show();
+		    		setTimeout(function(){
+		    			$('.RepFundBasis1 span').fadeOut(500)
+		    		},1000)
+		    	fRepFund1=false
+	    	}
+	    }
+
+	    //日历选择
+	    	// 开始
+	    $('.startDateImg').on('click',function(e){
+	    	$('.start').show();
+	    	$('.end').hide();
+	    	e.stopPropagation()
+
+	    	$('.start .date-content li').on('click',function(){
+	    		 
+	    		var month=$(this).html();
+				var year=$('.start').find('span').html()
+	    		$('.startDate').val(year+month);
+	    		$('.start').hide();
+
+	    	})
+	    })
+
+	     	// 结束
+	    $('.endDateImg').on('click',function(e){
+	    	$('.end').show(); 
+	    	$('.start').hide();
+	    	e.stopPropagation()
+
+	    	$('.end .date-content li').on('click',function(){
+	    		
+	    		var month=$(this).html();
+				var year=$('.end').find('span').html()
+	    		$('.endDate').val(year+month);
+	    		$('.end').hide();
+	    	})
+	    })
+
+
+	    $(document).on('click',function(){
+       		$('.dateMain').hide()
+	    });
+
+	    $('.dateMain').on('click',function(e){
+	        e.stopPropagation()
+	    })
+
+
+	    // 确认
+
+	      $('.okSetRepFundBtn').on('click',function(){
+	    	testRepFundBasis();
+	    	testRepFundBasis1()
+	    	if(fRepFund ){
+	    		alert('设置成功')
+	    		$('.setRepFund').hide()
+	    		$('.mengban').hide()
+	    	}
+	    })
+	    // 关闭与取消
+
+	    $('.closeBtn').on('click',function(){
+	    	$('.setRepFund').hide()
+	    	$('.mengban').hide()
+	    })
+
+
+
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

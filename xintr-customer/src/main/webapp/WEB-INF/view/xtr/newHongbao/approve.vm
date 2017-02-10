@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" id='html'>
+<head>
+	#parse("comm/head.vm")
+	<meta charset="UTF-8">
+	<title>认证页</title>
+	<meta name="viewport" content="	width=device-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1">
+    <script type="text/javascript" src="#springUrl('/resource/js/hongbao/ajaxfileupload.js')"></script>
+    <script type="text/javascript" src="#springUrl('/resource/js/newHongbao/approve.js')"></script>
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/newHongbao/approve.css')">
+</head>
+<body>
+	<div class="sign">
+		<div class="logo">
+			<img src="#springUrl('/resource/img/newHongbao/logo.png')" alt="">
+		</div>
+		<div class="logo-text">
+			<img src="#springUrl('/resource/img/newHongbao/logo-text.png')" alt="">
+		</div>
+	</div>
+	<header>企业完善信息</header>
+	<section>
+		<form id="companyForm">
+			<input name="companyId" type="hidden" value="$!{companyId}"/>
+            <input type="hidden" name="companyLogo" value="$!{companyLogo}"/>
+            <input type="hidden" name="companyOrganizationImg" value="$!{companyOrganizationImg}"/>
+			<ul class='company'>
+				<li class='companyName'>
+					<label><em>*</em>公司名称</label><input type="text" name="companyName" value="$!{companyName}" placeholder="输入公司名称">
+					<b></b>
+				</li>
+				<li class='companyLogo'>
+					<label>公司Logo</label>
+					<div class="pic1">
+						#if($!{companyLogo} == "")
+                            +<img src="#springUrl('/resource/img/newHongbao/error.png')" id="uploadLogo"/>
+						#else
+                            <img src= "$!{companyLogoUrl}"  id="uploadLogo"/>
+						#end
+		                <input type="file"  name="file" id="companyLogoFile""/>
+					</div>
+				</li>
+				<li class='companyAddress'>
+					<label><em>*</em>公司地址</label><input type="text" name="companyAddress" value="$!{companyAddress}"  placeholder="输入公司地址">
+					<b></b>
+				</li>
+			</ul>
+			<ul class='permit'>
+				<li class='businessLicenseNumber'>
+					<label><em>*</em>营业执照编号</label><input type="text" name="companyNumber" value="$!{companyNumber}" placeholder="输入营业执照编号">
+					<b></b>
+				</li>
+				<li class='businessLicensePic'>
+					<label><em>*</em>营业执照扫描件</label>
+					<div class="pic2">
+						#if($!{companyOrganizationImg}=="")
+                            +<img src="#springUrl('/resource/img/newHongbao/error.png')"  id="uploadOrgImage"/>
+						#else
+                            <img src="$!{companyOrganizationImgUrl}"  id="uploadOrgImage"/>
+						#end
+		                <input type="file"  name="file" id="companyOrganizationImgFile" />
+					</div>
+				</li>
+			</ul>
+			<ul class='personal'>
+				<li class='legalPerson'>
+					<label><em>*</em>法人代表</label><input type="text" name="companyCorporation" value="$!{companyCorporation}" placeholder="输入法人代表">
+					<b></b>
+				</li>
+				<li class='legalPhone'>
+					<label><em>*</em>联系电话</label><input type="text" name="companyCorporationPhone" value="$!{companyCorporationPhone}"  placeholder="输入联系电话">
+					<b></b>
+				</li>
+			</ul>
+		</form>
+	</section>
+	<div class="hint" style="display: none"></div>	
+	<footer>
+		<div class="subApprove">提交认证</div>
+	</footer>
+</body>
+</html>

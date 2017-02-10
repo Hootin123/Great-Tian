@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtr.core.persistence.reader.company.CompanyDepositReaderMapper">
+  <resultMap id="BaseResultMap" type="com.xtr.api.domain.company.CompanyDepositBean">
+    <id column="deposit_id" jdbcType="BIGINT" property="depositId" />
+    <result column="deposit_member_id" jdbcType="BIGINT" property="depositMemberId" />
+    <result column="deposit_company_id" jdbcType="BIGINT" property="depositCompanyId" />
+    <result column="deposit_bank_name" jdbcType="VARCHAR" property="depositBankName" />
+    <result column="deposit_bank_account_name" jdbcType="VARCHAR" property="depositBankAccountName" />
+    <result column="deposit_bank_number" jdbcType="VARCHAR" property="depositBankNumber" />
+    <result column="deposit_sub_bank_name" jdbcType="VARCHAR" property="depositSubBankName" />
+    <result column="deposit_create_user" jdbcType="VARCHAR" property="depositCreateUser" />
+    <result column="deposit_update_user" jdbcType="VARCHAR" property="depositUpdateUser" />
+    <result column="deposit_create_time" jdbcType="TIMESTAMP" property="depositCreateTime" />
+    <result column="deposit_update_time" jdbcType="TIMESTAMP" property="depositUpdateTime" />
+    <result column="deposit_state" jdbcType="INTEGER" property="depositState" />
+  </resultMap>
+  <resultMap id="BaseConditionResultMap" type="com.xtr.api.dto.company.CompanyDepositDto" extends="BaseResultMap">
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="company_contact_tel" jdbcType="VARCHAR" property="companyContactTel" />
+    <result column="member_logname" jdbcType="VARCHAR" property="memberLogName" />
+    <result column="company_id" jdbcType="BIGINT" property="companyId" />
+    <result column="member_id" jdbcType="BIGINT" property="memberId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    deposit_id, deposit_member_id, deposit_company_id, deposit_bank_name, deposit_bank_account_name, 
+    deposit_bank_number, deposit_sub_bank_name, deposit_create_user, deposit_update_user, 
+    deposit_create_time, deposit_update_time,deposit_state
+  </sql>
+
+  <!-- 查询企业提现账户信息过滤条件 -->
+  <sql id="Deposit_Where_Clause">
+  <if test="approveState != null">
+    AND  companys.company_audit_status =#{approveState,jdbcType=INTEGER}
+  </if>
+  <if test="authState != null ">
+    and companys.company_isauth=#{authState,jdbcType=INTEGER}
+  </if>
+  <if test="ptotocolState != null ">
+    and company_protocol.protocol_contract_type=#{ptotocolState,jdbcType=INTEGER} and company_protocol.protocol_current_status in(2,3,5)
+  </if>
+  <if test="companyName != null and companyName != '' ">
+    AND (companys.company_name like   concat('%',#{companyName,jdbcType=VARCHAR},'%')
+    or companys.company_contact_tel  like   concat('%',#{companyName,jdbcType=VARCHAR},'%'))
+  </if>
+</sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from company_deposit
+    where deposit_id = #{depositId,jdbcType=BIGINT}
+  </select>
+
+  <!--根据企业ID获取提现账户-->
+  <select id="selectByCompanyId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from company_deposit
+    where deposit_company_id = #{depositCompanyId,jdbcType=BIGINT}
+  </select>
+
+  <!--根据过滤条件获取所有用户提现账户-->
+  <select id="selectByCondition" parameterType="com.xtr.api.dto.company.CompanyDepositDto" resultMap="BaseConditionResultMap">
+    select
+    <include refid="Base_Column_List" />,companys.company_name,company_members.member_logname,
+    company_members.member_phone,companys.company_id,company_members.member_id,companys.company_contact_tel
+    from company_members
+    left join companys on companys.company_id=company_members.member_company_id
+    left join company_deposit on company_deposit.deposit_member_id=company_members.member_id
+    left join company_protocol on company_protocol.protocol_company_id=company_members.member_company_id
+    where member_isdefault=1
+    <include refid="Deposit_Where_Clause"/>
+    GROUP BY company_members.member_id
+    order by company_members.register_time desc
+  </select>
+
+</mapper>

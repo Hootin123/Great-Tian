@@ -1,0 +1,85 @@
+body{
+    width: 100%;
+    height: 100%;
+    background: url(../../img/newHongbao/hint-defeat.png) 0 0 no-repeat;
+    background-size: 100%;
+    font-family: '微软雅黑';
+}
+.text1{
+    margin-top:4.58rem;
+    width: 100%;
+    height: 0.76rem;
+    font-size: 0.48rem;
+    font-weight: bold;
+    color: #fefff0;
+    text-align: center;
+}
+.text2{
+    width: 100%;
+    height: 1.37rem;
+    font-size: 0.36rem;
+    color: #fefff0;
+    text-align: center;
+
+}
+.text3{
+    width: 100%;
+    height: 0.5rem;
+    font-size: 0.28rem;
+    color: #fff;
+    text-align: center;
+}
+.text4{
+    width: 100%;
+    height: 0.9rem;
+    font-size: 0.28rem;
+    color: #fff;
+    text-align: center;
+}
+.text5{
+    width: 100%;
+    font-size: 0.36rem;
+    color: #fee94e;
+    text-align: center;
+}
+
+.goChange{
+    width:6.8rem;
+    height:1rem;
+    margin:0 auto;
+    margin-top: 0.8rem;
+    margin-bottom: 0.3rem;
+    background:url(../../img/newHongbao/active-footer.png) 0 0 no-repeat;
+    background-size:100% 100%;
+    font-weight:bold;
+    font-size:0.36rem;
+    font-family:'微软雅黑';
+    color:#000;
+    line-height:1rem;
+    text-align:center;
+}
+
+.sign{
+    position: absolute;
+    width:6rem;
+    height: 0.7rem;
+    left:0.75rem;
+    top:0.4rem;
+
+}
+.logo{
+    width: 1.93rem;
+    height:0.7rem;
+    float: left;
+}
+.logo img,.logo-text img{
+    display: block;
+    width:100%;
+    height: 100%;
+}
+.logo-text{
+    width:2.95rem;
+    height:0.36rem;
+    margin-top: 0.17rem;
+    float: right;
+}

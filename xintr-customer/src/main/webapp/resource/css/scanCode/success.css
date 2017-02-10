@@ -1,0 +1,61 @@
+
+html{
+    width:100%;
+    height: 100%;
+    overflow: hidden;
+
+}
+body{
+    width:100%;
+    height:100%;
+    overflow: hidden;
+    background: url(../../img/h5wallet/success-bg.png) 0 0 no-repeat;
+    background-size: 100%;
+}
+h3{
+    width: 2.06rem;
+    margin: 0 auto;
+    margin-top:1.9rem;
+    height:1.44rem;
+    font-size: 0.48rem;
+    font-family: '微软雅黑';
+    color: #333;
+    font-weight: 300;
+
+}
+.txt p{
+    width: 2.2rem;
+    height: 0.56rem;
+    margin: 0 auto;
+    font-size: 0.32rem;
+    font-family: '微软雅黑';
+    color: #333;
+}
+.txt p:nth-child(2){
+    height: 1.18rem;
+    width: 100%;
+    padding-left: 0.4rem;
+    font-size: 0.36rem;
+    color: #0696fa;
+    line-height: 1.18rem;
+}
+.txt p:nth-child(3){
+    height: 1.18rem;
+    width: 4.26rem;
+    font-size: 0.36rem;
+    color: #0696fa;
+    line-height: 1.18rem;
+}
+footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 0.9rem;
+    background:#0696fa;
+    font-size:0.34rem;
+    font-family: '微软雅黑';
+    color: #fff;
+    text-align: center;
+    line-height: 0.9rem;
+}

@@ -1,0 +1,95 @@
+body{
+    min-width: 1440px;
+    min-height: 930px;
+    background: url(../../img/pchongbao/active.png) 0 0 no-repeat;
+}
+.activeHeader{
+    width:100%;
+    padding: 40px 115px 0;
+    height: 110px;
+    box-sizing: border-box;
+}
+.logo{
+    width: 192px;
+    height: 70px;
+    float: left;
+}
+.logo-text{
+    width: 295px;
+    height: 36px;
+    float: left;
+    margin-top: 16px;
+    margin-left: 20px;
+}
+.activeMain{
+    width: 1000px;
+    height: 464px;
+    margin:40px auto;
+
+}
+.activeMain-left{
+    width: 690px;
+    height: 100%;
+    float: left;
+
+}
+.activeMain-left .text{
+    width: 100%;
+    height: 144px;
+    margin:40px 0 0 65px;
+}
+.activeRule{
+    width: 100%;
+}
+.activeRule .title{
+    width: 100%;
+    height: 52px;
+    color: #000;
+    font-size: 36px;
+    font-family: '楷体';
+    font-weight: 600;
+}
+.activeRule p{
+    width: 100%;
+    height: 46px;
+    color: #000;
+    font-size: 28px;
+    font-family: '楷体';
+    font-weight: 600;
+}
+.activeRule p span{
+    color: #cc3939;
+}
+.activeMain-right{
+    width: 310px;
+    height: 100%;
+    float: left;
+}
+.activeMain-right-title{
+    width: 100%;
+    height: 25px;
+    color: #000;
+    font-family: '微软雅黑';
+    font-size: 14px;
+    font-weight: 600;
+}
+.activeMain-right-pic{
+    width: 100%;
+    height: 430px;
+    overflow: hidden;
+    background: url(../../img/pchongbao/people.png) 0 0 no-repeat;
+}
+.getPacket{
+    width: 273px;
+    height: 70px;
+    margin:0 auto;
+    margin-top: 350px;
+    background: url(../../img/pchongbao/getPacket.png) 0 0 no-repeat;
+    font-size: 36px;
+    text-align: center;
+    line-height: 60px;
+    color: #000;
+    font-family: '宋体';
+    font-weight: 600;
+    cursor: pointer;
+}

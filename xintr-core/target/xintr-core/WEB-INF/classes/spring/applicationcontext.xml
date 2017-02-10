@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--通知spring使用cglib而不是jdk的来生成代理方法 AOP可以拦截到Controller -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <!-- 启动注解扫描包-->
+    <context:annotation-config/>
+    <context:component-scan base-package="com.xtr.core.*"/>
+
+
+    <import resource="datasource-config.xml"/>
+    <!-- import the dao definition -->
+    <import resource="dao-writer-config.xml"/>
+    <import resource="dao-reader-config.xml"/>
+    <!-- import redis service-->
+    <import resource="redis-config.xml"/>
+
+    <!-- import motan service-->
+    <import resource="motan_server.xml"/>
+
+    <!-- 配置文件读取工具类-->
+    <bean id="propertyConfigurer"
+          class="com.xtr.comm.util.PropertyUtils">
+        <property name="locations">
+            <list>
+                <value>classpath:config/common.properties</value>
+                <value>classpath:config/system.properties</value>
+                <value>classpath:config/jdpay.properties</value>
+            </list>
+        </property>
+        <property name="fileEncoding" value="gbk"/>
+    </bean>
+
+
+    <bean id="schedulerFactoryBean"
+          class="org.springframework.scheduling.quartz.SchedulerFactoryBean"/>
+
+    <bean id="jdPayConfig"
+          class="com.xtr.comm.jd.util.JdPayConfig"/>
+
+</beans>

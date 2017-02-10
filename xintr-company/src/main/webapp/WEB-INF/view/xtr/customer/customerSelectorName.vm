@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title></title>
+    #parse("comm/head.vm")
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/customer/customerSelector.css')"/>
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/js/plugins/laydate/need/laydate.css')"/>
+    <script src="#springUrl('/resource/js/plugins/laydate/laydate.js')"></script>
+    <script src="#springUrl('/resource/js/comm/validateUtil.js')"></script>
+    <style>
+        table{
+            width:300px;
+            margin: 40px auto;
+        }
+        table tr{
+            width:100%;
+            height:200px;
+        }
+        table tr input{
+            display: block;
+            width:220px;
+            height:26px;
+            border: 1px solid #d3e0f1;
+            border-radius: 4px;
+            font-size: 14px;
+            line-height: 26px;
+            text-indent: 10px;
+        }
+        .Name_user{
+            width: 60px;
+        }
+        .okBtn{
+            width: 180px;
+            height: 40px;
+            border: 0;
+            border-radius: 6px;
+            font-size: 16px;
+            color: #fff;
+            background: #0696fa;
+            float: left;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<form>
+    <table>
+        <tr>
+            <td class="Name_user">姓名:</td>
+            <td><input type="text" placeholder="请输入姓名" id="customerTurename"></td>
+        </tr>
+    </table>
+    <div style="width: 160px; margin:80px auto;">
+        <input class="okBtn" type="button" value="确认"/>
+    </div>
+</form>
+</body>
+<script>
+    $(function () {
+        // 绑定确定按钮事件
+        $('.okBtn').on('click', function () {
+            if($("#customerTurename").val()!='' && $("#customerTurename").val()!=undefined){
+                if($("#customerTurename").val().length>=2 && $("#customerTurename").val().length<=16){
+                    addMembers();
+                }else{
+                    layer.alert("请输入2~16位的姓名", {icon: 1});
+                }
+            }else{
+                layer.alert("请输入姓名", {icon: 1});
+            }
+
+        });
+    });
+    /**
+     * 搜索用户
+     */
+    function addMembers() {
+        var customerTurename=$("#customerTurename").val();
+        parent.loadCustomerTabByName(customerTurename);
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    }
+</script>
+</html>

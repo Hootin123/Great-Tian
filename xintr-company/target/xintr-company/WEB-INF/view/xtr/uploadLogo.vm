@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    #parse("comm/head.vm")
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="#springUrl('/resource/css/home/uploadlogo.css')" rel="stylesheet">
+    <script src="#springUrl('/resource/js/plugins/cropbox.js')"></script>
+    <script src="#springUrl('/resource/js/plugins/fileupload/ajaxfileupload.js')"></script>
+
+</head>
+<div class="container">
+    <div class="imageBox">
+        <div class="thumbBox"></div>
+        <div class="spinner" style="display: none">
+            <div class="hdbox" style="background: url(#springUrl('/resource/img/file.png')) no-repeat center center">
+                <input type="file" class="" name="file" id="upload-file" />
+            </div>
+        </div>
+    </div>
+    <div class="action" style="text-align:center">
+        <div class="new-contentarea tc">
+        </div>
+        <div class="rebtn">
+            <input id="btnZoomOut" type="button" value="-"><input id = "btnZoomIn" type="button" value="+">
+        </div>
+            <label for="upload-file" id="label">重新选择图片</label>
+            <input class="hdsub" type="submit" id="toCut" value="确认">
+    </div>
+</div>
+
+</body>
+
+<script type="text/javascript">
+    $(window).load(function() {
+        var options =
+        {
+            thumbBox: '.thumbBox',
+            spinner: '.spinner',
+            loadNow:false
+        }
+
+        cropper = $('.imageBox').cropbox(options);
+        $('#upload-file').on('change', upload);
+        $('#btnCrop').on('click', function(){
+        })
+        $('#btnZoomIn').on('click', function(){
+            cropper.zoomIn();
+        })
+        $('#btnZoomOut').on('click', function(){
+            cropper.zoomOut();
+        })
+
+        function upload(){
+            $.ajaxFileUpload({
+                url: BASE_PATH + '/uploadLogo.htm', //用于文件上传的服务器端请求地址
+                fileElementId: 'upload-file', //文件上传域的ID
+                dataType: 'json', //返回值类型 一般设置为json
+                success: function (data, status){
+                    if(data.success) {
+                        options.imgSrc = BASE_PATH + "/downLogo.htm?logoName=" +data.comment;
+                        options.logoName = data.comment;
+                        options.loadNow = true;
+                        cropper = $('.imageBox').cropbox(options);
+                    }else{
+                        options.imgSrc = null;
+                        options.logoName = null;
+                        options.loadNow = false;
+                        cropper = $('.imageBox').cropbox(options);
+
+                        showWarning(data.message);
+                    }
+                    $('#upload-file').on('change', upload);
+                },
+                error: function (data, status, e){
+                    alert(e);
+                    $('#upload-file').on('change', upload);
+                }
+            })
+        }
+
+        $("#toCut").click(toCut);
+
+        function toCut(){
+            if(cropper.isOk()) {
+                $.post(BASE_PATH + "/toCutLogo.htm", cropper.getCutData(), function(data){
+                    if(data.success) {
+                        $(".logo", window.parent.document).attr("src", BASE_PATH + "/downLogo.htm?logoName=" +data.comment)
+//                        showSuccess("logo上传成功")
+                        closeWindow();
+                    }else{
+                        showWarning("logo上传失败")
+                    }
+                });
+            }else{
+                showWarning("请选择图片")
+            }
+        }
+
+        function closeWindow() {
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+        }
+    });
+</script>
+</html>

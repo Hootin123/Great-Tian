@@ -1,0 +1,281 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title></title>
+
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/payday/payday.css')" rel="stylesheet">
+    <script src="#springUrl('/resource/js/plugins/dropzone/dropzone.js')"></script>
+    <script src="#springUrl('/resource/js/plugins/laydate/laydate.js')"></script>
+    <script src="#springUrl('/resource/js/comm/jquery-1.8.3.min.js')"></script>
+</head>
+<style>
+    .bankName,.bankSize,.bankMark,.remark{padding:5px 0; margin-left:10px;width:300px;}
+    .inputName{border:0;color:red;position: absolute;left:1000px;top:335px;display:none}
+    .inputSize{border:0;color:red;position: absolute;left:1000px;top:410px;display:none}
+    .inputMark{border:0;color:red;position: absolute;left:1000px;top:480px;display:none}
+    .inputRemark{border:0;color:red;position: absolute;left:1000px;top:625px;display:none}
+</style>
+<script>
+
+    var isSub = true;
+
+    $(document).ready(function(){
+
+         $('.bankName').blur(function(){
+             var name = /^[\u4e00-\u9fa5]*$/;
+             if(!name.test($(this).val())){
+                 $('.inputName').show();
+                 isSub = false;
+             }else{
+                 $('.inputName').hide()
+             }
+         })
+        var reg = /^(\d{16}|\d{19})$/;
+        $('.bankSize').blur(function(){
+            if(!reg.test($(this).val())) {
+                $('.inputSize').show();
+                isSub = false;
+            }else {
+                $('.inputSize').hide()
+            }
+        })
+        var size = /^[0-9a-zA-Z]{2,40}$/;
+        $('.bankMark').blur(function(){
+            if(!size.test($(this).val())) {
+                $('.inputMark').show();
+                isSub = false;
+            }else {
+                $('.inputMark').hide()
+            }
+        })
+        $('.remark').blur(function(){
+            if($(this).val()==""){
+                $('.inputRemark').show();
+                isSub = false;
+            }else{
+                $('.inputRemark').hide()
+            }
+        })
+        /*$('.sub').click(function(){
+            var name = /^[\u4e00-\u9fa5]*$/;
+                if(!name.test($('.bankName').val())){
+                    return false;
+                }
+            var reg = /^(\d{16}|\d{19})$/;
+                if(!reg.test($('.bankSize').val())) {
+                    return false;
+                }
+            var size = /^[0-9a-zA-Z]{2,40}$/;
+                if(!size.test($('.bankMark').val())) {
+                    return false;
+                }
+
+        })*/
+    })
+
+</script>
+<body>
+<div class="main_right payoff_two salaryDetails clear" id="">
+
+
+
+    <strong>付款</strong>
+
+    <table class="payoff_two_list">
+        <tr class="payoff_two_list_first">
+            <td style="text-align:left; padding-left:15px;">
+                订单金额：$!{xtr.money($!{orderMoneyTotal})}元 &nbsp;&nbsp;
+                付款金额:$!{xtr.money($!{realMoney})}元 &nbsp;&nbsp;
+                #if($!{redMoney})红包折扣金额：$!{xtr.money($!{redMoney})}元#end
+            </td>
+        </tr>
+        <tr class="payoff_two_list_last">
+            <td align="left" style="padding-left:15px;">
+                请按照如下步骤完成充值：
+            </td>
+        </tr>
+        <tr class="payoff_two_list_last">
+            <td align="left" style="padding-left:15px;">
+                <label style="font-weight: bold;">
+                1、通过银行柜台或网银转账转账到如下账户：
+                </label>
+
+                <br />&nbsp;&nbsp;&nbsp;&nbsp;• 账户名称：网银在线（北京）科技有限公司客户备付金
+
+                <br />&nbsp;&nbsp;&nbsp;&nbsp;• 账号：341561371394
+
+                <br />&nbsp;&nbsp;&nbsp;&nbsp;• 开户行：中国银行股份有限公司北京奥运村支行
+
+            </td>
+        </tr>
+        <tr class="payoff_two_list_last">
+            <td align="left" style="padding-left:15px;">
+                <label style="font-weight: bold;">
+                    2、将网银转账信息填入对话框，财务审核后会帮助您完成充值
+                </label>
+                <form onsubmit="return checkValid()">
+                    <table style="width: 80%; border: 0px; margin:0 auto;" >
+
+                        <tr style="border:0px;">
+                            <td align="right" style="border:0px;width:37%;">付款银行名称：</td>
+                            <td style="border:0px;"><input type="text" id="rechargeBank" value="" class="bankName"/></td>
+                        </tr>
+                        <tr style="border:0px;">
+                            <td align="right" style="border:0px;">付款银行账号：</td>
+                            <td style="border:0px;"><input type="text" id="rechargeBankNumber" class="bankSize" value="" /></td>
+
+                        </tr>
+                        <tr style="border:0px;">
+                            <td align="right" style="border:0px;">银行交易流水号：</td>
+                            <td style="border:0px;"><input type="text" id="rechargeSerialNumber" value="" class="bankMark"/></td>
+
+                        </tr>
+                        <tr style="border:0px;">
+                            <td align="right" style="border:0px;">充值金额：</td>
+                            <input type="hidden" name="rechargeMoney" id="rechargeMoney" value="$!{realMoney}"/>
+                            <td style="border:0px;font-size:18px;padding-left:10px;">$!{xtr.money($!{realMoney})}</td>
+                        </tr>
+                        <tr style="border:0px;">
+                            <td align="right" style="border:0px;">备注：</td>
+                            <td style="border:0px;"><input type="text" id="rechargeBak" value="" class="remark"/></td>
+
+                        </tr>
+                        <tr style="border:0px;">
+                            <td align="center" colspan="2" style="border:0px;">
+                                <button type="submit" class="sub" style="border:0;height:32px; margin: 0px; background-color: #0696fa; font-size: 12px; color:white; width:122px;; line-height:30px; display:inline-block;">
+                                    提交
+                                </button>
+##                              <a href="javascript:;" class="sub" style=";height:32px; margin: 0px; background-color: #0696fa; font-size: 12px; color:white; width:120px;; line-height:32px; display:inline-block;" onclick="payorder($(this));">提交</a>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="javascript:;" style="border:1px solid #0696fa;height:30px; margin: 0px; color: #0696fa; background:#fff;font-size: 12px; width:120px;; line-height:30px; display:inline-block;" onclick="history.go(-1);">返回</a>
+                            </td>
+                        </tr>
+
+                    </table>
+            <div class="inputName">请输入正确的银行名称</div>
+            <div class="inputSize">请输入正确的银行账号</div>
+            <div class="inputMark">请输入正确的银行交易流水号</div>
+            <div class="inputRemark">备注不能为空</div>
+                </form>
+
+            </td>
+        </tr>
+
+    </table>
+
+
+
+</div>
+</body>
+
+</html>
+
+<script type="text/javascript">
+
+
+    function checkValid(){
+
+        if($('.bankName').val() == '' || !/^[\u4e00-\u9fa5]*$/.test($('.bankName').val())){
+            $('.inputName').show();
+            return false;
+        }
+
+        if($('.bankSize').val() == '' || !/^(\d{16}|\d{19})$/.test($('.bankSize').val())){
+            $('.inputSize').show();
+            return false;
+        }
+
+        if($('.bankMark').val()=='' || !/^[0-9a-zA-Z]{2,40}$/.test($('.bankMark').val())){
+            $('.inputMark').show();
+            return false;
+        }
+
+        if($('.remark').val() == ''){
+            $('.inputRemark').show();
+            return false;
+        }
+
+        $.ajax({
+            type: 'post',
+            url: '../social/orderBankPay.htm',
+            data: {
+                'orderId': orderid
+                ,'rechargeBank':$('#rechargeBank').val()
+                ,'rechargeBankNumber':$('#rechargeBankNumber').val()
+                ,'rechargeSerialNumber':$('#rechargeSerialNumber').val()
+                ,'rechargeMoney':$('#rechargeMoney').val()
+                ,'rechargeBak':$('#rechargeBak').val()
+                ,'orderPaytype':1
+            },
+            success: function (resultResponse) {
+
+                if (resultResponse.success) {
+                    window.location.href = BASE_PATH + "/socialOrders.htm";
+                    /*layer.alert(resultResponse.message,{
+                        title:'温馨提示',
+                    },function(index){
+                        layer.close(index);
+                        window.location.href = BASE_PATH + "/socialOrders.htm";
+                        //window.location.reload();
+                    });*/
+                } else {
+                    showWarning(resultResponse.message);
+                }
+            }
+        });
+
+        return false;
+    }
+
+    var orderid=$!{orderId};
+    var ordermoneytotal=$!{orderMoneyTotal};
+
+    function payorder(obj){
+
+        if(obj.attr('ta')=='1')
+            return;
+
+        obj.attr('ta','1');
+
+        if(checkValid()){
+            $.ajax({
+                type: 'post',
+                url: '../social/orderBankPay.htm',
+                data: {
+                    'orderId': orderid
+                    ,'rechargeBank':$('#rechargeBank').val()
+                    ,'rechargeBankNumber':$('#rechargeBankNumber').val()
+                    ,'rechargeSerialNumber':$('#rechargeSerialNumber').val()
+                    ,'rechargeMoney':$('#rechargeMoney').val()
+                    ,'rechargeBak':$('#rechargeBak').val()
+                    ,'orderPaytype':1
+                },
+                success: function (resultResponse) {
+
+                    obj.removeAttr('ta');
+
+                    if (resultResponse.success) {
+                        window.location.href = BASE_PATH + "/socialOrders.htm";
+                        /*layer.alert(resultResponse.message,{
+                            title:'温馨提示',
+                        },function(index){
+                            layer.close(index);
+                            window.location.href = BASE_PATH + "/socialOrders.htm";
+                            //window.location.reload();
+                        });*/
+                    } else {
+                        showWarning(resultResponse.message);
+                    }
+                }
+            });
+        }
+
+        return;
+    }
+
+</script>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtr.core.persistence.reader.company.CompanyMemberLogsReaderMapper">
+
+  <resultMap id="BaseResultMap" type="com.xtr.api.domain.company.CompanyMemberLogsBean">
+    <id column="log_id" jdbcType="BIGINT" property="logId" />
+    <result column="log_company_id" jdbcType="BIGINT" property="logCompanyId" />
+    <result column="log_dep_id" jdbcType="BIGINT" property="logDepId" />
+    <result column="log_member_id" jdbcType="BIGINT" property="logMemberId" />
+    <result column="log_des" jdbcType="VARCHAR" property="logDes" />
+    <result column="log_type" jdbcType="INTEGER" property="logType" />
+    <result column="log_addtime" jdbcType="TIMESTAMP" property="logAddtime" />
+    <result column="log_member_logintime" jdbcType="TIMESTAMP" property="logMemberLogintime" />
+    <result column="log_member_logouttime" jdbcType="TIMESTAMP" property="logMemberLogouttime" />
+    <result column="log_ip" jdbcType="VARCHAR" property="logIp" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    log_id, log_company_id, log_dep_id, log_member_id, log_des, log_type, log_addtime,
+    log_member_logintime, log_member_logouttime, log_ip
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from company_member_logs
+    where log_id = #{logId,jdbcType=BIGINT}
+  </select>
+
+
+  <resultMap type="com.xtr.api.dto.company.CompanyMemberLogDto" id="companyMemberLogDto" extends="BaseResultMap">
+    <result column="user_name" property="userName"/>
+    <result column="job_name" property="jobName"/>
+    <result column="member_logname" property="memberLogname"/>
+  </resultMap>
+
+  <!-- 分页查询企业员工操作日志 -->
+  <select id="selectPage" resultMap="companyMemberLogDto">
+    SELECT
+    <include refid="Base_Column_List"/>,
+    b.member_name as user_name,
+    b.member_logname as member_logname,
+    b.member_rolename as job_name
+    from company_member_logs as a
+    left join company_members as b on a.log_member_id = b.member_id
+    WHERE 1=1
+    <if test="memberId != null">
+      AND a.log_member_id = #{memberId}
+    </if>
+    <if test="uname != null and uname != ''">
+      AND (b.member_name like '%${uname}%' or b.member_logname = #{uname})
+    </if>
+    <if test="dateStr != null and dateStr != ''">
+      AND date(a.log_addtime) = date(#{dateStr,jdbcType=VARCHAR})
+    </if>
+    ORDER BY a.log_addtime DESC
+  </select>
+
+</mapper>

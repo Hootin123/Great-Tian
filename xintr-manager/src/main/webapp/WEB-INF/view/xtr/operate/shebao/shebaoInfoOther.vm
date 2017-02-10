@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>历史账单</title>
+    #parse("comm/head.vm")
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/js/hui/plugins/layer/laydate/need/laydate.css')"/>
+    <script src="#springUrl('/resource/js/hui/plugins/layer/laydate/laydate.js')"></script>
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/hui/shebao/historyBill.css')">
+    <script src="#springUrl('/resource/js/operate/shebao/historyPayorder.js')"></script>
+</head>
+<body>
+<div class="historyBillHeader"></div>
+<div class="historyBill">
+    <form id="queryForm">
+        <div class="historyBill-title">
+            <span></span>
+            <span class='search1' onclick="search()">搜索</span>
+            <span class='historyBillDate'>
+              账单日期：<input type="text" name="orderDate"  class="laydate-icon" readonly="readonly" onclick="laydate({istime: true, format: 'YYYY-MM'})"  style="width: 200px" placeholder="请输入账单时间"/>
+			</span>
+            <span>
+            账单地区：<input name="joinCityName" placeholder="请输入地区名称精确查询" />
+          </span>
+            <span>
+                公司名称： <input name="companyName" type="text" placeholder="请输入公司名称模糊查询"/>
+            </span>
+        </div>
+    </form>
+    <div class="historyBill-main">
+        <ul>
+##            <li>
+##                <div class="historyBill-main-top">
+##                    <p><span>阿里巴巴-上海201610</span>账单</p>
+##                    <p class='submit'>订单编号：2010104454678</span>提交时间：<span>2016-10-18 23:00:00</span></p>
+##
+##                </div>
+##                <div class="historyBill-main-table">
+##                    <table>
+##                        <tr>
+##                            <td>缴费月份</td>
+##                            <td>缴费类型</td>
+##                            <td>详情</td>
+##                            <td>费用总额</td>
+##                            <td>账单状态</td>
+##                            <td>操作</td>
+##                        </tr>
+##                        <tr>
+##                            <td>201008</td>
+##                            <td>社保</td>
+##                            <td>{增员：1}</td>
+##                            <td rowspan="2">
+##                                <p>30元</p>
+##                                    <p>含服务费：<span price_service="$!{data.priceService}" customer_count="$!{data.customerCount}"
+##                                                  price_single="$!{data.priceSingle}" onclick="showService(this)">30元</span></p>
+##                                    <p>含补差费用：<a href="#springUrl('/shebao/addtion_detail.htm')">-15元</a></p>
+##                            </td>
+##                            <td rowspan="2">
+##                               待提交
+##                            </td>
+##                            <td rowspan="2" class='showTd1'>
+##                                <a href="#springUrl('/shebao/payorder_detail.htm?orderId=')$!{data.id}">账单详情</a>
+##                                <br>
+##                                <a style="color:red">异常账单</a>
+##                            </td>
+##                        </tr>
+##                        <tr>
+##                            <td>$!date.format('yyyyMM',$!{data.orderDate})</td>
+##                            <td>公积金</td>
+##                            <td>$!{data.orderGjjDetail}</td>
+##                        </tr>
+##                    </table>
+##                </div>
+##            </li>
+        </ul>
+
+
+
+    </div>
+    <!-- 蒙版 -->
+    <div class="mengban" style="display:none"></div>
+    <!--服务费 -->
+    <div class="service" style="display: none">
+        <div class="service-title">服务费用 <b></b></div>
+        <div class="service-main">
+            <table>
+                <tr>
+                    <td>服务费（元）</td>
+                    <td>单价（元）</td>
+                    <td>人数</td>
+                </tr>
+                <tr>
+                    <td><p class="price_service">0.00 </p><span>=</span></td>
+                    <td><p class="price_single">0.00</p><span class='cheng'>*</span></td>
+                    <td class="customer_count">0</td>
+                </tr>
+            </table>
+            <p class='pTitle list'>服务费收取规则说明：</p>
+            <p class="list">1、服务费按需求人数收取，<i id="serviceSingleAmount">29.80</i>元/人/次。</p>
+            <p class="list">2、停缴需求不收取服务费</p>
+        </div>
+        <div class="service-bottom">
+            <div class="button3">
+                <input type="button" name="" id="serviceSureBtn" value="确认">
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+        function cancelHistoryPayOrder(){
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+        }
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

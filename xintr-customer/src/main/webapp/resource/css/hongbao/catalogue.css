@@ -1,0 +1,111 @@
+@charset "UTF-8";
+body {
+  width: 100%;
+  height: 100%;
+  background: url(../../img/hongbao/packet-bg.png) 0 0 no-repeat;
+  background-size: cover; }
+
+header {
+  width: 100%;
+  height: 5.5rem; }
+
+section {
+  width: 100%;
+  height: 100%; }
+  section .hint {
+    margin-top: 0.8rem;
+    width: 100%; }
+    section .hint .blind-success p, section .hint .unbound p, section .hint .audit p, section .hint .approve p, section .hint .unapprove p, section .hint .getPacket p {
+      width: 100%;
+      line-height: 0.6rem;
+      font-size: 0.2rem;
+      color: #fff;
+      font-family: '微软雅黑';
+      text-align: center; }
+      section .hint .blind-success p span, section .hint .unbound p span, section .hint .audit p span, section .hint .approve p span, section .hint .unapprove p span, section .hint .getPacket p span {
+        color: #feb20f; }
+    section .hint .blind-success p:nth-child(1), section .hint .unbound p:nth-child(1), section .hint .audit p:nth-child(1), section .hint .approve p:nth-child(1), section .hint .unapprove p:nth-child(1), section .hint .getPacket p:nth-child(1) {
+      font-size: 0.36rem; }
+    section .hint .unbound .cord {
+      width: 2rem;
+      height: 2rem;
+      padding: 2rem 0 0 2rem !important;
+      margin: -2rem 0 0 0.8rem !important;
+      position: relative;
+      z-index: 100;
+      -webkit-user-select: none;
+      margin: 0 auto; }
+      section .hint .unbound .cord img {
+        display: block;
+        width: 100%;
+        height: 100%; }
+  section ul {
+    width: 100%;
+    height: 2.07rem;
+    margin-top: 0.2rem; }
+    section ul li {
+      width: 3.28rem;
+      height: 100%;
+      float: left;
+      margin-left: 0.3rem; }
+      section ul li span {
+        display: block;
+        width: 1.8rem;
+        height: 0.44rem;
+        margin: 0 auto;
+        margin-top: 1.53rem;
+        color: #fff;
+        font-size: 0.32rem;
+        font-family: '微软雅黑';
+        font-weight: 600;
+        text-align: center;
+        line-height: 0.44rem; }
+    section ul .packet-reg {
+      background: url(../../img/hongbao/packet-reg.png) 0 0 no-repeat;
+      background-size: 100% 100%; }
+    section ul .packet-info {
+      background: url(../../img/hongbao/packet-info.png) 0 0 no-repeat;
+      background-size: 100% 100%; }
+  section .packet {
+    width: 100%;
+    height: 2.55rem; }
+    section .packet .packet-five, section .packet .packet-twenty {
+      width: 3.28rem;
+      height: 100%;
+      float: left;
+      margin-left: 0.3rem;
+      background: url(../../img/hongbao/packet-befor.png) center 0 no-repeat;
+      background-size: 1.62rem 2.52rem; }
+      section .packet .packet-five span, section .packet .packet-twenty span {
+        display: block;
+        width: 1.15rem;
+        height: 0.36rem;
+        border-radius: 0.2rem;
+        box-shadow: 1px 6px 3px #7d1026;
+        background: #fff;
+        margin-left: 0.96rem;
+        margin-top: 1.68rem;
+        font-size: 0.3rem;
+        font-family: '微软雅黑';
+        font-weight: 900;
+        color: #f00;
+        text-align: center;
+        line-height: 0.36rem; }
+  section .text {
+    width: 100%;
+    height: 0.6rem;
+    margin-top: 0.2rem;
+    font-size: 0.26rem;
+    color: #fff;
+    font-family: '微软雅黑';
+    text-align: center;
+    line-height: 0.6rem; }
+
+footer {
+  width: 1.67rem;
+  height: 0.6rem;
+  margin: 0.2rem auto;
+  background: url(../../img/hongbao/footer-logo.png) 0 0 no-repeat;
+  background-size: 100% 100%; }
+
+/*# sourceMappingURL=catalogue.css.map */

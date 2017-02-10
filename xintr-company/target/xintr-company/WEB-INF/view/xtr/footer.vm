@@ -1,0 +1,53 @@
+#parse("comm/head.vm")
+<div id="to_top">
+    <ul>
+        <li class="a1">
+            <div>
+                <form>
+                    <input type="text" value="请输入您的电话" placeholder="请输入您的电话" maxlength="11" />
+                    <button type="button" class="btn btn-blue" onclick="addcob($(this));">免费回拨</button>
+                </form>
+            </div>
+        </li>
+        <li class="a2">
+            <div></div>
+        </li>
+        <li class="a3" onclick="$('body,html').animate({scrollTop:0},800);">
+            <div></div>
+        </li>
+    </ul>
+
+</div>
+
+<div class="footer">
+    <div class="x-container f1">
+        <div class="x-content">
+            <div class="content clfix">
+                <div class="service">
+                    <img src="#springUrl('/resource/img/xtr2/server.png')" class="fllt"/>
+                    <p class="p1">全国服务热线（09:00-18:00）</p>
+                    <p class="p2">400-175-8090</p>
+                </div>
+                <div class="item">
+                    <p class="title">商务合作</p>
+                    <p class="p1">地址：上海市静安区华盛路80号恒盛大厦5层</p>
+                    <p class="p1">电话：021-61812163（9:00-18:00）</p>
+                    <p class="p1">邮箱：bd@xintairuan.com</p>
+                </div>
+                <div class="item" style="width: 260px;padding-left: 82px;">
+                    <div class="x-download" style="margin-right: 50px;">
+                        <img src="#springUrl('/resource/img/xtr2/ios.png')"/>
+                        <p>IOS客户端下载</p>
+                    </div>
+                    <div class="x-download">
+                        <img src="#springUrl('/resource/img/xtr2/android.png')"/>
+                        <p>安卓客户端下载</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="x-container f2">
+        <div class="x-content"><p><a href="http://www.xintairuan.com/" style="color: #828487;">薪太软</a>（上海）科技发展有限公司&nbsp;&nbsp;|&nbsp;&nbsp;沪ICP备16018294号&nbsp;&nbsp;|&nbsp;&nbsp;  <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31010602000188" style="color: #828487;"><img src="/201607/img/ba.png" style="margin:  0 3px 0 -3px;width: 13px;">沪公网安备 31010602000188号</a></p></div>
+    </div>
+</div>

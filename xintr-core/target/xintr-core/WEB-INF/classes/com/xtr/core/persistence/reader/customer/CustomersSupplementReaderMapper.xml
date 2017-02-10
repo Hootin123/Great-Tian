@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xtr.core.persistence.reader.customer.CustomersSupplementReaderMapper" >
+    <resultMap id="BaseResultMap" type="com.xtr.api.domain.customer.CustomersSupplementBean" >
+        <id column="supplement_id" property="supplementId" jdbcType="BIGINT" />
+        <result column="supplement_customer_id" property="supplementCustomerId" jdbcType="BIGINT" />
+        <result column="supplement_company_order_id" property="supplementCompanyOrderId" jdbcType="BIGINT" />
+        <result column="supplement_sb_company_receive" property="supplementSbCompanyReceive" jdbcType="DECIMAL" />
+        <result column="supplement_sb_company_back" property="supplementSbCompanyBack" jdbcType="DECIMAL" />
+        <result column="supplement_sb_self_receive" property="supplementSbSelfReceive" jdbcType="DECIMAL" />
+        <result column="supplement_sb_self_back" property="supplementSbSelfBack" jdbcType="DECIMAL" />
+        <result column="supplement_gjj_company_receive" property="supplementGjjCompanyReceive" jdbcType="DECIMAL" />
+        <result column="supplement_gjj_company_back" property="supplementGjjCompanyBack" jdbcType="DECIMAL" />
+        <result column="supplement_gjj_self_receive" property="supplementGjjSelfReceive" jdbcType="DECIMAL" />
+        <result column="supplement_gjj_self_back" property="supplementGjjSelfBack" jdbcType="DECIMAL" />
+        <result column="supplement_sb_receive_detail" property="supplementSbReceiveDetail" jdbcType="VARCHAR" />
+        <result column="supplement_sb_back_detail" property="supplementSbBackDetail" jdbcType="VARCHAR" />
+        <result column="supplement_gjj_receive_detail" property="supplementGjjReceiveDetail" jdbcType="VARCHAR" />
+        <result column="supplement_gjj_back_detail" property="supplementGjjBackDetail" jdbcType="VARCHAR" />
+        <result column="supplement_sb_receive_reason" property="supplementSbReceiveReason" jdbcType="VARCHAR" />
+        <result column="supplement_sb_back_reason" property="supplementSbBackReason" jdbcType="VARCHAR" />
+        <result column="supplement_gjj_receive_reason" property="supplementGjjReceiveReason" jdbcType="VARCHAR" />
+        <result column="supplement_gjj_back_reason" property="supplementGjjBackReason" jdbcType="VARCHAR" />
+        <result column="supplement_create_time" property="supplementCreateTime" jdbcType="TIMESTAMP" />
+        <result column="supplement_is_back" property="supplementIsBack" jdbcType="INTEGER" />
+        <result column="supplement_fail_msg" property="supplementFailMsg" jdbcType="VARCHAR" />
+        <result column="supplement_pay_status" property="supplementPayStatus" jdbcType="INTEGER" />
+        <result column="supplement_finance_user" property="supplementFinanceUser" jdbcType="VARCHAR" />
+        <result column="supplement_remark" property="supplementRemark" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <resultMap id="AllResultMap" type="com.xtr.api.dto.customer.CustomersSupplementDto" extends="BaseResultMap">
+        <result column="customer_current_salary" property="memberName" jdbcType="VARCHAR" />
+        <result column="customer_probation_salary" property="memberPhone" jdbcType="VARCHAR" />
+        <result column="customer_regular_salary" property="deptId" jdbcType="BIGINT" />
+        <result column="beforeDepName" property="deptName" jdbcType="VARCHAR" />
+        <result column="afterDepName" property="areaCode" jdbcType="VARCHAR" />
+        <result column="station_enter_time" property="areaName" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        supplement_id, supplement_customer_id, supplement_company_order_id, supplement_sb_company_receive, supplement_sb_company_back,
+        supplement_sb_self_receive, supplement_sb_self_back, supplement_gjj_company_receive, supplement_gjj_company_back,
+        supplement_gjj_self_receive, supplement_gjj_self_back, supplement_sb_receive_detail, supplement_sb_back_detail,
+        supplement_gjj_receive_detail,supplement_gjj_back_detail,supplement_sb_receive_reason,supplement_sb_back_reason,
+        supplement_gjj_receive_reason,supplement_gjj_back_reason,supplement_create_time,supplement_is_back,supplement_fail_msg,supplement_pay_status,
+        supplement_finance_user,supplement_remark
+    </sql>
+    <!--根据企业订单ID获取补收补退信息-->
+    <select id="selectByCompanyOrderId" resultMap="AllResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />,customer_turename as memberName,customer_phone as memberPhone,join_city_name as areaName,join_city_code as areaCode,
+        station_dept_id as deptId,dep_name as deptName
+        from customers_supplement
+        left join customers on customers.customer_id=customers_supplement.supplement_customer_id
+        left join company_shebao_order on company_shebao_order.id=customers_supplement.supplement_company_order_id
+        left join customers_station on customers_station.station_customer_id=customers_supplement.supplement_customer_id
+        left join company_deps on company_deps.dep_id=customers_station.station_dept_id
+        where supplement_company_order_id = #{supplementCompanyOrderId,jdbcType=BIGINT}
+    </select>
+
+    <!--根据企业订单ID获取符合补退的信息-->
+    <select id="selectBackInfoByCompanyOrderId" resultMap="BaseResultMap" >
+        select <include refid="Base_Column_List" />
+        from  customers_supplement
+        left join company_shebao_order on company_shebao_order.id=customers_supplement.supplement_company_order_id
+        where company_shebao_order.status>=4 and customers_supplement.supplement_is_back=2
+        and (customers_supplement.supplement_sb_self_back>0 or customers_supplement.supplement_gjj_self_back>0)
+    </select>
+
+    <!--根据企业订单ID和员工获取员工的补收,补退详情-->
+    <select id="selectByCompanyOrderIdAndCustomerId" resultMap="BaseResultMap" >
+        select <include refid="Base_Column_List" />
+        from customers_supplement
+        where supplement_customer_id=#{supplementCustomerId,jdbcType=BIGINT} and supplement_company_order_id=#{supplementCompanyOrderId,jdbcType=BIGINT}
+        limit 1
+    </select>
+
+</mapper>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" id='html'>
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎页</title>
+    #parse("comm/head.vm")
+    <meta name="viewport" content="width=divce-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1">
+    <link rel="stylesheet" href="#springUrl('/resource/css/h5wallet/welcome.css')">
+</head>
+<body>
+<div class="logo">
+    <div class="logo-pic">
+        <img src="#springUrl('/resource/img/h5wallet/logo1.png')" alt="">
+    </div>
+    <div class="logo-txt">
+        <img src="#springUrl('/resource/img/h5wallet/serve.png')" alt="">
+    </div>
+</div>
+<div class="check">
+
+    <input type="checkbox" name="">
+    <p>我同意并已阅读<span>《薪太软网站服务条款》</span></p>
+
+</div>
+<div class="enter">进入</div>
+</body>
+<script>
+    $(function(){
+        $(".enter").click(function(){
+            if($(".check input").is(':checked')){
+                location.href = "toH5walletLoginPage.htm";
+            }
+        });
+        $(".check span").click(function(){
+            location.href="toH5walletAgreePage.htm"
+        })
+    });
+</script>
+</html>

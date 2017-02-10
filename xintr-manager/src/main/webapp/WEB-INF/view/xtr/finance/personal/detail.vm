@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>批次提现详情</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-table/bootstrap-table.min.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-datepicker/css/bootstrap-datetimepicker.css')" rel="stylesheet">
+</head>
+
+<body>
+<div class="col-sm-12">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="ibox-content">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>登录名</th>
+                        <th>员工姓名</th>
+                        <th>手机号</th>
+                        <th>身份证号码</th>
+                        <th>提交时间</th>
+                        <th>提现银行</th>
+                        <th>提现银行卡号</th>
+                        <th>提现金额</th>
+                        <th>提现流水号</th>
+                        <th>财务经办人</th>
+                        <th>状态</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    #set ($i=1)
+                    #foreach($item in $!{rechargeData})
+                    <tr>
+                        <td>$i</td>
+                        <td>$!{item.loginName}</td>
+                        <td>$!{item.uname}</td>
+                        <td>$!{item.mobile}</td>
+                        <td>$!{item.idCard}</td>
+                        <td>$!date.format('yyyy-MM-dd HH:mm:ss',$!{item.rechargeAddtime})</td>
+                        <td>$!{item.rechargeBank}</td>
+                        <td>$!{item.rechargeBanknumber}</td>
+                        <td>$!{xtr.money($!{item.rechargeMoney})}</td>
+                        <td>$!{item.rechargeNumber}</td>
+                        <td>$!{item.auditName}</td>
+                        <td>
+                            #if($!{item.rechargeState} == 0)
+                            待提现
+                            #elseif($!{item.rechargeState} == 1)
+                            提现失败
+                            #elseif($!{item.rechargeState} == 2)
+                            <font color="blue">提现成功</font>
+                            #end
+                        </td>
+                    </tr>
+                    #set($i=$i+1)
+                    #end
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+<script src="#springUrl('/resource/js/hui/content.min.js')"></script>
+</html>

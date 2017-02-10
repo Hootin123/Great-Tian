@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title></title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/salary/monthlypayroll.css')" rel="stylesheet">
+    <script src="#springUrl('/resource/js/salary/historypayroll.js')"></script>
+    <script src="#springUrl('/resource/js/home/mainPage.js')"></script>
+
+</head>
+<script type="text/javascript">
+    $(function () {
+        #if($!{map})
+            #foreach($payrollList in $map.entrySet())
+                #foreach($payroll in $payrollList.value)
+                    $('#list$!{payroll.id}').on('click', function () {
+                        var n = $(this).attr('data-flag')
+                        if (n == 1) {
+                            $('#salaset-main$!{payroll.id}').show()
+                            $(this).attr('data-flag', '2');
+                            var html = $('#salaset-body$!{payroll.id}').html();
+                            if (!isEmpty(html)) {
+                                var param = {'payCycleId': $!{payroll.id}};
+                                loadData($('#salaset-body$!{payroll.id}'), param,$!{payroll.id});
+                            }
+                        }
+                        if (n == 2) {
+                            $('#salaset-main$!{payroll.id}').hide()
+                            $(this).attr('data-flag', '1');
+                        }
+                        $(this).css('border', '1px solid #b0ccd7').siblings().css('border', '1px solid #dbe9ee');
+                        $(this).parent().siblings().find('.salaset-main').hide()
+                        $(this).parent().siblings().find('.list').attr('data-flag', '1')
+                    })
+                #end
+                $('.year$payrollList.key').on('click', function () {
+                    $(this).addClass('show').siblings().removeClass('show')
+                    $('time1$payrollList.key').show();
+                    $('time1$payrollList.key').siblings().hide();
+                })
+            #end
+        #end
+        /**
+         * 取消
+         */
+        $('#guanbiBtn').click(function(){
+            onCancelDialog()
+        })
+        function onCancelDialog() {
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+        }
+    })
+
+
+</script>
+<body>
+<div class="salaset-title">
+    <h2>历史工资</h2>
+    <img src="#springUrl('/resource/img/salary/guanbi.png')" alt="" id="guanbiBtn">
+</div>
+<div class="salaset">
+
+    <div class="salaset-top">
+        <div class="title-top">
+            <ul>
+                #if($!{map})
+                    #set($count=0)
+                    #foreach($year in $map.entrySet())
+                        #if($count == 0 )
+                            <li class='year$year.key show'>$year.key年</li>
+                        #else
+                            <li class='year$year.key'>$year.key年</li>
+                        #end
+                    #end
+                #end
+            </ul>
+        </div>
+        <!-- 主要内容 -->
+        <div class="title-content time1">
+            #if($!{map})
+                #set($count=0)
+                #foreach($payrollList in $map.entrySet())
+                    #foreach($payroll in $payrollList.value)
+
+                        <!-- ******每一个月的列表****** -->
+                        <div id="salaset-list$!{payroll.id}" class="salaset-list">
+                            <div class='list' data-flag="1" id="list$!{payroll.id}">
+                                <div class='ali'>$!{payroll.month} 月工资</div>
+                                <div class='ali'><p>人数</p>
+
+                                    <p>$!{payroll.peopleNumber}</p></div>
+                                <div class='ali'><p>人工成本（元）</p>
+
+                                    <p>$!{payroll.totalWages}</p></div>
+                                <div class='ali'><p>发放总额（元）</p>
+
+                                    <p>$!{payroll.totalWages}</p></div>
+                                <div class='ali'><p>发放日期 </p>
+
+                                    <p>$!date.format('yyyy-MM-dd',$!{payroll.payDay})</p></div>
+                                <div class='ali'><p>状态</p>
+
+                                    <p id="payCycleState$!{payroll.id}">#if($!{payroll.isPayOff} == 0)
+                                        未发放
+                                    #elseif($!{payroll.isPayOff} == 1)
+                                        待发放
+                                    #elseif($!{payroll.isPayOff} == 2)
+                                        发放中
+                                    #elseif($!{payroll.isPayOff} == 3)
+                                        已发放
+                                    #end</p>
+                                </div>
+                                <div class='m ali'>
+                                    #if($!{payroll.isPayOff} == 0)
+                                        <span class='active der s payOffBtn' id="payOff"  data-value="$!{payroll.id}">发工资</span>
+                                    #end
+                                    <span  data-value="$!{payroll.id}" class='active der s spanBtn' >导出</span>
+                                </div>
+                            </div>
+                            <!-- 表格内容 -->
+                            <div id="salaset-main$!{payroll.id}" class="salaset-main" style='display: none'>
+                                <div class="salaset-brie">
+                                    <div class="salaset-brie-span">
+                                        <span>人数:<b>$!{payroll.peopleNumber}</b>人</span>
+                                        <span>人工成本:<b>$!{payroll.totalWages}</b>元</span>
+                                        <span>发放总额:<b>$!{payroll.totalWages}</b>元</span>
+                                        <span>发放日期:<b>$!date.format('yyyy-MM-dd',$!{payroll.payDay})</b></span>
+                                        <span>状态:
+                                            <b>#if($!{payroll.isPayOff} == 0)
+                                                未发放
+                                            #elseif($!{payroll.isPayOff} == 1)
+                                                待发放
+                                            #elseif($!{payroll.isPayOff} == 2)
+                                                发放中
+                                            #elseif($!{payroll.isPayOff} == 3)
+                                                已发放
+                                            #end</b>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div id="salaset-body$!{payroll.id}" class="salaset-list clear">
+
+                                </div>
+                            </div>
+                        </div>
+
+                    #end
+                #end
+            #end
+        </div>
+    </div>
+
+    <!-- *************蒙版***************** -->
+    <div class="mengban" style='display: none'></div>
+
+
+    <!-- 自定义导出-->
+    <div class="deriver" style='display: none'>
+        <h3>自定义导出 </h3>
+##        <b id="close"></b>
+        <ul id="exportList">
+        </ul>
+        <div class='foot1'>
+            <div class="footBtn">
+                <a id="exportBtn" href="javascript:;" class="oBt1 oBt">确定</a>
+                <a id="exportCancelBtn" href="javascript:;" class="cBt2 cBt">取消</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title></title>
+    <script src="#springUrl('/resource/js/payday/jquery-1.11.0.min.js')" type="text/javascript" charset="utf-8"></script>
+    <style type="text/css">
+        body{
+            width: 600px;
+            margin: 0 auto;
+        }
+        .panel{
+            border: 1px solid indianred;
+            padding: 10px;
+        }
+        .row{
+            width: 100%;
+            margin-top: 20px;
+
+        }
+        .radio-group{
+            display: inline;
+            margin-right: 40px;
+        }
+        .amount{
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="panel">
+    <div class="row">
+        <div class="radio-group">
+            <label><input name="type" type="radio" value="1" checked/>
+                企业提现</label>
+
+        </div>
+        <div class="radio-group">
+            <label><input name="type" type="radio" value="3"/>
+                个人提现</label>
+        </div>
+        <div class="radio-group">
+            <label><input name="type" type="radio" value="4"/>
+                企业验证</label>
+        </div>
+        <div class="radio-group">
+            <label><input name="type" type="radio" value="5"/>
+                急速发工资</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="radio-group">
+            <label><input name="btype" type="radio" value="query" checked/>
+            查询订单信息</label>
+
+        </div>
+        <div class="radio-group">
+            <label><input name="btype" type="radio" id="qa" value="queryaccount"/>
+                查询账户余额</label>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="radio-group">
+            <label><input name="btype" type="radio" value="sendfail_balance"/>
+                发送失败(账户余额不足)消息</label>
+        </div>
+        <div class="radio-group">
+            <label><input name="btype" type="radio" value="sendfail_card"/>
+            发送失败(银行卡错误)消息</label>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="radio-group">
+            <label><input name="btype" type="radio" value="sendsucc"/>
+                发送成功消息</label>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="radio-group">
+            <label><input name="btype" id="refundRadio" value="refund" data-isrefund="1" type="radio"/>
+                订单退款</label>
+        </div>
+    </div>
+    <div class="row input-row">
+        <label class="orderid">订单号：</label>
+        <input class="orderid" type="text" id="orderId"/>
+
+        <label class="amount">退款金额：</label>
+        <input class="amount" type="text" id="amount"/>
+    </div>
+    <div class="row" style="">
+        <input type="button" value="提交" id="sub"/>
+    </div>
+    <div class="row">
+        <label>结果：</label>
+        <textarea id="result" style="width: 100%;min-height: 200px;"></textarea>
+    </div>
+</div>
+
+
+</body>
+
+<script>
+
+    $(function(){
+        JdToolExtend.init()
+    })
+
+    JdToolExtend = {
+        init:function(){
+            $("input[name=btype]").click(function(){
+                if($("#refundRadio").prop("checked")){
+                    $(".amount").show();
+                }else{
+                    $(".amount").hide();
+                }
+
+
+            });
+            $("#sub").click(function(){
+                $("#result").val("");
+                $.post("/jd_tools.htm", {"amount": $("#amount").val(), "orderId":$("#orderId").val(), "btype":$("input[name=btype]:checked").val(), "type":$("input[name=type]:checked").val()}, function(data){
+                    $("#result").val(JSON.stringify(data));
+                })
+            });
+
+        }
+    }
+
+</script>
+
+</html>

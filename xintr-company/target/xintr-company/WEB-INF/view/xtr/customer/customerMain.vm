@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title></title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/customer/customerMain.css')" rel="stylesheet">
+##    <link href="#springUrl('/resource/css/home/mainPage.css')" rel="stylesheet">
+    <script src="#springUrl('/resource/js/customer/customerMain.js')"></script>
+##    <script src="#springUrl('/resource/js/home/mainPage.js')"></script>
+</head>
+<body>
+<input name="customerVisitFirst" id="customerVisitFirst"  type="hidden" value="$!{customerVisitFirst}"/>
+<div class=" main_right payoff_two clear">
+    <div class="min-top">
+        <div class="title-top">
+            <p >当前员工<span id="totalCount" style="color:white;cursor: default;">$!{totalCount}</span>人</p><a href="#springUrl('/dept/deptIndex.htm')" style="border-right:0">组织构架</a><a onclick="onCustomerRequire();" style="border-right:0">入职须知</a>
+        </div>
+    </div>
+    <div class="pwrit">
+        <input type="hidden" value="$!date.format('yyyy-MM-dd HH:mm:ss',$!{startTime})" id="startTime">
+        <input type="hidden" value="$!date.format('yyyy-MM-dd HH:mm:ss',$!{endTime})" id="endTime">
+        <div class="paoff_twhd">
+##            <em class="triangle1"></em>
+            <div class="paoff_twdv clear">
+                <div class="paoff_twhd_lf">
+                    <span class='timer' style="width: 18%;cursor: pointer">本月: （$!date.format('MM.dd',$!{startTime})-$!date.format('MM.dd',$!{endTime})） </span>
+                    <span style="width: 7% ;text-align: left;cursor: pointer" onclick="loadCustomerTabByType(1);">入职：<a  id="enterCount"> $!{enterCount}</a></span>
+                    <span style="width: 8%;cursor: pointer" onclick="loadCustomerTabByType(2);"> 离职：<a  id="leaveCount"> $!{leaveCount}</a></span>
+                    <span style="width: 10%;cursor: pointer" onclick="loadCustomerTabByType(3);">  待转正：<a  id="willCount"> $!{willCount}</a></span>
+                    <span style="width: 12%;cursor: pointer" onclick="loadCustomerTabByType(4);"> 未补全资料：<a  id="lessCount">$!{lessCount}</a></span>
+
+                    <span class='checkUser'><img src="#springUrl('/resource/img/salary/screen.png')" alt=""><a style="margin-left:10px ;color:#666"   >筛选员工</a></span>
+                    <span class='searchUser'> <img src="#springUrl('/resource/img/salary/search.png')" alt=""><a  style="margin-left:10px;color:#666">搜索员工</a></span>
+
+                    <span class='addUser add' ><img src="#springUrl('/resource/img/salary/userAdd.png')" alt=""><a onclick="onAddCustomer();" style="margin-left:10px;color:#666">新增员工</a></span>
+                    <span class='cz'><img src="#springUrl('/resource/img/salary/operation.png')" alt=""><a onclick="onAddCustomerBatch();" style="margin-left:10px;color:#666">批量操作</a></span>
+                </div>
+               <!--搜索员工-->
+                <div class="seachName">
+                    <input id="customerTurename" type="text" placeholder="输入员工姓名"/>
+                    <input type="button" value="确定" class="okBtn1"/>
+                </div>
+                <!--筛选员工-->
+                <div class="salaset-seach">
+                    <div style="z-index: 5;" class="list">
+                        <img class="salaset-down" src="#springUrl('/resource/img/salary/drop-down.png')">
+                        <input type="text" readonly placeholder="聘用形式">
+                        <input type="hidden" id="stationEmployMethod">
+##                        <p>无</p>
+                        <p>正式</p>
+                        <p>劳务</p>
+                    </div>
+                    <div class="list" style="z-index: 4;">
+                        <img class="salaset-down" src="#springUrl('/resource/img/salary/drop-down.png')">
+                        <input type="text" readonly placeholder="员工状态">
+                        <input type="hidden" id="stationCustomerState">
+##                        <p>无</p>
+##                        <p>试用期</p>
+                        <p>在职</p>
+                    ##                    <span>转正</span>
+                        <p>离职</p>
+                    ##                    <span>删除</span>
+                    ##            </td>
+                    </div>
+                    <div class="customerDepName customerDepName1 list" style="z-index: 3;">
+                        <img class="salaset-down" src="#springUrl('/resource/img/salary/drop-down.png')">
+                        <input type="text" id="stationDeptName" name="stationDeptName"  readonly placeholder="部门"/>
+                        <input type="hidden" id="stationDeptId" name="stationDeptId" />
+##                        <b></b>
+                        <div class="branch" style="display: none">
+##                            <h4>部门</h4>
+                            <div id="dep-base"></div>
+                        </div>
+                    </div>
+                    <div style="z-index: 2;" class="list">
+                        <img class="salaset-down" src="#springUrl('/resource/img/salary/drop-down.png')">
+                        <input type="text" readonly placeholder="性别">
+                        <input type="hidden"  id="customerSex">
+##                        <p>无</p>
+                        <p>男</p>
+                        <p>女</p>
+
+                    </div>
+
+                    <input class="okBtn" type="button" value="确认" />
+                </div>
+            </div>
+        </div>
+        <!--显示筛选结果集-->
+        <div id="showSelectorDiv"></div>
+        <!--列表结果集-->
+        <div id="customerListDiv"></div>
+        <div id="kkpager" style=""></div>
+    </div>
+</div>
+##<div id="popupbox" class="popupbox">
+##    <i class="popupbox-closed"></i>
+##</div>
+##<div>
+##<input type="button" value="新员工管理" onclick="bbbb();">
+##</div>
+</body>
+
+<script>
+//    function bbbb(){
+//        location.href="toCustomerMainPageNew.htm";
+//    }
+    $(function () {
+        // 绑定确定按钮事件(搜索员工)
+        $('.searchUser').on('click',function(e){
+            e.stopPropagation()
+            $('.seachName').show();
+            $('.salaset-seach').hide();
+            $('.salaset-seach p').hide()
+            $('.salaset-seach').find("input[type='text']").val('')
+            $('.salaset-seach').find("input[type='hidden']").val('')
+        });
+        $(document).on('click',function(){
+            $('.seachName').hide()
+        })
+        $('.seachName').on('click',function(e){
+            e.stopPropagation()
+        })
+
+        $('.okBtn1').on('click', function () {
+
+            if($("#customerTurename").val()!='' && $("#customerTurename").val()!=undefined){
+                if($("#customerTurename").val().length>=2 && $("#customerTurename").val().length<=16){
+                    addMembers1();
+                }else{
+                    layer.alert("请输入2~16位的姓名", {icon: 1});
+                }
+            }else{
+                layer.alert("请输入姓名", {icon: 1});
+            }
+
+        });
+
+
+        // 绑定确定按钮事件(筛选员工)
+        $('.okBtn').on('click', function () {
+            addMembers();
+        });
+        $('.checkUser').on('click',function(e){
+            e.stopPropagation()
+            $('.salaset-seach').show();
+            $('.seachName').hide()
+        });
+        $(document).on('click',function(){
+            $('.salaset-seach').hide()
+            $('.salaset-seach p').hide()
+            $('.salaset-seach').find("input[type='text']").val('')
+            $('.salaset-seach').find("input[type='hidden']").val('')
+        })
+        $('.salaset-seach').on('click',function(e){
+            e.stopPropagation()
+        })
+        /**部门的数据接口 start**/
+        $.get(BASE_PATH + '/dept/tree.htm', {}, function(data){
+            if (data.success) {
+                // DeptExtend.initTree(data.data);
+                console.log(data.date);
+                dg($("#dep-base"), data.data)
+            } else {
+                showWarning(data.message);
+            }
+        });
+        /**部门的数据接口 end**/
+        function dg(parent, data){
+            var title = '<span class="dep-item" data-depid="'+data.depId+'" style="display: block; width: 100%;">' + data.depName + '</span>';
+            parent.append(title);
+            if(data.children && data.children.length > 0){
+                var ul = $("<ul>");
+                $.each(data.children, function(index, item){
+                    var li =$("<li style='position: relative'>")
+                    var i=$("<i class='show'>")
+                    li.append(i)
+                    dg(li, item)
+                    ul.append(li);
+                })
+                parent.append(ul);
+                $('li').not(':has(ul)').find('i').removeClass('show')
+                $('.show').html('+');
+                $('.show').parent().find('ul').hide();
+            };
+            $('.branch span:first').removeClass('dep-item')
+            $('.dep-item').unbind("click").on('click',function(){
+                console.log(2)
+                $('#stationDeptName').val($(this).html());
+                $('#stationDeptId').val($(this).data("depid"));
+//                $('.customerDepName b').click();
+//                $('.branch').toggle();
+                $('.branch').hide();
+                $('.show').off('click')
+            })
+        }
+
+
+
+        $('.customerDepName input').on('click',function(e){
+//            $('.branch').toggle();
+//            $('.branch li').toggle();
+//            $('.branch').find("li").toggle();
+//            $(this).siblings().find('input').on('click',function(){
+//                console.log(2)
+//                $('.branch').hide();
+//            })
+            e.stopPropagation();
+            $('.show').off('click');
+            $('.branch').toggle();
+            // 判断 是否有子元素
+            $('.show').on('click',function(){
+
+                if($(this).html()=='+'){
+                    console.log(22)
+                    $(this).siblings('ul').toggle(200)
+                    $(this).html('-');
+                }else{
+                    console.log(111)
+                    $(this).siblings('ul').toggle(200);
+                    $(this).html('+');
+                }
+
+            })
+
+        });
+
+
+        // 去除冒泡
+        $(document).on('click',function(){
+            $('.branch').hide();
+            $('.show').off('click')
+        })
+        $('.branch').on('click',function(e){
+            e.stopPropagation()
+        })
+
+
+    });
+    /**
+     * 搜索用户
+     */
+    function addMembers1() {
+        var customerTurename=$("#customerTurename").val();
+        loadCustomerTabByName(customerTurename);
+        $('.seachName').hide()
+//        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+//        parent.layer.close(index);
+    }
+
+    /**
+     * 筛选用户
+     */
+    function addMembers() {
+        var stationCustomerState=$("#stationCustomerState").val();
+        console.log(stationCustomerState)
+        var stationEmployMethod=$("#stationEmployMethod").val();
+        var customerSex=$("#customerSex").val();
+        var stationDeptId=$("#stationDeptId").val();
+        var stationDeptName=$("#stationDeptName").val();
+       loadCustomerTab(stationCustomerState,stationEmployMethod,customerSex,stationDeptId,stationDeptName);
+//        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+//        parent.layer.close(index);
+        $('.salaset-seach').hide()
+        $('.salaset-seach').find("input[type='text']").val('')
+        $('.salaset-seach').find("input[type='hidden']").val('')
+    }
+
+    // 出现
+    $(".list input").on('click',function(){
+        $(this).parent().find('p').show();
+        $(this).parent().siblings().find('p').hide();
+        $(this).parent().siblings().find('.branch').hide()
+    });
+    $(".list p").on('click',function(){
+        var Txt=$(this).html();
+        console.log(Txt);
+        $(this).parent().find("input[type='text']").val(Txt);
+        if(Txt==="正式"){
+            $(this).parent().find("input[type='hidden']").val(1);
+        }else if(Txt==="劳务"){
+            $(this).parent().find("input[type='hidden']").val(2);
+        }else if(Txt==="在职"){
+            $(this).parent().find("input[type='hidden']").val(1);
+        }else if(Txt==="离职"){
+            $(this).parent().find("input[type='hidden']").val(3);
+        }else if(Txt==="男"){
+            $(this).parent().find("input[type='hidden']").val(1);
+        }else if(Txt==="女"){
+            $(this).parent().find("input[type='hidden']").val(0);
+        }
+        $(this).parent().find('p').hide()
+    });
+    $(".list p").hover(
+            function(){
+                $(this).css({'background':'#0696fa','color':'#fff'})
+            },
+            function(){
+                $(this).css({'background':'#fff','color':'#333'})
+            }
+    )
+
+</script>
+</html>

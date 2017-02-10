@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title></title>
+
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/payday/payday.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/comm/comm.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/payfor1.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/phonebox.css')" rel="stylesheet">
+    <script src="#springUrl('/resource/js/plugins/dropzone/dropzone.js')"></script>
+    <script src="#springUrl('/resource/js/plugins/laydate/laydate.js')"></script>
+    <script src="#springUrl('/resource/js/payday/pay.js')"></script>
+    <script>
+        var paytypeValue=$!{paytype};
+    </script>
+    <script src="#springUrl('/resource/js/payday/payfor.js')"></script>
+
+</head>
+
+<body>
+<div class="container hide" id="identity" style="padding: 60px 5% 40px; min-width: 1000px">
+    <div class="identity-wrap">
+        <div class="bg"></div>
+        #if($!{paytype} == "1")
+            <div class="it active" style="width:15%;">1
+                <p>完善信息</p>
+                <p style="font-size:12px;">填写公司基本信息</p>
+            </div>
+            <div class="it" style="width:15%;">2
+                <p>实名认证</p>
+                <p style="font-size:12px;">对公银行账户验证</p>
+            </div>
+            <div class="it" style="width:15%;">3
+                <p>上传资料</p>
+                <p style="font-size:12px;">提交企业征信资料</p>
+            </div>
+            <div class="it" style="width:15%;">4
+                <p>审核通过</p>
+                <p style="font-size:12px;">风控审核并完成签约</p>
+            </div>
+        #else
+            <div class="it active">1
+                <p>完善信息</p>
+                <p style="font-size:12px;">填写公司基本信息</p>
+            </div>
+            <div class="it">2
+                <p>实名认证</p>
+                <p style="font-size:12px;">对公银行账户验证</p>
+            </div>
+            <div class="it">3
+                <p>认证成功</p>
+            </div>
+        #end
+    </div>
+##<div class="cause">
+##<div class="causeBack"></div>
+    #if($!{auditStatus} == "1")
+        <div class="causeText">
+            <h3>您提交的企业信息审核未通过，原因是：$!{companyAuditRemark}</h3>
+        </div>
+    #else
+    #end
+</div>
+<div class="content" style="width: 90%;min-width: 1000px">
+    <form id="payforForm" name="payforForm">
+        <div class="nameLefr">
+            <ul>
+                <li><span>*</span> 公司名称</li>
+                <li class="tall"><span></span> 公司LOGO</li>
+                <li><span>*</span> 公司地址</li>
+                <li><span>*</span> 营业执照编号</li>
+                <li class="tall"><span>*</span> 营业执照扫描件</li>
+                <li><span></span> 法人代表</li>
+                <li><span>*</span> 联系电话</li>
+                <li><span></span> 公司规模</li>
+                <li><span></span> 所属行业</li>
+                <li style="border-bottom:1px solid #dbe9ee;"><span>*</span> 了解薪太软的渠道</li>
+            </ul>
+        </div>
+        <div class="conRight">
+            <ul class="conRight-list">
+                <li>
+                    <input type="text" name="companyName" id="companyName" placeholder="请输入公司名称" value="$!{companyName}">
+                    <span class="error">公司名称不能为空！</span>
+                </li>
+                <li class="tall logo">
+                    <div>
+                        <div style="width: 80px;height: 80px;">
+                            #if($!{companyLogo} == "")
+                            <img style="max-width: 80px" src="resource/img/uploading.png" alt="" id="companyLogoImage">
+                            #else
+                            <img style="max-width: 80px" src="$!{companyLogoUrl}" alt="" id="companyLogoImage">
+                            #end
+                        </div>
+                        <a class="tesfile" style="float: left" id="uploadlogo"></a>
+                        <input type="hidden" name="companyLogo" id="companyLogo"  value="$!{companyLogo}">
+                        <p class="logo1">请上传您公司的Logo</p>
+                        <p class="logo2">支持jpg、jpeg、png、bmp格式照片，大小不超过5M</p>
+                    </div>
+                    <span class="error error1" style="top: 38px;">上传格式错误！</span>
+                </li>
+                <li>
+                    <input type="text" name="companyAddress" id="companyAddress" placeholder="请输入公司地址" value="$!{companyAddress}">
+                    <span class="error">公司地址不能为空！</span>
+                </li>
+                <li>
+                    <input type="text" name="companyNumber" id="companyNumber" placeholder="请输入15或18位营业执照编号" value="$!{companyNumber}">
+                    <span class="error">请输入正确的营业执照编号！</span>
+                </li>
+                <li class="tall license">
+                    <div>
+                        <div style="width: 80px;height: 80px">
+                            #if($!{companyOrganizationImg} == "")
+                            <img style="max-width: 80px" src="resource/img/uploading.png" alt="" id="companyOrganizationImgUrl">
+                            #else
+                            <img style="max-width: 80px" src="$!{companyOrganizationImgUrl}" alt="" id="companyOrganizationImgUrl">
+                            #end
+                        </div>
+
+                        <a class="tesfile" style="float: left" id="upload"></a>
+                        <input type="hidden" name="companyOrganizationImg" id="companyOrganizationImg"  value="$!{companyOrganizationImg}">
+                        <p class="license1">请上传带有公章的营业执照数码照，营业执照须在有效期内且年检齐全（当年成立可无年检）。</p>
+                        <p class="license2">支持.jpg.jpeg.png.bmp格式照片，大小不超过5M<p>
+                    </div>
+                    <span class="error error1" style="top: 38px;">上传格式错误！</span>
+                </li>
+                <li>
+                    <input type="text" name="companyCorporation" id="companyCorporation" placeholder="请输入法人代表人姓名" value="$!{companyCorporation}">
+                    <span class="error">法人代表人姓名不能为空！</span>
+                </li>
+                <li>
+                    <input type="text" name="companyContactTel" id="companyContactTel" placeholder="请输入联系电话" value="$!{companyContactTel}">
+                    <span class="error">请输入正确的联系电话！</span>
+                </li>
+                <li class="identity-tab identity-tab1">
+                    <span class="identity-span"></span>
+                    <span class="error">公司规模不能为空！</span>
+                    <input class="identity-hiden" name="companyScale" id="companyScale" type="hidden" value="$!{companyScale}" />
+                    <ol>
+                        <li>50人以下</li>
+                        <li>50-100人</li>
+                        <li>100-200人</li>
+                        <li>200-500人</li>
+                        <li>500人以上</li>
+                    </ol>
+                </li>
+                <li class="identity-tab identity-tab2">
+                    <span class="identity-span"></span>
+                    <span class="error">所属行业不能为空！</span>
+                    <input class="identity-hiden" name="companyBelongIndustry" id="companyBelongIndustry"  type="hidden" value="$!{companyBelongIndustry}" />
+                    <ol>
+                        <li>互联网/游戏/软件</li>
+                        <li>电子/通信/硬件</li>
+                        <li>房地产/建筑/物业</li>
+                        <li>金融</li>
+                        <li>消费品</li>
+                        <li>汽车/机械/制造</li>
+                        <li>服务/外包/中介</li>
+                        <li>广告/传媒/教育/文化</li>
+                        <li>交通/贸易/物理</li>
+                        <li>广告/传媒/教育/文化</li>
+                    </ol>
+                </li>
+                <li class="lastli identity-tab identity-tab3">
+                    <span class="identity-span"></span>
+                    <span class="error">请输入您了解薪太软的渠道！</span>
+                    <input class="identity-hiden" name="companyChannel" id="companyChannel"  type="hidden" value="$!{companyChannel}" />
+                    <ol style="z-index: 100; display: none; height: 150px">
+
+                        <li inde="1">百度360，等搜索引擎</li>
+                        <li inde="2">微信，QQ等社交平台</li>
+                        <li inde="3">推销</li>
+                        <li inde="4">广告</li>
+                        <li inde="5">朋友介绍</li>
+                        <li inde="6">其他</li>
+                    </ol>
+                </li>
+            </ul>
+        </div>
+        <div class="reminded" id="payforNext">薪太软会在3个工作日内审核您的信息，请耐心等待...</div>
+        <div class="bottom">
+            <input type="button" class="obtnsubmit" value="下一步">
+        </div>
+    </form>
+</div>
+
+</body>
+<script>
+    var auditStatus='$!{auditStatus}';
+
+    if(auditStatus=='0'){
+        document.getElementById("payforNext").style.display = "block";
+    }
+</script>
+</html>

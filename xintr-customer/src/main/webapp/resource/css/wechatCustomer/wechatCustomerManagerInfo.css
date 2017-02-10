@@ -1,0 +1,180 @@
+@charset "UTF-8";
+body {
+    width: 100%;
+    height: 100%;
+    background: #f4f4f4;
+    background-size: 100%; }
+
+header {
+    width: 100%;
+    height: 1.4rem;
+    padding-top: 0.4rem;
+    box-sizing: border-box; }
+header ul {
+    width: 6rem;
+    height: 0.6rem;
+    margin: 0 auto;
+    border: 1px solid #0696fa;
+    border-radius: 0.4rem;
+    overflow: hidden; }
+header ul li {
+    width: 1.98rem;
+    height: 100%;
+    float: left;
+    border-right: 1px solid #0696fa;
+    font-size: 0.3rem;
+    color: #0696fa;
+    font-family: '微软雅黑';
+    text-align: center;
+    line-height: 0.6rem; }
+header ul li:nth-child(3) {
+    border-right: 0; }
+header ul .active {
+    background: #0696fa;
+    color: #fff; }
+
+section {
+    width: 100%;
+    overflow: hidden; }
+section .main-left {
+    width: 3rem;
+    float: left;
+    background: #f1f9fc;
+    border-top: 1px solid #b0ccd7; }
+section .main-left ul {
+    width: 100%; }
+section .main-left ul li {
+    width: 100%;
+    height: 0.86rem;
+    border-bottom: 1px solid #b0ccd7;
+    font-size: 0.3rem;
+    font-family: '微软雅黑';
+    color: #666;
+    text-indent: 0.44rem;
+    line-height: 0.86rem;
+    position: relative; }
+section .main-left ul li em {
+    color: #fea811;
+    position: absolute;
+    left: -0.2rem;
+    top: 0.05rem; }
+section .main-left ul .idCard {
+    height: 3.5rem; }
+section .main-left ul li:nth-child(14), section .main-left ul li:nth-child(15) {
+    border-bottom: 0; }
+section .main-right {
+    width: 4.5rem;
+    float: left;
+    background: #f1f9fc;
+    border-top: 1px solid #b0ccd7; }
+section .main-right ul {
+    width: 100%; }
+section .main-right ul li {
+    width: 100%;
+    height: 0.86rem;
+    border-bottom: 1px solid #b0ccd7;
+    border-left: 1px solid #b0ccd7;
+    font-size: 0.3rem;
+    font-family: '微软雅黑';
+    color: #333;
+    text-indent: 0.44rem;
+    line-height: 0.86rem;
+    position: relative; }
+section .main-right ul li input {
+    display: block;
+    text-indent: 0.44rem;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    color: #333;
+    font-size: 0.3rem;
+    font-family: '微软雅黑';
+    background: #fff; }
+section .main-right ul li select {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    padding-left: 0.44rem;
+    font-size: 0.3rem;
+    font-family: '微软雅黑';
+    color: #666;
+    line-height: 0.86rem;
+    -webkit-appearance: none;
+    background: #fff url('../../img/wechatCustomer/drop-down.png') no-repeat 4rem center;
+}
+section .main-right ul li input::-webkit-input-placeholder {
+    color: #ccc;
+    font-size: 0.3rem; }
+section .main-right ul li .error {
+    height: 0.78rem;
+    position: absolute;
+    right: 0.1rem;
+    top: 0.08rem;
+    font-size: 0.16rem;
+    line-height: 0.78rem;
+    color: #f00; }
+section .main-right ul .idCard {
+    height: 3.5rem;
+    background: #fff; }
+section .main-right ul .idCard dl {
+    width: 100%;
+    height: 1.56rem;
+    padding: 0.34rem 0 0 0.34rem;
+    box-sizing: border-box; }
+section .main-right ul .idCard dl dt {
+    width: 1.8rem;
+    height: 1.2rem;
+    float: left;
+    border: 1px dashed #b0ccd7;
+    position: relative;
+    font-size: 1.2rem;
+    color: #b0ccd7;
+    line-height: 1.2rem; }
+section .main-right ul .idCard dl dt input {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    right: 0;
+    top: 0;
+    opacity: 0;
+    filter: alpha(opacity=0); }
+section .main-right ul .idCard dl dt img {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%; }
+section .main-right ul .idCard dl dd {
+    width: 2.08rem;
+    height: 100%;
+    float: left;
+    text-indent: 0.16rem;
+    line-height: 1.2rem;
+    color: #666;
+    font-size: 0.24rem;
+    font-family: '微软雅黑'; }
+section .main-right ul li:nth-child(1), section .main-right ul li:nth-child(3), section .main-right ul li:nth-child(16) {
+    background: #f1f9fc; }
+section .main-right ul li:nth-child(14), section .main-right ul li:nth-child(15) {
+    border-bottom: 0;
+    background: #f1f9fc; }
+section .footer {
+    width: 100%;
+    height: 0.9rem;
+    margin-top: 0.6rem;
+    float: left; }
+section .footer .affirm {
+    width: 7rem;
+    height: 0.9rem;
+    margin: 0 auto;
+    background: #0696fa;
+    border-radius: 0.45rem;
+    font-size: 0.34rem;
+    font-family: '微软雅黑';
+    color: #fff;
+    text-align: center;
+    line-height: 0.9rem; }

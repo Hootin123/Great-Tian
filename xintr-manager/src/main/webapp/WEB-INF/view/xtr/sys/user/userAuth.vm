@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>用户授权</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/hui/plugins/treeview/bootstrap-treeview.min.css')" rel="stylesheet">
+</head>
+
+<div class="ibox" style="padding-top: 0px">
+    <div class="ibox-content">
+        <div class="panel">
+            <div id="treeview"></div>
+        </div>
+    </div>
+</div>
+<script src="#springUrl('/resource/js/hui/plugins/treeview/bootstrap-treeview.min.js')"></script>
+<script src="#springUrl('/resource/js/sys/user/userAuth.js')"></script>
+</html>

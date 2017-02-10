@@ -1,0 +1,155 @@
+body{
+    width: 100%;
+    height: 100%;
+}
+.page1{
+    width: 100%;
+    height: 100%;
+    background: url(../../img/lasthongbao/newActive.png) 0 0 no-repeat;
+    background-size: 100%;
+    overflow: hidden;
+}
+.page1 .start{
+    margin:0 auto;
+    margin-top: 3.8rem;
+    margin-bottom: 2.4rem;
+    width: 5rem;
+    height: 7.05rem;
+}
+.page1 .start img{
+    display: block;
+    height: 100%;
+    width:100%;
+
+}
+.page1 .move1{
+
+    -webkit-animation:myfirst 0.6s .2s ease both;
+}
+@-webkit-keyframes myfirst
+{
+    0%{-webkit-transform:scale(1)}
+    10%,20%{-webkit-transform:scale(0.9) rotate(-3deg)}
+    30%,50%,70%,90%{-webkit-transform:scale(1.1) rotate(3deg)}
+    40%,60%,80%{-webkit-transform:scale(1.1) rotate(-3deg)}
+    100%{-webkit-transform:scale(1) rotate(0)}
+}
+
+.page1 .introduce{
+    width: 4.2rem;
+    height: 0.8rem;
+    margin:0 auto;
+    margin-top: 1.86rem;
+}
+.page1 .introduce img{
+    display: block;
+    width: 100%;
+    height: 100%;
+
+}
+
+.page2{
+    width: 100%;
+    /*height: 13.34rem;*/
+    background: url(../../img/lasthongbao/getPacket.png) 0 0 no-repeat;
+    background-size: 100%;
+    overflow: hidden;
+}
+.page2 .getMain{
+    margin:0 auto;
+    margin-top: 7.42rem;
+    width: 5.8rem;
+    height: 0.78rem;
+    position: relative;
+}
+.page2 .getMain input{
+    display: block;
+    width: 100%;
+    height: 100%;
+    border:1px solid #000;
+    border-radius: 0.1rem;
+    background:#fff url(../../img/lasthongbao/phone.png) 0.15rem center no-repeat;
+    background-size:0.3rem 0.45rem;
+    font-size: 0.28rem;
+    color: #666;
+    text-indent: 0.76rem;
+}
+.page2 .getMain b{
+    height: 0.78rem;
+    position: absolute;
+    right:0.28rem;
+    top:0;
+    font-size: 0.26rem;
+    line-height: 0.78rem;
+    color: #f00;
+}
+.page2 .getFooter{
+    width: 5.8rem;
+    height: 0.85rem;
+    margin: 0.2rem auto;
+    background: url(../../img/lasthongbao/footer-bg.png) 0 0 no-repeat;
+    background-size:100%;
+    font-size: 0.28rem;
+    color: #fff;
+    text-align: center;
+    line-height: 0.8rem;
+    text-shadow:2px 0px 2px #f16f3c,-2px 0px 2px #f16f3c, 0px 2px 2px #f16f3c, 0px -2px 2px #f16f3c
+}
+.page2 .introduce{
+    width: 4.2rem;
+    height: 0.8rem;
+    margin:0 auto;
+    margin-top: 0.28rem;
+    margin-bottom: 0.4rem;
+}
+.page2 .introduce img{
+    display: block;
+    width: 100%;
+    height: 100%;
+
+}
+.page2 .pic1{
+    width: 2.68rem;
+    height: 2rem;
+    position: absolute;
+    position: relative;
+    left:2.5rem;
+    top:3.12rem;
+    overflow: hidden;
+}
+.page2 .pic1 img{
+    position: absolute;
+    left:0;
+    top:2rem;
+    width: 100%;
+    height: 100%;
+}
+.page2 .pic2{
+    width: 0.87rem;
+    height: 0.83rem;
+    position: absolute;
+    left:4.64rem;
+    top:8rem;
+}
+.page2 .pic2 img{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.page2 .move3{
+    -webkit-animation:bounce 1s .2s ease 2;
+}
+@-webkit-keyframes bounce{
+    0%,20%,50%,80%,100%{-webkit-transform:translateY(0)}
+    40%{-webkit-transform:translateY(-1rem)}
+    60%{-webkit-transform:translateY(-0.5rem)}
+}
+.loginText{
+    /*margin-bottom: 0.4rem;*/
+    width: 100%;
+    font-size: 0.28rem;
+    color: #030719;
+    text-align: center;
+    font-weight: 600;
+    text-decoration:underline;
+}

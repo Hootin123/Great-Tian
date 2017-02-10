@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:motan="http://api.weibo.com/schema/motan"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://api.weibo.com/schema/motan http://api.weibo.com/schema/motan.xsd">
+
+    <!-- 注册中心配置 使用不同注册中心需要依赖对应的jar包。如果不使用注册中心，可以把check属性改为false，忽略注册失败。 -->
+    <!--<motan:registry regProtocol="local" name="registry" /> -->
+    <!--<motan:registry regProtocol="consul" name="registry" address="127.0.0.1:8500"/> -->
+    <motan:registry regProtocol="zookeeper" name="registry"
+                    address="${zookeeper.address}" connectTimeout="200000"/>
+
+    <!-- 协议配置。为防止多个业务配置冲突，推荐使用id表示具体协议。 -->
+    <motan:protocol id="demoMotan" default="true" name="motan"
+                    maxServerConnection="80000" maxContentLength="1048576"
+                    maxWorkerThread="800"/>
+
+    <!-- 通用配置，多个rpc服务使用相同的基础配置. group和module定义具体的服务池。export格式为“protocol id:提供服务的端口” -->
+    <motan:basicService export="demoMotan:8002" group="motan-demo-rpc1"
+                        accessLog="false" shareChannel="true" module="motan-demo-rpc"
+                        application="myMotanDemo" registry="registry" id="serviceBasicConfig"/>
+
+    <!-- 具体rpc服务配置，声明实现的接口类。 -->
+    <motan:service interface="com.xtr.api.service.sys.SysUserService"
+                   ref="sysUserService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.sys.SysMenuService"
+                   ref="sysMenuService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.sys.SysMenuBtnService"
+                   ref="sysMenuBtnService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.sys.SysRoleService"
+                   ref="sysRoleService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.sys.SysRoleRelService"
+                   ref="sysRoleRelService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.sys.DictionaryService"
+                   ref="dictionaryService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.sys.SysLogService"
+                   ref="sysLogService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.company.CompanyLogService"
+                   ref="companyLogService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+
+    <!-- task service config start-->
+    <motan:service interface="com.xtr.api.service.task.TaskLogService"
+                   ref="taskLogService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+
+    <motan:service interface="com.xtr.api.service.task.TaskScheduleJobService"
+                   ref="taskScheduleJobService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <!-- task service config end-->
+
+    <motan:service interface="com.xtr.api.service.order.IdGeneratorService"
+                   ref="idGeneratorService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+
+
+    <!-- company service config start-->
+    <motan:service interface="com.xtr.api.service.company.CompanySocialOrdersService"
+                   ref="companySocialOrdersService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.company.CompanySalaryExcelService"
+                   ref="companySalaryExcelService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.company.CompanyDepsService"
+                   ref="companyDepsService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.company.CompanyMemberLogItemsService"
+                   ref="companyMemberLogItemsService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.company.CompanyMembersService"
+                   ref="companyMembersService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.company.CompanysService"
+                   ref="companysService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.company.CompanyRechargesService"
+                   ref="companyRechargesService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.company.CompanyMoneyRecordsService"
+                   ref="companyMoneyRecordsService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.company.CompanyBorrowOrdersService"
+                   ref="companyBorrowOrdersService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+
+    <motan:service interface="com.xtr.api.service.company.CompanyBorrowBillsService"
+                   ref="companyBorrowBillsService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+
+    <motan:service interface="com.xtr.api.service.company.CompanyAccountService"
+                   ref="companyAccountService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+
+    <motan:service interface="com.xtr.api.service.account.SubAccountService"
+                   ref="subAccountService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+
+    <motan:service interface="com.xtr.api.service.account.RedEnvelopeService"
+                   ref="redEnvelopeService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+
+    <motan:service interface="com.xtr.api.service.account.RedReceiveService"
+                   ref="redReceiveService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+
+    <motan:service interface="com.xtr.api.service.company.CompanyMemberLogsService"
+                   ref="companyMemberLogsService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+
+    <motan:service interface="com.xtr.api.service.company.CompanyProtocolsService"
+                   ref="companyProtocolsService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+
+    <motan:service interface="com.xtr.api.service.company.CompanyIntentService"
+                   ref="companyIntentService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+
+    <motan:service interface="com.xtr.api.service.company.CompanyMsgsService"
+                   ref="companyMsgsService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+
+    <motan:service interface="com.xtr.api.service.company.CompanyNotesService"
+                   ref="companyNotesService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+
+    <motan:service interface="com.xtr.api.service.company.CompanyDepositService"
+                   ref="companyDepositService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+
+    <motan:service interface="com.xtr.api.service.account.BankCodeService"
+                   ref="bankCodeService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+
+    <motan:service interface="com.xtr.api.service.company.CompanyDeptService"
+                   ref="companyDeptService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <!-- company service config end-->
+
+
+    <!-- station service config start-->
+    <motan:service interface="com.xtr.api.service.station.StationSmscontService"
+                   ref="stationSmscontService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.station.StationSmsRecordsService"
+                   ref="stationSmsRecordsService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.station.StationCollaborationService"
+                   ref="stationCollaborationService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+
+    <motan:service interface="com.xtr.api.service.station.StationNewsService"
+                   ref="stationNewsService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+
+    <!-- station service config end-->
+
+    <!-- customer service config start-->
+    <motan:service interface="com.xtr.api.service.customer.CustomerItemsService"
+                   ref="customerItemsService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.customer.CustomerJobsService"
+                   ref="customerJobsService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.customer.CustomersService"
+                   ref="customersService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.customer.CustomerSalarysService"
+                   ref="customerSalarysService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.customer.CustomerRechargesService"
+                   ref="customerRechargesService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.customer.CustomerMoneyRecordsService"
+                   ref="customerMoneyRecordsService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.customer.CustomerMsgsService"
+                   ref="customerMsgsService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.customer.CustomersPersonalService"
+                   ref="customersPersonalService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.customer.CustomersRecordService"
+                   ref="customersRecordService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.customer.CustomersStationService"
+                   ref="customersStationService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.customer.CustomerUpdateSalaryService"
+                   ref="customerUpdateSalaryService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.customer.CustomerPayFaildService"
+                   ref="customerPayFaildService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.salary.CustomerExpenseService"
+                   ref="customerExpenseService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.customer.CustomersSupplementService"
+                   ref="customersSupplementService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <!-- customer service config end-->
+
+    <!-- appApi service config start-->
+    <motan:service interface="com.xtr.api.service.app.AppVersionService"
+                   ref="appVersionService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.app.CustomerUserService"
+                   ref="customerUserService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.send.SendMsgService"
+                   ref="sendMsgService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.app.AppQuestionFeedbackService"
+                   ref="appQuestionFeedbackService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <!-- appApi service config end-->
+
+
+    <!-- gateway service config start-->
+    <motan:service interface="com.xtr.api.service.gateway.JdPayService"
+                   ref="jdPayService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <!-- gateway service config end-->
+
+    <!-- h5wallet service config start-->
+    <motan:service interface="com.xtr.api.service.h5wallet.H5walletService"
+                   ref="h5walletService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <!-- h5wallet service config end-->
+
+    <!--薪资设置 start-->
+    <motan:service interface="com.xtr.api.service.salary.PayRuleService"
+                   ref="payRuleService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+
+    <motan:service interface="com.xtr.api.service.salary.AllowanceSettingService"
+                   ref="allowanceSettingService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+
+    <motan:service interface="com.xtr.api.service.salary.BonusSettingsService"
+                   ref="bonusSettingsService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+
+    <motan:service interface="com.xtr.api.service.salary.AllowanceApplyService"
+                   ref="allowanceApplyService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+
+    <motan:service interface="com.xtr.api.service.salary.PayrollAccountService"
+                   ref="payrollAccountService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+
+    <motan:service interface="com.xtr.api.service.salary.CustomerPayrollService"
+                   ref="customerPayrollService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+
+    <motan:service interface="com.xtr.api.service.salary.PayCycleService"
+                   ref="payCycleService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+
+    <!--薪资设置 end-->
+    <!-- hongbao service config start-->
+    <motan:service interface="com.xtr.api.service.h5wallet.HongbaoService"
+                   ref="hongbaoService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <!-- hongbao service config end-->
+    <!-- wechat customer service config start-->
+    <motan:service interface="com.xtr.api.service.wechatCustomer.WechatCustomerInfoService"
+                   ref="wechatCustomerInfoService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.wechatCustomer.WechatCustomerBindService"
+                   ref="wechatCustomerBindService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <!-- wechat customer service config end-->
+
+    <!--社保通服务 start-->
+    <motan:service interface="com.xtr.api.service.sbt.SbtService"
+                   ref="sbtService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <!--社保通服务 end-->
+
+    <!--社保服务 start-->
+    <motan:service interface="com.xtr.api.service.shebao.CustomerShebaoService"
+                   ref="customerShebaoService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.shebao.CompanyShebaoService"
+                   ref="companyShebaoService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.shebao.CustomerShebaoOrderService"
+                   ref="customerShebaoOrderService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.shebao.ShebaoDepoitService"
+                   ref="shebaoDepoitService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <!--社保服务 end-->
+
+    <!--急速发工资 start-->
+    <motan:service interface="com.xtr.api.service.salary.RapidlyPayrollService"
+                   ref="rapidlyPayrollService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <motan:service interface="com.xtr.api.service.salary.RapidlyPayrollExcelService"
+                   ref="rapidlyPayrollExcelService" export="demoMotan:8002" basicService="serviceBasicConfig"/>
+    <!--急速发工资 end-->
+
+</beans>

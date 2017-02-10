@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>H+ 合作意向管理</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-table/bootstrap-table.min.css')" rel="stylesheet">
+</head>
+
+<body>
+<div class="col-sm-12">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <form class="form-group" id="queryForm">
+                <div class="col-sm-3" style="width:20%;">
+                    <label style="margin-top:10px;" class="col-sm-4" control-label">意向类型</label>
+                    <div class="col-sm-8">
+                        <select class="form-control m-b" name="itemType" id="itemType">
+                            <option value="">不选择</option>
+                            <option value="1">商务合作</option>
+                            <option value="2">新用户注册</option>
+                            <option value="3">提交工资单</option>
+                            <option value="4">签约到期前30天</option>
+                            <option value="5">融资意向</option>
+                            <option value="6">明确期望签约</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-3" style="width:20%;">
+                    <label style="margin-top:10px;" class="col-sm-4" control-label">意向状态</label>
+                    <div class="col-sm-8">
+                        <select class="form-control m-b" name="sign" id="sign">
+                            <option value="">不选择</option>
+                            <option value="1">待联系</option>
+                            <option value="2">已联系</option>
+                            <option value="3">已签约</option>
+                            <option value="4">关闭</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-3" style="width:24%;">
+                    <label style="margin-top:10px;" class="col-sm-3" control-label">业务经理</label>
+                    <div class="col-sm-9">
+                        <input type="text" placeholder="后台账户名" class="form-control" name="businessMaName" id="businessMaName"/>
+                    </div>
+                </div>
+                <div class="col-sm-1" style="width:20%;">
+                    <input type="text" placeholder="根据企业名或手机号或企业编号模糊检索" class="form-control" name="itemName" id="itemName">
+                </div>
+                <div class="col-sm-1" style="width:8%;">
+                    <button class="btn btn-primary " type="button" id="queryBtn"><i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;搜索
+                    </button>
+                </div>
+                <div class="col-sm-1" style="width:8%;">
+                    <button class="btn btn-primary " type="button" id="exportBtn"><i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;导出
+                    </button>
+                </div>
+            </form>
+            <table id="data-list"></table>
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+<script src="#springUrl('/resource/js/hui/content.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table-mobile.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/validate/jquery.validate.min.js')"></script>
+<script src="#springUrl('/resource/js/comm/jdatagrid.js')"></script>
+<script src="#springUrl('/resource/js/market/intent/cooperationIntent.js')"></script>
+</html>

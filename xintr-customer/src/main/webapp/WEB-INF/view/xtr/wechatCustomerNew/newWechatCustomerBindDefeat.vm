@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" id='html'>
+<head>
+	#parse("comm/head.vm")
+	<meta charset="UTF-8">
+	<title>绑定</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/wechatCustomerNew/bindDefeat.css')">
+</head>
+<body>
+	<div class="bindPic">
+		<img  src="#springUrl('/resource/img/wechatCustomerNew/bindDefeat.png')"/>
+	</div>
+	<div class="bindText">绑定失败</div>
+	<p>HR还未将您录入花名册</p>
+	<p>请提醒您的HR，稍后再来绑定</p>
+	<footer>
+		<div class="roger">我知道啦</div>
+	</footer>	
+</body>
+<script>
+	$(function () {
+		$(".roger").click(function(){
+			history.go(-1);
+		})
+    })
+</script>
+</html>

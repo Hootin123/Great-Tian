@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" id='html'>
+<head>
+	<meta charset="UTF-8">
+	<title>工资单</title>
+	#parse("comm/head.vm")
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/wechatCustomerNew/customerPayOrder.css')">
+</head>
+<body>
+
+  <div>
+	  <!-- 页面隐藏域-->
+	  <input type="hidden" name="customerId" value="$!{customerId}"/>
+	  <input type="hidden" name="companyId" value="$!{companyId}"/>
+	  <input type="hidden" name="currentYear" value="$!{currentYear}"/>
+	<header>
+		<div class="currentYear">
+			<span>$!{currentYear}</span>
+			<b><img  src="#springUrl('/resource/img/wechatCustomerNew/lit-right.png')"></b>
+		</div>
+		<div class="year" style="display: none;">
+			<ul>
+				<!--  <li>
+					<span>2015年</span>
+				</li> -->
+	
+				
+			</ul>
+		</div>
+	</header>
+	<section  class="hasPay">
+		<ul id="payOrders">
+##			<li>
+##				<span class='leftSpan'>12月工资单</span>
+##				<span class='centerSpan'>发放日期：2016.01.15</span>
+##				<span >详情</span>
+##			</li>
+##			<li>
+##				<span class='leftSpan'>11月工资单</span>
+##				<span class='centerSpan'>发放日期：2016.12.15</span>
+##				<span >详情</span>
+##			</li>
+##			<li>
+##				<span class='leftSpan'>10月工资单</span>
+##				<span class='centerSpan'>发放日期：2016.11.15</span>
+##				<span >详情</span>
+##			</li>
+##			<li>
+##				<span class='leftSpan'>09月工资单</span>
+##				<span class='centerSpan'>发放日期：2016.10.15</span>
+##				<span >详情</span>
+##			</li>
+##			<li>
+##				<span class='leftSpan'>08月工资单</span>
+##				<span class='centerSpan'>发放日期：2016.09.15</span>
+##				<span >详情</span>
+##			</li>
+##			<li>
+##				<span class='leftSpan'>07月工资单</span>
+##				<span class='centerSpan'>发放日期：2016.08.15</span>
+##				<span >详情</span>
+##			</li>
+##			<li>
+##				<span class='leftSpan'>06月工资单</span>
+##				<span class='centerSpan'>发放日期：2016.07.15</span>
+##				<span >详情</span>
+##			</li>
+##			<li>
+##				<span class='leftSpan'>05月工资单</span>
+##				<span class='centerSpan'>发放日期：2016.08.15</span>
+##				<span >详情</span>
+##			</li>
+##			<li>
+##				<span class='leftSpan'>04月工资单</span>
+##				<span class='centerSpan'>发放日期：2016.09.15</span>
+##				<span >详情</span>
+##			</li>
+##			<li>
+##				<span class='leftSpan'>03月工资单</span>
+##				<span class='centerSpan'>发放日期：2016.10.15</span>
+##				<span >详情</span>
+##			</li>
+##			<li>
+##				<span class='leftSpan'>02月工资单</span>
+##				<span class='centerSpan'>发放日期：2016.11.15</span>
+##				<span >详情</span>
+##			</li>
+##			<li>
+##				<span class='leftSpan'>01月工资单</span>
+##				<span class='centerSpan'>发放日期：2016.12.15</span>
+##				<span >详情</span>
+##			</li>
+
+		</ul>
+	</section>
+  </div>
+
+<div class="noPayOrder">
+
+    <div class="empty">
+        <img src="#springUrl('/resource/img/wechatCustomerNew/empty.png')" />
+    </div>
+    <p>你还没有工资单记录哦！</p>
+</div>
+
+</body>
+<script type="text/javascript">
+	// 初始化
+	getNowDate()
+	// 获取当前时间
+	function getNowDate(){
+
+		initY=$!{currentYear}; // .....当前年
+		$('.currentYear span').text(initY+'年')
+		var currentYear=parseInt($('.currentYear span').text());
+		for (var i = 0; i < 50 ;i++) {
+			$('.year ul').append("<li><span>"+(currentYear-i)+"年</span></li>")
+		};
+
+	}
+	// 点击年
+	$('.currentYear').on('click',function(e){
+		e.stopPropagation()
+		$('.year').show();
+		$('.currentYear img').addClass('show')
+		$('.year li').on('touchstart',function(){
+			$(this).addClass('active').find('span').css('border',0).parent().siblings().removeClass('active').find('span').css('border-bottom','1pxdolid #ddd')
+		});
+
+	})
+
+	//选择年份 异步加载
+    $('.year li').on('click',function(){
+
+        $('.currentYear span').text($(this).text());
+		$("input[name='currentYear']").val($(this).text().substring(0,4));
+        $('.year').hide();
+        $('.currentYear img').removeClass('show');
+
+
+		//alert($(this).text().substring(0,4))
+		//异步请求后台 加载选择的年份的工资单
+          seePayOrderList()
+
+    })
+
+ 	$(document).on('click',function(){
+        $('.year').hide();
+        $('.currentYear img').removeClass('show');
+    })
+    $('.year').on('click',function(e){
+        e.stopPropagation()
+    })
+
+
+
+	$(function(){
+		//初始化工资列表
+        seePayOrderList();
+
+	})
+
+	//查看工资详情
+	function  seeDetail(i,j,k){
+       var  payrollId = i;
+	   var payCycleId =j;
+	   var  month = k;
+	   var  customerId = $("input[name='customerId']").val();
+	   var companyId = $("input[name='companyId']").val();
+       var path = BASE_PATH+"/wechatCustomer/toPayOrderDetail.htm?payrollId="+payrollId+"&payCycleId="+payCycleId+"&customerId="+customerId+"&companyId="+companyId+"&month="+month
+
+	   window.location.href=path;
+	}
+
+
+    function seePayOrderList(){
+
+        //页面加载
+        var  companyId = $("input[name='companyId']").val();
+        var customerId = $("input[name='customerId']").val();
+        var currentYear = $("input[name='currentYear']").val();
+        $("#payOrders").empty();
+        $.ajax({
+            url:BASE_PATH+'/wechatCustomer/queryYearOrders.htm',
+            data:{'companyId':companyId,'customerId':customerId,'currentYear':currentYear},
+            dataType:'json',
+            type:'post',
+            success:function(data){
+                if(data.success){
+                    //查到了工资
+                    var list = data.data;
+                    if(null!=list&&list.length>0){
+                        $(".noPayOrder").hide();
+                        $(".hasPay").show();
+                        var html="";
+                        $.each(list,function (i,item) {
+                            html+="<li  onclick=seeDetail("+item.payrollId+","+item.payCycleId+","+item.month+");>";
+                            html+="<span class='leftSpan'>"+item.month+"月工资单</span>";
+                            html+="<span class='centerSpan'>发放日期："+item.payDayStr+"</span>";
+                            html+="<span>详情</span>"
+
+                        });
+
+                        $("#payOrders").html(html);
+
+
+
+                    }else{
+                        //显示未查询到
+                        $(".noPayOrder").show();
+                        $(".hasPay").hide();
+                    }
+
+                }else{
+                    //没有查到工资
+                    alert(data.message);
+                    $(".noPayOrder").show();
+                    $(".hasPay").hide();
+                }
+            },
+            error:function(){
+                alert("网络错误，请刷新页面");
+            }
+
+        })
+
+	}
+
+
+</script>
+</html>

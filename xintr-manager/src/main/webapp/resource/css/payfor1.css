@@ -1,0 +1,451 @@
+.identity-wrap {
+    position: relative;
+    height: 110px;
+}
+.xtr3-btns {
+    margin: 20px 0;
+    position: relative;
+    background: #e7edf5;
+    color: #e7edf5;
+    padding: 20px 40px;
+}
+.clfix {
+    clear: both;
+}
+.identity-wrap .bg {
+    background: #e7edf5;
+    border-radius: 10px;
+    height: 20px;
+    position: absolute;
+    top: 27px;
+    left: 0;
+    width: 100%;
+    z-index: 0;
+}
+.identity-wrap .it.active p {
+    color: #5b7798;
+}
+.identity-wrap .it.active{
+    background: url(../img/xtrxx-active.png) no-repeat center 0;
+}
+.identity-wrap .it p {
+    color: #c2cad3;
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 30px;
+}
+.identity-wrap .it {
+    margin-left: 8%;
+    width: 23%;
+    float: left;
+    height: 110px;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    font-size: 30px;
+    line-height: 74px;
+    background: url(../img/xtrxx.png) no-repeat center 0;
+    position: relative;
+    z-index: 2;
+}
+.xtr3-btns i {
+    position: absolute;
+    top: -21px;
+    right: 16.66666%;
+    margin-right: -10px;
+    font-size: 30px;
+    width: 20px;
+}
+[class^="icon-"], [class*=" icon-"] {
+    display: inline;
+    width: auto;
+    height: auto;
+    line-height: normal;
+    vertical-align: baseline;
+    background-image: none;
+    background-position: 0% 0%;
+    background-repeat: repeat;
+    margin-top: 0;
+}
+[class^="icon-"], [class*=" icon-"] {
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: inherit;
+    -webkit-font-smoothing: antialiased;
+    *margin-right: .3em;
+}
+i {
+    font-style: normal;
+}
+.login-wrap h2, .xtr2-h2 {
+    margin: 5px 0 15px -4px;
+    text-align: left;
+    font-size: 18px;
+    font-weight: 100;
+    height: 16px;
+    line-height: 16px;
+    color: #333;
+    background: none;
+    border-left: 4px solid #5b7798;
+    padding-left: 10px;
+}
+.xtr2-input {
+    width: 460px;
+    height: 30px;
+    padding: 2px 20px;
+    border: 1px solid #e3e3e3;
+}
+/*.login-wrap button.ui-btn {
+    outline: none;
+    background: #0696fa;
+    border-color: #0696fa;
+    color: #fff;
+    font-size: 14px;
+    box-sizing: content-box;
+    border-radius: 10px;
+    width: 340px;
+    height: 30px;
+    line-height: 30px;
+}
+.login-wrap input[type="text"], .login-wrap input[type="password"], .login-wrap button.ui-btn, .login-wrap select {
+    border-radius: 4px;
+    width: 260px;
+    height: 20px;
+    padding: 9px 19px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #404040;
+    border: 1px solid #e3e3e3;
+}
+.login-wrap button, a.login-btn, button.login-btn {
+    outline: none;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    color: #fff;
+    background: #0696fa;
+    display: inline-block;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 14px;
+}
+.ui-btn {
+    border-radius: 10px;
+    font-size: 14px;
+    text-align: center;
+    width: 198px;
+    height: 38px;
+    outline: none;
+    cursor: pointer;
+    box-sizing: content-box;
+}
+.ui-btn {
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    display: inline-block;
+    text-align: center;
+}*/
+.codebtn{
+	width: 120px;
+	height: 36px;
+	background: #0696FA;
+	margin-left: 20px;
+	border: none;
+	color: #FFFFFF;
+	cursor: pointer;
+}
+.next{
+	width: 200px;
+	height: 50px;
+	background: #0696fa;
+	color: #FFFFFF;
+	line-height: 50px;
+	text-align: center;
+	border-radius:6px;
+	border:none;
+	cursor: pointer;
+}
+/*button {
+   cursor: pointer;
+}*/
+.red{
+	color: #fa5f5f;
+}
+
+/*test2*/
+
+.btn-blue {
+    background: #0696fa;
+    color: #fff;
+}
+
+.upload-wrap {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    text-align: center;
+}
+.upload-wrap img {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 0;
+}
+.upload-wrap input[type="file"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 3;
+    /*display: none;*/
+    opacity: 0;
+    filter: alpha(opacity=0);
+    cursor: pointer;
+}
+.upload-wrap .delete {
+    position: absolute;
+    border: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    cursor: pointer;
+    color: #fff;
+    background: #333;
+    background: rgba(0,0,0,.5);
+    display: none;
+}
+.upload-wrap .opacity {
+    /*display: none;*/
+}
+.upload-wrap .progress-wrap {
+    position: relative;
+    margin-top: 160px;
+}
+.progress-wrap {
+    background: #fff;
+    display: inline-block;
+    width: 150px;
+    height: 8px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.progress-wrap .progress {
+    height: 100%;
+    width: auto;
+    background: #35ddaf;
+    border-radius: 10px;
+}
+.upload-wrap.uploading .opacity .bgg {
+    background: #000;
+    opacity: .7;
+    filter: alpha(opacity=70);
+    height: 100%;
+    z-index: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.tesfile{
+    display: block; width: 70px; height: 22px;border-radius: 6px; font-size: 12px; border:1px solid #0696fa; color: #0696fa; line-height: 22px; text-align: center;cursor: pointer;
+}
+.tesfile1{
+    width:200px;
+    height:200px;
+    position: absolute;
+    left: 0;
+    top:0;
+    opacity: 0;
+}
+.identity-content{
+
+    color:#747474;
+}
+.identity-content-p1{
+    font-size:17px;
+    margin-top:165px;
+    font-family:"微软雅黑";
+    text-align: center;
+
+}
+
+.identity-content-btn{
+    width:300px;
+    height:50px;
+    border-radius:10px;
+    background:#0696fa;
+    color:#fff;
+    font-size:18px;
+    border:0;
+    margin-top:210px;
+    font-family:"微软雅黑";
+    text-align: center;
+}
+.identity-content-div{
+    text-align: center;
+}
+
+/*上传资料的文件夹的样式*/
+
+
+.identity-inpfile{
+    width: 100px;
+    height: 100px;
+    background: red;
+    position: absolute;
+    left: 40%;
+    top: 50%;
+    cursor: pointer;
+    opacity: 0; filter:Alpha(opacity=0);
+}
+/*end*/
+
+
+
+.clear:after{
+    content: '';
+    display: block;
+    clear: both;
+}
+.identity-content-boxes{
+    padding: 70px 20px 0 20px;
+    min-width: 850px;
+}
+.identity-content-boxs{
+    float: left;
+    margin: 0 20px 50px 20px;
+    text-align: center;
+}
+.identity-content-box{
+    width: 172px;
+    height: 147px;
+    background: url(../img/folder-no.png) no-repeat center center;
+    position: relative;
+}
+.identity-content-box1{
+    background: url(../img/folders.png) no-repeat center center;
+}
+.identity-content-boxs p{
+    font-size: 12px;
+    color: #666666;
+    padding-top:10px ;
+    width: 172px;
+}
+.identity-content-box a{
+    display: block;
+    width: 70px;
+    height: 22px;
+    background: #0696FA;
+    color: #FFFFFF;
+    line-height: 22px;
+    text-align: center;
+    border-radius:6px ;
+    font-size: 12px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: 14px 0 0 -35px;
+}
+.identity-content-file{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin:-25px 0 0 -50px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+/*end*/
+
+/*上传的照片展示页样式*/
+.identity-content-boxes1{
+    margin: 76px 0 0 0;
+
+}
+.identity-content-page{
+    width: 200px;
+    height: 200px;
+    margin-right:30px ;
+    position: relative;
+    float: left;
+    margin-bottom: 60px;
+}
+.identity-content-page img{
+    width: 100%;
+    height: 100%;
+}
+.identity-content-page i{
+    display: block;
+    width: 200px;
+    height: 50px;
+    /*background: rgba(0,0,0,0.5);*/
+    background:#000000;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: block;
+    display: none;
+}
+.identity-content-page .identity-page-delete{
+    background: none;
+    color: #FFFFFF;
+    opacity: 1;
+    filter: alpha(opacity=100);
+    line-height: 50px;
+    text-align: center;
+    cursor: pointer;
+    display: block;
+    display: none;
+}
+
+
+.identity-page-upload{
+    width: 150px;
+    height: 6px;
+    border-radius: 3px;
+    background: #FFFFFF;
+    position: absolute;
+    bottom:20px ;
+    left: 25px;
+    display: none;
+}
+.identity-page-upload .identity-page-upload1{
+    width: 40px;
+    height: 6px;
+    background: #35ddaf;
+    border-radius: 3px;
+}
+
+.identity-page-file{
+    width: 200px;
+    height: 200px;
+    background: #0696FA;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    cursor: pointer;
+}
+.identity-page-shure{
+    display: block;
+    width: 300px;
+    height: 50px;
+    background: #0696FA;
+    text-align: center;
+    line-height: 50px;
+    color: #FFFFFF;
+    font-size: 18px;
+    border-radius: 6px;
+    margin: 140px auto 0;
+}
+/*end*/

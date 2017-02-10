@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>调薪</title>
+    #parse("comm/head.vm")
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/js/plugins/laydate/need/laydate.css')"/>
+    <script src="#springUrl('/resource/js/plugins/laydate/laydate.js')"></script>
+    <style>
+        body,html{
+            width:100%;
+            height:100%;
+        }
+        #dataForm{
+            width:550px;
+
+        }
+        .all{
+            height:100%;
+        }
+        .row1{
+            margin-top:20px;
+        }
+        .row{
+            float:left;
+            color:#666;
+        }
+
+        .row .divlabel{
+            width: 150px;
+            text-align: right;
+        }
+
+        .row > div{
+            float:left;
+            padding: 10px;
+        }
+        .row > div > label{
+            line-height: 36px;
+        }
+        .label1{
+            color:#333;
+            font-weight: 600;
+        }
+        input{
+            height: 34px;
+            border: 1px solid #e3e3e3;
+            position: relative;
+            top: -1px;
+            color: #666666;
+            width: 175px;
+        }
+        textarea{
+            border: 1px solid #e3e3e3;
+            position: relative;
+            top: -1px;
+            color: #666666;
+            width: 175px;
+            padding:10px;
+        }
+        .row .foot{
+            width:100%;
+            height:35px;
+            position: absolute;
+            bottom:20px;
+            padding:0;
+        }
+        .footBtn{
+            width:410px;
+            height:35px;
+            margin:0 auto;
+        }
+        .okbtn{
+            width: 200px;
+            height: 35px;
+            line-height: 35px;
+            background: #0696fa;
+            color: #FFFFFF;
+            border: none;
+            float:left;
+            text-align: center;
+            border-radius: 6px;
+            display: inline-block;
+            font-size: 14px;
+            cursor: pointer;
+            font-family: "微软雅黑";
+        }
+        .cancelbtn{
+            width: 198px;
+            height: 33px;
+            line-height: 33px;
+            border: 1px solid #0696FA;
+            color: #0696FA;
+            background: #FFFFFF;
+            float:right;
+            text-align: center;
+            border-radius: 6px;
+            display: inline-block;
+            font-size: 14px;
+            cursor: pointer;
+            font-family: "微软雅黑";
+        }
+        #date{
+            width:155px;
+            height:35px;
+            border:1px solid #dbe9ee;
+        }
+        .salary{padding-left:10px;}
+
+    </style>
+</head>
+
+<body>
+<div class="all">
+    <form id="dataForm">
+    <div class="row row1">
+        <input id="customerId" name="customerId" value="$!customer.customerId" type="hidden"/>
+        <div class="divlabel"><label>姓名</label></div>
+        <div style="width: 350px;">
+            <label class="label1">$!{customer.customerTurename}
+                #if($station.stationCustomerState == 2)
+                    (正式)
+                #end
+
+            </label>
+        </div>
+    </div>
+    <div style="clear: both"></div>
+    <div class="row">
+        <div class="divlabel">
+            <label>
+                目前基本工资
+            </label>
+        </div>
+        <div style="width: 350px;">
+            <label id="currentSalary">$!{currentSalary}</label>
+        </div>
+    </div>
+    <div style="clear: both"></div>
+
+    <div class="row">
+        <div class="divlabel">
+            <label>
+                *调整后基本工资
+            </label>
+        </div>
+        <div style="width: 200px;">
+            <input id="salary" name="salary" onkeyup="UpdateSalaryExtend.checkZz()" value=""/>
+            <span id="remind" style="color:red;display: none">工资基数并无变化，请重新调整</span>
+        </div>
+        <div style="width: 140px;overflow: hidden">
+            <label>调薪幅度<span id="fd">0</span>%</label>
+        </div>
+    </div>
+    <div style="clear: both"></div>
+
+    <div class="row">
+        <div class="divlabel">
+            <label>
+                *生效日期
+            </label>
+        </div>
+        <div style="width: 350px;">
+            <input id="date" type="text" name="date" class="laydate-icon" readonly="readonly" onclick="laydate({choose:function(data){UpdateSalaryExtend.onDateChange()}})"/>
+        </div>
+    </div>
+    <div style="clear: both"></div>
+
+    <div class="row">
+        <div class="divlabel">
+            <label>
+                调薪原因
+            </label>
+        </div>
+        <div style="width: 350px;">
+            <textarea style="width: 210px;height: 100px;" name="reason"></textarea>
+        </div>
+    </div>
+    <div style="clear: both"></div>
+
+    <div class="row">
+        <div class="divlabel" style="width:130px;"></div>
+        <div class="foot">
+            <div class="footBtn">
+                <input class="okbtn btn" type="button" value="确定" onclick="UpdateSalaryExtend.save()">
+                <input class="cancelbtn btn" type="button" value="取消" onclick="UpdateSalaryExtend.close()">
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+
+</body>
+<script>
+$(function () {
+    $("#date").bind("change", function(){
+        alert(12)
+    })
+
+})
+    UpdateSalaryExtend = {
+        checkZz:function(){
+            var mq = parseFloat("$!{customer.customerCurrentSalary}");
+            var tx = parseFloat($("#salary").val());
+
+            if(tx === mq) {
+                $("#salary").next("span").css("display", "block")
+            }else{
+                $("#salary").next("span").css("display", "none")
+            }
+            if($('#salary').val() == '' || isNaN($('#salary').val())){
+                $("#fd").html("0");
+            }else {
+                $("#fd").html(parseInt((tx - mq) / mq * 100));
+            }
+
+        },
+        onDateChange:function(){
+##            $.ajax({
+##                type: 'post',
+##                url: BASE_PATH + '/customerSalary/getLastSalary.htm',
+##                data: {"customerId" : '$!customer.customerId', 'lastDate':$("#date").val()},
+##                success: function(data) {
+##                    $("#currentSalary").html(data.data);
+##                }
+##            });
+        },
+        save:function(){
+            var jobState = "$station.stationCustomerState";
+
+            if($("#salary").next("span").css("display") == "block"){
+                showWarning("工资基数并无变化，请重新调整");
+                return;
+            }
+
+            if($("#salary").val() == "" || !isMoney($("#salary").val())){
+                showWarning("调整后基本工资输入有误");
+                return;
+            }
+            if($("#date").val() == ""){
+                showWarning("请选择生效日期");
+                return;
+            }
+            if(parseInt(jobState) > 2) {
+                showWarning("员工已离职");
+                return;
+            }
+
+            $.ajax({
+                type: 'post',
+                url: BASE_PATH + '/customerSalary/updateSalary.htm',
+                data: $("#dataForm").serialize(),
+                success: function(data) {
+                    if (data.success) {
+                        layer.alert('调薪成功',{
+                            title:'处理结果',
+                        },function(index){
+                            var param = {'id': '$!payrollId', 'type': 100};
+                            //更新基本工资
+                            parent.updateBasePay('$!payrollId', param);
+                            UpdateSalaryExtend.close();
+                        });
+
+                    } else {
+                        showWarning(data.message);
+                    }
+                }
+            });
+
+        },
+        close:function(){
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+        }
+    }
+
+</script>
+</html>

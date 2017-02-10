@@ -1,0 +1,109 @@
+body{
+    width: 100%;
+    background: #EBEBEB;
+}
+header{
+    width: 100%;
+    height: 2.4rem;
+    background: #6370C8;
+    overflow: hidden;
+}
+header .pay{
+    width: 4rem;
+    height: 0.66rem;
+    margin:0 auto;
+    margin-top: 0.88rem;
+    color: #fff;
+    font-size: 0.3rem;
+    font-family: '微软雅黑';
+    line-height: 0.7rem;
+}
+header .pay span{
+    font-size: 0.48rem;
+    line-height: 0.66rem;
+}
+header .payInfo{
+    width: 100%;
+    height: 0.26rem;
+    margin-top: 0.4rem;
+    /*	padding: 0 0.16rem;
+        box-sizing: border-box;*/
+}
+header .payInfo p{
+    float: left;
+    color: #fff;
+    font-family: '微软雅黑';
+    font-size: 0.18rem;
+    -webkit-transform: scale(0.9);
+
+}
+header .payInfo p:last-child{
+    float: right;
+}
+.payHint{
+    width: 111%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    color: #E45353;
+    font-size: 0.24rem;
+    background:#fff;
+    -webkit-transform-origin-y: 0;
+    -webkit-transform-origin-x: 0;
+    -webkit-transform: scale(0.9);
+
+}
+section table{
+    width: 100%;
+}
+section tr{
+    width: 100%;
+    border-top:1px solid #ddd;
+}
+section tr td{
+    border-bottom:1px solid #ddd;
+    height: 0.88rem;
+    color: #222;
+    font-size: 0.26rem;
+    background:#fff;
+    padding: 0 0.24rem;
+    box-sizing: border-box;
+
+}
+/*section ul li span{
+    float: left;
+}
+section ul li span:last-child{
+    float: right;
+}*/
+section tr  .payLeft{
+    font-size: 0.28rem;
+    font-weight: 600;
+}
+section tr .payright{
+    text-align: right;
+}
+section tr .payright .cutPay{
+    color: #1394FF;
+}
+section tr .mayPay{
+    color: #E45353;
+}
+section .commTr{
+    height: 1.2rem;
+}
+section .borderTr{
+    width: 100%;
+    height: 0.32rem;
+    background: #EBEBEB;
+}
+footer{
+    width: 100%;
+    height: 0.88rem;
+    font-size: 0.18rem;
+    color: #555;
+    font-family: '微软雅黑';
+    text-align: center;
+    line-height: 0.88rem;
+
+}

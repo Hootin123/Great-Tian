@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xtr.core.persistence.reader.salary.BonusSettingsReaderMapper">
+
+    <resultMap id="BaseResultMap" type="com.xtr.api.domain.salary.BonusSettingsBean">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="company_id" property="companyId" jdbcType="BIGINT"/>
+        <result column="dept_id" property="deptId" jdbcType="BIGINT"/>
+        <result column="company_menber_id" property="companyMenberId" jdbcType="BIGINT"/>
+        <result column="bonus_name" property="bonusName" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, company_id, dept_id, company_menber_id, bonus_name, create_time
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from bonus_settings
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <sql id="Example_Where_Clause">
+        <if test="companyId != null">
+            and company_id = #{companyId,jdbcType=BIGINT}
+        </if>
+        <if test="deptId != null">
+            and dept_id = #{deptId,jdbcType=BIGINT}
+        </if>
+        <if test="companyMenberId != null">
+            and company_menber_id = #{companyMenberId,jdbcType=BIGINT}
+        </if>
+        <if test="bonusName != null">
+            and bonus_name = #{bonusName,jdbcType=VARCHAR}
+        </if>
+        <if test="createTime != null">
+            and create_time = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+    </sql>
+
+    <!--查询奖金设置列表-->
+    <select id="selectList" resultMap="BaseResultMap" resultType="com.xtr.api.domain.salary.BonusSettingsBean">
+        select
+        <include refid="Base_Column_List"/>
+        from bonus_settings where 1=1
+        <include refid="Example_Where_Clause"/>
+        order by create_time desc
+    </select>
+
+</mapper>

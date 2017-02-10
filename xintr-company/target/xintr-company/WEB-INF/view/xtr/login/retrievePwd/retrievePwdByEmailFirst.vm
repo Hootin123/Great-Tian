@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/comm/comm.css')" />
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/login/login.css')" />
+    <link rel="stylesheet" href="#springUrl('/resource/css/comm/mainPage.css')" />
+    <script src="#springUrl('/resource/js/login/jquery-1.11.0.min.js')"></script>
+    <script src="#springUrl('/resource/js/login/login.js')"></script>
+
+</head>
+<body>
+<div class="header">
+    <div class="hdlg">
+        <a class="homepage" href="#">薪太软首页</a>
+    </div>
+</div>
+<div id="lgbdy">
+    <div class="activated">
+        <div class="activated_bg"></div>
+        <div class="activated_tb">
+            <form id="pwdFirstForm">
+                <table id="newFound">
+                    <tr>
+                        <th>忘记密码</th>
+                    </tr>
+                    <tr>
+                        <td>用户名</td>
+                        <td><input class="logtext"  type="text" placeholder="输入用户名" name="loginName"/></td>
+                    </tr>
+                    <tr>
+                        <td>图形验证码</td>
+                        <td>
+                            <input class="logtext" style="width: 100px;" type="text"  placeholder="图形验证码" name="emailCode"/>
+                            <img class="btn-code" id="emailCodeImg" name ="emailCodeImg" src="#springUrl('/generateImages.htm?time=')"  onclick="changeCodeImg();"/>
+                            <a href="#" style="margin-left: 20px;color: #5b7798;" onclick="changeCodeImg();">换一张</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" id="verifycodeTip" style="color:red;width:100%;"></td>
+                    </tr>
+                    <tr id="ieeight1">
+                        <td></td>
+                        <td>
+                            <input class="pbtbwbtn" type="button" value="下一步" id="firstNextBtn"/>
+                            <input class="pbtbwbtn pbtbwbtn1" type="button" value="取消" onclick="history.go(-1)" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+    </div>
+</div>
+<div class="footer" id="footer">薪太软（上海）科技发展有限公司  |  沪ICP备16018294号  |<img src="#springUrl('/resource/img/police.png')" style="margin: 28px 5px 0 5px;" />沪公网安备 31010602000188号</div>
+</body>
+<script src="#springUrl('/resource/js/login/retrievePwd/retrievePwdByEmailFirst.js')"></script>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" id='html'>
+<head>
+	<meta charset="UTF-8">
+	<title>红包页</title>
+	<meta name="viewport" content="width=divce-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1">
+	#parse("comm/head.vm")
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/h5wallet/pachet.css')">
+</head>
+<body>
+	<header>
+		<div class="logo"></div>
+		<em></em>
+		<div class="txt">
+			<p>有<span>「薪」</span>事</p>
+			<p>找薪太软</p>
+		</div>
+	</header>
+	<section>
+        <p>新用户注册可获得5元现金红包</p>
+        <p>新老用户完成企业认证再获20元现金红包</p>
+        <p>我们将在1-2工作日内</p>
+        <p>与你电话沟通并发放红包</p>
+
+	</section>
+	<input type="hidden" name="companyId" id="companyId" value="$!{companyId}"/>
+	<footer>
+		<div class="attest" id="attest">立即认证</div>
+	</footer>
+</body>
+<script>
+	$("#attest").click(function(){
+        $.ajax({
+            type: 'post',
+            url: 'h5ScanApproveCheck.htm',
+            data: {"companyId":$("#companyId").val()},
+            async:false,
+            success: function (data) {
+                console.log(data);
+                if (data.success) {
+                    var companyBean=data.data;
+                    if(companyBean.companyAuditStatus==0){//待审核，跳到待审核页面
+                        window.location.href=BASE_PATH+'/scanCode/toh5scanApproveWait.htm?companyId='+companyBean.companyId;
+                    }else if(companyBean.companyAuditStatus==1){//审核驳回，跳到审核失败页面
+                        window.location.href=BASE_PATH+'/scanCode/toh5scanApproveFailed.htm?companyId='+companyBean.companyId+'&companyAuditRemark='+encodeURIComponent(encodeURIComponent(companyBean.companyAuditRemark));
+                    }else if(companyBean.companyAuditStatus==2){//审核成功，跳到审核成功页面
+                        window.location.href=BASE_PATH+'/scanCode/toh5scanApproveSuccess.htm?companyId='+companyBean.companyId;
+                    }else{//未审核，跳到审核页面
+                        window.location.href=BASE_PATH+'/scanCode/toScanApprove.htm?companyId='+companyBean.companyId+'&companyName='+encodeURIComponent(encodeURIComponent(companyBean.companyName))+'&companyCorporationPhone='+companyBean.companyCorporationPhone;
+                    }
+                } else {
+
+                   alert(data.message);
+                }
+            }
+        });
+
+	});
+
+</script>
+</html>

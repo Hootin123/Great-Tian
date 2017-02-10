@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    #parse("comm/head.vm")
+    <title>报销</title>
+    <style>
+        body,html{width:100%;height:100%;position: relative}
+        .reportBall{width:600px;height:330px;z-index:10;margin: 0 auto;overflow: auto}
+        .reportBall h3{text-indent: 20px;color:#333;padding-top:20px;}
+        .reportBall b{ display: block;width: 10px;  height: 10px;  background: url(#springUrl('/resource/img/customer/new/2.2close.png')) 0 0 no-repeat;position: absolute;right:20px;top:20px;cursor: pointer;}
+        .ballCon{padding:0 40px;}
+        .ballConSum{margin-top:30px;height:40px;}
+        .ballConSumLeft{color:#666;float:left;}
+        .ballConSumRight{float:right;width:70px;height:20px;border:1px solid #0696fa;color:#0696fa;text-align: center;font-size: 12px;line-height:20px;cursor: pointer;border-radius:3px}
+        .ballFormTop{height:37px;line-height:37px;background:#5b7798;color:#fff;}
+        table{width:100%;}
+        .ballForm table tr td{height:45px;border:1px solid #dbe9ee;text-align: center}
+        .ballFormTable1{width:117px;}
+        .ballFormTable2{width:111px;}
+        .ballFormTable3{width:117px;}
+        .ballFormTable4{width:73px;}
+        .ballFormTable4 span{color:#fa5f5f;cursor: pointer;}
+        .ballFormTop1{padding-left:60px;}
+        .ballFormTop2{padding-left:95px;}
+        .ballFormTable2 input{width:81px;height:45px;padding-left:30px;border:0;}
+        .ballFormTable3 input{width:87px;height:45px;padding-left:30px;border:0;}
+        .ballFormTop3{padding-left:76px;}
+        .ballFormTop4{padding-left:45px;}
+        .ballText{color:#fa5f5f;margin-top:10px;display:none}
+        .ballBtn{width:100%;height:40px;padding-bottom:20px;margin-top:30px;}
+        .ballB{width:200px;height:40px;margin:0 auto;}
+        .ballBtn1{width:200px;height:40px;background:#314a5e;color:#fff;border:0;font-family:"微软雅黑";border-radius:6px;float:left;cursor:pointer}
+        /*.ballBtn2{width:200px;height:35px;background:#fff;color:#0696fa;border:1px solid #0696fa;font-family:"微软雅黑";border-radius:6px;float:right;cursor:pointer}*/
+        .closeImg{position: absolute;right:-20px;top:-20px;}
+    </style>
+</head>
+<body>
+    <div class="reportBall">
+        <h3>录入和修改报销 <b class="ballBtn2"></b></h3>
+        <div class="ballCon">
+            <div class="ballConSum">
+                <div class="ballConSumLeft">
+                    <span>剩余报销总额：</span>
+                    <span id="sum"></span>
+                    <span>元</span>
+                </div>
+                <div class="ballConSumRight">添加报销</div>
+            </div>
+            <div class="ballForm">
+                <div class="ballFormTop">
+                    <span class="ballFormTop1">时间</span>
+                    <span class="ballFormTop2">发票类型</span>
+                    <span class="ballFormTop3">金额（元）</span>
+                    <span class="ballFormTop4">操作</span>
+                </div>
+                <form id="dataForm">
+                    <table>
+                        #foreach($item in $expenses)
+                            <tr>
+                            <td class="ballFormTable1">$!date.format('yyyy.MM.dd',$item.expenseDate)<input type="hidden" name="id" value="$item.id"/></td>
+                            <td class="ballFormTable2"><input type="text" placeholder="输入类型" value="$item.expenseType" name="expenseType" /></td>
+                            <td class="ballFormTable3"><input type="text" class="amount" placeholder="输入金额" name="expenseAmount" value="$item.expenseAmount"/></td>
+                            <td class="ballFormTable4"><span>删除</span></td>
+                            </tr>
+                        #end
+                    </table>
+                </form>
+            </div>
+            <div class="ballText">报销金额超过定额，超出部分将不会报销</div>
+            <div class="ballBtn">
+                <div class="ballB">
+                    <button class="ballBtn1">确定</button>
+##                    <button class="ballBtn2">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    $(function(){
+
+        $('.ballConSumRight').click(function(){
+            if(calSum() <= 0) {
+                showWarning("当前额度已用完，无需添加");
+                return;
+            }
+
+            $('table').append('<tr>'+
+                                  '<td class="ballFormTable1">'+ formatDate(new Date()) +'<input type="hidden" name="id"/></td>'+
+                                  '<td class="ballFormTable2"><input type="text" placeholder="输入类型" name="expenseType" /></td>'+
+                                  '<td class="ballFormTable3"><input type="text" placeholder="输入金额" class="amount" name="expenseAmount"/></td>'+
+                                  '<td class="ballFormTable4"><span>删除</span></td>'+
+                              '</tr>');
+        });
+        
+        $(document).on("click", ".ballFormTable4 span", function() {
+            var id = $(this).parent().parent().find("input[name='id']").val();
+            if(id){
+                deleteId.push(id);
+            }
+           $(this).parent().parent().remove()
+            calSum();
+        });
+
+        $(document).on("keyup", ".amount", function(){
+//            calSum();
+            console.log(1)
+            if($(this).val()>Number($('#sum').html())){
+                $('.ballText').show();
+            }else{
+                $('.ballText').hide();
+            }
+        })
+        
+       var formatDate = function (date) {  
+                var y = date.getFullYear();  
+                var m = date.getMonth() + 1;  
+                m = m < 10 ? '0' + m : m;  
+                var d = date.getDate();  
+                d = d < 10 ? ('0' + d) : d;  
+                return y + '.' + m + '.' + d;  
+        };
+
+        var deleteId = [];
+
+        function jsonData(){
+            var isOk = true;
+            var json={};
+            json.customerId = '$!{customerId}';
+            var beans = [];
+            $('table tr').each(function(index, data){
+                var bean = {};
+                bean.id = $(data).find("input[name='id']").val();
+                bean.expenseType = $(data).find("input[name='expenseType']").val();
+                if(bean.expenseType == "") {
+                    isOk = false;
+                    showWarning("请输入报销类型")
+                    return false;
+                }
+                bean.expenseAmount = $(data).find("input[name='expenseAmount']").val();
+                if(isNaN(bean.expenseAmount) || bean.expenseAmount == "") {
+                    isOk = false;
+                    showWarning("请输入有效的报销金额")
+                    return false;
+                }
+                beans.push(bean);
+            });
+            if(isOk == false) {
+                return false;
+            }
+            json.beans = beans;
+            json.deleteId=deleteId;
+            return json;
+        }
+
+        $(".ballBtn2").click(function(){
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+        });
+
+        $(".ballBtn1").click(function(){
+            if($('.amount').val()>Number($('#sum').html())){
+//                alertError("金额不能大于报销总额");
+                $('.ballText').show();
+                return false;
+            }else{
+                $('.ballText').hide();
+            }
+//            //报销必须为整数
+//            if($('tbody tr').length !=0){
+//                if($('.amount').val()!= parseInt($('.amount').val())){
+//                    alertError("请输入报销整数");
+//                    return false;
+//                }
+//            }
+
+
+            var json = jsonData();
+            if(!json){
+                return;
+            }
+            layer.load();
+            $.ajax({
+                type: 'post',
+                url: 'customerExpense.htm',
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+                data: JSON.stringify(json),
+                success: function (data) {
+                    //关闭
+                    layer.closeAll('loading');
+                    if (data.success) {
+                        parent.onScreen();
+                        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+                        parent.layer.close(index);
+                    } else {
+                        showWarning(data.message);
+                    }
+                },
+                error:function(){
+                    layer.closeAll('loading');
+                    alertError("网络异常");
+                }
+            });
+        });
+        var expense = '$!{customer.customerCurrentExpense}'
+        var salary = '$!{customer.customerCurrentSalary}'
+        function calSum(){
+            var sum = 0;
+            $("table").find("input[name='expenseAmount']").each(function(index, input){
+                var a = $(input).val();
+                if(a == ""){
+                    return;
+                }
+                if(!isNaN(a)) {
+                    sum += parseFloat(a);
+                }
+            })
+            var last = Math.max(0, (min() - sum));
+            $("#sum").html(last);
+            return last;
+        }
+        function min(){
+            if(!expense) {
+                expense = 0
+            }else{
+                expense = parseFloat(expense);
+            }
+            if(!salary) {
+                salary = 0;
+            }else{
+                salary = parseFloat(salary);
+            }
+            return Math.min(expense, salary);
+        }
+        calSum();
+    })
+</script>
+</html>

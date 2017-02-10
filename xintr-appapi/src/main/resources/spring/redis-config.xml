@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Repository and Service layers -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- ========================= Repository RESOURCE DEFINITIONS ========================= -->
+    <!-- redis config -->
+    <!-- POOL配置 -->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <!-- 池中可借的最大数 -->
+        <property name="maxTotal" value="5000"/>
+        <!-- 允许池中空闲的最大连接数 -->
+        <property name="maxIdle" value="1500"/>
+        <!-- 允许池中空闲的最小连接数 -->
+        <property name="minIdle" value="5"/>
+        <property name="jmxEnabled" value="true"/>
+        <!-- 获取连接最大等待时间（毫秒） -->
+        <property name="maxWaitMillis" value="12000"/>
+        <!-- 当maxActive到达最大数，连接耗尽时是否阻塞, false报异常,ture阻塞直到超时, 默认true -->
+        <!--<property name="blockWhenExhausted" value="false"/>-->
+        <!-- 在获取连接时，是否验证有效性 -->
+        <property name="testOnBorrow" value="true"/>
+        <!-- 在归还连接时，是否验证有效性 -->
+        <property name="testOnReturn" value="true"/>
+        <!-- 当连接空闲时，是否验证有效性 -->
+        <property name="testWhileIdle" value="true"/>
+        <!-- 设定间隔没过多少毫秒进行一次后台连接清理的行动 -->
+        <property name="timeBetweenEvictionRunsMillis" value="5000"/>
+        <!--表示一个对象至少停留在idle状态的最短时间，然后才能被idle object evitor扫描并驱逐；这一项只有在timeBetweenEvictionRunsMillis大于0时才有意义-->
+        <property name="minEvictableIdleTimeMillis" value="600000 "/>
+        <!-- 每次检查的连接数 -->
+        <property name="numTestsPerEvictionRun" value="10"/>
+    </bean>
+    <bean id="jedisConnectionFactory" class="com.xtr.comm.cache.RedisConnectionFactory">
+        <property name="poolConfig" ref="jedisPoolConfig"></property>
+        <property name="usePool" value="true"/>
+        <!--<property name="hostName" value="${redis.host}"></property>-->
+        <!--<property name="port" value="${redis.port}"></property>-->
+        <!--<property name="timeout" value="${redis.timeout}"></property>-->
+        <!--<property name="password" value="password"></property>
+        <property name="database" value="${redis.database}"></property>
+        -->
+    </bean>
+    <!-- redis template definition -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
+          p:connection-factory-ref="jedisConnectionFactory">
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+    </bean>
+</beans>

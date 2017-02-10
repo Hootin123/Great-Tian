@@ -1,0 +1,18 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="renderer" content="webkit" />
+<title>$!{news_title}</title>
+<meta name="keywords" content="$!{news_keywords}"/>
+<meta name="description" content="$!{news_intro}"/>
+
+<meta name="360-site-verification" content="340aa1b20cd239bb3ce0f0c7c2514fe7" />
+
+<link rel="shortcut icon" href="/img/favicon.ico"/>
+<link rel="stylesheet" type="text/css" href="/201607/css/xtr2.css"/>
+<link rel="stylesheet" type="text/css" href="/201607/css/font-awesome.min.css"/>
+<script src="/201607/js/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/201607/js/custom2.js" type="text/javascript" charset="utf-8"></script>
+<script>
+var BASE_PATH = "#springUrl('')";
+</script>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xtr.core.persistence.reader.station.StationCollaborationReaderMapper" >
+  <resultMap id="BaseResultMap" type="com.xtr.api.domain.station.StationCollaborationBean" >
+    <id column="item_id" property="itemId" jdbcType="BIGINT" />
+    <result column="item_mobile" property="itemMobile" jdbcType="VARCHAR" />
+    <result column="item_name" property="itemName" jdbcType="VARCHAR" />
+    <result column="item_bak" property="itemBak" jdbcType="VARCHAR" />
+    <result column="item_type" property="itemType" jdbcType="INTEGER" />
+    <result column="adddate" property="adddate" jdbcType="TIMESTAMP" />
+    <result column="sign" property="sign" jdbcType="INTEGER" />
+    <result column="admin_user" property="adminUser" jdbcType="INTEGER" />
+    <result column="admin_username" property="adminUsername" jdbcType="VARCHAR" />
+    <result column="item_re_title" property="itemReTitle" jdbcType="VARCHAR" />
+    <result column="item_re_cont" property="itemReCont" jdbcType="VARCHAR" />
+    <result column="item_times" property="itemTimes" jdbcType="INTEGER" />
+    <result column="recall_time" property="recallTime" jdbcType="TIMESTAMP" />
+    <result column="business_ma_name" property="businessMaName" jdbcType="VARCHAR" />
+    <result column="collaboration_company_id" property="collaborationCompanyId" jdbcType="BIGINT" />
+    <result column="collaboration_close_items" property="collaborationCloseItems" jdbcType="INTEGER" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="company_contact_tel" property="memberPhone" jdbcType="VARCHAR" />
+    <result column="company_contact_place" property="companyContactPlace" jdbcType="VARCHAR" />
+    <result column="collaboration_contract_type" property="collaborationContractType" jdbcType="INTEGER" />
+    <result column="collaboration_contract_address" property="collaborationContractAddress" jdbcType="VARCHAR" />
+    <result column="collaboration_contract_content" property="collaborationContractContent" jdbcType="VARCHAR" />
+    <result column="collaboration_relationer_name" property="collaborationRelationerName" jdbcType="VARCHAR" />
+    <result column="collaboration_relationer_phone" property="collaborationRelationerPhone" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="BatchExportResultMap" type="com.xtr.api.domain.station.StationCollaborationBean" extends="BaseResultMap">
+    <result column="member_phone" property="loginPhone" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="NEW_Column_List" >
+    /*item_id, item_mobile, item_name, item_bak, item_type, adddate, sign, admin_user,
+    admin_username, item_re_title, item_re_cont, item_times, recall_time, business_ma_name,collaboration_company_id,collaboration_close_items*/
+    item_id, item_mobile, item_name, item_bak, item_type, adddate, sign, admin_user,
+    admin_username, item_re_title, item_re_cont, item_times, recall_time, business_ma_name,collaboration_company_id,collaboration_close_items,
+    collaboration_contract_type,collaboration_contract_address,collaboration_contract_content,collaboration_relationer_name,collaboration_relationer_phone
+  </sql>
+  <sql id="Base_Column_List" >
+    /*item_id, item_mobile, item_name, item_bak, item_type, adddate, sign, admin_user,
+    admin_username, item_re_title, item_re_cont, item_times, recall_time, business_ma_name,collaboration_company_id,collaboration_close_items*/
+    item_id, item_mobile, item_name, item_bak, item_type, adddate, sign, admin_user,
+    admin_username, item_re_title, item_re_cont, item_times, recall_time, business_ma_name,collaboration_company_id,collaboration_close_items,
+    companys.company_name,company_members.member_phone,companys.company_contact_tel,companys.company_contact_place,
+    collaboration_contract_type,collaboration_contract_address,collaboration_contract_content,collaboration_relationer_name,collaboration_relationer_phone
+  </sql>
+
+  <sql id="StationCollaboration_Where_Clause">
+    <!--<if test="itemName != null and itemName != '' ">
+      AND (companys.company_name like   concat('%',#{itemName,jdbcType=VARCHAR},'%')
+      or item_mobile like   concat('%',#{itemName,jdbcType=VARCHAR},'%'))
+    </if>-->
+    <if test="businessMaName != null and businessMaName != '' ">
+  <!--AND (business_ma_name like concat('%',#{businessMaName,jdbcType=VARCHAR},'%'))-->
+
+  AND (item_mobile like concat('%',#{businessMaName,jdbcType=VARCHAR},'%')
+  or collaboration_company_id like concat('%',#{businessMaName,jdbcType=VARCHAR},'%')
+  or business_ma_name like concat('%',#{businessMaName,jdbcType=VARCHAR},'%'))
+</if>
+<if test="sign != null">
+  AND sign =#{sign,jdbcType=INTEGER}
+</if>
+<if test="itemType != null ">
+  AND item_type =#{itemType,jdbcType=INTEGER}
+</if>
+</sql>
+
+<!-- 根据过滤条件查询合作意向信息-->
+  <select id="selectStationCollaborationInfoPageList" resultMap="BaseResultMap" parameterType="com.xtr.api.domain.station.StationCollaborationBean" >
+    select
+    <include refid="Base_Column_List" />
+    from station_collaboration
+    left join companys on companys.company_id=station_collaboration.collaboration_company_id
+    left join company_members on company_members.member_company_id=station_collaboration.collaboration_company_id and company_members.member_isdefault=1
+    WHERE 1=1
+    <include refid="StationCollaboration_Where_Clause"/>
+    ORDER BY station_collaboration.adddate DESC
+  </select>
+
+  <!-- 根据ID查询合作意向信息-->
+  <select id="selectStationCollaborationInfoById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from station_collaboration
+    left join companys on companys.company_id=station_collaboration.collaboration_company_id
+    left join company_members on company_members.member_company_id=station_collaboration.collaboration_company_id and company_members.member_isdefault=1
+    WHERE item_id =#{itemId,jdbcType=BIGINT}
+  </select>
+
+  <!-- 根据企业ID和意向类型查询合作意向信息-->
+  <select id="selectInfoByCompanyIdAndType" resultMap="BaseResultMap" parameterType="com.xtr.api.domain.station.StationCollaborationBean" >
+    select
+    <include refid="Base_Column_List" />
+    from station_collaboration
+    left join companys on companys.company_id=station_collaboration.collaboration_company_id
+    left join company_members on company_members.member_company_id=station_collaboration.collaboration_company_id and company_members.member_isdefault=1
+    WHERE collaboration_company_id =#{collaborationCompanyId,jdbcType=BIGINT}
+    <if test="itemType != null ">
+      AND item_type =#{itemType,jdbcType=INTEGER}
+    </if>
+  </select>
+
+  <!--获取批量导出信息-->
+  <select id="selectInfoByBatch" resultMap="BatchExportResultMap" parameterType="com.xtr.api.domain.station.StationCollaborationBean" >
+    select
+    <include refid="Base_Column_List" />
+    from station_collaboration
+    left join companys on companys.company_id=station_collaboration.collaboration_company_id
+    left join company_members on company_members.member_company_id=station_collaboration.collaboration_company_id and company_members.member_isdefault=1
+    WHERE 1=1
+    <if test="startTime != null ">
+      AND adddate >=#{startTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="endTime != null ">
+      AND <![CDATA[adddate <=#{endTime,jdbcType=TIMESTAMP} ]]>
+    </if>
+    ORDER BY station_collaboration.adddate DESC
+  </select>
+
+  <!--获取已提交申请的明确签约意向-->
+  <select id="selectInfoForAlreadyApply" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="NEW_Column_List" />
+    from station_collaboration
+    WHERE item_type=6 and collaboration_company_id=#{collaborationCompanyId,jdbcType=BIGINT}
+    and sign!=3 and sign!=4
+  </select>
+</mapper>

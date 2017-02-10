@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="#springUrl('/resource/css/comm/comm.css')" rel="stylesheet">
+<link href="#springUrl('/resource/css/payfor1.css')" rel="stylesheet">
+
+
+<title></title>
+
+</head>
+
+<body>
+<div class="container hide" id="identity" style="padding: 60px 5% 40px;">
+<div class="identity-wrap">
+<div class="bg"></div>
+<div class="it active">1
+<p>完善信息</p>
+</div>
+<div class="it active">2
+<p>实名认证</p>
+</div>
+<div class="it active">3
+<p>认证成功</p>
+</div>
+</div>
+<div class="identity-content">
+<p class="identity-content-p1">恭喜您已在薪太软完成实名认证，我们的客服会尽快与您联系，请耐心等候。</p>
+<div class="identity-content-div"><input onclick="parent.location.href='payhome.htm'" style="cursor:pointer" class="identity-content-btn" type="button" value="确定"></div>
+</div>
+</div>
+</body>
+</html>

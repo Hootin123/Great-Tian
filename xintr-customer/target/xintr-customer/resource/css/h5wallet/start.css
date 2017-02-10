@@ -1,0 +1,68 @@
+/* reset */
+body,h1,h2,h3,h4,h5,p,dl,dd,ul,ol,form,input,textarea,th,td,select { margin:0; padding:0; }
+em,i { font-style:normal; }
+li { list-style:none; }
+a { text-decoration:none; color: inherit; }
+img { border:none; vertical-align:top; }
+table { border-collapse:collapse; }
+input,textarea { outline:none; }
+textarea { resize:none; overflow:auto; }
+body { font-size:14px; font-family:"微软雅黑"; }
+strong{ font-weight: normal;}
+/*end reset*/
+.clear:after{ content: ''; display: block; clear: both; }
+
+body{
+	width: 100%;
+	height: 100%;
+	background: url(/resource/img/h5wallet/seek.png) no-repeat 0 0;
+	background-size: 100% ;
+}
+
+.beh{
+	width: 3.96rem;
+	height: 1.3rem;
+	background: #0696fa;
+	box-shadow:0 0 0.04rem 0.04rem #9adcfa;
+	margin:0 auto;
+	margin-top: 5.63rem;
+	border-radius: 0.14rem;
+}
+.beh .content,.advance .content{
+	width: 2.4rem;
+	height: 0.5rem;
+	padding-top:0.4rem;
+	margin: 0 auto;
+
+}
+.beh .content .pic1{
+	width:0.74rem;
+	height: 0.48rem;
+	float: left;
+	margin-right: 0.2rem;
+	background: url(/resource/img/h5wallet/issuing.png) no-repeat 0 0;
+	background-size:100% 100%;
+}
+.beh .content .txt,.advance .content .txt{
+	float: left;
+	font-family: '微软雅黑';
+	font-size: 0.36rem;
+	color: #fff;
+}
+.advance{
+	width: 3.96rem;
+	height: 1.3rem;
+	background: #32cbad;
+	box-shadow:0 0 0.04rem 0.04rem #9adcfa;
+	margin:0 auto;
+	margin-top:1.28rem;
+	border-radius: 0.14rem;
+}
+.advance .content .pic2{
+	width:0.7rem;
+	height: 0.48rem;
+	float: left;
+	margin-right: 0.2rem;
+	background: url(/resource/img/h5wallet/account.png) no-repeat 0 0;
+	background-size:100% 100%;
+}

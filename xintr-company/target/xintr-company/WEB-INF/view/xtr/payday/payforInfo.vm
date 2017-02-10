@@ -1,0 +1,898 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title></title>
+
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/account/kkpager_orange.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/payday/payday.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/payday/set.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/comm/comm.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/phonebox.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/payfor1.css')" rel="stylesheet">
+    <script src="#springUrl('/resource/js/payday/pay.js')"></script>
+    <script src="#springUrl('/resource/js/plugins/dropzone/dropzone.js')"></script>
+    <script src="#springUrl('/resource/js/plugins/laydate/laydate.js')"></script>
+    <script src="#springUrl('/resource/js/payday/payfor.js')"></script>
+    <script src="#springUrl('/resource/js/payday/set.js')"></script>
+    <script src="#springUrl('/resource/js/payday/kkpager.min.js')"></script>
+    <script src="#springUrl('/resource/js/plugins/laypage/laypage.js')"></script>
+    <script>
+     function showPayInfo(){
+        var typeValue='$!{typeValue}';
+        if(typeValue=='info'){
+            $('.content').show();
+            $('.compent').hide();
+            $('.log').hide();
+            $('.text').show();
+            $('.add').hide();
+            $('.search').hide();
+            $(this).addClass('active').siblings().removeClass('active')
+//            $('#info').css({'background':'#5b7798','color': '#fff'}).siblings().css({'background':'#fff','color': '#5b7798'});
+        }else if(typeValue=='operat'){
+            $('.content').hide();
+            $('.compent').show();
+            $('.log').hide();
+            $('.text').hide();
+            $('.add').show();
+            $('.search').hide();
+            $(this).addClass('active').siblings().removeClass('active')
+//            $('#operat').css({'background':'#5b7798','color': '#fff'}).siblings().css({'background':'#fff','color': '#5b7798'});
+
+        }else if(typeValue=='logPage'){
+            pageShowNext();
+        }else if(typeValue=='log'){
+            $('.content').hide();
+            $('.compent').hide();
+            $('.log').show();
+            $('.text').hide();
+            $('.add').hide();
+            $('.search').show();
+            $(this).addClass('active').siblings().removeClass('active')
+//            $('#log').css({'background':'#5b7798','color': '#fff'}).siblings().css({'background':'#fff','color': '#5b7798'});
+            }
+        };
+
+   </script>
+<style>
+
+</style>
+</head>
+<body>
+
+<!--资料填写弹窗-->
+<div class="container hide" id="identity">
+##    <header>
+##        <h3 class='title'>公司设置</h3>
+##    </header>
+    <section>
+        <div class="top">
+            <ul>
+                <li id='info' class="active">公司信息</li>
+                <li id='operat'>权限管理</li>
+                <li id='log'>操作日志</li>
+                <li id="sign">签约记录</li>
+            </ul>
+            <div class="hint">
+                <div class="text"></div>
+                <div class="add" >
+                    <button>+</button>
+                    <span>添加操作员</span>
+                </div>
+                <div class="search" style='display: none'>
+                    <input type="text" id="userNameValue" name="" placeholder="根据操作员搜索">
+                    <p class='sec' onclick="serchLogShow()"></p>
+                </div>
+            </div>
+        </div>
+        <!--公司信息-->
+        <div class="content" style="90%">
+            #if($!{auditStatus} == "1")
+                <script>
+                    layer.alert('您提交的企业信息审核未通过，原因是：$!{companyAuditRemark}');
+                </script>
+            #else
+            #end
+            <form id="payforForm" name="payforForm">
+
+
+                <div class="reminded" style="display:none" id="payforNext">薪太软会在3个工作日内审核您的信息，请耐心等待...</div>
+                <div class="content-left">
+                    <div class="nameLeft">
+                        <ul>
+                            <li><span>*</span> 公司名称</li>
+                            <li><span>*</span> 联系电话</li>
+                            <li><span>*</span> 公司地区</li>
+                            <li><span>*</span> 公司地址</li>
+                            <li><span>*</span> 营业执照编号</li>
+                            <li class="tall" style="border-bottom:1px solid #dbe9ee;"><span>*</span> 营业执照扫描件</li>
+
+                        ##                        <li class="tall"><span></span> 公司LOGO</li>
+                        ##
+                        ##
+                        ##                        <li><span></span> 法人代表</li>
+                        ##
+                        ##                        <li><span></span> 公司规模</li>
+                        ##                        <li><span></span> 所属行业</li>
+                        ##                        <li style="border-bottom:1px solid #dbe9ee;"><span>*</span> 了解薪太软的渠道</li>
+                        </ul>
+                    </div>
+                    <div class="contRight ">
+                        <ul class="conRight-list">
+                            <li>
+                                <input type="text" name="companyName" id="companyName" value="$!{companyName}" placeholder="请输入公司名称">
+                                <span class="error">公司名称不能为空！</span>
+                            </li>
+                            <li>
+                                <input type="text" placeholder="请输入联系电话" name="companyContactTel" id="companyContactTel" value="$!{companyContactTel}">
+                                <span class="error">请输入正确的联系电话！</span>
+                            </li>
+                            <li>
+                                <input type="text" placeholder="请输入公司地区" name="" id="" >
+                                <span class="error">请输入正确的公司地区！</span>
+                            </li>
+                            <li>
+                                <input type="text" name="companyAddress" id="companyAddress" value="$!{companyAddress}" placeholder="请输入公司地址">
+                                <span class="error">公司地址不能为空！</span>
+                            </li>
+                            <li>
+                                <input type="text" placeholder="请输入营业执照编号" name="companyNumber" id="companyNumber" value="$!{companyNumber}">
+                                <span class="error">请输入正确的营业执照编号！</span>
+                            </li>
+
+                            <li class="tall license" style="border-bottom:1px solid #dbe9ee;">
+                                <div>
+                                    <div style="width: 120px;height: 120px">
+                                        #if($!{companyOrganizationImg} == "")
+                                            <img style="max-width: 100px;max-height: 100px" src="resource/img/uploading.png" alt="" id="companyOrganizationImgUrl">
+                                        #else
+                                            <img style="max-width: 100px;max-height: 100px" src="$!{companyOrganizationImgUrl}" alt="" id="companyOrganizationImgUrl">
+                                        #end
+                                    </div>
+                                    <img src="#springUrl('/resource/img/custom/load.gif')" alt="" class="load" style="width: 60px;margin-top: 20px;margin-left: 10px;display:none">
+                                    <a class="tesfile" style="float: left" id="upload"></a>
+                                    <input type="hidden" name="companyOrganizationImg" id="companyOrganizationImg"  value="$!{companyOrganizationImg}">
+                                    <p class="license1">请上传带有公章的营业执照数码照，营业执照须在有效期内且年检齐全（当年成立可无年检）。</p>
+                                    <p class="license2">支持.jpg.jpeg.png.bmp格式照片，大小不超过5M<p>
+                                </div>
+                                <span class="error error1" style="top: 38px;">上传格式错误！</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="content-border"></div>
+                </div>
+
+                <div class="content-right">
+                    <div class="nameLeft nameLeft1">
+                        <ul>
+                            <li><span></span> 法人代表</li>
+                            <li><span></span> 所属行业</li>
+                            <li><span></span> 公司规模</li>
+                            <li ><span>*</span> 了解薪太软的渠道</li>
+                            <li class="tall" style="border-bottom:1px solid #dbe9ee;"><span></span> 公司LOGO</li>
+                        </ul>
+                    </div>
+                    <div class="contRight contRight1">
+                        <ul class="conRight-list">
+                            <li>
+                                <input type="text" placeholder="请输入法人代表人姓名" name="companyCorporation" id="companyCorporation" value="$!{companyCorporation}">
+                                <span class="error">法人代表人姓名不能为空！</span>
+                            </li>
+                            <li class="identity-tab identity-tab1">
+                                <span class="identity-span">消费品</span>
+                                <span class="error">所属行业不能为空！</span>
+                                <input class="identity-hiden" name="companyBelongIndustry" id="companyBelongIndustry" type="hidden" value="$!{companyBelongIndustry}" />
+                                <ol>
+                                    <li>互联网/游戏/软件</li>
+                                    <li>电子/通信/硬件</li>
+                                    <li>房地产/建筑/物业</li>
+                                    <li>金融</li>
+                                    <li>消费品</li>
+                                    <li>汽车/机械/制造</li>
+                                    <li>服务/外包/中介</li>
+                                    <li>广告/传媒/教育/文化</li>
+                                    <li>交通/贸易/物理</li>
+                                    <li>广告/传媒/教育/文化</li>
+                                </ol>
+                            </li>
+                            <li class="identity-tab identity-tab2">
+                                <span class="identity-span">50人以下</span>
+                                <span class="error">公司规模不能为空！</span>
+                                <input class="identity-hiden" name="companyScale" id="companyScale" type="hidden" value="$!{companyScale}" />
+                                <ol>
+                                    <li>50人以下</li>
+                                    <li>50-100人</li>
+                                    <li>100-200人</li>
+                                    <li>200-500人</li>
+                                    <li>500人以上</li>
+                                </ol>
+                            </li>
+
+                            <li class="identity-tab identity-tab3">
+                                <span class="identity-span">百度360，等搜索引擎</span>
+                                <span class="error">请输入您了解薪太软的渠道！</span>
+                                <input class="identity-hiden" name="companyChannel" id="companyChannel" type="hidden" value="$!{companyChannel}" />
+                                <ol>
+                                    <li inde="1">百度360，等搜索引擎</li>
+                                    <li inde="2">微信，QQ等社交平台</li>
+                                    <li inde="3">推销</li>
+                                    <li inde="4">广告</li>
+                                    <li inde="5">朋友介绍</li>
+                                    <li inde="6">其他</li>
+                                </ol>
+                            </li>
+                            <li class="tall logo" style="border-bottom:1px solid #dbe9ee;">
+                                <div>
+                                    <div style="width: 120px;height: 120px;">
+                                        #if($!{companyLogo} == "")
+                                            <img style="max-width: 100px;max-height: 100px" src="resource/img/uploading.png" alt="" id="companyLogoImage">
+                                        #else
+                                            <img style="max-width: 100px;max-height: 100px" src="$!{companyLogoUrl}" alt="" id="companyLogoImage">
+                                        #end
+                                    </div>
+                                    <img src="#springUrl('/resource/img/custom/load.gif')" alt="" class="logoLoad" style="width: 60px;margin-top: 20px;margin-left: 10px;display:none">
+                                    <a class="tesfile" style="float: left" id="uploadlogo"></a>
+                                    <input type="hidden" name="companyLogo" id="companyLogo"  value="$!{companyLogo}">
+                                    <p class="logo1">请上传您公司的Logo</p>
+                                    <p class="logo2">支持jpg、jpeg、png、bmp格式照片，大小不超过5M</p>
+                                </div>
+                                <span class="error error1" style="top: 38px;">上传格式错误！</span>
+                            </li>
+
+
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <!-- **********权限管理********** -->
+        <div class="compent"  style='display: none'>
+            <table>
+                <tr id="powerFirstChild">
+                    <th class="num">序号</th>
+                    <th class='name'>姓名</th>
+                    <th clas='phone'>手机号</th>
+                    <th class='compet'>权限</th>
+                    <th class='status'>账号状态</th>
+                    <th class='operat'>操作</th>
+                </tr>
+
+##                #set ($i=1)
+##                #if($!{listCmember} && $!{listCmember.size()} > 0)
+##                #foreach($data in $!{listCmember})
+##                <tr>
+##                <td>$i</td>
+##                <td>$!{data.memberName}</td>
+##                <td>$!{data.memberPhone}</td>
+##                <td>
+##                    #if( $!{data.memberIsdefault}==1)
+##                        #set ($j=1)
+##                        #foreach($dataRole in $!{listRole})
+##                            #if( $j>1)
+##                                ,
+##                            #end
+##                            $!{dataRole.roleName}
+##                            #set($j=$j+1)
+##                        #end
+##                    #else
+##                        $!{data.roleName}
+##                    #end
+##                </td>
+##                <td>
+##                    #if( $!{data.memberIsdefault}==1)
+##                        <div class="state" id="showdiv$!{data.memberId}" onclick="alert('管理员不能关闭');">
+##                            <p value="1"></p>
+##                        </div>
+##                    #else
+##                        #if( $!{data.memberStatus}==1)
+##                            <div class="state" id="showdiv$!{data.memberId}" onclick="memberOpenButton($!{data.memberId})">
+##                                <p  value="2"></p>
+##                            </div>
+##                        #else
+##                            <div class="state" style="background:#ccc;" id="showdiv$!{data.memberId}" onclick="memberOpenButton($!{data.memberId})" >
+##                                <p style="left:0" value="1"></p>
+##                            </div>
+##                        #end
+##                    #end
+##
+##                </td>
+##                <td>
+##                    #if( $!{data.memberIsdefault}!=1)
+##                        <span class='amend' onclick="memberUpdate($!{data.memberId},'$!{data.memberName}','$!{data.idValue}')">修改</span>
+##                        <span class='deleat' onclick="memberGetById($!{data.memberId},'$!{data.memberPhone}')">删除</span>
+##                    #end
+##
+##                </td>
+##                </tr>
+##                #set($i=$i+1)
+##                #end
+##                #end
+            </table>
+            <div class="pagePay">
+                <div id="pagePayroll2"></div>
+            </div>
+        </div>
+
+
+
+        <!-- **********操作日志********** -->
+        <div class="log" style='display: none;'>
+            <table>
+                <tr id="logFirstChild">
+                    <th class='ope-time'>操作时间</th>
+                    <th class='ope-name'>操作员</th>
+                    <th class='ope-content'>操作内容</th>
+                    <th class='ope-result'>操作结果</th>
+                </tr>
+##
+##                #if($!{ordersData} && $!{ordersData.size()} > 0)
+##                #foreach($data in $!{ordersData})
+##                <tr>
+##                <td>$!date.format('yyyy-MM-dd hh:mm:ss',$!{data.createTime})</td>
+##                <td>$!{data.userName}</td>
+##                <td>$!{data.operation}</td>
+##                <td>
+##                #if($!{data.type}=='0')
+##                成功
+##                #else
+##                失败
+##                #end
+##                </td>
+##                </tr>
+##                 #end
+##                 #end
+            </table>
+##          <div id="kkpager" style=""></div>
+            <div class="pagePay">
+                <div id="pagePayroll"></div>
+            </div>
+        </div>
+        <!-- **********签约记录********** -->
+        <div class="sign" style="display: none">
+            <table>
+                <tr id="firstChild">
+                    <th class='productName'>产品名称</th>
+                    <th class='productDescription'>产品说明</th>
+                    <th class='contractStatus'>签约状态</th>
+                    <th class='contractTime'>签约时间</th>
+                    <th class="operation">操作</th>
+                </tr>
+
+##                <tr>
+##                    <td>垫发工资</td>
+##                    <td></td>
+##                    <td>未签约</td>
+##                    <td>——</td>
+##                    <td><span>签约</span></td>
+##                </tr>
+##                <tr>
+##                    <td>代发工资</td>
+##                    <td></td>
+##                    <td>已提交签约申请</td>
+##                    <td>20160601——</td>
+##                    <td><span></span></td>
+##
+##                </tr>
+##                <tr>
+##                    <td>代缴社保公积金</td>
+##                    <td></td>
+##                    <td>已签约</td>
+##                    <td>20160601——201609010</td>
+##                    <td><span></span></td>
+##
+##                </tr>
+##
+##                <tr>
+##                    <td>报销管理</td>
+##                    <td>1</td>
+##                    <td>已签约</td>
+##                    <td>20160601——201609010</td>
+##                    <td><span></span></td>
+##
+##                </tr>
+##
+            </table>
+            <!-- ***小弹窗***-->
+            <div class="signUp" style="display: none">
+                您的签约申请已提交成功
+            </div>
+        </div>
+      <section>
+
+          <!-- **********各类弹窗********** -->
+          <!-- **********添加操作员********** -->
+      <div class="add-user" style='display: none'>
+        <form id="roleForm" name="roleForm">
+          <h3>添加操作员 <b></b></h3>
+          <ul>
+              <li class='username' >
+                  <label><span>*</span>姓名</label>
+                  <input type="text" name="memberName" placeholder="请输入姓名">
+                  <em></em>
+              </li>
+              <li id="phone" class="phone">
+                  <label><span>*</span>手机号</label>
+                  <input type="text" name="memberPhone" maxlength="11" placeholder="请输入手机号">
+                  <em></em>
+              </li>
+          </ul>
+          <div class="check-pre">
+              <h5>请选择该员工拥有的权限：</h5>
+              <div class="check" id="check">
+                <input class="ident " name="memberPowerIds"   type="hidden" value=""  id="memberPowerIds"/>
+##                #if($!{listRole} && $!{listRole.size()} > 0)
+##                #foreach($data in $!{listRole})
+##                <li dat="$!{data.id}">
+##                <input type="checkbox" name="">$!{data.roleName}
+##                </li>
+##                #end
+##                #end
+           </div>
+          </div>
+            <div class="add-hint">（点击确认后，薪太软将随机生成六位密码发送至所填写手机号码，请填写正确的手机号码）</div>
+          <div class="bot">
+              <input type="button" name=""  value='确认' class="affirm">
+##              <input type="button" name="" class='btnqx' value='取消' >
+          </div>
+       </form>
+      </div>
+      <!-- *************蒙版***************** -->
+      <div class="mengban" style='display: none'></div>
+      <!-- **********关闭操作员********** -->
+      <div class="close-user" style='display: none'>
+        <form id="roleDelForm" name="roleDelForm">
+          <h4>关闭操作员账号<b></b></h4>
+          <p>您好，此操作将使该员工账号不能再有操作权限，您确认停用该操作
+              员账号吗？
+          </p>
+          <p style="color: #0696fa">（您日后可以从员工列表里面重新启用该操作员账号）</p>
+            <input type="hidden" id="memberIdDelVlaue" name="memberId"  value="">
+            <input type="hidden" id="member_status" name="memberStatus"  value="3">
+          <div class="btn">
+              <input type="button" name="" value='确认' class="clo">
+##              <input type="button" name="" class='btnqx1' value='取消'>
+          </div>
+        </form>
+      </div>
+      <!-- **********打开操作员********** -->
+      <div class="open-user" style='display: none'>
+          <h4>开启操作员账号<b></b></h4>
+          <p>您好，此操作将恢复该员工的账号登录权限，您确认启用该员工账号吗？
+          </p>
+          <div class="btn">
+              <input type="button" name="" value='确认' class="ope">
+##              <input type="button" name="" class='btnqx1' value='取消'>
+          </div>
+      </div>
+      <!-- **********修改权限********** -->
+      <div class="change-pre" style='display: none'>
+        <form id="roleEditForm" name="roleEditForm">
+          <h4>权限修改<b></b></h4>
+          <p>您好，您将对<span id="member_name"></span>的权限进行修改。
+          </p>
+          <div class="check1">
+                <input class="ident1 " id="memberPowerIdsValue" name="memberPowerIds"   type="hidden" value="" />
+                <input type="hidden" id="memberIdVlaue" name="memberId"  value="">
+                #if($!{listRole} && $!{listRole.size()} > 0)
+                #foreach($data in $!{listRole})
+                <li sat="$!{data.id}">
+                <input type="checkbox" name="">$!{data.roleName}
+                </li>
+                #end
+                #end
+          </div>
+          <div class="btn">
+              <input type="button" name="" value='确认' class="affirm1">
+##              <input type="button" name="" class='btnqx1' value='取消'>
+          </div>
+        </form>
+      </div>
+      <!-- **********删除操作员********** -->
+      <div class="deleat-user" style='display: none'>
+          <h4>删除操作员账号<b id="delete-user"></b></h4>
+          <p>本次操作将删除<span id="member_phone"></span>，删除后账号将不可恢复，您确认删除吗？
+          </p>
+          <div class="btn">
+              <input type="button" name="" value='确认' onclick="memberDel()">
+##              <input type="button" name="" class='btnqx1' value='取消'>
+          </div>
+      </div>
+
+
+       <!-- **********签约申请**********  start-->
+
+          <div class="singApply" style="display: none">
+              <form id="applyForm">
+              <input name="collaborationContractType"  type="hidden" />
+              <input name="collaborationCompanyId" type="hidden"/>
+              <div class="singApply-title">申请<span id="typeStr"></span> <b></b></div>
+              <div class="singApply-main">
+                  <table>
+                      <tr>
+                          <td class="'firstTd">公司名称</td>
+                          <td id="applyCompanyName"></td>
+                      </tr>
+                      <tr>
+                          <td>申请内容</td>
+                          <td id="applyCont"></td>
+                      </tr>
+                      <tr>
+                          <td>合同邮寄地址</td>
+                          <td class="mailingAddress">
+                              <input type="text"  name="collaborationContractAddress"  placeholder="请输入邮寄地址"/>
+                              <span></span>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>联系人姓名</td>
+                          <td class="linkman">
+                              <input type="text"  name="collaborationRelationerName" placeholder="请输入联系人姓名"/>
+                              <span></span>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>联系人电话</td>
+                          <td class="linkPhone">
+                              <input type="text" name="collaborationRelationerPhone"   placeholder="请输入联系人电话"/>
+                              <span></span>
+                          </td>
+                      </tr>
+                  </table>
+              </div>
+              <div class="singApply-footer">
+                  <input type="button" value="提交申请" class="signBtnPre"/>
+              </div>
+              </form>
+          </div>
+          <!-- **********签约申请********** end-->
+</div>
+
+
+
+<footer>
+    <div class="bottom">
+        <input type="button" name=""  class="btnPre obtnsubmit1" value='更新设置'>
+        <input style="float:right;" type="button" name="" class=' btnClose popupbox-closed' value='取消'">
+    </div>
+</footer>
+<!--end-->
+</body>
+<script type="text/javascript">
+
+var auditStatus='$!{auditStatus}';
+if(auditStatus=='0'){
+    document.getElementById("payforNext").style.display = "block";
+}
+
+
+//跳转至签约页面
+ function toApplySign(i,j){
+     if(j==2){
+//         //全屏弹框
+//         var path = BASE_PATH+"/toSignApplyPage.htm?type="+i;
+//             var index = layer.open({
+//                 type: 2,
+//                 title: false,
+//                 closeBtn:false,
+//                 maxmin: false,
+//                 shadeClose: false, //点击遮罩关闭层
+//                 area: ['650px', '380px'],
+//                 content:path
+//             });
+//             //窗口最大化
+//             layer.full(index);
+
+             $.ajax({
+                url:BASE_PATH+'/toApplySignNew.htm',
+                data:{"type":i},
+                dataType:'json',
+                type:'post',
+                success:function(data){
+                     if(data.success){
+                        var  map = data.data;
+                        var companyId = map.companyId;
+                        var typeStr = map.typeStr;
+                        var companyName = map.companyName;
+                        var type=map.type;
+                        //div赋值
+                       $("input[name='collaborationContractType']").val(type);
+                       $("input[name='collaborationCompanyId']").val(companyId);
+                       $("#applyCompanyName").text(companyName);
+                       $("#typeStr").text(typeStr);
+                       $("#applyCont").text(typeStr);
+
+
+                         $('.singApply').show();
+                         $('.mengban').show()
+
+                     }else{
+                         showError("签约失败");
+                     }
+                },
+                error:function(){
+                    showError("网络错误，请刷新页面");
+                }
+
+             });
+         }else if(j==3){
+          //撤销申请
+          $.ajax({
+               url:BASE_PATH+'/deleteSureProtocol.htm',
+               data:{'contractType':i},
+               dataType:'json',
+               type:'post',
+               success:function(data){
+                   if(data.success){
+                       showSuccess("成功撤销申请");
+                       textA();
+                       $('.signUp').show().html('撤销申请成功');
+                       setTimeout(function(){
+                           $('.signUp').hide()
+                       },3000);
+                   }else{
+                       showError("操作失败")
+                   }
+               },
+              error:function(){
+               showError("网络错误，请刷新页面");
+             }
+          });
+
+
+     }else if(j==4){
+         $.ajax({
+            url:BASE_PATH+'/renewSureProtocol.htm',
+            data:{'contractType':i},
+            dataType:'json',
+            type:'post',
+            success:function (data) {
+                if(data.success){
+                    showSuccess("续约成功");
+                    textA();
+                }else{
+                    showError("操作失败");
+                }
+            },
+            error:function(){
+                showError("网络错误，请刷新页面");
+            }
+         });
+
+
+     }
+ }
+
+ //关闭
+$(".singApply b").click(function(){
+
+    $('.singApply').hide();
+    $('.mengban').hide();
+})
+
+// 签约申请（验证）
+    var faddress = false, flinkman = false, flinkPhone = false;
+    // 验证邮件地址
+    $('.mailingAddress input').blur(function(){
+        testMailingAddress()
+    })
+
+    function testMailingAddress(){
+        if($('.mailingAddress input').val()=='' || $('.mailingAddress input').val()==undefined){
+            $('.mailingAddress span').html('请填写邮寄地址').addClass('error').show();
+            setTimeout(function(){
+                $('.mailingAddress span').fadeOut(500)
+            },1500)
+            faddress = false;
+        }
+        else if($(".mailingAddress input").val().length>=2 && $(".mailingAddress input").val().length<=50){
+            $('.mailingAddress span').html('').removeClass('error');
+            faddress = true;
+        }
+        else{
+            $('.mailingAddress span').html('邮寄地址应为2-50位字符').addClass('error').show();
+            setTimeout(function(){
+                $('.mailingAddress span').fadeOut(500)
+            },1500)
+
+            faddress = false;
+        }
+    }
+    // 验证联系人
+
+    $('.linkman input').blur(function(){
+        testLinkman()
+    })
+
+    function testLinkman(){
+        if($('.linkman input').val()=='' || $('.linkman input').val()==undefined){
+            $('.linkman span').html('请填写联系人姓名').addClass('error').show();
+            setTimeout(function(){
+                $('.linkman span').fadeOut(500)
+            },1500)
+            flinkman = false;
+        }
+        else if($(".linkman input").val().length>=2 && $(".linkman input").val().length<=50){
+            $('.linkman span').html('').removeClass('error');
+            flinkman = true;
+        }
+        else{
+            $('.linkman span').html('联系人姓名应为2-50位字符').addClass('error').show();
+            setTimeout(function(){
+                $('.linkman span').fadeOut(500)
+            },1500)
+            flinkman = false;
+        }
+    }
+
+
+    //....验证联系人电话
+
+    $('.linkPhone input').blur(function(){
+        testLinkPhone();
+    });
+    function testLinkPhone(){
+        var  reg=/^1[3|5|7|8]\d{9}$/;
+        if($(".linkPhone input").val()=='' || $(".linkPhone input").val()==undefined ){
+            $('.linkPhone span').html('请输入联系电话').addClass('error').show();
+            setTimeout(function(){
+                $('.linkPhone span').fadeOut(500)
+            },1500);
+            flinkPhone = false;
+        }
+        else if(reg.test($(".linkPhone input").val())){
+            $('.linkPhone span').html('').removeClass('error').hide();
+            flinkPhone = true;
+        }
+        else{
+            $('.linkPhone span').html('请输入正确的电话').addClass('error').show();
+            setTimeout(function(){
+                $('.linkPhone span').fadeOut(500)
+            },1500);
+            flinkPhone = false;
+        }
+    }
+
+
+//签约
+   $(".signBtnPre").click(function(){
+//     $.ajax({
+//           url:BASE_PATH+'/addSureProtocol.htm',
+//           data:$("#applyForm").serialize(),
+//           dataType:'json',
+//           type:'post',
+//           success:function(data){
+//             if(data.success){
+//                 showSuccess("操作成功");
+//                 $('.singApply').hide();
+//                 $('.mengban').hide()
+//                 textA();
+//             }else{
+//                 showError("操作失败");
+//             }
+//           },
+//           error:function(){
+//               showError("网络错误，请刷新页面");
+//           }
+//     });
+       testMailingAddress();
+       testLinkman();
+       testLinkPhone();
+       if(faddress&&flinkman&&flinkPhone){
+         $.ajax({
+               url:BASE_PATH+'/addSureProtocol.htm',
+               data:$("#applyForm").serialize(),
+               dataType:'json',
+               type:'post',
+               success:function(data){
+                 if(data.success){
+                     showSuccess("操作成功");
+                     $('.singApply').hide();
+                     $('.mengban').hide()
+                     textA();
+                 }else{
+                     showError("操作失败");
+                 }
+               },
+               error:function () {
+                   showError("网络错误，请刷新页面");
+               }
+         });
+       }
+   });
+
+
+
+
+    //添加签约后异步刷新
+    function textA(){
+            $('.signUp').show();
+            setTimeout(function(){
+                $('.signUp').hide()
+            },3000);
+            $("#firstChild").nextAll().remove();
+            $.ajax({
+                url:BASE_PATH+'/querySignRecord.htm',
+                dataType:'json',
+                type:'post',
+                success:function(data){
+                    if(data.success){
+
+                        //循环json
+                        var html ="";
+                        var list = data.list;
+                        $.each(list,function(i,item){
+                            html="<tr><td>"+item.protocolContractTypeStr+"</td><td>"+item.produceComment+"</td><td>"+item.applyStateStr+"</td><td>"+item.applyTimeStr+"</td><td><span onclick='toApplySign("+item.protocolContractType+","+item.applyState+")'>"+item.isNeedApply+"</span></td>"
+                            $(".sign table").append(html);
+                        });
+                    }
+                },
+                error:function(){
+                    alert("网络错误，请刷新");
+                }
+
+            });
+
+    }
+    //添加权限管理异步刷新
+    function  powerManager(){
+        $("#powerFirstChild").nextAll().remove();
+        //调用接口
+        $.ajax({
+            url:BASE_PATH+'/queryPowersManager.htm',
+            dataType:'json',
+            type:'post',
+            success:function(resultResponse){
+                if(resultResponse.success){
+
+                    var list =resultResponse.data.listCmember;
+                    var html5 ="";
+
+                    $.each(list,function(i,data){
+                        var html="";
+                        var html1 ="";
+                        var html2="";
+                        var html3="";
+                        //判断
+                        html = "<tr><td>"+(i+1)+"</td><td>"+data.memberName+"</td><td>"+data.memberPhone+"</td>"
+                        if(data.memberIsdefault==1){
+                            html1 ="<td>"+resultResponse.data.listRoleStr+"</td><td><div class='state' id='showdiv"+data.memberId+"' onclick=alert('管理员不能关闭')><p value='1'></p></div></td>"
+                            html2="<td></td></tr>"
+                            html3 =html1+html2;
+                        }else{
+                            html2="<td><span class='amend' onclick=memberUpdate("+data.memberId+","+"'"+data.memberName+"'"+","+"'"+data.idValue+"'"+");>修改</span>"+"<span class='deleat' onclick=memberGetById("+data.memberId+","+"'"+data.memberPhone+"'"+"); >删除</span></td></tr>"
+                            if(data.memberStatus==1){
+                                html1="<td>"+data.roleName+"</td><td><div class='state' id='showdiv"+data.memberId+"' onclick='memberOpenButton("+data.memberId+")'><p value='2'></p></div></td>";
+                            }else{
+                                html1 ="<td>"+data.roleName+"</td><td><div class='state' style='background:#ccc;' id='showdiv"+data.memberId+"' onclick=memberOpenButton("+data.memberId+")><p style='left:0' value='1'></p></div></td>";
+                            }
+                            html3 = html1+html2;
+                        }
+
+                        html5=html+html3;
+                        $(".compent table").append(html5);
+                    });
+
+
+                }else{
+                    layer.alert("未知错误")
+                }
+            },
+            error:function(){
+                layer.alert("网络错误");
+            }
+
+        });
+    }
+
+    //取消按钮
+
+    $(".popupbox-closed").click(function(){
+        history.go(-1);
+    })
+
+</script>
+</html>

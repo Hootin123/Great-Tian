@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>薪资核算第一次进入</title>
+    #parse("comm/head.vm")
+    <script src="#springUrl('/resource/js/salary/salaryOne.js')"></script>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            position: relative;
+            min-width: 1200px;
+            overflow: auto;
+        }
+
+        .payAll {
+            width: 598px;
+            height: 358px;
+            background: #fff;
+            box-shadow: #DDD 0px 0px 50px 10px;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            top: 0;
+            right: 0;
+            margin: auto;
+            border: 1px solid #ddd;
+        }
+
+        .payAllTitle {
+            line-height: 50px;
+            font-size: 16px;
+            color: #333;
+            padding-left: 20px;
+            font-weight: 600
+        }
+
+        .payAllTitle span {
+            font-size: 12px;
+            color: #128ef4;
+            padding-left: 10px;
+            cursor: pointer
+        }
+
+        .payAllText {
+            text-align: center;
+            line-height: 67px;
+            font-weight: 600
+        }
+
+        .payAllTime {
+            width: 100%;
+            height: 40px;
+        }
+
+        .payAllTime div, .payAllTi1 div {
+            float: left;
+        }
+
+        .payAllTime1 {
+            line-height: 40px;
+            padding-left: 145px;
+            color: #a1a1a1;
+        }
+
+        .payAllTime2 {
+            width: 188px;
+            height: 38px;
+            border: 1px solid #999;
+            margin-left: 20px;
+            line-height: 38px;
+            padding-left: 20px;
+            border-radius: 3px;
+            background: url(#springUrl('/resource/img/salary/xialasanjiao.png')) no-repeat 185px center;
+        }
+
+        .payAllTi1 {
+            margin-top: 22px;
+            width: 100%;
+            height: 40px;
+        }
+
+        .payAllTi2 {
+            width: 190px;
+            height: 40px;
+            margin-left: 20px;
+            line-height: 40px;
+            padding-left: 20px;
+            border-radius: 3px;
+            background: #ddd;
+        }
+
+        .payAllHint {
+            line-height: 50px;
+            text-align: center;
+            color: #f1543f;
+        }
+
+        .payAllBtn {
+            display: block;
+            width: 200px;
+            height: 40px;
+            background: #324a5e;
+            border: none;
+            color: #fff;
+            font-family: "微软雅黑";
+            border-radius: 3px;
+            margin: 0 auto;
+            text-align: center;
+            margin-top: 10px;
+            cursor: pointer
+        }
+
+        .payAllDown {
+            position: absolute;
+            left: 263px;
+            top: 156px;
+            width: 208px;
+            border: 1px solid #999;
+            max-height: 100px;
+            overflow: auto;
+            display: none
+        }
+
+        .payAllDown li {
+            line-height: 30px;
+            text-align: center;
+            background: #fff;
+            cursor: pointer
+        }
+
+        .payAllDown li:hover {
+            background: #ddd;
+        }
+
+        .payRule {
+            width: 598px;
+            height: 358px;
+            background: #fff;
+            box-shadow: #DDD 0px 0px 50px 10px;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            top: 0;
+            right: 0;
+            margin: auto;
+            border: 1px solid #ddd;
+            display: none
+        }
+
+        .payRulesalary {
+            width: 100%;
+            height: 40px;
+            margin-top: 40px;
+        }
+
+        .payRulesalary div {
+            float: left;
+        }
+
+        .payRulesalary1, .payRulesala11 {
+            line-height: 40px;
+            padding-left: 145px;
+            color: #a1a1a1;
+        }
+
+        .payRulesalary2 {
+            width: 188px;
+            height: 38px;
+            border: 1px solid #999;
+            margin-left: 30px;
+            line-height: 38px;
+            padding-left: 20px;
+            border-radius: 3px;
+            background: url(#springUrl('/resource/img/salary/xialasanjiao.png')) no-repeat 185px center;
+        }
+
+        .payRulesala22 {
+            width: 188px;
+            height: 38px;
+            border: 1px solid #999;
+            margin-left: 16px;
+            line-height: 38px;
+            padding-left: 20px;
+            border-radius: 3px;
+            background: url(#springUrl('/resource/img/salary/xialasanjiao.png')) no-repeat 185px center;
+        }
+
+        .payRuleBtn {
+            width: 100%;
+            height: 40px;
+            margin-top: 70px;
+        }
+
+        .payRuleBtn1 {
+            width: 200px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            border: none;
+            background: #324a5e;
+            font-family: "微软雅黑";
+            color: #fff;
+            margin-left: 70px;
+            float: left;
+            border-radius: 3px;
+            cursor: pointer
+        }
+
+        .payRuleBtn2 {
+            width: 200px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            border: none;
+            background: #324a5e;
+            font-family: "微软雅黑";
+            color: #fff;
+            margin-left: 60px;
+            float: left;
+            border-radius: 3px;
+            cursor: pointer
+        }
+
+        .payRulesalaryDown {
+            width: 208px;
+            border: 1px solid #999;
+            position: absolute;
+            left: 231px;
+            top: 130px;
+            display: none
+        }
+
+        .payRulesalaryDown li, .payRulesalaDown li, .paySetTimeSet li {
+            line-height: 30px;
+            text-align: center;
+            background: #fff;
+            cursor: pointer
+        }
+
+        .payRulesalaryDown li:hover, .payRulesalaDown li:hover, .paySetTimeSet li:hover {
+            background: #ddd;
+        }
+
+        .payRulesalaDown {
+            width: 208px;
+            border: 1px solid #999;
+            position: absolute;
+            left: 231px;
+            top: 210px;
+            display: none
+        }
+
+        .paySet {
+            width: 598px;
+            height: 358px;
+            background: #fff;
+            box-shadow: #DDD 0px 0px 50px 10px;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            top: 0;
+            right: 0;
+            margin: auto;
+            border: 1px solid #ddd;
+            display: none
+        }
+
+        .paySet img {
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: auto;
+            top: 55px;
+        }
+
+        .paySet1 {
+            text-align: center;
+            margin-top: 80px;
+            font-weight: 600
+        }
+
+        .paySet2 {
+            text-align: center;
+            margin-top: 15px;
+            color: #f1543f;
+        }
+
+        .paySetTime {
+            margin-top: 30px;
+            overflow: hidden
+        }
+
+        .paySetTime div {
+            float: left;
+            line-height: 40px
+        }
+
+        .paySetTime1 {
+            color: #999;
+            padding-left: 133px;
+        }
+
+        .paySetTime2 {
+            width: 193px;
+            height: 38px;
+            border: 1px solid #999;
+            border-radius: 3px;
+            padding-left: 15px;
+            margin-left: 15px;
+            background: url(#springUrl('/resource/img/salary/xialasanjiao.png')) no-repeat 185px center;
+        }
+
+        .paySetTime3 {
+            color: #999;
+            padding-left: 20px;
+        }
+
+        .paySetBtn {
+            display: block;
+            width: 200px;
+            height: 40px;
+            background: #324a5e;
+            border: none;
+            color: #fff;
+            font-family: "微软雅黑";
+            border-radius: 3px;
+            margin: 0 auto;
+            text-align: center;
+            margin-top: 40px;
+            cursor: pointer
+        }
+
+        .paySetTimeSet {
+            width: 208px;
+            border: 1px solid #999;
+            position: absolute;
+            left: 176px;
+            top: 252px;
+            display: none
+        }
+    </style>
+</head>
+<body>
+<!--    计薪周期设置-->
+<div class="payAll">
+    <p class="payAllTitle">计薪周期设置</p>
+    <p class="payAllText">算工资前需要先计算计薪周期</p>
+    <div class="payAllTime">
+        <div class="payAllTime1">计薪开始日期：</div>
+        <div class="payAllTime2"><span value='1'>当月1日</span></div>
+        <ul class="payAllDown">
+            #foreach($index in [1..14])
+                <li>$index</li>
+            #end
+        </ul>
+    </div>
+    <div class="payAllTi1">
+        <div class="payAllTime1">计薪结束日期：</div>
+        <div class="payAllTi2"><span>当月月底</span></div>
+    </div>
+    <p class="payAllHint">请填写贵公司计薪周期，点击下一步按钮后不可修改哦！</p>
+    <button class="payAllBtn">下一步</button>
+</div>
+
+<!--    计薪规则设置-->
+<div class="payRule">
+    <p class="payAllTitle">计薪规则设置<span>需要帮助</span></p>
+    <div class="payRulesalary">
+        <div class="payRulesalary1">计薪规则</div>
+        <div class="payRulesalary2" value='1'>21.75标准记薪法</div>
+        <ul class="payRulesalaryDown">
+            <li value='1'>21.75标准记薪法</li>
+            <li value='2'>实际工作日记薪</li>
+        </ul>
+    </div>
+    <div class="payRulesalary">
+        <div class="payRulesala11">社保公积金</div>
+        <div class="payRulesala22" value='1'>使用</div>
+        <ul class="payRulesalaDown">
+            <li value='1'>使用</li>
+            <li value='0'>不使用</li>
+        </ul>
+    </div>
+    <div class="payRuleBtn">
+        <button class="payRuleBtn1">上一步</button>
+        <button class="payRuleBtn2">下一步</button>
+    </div>
+</div>
+<!--    设置成功-->
+<div class="paySet">
+    <p class="payAllTitle">设置成功</p>
+    <img src="#springUrl('/resource/img/salary/rightGou.png')" alt="">
+    <p class="paySet1">恭喜您完成计薪规则的设置</p>
+    <p class="paySet2">如果需要改动工资表结构，可以在“薪资结构设置”里操作</p>
+    <div class="paySetTime">
+        <div class="paySetTime1">从：</div>
+        #set($Integer = 6)
+        #set ($Y=$date.getYear())
+        #set ($M=$date.getMonth() + 1)
+        #if($M < 10)
+            <div class="paySetTime2" value="$!{Y}-0$M">$Y年$M月</div>
+        #else
+            <div class="paySetTime2" value="$!{Y}-$M">$Y年$M月</div>
+        #end
+
+        <ul class="paySetTimeSet">
+            #foreach($index in [0..6])
+                #set($mm =$M - $Integer)
+                #set($Integer = $Integer - 1)
+                #if($mm <= 0)
+                    #set($M=12)
+                    #set($Y=$Y - 1)
+                    #set($mm=$mm + 13)
+                #end
+
+                #if($mm < 10)
+                    <li data-value="$!{Y}-0$!{mm}">$Y年$mm月</li>
+                #else
+                    <li data-value="$!{Y}-$!{mm}">$Y年$mm月</li>
+                #end
+
+            #end
+        </ul>
+        <div class="paySetTime3">开始计算</div>
+    </div>
+    <button class="paySetBtn">确 定</button>
+</div>
+</body>
+</html>

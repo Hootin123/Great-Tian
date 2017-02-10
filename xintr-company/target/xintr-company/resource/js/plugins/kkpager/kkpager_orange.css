@@ -1,0 +1,131 @@
+#kkpager{
+	clear:both;
+	color:#999;
+	padding:5px 0px 5px 0px;
+	font-size:13px;
+	margin:0 auto;
+}
+#kkpager a{
+	float: left;
+	border: 1px solid #e3e3e3;
+	display: inline;
+	margin-right: 10px;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	cursor: pointer;
+	background: #fff;
+	text-decoration:none;
+	color:#999;
+	width: auto;
+	padding: 0px 15px 0px 15px;
+	height: 28px;
+	text-align: center;
+	line-height: 30px;
+}
+
+#kkpager span.disabled{
+	float: left;
+	display: inline;
+	margin-right: 5px;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border:1px solid #e3e3e3;
+	color: #666666;
+	width: auto;
+	padding: 0px 15px 0px 15px;
+	height: 28px;
+	line-height: 30px;
+	text-align: center;
+
+}
+#kkpager span.curr{
+	float: left;
+	/*border: 1px solid #FF6600;*/
+	display: inline;
+	/*padding: 3px 10px 3px 10px;*/
+	margin-right: 5px;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	background: #5b7798;
+	color: #FFFFFF;
+	width: auto;
+	padding: 0px 15px 0px 15px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+}
+#kkpager a:hover{
+	border:1px solid #5b7798;
+	background-color:#5b7798;
+	color:#FFFFFF;
+}
+#kkpager span.normalsize{
+}
+#kkpager_gopage_wrap{
+	position:relative;
+	left:0px;
+	top:0px;
+}
+#kkpager_btn_go {
+	width:44px;
+	height:25px;
+	border:0px;
+	overflow:hidden;
+	line-height:140%;
+	padding:0px;
+	margin:0px;
+	text-align:center;
+	cursor:pointer;
+	background-color:#5B7798;
+	color:#FFF;
+	position:absolute;
+	left:0px;
+	top:-4px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	display:none;
+	margin-left: 20px;
+}
+#kkpager_btn_go_input{
+	width:48px;
+	height:26px;
+	color:#666666;
+	text-align:center;
+	margin:0 6px 0 6px;
+	border:1px solid #E3E3E3;
+	border-radius:3px ;
+	position:relative;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	left:0px;
+	top:0px;
+	outline:none;
+}
+
+#kkpager_btn_go_input.focus{
+	border-color:#5B7798;
+}
+
+#kkpager .pageBtnWrap{
+	float:right;
+
+}
+#kkpager .infoTextAndGoPageBtnWrap{
+	float:right;
+	margin-right:35px;
+}
+#kkpager .spanDot{
+	float:left;
+	margin-right:5px;
+}
+
+#kkpager .currPageNum{
+	color:#FD7F4D;
+}
+
+/*#kkpager .infoTextAndGoPageBtnWrap{
+	padding-top:5px;
+}*/

@@ -1,0 +1,744 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="renderer" content="webkit">
+    <meta name="renderer" content="ie-comp">
+    <meta name="renderer" content="ie-stand">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title></title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/home/mainPage.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/account/account.css')" rel="stylesheet">
+    <script src="#springUrl('/resource/js/home/sCroll.js')"></script>
+    <script src="#springUrl('/resource/js/home/mainPage.js')"></script>
+    <script src="#springUrl('/resource/js/home/iMove.js')"></script>
+    <script src="#springUrl('/resource/js/home/indexlogin1.js')"></script>
+    <style type="text/css">
+        .pull {width: 100px;height:90px;position: absolute;right:116px;top:38px;z-index:99;background:#0696fa;display:none;}
+        .pull ul li {width:100px;height:30px;text-align: center; line-height: 30px; font-size:14px; color:#fff; cursor: pointer }
+        .pullBottom{border-radius:0 0 6px 6px;}
+        .pull ul li:hover{background:#0c64a0;}
+        .lis:hover{border-radius:0 0 6px 6px;}
+        .accouparent1{width: 500px; height: 300px; position:absolute; top: 30%; left: 40%;  z-index: 100; color: #666666; display: none; }
+        .accountset1{ height: 275px; background: #FFFFFF; position: relative; border-radius:20px;}
+        .accountset1 h3{color:#333;padding-top:30px;text-align: center}
+        .aselist1 { padding: 35px 50px 30px 50px; }
+        .aselstfirst1 { color: #999999; margin-bottom: 24px; }
+        .aselstseccond1 { font-weight: bold; color: #666666; margin: 60px 0 22px 0; }
+        .aselstli1 { margin-bottom:24px; height:;  position: relative; display: none; }
+        .aselstli1 img { position: absolute; right: -30px; top: 10px; display: none; }
+        .aselstspan1 { display: inline-block; width: 79px; line-height: 37px; float: left; }
+        .aselstli1 input {padding: 0 20px; width: 278px; height: 34px; border: 1px solid #e3e3e3; position: relative; color: #666666; float: left;line-height:34px}
+        .aseipBtn{width:410px;height:35px;position: absolute;left:0;right:0;margin:auto;bottom:20px;}
+        .aseip11 {width:200px;height:35px;border:0; text-align: center; border-radius: 6px; display: inline-block; float: left;  cursor: pointer; background:#0696fa;color:#fff;font-family: "微软雅黑"}
+        .aseip21 {width:198px;height:35px;text-align: center;border-radius: 6px;display: block;float:right;cursor: pointer;border:1px solid #0696fa; line-height:35px;background:#fff;color:#0696fa;font-family: "微软雅黑"}
+        .aseclose1 { display: block; width: 38px; height: 38px; background: url(../../img/v_close.png) center center no-repeat; border-radius: 19px; text-align: center; line-height: 38px; cursor: pointer; position: absolute; top: -40px; right: -40px;font-family:"微软雅黑"}
+        .error-remind{color:red;font-size: 12px;display: block;height: 30px;line-height: 30px; position: absolute; bottom:-26px ; left:80px;display: none}
+        .phcode1,.phcode { float: left; width: 120px; height: 38px; color: #FFFFFF; background: #0696fa; cursor: pointer; border: none; margin-left: 20px; }
+        .indexshade{ width: 100%; height: 100%; min-width: 1200px; min-height: 930px; position: absolute; left: 0; top: 0; background: #000000; opacity: 0.8; filter:Alpha(opacity=80); z-index: 99; display: none; }
+        /*end*/
+        /*消息盒子*/
+        .homeNews{width:100px;height:30px;backgrund:#fff;}
+        .newsBoxCon{width:100%;min-height:800px;position:absolute;left:0;top:0;background:#fff;display:none;z-index:10}
+        .newsBoxTop{width:100%;height:100px;border-bottom:1px solid #ccc;position: relative}
+        .newsBoxTop h2{width:100px;line-height: 100px; position:absolute;left:0;top:0;right:0;bottom:0;margin:auto;}
+        .newsBoxTop img{position: absolute;top:0;bottom:0;margin:auto;right:50px;cursor:pointer}
+        .newsBox{width:90%;height:700px;margin:0 auto;min-width:1200px;min-height:700px;margin-top:50px;}
+        .newsBoxLeft{width:40%;height:700px;border:1px solid #dbe9ee;float:left;overflow: auto;}
+        .newsBoxRight{width:50%;border:1px solid #dbe9ee;float:right;overflow: auto;background:#f1f9fc;position:relative;}
+        .newsBoxBtn{width:240px;height:40px;background:#0696fa;color:#fff;line-height:40px;border-radius: 6px;margin:40px auto;text-align: center;cursor: pointer}
+        .newsBoxRight1{color:#333;width:90%;height:50px;margin:0 auto;border-bottom:1px solid #dbe9ee;color:#333;font-size:20px;line-height: 50px }
+        .newsBoxRight2{width:90%;margin:0 auto;font-size:16px;padding-bottom:120px;line-height:25px;margin-top:20px;color:#666;}
+        .newsBoxRight3{position: absolute;bottom:20px;right:20px;color:#666;}
+
+        .conte{width:90%;heigt:100px;border-bottom:1px solid #dbe9ee;margin:0 auto;position: relative}
+        .succeedAlert{padding-left:20px;font-size:14px;font-weight: 600;padding-top:20px;line-height:30px;}
+        .contentCheck{padding-left:20px;width:90%;height:50px;line-height:50px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden; color:#666;}
+        .deleteRemove{color:#0696fa;position:absolute;top:30px;right:20px;cursor: pointer}
+        .newsBoxTopClose{transition:all 1s;}
+        .newsBoxTopClose:hover{transform:rotate(90deg)}
+        .popupbox{background: #ffffff;}
+        /*导航*/
+        .mengban { width: 100%;  height: 100%;min-width: 1200px; min-height: 930px;position: absolute; left: 0; top: 0; background: #000000;opacity: 0.8;  z-index: 10;  }
+        .guideInfo,.guideFramework,.guideOperate,.guideNotice,.guidePay,.guideBatch,.guidePayroll{position: absolute;z-index: 15; width: 100%;min-width: 1200px;}
+        .guideOperate,.guideFramework,.guideNotice,.guidePay,.guideBatch,.guidePayroll{min-width: 1200px;padding-left: 200px;box-sizing: border-box;}
+        /*.guidePay,.guidePayroll{min-width:1210px;}*/
+        /*.guidePay{min-width: 1220px;}*/
+        .guideInfoText{color: #c1cbd7;  font-size: 16px;  position: absolute;  left: 200px; top: 20px;}
+        .guideInfoText span{color: #fa5f5f;}
+        .guideInfo .pic1{position: absolute;left: 400px;top:40px;}
+        .guideInfo .okay{position: absolute;left:400px;top:300px;cursor: pointer;}
+        .guideFrameworkText{    width: 80px; height: 26px;font-size:14px;  border-radius: 7px; background: #6be7bd;  position: absolute;  right: 5%;  top: 103px;  line-height: 26px;  text-align: center;  color: #fff;margin:0 10px 0 0;}
+        .guideFramework .pic2{position: absolute;right: 70px;top:130px;}
+        .guideFramework .next{position: absolute;right: 140px;top:390px;cursor: pointer;}
+        .guideOperateText{ width:90%; margin: 0 5%;margin-top: 161px;min-width: 900px; border: 1px solid transparent;font-size:14px;}
+        .guideOperateText span{ display: block;  width: 11%; margin-right: 0.8%; height: 40px;  float: right;  line-height: 40px;  text-align: center; color: #fff;}
+        /*.guideOperateText span:nth-child(2){background: url(resource/img/salary/userAdd.png) 25% center no-repeat;margin-right:0;}*/
+        .guideOperateText span img{margin-top: 13px;}
+        .guideOperateText span a{margin-left: 10px;}
+        .guideOperate .pic3{position: absolute;right: 10%;top:210px;}
+        .guideOperate .pic4{position: absolute;right: 30%;top:460px;}
+        .guideOperate .easy{position: absolute;right: 30%;top:630px;cursor: pointer;}
+        .guideNoticeText{ width: 80px; height: 26px; border-radius: 7px;background:#f8d37a; margin-right: 110px;line-height: 26px;text-align: center;color:#fff;position: absolute;right: 5%;top:103px;}
+        .guideNotice .pic5{position: absolute;right: 180px;top:130px;}
+        .guideNotice .okay1{position: absolute;right: 250px;top:390px;cursor: pointer;}
+        .guidePayText{width: 80px;  height: 26px; font-size:14px;line-height: 26px;  color: #FFFFFF; position: absolute;right:5%; top:96px;  text-align: center;  border-radius: 7px;margin-right:210px;background: #68bdf3;}
+        .guidePay .pic6{position: absolute;right: 255px;top:130px;}
+        .guidePay .next2{position: absolute;right: 315px;top:360px;cursor: pointer;}
+        .guideBatchText{color: #fff; width: 90%; margin: 0 5%; margin-top: 162px; min-width: 900px; border: 1px solid transparent;font-size: 14px;}
+        .guideBatchText img{margin: 3px 10px 0 0 }
+        .guideBatch .pic7{position: absolute;right: 50px;top:180px;}
+        .guideBatch .pic8{position: absolute;right: 400px;top:360px;}
+        .guideBatch .next3{position: absolute;right: 410px;top:620px;cursor: pointer;}
+        .guidePayrollText{    width: 80px;  height: 26px;  line-height: 26px;  color: #FFFFFF;  margin: 0px 10px 0 0;  text-align: center;  border-radius: 7px;  background: #6ae6bc;  position: absolute;right:5%;top:96px;font-size: 14px;}
+        .guidePayroll .pic9{position: absolute;right: 100px;top:130px;}
+        .guidePayroll .okay2{position: absolute;right: 100px;top:330px;cursor: pointer;}
+    </style>
+
+</head>
+
+<body>
+
+<body>
+<!-- 蒙版-->
+<div class="mengban" style="display: none"></div>
+<!-- 引导提示-->
+    <!-- 完善信息-->
+<div class="guideInfo" style="display: none">
+    <div class="guideInfoText">上海薪太软科技发展有限公司（请<span>完善信息</span>，以便使用完整功能） </div>
+    <div class="pic1"><img src="resource/img/hand.png" alt=""></div>
+    <div class="okay"><img src="resource/img/okay.png" alt=""></div>
+</div>
+    <!-- 组织架构-->
+<div class="guideFramework" style="display: none">
+    <div class="guideFrameworkText">组织架构</div>
+    <div class="pic2"><img src="resource/img/hand1.png" alt=""></div>
+    <div class="next"><img src="resource/img/next.png" alt=""></div>
+</div>
+<!-- 批量操作-->
+<div class="guideOperate" style="display: none">
+    <div class="guideOperateText">
+        <span><img src="#springUrl('resource/img/salary/operation.png')" alt=""><a>批量操作</a></span>
+        <span style="margin-right: 0"><img src="#springUrl('resource/img/salary/userAdd.png')" alt=""><a>新增员工</a></span>
+    </div>
+    <div class="pic3"><img src="resource/img/hand2.png" alt="">
+    </div>
+    <div class="pic4"><img src="resource/img/hand3.png" alt=""></div>
+    <div class="easy"><img src="resource/img/easy.png" alt=""></div>
+</div>
+
+<!-- 入职须知-->
+<div class="guideNotice" style="display: none">
+    <div class="guideNoticeText">入职须知</div>
+    <div class="pic5"><img src="resource/img/hand4.png" alt=""></div>
+    <div class="okay1"><img src="resource/img/okay.png" alt=""></div>
+</div>
+<!-- 薪资设置-->
+<div class="guidePay" style="display: none">
+    <div class="guidePayText">薪资设置</div>
+    <div class="pic6"><img src="resource/img/hand5.png" alt=""></div>
+    <div class="next2"><img src="resource/img/next.png" alt=""></div>
+</div>
+<!-- 批量操作-->
+<div class="guideBatch" style="display: none">
+    <div class="guideBatchText">
+        <span style="float: right;margin-right: 20px"><img src="/resource/img/salary/operation.png">批量操作</span>
+    </div>
+    <div class="pic7"><img src="resource/img/hand6.png" alt=""></div>
+    <div class="pic8"><img src="resource/img/hand7.png" alt=""></div>
+    <div class="next3"><img src="resource/img/next.png" alt=""></div>
+</div>
+<!-- 工资表-->
+<div class="guidePayroll" style="display: none">
+    <div class="guidePayrollText">9月工资表</div>
+    <div class="pic9"><img src="resource/img/hand8.png" alt=""></div>
+    <div class="okay2"><img src="resource/img/okay.png" alt=""></div>
+</div>
+
+<div class="body" id="iBody">
+    <div id="header" class="clear header">
+        <div class="topText">
+#if ($!{memberIsDefault} == 1)
+    #if ($!{companyInfoIsComplete} == 1)
+        #if ($!{auditStatus} == 1)
+            <span class="topText1">$!{companyName}</span>
+            <span class="topText2" name="auditStatusDesc1">（</span>
+            <a class="popupbox-payfor" href="javascript:;"  name="auditStatusDesc">企业信息审核未通过</a>
+            <span class="topText3" name="auditStatusDesc2">）</span>
+        #else
+            #if ($!{auditStatus} == 0)
+                <span class="topText1">$!{companyName}</span>
+                <span class="topText2" name="auditStatusDesc1">（</span>
+                <a class="popupbox-payfor" href="javascript:;"  name="auditStatusDesc">资料审核中</a>
+                <span class="topText3" name="auditStatusDesc2">）</span>
+            #else
+                <a class="popupbox-payfor" href="javascript:;"><span class="topText1">$!{companyName}</span></a>
+                <span class="topText2" name="auditStatusDesc1"></span>
+                <a class="popupbox-payfor" href="javascript:;"  name="auditStatusDesc"></a>
+                <span class="topText3" name="auditStatusDesc2"></span>
+
+            #end
+
+        #end
+    #else
+        <span class="topText1">$!{companyName}</span>
+        <span class="topText2" name="auditStatusDesc1">（请</span>
+        <a class="popupbox-payfor" href="javascript:;"  name="auditStatusDesc">完善信息</a>
+        <span class="topText3" name="auditStatusDesc2">，以便使用完整功能）</span>
+    #end
+#else
+    <span class="topText1">$!{companyName}</span>
+#end
+
+        </div>
+
+        <img class="logo" onclick="onShowUploadLogo();"
+            #if(${xtr.getCompanySessionInfo($session)} && ${xtr.getCompanySessionInfo($session).companyLogo})
+             src="#springUrl('/downLogo.htm?logoName=')$xtr.getCompanySessionInfo($session).companyLogo"
+            #else
+             src="#springUrl('/resource/img/default_logo.jpg')"
+            #end
+        />
+
+        <div class="ilst"><em>0</em><i class="inhdtl"></i></div>
+
+        <div class="hdlf">
+
+
+            #if($!{companyIsAuth} == "1")
+                <div id="phoneNume" class="a2 span31">$!{memberLogname}</div>
+            #else
+                <div id="phoneNume2" class="a2 span21">&nbsp;&nbsp;$!{memberLogname}</div>
+            #end
+
+            <a class="a3">
+                <img class="a3Img1" src="#springUrl('/resource/img/newsBell.png')" alt="">
+                <img class="a3Img2" style="display:none" src="#springUrl('/resource/img/newsNub.png')" alt="">
+                <span class="a3Span" id="msgCounts"  style="display: none;"></span>
+            </a>
+
+            <div class="pull">
+                <ul>
+                    <li><a href="javascript:void(0);" id="changePhone">账户设置</a></li>
+                    <li><a id="modifyPwdBtn" id="modifyPwdBtn" href="javascript:void(0);">重置密码</a></li>
+                    <li class="lis"><a  href="logout.htm">安全退出</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="mainlf">
+        <ul id="mainlful" style="padding-top:60px">
+            <li class="mulactive" data-url="homePage.htm"><img src="#springUrl('/resource/img/icon11.png')" />首页</li>
+            #if($!{listCompanyMenuBean} && $!{listCompanyMenuBean.size()} > 0)
+                #foreach($data in $!{listCompanyMenuBean})
+                    #if($!{data.sort} == "0")
+                        <li data-url="$!{data.url}"><i></i><img src="$!{data.menuIcon}"/>$!{data.menuName}</li>
+                    #else
+                        <li data-url="$!{data.url}"><i></i><img src="$!{data.menuIcon}"/>$!{data.menuName}</li>
+                    #end
+
+                #end
+            #end
+            <!--<li data-url="payoff.htm"><i></i><img class="btnimg4" src="#springUrl('/resource/img/icon4.png')"/>安全中心</li>-->
+
+        </ul>
+    </div>
+</div>
+
+<div class="right">
+    <iframe marginwidth="0" marginheight="0" id="J_iframe" frameBorder="no" noresize="noresize" name="iframe0"
+            width="100%" height="100%" frameborder="0" src="#springUrl('/homePage.htm')" data-id="index.htm"></iframe>
+</div>
+<div class="footer" id="footer">薪太软（上海）科技发展有限公司 | 沪ICP备16018294号 |<img src="#springUrl('/resource/img/police.png')"
+                                                                       style="margin: 28px 5px 0 5px;"/>沪公网安备
+    31010602000188号
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260212442'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1260212442%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+
+
+<div class="indexshade" id="indexshade"></div>
+<!--描述：账户设置密码修改界面-->
+<div class="accouparent" id="modifyPwdAccouparent">
+    <div class="accountset" id="accountset">
+        <h3 class="asehde">重置密码</h3>
+        <form id="modifyPwdForm">
+            <input type="hidden" value="" name="memberId">
+            <ul class="aselist">
+                <li class="aselstfirst"><span style="width:100%;" name="memberLogname">我的账户：</span></li>
+                <li class="aselstfirst"><span style="width:100%;" name="companyName">公司名称：</span></li>
+                <li class="aselstseccond">修改密码</li>
+                <li class="aselstli"><span class="aselstspan">原密码</span><input type="password" placeholder="输入原密码" name="memberPassword" /></li>
+                <li class="aselstli"><span class="aselstspan">新密码</span><input type="password" placeholder="输入新密码" name="newPwd" /></li>
+                <li class="aselstli" style="margin-bottom: 8px;"><span class="aselstspan">确认密码</span><input type="password" placeholder="重复输入密码" name="confirmNewPwd" /></li>
+                <li class="aselstli"><span id="verifycodeTip" style="color:red;width:100%;"></span></li>
+                <li clsss="asebtn">
+                    <div class="aseipBtn">
+                        <input class="aseip1" type="button" id="sureBtn" value="确定" />
+                        <input class="aseip2" type="button" id="cacelBtn" value="取消" />
+                    </div>
+                </li>
+            </ul>
+        </form>
+        <em class="aseclose" id="aseclose"></em>
+    </div>
+</div>
+
+<!--修改手机-->
+<div class="accouparent1 accparparent1">
+    <div class="accountset1 accountset1" id="accountset1">
+        <h3>账户设置</h3>
+        <form id="changePhoneForm">
+            <input type="hidden" name="memberId" id="memberId" value="${memberid}"/>
+
+            <ul class="aselist1">
+                <li class="aselstli1 clear" style="display: block;">
+                    <span class="aselstspan1">姓名</span>
+                    <input value="${userName}" name="userName" id="userName"/>
+                    <img class="login-img1 login-img11" src="resource/img/wrrong.png" />
+                    <img class="login-img2 login-img21" src="resource/img/right.png" />
+                    <i class="error-remind login-wrrong">姓名不能为空!</i>
+                </li>
+                <li class="aselstli1 clear" style="display: block;">
+                    <span class="aselstspan1">手机号码</span>
+                    <input style="width: 139px;float: left;" type="text" value="${memberPhone}"  id="memberPhone" name="memberPhone" disabled="disabled" />
+                    <input type="button" style="width: 120px; height: 38px; color: #FFFFFF;padding:0;background:#0696fa" class="phcode" value="修改" />
+
+                </li>
+                <li class="aselstli1 clear">
+                    <span class="aselstspan1">短信验证码</span>
+                    <input placeholder="输入短信验证码" maxlength="6" id="smscode1" name="smscode1"/>
+                    <img class="login-img1 login-img11" src="resource/img/wrrong.png" />
+                    <img class="login-img2 login-img21" src="resource/img/right.png" />
+                    <i class="error-remind login-wrrong">请输入正确的验证码！</i>
+                </li>
+                <li class="aselstli1 clear">
+                    <span class="aselstspan1">新手机号码</span>
+                    <input style="width: 139px;float: left;"  maxlength="11" name="newMemberPhone" id="newMemberPhone" placeholder="请输入新手机号码" />
+                    <input class="phoneboxcode1 phoneboxcode1 phcode1" type="button" style="width: 120px; height: 38px; color: #FFFFFF;float: left;" class="phcode1" value="获取验证码" />
+                    <img class="login-img1 login-img11" src="resource/img/wrrong.png" />
+                    <img class="login-img2 login-img21" src="resource/img/right.png" />
+                    <div style="clear: both"></div>
+                    <i class="error-remind login-wrrong">请输入正确的手机号码！</i>
+                </li>
+                <li class="aselstli1 clear" style="margin-bottom: 33px;">
+                    <span class="aselstspan1">短信验证码</span>
+                    <input placeholder="输入新手机验证码"  maxlength="6" name="smscode2" id="smscode2" />
+                    <img class="login-img1 login-img11" src="resource/img/wrrong.png" />
+                    <img class="login-img2 login-img21" src="resource/img/right.png" />
+                    <i class="error-remind login-wrrong">请输入正确的验证码！</i>
+                </li>
+                <li clsss="asebtnbox1">
+                    <div class="aseipBtn">
+                        <input class="aseip11" type="submit" value="确定" />
+                        <input class="aseip21" type="button" value="取消" />
+                    </div>
+                </li>
+            </ul>
+        </form>
+        <em class="aseclose1" id="aseclose1"></em>
+    </div>
+</div>
+<!--end-->
+
+<div class="indexbox" id="indexbox">
+    <div class="inbox">
+        <span class="insclos"></span>
+    </div>
+</div>
+##<div class="pacity" style="width:100%;height:100%;display: none;opacity: 0.7;background: #000000; position: absolute;left: 0;top: 0; filter:alpha(opacity=70);"></div>
+##<div style="display: none;" class="aboxbg" id="aboxbg">
+##    <div class="abox" id="abox">
+##        <div class="abox_head">
+##            <span>提示</span>
+##        </div>
+##        <p>修改密码成功</p>
+##        <i id="sureBtnThird"><span>确认</span></i>
+##    </div>
+##</div>
+<div id="popupbox" class="popupbox">
+    <i class="popupbox-closed"></i>
+</div>
+##消息盒子
+<div class="newsBoxCon">
+    <div class="newsBoxTop">
+        <h2>消息盒子</h2>
+        <img class="newsBoxTopClose" src="resource/img/guanbi.png" alt="">
+    </div>
+    <div class="newsBox">
+        <div class="newsBoxLeft">
+
+
+        </div>
+        <div class="newsBoxRight">
+           <div class="newsBoxRight1"></div>
+           <div class="newsBoxRight2"></div>
+           <div class="newsBoxRight3"></div>
+        </div>
+
+    </div>
+    <div class="newsBoxBtn">确定</div>
+</div>
+</body>
+<script>
+
+    $(function(){
+
+        //获取所有的未读消息
+
+
+        $("#modifyPwdBtn").click(function(){
+            //初始化
+            $("[name=memberId]").val("");
+            $(".aselstfirst [name='memberLogname']").text("我的账户：");
+            $(".aselstfirst [name='companyName']").text("公司名称：");
+            $("[name=memberPassword]").val("");
+            $("[name=newPwd]").val("");
+            $("[name=confirmNewPwd]").val("");
+            $.ajax({
+                type: 'post',
+                url: 'getModifyPwdInfo.htm',
+//            data: $("#protocolModifyForm").serialize(),
+                async:false,
+                success: function (data) {
+                    console.log(data);
+                    if (data.success) {
+                        var companyMemberBean=data.data;
+                        if(companyMemberBean!=null&& companyMemberBean!=undefined){
+                            $("[name=memberId]").val(companyMemberBean.memberId);
+                            $(".aselstfirst [name='memberLogname']").text("我的账户："+companyMemberBean.memberLogname);
+                            $(".aselstfirst [name='companyName']").text("公司名称："+(companyMemberBean.companyName==null||companyMemberBean.companyName==undefined?"":companyMemberBean.companyName));
+                        }
+                        $('.indexshade').css('display','block');
+                        $('.accouparent').show(200);
+                    } else {
+                        alert("用户登录超时,请重新登录");
+                        location.href = "/";
+                    }
+                }
+            });
+
+        });
+        $("#aseclose").click(function(){
+            $('.indexshade').css('display','none');
+            $('.accouparent').hide(200);
+        });
+        $("#cacelBtn").click(function(){
+            $('.indexshade').css('display','none');
+            $('.accouparent').hide(200);
+        });
+        $("#sureBtn").click(function(){
+            if(validatorFirstData()) {
+                var formDataStr = {
+                    'memberPassword': $('[name=memberPassword]').val(),
+                    'memberId': $('[name=memberId]').val(),
+                    'newPwd': $('[name=newPwd]').val(),
+                    'confirmNewPwd': $('[name=confirmNewPwd]').val()
+                };
+                $.ajax({
+                    type: 'post',
+                    url: "modifyPwdOperation.htm",
+                    data: JSON.stringify(formDataStr),
+                    async: false,
+                    dataType: "json",
+                    contentType: 'application/json',
+                    success: function (data) {
+                        console.log(data);
+                        if (data.success) {
+//                        alert("密码修改成功");
+                            $("#verifycodeTip").text("");
+                            $('.pacity').css('display','block');
+                            $('.aboxbg').show(200);
+                            $('.indexshade').css('display', 'none');
+                            $('.accouparent').hide(200);
+                        } else {
+//                        alert(data.message);
+                            $("#verifycodeTip").text(data.message);
+                        }
+                    }
+                });
+            }
+        });
+
+        $("[name=memberPassword]").blur(function(){
+            validatorFirstData();
+        });
+
+        $("[name=newPwd]").blur(function(){
+            validatorFirstData();
+        });
+
+        $("[name=confirmNewPwd]").blur(function(){
+            validatorFirstData();
+        });
+
+        $("#sureBtnThird").click(function(){
+            $('.pacity').css('display','none');
+            $('.aboxbg').css('display','none');
+        });
+        count()
+        aneww()
+
+    });
+    /**
+     * 验证数据
+     */
+    function validatorFirstData(){
+        var memberPassword=$("[name=memberPassword]").val();
+        var newPwd=$("[name=newPwd]").val();
+        var confirmNewPwd=$("[name=confirmNewPwd]").val();
+        var validatorMsg="OK";
+        console.log(memberPassword);
+        console.log(/^[A-Za-z0-9]+$/.test(memberPassword));
+        if(memberPassword==null || memberPassword=="" || memberPassword==undefined){
+            validatorMsg="请输入原密码";
+        }else if(newPwd==null || newPwd=="" || newPwd==undefined){
+            validatorMsg="请输入新密码";
+        }else if(confirmNewPwd==null || confirmNewPwd=="" || confirmNewPwd==undefined){
+            validatorMsg="请输入确认密码";
+        }else if(memberPassword.length>20){
+            validatorMsg="原密码长度不能超过20位";
+        }else if(newPwd.length>20){
+            validatorMsg="新密码长度不能超过20位";
+        }else if(confirmNewPwd.length>20){
+            validatorMsg="确认密码不能超过20位";
+        }else if (memberPassword.length < 6) {
+            validatorMsg = "原密码长度不能小于6位";
+        }else if (newPwd.length < 6) {
+            validatorMsg = "新密码长度不能小于6位";
+        } else if (confirmNewPwd.length <6) {
+            validatorMsg = "确认密码长度不能小于6位";
+        } else if (!/^[A-Za-z0-9]+$/.test(memberPassword)) {
+            validatorMsg = "原密码只能输入数字或字母";
+        }else if (!/^[A-Za-z0-9]+$/.test(newPwd)) {
+            validatorMsg = "新密码只能输入数字或字母";
+        } else if (!/^[A-Za-z0-9]+$/.test(confirmNewPwd)) {
+            validatorMsg = "确认密码只能输入数字或字母";
+        }else if(confirmNewPwd!=newPwd){
+            validatorMsg="新密码与确认密码不一致";
+        }
+        if(validatorMsg=="OK"){
+            $("#verifycodeTip").text("");
+            return true;
+        }else{
+            $("#verifycodeTip").text(validatorMsg);
+            return false;
+        }
+        $("#sureBtnThird").click(function(){
+            location.href = "/";
+        });
+    }
+
+
+    /*  上传logo */
+    function onShowUploadLogo() {
+        var index = layer.open({
+            type: 2,
+            title: '上传Logo',
+            maxmin: false,
+            shadeClose: false, //点击遮罩关闭层
+            area: ['500px', '620px'],
+            content: BASE_PATH + '/logo.htm'
+        });
+    }
+
+    /*账户设置*/
+
+    //
+    //$('.a3').click(function(){
+    //    $('.indexshade').css('display','block');
+    //    $('.accouparent').css('display','block');
+    //})
+    //	$('.aseclose').click(function(){
+    //		$('.indexshade').css('display','none');
+    //		$('.accouparent').css('display','none');
+    //	})
+    /*end*/
+
+
+    //获取消息数量
+
+    function count(){
+        $.ajax({
+            url:'getUnReadMsgsCount.htm',
+            dataType:'json',
+            type:'POST',
+            success:function(resultResponse){
+                if(resultResponse.success){
+                    if(resultResponse.data==0){
+                        $(".a3Img2").hide();
+                        $(".a3Span").hide();
+                    }else{
+                        $(".a3Img2").show();
+                        $(".a3Span").show();
+                        $("#msgCounts").text(resultResponse.data);
+                    }
+
+                }
+            }
+        });
+    }
+    //删除
+    function aneww(){
+        $.ajax({
+            url:'seeMessageBox.htm',
+            dataType:'json',
+            type:'POST',
+            success:function(resultResponse){
+                $('.newsBoxLeft').empty()
+                if (!resultResponse.data && typeof(resultResponse.data)!="undefined"){
+                    //alert(resultResponse.data);
+                }else{
+                    for(var i=0;i<resultResponse.data.length;i++){
+                        var htmlHasRead = "<div class='conte'><div class='succeedAlert' onclick=deleteBtn("+resultResponse.data[i].msgId+","+resultResponse.data[i].msgSign+")>"+resultResponse.data[i].msgTitle+"</div><div class='contentCheck' onclick=deleteBtn("+resultResponse.data[i].msgId+","+resultResponse.data[i].msgSign+") >"+resultResponse.data[i].msgCont+"</div>" + "<div class='deleteRemove' onclick=deleteMsg('"+resultResponse.data[i].msgId+"')>删除</div></div>";
+                        var htmlNoRead ="<div class='conte'><div class='succeedAlert' onclick=deleteBtn("+resultResponse.data[i].msgId+","+resultResponse.data[i].msgSign+")>"+resultResponse.data[i].msgTitle+"</div><div class='contentCheck' style='color:red' onclick=deleteBtn("+resultResponse.data[i].msgId+","+resultResponse.data[i].msgSign+") >"+resultResponse.data[i].msgCont+"</div>" + "<div class='deleteRemove' onclick=deleteMsg('"+resultResponse.data[i].msgId+"')>删除</div></div>";
+                        if(resultResponse.data[i].msgSign==1){
+                            //未读
+                            $('.newsBoxLeft').append(htmlNoRead);
+                        }else{
+                            //console.log("已读")
+                            $('.newsBoxLeft').append(htmlHasRead);
+                        }
+
+                    }
+
+                }
+            }
+        });
+    }
+    function deleteMsg(id){
+        $.ajax({
+            url:'deleteMessage.htm',
+            type:'POST',
+            data:{'msgId':id},
+            dataType:'json',
+            success:function(resultResponse){
+                if(resultResponse.success){
+                    alert("删除成功")
+                    aneww()
+                    count()
+                }else{
+                    alert("删除失败")
+                }
+            }
+        });
+    }
+    function deleteBtn(id,msgSign){
+        console.log(msgSign)
+        $('.conte').click(function(){
+            $(this).css('background','#f4fbfe').siblings().css('background','#fff');
+            if(msgSign==1){
+                $(this).find('div :eq(1)').css("color","#666")
+            }
+        })
+        $.ajax({
+            url:'findMessageDetail.htm',
+            type:'POST',
+            data:{'msgId':id},
+            dataType:'json',
+            success:function(resultResponse){
+                if(resultResponse.success){
+                    $('.newsBoxRight1').text(resultResponse.data.msgTitle)
+                    $('.newsBoxRight2').text(resultResponse.data.msgCont)
+                        time()
+                        function time(){
+                        var date = new Date(resultResponse.data.msgAddtime);
+                        var a = date.getFullYear();
+                        var b = date.getMonth()+1;
+                        var c = date.getDate();
+                        var d= date.getHours();
+                        var e = date.getMinutes();
+                        var f = date.getSeconds();
+                        if(b<10){
+                            b = "0"+b
+                        }
+                        if(c<10){
+                            c = "0"+c
+                        }
+                        if(d<10){
+                            d = "0"+d
+                        }
+                        if(e<10){
+                            e="0"+e
+                        }
+                        if(f<10){
+                            f="0"+f
+                        }
+                        var time = a+ '-' + b + '-' + c + ' ' +d+':'+e+':'+f;
+                        $('.newsBoxRight3').text(time);
+                    }
+                }
+            }
+        });
+    }
+
+    $('.a2,.pull').hover(function(){
+        $('.pull').show()
+
+    },function(){
+        $('.pull').hide()
+    })
+
+    //            消息盒子
+    $('.a3Img1,#msgCounts').click(function(){
+        $('.newsBoxCon').show();
+    })
+    $('.newsBoxBtn,.newsBoxTopClose').click(function(){
+        aneww()
+        count()
+        $('.newsBoxCon').hide();
+    })
+
+
+    function guideInfo(){
+        $('.mengban').show();
+        $('.guideInfo').show();
+    }
+    function guideFramework(){
+        $('.mengban').show();
+        $('.guideFramework').show();
+    }
+   function guidePay(){
+       $('.mengban').show();
+       $('.guidePay').show();s
+   }
+           //..............导航提示
+            $('.okay').on('click',function(){
+                $('.mengban').hide()
+                $('.guideInfo').hide()
+            })
+
+            $('.next').on('click',function(){
+                $('.guideFramework').hide()
+                $('.guideOperate').show()
+            })
+            $('.easy').on('click',function(){
+                $('.guideOperate').hide()
+                $('.guideNotice').show()
+            })
+            $('.okay1').on('click',function(){
+                $('.mengban').hide()
+                $('.guideNotice').hide()
+            })
+
+            $('.next2').on('click',function(){
+                $('.guidePay').hide()
+                $('.guideBatch').show()
+            });
+            $('.next3').on('click',function(){
+                $('.guideBatch').hide()
+                $('.guidePayroll').show()
+            });
+            $('.okay2').on('click',function(){
+                $('.mengban').hide()
+                $('.guidePayroll').hide()
+            })
+
+
+
+</script>
+</html>

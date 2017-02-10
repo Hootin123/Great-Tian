@@ -1,0 +1,891 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title></title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/homeIndex/font-awesome.min.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/homeIndex/salary.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/homeIndex/salary1.css')" rel="stylesheet">
+　　<link href="#springUrl('/resource/css/homeIndex/swiper.min.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/homeIndex/xtr.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/homeIndex/xtr1.css')" rel="stylesheet">
+    <link rel="shortcut icon" href="#springUrl('/resource/img/xtr1/favicon.ico')"/>
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/homeIndex/xtr2.css')"/>
+    <script src="#springUrl('/resource/js/homeIndex/custom2.js')" type="text/javascript" charset="utf-8"></script>
+    <script src="#springUrl('/resource/js/login/login.js')" type="text/javascript" charset="utf-8"></script>
+    <style type="text/css">
+        .content {margin: 0 auto;}
+    </style>
+</head>
+<body>
+##<jsp:include page="/201607/meta.jsp"></jsp:include>
+##<jsp:include page="/201607/top.jsp"></jsp:include>
+    #parse("comm/home/top.vm")
+<div class="banner" id="top">
+    <div class="x-content" style="z-index: 2;">
+##        <%if(request.getSession().getAttribute("memberid")==null || request.getSession().getAttribute("memberid").toString().length()<1) {%>
+        <div class="index-login" >
+            <div class="opacity" style=""></div>
+            <div class="index-login-content" style="">
+                <h2 style="">登录薪太软</h2>
+                <form id="loginForm">
+                <table border="0" cellspacing="0" cellpadding="0" style="">
+                    <tr>
+                        <td>
+                            #*<input type="text" id="loginname" value="输入电子邮箱" placeholder="输入电子邮箱" />*#
+                              <input type="text" name="memberLogname" id="memberLogname"  placeholder="输入电子邮箱"/><span id="memberLognameTip" style="color:red" ></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            #*<input type="password" id="pwd" value="输入登录密码" placeholder="输入登录密码" />*#
+                            <input type="password" name="memberPassword" id="memberPassword" placeholder="输入登录密码"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img class="btn-code" id="vcodeimg" name ="vcodeimg" src="#springUrl('/generateImages.htm')"  />
+                           #* <img id="vcodeimg" src="/action/ax/authImages" onclick="$(this).attr('src','/action/ax/authImages?'+(new Date()).getTime())" />*#
+                           #* <input type="text" maxlength="4" id="yzcode" value="图形验证码" placeholder="图形验证码" style="width: 110px;" />*#
+                            <input  type="text" maxlength="4" id="verifycode" name="verifycode" placeholder="图形验证码" style="width: 110px;"><span id="verifycodeTip" style="color:red" ></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                <p class="err"></p>
+                              #*  <button type="button" class="btn-blue" id="btn_log" onclick="login();">登录</button>*#
+                                <button type="button" class="btn-blue" id="login">登录</button>
+
+                               #* <a href="/action/web/regist">注册</a>*#
+                                <a href="#springUrl('/registerInit.htm')">注册</a>
+
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                </form>
+                <!--
+                <p style="color: #fff;font-size: 12px;text-align: center;padding: 25px 0 0;">已注册商户达<span style="font-size: 16px;color: #ff4a4a;font-weight: bold;">100,000.00</span>家</p>
+                -->
+            </div>
+
+        </div>
+##        <%}else{ %>
+##        <div class="index-login" style="height: 250px;top: 100px;">
+##            <div class="opacity" style=""></div>
+##            <div class="index-login-content" style="text-align: center;">
+##
+##                <p style="color: #fff;font-size: 18px;padding: 60px 0 10px;">欢迎来到薪太软</p>
+##                <p style="color: #ffbc6e;font-size: 14px;padding: 0 0 55px;"><%=request.getSession().getAttribute("membername").toString()%></p>
+##                <div style="padding: 0 23px;">
+##                    <a href="/action/web/manageIndex" class="ui-btn btn-blue" style="width: 200px; float: left;border-radius: 10px;">进入后台</a>
+##                    <a href="/action/web/logout" style="color: #0696fa;font-size: 14px;">退出</a>
+##                </div>
+##            </div>
+##
+##        </div>
+##        <%}%>
+    </div>
+    <div  id="banner">
+        <div class="swiper-wrapper" style="height: 450px;">
+            <div class="swiper-slide" style="background-image: url(#springUrl('/resource/img/xtr2/b1_02.jpg'));"></div>
+            <div class="swiper-slide" style="background-image: url(#springUrl('/resource/img/xtr2/b2_02.jpg'));"></div>
+        </div>
+        <div class="swiper-pagination"></div>
+        <span class="l"></span>
+        <span class="r"></span>
+    </div>
+</div>
+##<link rel="stylesheet" type="text/css" href="/201607/css/swiper.min.css"/>
+<script src="#springUrl('/resource/js/homeIndex/swiper.min.js')" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    var mySwiper = new Swiper('#banner', {
+        autoplay: 5000,//可选选项，自动滑动
+        pagination : '.swiper-pagination',
+        paginationClickable: true,
+        prevButton:'.banner .l',
+        nextButton:'.banner .r',
+    })
+</script>
+<div class="x-container" style="background: #fff;">
+    <div id="product" style="position:absolute;top:-50px;left:0;"></div>
+    <div class="indx-title-wrap" style="z-index: 1;">
+        <p class="inde-title"><img src="#springUrl('/resource/img/xtr2/en1.png')" style="margin-bottom: 20px;position: relative;z-index: 3;"/></p>
+    </div>
+    <div class="x-container" style="background: url(#springUrl('/resource/img/xtr2/bgg_02.jpg') no-repeat center bottom;z-index: 0;">
+        <div class="x-content">
+            <div class="inde-fun-wrap">
+                <div class="left"></div>
+                <ul>
+                    <li class="a1 active">
+                        <p>工资代发</p>
+                    </li>
+                    <li class="a2">
+                        <p>工资垫付</p>
+                    </li>
+                    <li class="a3">
+                        <p>社保及公积金代缴</p>
+                    </li>
+                    <li class="a5">
+                        <p>员工体检</p>
+                    </li>
+                </ul>
+                <div class="right"></div>
+            </div>
+            <div class="case-item-wrap">
+                <div style="display: block;" class="clfix case-item">
+                    <img src="#springUrl('/resource/img/xtr2/g1_03.jpg')" />
+                    <div class="r" style="">
+                        <p class="title">工资代发</p>
+                        <p class="info">
+                            <span>·</span> 批量代发，省时省力。<br/>
+                            <span>·</span> 实时对账，安全放心。<br/>
+                            <span>·</span> APP电子工资单，随时随地查工资。<br/>
+                            <span>·</span> 帮助HR告别纸质发工资的传统方式。
+                        </p>
+                    </div>
+                </div>
+                <div class="clfix case-item">
+                    <img src="#springUrl('/resource/img/xtr2/g2_03.jpg')" />
+                    <div class="r" style="">
+                        <p class="title">工资垫付</p>
+                        <p class="info">
+                            <span>·</span> 零门槛零负担零差异，垫付资金一步到位。<br/><span>·</span> 30分钟内即刻响应，24小时内给出反馈。<br/><span>·</span> 费率低至年化5%。
+                        </p>
+                    </div>
+                </div>
+                <div class="clfix case-item">
+                    <img src="#springUrl('/resource/img/xtr2/g3_03.jpg')" />
+                    <div class="r" style="">
+                        <p class="title">社保及公积金代缴</p>
+                        <p class="info">
+                            <span>·</span> 全国通缴，价格低至29.8元。<br/><span>·</span> 订单状态可视化，随时随地随心查。<br/><span>·</span> 全线上操作，审核、申报、缴纳、帐户合并及转移、保险理赔，一键搞定，改善传统复杂的缴纳流程，提升人力资源办公效率。
+                        </p>
+                    </div>
+                </div>
+                <!--<div class="clfix case-item" style="display: none;">
+                    <img src="/201607/img/xtr2/g4_03.jpg" />
+                    <div class="r" style="">
+                        <p class="title">居住证</p>
+                        <p class="info">
+                            联合多家医院、体检机构，为您提供最具性价比的体检套餐。<br />确保员工身体健康，营造良好的工作生活环境，完善员工福利体系。
+                        </p>
+                    </div>
+                </div>-->
+                <div class="clfix case-item">
+                    <img src="#springUrl('/resource/img/xtr2/g5_03.jpg')" />
+                    <div class="r" style="">
+                        <p class="title">员工体检</p>
+                        <p class="info">
+                            <span>·</span> 联合多家医院、体检机构，为您提供最具性价比的体检套餐。<br /><span>·</span> 确保员工身体健康，营造良好的工作生活环境，完善员工福利体系。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="" class="x-container" style="background: #fff;">
+    <div id="safeInfo" style="position:absolute;top:-50px;left:0;"></div>
+    <div class="indx-title-wrap" style="z-index: 1;">
+        <p class="inde-title"><img src="#springUrl('/resource/img/xtr2/en2.png')" style="margin-bottom: 20px;position: relative;z-index: 3;"/></p>
+    </div>
+    <div class="x-container" style="padding-top: 70px">
+        <div class="x-content clfix">
+            <div class="xtr2-fck" style="margin: 0 20px 0 10px;">
+                <img class="img2" src="#springUrl('/resource/img/xtr2/fuck_03.jpg')"/>
+                <img class="img3" src="#springUrl('/resource/img/xtr2/sf_03.jpg')"/>
+                <div class="img1 imghover">
+                    <div class="opacity"></div>
+                    <p>信息全程加密</p>
+                    <span>Information encryption</span>
+                    <i>对客户信息采用全程加密，所有客户信息进行加密存储，从根本上保证原始信息的安全性。</i>
+                </div>
+            </div>
+            <div class="xtr2-fck">
+                <img class="img2" src="#springUrl('/resource/img/xtr2/fuck_05.jpg')"/>
+                <img class="img3" src="#springUrl('/resource/img/xtr2/sf_05.jpg')"/>
+                <div class="img1 imghover">
+                    <div class="opacity"></div>
+                    <p>分布式存储</p>
+                    <span>Distributed storage</span>
+                    <i>数据保存在云存储体系中，分布在多级数据中心，并进行二次加密，保证数据不丢失、不泄露。</i>
+                </div>
+            </div>
+            <div class="xtr2-fck">
+                <img class="img2" src="#springUrl('/resource/img/xtr2/fuck_07.jpg')"/>
+                <img class="img3" src="#springUrl('/resource/img/xtr2/sf_07.jpg')"/>
+                <div class="img1 imghover">
+                    <div class="opacity"></div>
+                    <p>分级权限管理</p>
+                    <span>Hierarchical rights management</span>
+                    <i>企业端进行权限分级操作，支持针对不同员工设置相应的访问级别，并可对操作日志进行回溯。保障信息使用的安全性。</i>
+                </div>
+            </div>
+            <div class="xtr2-fck" style="margin: 0">
+                <img class="img2" src="#springUrl('/resource/img/xtr2/fuck_09.jpg')"/>
+                <img class="img3" src="#springUrl('/resource/img/xtr2/sf_09.jpg')"/>
+                <div class="img1 imghover">
+                    <div class="opacity"></div>
+                    <p>服务器安全巡检</p>
+                    <span>Server security patrol</span>
+                    <i>基于大数据威胁情报保障服务器安全，通过实时监控、审计登录日志和定期的安全基线巡检，避免黑客攻击导致的数据泄露，守护住最后一道安全防线。</i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="x-container" style="background: #fff;">
+    <div id="succCase" style="position:absolute;top:-50px;left:0;"></div>
+    <div class="indx-title-wrap" style="z-index: 1;">
+        <p class="inde-title"><img src="#springUrl('/resource/img/xtr2/en3.png')" style="margin-bottom: 20px;position: relative;z-index: 3;"/></p>
+    </div>
+    <div class="x-container" style="padding-top: 75px">
+        <div class="x-content"   style="background: url('#springUrl('/resource/img/xtr2/companycut_03.jpg')') no-repeat center 0;height: 704px;">
+            <ul class="xtr-map">
+                <li style="left: 53px;top: 11px;"  n="来财街" t="来财街致力于为中小企业用户提供安全性好、收益率高和稳定性强的金融服务的公司。" c="薪太软是我们重要的合作伙伴，来财街为薪太软的员工提供安全、优质的金融产品，为薪太软平台的小伙伴实现‘涨工资’的梦想。">
+                    <img src="#springUrl('/resource/img/xtr2/dading_06.png')">
+                    <div style="left: -131px;top: -31px;"><img src="#springUrl('/resource/img/xtr2/hzl.png')"></div>
+                </li>
+                <li style="left: 22px;top: 68px;" n="随你花" t="随你花是由世界500强公司、银行、互联网巨头出身的管理及产品研发人员组成的，专门为年轻人提供专业的互联网金融咨询服务的公司。" c="我们与薪太软携手，努力打造完善的个人信用体系。双方利用自身大数据平台优势，通过自主研发系统和信用评价模，实现快速、及时、精准的用户信用价值评估。为薪太软用户带来更多基于个人信用价值的优质产品。">
+                    <img src="#springUrl('/resource/img/xtr2/dading_06.png')">
+                    <div style="left: -127px;top: 7px;"><img src="#springUrl('/resource/img/xtr2/hzs.png')"></div>
+                </li>
+                <li style="left: 114px;top: 24px;" n="91人气" t="91人气是一家为广大互联网商家用户提供企业级服务的互联网公司。" c="在大众创业，万众创新的时代背景下。薪太软为我们的广大创业者提供强大的人力资源服务和支持，更好的帮助创业者的萌芽与成长。是我们的坚实盟友与后盾。">
+                    <img src="#springUrl('/resource/img/xtr2/dading_06.png')">
+                    <div style="left: 29px;top: -31px;"><img src="#springUrl('/resource/img/xtr2/hz9.png')"></div>
+                </li>
+                <li class="active" style="left: 73px;top: 62px;" n="中崇集团有限公司" t="中崇集团是一家国际贸易、综合物流、建设投资、金融服务四业联动的大型企业集团。" c="与薪太软合作，不仅仅因为他可以很好地满足我们企业在社保管理上“易用、专业”的需求，解放了我们人力资源管理者很大一部分的时间和精力，让管理者专注于企业核心人力资源工作，更因为他们认真负责的服务态度，也让我们放心把业务交给他。">
+                    <img src="#springUrl('/resource/img/xtr2/dading_06.png')">
+                    <div style="left: 29px;top: 14px;"><img src="#springUrl('/resource/img/xtr2/hzz.png')"></div>
+                </li>
+                <li style="left: 78px;top: 110px;" n="冠生园（集团）有限公司" t="冠生园是一家有着近百年历史的中华民族名牌老字号企业，也是中国食品工业二十大杰出企业之一。" c="薪太软是我们战略合作伙伴，为我们企业订制专属的互联网薪资福利平台，我们和薪太软的合作更着眼于未来，双方将会共同推荐业务发展，实现互利共赢。">
+                    <img src="#springUrl('/resource/img/xtr2/dading_06.png')">
+                    <div style="left: 27px;top: 16px;"><img src="#springUrl('/resource/img/xtr2/hzg.png')"></div>
+                </li>
+                <li style="left: -1px;top: 159px;" n="西宁特钢股份有限公司" t="西宁特钢集团是宁夏回族自治区最大的现代化钢铁企业。" c="薪太软团队为我们提供了工资代发、工资垫付服务及人力资源大数据分析。通过系统对接、自动化处理、云端多地多时操作、大数据等技术，形成一套标准化的技术方案，重塑企业的人力资源管理流程，并且性价比相对传统的人力资源服务高很多。">
+                    <img src="#springUrl('/resource/img/xtr2/dading_06.png')">
+                    <div style="left: -127px;top: 7px;"><img src="#springUrl('/resource/img/xtr2/hzx.png')"></div>
+                </li>
+            </ul>
+            <div style="width: 490px;height: 350px;position: absolute;left: 80px;top: 142px;">
+                <div class="inde-title-wrap">
+                    <p class="name">企业介绍</p>
+                    <p class="info" id="titleXTR">中崇集团是一家国际贸易、综合物流、建设投资、金融服务四业联动的大型企业集团。</p>
+                </div>
+                <div class="inde-title-wrap">
+                    <p class="name">合作案例</p>
+                    <p class="info" id="infoXTR">与薪太软合作，不仅仅因为他可以很好地满足我们企业在社保管理上“易用、专业”的需求，解放了我们人力资源管理者很大一部分的时间和精力，让管理者专注于企业核心人力资源工作，更因为他们认真负责的服务态度，也让我们放心把业务交给他。</p>
+                </div>
+                <p id="nameXTR" style="font-size: 12px;font-weight: bold;color: #333;text-align: right;">—— 中崇集团有限公司</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="x-container" style="margin-top: -134px;">
+    <div id="hr" style="position:absolute;top:-50px;left:0;"></div>
+    <div class="indx-title-wrap" style="z-index: 1;">
+        <p class="inde-title"><img src="#springUrl('/resource/img/xtr2/en4.png')" style="margin-bottom: 20px;position: relative;z-index: 3;"/></p>
+    </div>
+    <div class="x-container" style="padding: 75px 0 100px;">
+        <div class="x-content clfix">
+            <div style="font-size: 14px;color: #404040;width: 550px;float: right;margin-right: 130px;">
+                <ul class="clifx xtr-cutbar half" style="margin-bottom: 50px;width: 300px;float: right;">
+                    <li class="active" ta="2"><span>HR知识库</span></li>
+                    <li ta="3"><span>政策薪解</span></li>
+                </ul>
+                <div class="clfix"></div>
+               <div class="news-list inde" >
+                   <ul id="newslist">
+##                        <!--
+##                        <li>
+##                            <a href="news_detail.html" target="_blank">
+##                                <img src="/201607/img/xtr2/b1_02.jpg">
+##                                <p class="title">`5月17日薪太软系统升级通知，文字描述文字描述文字描述文字描述文字描述。文字描述文字描述。</p>
+##                                <p class="ly">2016-06-29 12:00:35   来源：网络</p>
+##                            </a>
+##                        </li>
+##                        <li>
+##                            <a href="news_detail.html" target="_blank">
+##                                <img src="/201607/img/xtr2/b1_02.jpg">
+##                                <p class="title">`5月17日薪太软系统升级通知，文字描述文字描述文字描述文字描述文字描述。文字描述文字描述。</p>
+##                                <p class="ly">2016-06-29 12:00:35   来源：网络</p>
+##                            </a>
+##                        </li>
+##                        <li>
+##                            <a href="news_detail.html" target="_blank">
+##                                <img src="/201607/img/xtr2/b1_02.jpg">
+##                                <p class="title">`5月17日薪太软系统升级通知，文字描述文字描述文字描述文字描述文字描述。文字描述文字描述。</p>
+##                                <p class="ly">2016-06-29 12:00:35   来源：网络</p>
+##                            </a>
+##                        </li>
+##                        <li>
+##                            <a href="news_detail.html" target="_blank">
+##                                <img src="/201607/img/xtr2/b1_02.jpg">
+##                                <p class="title">`5月17日薪太软系统升级通知，文字描述文字描述文字描述文字描述文字描述。文字描述文字描述。</p>
+##                                <p class="ly">2016-06-29 12:00:35   来源：网络</p>
+##                            </a>
+##                        </li>
+##                        -->
+##
+##                        <li>
+##                            <div>
+##                                <a href="/hrcenter.jsp" class="btn">更多<i class="icon-angle-right"></i></a>
+##                            </div>
+##                        </li>
+##                    </ul>
+##
+##                </div>
+##                <div class="news-list inde">
+##                    <ul id="newslist">
+##                        <li>
+##                            <a href="/action/newsDetail/46" target="_blank">
+##                                <img src="http://thisadmi.xintairuan.com/upload/1468287282115.jpg">
+##                                <p class="title">【薪知识】人力资源行业发展的10大趋势</p>
+##                                <p class="ly">2016-07-12 12:05:03   来源：薪太软</p>	</a></li><li>
+##                             <a href="/action/newsDetail/47" target="_blank">
+##                                <img src="http://thisadmi.xintairuan.com/upload/1468287770426.jpg">
+##                                <p class="title">【薪知识】从“管理思维”到“经营思维”HR必走的路</p>
+##                                <p class="ly">2016-07-12 12:05:01   来源：薪太软</p>
+##                            </a>
+##                        </li>
+##                        <li>
+##                            <a href="/action/newsDetail/45" target="_blank">
+##                                <img src="http://thisadmi.xintairuan.com/upload/1468287976363.jpg">
+##                                <p class="title">【薪知识】HR应该懂的薪酬谈判技巧</p>
+##                                <p class="ly">2016-07-12 12:04:59   来源：薪太软</p>
+##                            </a>
+##                        </li>
+##                        <li>
+##                            <a href="/action/newsDetail/48" target="_blank">
+##                                <img src="http://thisadmi.xintairuan.com/upload/1468288226246.jpg">
+##                                <p class="title">【薪知识】HR能从产品经理身上学到什么？</p>
+##                                <p class="ly">2016-07-12 12:04:57   来源：薪太软</p>
+##                            </a>
+##                        </li>
+                        <li>
+                            <div>
+                                <a href="/hrcenter.jsp" class="btn">更多<i class="icon-angle-right"></i></a>
+                            </div>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </div>
+            <div style="float: left;width: 320px;margin: 110px 0 0 130px;">
+                <div class="news-list" style="padding: 0;">
+                    <ul id="newsfirst">
+                        <!--
+                        <li style="padding: 0;border: 0;">
+                            <img src="/201607/img/xtr2/b1_02.jpg" style="float: none;margin: 0;">
+                            <p class="title" style="margin: 20px 0 15px;height: 24px;overflow: hidden;">`5月17日薪太软系统升级通知，文字描述文字描述文字描述文字描述文字描述。文字描述文字描述。</p>
+                            <p class="ly">2016-06-29 12:00:35   来源：网络</p>
+                            <p class="info" style="height: 84px;color: #666;margin-bottom: 35px;line-height: 28px;">5月17日薪太软系统升级通知5月17日薪太软系统升级通知5月17日薪太软系统升级通知5月17日薪太软系统升级通知5月17日薪太软系统升级通知5月17日薪太软系统升级通知5月17日薪太软系统升级通知5月17日薪太软系统升级通知5月17日薪太软系统升级通知5月17日薪太软系统升级通知5月17日薪太软系统升级通知5月17日薪太软系统升级通知5月17日薪太软系统升级通知5月17日薪太软系统升级通知5月17日薪太软系统升级通知5月17日薪太软系统升级通知5月17日薪太软系统升级通知5月17日薪太软系统升级通知5月17日薪太软系统升级通知5月17日薪太软系统升级通知5月17日薪太软系统升级通知</p>
+                            <a href="news_detail.html" target="_blank" style="color: #999;">
+                                <img src="/201607/img/xtr2/readoldacticl.png" style="vertical-align: bottom;width: auto;height: auto;margin-right: 5px;">阅读原文
+                            </a>
+                        </li>
+                        -->
+                        <li style="padding: 0;border: 0;">
+                           #* <img src="http://thisadmi.xintairuan.com/upload/1468402060381.jpg" style="float: none;margin: 0;">*#
+                            <p class="title" style="margin: 20px 0 15px;height: 24px;overflow: hidden;">【薪知识】用数据创造人力资源新价值</p>
+                            <p class="ly">2016-07-13 17:28:52  来源：薪太软</p>
+                            <p class="info" style="height: 84px;color: #666;margin-bottom: 35px;line-height: 28px;">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                当前，越来越多的决策者在用人问题上，期待数据、模型等量化工具为决策提供更有力的支持。要真正成为企业的战略顾问，人力资源职能的领导必须像业务部门领导那样看待创造价值的机会，学会用数据创造价值。
+
+
+
+
+
+                                1、人力资源量化管理历程
+
+
+                                人力资源量化管理一直是个难题，经过人力资源从业者多年的探索，如今，一系列获取和分析数据的新工具和方法让人力资源主管能更有效地确定“员工实践”与绩效之间的联系。在人力成本大幅攀升，首席执行官四处发掘价值的当下，人力资源主管利用数据使人力资源创造更大价值，正当其时。
+
+
+                                ①　企业资源规划系统和人力资源信息系统的广泛应用使得业务运营、绩效和人员的信息更加标准化，获取起来也更方便。
+
+
+                                ②　人力资源信息系统的兴起，催生了一大批软件和技术媒介，能帮助人力资源和企业高管使用数据找到人才管理和劳动生产率之间的联系
+
+
+
+
+
+
+                                2、人力资源数据收集
+
+
+                                有管理者认为人力资源的工作难以量化，其实不然，从时间、数量、质量、成本、满意度等5个角度，可以对人力资源很多工作进行数据统计和分析，建立起客观评价的基础。
+
+
+                                在日常的工作中，人力资源管理者至少需要做好以下几方面的数据收集。
+
+
+                                （1）反映人力资源现状的事实数据
+
+
+                                例如人员数量与结构、学历、年龄等，可以展示一定时间段组织内部人力资源的基本概况。人力资源部门每月提供此类人力资源数据报表，并与不同时期的数据进行对比，可以让决策者对人力资源现状有一个概览式的认知。
+
+
+                                （2）反映人力资源活力的动态数据
+
+
+                                人力资源动态数据包括招聘周期、招聘完成率、核心员工流失率等。动态数据的收集要注重数据的积累，并及时了解市场行情，通过内部及外部的对比分析，对组织人力资源的活力进行客观的评价，及时调整企业的人力资源政策。例如，一段时间的数据监测发现，某个岗位的招聘周期变长了，我们需要及时分析是市场人才的供给少了，还是竞争对手拓展业务大量招揽人才，还是人才定位出现偏差或是其他原因。此类监控数据，就像组织健康状况的晴雨表，随时可以给管理者预警。
+
+
+                                （3）反映人力资源质量的分析数据
+
+
+                                人力资源质量的分析数据包括人均人工成本、人力资本投资回报率、员工满意度、员工敬业度等。通过分析这些数据的变化趋势，对比行业数据，我们可以深入了解组织的效率，反映人力资源对业绩的作用。人力资源部门应根据所在企业的发展阶段建立相应的数据分析模型，来诊断企业经营状况，并为制定企业的重大薪酬激励政策提供决策依据。这类数据的目标用户是企业的决策层和人力资源高层管理者。
+
+
+                                （4）与人力资源项目投资回报率相关的数据
+
+
+                                反馈及进一步行动的数据
+
+
+                                学习方面的数据
+
+
+                                应用与实施方面的数据
+
+
+                                对业务影响的数据
+
+
+                                投资回报方面的数据
+
+
+                                无形的效益
+
+
+                                3、挖掘数据背后的真相
+
+
+                                人工成本在不断地提高，这是一个事实。当企业面临困境时，通过缩小规模以及注重短期效益降低成本的方式，在企业中已司空见惯。然而，如果将这些举措对企业业绩、成本影响的数据呈现出来，我们会发现这些举措可能只是管理者的“经验之谈”，未必能给企业减压。
+
+
+                                （1）裁员一定降低成本？
+
+
+                                在1995年，Connecticut Mutual寿险公司试图通过减少雇员来降低成本，它采取的策略是向其1,675名员工实施一项价值可观的工龄买断计划。结果，大约9,00名（也就是公司期望裁员数目两倍的员工）接受了这项计划，从而迫使公司重新招募400名员工弥补空缺。为此，Connecticut Mutual寿险公司多付出了大约1,690万美元的解雇费。
+
+
+                                柯达公司也做了同样的蠢事，为了弥补解雇后的员工短缺，公司在生产高峰期将业务外包。在很多情况下，完成同样的工作，合同商的要价是公司付给被裁工人的3～4倍，柯达公司最终不得不重新招募了一些工人来弥补原先裁掉的职位空缺。
+
+
+                                （2）熟练工VS生手
+
+
+                                相对于生手，熟练工的工资要高不少。为此，一些企业为了节约成本大量招聘新人。还有些企业缺乏有效的人才保留和激励措施，人员流动率高，长期处于培训生手的状态。然而，许多决策者并没有意识到，这将给企业增加多少成本。人力资源管理者只有拿出明确的数据，才有说服力。《Manufacturing.net》新近发表文章《生手的高昂成本》指出，制造流程上工务部成本最高的地方在技术不熟练的员工。生手工作所耗费的成本要比熟练工多出2～4倍。
+
+
+                                4、让管理可视化
+
+
+                                数据的统计也是有成本的，企业到一定规模后，人力资源信息系统的建设显得尤为重要。技术进步为业务部门和人力资源部门的高层领导就人员和绩效间的关联性开始全新的对话创造了机会。这种对话能帮助人力资源高管展示自身工作的影响，达成与高管团队其他成员结成战略合作伙伴关系的目的，当然，还能为企业创造价值。
+
+
+
+
+
+                                人力资源信息系统是组织进行有关人及人的工作方面的信息收集、保存、分析和报告的过程，是计算机用于企业人事管理的产物，它是通过计算机建立的、记录企业每个员工技能和表现的功能模拟信息库。企业通过人力资源信息系统将企业习惯、员工习惯通过流程等工具来加以规范和引导。让看似无形的管理价值观——行为管理、过程监控、结果导向等诉求通过管理系统实现“可视力”。管理者通过对数据的监控、分析，及时改进不足，提升管理水平，进而提高人均效率。
+
+
+                                对人力资源的数据进行分析和管理，既为人力资源规划提供了有力的信息支持与保证，同时，也是企业管理者决策的依据。然而数据本身并没有意义的，关键在于如何将人力资源数据与业绩关联起来。这类数据的收集与分析需要模型支撑，也需要创造性。人力资源数据分析不能孤芳自赏，必须服务于业务才能发挥真正的作用。从事数据分析的人员需要有销售、财务的敏感性和基本的知识，这样才能将人力资源与业务更紧密地联系起来。此外，企业要将数据收集、分析融入到人力资源日常的业务工作中。组织内部人力资源历史数据的沉淀在评估和预测方面能发挥更大作用。
+
+
+
+                            </p>
+                            <a href="/action/newsDetail/53" target="_blank" style="color: #999;">		<img src="#springUrl('/resource/img/xtr2/readoldacticl.png')" style="vertical-align: bottom;width: auto;height: auto;margin-right: 5px;">阅读原文	</a>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="x-container" style="background: #fff;">
+    <div class="x-content">
+
+    </div>
+</div>
+
+##<jsp:include page="/201607/footer.jsp"></jsp:include>
+<div class="footer">
+    <div class="x-container f1">
+        <div class="x-content">
+            <div class="content clfix">
+                <div class="service" style="width:20%;margin-left:0px;margin-top:0px;padding-top:0px;padding-right:20px;">
+                    <img src="#springUrl('/resource/img/xtr1/footerlogo_03.png')"/>
+                    <p class="p2" style="margin: 54px 0 3px;">400-175-8090</p>
+                    <p class="p1" style="margin: 0;">全国服务热线（09:30-18:30）</p>
+                </div>
+                <div class="item"  style="width:40%;margin-left:0px;margin-top:0px;padding-left:20px;padding-top:10px;">
+                    <p class="title">发现</p>
+                    <a href="/">开放服务<i class="icon-angle-right"></i></a>
+                    <a href="/solute.jsp">解决方案<i class="icon-angle-right"></i></a>
+                    <a href="/cases.jsp">经典案例<i class="icon-angle-right"></i></a>
+                    <a href="/help.jsp">帮助支持<i class="icon-angle-right"></i></a>
+                </div>
+                <div class="item" style="width:30%;margin-left:0px;margin-top:0px;padding-left:20px;padding-top:10px;">
+                    <p class="title" style="background-position: -3px -45px;">联系我们</p>
+                    <p class="p1">社交媒体<br />pr@xintairuan.com</p>
+                    <p class="p1">商务合作<br />bd@xintairuan.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="x-container f2">
+        <div class="x-content">
+            <p>
+                <a href="http://www.xintairuan.com/"  style="color: #828487;">薪太软</a>
+                （上海）科技发展有限公司&nbsp;&nbsp;|&nbsp;&nbsp;沪ICP备16018294号&nbsp;&nbsp;|&nbsp;&nbsp;
+                <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31010602000188" style="color: #828487;">
+                    <img src="#springUrl('/resource/img/xtr1/ba.png')" style="margin:  0 3px 0 -3px;width: 13px;">沪公网安备 31010602000188号</a>
+            </p></div>
+    </div>
+</div>
+<script type="text/javascript" src="//s.union.360.cn/32150.js"></script>
+<div style="display:none;">
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1259574388'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1259574388' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+<div style="display: none;"><script src="https://s4.cnzz.com/z_stat.php?id=1259528748&web_id=1259528748" language="JavaScript"></script></div>
+</body>
+</html>
+<script type="text/javascript">
+
+    $(function(){
+
+        if(window.location.pathname!=null && window.location.pathname.length>0){
+            if(window.location.pathname.indexOf('/hrcenter.jsp')>-1){
+                showidx(4);
+            }else if(window.location.pathname.indexOf('/product.jsp')>-1){
+                showidx(1);
+            }else if(window.location.pathname.indexOf('/safeInfo.jsp')>-1){
+                showidx(2);
+            }else if(window.location.pathname.indexOf('/succCase.jsp')>-1){
+                showidx(3);
+            }else if(window.location.pathname.indexOf('/about.jsp')>-1){
+                showidx(5);
+            }else{
+                showidx(0);
+            }
+        }
+
+    });
+
+    function showidx(idx){
+        var lis=$('.nav ul li');
+        lis.removeClass('active');
+        lis.eq(idx).addClass('active');
+    }
+</script>
+##<script src="#springUrl('/resource/js/homeIndex/scrollReveal.js')" type="text/javascript" charset="utf-8"></script>
+<script src="resource/js/login/login.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+
+
+    $(function () {
+
+
+        $(".xtr-map li").hover(function(){
+            $(this).addClass("active").siblings("li").removeClass("active");
+        },function(){
+
+        });
+        $(".index-login input").click(function () {
+            if($(this).val()==$(this).attr("placeholder")){
+                $(this).val('').focus();
+            }
+        });
+        $("#pass").click(function  () {
+            $(this).attr("type","password");
+        });
+        if(!isLessIE10()){
+            $(".index-login input").val('');
+            $("#to_top input").val('');
+        }
+
+        //薪太软为您提供一站式薪酬福利解决方案   切换
+        var inde_fun_i = 0;
+        $(".inde-fun-wrap ul li").hover(function () {
+            inde_fun_i = $(this).index()
+            indeFun_click(inde_fun_i);
+        });
+        $(".inde-fun-wrap .left").click(function () {
+            inde_fun_i--;
+            if(inde_fun_i<0){
+                inde_fun_i=$(".inde-fun-wrap ul li").length-1;
+            }
+            indeFun_click(inde_fun_i);
+        });
+        $(".inde-fun-wrap .right").click(function () {
+            inde_fun_i++;
+            if(inde_fun_i>=$(".inde-fun-wrap ul li").length){
+                inde_fun_i=0;
+            }
+            indeFun_click(inde_fun_i);
+        });
+        function indeFun_click(i){
+            $(".inde-fun-wrap ul li").eq(i).addClass("active").siblings("li").removeClass("active");
+            $(".case-item-wrap	.case-item").eq(i).stop().fadeIn(300).siblings(".case-item").hide();
+        }
+
+        $(".xtr-map li").hover(function(){
+            $("#nameXTR").html('—— '+$(this).attr('n'));
+            $("#titleXTR").html($(this).attr('t'));
+            $("#infoXTR").html($(this).attr('c'));
+        });
+        $(window).scroll(function () {
+            //console.log($(document).scrollTop()+",hengith:"+$("#product").offset().top+",window-heiht:"+$(window).height())
+            var st = $(document).scrollTop(),wh=$(window).height();
+            var ph = $("#product").offset().top-30,safeInfoh=$("#safeInfo").offset().top-30
+                    ,succh=$("#succCase").offset().top-30,hrh=$("#hr").offset().top-30;
+            if(ph>st){
+                $(".nav ul li").eq(0).addClass("active").siblings('li').removeClass("active");
+            }if(ph<st&&ph>st-wh){
+                $(".nav ul li").eq(1).addClass("active").siblings('li').removeClass("active");
+            }if(safeInfoh<st&&safeInfoh>st-wh){
+                $(".nav ul li").eq(2).addClass("active").siblings('li').removeClass("active");
+            }if(succh<st&&succh>st-wh){
+                $(".nav ul li").eq(3).addClass("active").siblings('li').removeClass("active");
+            }
+            if(hrh<st&&hrh>st-wh){
+                $(".nav ul li").eq(4).addClass("active").siblings('li').removeClass("active");
+            }
+        });
+        $(".nav ul li").click(function () {
+            $(".nav ul li").eq($(this).index()).addClass("active").siblings('li').removeClass("active");
+        });
+
+
+
+
+
+        window.scrollReveal = new scrollReveal({ reset: true, move: '50px',easing   : 'ease'});
+
+        $(".hzheb a").hover(function(){
+            var i = $(this).index();
+            $("#cuts").find(".qd-wrods").eq(i).stop().fadeIn(300).siblings(".qd-wrods").hide();
+            $(this).addClass("active").siblings("a").removeClass("active");
+        });
+    });
+
+
+
+
+
+    $(function () {
+        $(".xtr-cutbar li").click(function () {
+
+            uploadRecord(1,5,$(this).attr('ta'));
+        });
+
+        $(".xtr-cutbar li").eq(0).click();
+    });
+
+
+
+
+    function login(){
+
+        if($('#btn_log').attr('ta')=='1')
+            return;
+
+        $('#btn_log').attr('ta','1');
+
+
+        var logname=$('#loginname').val();
+        var pwd=$('#pwd').val();
+        var yzcode=$('#yzcode').val();
+
+        $.ajax({
+            type:"POST",
+            url:"/action/ax/login",
+            dataType:"json",
+            data:{
+                'loginname':logname
+                ,'password':pwd
+                ,'verifycode':yzcode
+            },
+            async: true,
+            success: function(data){
+                $('#btn_log').removeAttr('ta');
+
+                if(data==null){
+                    window.console?window.console.log('data is null or empty'):'';
+                    return;
+                }
+
+                if(data.code!='0'){
+
+                    if(data.code=='3' || data.code=='4')
+                        $('#vcodeimg').attr('src','/action/ax/authImages?'+(new Date()).getTime());
+
+
+                    $('#btn_log').prev().html(data.msg);
+                    return;
+                }
+alert(data.msg);
+                $('#btn_log').prev().html('');
+
+                var ref=document.referrer;
+                ref='';
+                if(null!=ref && ref.length>0){
+                    window.location.href=ref;
+                    return;
+                }
+                window.location.href='/action/web/manageIndex';
+
+            }
+        });
+
+    }
+
+
+
+    var tt1=1;
+    function uploadRecord(pidx,pnum,type){
+
+        if(isNaN(pidx))
+            return;
+
+        if(pidx*1<1)
+            pidx=1;
+
+        if(pidx*1>tt1*1)
+            pidx=tt1*1;
+
+        $.ajax({
+            type:"POST",
+            url:"/action/st/newslist",
+            dataType:"json",
+            data:{
+                'pidx':pidx
+                ,'pnum':pnum
+                ,'type':type
+            },
+            async: true,
+            success: function(data){
+                $('#newslist').html('<li style="text-align: center;font-size: 16px;color: #7c7c7c;padding: 50px 0 36px;">暂无数据</li>');
+                $('#newsfirst').html('');
+
+                if(data==null){
+                    window.console?window.console.log('data is null'):'';
+                    return;
+                }
+
+                if(data.code!='0'){
+                    window.console?window.console.log(data.msg):'';
+                    return;
+                }
+
+                if(data.data==null || data.data.length<1)
+                    return;
+
+                var len=data.data.length;
+
+                var fnewstr='';
+                if(len>0){
+
+                    var contt=data.data[0].news_content==null?'':data.data[0].news_content;
+
+
+                    var cont=$('<div>'+contt+'</div>');
+                    contt=cont.text();
+
+                    fnewstr+='<li style="padding: 0;border: 0;">';
+                    fnewstr+='	<img src="'+(data.data[0].news_img==null?'':data.data[0].news_img)+'" style="float: none;margin: 0;">';
+                    fnewstr+='	<p class="title" style="margin: 20px 0 15px;height: 24px;overflow: hidden;">'+(data.data[0].news_class_name==null?'':('【'+data.data[0].news_class_name+'】'))+(data.data[0].news_title==null?'':data.data[0].news_title)+'</p>';
+                    fnewstr+='	<p class="ly">'+(data.data[0].news_releasetime==null?'':data.data[0].news_releasetime.split('.')[0])+'  来源：'+(data.data[0].news_ly==null?'':data.data[0].news_ly)+'</p>';
+                    fnewstr+='	<p class="info" style="height: 84px;color: #666;margin-bottom: 35px;line-height: 28px;">'+contt+'</p>';
+                    fnewstr+='	<a href="/action/newsDetail/'+data.data[0].news_id+'" target="_blank" style="color: #999;">';
+                    fnewstr+='		<img src="/201607/img/xtr2/readoldacticl.png" style="vertical-align: bottom;width: auto;height: auto;margin-right: 5px;">阅读原文';
+                    fnewstr+='	</a>';
+                    fnewstr+='</li>';
+
+                }
+
+                $('#newsfirst').html(fnewstr);
+
+
+
+                var str='';
+
+                if(len>1){
+                    for(var i=1;i<data.data.length;i++){
+
+                        var contt=data.data[i].news_content==null?'':data.data[i].news_content;
+
+
+                        var cont=$('<div>'+contt+'</div>');
+                        contt=cont.text();
+
+
+                        str+='<li>';
+                        str+='	<a href="/action/newsDetail/'+data.data[i].news_id+'" target="_blank">';
+                        str+='		<img src="'+(data.data[i].news_img==null?'':data.data[i].news_img)+'">';
+                        str+='		<p class="title">'+(data.data[i].news_class_name==null?'':('【'+data.data[i].news_class_name+'】'))+(data.data[i].news_title==null?'':data.data[i].news_title)+'</p>';
+                        str+='		<p class="ly">'+(data.data[i].news_releasetime==null?'':data.data[i].news_releasetime.split('.')[0])+'   来源：'+(data.data[i].news_ly==null?'':data.data[i].news_ly)+'</p>';
+                        str+='	</a>';
+                        str+='</li>';
+
+
+                    }
+
+                    str+='<li>';
+                    str+='	<div>';
+                    str+='		<a href="/hrcenter.jsp" class="btn">更多<i class="icon-angle-right"></i></a>';
+                    str+='	</div>';
+                    str+='</li>';
+
+                    $('#newslist').html(str);
+
+                }
+
+
+
+            }
+        });
+
+    }
+
+</script>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?9d23af52536a65262d401db7a24004fa";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>

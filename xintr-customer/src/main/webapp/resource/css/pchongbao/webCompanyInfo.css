@@ -1,0 +1,220 @@
+body{
+			min-width: 1440px;
+			min-height: 930px;
+			background: url(../../img/pchongbao/register-bg.png) 0 0 no-repeat;
+		}
+		.companyHeader{
+			width:100%;
+			padding: 40px 115px 0;
+			height: 110px;
+			box-sizing: border-box;
+		}
+		.companyHeader .logo{
+			float: left;
+		}
+		.companyHeader .logo-text{
+			float: right;
+		}
+		.companyMain{
+			width: 670px;
+			height: 660px;
+			margin:0 auto;
+			margin-top: 10px;
+			position: relative;
+		}
+		.companyMain-title{
+			width: 100%;
+			height: 70px;
+			font-family: '微软雅黑';
+			font-size: 28px;
+			color: #000;
+			font-weight: bold;
+		}
+		.companyMain ul{
+			width: 100%;
+		}
+		.companyMain ul li{
+			width: 100%;
+			height: 48px;
+			position: relative;
+		}
+		.companyMain ul li label{
+			width: 166px;
+			height: 100%;
+			float: left;
+			line-height: 34px;
+			font-size: 18px;
+			font-family: '微软雅黑';
+			color: #000;
+			font-weight: bold;
+		}
+		.companyMain ul li label em{
+			color: #f99b15;
+			margin-right: 2px;
+		}
+		.companyMain ul li input{
+			width: 500px;
+			height: 34px;
+			float: left;
+			border:1px solid #000;
+			border-radius: 20px;
+			font-size: 14px;
+			color: #000;
+			text-indent: 30px;
+			line-height: 34px;
+			background: #fa7979;
+			font-family: '微软雅黑';
+			font-weight: bold;
+
+		}
+		.companyMain ul li .error{
+			max-width: 500px;
+		    min-height: 20px;
+		    position: absolute;
+		    right: -210px;
+		    top: -2px;
+		    background: #f99b15;
+		    padding: 5px 18px;
+		    z-index: 10;
+		    border-radius: 5px;
+		    color: #f00;
+		    font-size: 14px;
+		    line-height: 26px;
+		}
+		.companyMain ul li .error:before{
+			content: "";
+		    display: block;
+		    border-width: 12px 24px;
+		    position: absolute;
+		    top: 6px;
+		    left: -35px;
+		    border-style: solid dashed dashed;
+		    border-color: transparent #f99b15 transparent transparent;
+		    font-size: 0;
+		    line-height: 0;
+		}
+		.companyMain ul li input::-webkit-input-placeholder{
+			color: #222;
+			font-family: '微软雅黑';
+		}
+		.companyMain .companyLogo,.companyMain .businessLicensePic{
+			height: 100px;
+		}
+		.companyMain .companyLogo .pic1,.companyMain .businessLicensePic .pic2{
+			width: 80px;
+			height:80px;
+			float: left;
+			line-height: 80px;
+			margin-right: 30px;;
+			font-size: 50px;
+			background: #e0c034;
+			color: #000;
+			border:1px dashed #b9d2dc;
+			vertical-align: middle;
+			text-align: center;
+			border-radius:50%;
+			position:relative;
+			cursor: pointer;
+		}
+		.companyMain .companyLogo input,.companyMain .businessLicensePic input{
+			display: block;
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			right: 0;
+			top: 0;
+			opacity: 0;
+			filter: alpha(opacity=0);
+			cursor: pointer;
+		}
+		.companyMain .companyLogo img,.companyMain .businessLicensePic img{
+			display: block;
+			position: absolute;
+			top:0;
+			left:0;
+			display: block;
+			width:100%;
+			height:100%;
+		}
+		.companyMain .companyLogo .logo1-hint p,.companyMain .businessLicensePic .logo2-hint p{
+			line-height: 40px;
+			color: #e0c034;
+		}
+		.companyMain .companyLogo .logo1-hint p:nth-child(1),.companyMain .businessLicensePic .logo2-hint p:nth-child(1){
+			font-size: 14px;
+			color: #222;
+			line-height: 20px;
+			font-family: '微软雅黑';
+			font-weight: bold;
+		}
+		.companyMain .pull .list{
+			width: 502px;
+			height: 180px;
+			position: absolute;
+			left: 166px;
+			top:30px;
+			background: #fa7979;
+			border:1px solid #000;
+			z-index: 10;
+			border-top:0;
+			padding-top: 10px;
+			box-sizing: border-box;
+			border-radius: 0 0 25px 25px ;
+			overflow-y: auto;
+	
+		}
+		.companyMain .ditch .list{
+			height: 200px;
+		}
+		.companyMain .pull .list p{
+			line-height: 30px;
+			text-indent: 30px;
+			font-size: 14px;
+			color: #000;
+			font-family: '微软雅黑';
+			font-weight: bold;
+			cursor: pointer;
+		}
+		.companyMain .pull input{
+			background: #fa7979 url(../../img/pchongbao/lit.png) 460px center no-repeat;
+			cursor: pointer;
+		}
+		.companyMain .pull .list p:hover{
+			background: #e0c034;
+		}
+		.companyFooter{
+			width: 500px;
+			height: 50px;
+			margin:0 auto;
+		}
+		.companyFooter input{
+			width: 300px;
+			height: 100%;
+			font-size: 18px;
+			font-family: '微软雅黑';
+			line-height: 50px;
+			font-weight: 600;
+			text-align: center;
+			float: left;
+			border:1px solid #000;
+			cursor: pointer;
+		}
+		.companyFooter .companyClose{
+			width: 160px;
+			background: transparent;
+			
+		}
+		.companyFooter .companyBtn{
+			float: right;
+			background: #e0c034;
+		}
+		.prompt1{
+			position: absolute;
+			left: -300px;
+			top:346px;
+		}
+		.prompt2{
+			position: absolute;
+			right: -318px;
+			top:52px;
+		}

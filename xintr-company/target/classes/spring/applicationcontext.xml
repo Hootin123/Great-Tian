@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- import motan service-->
+    <import resource="motan_client.xml"/>
+    <!-- import redis service-->
+    <import resource="redis-config.xml"/>
+
+
+    <!-- 配置文件读取工具类-->
+    <bean id="propertyConfigurer"
+          class="com.xtr.comm.util.PropertyUtils">
+        <property name="locations">
+            <list>
+                <value>classpath:config/common.properties</value>
+                <value>classpath:config/system.properties</value>
+            </list>
+        </property>
+        <property name="fileEncoding" value="utf-8"/>
+    </bean>
+</beans>

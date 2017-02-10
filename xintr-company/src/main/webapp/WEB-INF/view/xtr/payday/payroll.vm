@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title></title>
+
+    #parse("comm/head.vm")
+##    <link href="#springUrl('/resource/css/payday/payday.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/payday/payoff.css')" rel="stylesheet">
+    <script src="#springUrl('/resource/js/plugins/dropzone/dropzone.js')"></script>
+    <script src="#springUrl('/resource/js/payday/payday.js')"></script>
+    <script src="#springUrl('/resource/js/plugins/laydate/laydate.js')"></script>
+</head>
+
+<body>
+<div class="main_right payoff_two clear">
+
+    <ol class="payoff_two_nav">
+        <li class="payoff_two_active nav_first">发工资</li>
+        <a href="orgmember.htm" class="payoff_two_active">
+            <li>维护组织成员</li>
+        </a>
+        <li class="payoff_two_logo"><img src="resource/img/help.png"/><br/>帮助</li>
+    </ol>
+
+
+    <div class=" wages">
+
+        <div class="payoff_two_header">
+            <em class="triangle"></em>
+
+            <div class="payoff_two_div clear">
+                <span class="word wd1">我要发</span>
+
+                <div class="payoffShade">
+                    <img src="resource/img/arrow.png"/>
+                    <ul>
+                        #set($Integer = 6)
+                        #set ($Y=$date.getYear())
+                        #set ($M=$date.getMonth() + 1)
+                        #if($M < 10)
+                            <li data-month="$M" data-year="$Y">0$M月</li>
+                        #else
+                            <li data-month="$M" data-year="$Y">$M月</li>
+                        #end
+                        #foreach($index in [0..6])
+                            #set($mm =$M - $Integer)
+                            #set($Integer = $Integer - 1)
+                            #if($mm <= 0)
+                                #set($M=12)
+                                #set($Y=$Y - 1)
+                                #set($mm=$mm + 13)
+                            #end
+
+                            #if($mm == $M)
+                                #if($mm < 10)
+                                    <li style="display: none" data-month="$mm" data-year="$Y">0$!{mm}月</li>
+                                #else
+                                    <li style="display: none" data-month="$mm" data-year="$Y">$mm月</li>
+                                #end
+                            #else
+                                #if($mm < 10)
+                                    <li data-month="$mm" data-year="$Y">0$mm月</li>
+                                #else
+                                    <li data-month="$mm" data-year="$Y">$mm月</li>
+                                #end
+                            #end
+                        #end
+
+                    </ul>
+                </div>
+                <span class="word wd2">的工资，我希望在<span style="display:inline-block;width: 139px;"></span>发放。我要
+                    <a href="#" id="upload" style="text-decoration: underline; color: #0696fa;">上传工资单</a></span>
+						<span class="bar">
+						<em class="bar_1"></em>
+					</span>
+                <ul class="payoff_kalendar">
+                ##
+                    <input type="text" id="payday" class="laydate-icon"
+                           onclick="laydate({min:'$!date.format('yyyy-MM-dd HH:mm:ss ',$!{tomorrowDate})'})"
+                           value="$!date.format('yyyy-MM-dd',$!{tomorrowDate})"
+                           readonly="readonly"/>
+                </ul>
+
+            </div>
+            <p class="payoff_two_p2">请使用通用模板上传工资单<a href="$!{payrollPath}" style="color: #5b7798;">（点击下载）</a></p>
+        </div>
+
+        <table class="payoff_two_list">
+            <tr class="first_list">
+                <td>发薪月份</td>
+                <td>人数</td>
+                <td>工资金额（元）</td>
+                <td>发放日期</td>
+                <td>文档名称</td>
+                <td>上传者</td>
+                <td>状态</td>
+                <td>操作</td>
+            </tr>
+
+            #if($!{excelData} && $!{excelData.size()} > 0)
+                #foreach($data in $!{excelData})
+                    <tr class="first_last">
+                        <td>$!{data.excelMonth}月<br/><em>$!{data.excelYear}</em></td>
+                    ##人数
+                        <td>$!{data.excelPayrollNumber}</td>
+                        <td>$!{data.excelCostTotal}</td>
+                        <td>$!date.format('yyyy-MM-dd',$!{data.excelPayday})</td>
+                        <td>$!{data.excelName}<a href="downloadExcel.htm?excelId=$!{data.excelId}"><img
+                                src="resource/img/download.png"/></a></td>
+                        <td>$!{data.excelAddName}</td>
+                        <td>
+                            #if($!{data.excelGrantState} == '0')
+                                待处理
+                            #elseif($!{data.excelGrantState} == '1')
+                                发放中
+                            #elseif($!{data.excelGrantState} == '2')
+                                已发放
+                            #elseif($!{data.excelGrantState} == '3')
+                                挂起
+                            #elseif($!{data.excelGrantState} == '4')
+                                仅下发工资单
+                            #elseif($!{data.excelGrantState} == '5')
+                                撤销
+                            #end
+                        </td>
+                        <td>
+                            #if($!{data.excelGrantState} == '0')
+                                <a onclick="cancelSalaryExcel($!{data.excelId})" href="#"
+                                   class="cancel">撤销</a><a href="paySalaryDetail.htm?excelId=$!{data.excelId}">详情</a>
+                            #else
+                                <a href="paySalaryDetail.htm?excelId=$!{data.excelId}">详情</a>
+                            #end
+                        </td>
+                    </tr>
+                #end
+            #end
+
+        </table>
+        <div id="kkpager" style=""></div>
+
+    </div>
+</body>
+
+</html>
+
+<script type="text/javascript">
+    //生成分页控件
+    kkpager.generPageHtml({
+        pno: '$!{paginator.page}',
+        mode: 'link', //可选，默认就是link
+        //总页码
+        total: '$!{paginator.totalPages} ',
+        //总数据条数
+        totalRecords: '$!{paginator.totalCount} ',
+        //链接前部
+        hrefFormer: '${hrefFormer}',
+        //链接尾部
+        hrefLatter: '${hrefLatter}',
+        //链接算法
+        isShowFirstPageBtn:false,
+        isShowLastPageBtn:false,
+        currPageBeforeText:'第',
+        getLink: function (n) {
+            return 'salary.htm?pageIndex=' + n;
+        }
+
+    });
+
+</script>

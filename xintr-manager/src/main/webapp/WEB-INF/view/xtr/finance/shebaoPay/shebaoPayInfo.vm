@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>H+ 合作意向管理</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-table/bootstrap-table.min.css')" rel="stylesheet">
+</head>
+
+<body>
+<div class="col-sm-12">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <form class="form-group" id="queryForm">
+                <input type="hidden" name="selType" value="0">
+                <div class="col-sm-1" style="margin-top:10px;">
+                    所有订单:<a href="#" onclick="showAllPayInfo();" id="allInfoCount"></a>
+                </div>
+                <div class="col-sm-1" style="margin-top:10px;">
+                    待付款订单:<a href="#" onclick="showNoPayInfo();" id="noPayCount"></a>
+                </div>
+                <div class="col-sm-3">
+                    <label style="margin-top:10px;" class="col-sm-4">企业名称</label>
+                    <div class="col-sm-8">
+                        <select class="form-control m-b" name="companyId">
+                            <option value="">不选择</option>
+                            #if($!{orderList})
+                                #foreach($item in $!{orderList})
+                                    <option value="$!{item.companyId}">$!{item.companyName}</option>
+                                #end
+                            #end
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <label style="margin-top:10px;" class="col-sm-3">订单编号</label>
+                    <div class="col-sm-9">
+                        <input type="text"  class="form-control" name="orderNumber"/>
+                    </div>
+                </div>
+                <div class="col-sm-1" style="width:8%;">
+                    <button class="btn btn-primary " type="button" id="selBtn"><i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;搜索
+                    </button>
+                </div>
+            </form>
+            <table id="data-list"></table>
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+<script src="#springUrl('/resource/js/hui/content.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table-mobile.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/validate/jquery.validate.min.js')"></script>
+<script src="#springUrl('/resource/js/comm/jdatagrid.js')"></script>
+<script src="#springUrl('/resource/js/finance/shebaoPay/shebaoPayInfo.js')"></script>
+</html>

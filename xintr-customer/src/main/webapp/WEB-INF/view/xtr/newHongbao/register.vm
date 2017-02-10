@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" id="html">
+<head>
+	#parse("comm/head.vm")
+	<meta charset="UTF-8">
+	<title>注册</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1">
+    <script type="text/javascript" src="#springUrl('/resource/js/newHongbao/register.js')"></script>
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/newHongbao/register.css')">
+
+</head>
+<body>
+	<div class='promt' style="display: none">
+		<h4>注册成功</h4>
+		<p>确定</p>
+	</div>
+	<header>
+		<div class="logo"></div>
+		<em></em>
+		<div class="txt">
+			<p>有<span>「薪」</span>事</p>
+			<p>找薪太软</p>
+		</div>
+	</header>
+	<form id="registerForm">
+	<section>
+		<ul>
+			<li id='companyname'>
+				<input type="text" name="companyName" placeholder='请输入公司名称'>
+				<b></b>
+				<em></em>
+			</li>
+			<li id='username'>
+				<input type="text" name="userName" placeholder ='请输入你的姓名'>
+				<b></b>
+				<em></em>
+			</li>
+			<li id='password'>
+				<input type="password" name="password" placeholder ='请设置登录密码'>
+				<b></b>
+				<em></em>
+			</li>
+			<li id='repassword'>
+				<input type="password" name="rePassword" placeholder ='重复登录密码'>
+				<b></b>
+				<em></em>
+			</li>
+			<li id="phone">
+				<input type="text" name="phoneNumber" placeholder='请输您的手机号码'>
+				<b></b>
+				<em></em>
+			</li>
+			<li id='phonecode'>
+				<input type="text"  name="phoneCode" placeholder='请输入手机验证码'>
+				<b></b>
+				<p>
+					<em></em>
+					<span>获取验证码</span>
+				</p>
+				
+			</li>
+			
+		</ul>
+		<div class="hint" style="display:none" id="registerError">验证码获取错误</div>
+		<div class="reg">免费注册</div>
+##		<div class="login">登录</div>
+	</section>
+</form>
+</body>
+</html>

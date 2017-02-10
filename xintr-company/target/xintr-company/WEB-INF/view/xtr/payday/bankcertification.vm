@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title></title>
+
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/payday/payday.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/comm/comm.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/payfor1.css')" rel="stylesheet">
+    <script src="#springUrl('/resource/js/plugins/dropzone/dropzone.js')"></script>
+    <script src="#springUrl('/resource/js/plugins/laydate/laydate.js')"></script>
+    <script src="#springUrl('/resource/js/payday/payforamount.js')"></script>
+    <script>
+    function confirmBank() {
+       var amount=$!{companyQuotaValue};
+       var amountValue=$("#amountValue").val();
+       var opportunityValue=$("#opportunityTip").text();
+       if(opportunityValue==0){
+        window.location.href = 'bankfailure.htm?companyBank=$!{companyBank}&companyBanknumber=$!{companyBanknumber}&companyName=$!{companyName}';
+       }else{
+        if(amount==amountValue){
+        window.location.href = 'literaturereview.htm?companyId=$!{companyId}&paytype=$!{paytype}&companyBanknumber=$!{companyBanknumber}&companyName=$!{companyName}&amount='+amountValue;
+        }else{
+        $("#opportunityTip").text(opportunityValue-1);
+        amountNumber(opportunityValue-1);
+        alert('银行汇款金额不正确!');
+        }
+       }
+
+    }
+   </script>
+</head>
+
+<body>
+<div class="container hide" id="identity" style="padding: 60px 5% 40px;">
+    <div class="identity-wrap">
+        <div class="bg"></div>
+        #if($!{paytype} == "1")
+        <div class="it active" style="width:15%;">1
+        <p>完善信息</p>
+        <p style="font-size:12px;">填写公司基本信息</p>
+        </div>
+        <div class="it active" style="width:15%;">2
+        <p>实名认证</p>
+        <p style="font-size:12px;">对公银行账户验证</p>
+        </div>
+        <div class="it" style="width:15%;">3
+        <p>上传资料</p>
+            <p style="font-size:12px;">提交企业征信资料</p>
+        </div>
+        <div class="it" style="width:15%;">4
+        <p>审核通过</p>
+        <p style="font-size:12px;">风控审核并完成签约</p>
+        </div>
+        #else
+        <div class="it active">1
+        <p>完善信息</p>
+            <p style="font-size:12px;">填写公司基本信息</p>
+        </div>
+        <div class="it active">2
+        <p>实名认证</p>
+            <p style="font-size:12px;">对公银行账户验证</p>
+        </div>
+        <div class="it">3
+        <p>认证成功</p>
+        </div>
+        #end
+    </div>
+    <div class="identity-content">
+        <div class="xtr3-btns clfix" style="padding: 20px 40px;">
+            <i class="icon-caret-up" style="left: 38%;"></i>
+            <div style="color: #8fa9c7;line-height: 20px;font-size: 12px;">薪太软已向您的对公账户（**********$!{companyBanknumber}）汇入一笔1元以下的确认资金。请查询银行卡的收支明细，输入银行卡内来自薪太软的汇款金额完成认证。</div>
+        </div>
+        <table border="0" cellspacing="0" cellpadding="0" style="color:#666;font-size:12px;width: 430px;margin: 20px auto 0;">
+            <tbody>
+            <tr style="height: 80px;">
+                <td colspan="2"></td>
+            </tr>
+            <tr style="height: 55px;">
+                <td><span style="font-size: 14px;">开户银行</span></td>
+                <td>
+                    <span style="font-size: 14px;color: #333;">$!{companyBank}</span>
+                </td>
+            </tr>
+            <tr style="height: 55px;">
+                <td><span style="font-size: 14px;">对公银行账号</span></td>
+                <td>
+                    <span style="font-size: 14px;color: #333;">************$!{companyBanknumber}</span>
+                </td>
+            </tr>
+            <tr style="height: 55px;">
+                <td><span style="font-size: 14px;">银行开户名</span></td>
+                <td>
+                    <span style="font-size: 14px;color: #333;">$!{companyName}</span>
+                </td>
+            </tr>
+            <tr style="height: 55px;">
+                <td><span style="font-size: 14px;">联行号</span></td>
+                <td>
+                    <span style="font-size: 14px;color: #333;">$!{companyBean.companyAssociatedCode}</span>
+                </td>
+            </tr>
+            <tr style="height: 55px;">
+                <td style="width: 130px"><span style="font-size: 14px;">银行汇款金额</span></td>
+                <td><input type="text" name="" id="amountValue" value="" placeholder="" class="xtr2-input" style="width: 258px;"></td>
+            </tr>
+            <tr style="height: 35px;">
+                <td></td>
+                <td>
+                    <span style="font-size: 12px;color: #999;">银行打款金额在0.01至0.99元之间<br />您有<span id="opportunityTip" class="red">$!{amountNumber}</span>次剩余确认机会</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <div class="login-wrap" style="padding: 70px 0 0;">
+                        <a onclick="confirmBank()" class="ui-btn next" style="display:block;width: 260px;">下一步</a>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+
+</html>

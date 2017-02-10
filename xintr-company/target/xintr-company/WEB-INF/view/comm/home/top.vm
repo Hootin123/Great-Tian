@@ -1,0 +1,30 @@
+<div class="x-container x-nav-wrap">
+    <div class="x-content">
+        <div class="logo-wrap">
+            <a href="/">
+                <img src="#springUrl('/resource/img/xtr2/logo.png')" alt="薪太软" title="薪太软"/>
+                <img src="#springUrl('/resource/img/xtr/logo2.png')" style="display: none;" alt="薪太软" title="薪太软"/>
+            </a>
+        </div>
+        <div class="nav">
+            <ul style="width:85%">
+                <li style="margin-left:15%;padding-left:0px;"><a href="#springUrl('#top')">首页</a></li>
+                <li style="margin-left:0px;padding-left:0px;"><a href="#springUrl('#product')">产品介绍</a></li>
+                <li style="margin-left:0px;padding-left:0px;"><a href="#springUrl('#safeInfo')">信息安全</a></li>
+                <li style="margin-left:0px;padding-left:0px;"><a href="#springUrl('#succCase')">成功案例</a></li>
+                <li style="margin-left:0px;padding-left:0px;"><a href="#springUrl('#hr')">HR中心</a></li>
+                <li style="margin-left:0px;padding-left:0px;"><a href="#springUrl('/about.htm')">关于我们</a></li>
+                <li class="split" style="margin-left:0px;padding-left:0px;"><span>|</span></li>
+            ##                <%if(request.getSession().getAttribute("memberid")!=null && request.getSession().getAttribute("memberid").toString().length()>0) {%>
+
+            ##                <li class="user"><a href="/action/web/manageIndex"><%=request.getSession().getAttribute("membername").toString()%></a></li>
+            ##                <li class="loginout"><a href="/action/web/logout" class="red-blue">退出</a></li>
+            ##                <%}else{ %>
+                <li class="try" style="margin-left:0px;padding-left:0px;"><a href="/action/web/regist" class="btn-blue">试用</a></li>
+                <li class="login" style="margin-left:0px;padding-left:0px;"><a href="/action/web/login">登录</a></li>
+            ##                <%} %>
+
+            </ul>
+        </div>
+    </div>
+</div>

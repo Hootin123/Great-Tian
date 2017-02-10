@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title></title>
+    #parse("comm/head.vm")
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/customer/customerSelector.css')"/>
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/js/plugins/laydate/need/laydate.css')"/>
+    <link href="#springUrl('/resource/css/customer/dropzone.css')" rel="stylesheet" />
+    <script src="#springUrl('/resource/js/plugins/laydate/laydate.js')"></script>
+    <script src="#springUrl('/resource/js/comm/validateUtil.js')"></script>
+    <script src="#springUrl('/resource/js/customer/dropzone.js')"></script>
+
+</head>
+<body>
+文件上传要求<br/>
+<br/>
+1、支持WPS、excel2003以上版本文件。<br/>
+2、文件格式见示例 下载正式员工模板文件<br/>
+3、格式说明：<br/>
+手机 (必填):账号手机号，正规手机号格式。如：13810184537<br/>
+姓名（必填）：2-20个字符。 如：张三<br/>
+入职日期（必填）：格式为 “20150412”、“2015.5.6” “2015-5-6” “2015/5/6” “2015-05-06” “2015/05/06”。<br/>
+聘用形式（必填）：只能填写如下选项，“正式”，“劳务”。<br/>
+转正日期(选填）：格式为 “20150412”、“2015.5.6” “2015-5-6” “2015/5/6” “2015-05-06” “2015/05/06”。<br/>
+工号（选填）：2-20个字符。如：0036、B006<br/>
+部门（选填）：系统内已经存在的部门名称<br/>
+身份证号（选填）：正规大陆身份证号格式。<br/>
+银行卡号（选填）：15-20位数字。如9555500534567890<br/>
+开户行（选填）：2-30个字符，至少给出总行名字，最好细化到支行。如“招商银行”或“招商银行北京市分行大屯路支行”<br/>
+
+</body>
+</html>

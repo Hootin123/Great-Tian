@@ -1,0 +1,290 @@
+
+/*资料填写的弹窗*/
+
+    .identity-title{
+        font-size: 24px;
+        font-weight:bold;
+        color:#333333;
+        text-align: center;
+        width:100%;
+        min-width: 1000px;
+        height: 80px;
+        border-bottom: 1px solid #dbe9ee;
+        line-height: 80px;
+    }
+    .identity-title-p{
+        height: 52px;
+        line-height: 52px;
+        color: #f99b15;
+        text-align: center;
+    }
+
+    #identity{
+		background: #FFFFFF;
+		z-index: 99;
+		/*display: none;*/
+    }
+
+	.cause{
+        width:100%;
+        height:75px;
+        background: #0696fa;
+        margin: 90px 0 40px 0;
+        font-size:18px;
+        color: #FFFFFF;
+        line-height: 75px;
+
+        overflow: hidden
+    }
+
+    .causeText{
+        width:95%;
+        height:70px;
+        line-height: 70px;
+        background:#0696fa;
+        color:#fff;
+        padding-left:5%;
+        overflow: hidden
+    }
+    .bottom{
+        width:100%;
+        height:80px;
+        float:left;
+        border:1px solid #dbe9ee;
+        margin:40px 0 40px 0;
+        background:#f1f9fc;
+    }
+    .bottom input{
+        display: block;
+        width:240px;
+        height:40px;
+        border:0;
+        border-radius:6px;
+        font-size:18px;
+        color:#fff;
+        background:#0696fa;
+        cursor: pointer;
+        margin:20px auto;
+    }
+
+    .bottom .obtnclose{
+        background: #FFFFFF;
+        border: 1px solid #0696fa;
+        color: #0696fa;
+        margin-left: 20px;
+    }
+        .content{
+            margin: 0 auto 0;
+            width:1000px;
+            /*margin-top:50px;*/
+        }
+        .nameLefr{
+            width:20%;
+            float:left;
+            background:#f1f9fc;
+            color:#666;
+        }
+        .nameLefr span{
+            color:#f99b15;
+        }
+        .nameLefr li{
+            width:100%;
+            height:50px;
+            border-top:1px solid #dbe9ee;
+            line-height:50px;
+            text-align: center;
+            font-size:14px;
+            border-left:1px solid #dbe9ee;
+        }
+        .conRight{
+            float:left;
+            width:80%;
+        }
+        .conRight li input,.identity-span{
+
+            width:94.9%;
+            height:50px;
+            border:0;
+            /*border-top:1px solid #dbe9ee;
+            border-left:1px solid #dbe9ee;*/
+            font-size:14px;
+            padding-left:5%;
+            font-family: '微软雅黑';
+            line-height: 50px;
+           /* border-right:1px solid #dbe9ee;*/
+        }
+        .identity-span{
+            display: block;
+            cursor: pointer;
+            width: 200px;
+            line-height: 50px;
+            background: url('/resource/img/drop-down.png') no-repeat 182px center;
+            padding-left: 0;
+            margin-left:5% ;
+        }
+        .identity-tab{
+            /*padding-left: 5% ;*/
+            position: relative;
+        }
+       .nameLefr .tall{
+            height:120px;
+           line-height: 120px
+        }
+        .conRight-list .identity-tab ol{
+            box-shadow:1px 3px 10px 0 #b0ccd7;
+            width:200px;
+            background: #FFFFFF;
+            border:1px solid #dbe9ee;
+            position: absolute;
+            left: 4%;
+            top:50px;
+            z-index: 2;
+            font-size: 12px;
+            display: none;
+            height:120px;
+            overflow: auto;
+        }
+        .identity-tab2 ol{
+            height: 300px;
+        }
+        .conRight .identity-tab ol li{
+            border: none;
+            height: 30px;
+            line-height: 30px;
+            padding-left: 8px;
+            cursor: pointer;
+        }
+        .conRight .tall{
+            height:120px;
+        }
+        .logo{
+            position: relative;
+            border-top:1px solid #dbe9ee;
+            border-left:1px solid #dbe9ee;
+            border-right:1px solid #dbe9ee;
+        }
+        .logo img{
+            position: absolute;
+            left:5%;
+            top:20px;
+        }
+        .logo .logo1{
+            font-size:14px;
+            position: absolute;
+            left:180px;
+            top:30px;
+            color:#666;
+        }
+        .logo .logo2{
+            font-size:14px;
+            position: absolute;
+            left:180px;
+            top:65px;
+            color:#f99b15;
+        }
+        .license{
+            position: relative;
+            border-top:1px solid #dbe9ee;
+            border-left:1px solid #dbe9ee;
+            border-right:1px solid #dbe9ee;
+        }
+        .license img{
+            position: absolute;
+            left:5%;
+            top:20px;
+        }
+        .license .license1{
+            font-size:14px;
+            position: absolute;
+            left:180px;
+            top:30px;
+            color:#666;
+        }
+        .license .license2{
+            font-size:14px;
+            position: absolute;
+            left:180px;
+            top:65px;
+            color:#f99b15;
+        }
+        #upload-file{
+            width:80px;
+            height:80px;
+            background:red;
+            padding:0;
+            margin:20px 0 0 70px;
+            opacity: 0;
+            cursor: pointer
+        }
+        .lastli{
+        	border-bottom:1px solid #dbe9ee;
+        	}
+        .conRight .mouseactive{
+        	border-top: 1px solid #0696FA;
+        	border-left: 1px solid #0696FA;
+        	border-right: 1px solid #0696FA;
+        }
+        .conRight .mousetopactive{
+        	border-top:1px solid #0696FA ;
+        }
+        .conRight .mousebtomactive{
+        	border:1px solid #0696FA ;
+        }
+        .conRight ul li{
+        	position: relative;
+        	border-top: 1px solid #dbe9ee;
+        	border-left: 1px solid #dbe9ee;
+        	border-right: 1px solid #dbe9ee;
+        }
+
+        .reminded{
+        	color: #fa5f5f;
+        }
+ 		.error{
+ 			display: none;
+ 			opacity: 1;
+ 			filter:alpha(opacity=100);
+ 			max-width: 500px;
+		    min-height: 20px;
+		    position: absolute;
+		    top: 5px;
+		    right:60px;
+		    background-color: #ffe9eb;
+		    padding: 10px 18px;
+		    z-index: 10;
+		    border-radius: 5px;
+		    color: #fc2736;
+		    font-size: 12px;
+		    line-height: 20px;
+ 		}
+
+ 		.error:before{
+ 			content: "";
+		    display: block;
+		    border-width: 12px 24px;
+		    position: absolute;
+		    top: 8px;
+		    left: -36px;
+		    border-style: solid dashed dashed;
+		    border-color: transparent #ffe9eb transparent transparent;
+		    font-size: 0;
+		    line-height: 0;
+ 		}
+        .tesfile{
+            width: 80px;
+            height: 80px;
+            position: absolute;
+            left: 62px;
+            top: 20px;
+            border: none;
+            cursor: pointer;
+        }
+        .reminded{
+            display: none;
+            height:40px;
+            line-height: 40px;
+        }
+        .obtnsubmit{
+
+        }
+/*end*/

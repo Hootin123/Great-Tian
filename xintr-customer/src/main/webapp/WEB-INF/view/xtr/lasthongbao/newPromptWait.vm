@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="en" id='html'>
+<head>
+	#parse("comm/headNew.vm")
+    <meta charset="UTF-8">
+    <title>审核等待</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1">
+##    <script src="#springUrl('/resource/js/lasthongbao/zepto.min.js')"></script>
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/lasthongbao/wait.css')">
+
+</head>
+<body>
+	<div class="pic">
+		<img src="#springUrl('/resource/img/lasthongbao/wait.png')"/>
+	</div>
+	<div class="text">
+		<div class="text-title">客服妹子正拼命审核，请耐心等待！</div>
+		<p>薪太软</p>
+		<p>免费Saas系统——员工管理、薪资社保计算</p>
+		<p>自动完成工资代发、社保代缴 </p>
+		<p>炫酷人事工具等你开撩~</p>
+	</div>
+##	<div class="preSubmit">重新提交</div>
+    <div class="introduce">
+        <img src="#springUrl('/resource/img/lasthongbao/introduce.png')" alt="">
+    </div>
+    <div class="text1">请用电脑登录薪太软官网进行体验 <a>www.xintairuan.com</a> </div>
+</body>
+
+</html>

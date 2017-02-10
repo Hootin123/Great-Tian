@@ -1,0 +1,59 @@
+body{
+    width: 100%;
+    /*height: 13.34rem;*/
+    background: url(../../img/lasthongbao/getPacket.png) 0 0 no-repeat;
+    background-size: 100%;
+}
+.getMain{
+    margin:0 auto;
+    margin-top: 9.42rem;
+    width: 5.8rem;
+    height: 0.78rem;
+    position: relative;
+}
+.getMain input{
+    display: block;
+    width: 100%;
+    height: 100%;
+    border:1px solid #000;
+    border-radius: 0.1rem;
+    background:#fff url(../../img/lasthongbao/phone.png) 0.15rem center no-repeat;
+    background-size:0.3rem 0.45rem;
+    font-size: 0.28rem;
+    color: #666;
+    text-indent: 0.76rem;
+}
+.getMain b{
+    height: 0.78rem;
+    position: absolute;
+    right:0.28rem;
+    top:0;
+    font-size: 0.26rem;
+    line-height: 0.78rem;
+    color: #f00;
+}
+.getFooter{
+    width: 5.8rem;
+    height: 0.85rem;
+    margin: 0.2rem auto;
+    background: url(../../img/lasthongbao/footer-bg.png) 0 0 no-repeat;
+    background-size:100%;
+    font-size: 0.28rem;
+    color: #fff;
+    text-align: center;
+    line-height: 0.8rem;
+    text-shadow:2px 0px 2px #f16f3c,-2px 0px 2px #f16f3c, 0px 2px 2px #f16f3c, 0px -2px 2px #f16f3c;
+}
+.introduce{
+    width: 4.2rem;
+    height: 0.8rem;
+    margin:0 auto;
+    margin-top: 0.68rem;
+    margin-bottom: 0.4rem;
+}
+.introduce img{
+    display: block;
+    width: 100%;
+    height: 100%;
+
+}

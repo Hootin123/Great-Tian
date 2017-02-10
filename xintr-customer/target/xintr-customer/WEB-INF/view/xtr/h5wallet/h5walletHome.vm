@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" id='html'>
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    #parse("comm/head.vm")
+    <meta name="viewport" content="width=divce-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1">
+    <link rel="stylesheet" href="#springUrl('/resource/css/h5wallet/start.css')">
+</head>
+<body>
+<input type="hidden" value="$!{companyId}" id="companyId">
+<div class="beh">
+    <div class="content">
+        <div class="pic1"></div>
+        <div class="txt">代发工资</div>
+    </div>
+</div>
+<div class="advance">
+    <div class="content">
+        <div class="pic2"></div>
+        <div class="txt">垫付工资</div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function(){
+        $('.beh').on('click',function(){
+            window.location.href='toH5walletIssuingPage.htm?companyId='+$("#companyId").val();
+        });
+        $('.advance').on('click',function(){
+            window.location.href='toH5walletMatPage.htm?companyId='+$("#companyId").val();
+        });
+    });
+</script>
+</body>
+</html>

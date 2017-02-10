@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>社保首页</title>
+    #parse("comm/head.vm")
+    <script src="#springUrl('/resource/js/shebao/socialHome.js')"></script>
+    <script src="#springUrl('/resource/js/plugins/laydate/laydate.js')"></script>
+    <script src="#springUrl('/resource/js/plugins/laypage/laypage.js')"></script>
+</head>
+<style>
+    body,html{width:100%;height:100%;overflow: auto}
+    .homeAll{width:90%;margin:30px auto 0;min-width:1000px;position: relative;}
+    .top{width:100%;height:40px;background:#f1f9fc;color:#666;border:1px solid #dbe9ee;}
+    .topLeft{width:210px;float:left;line-height: 40px;padding-left:20px;}
+    .topRight{width:200px;float:right;line-height: 40px;position: relative;}
+    .atBill{right:194px;top:3px;padding:0px 2px;height:20px;line-height:20px;color:#fff;background:#fa5f5f;position: absolute;border-radius: 5px;font-size:12px}
+    .topRight1{width:80px;height:26px;background:#f8d37a;color:#fff;border-radius:6px;float:left;line-height:26px;text-align: center;margin-top:7px;cursor: pointer}
+    .topRight2{width:80px;height:26px;background:#6ae6bc;color:#fff;border-radius:6px;float:left;line-height:26px;text-align: center;margin:7px 0 0 20px;cursor: pointer}
+    .nav{width:100%;height:40px;border:1px solid #dbe9ee;color:#666;line- height:40px;margin-top:20px;background:#f1f9fc;;}
+    .navLeft{padding-left:20px;width:500px;float:left;line-height: 40px}
+    .navColor{color:#0696fa;}
+
+    .navRight{width:220px;height:20px;float:right;}
+    .navRight1{padding-top:11px;float:left;width:110px;height:30px;background:url(/resource/img/salary/screen.png) no-repeat 0 13px ;text-align: center;cursor: pointer;position:relative}
+    .navRight2{padding-top:11px;float:left;width:110px;height:30px;background:url(/resource/img/salary/search.png) no-repeat 0 13px ;text-align: center;cursor: pointer;position:relative}
+    .navRight3{float:left;width:110px;height:30px;background:url(/resource/img/salary/operation.png) no-repeat 0 13px ;text-align: center;cursor: pointer;position:relative}
+    .seekResult{width:100%;display: none}
+    .text{float:left;padding-left:20px;color:#999999;line-height:62px}
+    .result{float:left;}
+    .result li{margin-top:15px;padding:5px 10px;background:#f1f9fc;vertical-align: inherit;margin- top:16px;border-radius:6px;color:#666;float:left;margin-left:20px;border:1px solid #dbe9ee;}
+    .result li img{margin-top:6px;cursor: pointer}
+    .cancel{float:left;margin-left:20px;line-height:62px;color:#0696fa;cursor: pointer}
+    table{width:100%;text-align: center;margin-top:20px;color:#333;font-size: 12px;}
+    td{border:1px solid #b8dae6;line-height: 30px;}
+    table .tableNav{height:40px;background:#f1f8fe;color:#333;font-weight: 600;}
+    .seek{width:300px;border:1px solid #dbe9ee;background:#fff;box-shadow: #dbe9ee 1px 1px 8px 1px;position: absolute;right:0px;top:103px;display:none;text-align: center}
+    .seekText{font-family:"微软雅黑";margin-top:10px;width:235px;height:38px;border:1px solid #dbe9ee;background:url(/resource/img/salary/search1.png) no-repeat 15px center;padding-left:40px;margin- top:10px;}
+    .seekBtn{display: block;width:278px;height:35px;border:0;background:#0696fa;color:#fff;font-family: "微软雅黑";border-radius: 6px;cursor:pointer;margin:10px 0 10px 10px;}
+    .screen{width:300px;border:1px solid #dbe9ee;box-shadow: #dbe9ee 1px 1px 8px 1px;position: absolute;right:125px;top:103px;background:#fff;display: none;z-index:999}
+    .form{margin-left:10px;width:258px;height:40px;border:1px solid #dbe9ee;line-height: 40px;margin- left:10px;padding-left:20px;background:url(/resource/img/salary/san.png) no-repeat 258px center;margin-top:10px;color:#999;}
+    .form1{line-height:30px;border:1px solid #dbe9ee;width:278px;margin-left:10px;text-indent:20px;line- height:30px;color:#333;display:none}
+    .form1 li:hover{background:#0696fa;color:#fff;}
+    .formBtn{width:278px;height:35px;background:#0696fa;color:#fff;margin:10px 0 10px 10px;cursor: pointer;border:0;font-family: "微软雅黑";border-radius:6px;margin- bottom:10px;}
+    .batch{width:178px;border:1px solid #dbe9ee;background:#fff;position: absolute;top:90px;right:10px;box-shadow: #dbe9ee 1px 1px 8px 1px;display:none}
+    .batch div{width:178px;line-height: 30px;text-indent: 20px}
+    .batch div:hover{background:#0696fa;color:#fff;}
+    .section1{max-height:200px;overflow: auto;z-index:999;overflow:auto}
+    .section{font-family: "微软雅黑";font-size:14px;width:258px;height:40px;border:1px solid #dbe9ee;line-height: 40px;margin-left:10px;padding-left:20px;background:url(/resource/img/salary/san.png) no-repeat 258px center;margin-top:10px;}
+    .aboxbg,.aboxbg1{width:500px;height:300px;background:#fff;z-index:20;position: absolute;top:0;bottom:0;left:0;right:0;margin:auto;border-radius: 20px;display:none}
+    .aboxbg h3,.aboxbg1 h3{margin-top:30px;text-align: center;}
+    .aboxbgCon{width:60%;margin:0 auto;margin-top:50px;line-height: 35px;color:#333;}
+    .aboxbgCon div{float:right;}
+    .aboxbgCon input{width:170px;height:30px;padding-left:20px;font-family: "微软雅黑"}
+    .aboxbgText{text-align: center;color:#333;margin-top:50px;}
+    .aboxbgBtn,.sociaBtn,.batchSocialBtn,.batchFundBtn,.makeSocialBtn,.makeFundBtn {width:410px;height:35px;margin:20px auto;}
+    .aboxbgBtn1,.sociaBtn1,.batchSocialBtn1,.batchFundBtn1,.makeSocialBtn1,.makeFundBtn1 {width:200px;height:35px;background:#0696fa;float:left;border:0;color:#fff;font-family:"微  软雅黑";border-radius: 6px;cursor: pointer}
+    .aboxbgBtn2,.sociaBtn2,.batchSocialBtn2,.batchFundBtn2,.makeSocialBtn2,.makeFundBtn2 {width:200px;height:35px;background:#fff;color:#0696fa;border:1px solid #0696fa;float:right;font-family:"微软雅黑";border-radius: 6px;cursor: pointer }
+    .sociaAdjust,.fundAdjust{width:500px;height:300px;background:#fff;z-index:20;position: absolute;top:0;bottom:0;left:0;right:0;margin:auto;border-radius: 20px;display: none }
+    .sociaAdjust h3,.fundAdjust h3{margin-top:30px;text-align: center;}
+    .sociaAdjust1{line-height:30px;margin-top:20px;padding-left:70px;color:#666;}
+    .sociaAdjust2{line-height:30px;margin-top:20px;padding-left:70px;color:#666;}
+    .sociaAdjust2 input{height:25px;width:130px;padding-left:20px;color:#666;}
+    .sociaAdjust2 span{padding-left:20px;color:#f99b15;}
+    .sociaAdjust3{line-height:30px;margin-top:20px;padding-left:70px;color:#666;}
+    .batchSocial,.batchFund{width:500px;background:#fff;z-index:20;border- radius:20px;position: absolute;top:35%;left:35%;display:none}
+    .batchSocial h3,.batchFund h3,.makeSocial h3,.makeFund h3,.mayArea h3{margin-top:30px;text-align: center}
+    .batchSocialCon,.batchFundCon{width:80%;margin:0 auto;line-height:30px;margin- top:20px;color:#666;}
+    /*.batchSocialCon1{border:1px solid #dbe9ee;width:230px;height:25px;padding-
+left:20px;font-family: "微软雅黑";margin-left:20px;background:url
+(/resource/img/salary/san.png) no-repeat  230px ;}*/
+    /*.batchSocialCon div{padding-left:20px;}*/
+    .batchArea,.batchFundArea{line-height: 30px;width:80%;margin:23px auto 0;height:30px;background:url(/resource/img/salary/san.png) no-repeat  295px ;}
+    .batchArea1,.batchFundArea1{width:30%;float:left;}
+    .batchArea2,.batchFundArea2{width:67%;float:left;padding-left:2%;border:1px solid #ccc;}
+    .batchArea3,.batchFundArea3{width:68%;display:block;height:30px;text-indent:2%;font- family:"微软雅黑";}
+    .batchSocialLi,.batchFundArealli{width:55.2%;border:1px solid #ccc;margin- left:34%;margin-top:1px;text-indent:2%;line-height: 30px}
+    .batchSocialLi li:hover,.batchFundArealli li:hover{background:#0696fa;color:#fff;max- height:150px;overflow: auto;}
+    .makeSocial,.makeFund{width:500px;background:#fff;z-index:20;border- radius:20px;position: absolute;top:35%;left:35%;display: none}
+    .makeSocialCon,.makeFundCon{width:80%;margin:0 auto;overflow: hidden}
+    .makeSocialMend,.makeFundMend{margin-top:25px;line-height: 30px}
+    .makeSocialMend1,.makeFundMend1{width:30%;float:left;}
+    .makeSocialMend2,.makeFundMend2{width:70%;float:left;}
+    .makeSocialMend2 .input,.makeFundMend2 .input{height:28px;width:248px;border:1px solid #ccc;text-indent:2%;font-family:"微软雅黑";}
+    .makeSocialMend2Inp,.makeFundMend2Inp{border:1px solid #ccc;width:250px;}
+    .makeSocialMend2Inp .laydate-icon,.makeFundMend2Inp .laydate-icon {border:0;height:28px;text-indent:2%;font-family:"微软雅黑";}
+    .tdColor{color:#0696fa;cursor: pointer}
+    tbody{background:#fff;}
+    .laydate_table{display:none}
+    .mayArea{width:500px;position: absolute;left:35%;top:30%;background:#fff;border-radius: 20px;}
+    .mayArea p{line-height: 30px;padding-left:25px;color:#666;}
+    .mayAreaP1{margin-top:30px;}
+    .conMayArea{width:318px;margin:20px auto;max-height:200px;overflow: auto}
+    .mayAreaBtn{display: block;width:200px;height:35px;background:#0696fa;font-family: "微软雅黑";margin:20px auto;border:0;color:#fff;border-radius: 6px;cursor: pointer}
+    .xtrHint{  width:500px;  height:270px;  background: #fff;  border-radius: 20px;  position: absolute;  left: 0;  right: 0;  bottom:0;  top:0;  margin: auto;}
+    .xtrHint-title{  width: 100%;  height: 48px;  text-align: center;  line-height: 78px;  font-size: 18px;  color: #333; }
+    .xtrHint-title b img{  position: absolute;  right: -20px;  top: -20px;  cursor: pointer; }
+    .xtrHint-main{  margin-top:10px;  width: 100%;  padding: 0 40px;  box-sizing: border-box;  font-size: 12px;  color: #666; }
+    .xtrHint-main table{  width:100%; text-align: center;  background: #fff; }
+    .xtrHint-main table tr{ width: 100%;  height:40px;  background: #fff;}
+    .xtrHint-main table tr td{  border:1px solid #dbe9ee;}
+    .xtrHint-footer a{ display: block;  width:200px;  height: 40px;  margin: 0 auto;  margin-top: 30px;  color: #fff;  background:#0696fa;  border-radius: 6px;  font-size: 14px;  line-height: 40px;  text-align: center;  font-family: '微软雅黑';  }
+    .xtrHint-text{  width: 100%;  height: 30px;  font-size: 14px;  color: #f9a225;  text-align: center;  line-height: 70px;}
+    .allTr, .allTr+tr{background: #feebe7}
+    tbody .activeTr{background: #d2f8fb}
+</style>
+<body>
+<div class="homeAll">
+    <div class='top'>
+        <div class='topLeft'>
+            <span>$!date.format('yyyy年MM月',$!{date.systemDate})</span>
+            <span onclick="resetQuery();initData()" style="cursor: pointer">当前员工：
+            <span style="color:#2e9ef4;">$!{totalCount}
+                #if(!$totalCount)
+                    0
+                #end</span>
+            <span>人</span>
+            </span>
+        </div>
+        <!--隐藏域-->
+        <input type="hidden" name="orderCount" value="$!{orderCount}"/>
+        <div class='topRight'>
+            <span class="atBill" id="atBill"  style="display: none" title="您当前有$!{orderCount}个新账单哦">$!{orderCount}</span>
+            <a class='topRight1' onclick="showCurrentPayOrder();">当前账单</a>
+            <a class="topRight2"  onclick="showHistoryPayOrder();">历史账单</a>
+        </div>
+    </div>
+    <div class="nav">
+        <div class="navLeft">
+            <span onclick="resetQuery();isNew=1;initData()" style="cursor:pointer">新入职:
+                <span class='navColor'>$!{enterCount}
+                    #if(!$enterCount)
+                        0
+                    #end
+                </span>&nbsp;&nbsp;
+            </span>
+            <span onclick="resetQuery();isKeepSb=1;initData()" style="cursor:pointer">社保在缴：<span class='navColor'>$!{sbCount}</span>&nbsp;&nbsp;</span>
+
+            <span onclick="resetQuery();isKeepGjj=1;initData()" style="cursor:pointer">公积金在缴：<span class='navColor'>$!{gjjCount}</span>&nbsp;&nbsp;</span>
+
+            <span onclick="resetQuery();isFailed=1;initData()" style="cursor:pointer">资料审核失败：<span class='navColor'>$!failedCount</span></span>
+
+        </div>
+        <div class='navRight'>
+            <div class='navRight1'>筛选员工</div>
+            <div class='navRight2'>搜索员工</div>
+            <div class='navRight3' style="display: none;">批量操作</div>
+        </div>
+    </div>
+    <div class="seekResult">
+        <div class='text'>搜索结果：找到<span id="count">1</span>个关键词为</div>
+        <ul id="searchTj" class='result'>
+
+        </ul>
+        <div class='cancel'>取消筛选</div>
+    </div>
+    <table>
+        <thead>
+
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <div class="seek">
+        <input class="seekText" type="text" placeholder="请输入员工姓名">
+        <input class="seekBtn" type="button" value="确定">
+    </div>
+    <div class="screen">
+        <div class="form" style="display: none;">聘用形式</div>
+        <ul class="form1" style="display: none;">
+            <li data-value="1">正式</li>
+            <li data-value="2">劳务</li>
+        </ul>
+
+        <div  class="form" style="display: none;">员工状态</div>
+        <ul class="form1" style="display: none;">
+        ##            <li data-value="1">试用期</li>
+            <li data-value="2">在职</li>
+            <li data-value="3">离职</li>
+        </ul>
+
+        <div  class="form">参保地区</div>
+        <ul class="form1">
+            #foreach($city in $joinCites)
+                <li data-value="$!city.join_city_code">$!city.join_city_name</li>
+            #end
+        </ul>
+
+        <input class="form section" type="text" placeholder="请输入部门">
+        <ul class="form1 section1">
+        </ul>
+        <input class="formBtn" type="button" value="确定">
+    </div>
+    <div  class="batch">
+        <div>批量调薪</div>
+        <div>批量定薪</div>
+        <div>导入考勤</div>
+        <div>导入奖金</div>
+        <div>补充税前税后工资明细</div>
+    </div>
+##    <div id="kkpager" style="width:100%;margin-top:30px;margin-bottom:20px;"></div>
+    <!-- 分页器 -->
+    <div class="pagePay">
+        <div id="pagePayroll"></div>
+    </div>
+    <div class="a"></div>
+</div>
+
+<div class="pacity" style="display:none;width:100%;height:100%;opacity:0.7;background:#000;position: absolute;left: 0;top: 0; filter:alpha(opacity=70);"></div>
+##弹窗薪太软提醒
+<div class="xtrHint" style="display: none">
+    <div class="xtrHint-title">薪太软提醒你 <b><img src="#springUrl('/resource/img/shut.png')" alt=""></b></div>
+    <div class="xtrHint-text">11wd</div>
+    <div class="xtrHint-main">
+        <table>
+##            <tr>
+##                <td>补缴月份1</td>
+##                <td>201603——201604</td>
+##                <td>补缴基数1</td>
+##                <td>5000.00元</td>
+##            </tr>
+##            <tr>
+##            <td>补缴月份1</td>
+##            <td>201603——201604</td>
+##            <td>补缴基数1</td>
+##            <td>5000.00元</td>
+##            </tr>
+        </table>
+    </div>
+    <div class="xtrHint-footer"></div>
+
+</div>
+##弹窗停缴社保
+<input type="hidden" id="tjCustomerId">
+<div class="aboxbg">
+    <h3>停缴社保设置</h3>
+    <img src="/resource/img/shut.png" class="aboxbgImg" alt="" style="position: absolute;right:-20px;top:-20px;cursor: pointer" id="shebaoCloseBtn">
+    <div class="aboxbgCon monthChoose">开始停缴月份：<div class="monthChoose"><input type="text" placeholder="请选择停缴月份" id="stopSocial" class="monthChooseBan"></div></div>
+    <div class="aboxbgText">提示：如果设置开始停缴月份为201608，则表示该员工201608的社保不缴纳</div>
+    <div class="aboxbgBtn" style="margin-top:35px;">
+        <button class="aboxbgBtn1">确认</button>
+        <button class="aboxbgBtn2">取消停缴</button>
+    </div>
+</div>
+##弹窗停缴公积金
+<div class="aboxbg1">
+    <h3>停缴公积金设置</h3>
+    <img src="/resource/img/shut.png" class="aboxbgImg" alt="" style="position: absolute;right:-20px;top:-20px;cursor: pointer" id="gjjCloseBtn">
+    <div class="aboxbgCon">开始停缴月份：<div class="monthChoose"><input type="text" placeholder="请选择停缴月份" id="stopSocial2" class="monthChooseBan"></div></div>
+    <div class="aboxbgText">提示：如果设置开始停缴月份为201608，则表示该员工201608的公积金不缴纳</div>
+    <div class="aboxbgBtn" style="margin-top:35px;">
+        <button class="aboxbgBtn1">确认</button>
+        <button class="aboxbgBtn2">取消停缴</button>
+    </div>
+</div>
+##弹窗社保调基
+<div class="sociaAdjust">
+    <input type="hidden" id="shebaoAdjustMinBase">
+    <input type="hidden" id="shebaoAdjustMaxBase">
+    <h3>社保调基</h3>
+    <div class="sociaAdjust1">目前基数：<span id="shebaoOldBase"></span>元</div>
+    <div class="sociaAdjust2">调基：<input type="text" id="adjustAmount"><span id="shebaoAdjustRange"></span></div>
+    <div class="sociaAdjust3">基数更新月份：<span id="shebaoAdjustMonth"></span></div>
+    <div class="sociaBtn">
+        <button class="sociaBtn1">确认</button>
+        <button class="sociaBtn2">取消</button>
+    </div>
+</div>
+##弹窗公积金调基
+<div class="fundAdjust">
+    <input type="hidden" id="gjjAdjustMinBase">
+    <input type="hidden" id="gjjAdjustMaxBase">
+    <h3>公积金调基</h3>
+    <div class="sociaAdjust1">目前基数：<span id="gjjOldBase"></span>元</div>
+    <div class="sociaAdjust2">调基：<input type="text" id="adjustAmount2"><span id="gjjAdjustRange"></span></div>
+    <div class="sociaAdjust3">基数更新月份：<span id="gjjAdjustMonth"></span></div>
+    <div class="sociaBtn">
+        <button class="sociaBtn1">确认</button>
+        <button class="sociaBtn2">取消</button>
+    </div>
+</div>
+##弹窗批量缴纳社保
+<div class="batchSocial">
+    <h3>批量缴纳社保-参数设置</h3>
+    <div class="batchSocialCon">
+        <div class="batchArea">
+            <div class="batchArea1">*参保地区 </div>
+            <div class="batchArea2">请选择参保地区</div>
+        </div>
+        <ul class="batchSocialLi">
+            <li>北京</li>
+            <li>上海</li>
+            <li>外国</li>
+        </ul>
+        <div class="batchArea">
+            <div class="batchArea1">*缴纳类型</div>
+            <div class="batchArea2">请选择缴纳类型</div>
+        </div>
+        <ul class="batchSocialLi">
+            <li>你</li>
+            <li>我</li>
+            <li>他</li>
+        </ul>
+        <div class="batchArea">
+            <div class="batchArea1">*缴纳基数</div>
+            <input class="batchArea3"  type="text" placeholder="基数范围：3001元~10000元">
+        </div>
+    </div>
+    <div class="batchSocialBtn">
+        <button class="batchSocialBtn1">确认</button>
+        <button class="batchSocialBtn2">取消</button>
+    </div>
+</div>
+##弹窗批量缴纳公积金
+<div class="batchFund">
+    <h3>批量缴纳公积金-参数设置</h3>
+    <div class="batchFundCon">
+        <div class="batchFundArea">
+            <div class="batchFundArea1" >*参保地区 </div>
+            <div class="batchFundArea2" style="background:#fff;">上海</div>
+        </div>
+        <div class="batchFundArea">
+            <div class="batchFundArea1">*缴纳类型</div>
+            <div class="batchFundArea2">请选择缴纳类型</div>
+        </div>
+        <ul class="batchFundArealli">
+            <li>你</li>
+            <li>我</li>
+            <li>他</li>
+        </ul>
+        <div class="batchFundArea">
+            <div class="batchFundArea1">*缴纳基数</div>
+            <input class="batchFundArea3"  type="text" placeholder="基数范围：3001元~10000元">
+        </div>
+    </div>
+    <div class="batchFundBtn">
+        <button class="batchFundBtn1">确认</button>
+        <button class="batchFundBtn2">取消</button>
+    </div>
+</div>
+##批量补缴社保
+<div class="makeSocial">
+    <h3>批量补缴社保-参数设置</h3>
+    <div class="makeSocialCon">
+        <div class="makeSocialMend">
+            <div class="makeSocialMend1">*补缴月份：</div>
+            <div class="makeSocialMend2">
+                <div class="makeSocialMend2Inp"><input type="text" class="laydate-icon" id="input1" placeholder="起始时间"> --<input id="input2" type="text" class="laydate-icon" placeholder="结束时间"></div>
+                <div style="font-size: 12px;">可补缴月份：201607-201609</div>
+            </div>
+        </div>
+        <div class="makeSocialMend">
+            <div class="makeSocialMend1">*社保基数1</div>
+            <div class="makeSocialMend2">
+                <input class="input" type="text" placeholder="请输入社保基数">
+                <div style="font-size: 12px;">【201605-201606】基数范围:122.00元-520.00元
+                </div>
+            </div>
+        </div>
+        <div class="makeSocialMend">
+            <div class="makeSocialMend1">*社保基数2</div>
+            <div class="makeSocialMend2">
+                <input type="text" class="input" placeholder="请输入社保基数">
+                <div style="font-size: 12px;">【201605-201606】基数范围:122.00元-520.00元
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="makeSocialBtn">
+        <button class="makeSocialBtn1">确认</button>
+        <button class="makeSocialBtn2">取消</button>
+    </div>
+</div>
+##批量补缴社保公积金
+<div class="makeFund">
+    <h3>批量补缴公积金-参数设置</h3>
+    <div class="makeFundCon">
+        <div class="makeFundMend">
+            <div class="makeFundMend1">*补缴月份：</div>
+            <div class="makeFundMend2">
+                <div class="makeFundMend2Inp"><input type="text" class="laydate-icon" id="fundInput1" placeholder="起始时间"> --<input id="fundInput2" type="text" class="laydate-icon" placeholder="结束时间"></div>
+                <div style="font-size: 12px;">可补缴月份：201607-201609</div>
+            </div>
+        </div>
+        <div class="makeFundMend">
+            <div class="makeFundMend1">*公积金基数1</div>
+            <div class="makeFundMend2">
+                <input class="input" type="text" placeholder="请输入公积金基数">
+                <div style="font-size: 12px;">【201605-201606】基数范围:122.00元-520.00元
+                </div>
+            </div>
+        </div>
+        <div class="makeFundMend">
+            <div class="makeFundMend1">*公积金基数2</div>
+            <div class="makeFundMend2">
+                <input type="text" class="input" placeholder="请输入公积金基数">
+                <div style="font-size: 12px;">【201605-201606】基数范围:122.00元-520.00元
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="makeFundBtn">
+        <button class="makeFundBtn1">确认</button>
+        <button class="makeFundBtn2">取消</button>
+    </div>
+</div>
+
+##可缴纳地区
+#if($bchgCities && $bchgCities.size() > 0)
+<div class="may" style="width:100%;height:100%;opacity:0.7;background:#000;position: absolute;left: 0;top: 0; filter:alpha(opacity=70);"></div>
+    <div class="mayArea">
+        <h3>可调基地区</h3>
+        <img class="mayAreaImg" src="/resource/img/shut.png" class="aboxbgImg" alt="" style="position: absolute;right:-20px;top:-20px;cursor: pointer" >
+        <p class="mayAreaP1">调基规则：</p>
+        <p>1.只能在调基窗口月才能调整社保/公积金基数</p>
+        <p>2.按最低标准缴纳的员工，在调基窗口月系统将自动更新至新的最低标准</p>
+        <p>本月可调基地区：</p>
+        <div class="conMayArea">
+    ##          内容放这里$item
+            #foreach($item in $bchgCities)
+                <span style="border:1px solid #dbe9ee;color:#666;box-sizing:border-box;background:#f1f9fc;display:block;width:100px;float:left;line-height: 30px;text-align: center">$item</span>
+            #end
+        </div>
+        <input class="mayAreaBtn" type="button" value="确定">
+    </div>
+    <script>
+        $('.mayAreaBtn,.mayAreaImg').click(function () {
+            $('.may').hide();
+            $('.mayArea').hide();
+//            $.ajax({
+//                type: 'post',
+//                url: BASE_PATH + '/shebao/setShowBchg.htm',
+//                success: function (data) {
+//
+//                }
+//            });
+        })
+    </script>
+#end
+</body>
+<script>
+    $(function(){
+
+        laydate({
+            elem: '#input1', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+            event: 'focus', //响应事件。如果没有传入event，则按照默认的click
+            format: 'YYYY-MM-DD'
+        });
+        laydate({
+            elem: '#input2', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+            event: 'focus', //响应事件。如果没有传入event，则按照默认的click
+            format: 'YYYY-MM-DD'
+        });
+        laydate({
+            elem: '#fundInput1', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+            event: 'focus', //响应事件。如果没有传入event，则按照默认的click
+            format: 'YYYY-MM-DD'
+        });
+        laydate({
+            elem: '#fundInput2', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+            event: 'focus', //响应事件。如果没有传入event，则按照默认的click
+            format: 'YYYY-MM-DD'
+        });
+
+
+        // 月份选择
+        $('.monthChooseBan').on('click', function(event) {
+            var nowdate = new Date()
+            var initY = parseInt((nowdate.getFullYear()));
+            var initX = parseInt(nowdate.getMonth() + "") + 1;
+            event.stopPropagation();
+            var  html = '';
+            html+='<div class="monthChooseAll">';
+            html+='<div class="monthChooseTop"><div class="monthChooseTop1">◀◀</div><div class="monthChooseTop2">'+initY+'</div><div class="monthChooseTop3">▶▶</div></div>'
+            html+='<ul class="monthChooseContent">';
+            html+='<li>01</li><li>02</li><li>03</li><li>04</li><li>05</li><li>06</li><li>07</li><li>08</li> <li>09</li><li>10</li><li>11</li><li>12</li>';
+            html+='</ul>';
+            html+='</div>';
+            var htmlt = $(html);
+            htmlt.data('targetInput', this);
+            if($('.monthChooseAll').length !=1){
+                $(this).after(htmlt);
+            }
+            if(initX<10){
+                initX = '0'+initX
+            }
+            $('.monthChoose').css({'position':'relative'})
+            $('.monthChooseAll').css({'width':160,'height':200,'border':'1px solid #0696fa','position':'absolute','z-index':999});
+            $('.monthChooseTop').css({'width':160,'height':40,'background':'#0696fa','color':'#fff','line-height':'40px','font-family':'微软雅黑','position':'relative'});
+            $('.monthChooseTop1').css({'position':'absolute','left':'10px','cursor':'pointer'})
+            $('.monthChooseTop2').css({'position':'absolute','left':'0px','right':'0px','margin':'auto','width':80,'height':40,'text-align':'center'});
+            $('.monthChooseTop3').css({'position':'absolute','right':'10px','cursor':'pointer'});
+            $('.monthChooseContent').css({'width':160,'padding':'0','background':'#fff','height':200});
+            $('.monthChooseContent').find('li').css({'float':'left','width':25,'height':25,'text-align':'center','line-height':'25px','cursor':'pointer','border-radus':'5px','border':'5px','margin':'7px 14px','color':'#333','font-family':'微软雅黑','border-radius':'5px'});
+            var lis = $('.monthChooseContent').find('li');
+            lis.each(function(){
+                if($(this).html()== initX){
+                    $(this).css('color','#0696fa');
+                }else{
+                    $(this).hover(function(){
+                        $(this).css({'background':'#0696fa','color':'#fff'});
+                    },function(){
+                        $(this).css({'background':'#fff','color':'#333'});
+                    });
+                };
+            });
+            lis.on('click',function(){
+                $($(this).parent().parent().data('targetInput')).val
+                ($('.monthChooseTop2').html()+'-'+$(this).html()).css({});
+                $('.monthChooseAll').remove();
+            });
+            $(document).click(function(){
+                $('.monthChooseAll').remove();
+            });
+            var a = $('.monthChooseTop2').html();
+            $('.monthChooseTop1').on('click', function() {
+                a--;
+                $('.monthChooseTop2').html(a);
+            });
+            $('.monthChooseTop3').on('click', function() {
+                a++;
+                $('.monthChooseTop2').html(a);
+            });
+            $('.monthChooseAll').click(function(event){
+                event.stopPropagation();
+            });
+        });
+    })
+</script>
+</html>

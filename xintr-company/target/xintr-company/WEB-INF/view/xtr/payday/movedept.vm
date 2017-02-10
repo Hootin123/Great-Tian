@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title></title>
+    #parse("comm/head.vm")
+##    <link href="#springUrl('/resource/css/payday/payday.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/payday/payoff.css')" rel="stylesheet">
+    <script src="#springUrl('/resource/js/payday/movedept.js')"></script>
+</head>
+<body>
+##<div class="moveTo">
+##    <div class="moveTo_centent">
+##        <h4>选择成员所在部门</h4>
+##
+##        <div>
+##            #if($!{companyTree} && $!{companyTree.size()} > 0)
+##
+##                <dt><em></em>$!companyTree.get(0).companyName</dt>
+##                #foreach($data in $!{companyTree})
+##                    <dd>
+##                        <em></em>
+##                        <a href="#" onclick="onSelectDept($!{data.depId},'$!{data.depName}')">$!{data.depName}</a>
+##                    </dd>
+##                #end
+##            #end
+##        ##            <dt><em></em>天上人间/Q1606U4F</dt>
+##        ##            <dd>
+##        ##                <em></em><a href="#" onclick="onSelectDept()">技术部/MRH98462</a>
+##        ##            </dd>
+##        ##            <dd>
+##        ##                <em></em><a href="#">人事部/EFS40180</a>
+##        ##            </dd>
+##        ##            <dd>
+##        ##                <em></em><a href="#">财务部</a>
+##        ##            </dd>
+##        </div>
+##    </div>
+##
+##    <div class="moveTo_centent">
+##        <h4>成员将属于以下部门</h4>
+##
+##        <div>
+##            <a id="deptName"></a>
+##            <input type="hidden" id="deptId" name="deptId" value="">
+##        </div>
+##    </div>
+##    <div style="clear: both;"></div>
+##    <div class="move_btn">
+##        <a id="okBtn" href="#">确定</a>
+##        <a id="cancelBtn" href="#">取消</a>
+##    </div>
+##</div>
+
+
+<div class="moveTo" >
+##    <span></span>
+##
+##    <p>设置成员所在部门</p>
+
+    <div class="moveTo_left" style="margin-left:25px">
+        <h4>选择成员所在部门</h4>
+        <dl style="height: 300px;overflow: auto;">
+
+            #if($!{companyTree} && $!{companyTree.size()} > 0)
+
+                <dt><em></em>$!companyTree.get(0).companyName</dt>
+                #foreach($data in $!{companyTree})
+                    <dd>
+                        <em></em>
+                        <a href="#" onclick="onSelectDept($!{data.depId},'$!{data.depName}')">$!{data.depName}</a>
+                    </dd>
+                #end
+            #end
+
+        </dl>
+    </div>
+    <div class="moveTo_right">
+        <h4>成员将属于以下部门</h4>
+
+        <div>
+            <a id="deptName"></a>
+            <input type="hidden" id="deptId" name="deptId" value="">
+        </div>
+    </div>
+    <div style="clear: both;"></div>
+    <div class="move_btn">
+        <a id="okBtn" href="javascript:;">确定</a>
+        <a id="cancelBtn" href="javascript:;">取消</a>
+    </div>
+
+</div>
+</body>
+</html>
+

@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    #parse("comm/head.vm")
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="resource/css/comm/comm.css" />
+    <link rel="stylesheet" type="text/css" href="resource/css/login/activated.css" />
+    <link rel="stylesheet" href="resource/css/comm/mainPage.css" />
+    <script src="resource/js/login/login.js"></script>
+</head>
+<body>
+<div class="header">
+    <div class="hdlg">
+        <a class="homepage" href="/">薪太软首页</a>
+    </div>
+</div>
+<div id="lgbdy">
+<div class="activated acetpasucess">
+<div class="activated" style="opacity: 0.7;filter:alpha(opacity=70); z-index: -1; background: #FFFFFF; position: absolute; margin: 0;"></div>
+<span>企业账号注册成功</span>
+<p class="acetpasucessp">恭喜您的薪太软企业账号注册成功！</p>
+<p class="acetpasucessp1" style="font-weight:normal ;"><em>薪太软为你提供一站式薪酬福利解决方案，包括：代发工资、垫发工资、代缴社保公积金等服务。</em><br />
+    <em style="font-weight:bold ;color:grey">您的登录用户名为：$!{phoneShow}</em></p>
+<a class="acetpasucesbtn" style="color: #fff; text-decoration: none;" href="$!{emailLogPage}">登录</a>
+</div>
+</div>
+<div class="footer" id="footer">薪太软（上海）科技发展有限公司 | 沪ICP备16018294号 |<img src="#springUrl('/resource/img/police.png')"
+                                                                       style="margin: 28px 5px 0 5px;"/>沪公网安备
+    31010602000188号
+</div>
+</body>
+</html>

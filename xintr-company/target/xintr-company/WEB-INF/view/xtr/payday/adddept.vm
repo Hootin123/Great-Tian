@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title></title>
+    #parse("comm/head.vm")
+##    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/payday/addmembers.css')"/>
+    <script src="#springUrl('/resource/js/payday/adddept.js')"></script>
+    <link href="#springUrl('/resource/css/payday/payoff.css')" rel="stylesheet">
+    <script src="#springUrl('/resource/js/comm/validateUtil.js')"></script>
+
+</head>
+<body>
+<div class="pacity" style="opacity: 0.3;background: #000000;"></div>
+
+<div class="addbox">
+##    <div class="addbox_head">
+##        <span>编辑部门</span>
+##    </div>
+    <form id="addForm" action="#">
+        <table>
+            <tr>
+                <td>上级</td>
+                <td><input type="text" value="$!{companyName}" readonly="readonly"/></td>
+            </tr>
+            <tr>
+                <td>部门名称</td>
+                <td><input type="text" name="depName"/>
+                <td>
+            </tr>
+        </table>
+        <div class="adbox_btn">
+            <input class="okBtn" type="button" value="确认"/>
+            <input class="cancelBtn" type="button" value="取消">
+        </div>
+    </form>
+</div>
+</body>
+</html>
+

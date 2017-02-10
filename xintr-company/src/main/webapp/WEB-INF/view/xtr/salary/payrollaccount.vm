@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>薪资核算</title>
+    #parse("comm/head.vm")
+    <script src="#springUrl('/resource/js/salary/salaset.js')"></script>
+    <link href="#springUrl('/resource/css/salary/salaset.css')" rel="stylesheet">
+    <style>
+        .salaset-box {
+            width: 7%;
+        }
+    </style>
+    <script type="application/javascript">
+        var payCycleEndDate = '$!date.format('yyyy-MM-dd',$!{payCycle.endDate})'
+    </script>
+
+</head>
+<body>
+<div class="salaset">
+    <input type="hidden" id="payCycleId" value="$!{payCycle.id}"/>
+    <input type="hidden" id="isSocialSecurity" value="$!{isSocialSecurity}"/>
+
+    <div class="salaset-title">
+        <i>计薪周期（$!{payCycle.currentPayCycle}）</i>
+    ##        <i>计算下月工资</i>
+        <a href="#" class="salaset-abtn3" onclick="onMonthlyWage('../monthlypayroll/monthlypayroll.htm',' ');">$!{payCycle.month}月工资表</a>
+        <a href="#" class="salaset-abtn2" onclick="onCustomerRequire('../historypayroll/historypayroll.htm',' ');">历史工资</a>
+        <a href="#" class="salaset-abtn1" onclick="onAllowance('../../salary_setting/allowance.htm',' ');">薪资设置</a>
+    </div>
+    <div class="salaset-brie">
+				<span class="salaset-brie-span">
+					共<i>&nbsp;#if($!{customerInfo})$!{customerInfo.totalCount}#else 0#end&nbsp;</i>人 &nbsp;
+					入职 <i>&nbsp;#if($!{customerInfo})$!{customerInfo.enterCount}#else 0#end</i>
+					离职 <i>&nbsp;#if($!{customerInfo})$!{customerInfo.leaveCount}#else 0#end</i>
+					调薪<i>&nbsp;#if($!{customerInfo})$!{customerInfo.saralyCount}#else
+                    0#end</i>
+                    未定薪<i><a href="#" style="color:#0696fa;" onclick="initData({'isSalary':'0'})">&nbsp;#if($!{customerInfo})$!{customerInfo.noSaralyCount}#else
+                    0#end</a></i>
+				</span>
+				<span class="salaset-brie-span1">
+					<a class="salaset-sh" href="javascript:;"><img src="#springUrl('/resource/img/salary/screen.png')"/>筛选员工</a>
+					<a class="salaset-ss" href="javascript:;"><img src="#springUrl('/resource/img/salary/search.png')"/>搜索员工</a>
+                    <a class="salaset-co" href="javascript:;"><img src="#springUrl('/resource/img/salary/operation.png')"/>批量操作</a>
+				</span>
+        <!--筛选-->
+
+        <div class="salaset-seach">
+            <ul style="z-index: 5;">
+                <img class="salaset-down" src="#springUrl('/resource/img/salary/drop-down.png')">
+                <li class="list">聘用形式</li>
+                <li data-value="1">正式</li>
+                <li data-value="2">劳务</li>
+            </ul>
+            <ul style="z-index: 4;">
+                <img class="salaset-down" src="#springUrl('/resource/img/salary/drop-down.png')">
+                <li class="list">员工状态</li>
+##                <li data-value="1">试用期</li>
+                <li data-value="2">在职</li>
+                <li data-value="3">离职</li>
+            </ul>
+            <ul style="z-index: 3;">
+                <img class="salaset-down" src="#springUrl('/resource/img/salary//drop-down.png')">
+                <li class="list1"><input class="salaset-down-input" type="text" placeholder="请输入部门名称"/></li>
+                <li class="salaset-down-list1" style="padding-left: 0;">
+                </li>
+            </ul>
+            <ul style="z-index: 2;">
+                <img class="salaset-down" src="#springUrl('/resource/img/salary/drop-down.png')">
+                <li class="list list1" dataValue="list">津贴方案</li>
+##                #if($!{allowanceList})
+            ##                    #foreach($allowance in $!{allowanceList})
+            ##                        <li data-value="$!{allowance.id}">$!{allowance.allowanceName}</li>
+            ##                    #end
+            ##                #end
+            ##                <li>正式</li>
+            ##                <li>劳务</li>
+            </ul>
+
+            <input class="salaset-seach-btn" type="button" value="确定"/>
+
+        </div>
+        <!--end-->
+
+        <!--搜索-->
+        <div class="salaset-seach1">
+            <input id="userName" type="text" placeholder="输入员工姓名"/>
+            <input type="button" value="确定" onclick="onScreen()"/>
+        </div>
+        <!--end-->
+        <!--批量操作-->
+        <ul class="salaset-operate">
+##            <li class="sopactive" onclick="parent.allPop('../customerSalary/toBatchUpload.htm?type=1');">批量定薪</li>
+##            <li onclick="parent.allPop('../customerSalary/toBatchUpload.htm?type=2');">批量调薪</li>
+##            <li onclick="parent.allPop('../customerSalary/toBatchUpload.htm?type=4');">导入考勤</li>
+##            <li onclick="parent.allPop('../customerSalary/toBatchUpload.htm?type=3');">补充税前税后工资明细</li>
+    <li class="sopactive" onclick="onBatchUpload('../customerSalary/toBatchUpload.htm?type=1',' ');">批量定薪</li>
+    <li onclick="onBatchUpload('../customerSalary/toBatchUpload.htm?type=2',' ');">批量调薪</li>
+    <li onclick="onBatchUpload('../customerSalary/toBatchUpload.htm?type=4',' ');">导入考勤</li>
+    <li onclick="onBatchUpload('../customerSalary/toBatchUpload.htm?type=3',' ');">补充税前税后工资明细</li>
+        </ul>
+        <!--end-->
+    </div>
+    <div class="screen">
+
+    </div>
+    <div class="salaset-list clear">
+
+    </div>
+    <div id="kkpager" style="margin-top:30px;"></div>
+    <input name="firstVisitSalary" id="firstVisitSalary" type="hidden" value="$!{firstVisitSalary}"/>
+</div>
+<script>
+    $(function () {
+        var firstVisitSalary = $("#firstVisitSalary").val();
+        if(firstVisitSalary!=null&&firstVisitSalary!=""&&firstVisitSalary!=undefined){
+            parent.guidePay();
+            $("#firstVisitSalary").val("");
+        }
+//        $('.salaset-abtn1').click(function () {
+//            parent.allPop("../salary_setting/allowance.htm",function () {
+//                initData(null);
+//            });
+//        })
+    })
+</script>
+</body>
+</html>
+

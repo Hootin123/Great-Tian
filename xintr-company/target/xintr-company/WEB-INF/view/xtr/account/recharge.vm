@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/account/recharge.css')" rel="stylesheet">
+    <script src="#springUrl('/resource/js/account/addrecharge.js')"></script>
+    <script src="#springUrl('/resource/js/comm/validateUtil.js')"></script>
+</head>
+
+<body>
+<div class="main_right recharge">
+    <div class="topHeadline">
+        <h2>充值</h2>
+##        <img onclick="history.back();" src="#springUrl('/resource/img/salary/guanbi.png')" alt="" id="closeDetailBtn">
+    </div>
+
+    #if($!{error})
+        <font color="red">${error}</font>
+    #end
+
+    <form id="rechargeForm" method="post">
+        <input type="hidden" name="rechargeType" value="1"/>
+        <input type="hidden" name="rechargeClient" value="1"/>
+        <div class="recharge_show">
+            <p>可用余额：<span id="curMoney" class="span_red">#if($!{cashAmout})
+                $!{xtr.money($!{cashAmout})}
+            #else
+                0
+            #end</span>元，请完成以下步骤完成充值</p>
+            <dl class="show_list">
+                <dt>第一步：通过银行柜台或网银转账转账到如下账户</dt>
+                <dd>• 账户名称：网银在线（北京）科技有限公司客户备付金</dd>
+                <dd>• 账号：341561371394</dd>
+                <dd>• 开户行：中国银行股份有限公司北京奥运村支行</dd>
+                <dt>第二步：将网银转账信息填入对话框，财务审核后会帮助您完成充值</dt>
+            </dl>
+        </div>
+        <ul class="recharge_show_tw">
+            <li><span>付款银行名称</span>
+                <input type="text" id="rechargeBank" name="rechargeBank" placeholder="请输入您转账所用银行账户的银行名称"/>
+            </li>
+            <li><span>付款银行账号</span>
+                <input type="text" id="rechargeBanknumber" name="rechargeBanknumber" placeholder="请输入您转账所用的银行账号"/>
+            </li>
+            <li><span>银行交易流水号</span>
+                <input type="text" id="rechargeSerialNumber" name="rechargeSerialNumber" placeholder="请输入银行交易流水号 "/>
+            </li>
+            <li><span>转账金额</span>
+                <input type="text" id="rechargeMoney" name="rechargeMoney" placeholder="请输入转账金额"/>
+            </li>
+            <li><span>备注</span>
+                <input type="text" id="rechargeBak" name="rechargeBak" placeholder="请输入您在转账时填写的备注信息"/>
+            </li>
+        </ul>
+        <div class="recharge_show_tr">
+            <div class="recharge_show_tr_btn">
+                <a class="recharge_show_tr_btn1 btnsubmit okBtn" type="button" >提交</a>
+                <a class="recharge_show_tr_btn2" href="javascript:void(0);" onclick="history.back();">取消</a>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

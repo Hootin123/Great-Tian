@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    #if($shebaoType == 1)
+        <title>社保补缴</title>
+    #else
+        <title>公积金补缴</title>
+    #end
+    #parse("comm/head.vm")
+</head>
+<style>
+    body,html{width:100%;}
+    .salaset { width:90%;margin:0 auto;font-size: 12px;color: #666666;min-width: 960px;}
+    .salaset-title{width: 100%; height: 80px;position: relative}
+    .salaset-title h2{text-align: center;line-height: 80px;border-bottom: 1px solid #dbe9ee;color:#000;font-size:25px}
+    .salaset-title .topImg{position: absolute;right:25px;top:0;bottom:0;margin:auto;cursor: pointer;}
+    .all{width:90%;margin:40px auto 0;}
+    table{width:100%;}
+    td{border:1px solid #dbe9ee;height: 44px}
+    td span{color:#fea811;line-height: 45px}
+    .oneTitle{width:15%;text-align: center;background:#f1f9fc;color:#666;}
+    /*.oneCon ul{display:none}*/
+    .oneCon{width:100%;height:100%;color:#333;text-indent: 40px; position: relative;}
+    .oneCon .sit{width:200px;height:100%;background:url(#springUrl('/resource/img/san.png')) no-repeat 180px center;}
+    .oneImg{position: relative}
+    .oneImg1,.oneImg2{position: absolute;left:40px;top:0;bottom:0;margin:auto;}
+    .oneTxte{padding-left:40px; position: relative;}
+    .oneTxte input{border:0;}
+    .part{width:100%;height:45px;border:1px solid #dbe9ee;background:#f1f9fc;margin:20px auto;line-height:45px;color:#666;}
+    .toCon{background:#5b7798;color:#fff;}
+    .toNav{border:1px solid #dbe9ee;background:#f1f9fc;}
+    .footer{width:100%;height:80px;border:1px solid #dbe9ee;background:#f1f9fc;overflow: hidden;margin-top:20px;}
+    .footerBtn{width:400px;height:40px;margin:20px auto;}
+    .footerBtn1{width:240px;height:40px;font-size:18px;background:#0696fa;color:#fff;float:left;cursor: pointer;border:0;border-radius:6px;font-family: "微软雅黑"}
+    .footerBtn2{width:140px;height:40px;font-size:18px;background:#fff;color:#0696fa;float:left;cursor: pointer;border:1px solid #0696fa;float:right;border-radius:6px;font-family: "微软雅黑"}
+    .address input{width:205px;height: 40px;border:0;background: #fff;margin-left:40px;}
+    .address em{display: block;width: 20px;height:20px; position: absolute;left: 220px;top:15px;cursor:pointer}
+    .address em img{display: block;width: 100%;height: 100%;}
+    .address{text-indent: 0;}
+    .address .addressMain{
+      position: absolute;
+        left:30px;
+        top:40px;
+        width: 300px;
+        height: 250px;
+        border: 1px solid #dbe9ee;
+        box-shadow: 1px 5px 7px #e6eff2;
+        background: #fff;
+        z-index: 20;
+    }
+    .addressMain .address-title{
+        width: 100%;
+        height: 40px;
+        border-bottom:1px solid #dbe9ee;
+        background: #f1f9fc;
+    }
+    .addressMain .pname{
+        width: 149px;
+        height: 100%;
+        float: left;
+        text-align: center;
+        line-height: 40px;
+        color: #666;
+        cursor: pointer;
+        border-right: 1px solid #dbe9ee;
+    }
+    .addressMain .cname{
+        width: 150px;
+        height: 100%;
+        text-align: center;
+        line-height: 40px;
+        color: #666;
+        float: left;
+        cursor: pointer;
+    }
+    .addressMain .active{
+        color: #0696fa;
+        background: #fff;
+        border-bottom: 1px solid #fff;
+    }
+
+    .address-content .city,.address-content .province{
+        width: 100%;
+        height: 100%;
+        padding:15px;
+        box-sizing: border-box;
+    }
+    .address-content .city ul{
+        width: 100%;
+        height: 100%;
+    }
+    .address-content .city li{
+        float: left;
+        margin: 8px;
+        color: #333;
+        font-size: 12px;
+        cursor: pointer;
+    }
+    .address-content .province ul{
+        width: 100%;
+        height: 50px;
+    }
+
+    .address-content .province ul li{
+        float: left;
+        margin-right: 22px;
+        margin-bottom: 4px;
+        cursor: pointer;
+        color: #333;
+        font-size: 12px;
+    }
+    .address-content .province ul p{
+        height: 50px;
+        width: 50px;
+        float: left;
+        color: #333;
+        font-size: 12px;
+
+    }
+
+    .oneTxte .dateMain{
+        width: 164px;
+        height: 206px;
+       position: absolute;
+        left: 30px;
+        top: 40px;
+        background: #fff;
+        border: 1px solid #dbe9ee;
+        box-shadow: 1px 5px 7px #e6eff2;
+    }
+    .oneTxte input{
+        text-align: center;
+    }
+    .oneTxte .date2{
+        position: absolute;
+        left:300px;
+        top: 40px;
+    }
+    .dateMain .date-title{
+        width: 100%;
+        height: 40px;
+        background: #0696fa;
+        text-align: center;
+        line-height: 40px;
+        position: relative;
+        color: #fff !important;
+    }
+    .dateMain .date-title .date-left{
+        position: absolute;
+        left: 18px;
+        top:15px;
+        cursor: pointer;
+    }
+    .dateMain .date-title .date-right{
+        position: absolute;
+        right: 18px;
+        top:15px;
+        cursor: pointer;
+    }
+    .dateMain .date-content{
+        width: 100%;
+        height: 100%;
+        padding: 20px 20px 0;
+        box-sizing: border-box;
+    }
+    .dateMain .date-content li{
+        float: left;
+        width: 22px;
+        height: 22px;
+        text-align: center;
+        line-height: 22px;
+        margin:0 28px 13px 0;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    .dateMain .date-content li:hover{
+        background: #0696fa;
+        color: #fff;
+    }
+    .dateMain .date-content .lit{
+        margin-right: 0;
+    }
+    .para-input{
+        border:0;
+        color:#666;
+        height:45px;
+    }
+    #startDate,#endDate{
+        height:100%;
+        background:none;
+    }
+    .overbase-input{
+        border:0;
+    }
+    #typeSelect{
+        width:200px;
+        height:100%;
+        border:0;
+        color:#666;
+    }
+    .layui-layer-content{
+        margin-top:5px;
+    }
+
+</style>
+<body>
+    <div class="salaset-title">
+    #if($shebaoType == 1)
+        <h2 id="title">社保补缴</h2>
+    #else
+        <h2 id="title">公积金补缴</h2>
+    #end
+
+    <img class="topImg" src="#springUrl('/resource/img/ture.png')" alt="" id="closeDetailBtn"  onclick="javascript:location.href = BASE_PATH+'/shebao/shebaoIndex.htm';">
+    <div class="all">
+        <table id="basic-table">
+            <tr>
+                <td class="oneTitle"><span>*</span>&nbsp;补缴月份</td>
+                <td class="oneTxte">
+
+                    #if($socialBase.oemonth && $socialBase.obmonth)
+                        <input type="text" id="startDate" class="over-input startDate" placeholder="请选择日期" onchange="ShebaoExtend.onOverDateChange()">-
+                    #else
+                        <input type="text" id="startDate" disabled class="over-input startDate" placeholder="请选择日期" onchange="ShebaoExtend.onOverDateChange()">-
+                    #end
+
+
+                    <!--时间控件 -->
+                    <div class="dateMain date1" style="display: none">
+                        <div class="date-title">
+                            <em class='date-left'>
+                                <img src="#springUrl('/resource/img/date-left.png')">
+                            </em>
+                            <i>2015</i>
+                            <em class='date-right'>
+                                <img src="#springUrl('/resource/img/date-right.png')">
+                            </em>
+                        </div>
+                        <div class="date-content">
+                            <ul>
+                                <li>01</li>
+                                <li>02</li>
+                                <li class='lit'>03</li>
+                                <li>04</li>
+                                <li>05</li>
+                                <li class='lit'>06</li>
+                                <li>07</li>
+                                <li>08</li>
+                                <li class='lit'>09</li>
+                                <li>10</li>
+                                <li>11</li>
+                                <li class='lit'>12</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--end -->
+
+                    #if($socialBase.oemonth && $socialBase.obmonth)
+##                        #if($shebaoType == 1)
+                            <input type="text" id="endDate" disabled value="$!{socialBase.oemonth.replace('-', '')}" class="over-input endDate" placeholder="请选择日期" onchange="ShebaoExtend.onOverDateChange()">
+##                        #else
+##                            <input type="text" id="endDate" class="over-input endDate" placeholder="请选择日期" onchange="ShebaoExtend.onOverDateChange()">
+##                        #end
+                    #else
+                        <input type="text" id="endDate" disabled value="$!{socialBase.oemonth.replace('-', '')}" class="over-input endDate" placeholder="请选择日期" onchange="ShebaoExtend.onOverDateChange()">
+                    #end
+
+
+                    <!--时间控件 -->
+                    <div class="dateMain date2" style="display: none">
+                        <div class="date-title">
+                            <em class='date-left'>
+                                <img src="#springUrl('/resource/img/date-left.png')">
+                            </em>
+                            <i>2015</i>
+                            <em class='date-right'>
+                                <img src="#springUrl('/resource/img/date-right.png')">
+                            </em>
+                        </div>
+                        <div class="date-content">
+                            <ul>
+                                <li>01</li>
+                                <li>02</li>
+                                <li class='lit'>03</li>
+                                <li>04</li>
+                                <li>05</li>
+                                <li class='lit'>06</li>
+                                <li>07</li>
+                                <li>08</li>
+                                <li class='lit'>09</li>
+                                <li>10</li>
+                                <li>11</li>
+                                <li class='lit'>12</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--end -->
+                    <span style="padding-left:100px;"></span>
+                    <span id="over-month-tips">
+
+                        #if($socialBase.oemonth && $socialBase.obmonth)
+                            可补缴月份：$!{socialBase.obmonth} 至 $!{socialBase.oemonth}</span>
+                        #else
+                            当前无可补缴月份
+                        #end
+
+                    <span></span>
+                </td>
+            </tr>
+        </table>
+        <div class="part" style="display: none;">
+            <span style="padding-left:20px;">温馨提示：缴纳月份：</span>
+            <span id="jryf">$!date.format('yyyy-MM',$customerShebaoBean.currentMonth)</span>
+            #if($shebaoType == 1)
+                <span style="padding-left:40px;">社保补缴费用：</span>
+            #else
+                <span style="padding-left:40px;">公积金补缴费用：</span>
+            #end
+
+            <span id="sbbjfy">0</span>
+            <span>元</span>
+        </div>
+
+        <div class="footer">
+            <div class="footerBtn">
+                <input class="footerBtn1" type="button" onclick="ShebaoExtend.submit()" value="确认">
+                <input class="footerBtn2" type="button" value="取消补缴"  onclick="javascript:ShebaoExtend.cleanBj()">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    ShebaoExtend = {
+        types:{},
+        joinDatas:{},
+        init:function(){
+        },
+        validateMoney:function(input){
+            var val = $(input).val();
+            if(!isMoney(val)) {
+                layer.tips('请输入基数', $(input));
+                return false;
+            }
+            val = parseFloat(val);
+            var max = $(input).data("max");
+            if(max) {
+                if(val > parseFloat(max)) {
+                    layer.tips('基数最大值为' + max, $(input));
+                    return false;
+                }
+            }
+            var min = $(input).data("min");
+            if(min) {
+                if(val < parseFloat(min)) {
+//                    layer.tips('基数最小值为' + min, $(input));
+                    layer.tips('请输入正确的基数', $(input));
+                    return false;
+                }
+            }
+            return true;
+        },
+        calOverMoney:function(){
+            var isok = true;
+            ShebaoExtend.clearOverTable();
+            $.each($(".overbase-input"), function(index, input){
+                if(!ShebaoExtend.validateMoney(input)){
+                    isok = false;
+                    return false;
+                }
+            })
+            if(isok == false){
+
+                return false;
+            }
+
+            var orgoversum = 0;
+            var empoversum = 0;
+            var overCalResult = ShebaoExtend.calOver();            var table = $("<table class='overTable' style='text-align: center;color:#666;'></table>");
+            table.append("<thead class='toCon'><td>续费账单月</td><td>缴纳说明</td><td>单位费用（元）</td><td>个人费用（元）</td><td>小计（元）</td></thead>");
+            $.each(overCalResult, function(index, data) {
+
+                var tbody = $("<tbody>");
+                var tr = $("<tr>");
+                tr.append("<td>" + $("#jryf").text() + "</td>")
+                tr.append("<td>补缴" + data.month + "</td>")
+                tr.append("<td>" + data.orgSum + "元" + "</td>")
+                tr.append("<td>" + data.empSum + "元" + "</td>")
+                tr.append("<td>" + parseFloat(parseFloat(data.empSum)  + parseFloat(data.orgSum)).toFixed(2) + "元</td>")
+                orgoversum += data.orgSum;
+                empoversum += data.empSum;
+                tbody.append(tr)
+
+                if(data.month == $("#endDate").val()) {
+                    var tr = $("<tr>");
+                    tr.append("<td>总计</td>")
+                    tr.append("<td></td>")
+                    tr.append("<td>" + parseFloat(orgoversum).toFixed(2) + "元" + "</td>")
+                    tr.append("<td>" + parseFloat(empoversum).toFixed(2) + "元" + "</td>")
+                    tr.append("<td>" + parseFloat(parseFloat(orgoversum) + parseFloat(empoversum)).toFixed(2) + "元" + "</td>")
+                    tbody.append(tr)
+                    $("#sbbjfy").html(parseFloat(parseFloat(orgoversum) + parseFloat(empoversum)).toFixed(2));
+                    ShebaoExtend.updateByzdze();
+                }
+
+                table.append(tbody);
+                $(".footer").before(table);
+            })
+        },
+        calOver:function(){
+            var result = {};
+            var json = {};
+            json.cityCode = '$!{customerShebaoBean.joinCityCode}';
+            #if($shebaoType == 1)
+                json.type = '$!{customerShebaoBean.sbType}';
+            #else
+                json.type = '$!{customerShebaoBean.gjjType}';
+            #end
+            json.shebaoType = '$shebaoType';
+            json.overOrders = [];
+            $.each($(".overbase-input"), function(index, input){
+                var months = isNaN($(input).data("months")) ? $(input).data("months").split(",") : [$(input).data("months")];
+                $.each(months, function(index, m) {
+                    var overOrder ={};
+                    overOrder.month = m;
+                    overOrder.base = $(input).val();
+                    json.overOrders.push(overOrder);
+                })
+            })
+
+            $.ajax({
+                type: 'post',
+                url: BASE_PATH + '/shebao/calOverBySbt.htm',
+                data: JSON.stringify(json),
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+                async: false,
+                success: function (data) {
+                    layer.closeAll('loading');
+                    if(data.success) {
+                        result = data.data;
+                    }else{
+                        showWarning(data.message);
+                    }
+                },
+                error:function(){
+                    layer.closeAll('loading');
+                }
+            });
+            return result;
+        },
+        onOverDateChange :function(){
+            if(ShebaoExtend.validateOverDate()) {
+                var startDate = $("#startDate").val();
+                var endDate = $("#endDate").val();
+                var cityCode = '$!{customerShebaoBean.joinCityCode}';
+                #if($shebaoType == 1)
+                    var type = '$!{customerShebaoBean.sbType}';
+                #else
+                    var type = '$!{customerShebaoBean.gjjType}';
+                #end
+
+                $("#basic-table .over-input-tr").remove();
+                ShebaoExtend.clearOverTable();
+                ShebaoExtend.joinDatas = {};
+                $.ajax({
+                    type: 'post',
+                    async:false,
+                    url: BASE_PATH + '/shebao/getHistoryBasic.htm',
+                    data: {"cityCode" : cityCode,"startMonth" : startDate,"endMonth" : endDate},
+                    dataType: 'json',
+                    success: function (data) {
+                        var overDatas = [];
+                        $.each(data.data, function(index, item){
+                            var overData = {};
+                            overData.month = item.month;
+                            #if($shebaoType == 1)
+                                $.each(item.ins, function(index2, ins2){
+                            #else
+                                $.each(item.hf, function(index2, ins2){
+                            #end
+
+                                if(ins2.type == type) {
+                                    overData.inc = ins2.inc;
+                                    overData.min = ins2.min;
+                                    overData.max = ins2.max;
+                                    return false;
+                                }
+                            })
+                            overDatas.push(overData);
+                        })
+                        var joinDatas = [];
+                        var joinData = null;
+                        $.each(overDatas, function(index, data) {
+                            if(joinData == null) {
+                                joinData = {};
+                                joinData.min =data.min;
+                                joinData.max =data.max;
+                                joinData.inc = data.inc;
+                                joinData.months = [];
+                            }
+
+                            if(joinData.min == data.min && joinData.max == data.max) {
+                                joinData.months.push(data.month);
+                            }else {
+                                joinDatas.push($.extend(true, {}, joinData));
+                                joinData.min =data.min;
+                                joinData.max =data.max;
+                                joinData.inc = data.inc;
+                                joinData.months = [data.month];
+                            }
+                        })
+                        joinDatas.push(joinData);
+
+                        if(joinDatas) {
+                            $.each(joinDatas, function(index, joinData){
+                                var monthsjoin = joinData.months.join(",");
+                                var tr = $("<tr class='over-input-tr'>");
+                                tr.append($("<td class='oneTitle'><span>*</span>&nbsp;补缴基数" + (index + 1) + "</td>"));
+                                var td2 = $("<td>");
+                                td2.append("<span style='padding-left:40px;color:#333;'><input placeholder='请输入补缴基数' class='overbase-input' onchange='ShebaoExtend.calOverMoney()' data-months='"+monthsjoin+"' data-max='" + joinData.max + "' data-min='" + joinData.min + "'/></span>")
+                                ShebaoExtend.joinDatas[monthsjoin] = joinData.inc;
+                                tr.append(td2);
+                                var monthstr="";
+                                if(joinData.months.length > 1) {
+                                    monthstr = joinData.months[0] + " - " + joinData.months[joinData.months.length - 1];
+                                }else{
+                                    monthstr = joinData.months[0];
+                                }
+                                td2.append("<span style='padding-left:200px;'>[" + monthstr + "]</span>");
+                                td2.append("<span>基数范围：" + joinData.min + " - " + joinData.max + "</span>");
+                                $("#basic-table").append(tr);
+                            })
+
+                        }else{
+                            $("#basic-table").append("<tr class='over-input-tr'><td colspan='2'>暂无基数</td></tr>");
+                        }
+                    }
+                });
+            }else{
+                ShebaoExtend.clearOverTable()
+            }
+        },
+        validateOverDate : function(){
+            var startDate = $("#startDate").val();
+            var endDate = $("#endDate").val();
+            var obmonth = '$!{socialBase.obmonth}';
+            var oemonth = '$!{socialBase.oemonth}';
+            obmonth = obmonth.replace("-", "");
+            oemonth = oemonth.replace("-", "");
+            obmonth = parseInt(obmonth);
+            oemonth = parseInt(oemonth);
+            if(isNaN(startDate)) {
+                layer.tips('请输入正确的补缴开始时间', $("#startDate"));
+                return false;
+            }
+
+            if(isNaN(endDate)) {
+                layer.tips('请输入正确的补缴结束时间', $("#endDate"));
+                return false;
+            }
+
+            if(startDate) {
+                if(startDate > oemonth || startDate < obmonth) {
+                    layer.tips('请输入补缴范围内的时间', $("#startDate"));
+                    return false;
+                }
+            }else{
+                layer.tips('请选择补缴月份', $("#startDate"));
+                return false;
+            }
+            if(endDate) {
+                if(endDate > oemonth || endDate < obmonth) {
+                    layer.tips('请输入补缴范围内的时间', $("#endDate"));
+                    return false;
+                }
+            }else{
+                layer.tips('请输入补缴结束时间', $("#endDate"));
+                return false;
+            }
+
+            if(endDate < startDate) {
+                layer.tips('开始时间不能大于结束时间', $("#startDate"));
+                return false;
+            }
+
+            return true;
+        },
+        updateByzdze:function(){
+            $("#byzdze").html($("#sbbjfy").html());
+        },
+        submit:function(){
+            if (!ShebaoExtend.validateOverDate()) {
+                return false;
+            }else{
+                var isok = true;
+                $.each($(".overbase-input"), function(index, input){
+                    if(!ShebaoExtend.validateMoney(input)){
+                        isok = false;
+                        return false;
+                    }
+                })
+                if(isok == false)
+                    return false;
+            }
+
+            var json = {};
+            json.customerId = '$!{customerShebaoBean.customerId}';
+            json.shebaoType = '$!{shebaoType}';
+            json.overOrders = [];
+            $.each($(".overbase-input"), function(index, input){
+                var months = isNaN($(input).data("months")) ? $(input).data("months").split(",") : [$(input).data("months")];
+                $.each(months, function(index, m) {
+                    var overOrder ={};
+                    overOrder.month = m;
+                    overOrder.base = $(input).val();
+                    json.overOrders.push(overOrder);
+                })
+            })
+
+            if(ShebaoExtend.needContains && ShebaoExtend.needContains.length > 0) {
+                var isOk = true;
+                $.each(ShebaoExtend.needContains, function(index, data) {
+                    var isContain = false;
+                    $.each(json.overOrders, function(index2, data2){
+                        if(data2.month == data) {
+                            isContain = true;
+                            return false;
+                        }
+                    })
+                    if(!isContain) {
+                        isOk = false;
+                        return false;
+                    }
+                })
+                if(!isOk) {
+                    showInfo("选择的补缴月份必须包含公积金补缴月份", '提示', function(){
+                    });
+                    return false;
+                }
+            }
+
+            layer.load();
+            $.ajax({
+                type: 'post',
+                url: BASE_PATH + '/shebao/bj.htm',
+                data: JSON.stringify(json),
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+                success: function (data) {
+                    layer.closeAll('loading');
+                    if(data.success) {
+                        showInfo("设置成功", '提示', function(){
+//                            history.go(-1);
+                            location.href = BASE_PATH+"/shebao/shebaoIndex.htm";
+                        });
+                    }else{
+                        showWarning(data.message);
+                    }
+                },
+                error: function(){
+                    layer.closeAll('loading');
+                }
+            });
+
+            return true;
+
+        },
+        clearOverTable:function(){
+            $(".overTable").remove();
+            $("#sbbjfy").html(0);
+            ShebaoExtend.updateByzdze();
+        },
+        onEdit : function(){
+            layer.load();
+            $("#startDate").val("$!date.format('yyyyMM',$!{bjData.startMonth})");
+            $("#endDate").val("$!date.format('yyyyMM',$!{bjData.endMonth})");
+            ShebaoExtend.onOverDateChange();
+            var bases = eval('$!{bjData.bases}');
+            $.each($(".overbase-input"), function(index, input){
+                $(input).val(bases[index]);
+            })
+            ShebaoExtend.calOverMoney();
+        },
+        cleanBj:function(){
+            if(ShebaoExtend.needContains && ShebaoExtend.needContains.length > 0) {
+                showInfo("当前有公积金补缴，不能取消社保补缴", '提示', function(){
+                });
+                return false;
+            }
+            var json = {};
+            json.customerId = '$!{customerShebaoBean.customerId}';
+            json.shebaoType = '$!{shebaoType}';
+            $.ajax({
+                type: 'post',
+                url: BASE_PATH + '/shebao/cleanBj.htm',
+                data: JSON.stringify(json),
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+                success: function (data) {
+                    layer.closeAll('loading');
+                    if(data.success) {
+                        showInfo("取消成功", '提示', function(){
+//                            history.go(-1);
+                            location.href = BASE_PATH+"/shebao/shebaoIndex.htm";
+                        });
+                    }else{
+                        showWarning(data.message);
+                    }
+                },
+                error: function(){
+                    layer.closeAll('loading');
+                }
+            });
+        }
+
+    }
+
+    $(function(){
+        ShebaoExtend.init();
+        #if($isEdit)
+            ShebaoExtend.onEdit();
+        #end
+        ShebaoExtend.needContains = eval('$!needContains');
+    })
+
+
+    //  ...........时间控件
+    // 年份变化(减)
+    $('.date-left').on('click',function(){
+
+        var timer=$(this).parent().find('i').text()
+        timer--
+        // if(timer<2016){
+        // 	// judYear()
+        // 	return
+        // }else{
+        getNowDate()
+        $(this).parent().find('i').text(timer)
+        // }
+        judYear()
+
+    });
+    // 年份变化(加)
+    $('.date-right').on('click',function(){
+        getNowDate()
+        var timer=$(this).parent().find('i').text()
+        timer++
+        $(this).parent().find('i').text(timer)
+        judYear()
+    })
+
+    // 月份变化
+    $('.date-content li').on('click',function(){
+        $(this).css({'background':'#0696fa','color':'#fff'}).siblings().css({'background':'#fff','color':'#333'})
+
+    });
+
+
+    // 初始化
+    getNowDate()
+    $('.date-title i').html(initY)
+
+
+    // 获取当前时间
+    function getNowDate(){
+        nowdate = new Date();
+        initM=parseInt(nowdate.getMonth()+"")+1; // .....当前月
+        initY=parseInt((nowdate.getFullYear())); // .....当前年
+        outM=Add(initM);
+        var obj=$('.date-content li')
+        for (var i = 0; i < obj.length; i++) {
+            console.log(obj[i].innerHTML)
+            if(obj[i].innerHTML==outM ){
+                obj[i].style.border='1px solid #fa5f5f';
+//                obj[i].style.color='#0696fa';
+            };
+        }
+    }
+
+    // 判断是否是当前的年份
+    function judYear(){
+        if($('.date-title i').html()!=initY){
+            $('.date-content li').css({'border':'0','color':'#333','background':'#fff'})
+            // $('.date-content li:first').css({'background':'#0696fa','color':'#fff'});
+
+
+        }else{
+//            $('.date-content li').css({'background':'#fff','color':'#333'});
+        }
+
+    }
+
+    // 个位数加零
+    function Add(n){
+        if(n<10){
+            return '0'+n ;
+        }else{
+            return n;
+        }
+    }
+
+    //开始时间
+
+$('.startDate').on('click',function(e){
+    getNowDate()
+    $('.date-title i').html(initY)
+    e.stopPropagation()
+    $('.date1').show();
+    $('.date2').hide();
+    $('.date1 .date-content li').unbind('click').bind('click',function(){
+        var moth=$(this).html();
+        console.log(moth)
+        var year=$('.date1').find('i').html()
+        $('.startDate').val(year+moth);
+        ShebaoExtend.onOverDateChange()
+        $('.date1').hide()
+
+
+    });
+
+})
+
+    $(document).on('click',function(){
+        $('.date1').hide()
+    })
+    $('.date1').on('click',function(e){
+        e.stopPropagation()
+    })
+
+    //结束时间
+
+    $('.endDate').on('click',function(e){
+        getNowDate()
+        $('.date-title i').html(initY)
+        e.stopPropagation()
+        $('.date2').show();
+        $('.date1').hide();
+        $('.date2 .date-content li').unbind('click').bind('click',function(){
+            var moth=$(this).html();
+            console.log(moth)
+            var year=$('.date2').find('i').html()
+            $('.endDate').val(year+moth);
+            ShebaoExtend.onOverDateChange()
+            $('.date2').hide()
+
+
+        });
+
+    })
+
+    $(document).on('click',function(){
+        $('.date2').hide()
+    })
+    $('.date2').on('click',function(e){
+        e.stopPropagation()
+    })
+</script>
+</body>
+</html>

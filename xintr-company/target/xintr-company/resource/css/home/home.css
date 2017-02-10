@@ -1,0 +1,175 @@
+
+.header {
+	min-width: 1200px;
+	height: 60px;
+	background: #222933;
+	position: relative;
+}
+
+.header .logo {
+	position: absolute;
+	left: 62px;
+	top: 6px;
+	z-index: 999;
+}
+
+.header a {
+	font-size: 14px;
+	color: #dae8f8;
+	display: block;
+	float: left;
+}
+
+.header .a1 {
+	width: auto;
+	height: 34px;
+	line-height: 34px;
+	padding-left: 52px;
+	margin: 10px 0 0 279px;
+	background: url(../../img/news.png) no-repeat;
+}
+
+.header .a1 em {
+	font-size: 12px;
+	color: #ffffff;
+	position: relative;
+	left: -22px;
+	top: -10px;
+}
+
+.header .a1 img {
+	margin: 17px 0 0 15px;
+}
+
+.header_left {
+	position: absolute;
+	top: 0px;
+	right: 2.58%;
+}
+
+.header .a2 {
+	width: 156px;
+	height: 16px;
+	margin: 20px 0 0 129px;
+	line-height: 16px;
+	background: url(../../img/manhead.png) no-repeat;
+	padding-left: 28px;
+}
+
+.header .a3 {
+	width: 100px;
+	height: 30px;
+	margin: 14px 0 0 21px;
+	line-height: 30px;
+	background: #0696fa;
+	border-radius: 6px;
+	color: #FFFFFF;
+	text-align: center;
+}
+
+.header .a4 {
+	width: 80px;
+	height: 30px;
+	margin: 14px 0 0 20px;
+	line-height: 30px;
+	background: #fa5f5f;
+	border-radius: 6px;
+	color: #FFFFFF;
+	text-align: center;
+}
+
+.main_left ul,
+.main_left .ul_first {
+	background: #2a323d;
+	width: 250px;
+}
+
+.main_left ul li,
+.ul_first {
+	width: 250px;
+	height: 75px;
+	border-top: 1px solid #2e3641;
+	border-bottom: 2px solid #1d232f;
+	font-size: 14px;
+	color: #c1cbd7;
+	line-height: 76px;
+	cursor: pointer;
+}
+
+.main_left ul li {
+	width: 164px;
+	padding-left: 86px;
+}
+
+.ul_first {
+	height: 71px;
+	cursor: auto
+}
+
+.main_left ul .btn1 {
+	background: url(../../img/icon1.png) 51px center no-repeat;
+}
+
+.main_left ul .btn2 {
+	background: url(../../img/icon2.png) 50px center no-repeat;
+}
+
+.main_left ul .btn3 {
+	background: url(../../img/icon3.png) 50px center no-repeat
+}
+
+.main_left ul .btn4 {
+	background: url(../../img/icon4.png) 52px center no-repeat
+}
+
+.main_left ul .lastLi {
+	height: 411px;
+}
+
+.main_left ul .btn_a0 {
+	background: url(../../img/icon11.png) 46px center no-repeat;
+	color: #0696fa;
+	padding-left: 81px;
+	border-left: 5px solid #0696fa;
+}
+
+.main_left ul .btn_a1 {
+	background: url(../../img/icon22.png) 45px center no-repeat;
+	color: #0696fa;
+	padding-left: 81px;
+	border-left: 5px solid #0696fa;
+}
+
+.main_left ul .btn_a2 {
+	background: url(../../img/icon33.png) 45px center no-repeat;
+	color: #0696fa;
+	padding-left: 81px;
+	border-left: 5px solid #0696fa;
+}
+.main_left ul .btn_a3 {
+	background: url(../../img/icon44.png) 47px center no-repeat;
+	color: #0696fa;
+	padding-left: 81px;
+	border-left: 5px solid #0696fa;
+}
+.footer {
+	min-width: 1200px;
+	width: 100%;
+	height: auto !important;
+	height: 70px;
+	min-height: 70px;
+	background: #222933;
+	color: #FFFFFF;
+	text-align: center;
+	line-height: 70px;
+}
+.right {
+	left: 250px;
+	top: 60px;
+	position: absolute;
+	min-height: 800px;
+	height: 800px;
+	position: absolute;
+	top: 60px;
+	left: 250px;
+}

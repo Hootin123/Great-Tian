@@ -1,0 +1,185 @@
+	body{
+			min-width: 1440px;
+			min-height: 930px;
+			background: url(../../img/pchongbao/register-bg.png) 0 0 no-repeat;
+		}
+		
+		.registerHeader{
+			width:100%;
+			padding: 40px 115px 0;
+			height: 110px;
+			box-sizing: border-box;
+		}
+		.registerHeader .logo{
+			float: left;
+		}
+		.registerHeader .logo-text{
+			float: right;
+		}
+		.registerMain{
+			width: 635px;
+			height: 456px;
+			margin:0 auto;
+			margin-top: 40px;
+			position: relative;
+		}
+		.registerMain-title{
+			width: 100%;
+			height: 70px;
+			font-family: '微软雅黑';
+			font-size: 28px;
+			color: #000;
+			font-weight: bold;
+		}
+		.registerMain ul{
+			width: 100%;
+		}
+		.registerMain ul li{
+			width: 100%;
+			height: 48px;
+			position: relative;
+		}
+		.registerMain ul li label{
+			width: 133px;
+			height: 100%;
+			float: left;
+			line-height: 34px;
+			font-size: 18px;
+			font-family: '微软雅黑';
+			color: #000;
+			font-weight: bold;
+		}
+		.registerMain ul li input{
+			width: 500px;
+			height: 34px;
+			float: left;
+			border:1px solid #000;
+			border-radius: 50px;
+			font-size: 14px;
+			color: #000;
+			text-indent: 30px;
+			line-height: 34px;
+			background: #fa7979;
+			font-family: '微软雅黑';
+			font-weight: bold;
+
+		}
+		.registerMain ul li input::-webkit-input-placeholder{
+			color: #222;
+			font-family: '微软雅黑';
+		}
+		 .error{
+			max-width: 500px;
+		    min-height: 20px;
+		    position: absolute;
+		    right: -240px;
+		    top: -2px;
+		    background: #f99b15;
+		    padding: 2px 18px;
+		    z-index: 10;
+		    border-radius: 5px;
+		    color: #f00;
+		    font-size: 14px;
+		    line-height: 26px;
+		}
+		 .error:before{
+			content: "";
+		    display: block;
+		    border-width: 12px 24px;
+		    position: absolute;
+		    top: 4px;
+		    left: -35px;
+		    border-style: solid dashed dashed;
+		    border-color: transparent #f99b15 transparent transparent;
+		    font-size: 0;
+		    line-height: 0;
+		}
+		
+		.registerMain .phone input{
+			width: 300px;
+		}
+		.registerMain .phone p{
+			width: 160px;
+			height: 34px;
+			border:1px solid #000;
+			border-radius: 50px;
+			font-size: 14px;
+			color: #fff;
+			text-align: center;
+			line-height: 34px;
+			float: right;
+			cursor: pointer;
+			background: #26a1a2;
+		}
+		.protocol{
+			width: 500px;
+			height: 40px;
+			margin-left: 133px;
+			position: relative;
+
+		}
+		.protocol input[type="checkbox"] {
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			background: #fff ;
+			float: left;
+			width: 28px;
+			height: 28px;
+			border-radius: 50%;
+		}
+		.protocol input[type="checkbox"]:checked {
+		  background:#c6d5d5 url(../../img/pchongbao/checked.png) center center no-repeat;
+		}
+		.protocol p{
+			float: left;
+			color: #000;
+			font-family: '微软雅黑';
+			font-size: 16px;
+			line-height: 28px;
+			margin-left: 10px;
+			font-weight: 600;
+		}
+		.protocol p span{
+			color: #ffdd46;
+			cursor: pointer;
+		}
+		.registerFooter {
+			width: 635px;
+			height: 50px;
+			margin:0 auto;
+		}
+		.registerFooter .login{
+			width: 90px;
+			height: 100%;
+			background: #26a1a2;
+			float: left;
+			font-family: '微软雅黑';
+			font-size: 18px;
+			color: #222;
+			line-height: 50px;
+			text-align: center;
+			font-weight: 600;
+			cursor: pointer;
+		}
+		.registerFooter .register{
+			width: 500px;
+			height: 100%;
+			float: right;
+			background: #ffdd46;
+			font-size: 18px;
+			color: #222;
+			line-height: 50px;
+			text-align: center;
+			font-weight: 600;
+			cursor: pointer;
+		}
+		.prompt1{
+			position: absolute;
+			left: -300px;
+			top:346px;
+		}
+		.prompt2{
+			position: absolute;
+			right: -318px;
+			top:52px;
+		}

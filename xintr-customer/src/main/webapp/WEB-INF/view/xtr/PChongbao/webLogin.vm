@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	#parse("comm/head.vm")
+	<meta charset="UTF-8">
+	<title>登录</title>
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/pchongbao/webLogin.css')">
+    <script src="#springUrl('/resource/js/pchongbao/webLogin.js')"></script>
+</head>
+<body>
+	<div class="loginHeader">
+		<div class="logo">
+			<img  src="#springUrl('/resource/img/pchongbao/web-logo1.png')"  />
+		</div>
+		<div class="logo-text">
+			<img  src="#springUrl('/resource/img/pchongbao/web-text1.png')" />
+		</div>
+	</div>
+	<div class="loginMain">
+		<div class="loginMain-title">登录企业账号</div>
+            <form id="loginForm">
+			<ul>
+				<li class='loginPhone'>
+					<label>手机号</label><input type="text" name="loginPhoneNumber" placeholder="请输入您手机号码"/>
+					<b></b>
+				</li>
+				<li class='loginPwd'>
+					<label>登录密码</label><input type="password" name="loginPassword" placeholder="请输入登录密码"/>
+					<b></b>
+				</li>
+				
+				<li class='LoginCode'>
+					<label>图形验证</label><input type="text" name="code" maxlength="4" placeholder="请输入图形验证"/>
+					<p><img  src="#springUrl('/web/getImgCode.htm')" id="code" /></p>
+					<b></b>
+				</li>
+			</ul>
+          </form>
+		<!-- 提示 -->
+		<div class="prompt1">
+			<img  src="#springUrl('/resource/img/pchongbao/prompt1.png')" />
+		</div>
+		<div class="prompt2">
+			<img  src="#springUrl('/resource/img/pchongbao/prompt2.png')" />
+		</div>
+	</div>
+	<div class="loginFooter">
+		<div class="login">登录</div>
+		<div class="register">注册</div>
+	</div>
+	
+</body>
+
+
+
+
+</html>

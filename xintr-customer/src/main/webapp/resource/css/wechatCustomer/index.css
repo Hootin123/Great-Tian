@@ -1,0 +1,158 @@
+@charset "UTF-8";
+body {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  background-size: 100%; }
+
+header {
+  width: 100%;
+  height: 4rem;
+  background: url(../../img/wechatCustomer/index-bg.png) 0 0 no-repeat;
+  background-size: 100% 100%; }
+  header .logo {
+    width: 1.54rem;
+    height: 2.63rem;
+    margin: 0 auto;
+    padding-top: 0.62rem; }
+    header .logo dl {
+      width: 100%;
+      height: 100%; }
+      header .logo dl dt {
+        width: 100%;
+        height: 1.76rem;
+        position: relative; }
+        header .logo dl dt img {
+          display: block;
+          width: 1.54rem;
+          height: 1.54rem;
+          border-radius: 50%; }
+        header .logo dl dt em {
+          display: block;
+          width: 0.5rem;
+          height: 0.5rem;
+          position: absolute;
+          left: 1.25rem;
+          top: 1.15rem;
+          background: url(../../img/wechatCustomer/set.png) 0 0 no-repeat;
+          background-size: 100% 100%; }
+        header .logo dl dt input {
+          display: block;
+          border-radius: 50%;
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          right: 0;
+          top: 0;
+          opacity: 0;
+          filter: alpha(opacity=0); }
+      header .logo dl dd {
+        text-align: center;
+        font-size: 0.28rem;
+        font-family: '微软雅黑';
+        color: #fff; }
+  header .text {
+    width: 4rem;
+    height: 0.5rem;
+    margin: 0 auto;
+    line-height: 0.5rem; }
+    header .text p {
+      float: left;
+      font-size: 0.3rem;
+      font-family: '微软雅黑';
+      color: #fff; }
+    header .text span {
+      display: block;
+      width: 0.8rem;
+      height: 0.5rem;
+      float: left;
+      background: url(../../img/wechatCustomer/time-bg.png) 0 0 no-repeat;
+      background-size: 100% 100%;
+      padding-left: 0.08rem;
+      font-size: 0.4rem;
+      color: #0696fa;
+      letter-spacing: 0.22rem; }
+
+section {
+  width: 100%; }
+  section .sec-top {
+    width: 100%;
+    height: 2rem;
+    padding-top: 0.35rem;
+    background: #dbe9ee;
+    position: relative; }
+    section .sec-top .sec-year {
+      width: 5.3rem;
+      height: 0.4rem;
+      margin: 0 auto;
+      position: relative;
+      text-align: center;
+      font-size: 0.36rem;
+      font-family: '微软雅黑';
+      color: #333;
+      line-height: 0.4rem; }
+      section .sec-top .sec-year em {
+        display: block;
+        width: 0.13rem;
+        height: 0.29rem; }
+      section .sec-top .sec-year .clickLeft {
+        background: url(../../img/wechatCustomer/left.png) 0 0 no-repeat;
+        background-size: 100% 100%;
+        position: absolute;
+        left: 0;
+        top: 0.05rem; }
+      section .sec-top .sec-year .clickRight {
+        background: url(../../img/wechatCustomer/right.png) 0 0 no-repeat;
+        background-size: 100% 100%;
+        position: absolute;
+        right: 0;
+        top: 0.05rem; }
+    section .sec-top .sec-pay {
+      width: 2.52rem;
+      height: 2.52rem;
+      background: url(../../img/wechatCustomer/pay.png) 0 0 no-repeat;
+      background-size: 100% 100%;
+      position: absolute;
+      left: 2.48rem;
+      top: 1.2rem;
+      z-index: 10; }
+      section .sec-top .sec-pay p:nth-child(1) {
+        width: 100%;
+        height: 0.8rem;
+        text-align: center;
+        margin-top: 0.74rem;
+        font-size: 0.5rem;
+        color: #fff; }
+        section .sec-top .sec-pay p:nth-child(1) span:nth-child(2) {
+          font-size: 0.24rem; }
+      section .sec-top .sec-pay p:nth-child(2) {
+        font-size: 0.24rem;
+        text-align: center;
+        color: #fff; }
+  section .sec-time {
+    width: 5.95rem;
+    height: 3.3rem;
+    margin: 0 auto;
+    margin-top: 2rem; }
+    section .sec-time ul {
+      width: 100%;
+      height: 100%; }
+      section .sec-time ul li {
+        width: 1.74rem;
+        height: 1.04rem;
+        float: left; }
+        section .sec-time ul li a {
+          font-size: 0.3rem;
+          font-family: '微软雅黑';
+          color: #333; }
+        section .sec-time ul li .active {
+          color: #0696fa; }
+        section .sec-time ul li .active1 {
+          color: #333;
+          border: 0; }
+        section .sec-time ul li .active2 {
+          color: #ccc; }
+      section .sec-time ul .sit {
+        width: 0.7rem; }
+
+/*# sourceMappingURL=index.css.map */

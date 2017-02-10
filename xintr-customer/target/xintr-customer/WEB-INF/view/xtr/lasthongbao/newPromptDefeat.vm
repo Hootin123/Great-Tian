@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="en" id='html'>
+<head>
+    #parse("comm/headNew.vm")
+    <meta charset="UTF-8">
+    <title>审核失败</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1">
+##    <script src="#springUrl('/resource/js/lasthongbao/zepto.min.js')"></script>
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/lasthongbao/defeat.css')">
+
+
+</head>
+<body>
+   <input type="hidden" name="companyId" value="$!{companyId}"/>
+	<div class="pic">
+		<img src="#springUrl('/resource/img/lasthongbao/defeat.png')">
+	</div>
+	<div class="text">
+		<div class="text-title">很抱歉，您的审核未通过 </div>
+		<p>原因：$!{reason}</p>
+		<p>您可以点击下方按钮重新完善企业信息</p>
+		
+	</div>
+	<div class="preSubmit1">重新提交</div>
+   <div class="introduce">
+       <img src="#springUrl('/resource/img/lasthongbao/introduce.png')" alt="">
+   </div>
+   <div class="text1">请用电脑登录薪太软官网进行体验 <a>www.xintairuan.com</a> </div>
+</body>
+<script>
+    $(".preSubmit1").click(function(){
+        var editFlag ="editFlag";
+        var companyId = $("input[name='companyId']").val();
+        window.location =BASE_PATH+"/lastHongbao/jumpToCompanyInfoPage.htm?editFlag="+editFlag+"&companyId="+companyId;
+    });
+</script>
+</html>

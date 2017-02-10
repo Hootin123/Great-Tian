@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>我的账户 - 应付款</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/account/account.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/account/records.css')" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="main_right account">
+    <ol>
+        <a href="account.htm"><li class="account_nav_first">账户资产</li></a>
+        <li class="active">应付款</li>
+        <a href="balanceOfPayments.htm"><li>收支记录</li></a>
+    </ol>
+
+    <div class="account_nav account_nav_tw">
+        <em class="triangle2"></em>
+        <div style="position: relative">
+            <span style="position: absolute; left: 14%; top: 24px;">应还总额（元）<br /><em>$!{xtr.money($!{borrowData.repaymentTotal})}</em></span>
+            <span style="position: absolute; left: 46%; top: 24px;">30日到期（元）<br /><em>$!{xtr.money($!{borrowData.monthRepayment})}</em></span>
+            <span style="position: absolute; left: 80%; top: 24px;"><a href="#">剩余额度（元）<br /><em style="color: #fa5f5f;">0.00</em></a></span>
+        </div>
+    </div>
+    <table class="account_list_tw" id="a" style="margin-top: 20px;">
+        #if($!{borrowData} && $!{borrowData.bills} && $!{borrowData.bills.size()} > 0)
+            #foreach($data in $!{borrowData.bills})
+            <tr>
+                <td class="first_tw">
+                    <span>
+                        $!date.format('yyyy-MM-dd',$!{data.biilRepaytime})（$!{xtr.weekday($!{data.biilRepaytime})}）<em>到期时间</em>
+                    </span>
+                </td>
+                <td class="seccond_tw">
+                    $!date.format('yyyy-MM-dd',$!{data.billAddtime})<em>垫付时间</em>
+                </td>
+                <td class="third_tw">
+                    $!{xtr.money($!{data.billMoney})}<em>$!{data.description}</em>
+                </td>
+                <td class="last_tw">
+                    <a class="a1" href="repayment.htm?id=$!{data.orderId}">还款</a>
+                    <a class="a2" href="#">详情</a>
+                </td>
+            </tr>
+            #end
+        #end
+    </table>
+    <div id="kkpager"></div>
+</div>
+
+<script type="text/javascript">
+    //生成分页控件
+    kkpager.generPageHtml({
+        pno: '$!{paginator.page}',
+        mode: 'link', //可选，默认就是link
+        //总页码
+        total: '$!{paginator.totalPages} ',
+        //总数据条数
+        totalRecords: '$!{paginator.totalCount} ',
+        //链接算法
+        isShowFirstPageBtn:false,
+        isShowLastPageBtn:false,
+        currPageBeforeText:'第',
+        getLink: function (n) {
+            return 'balanceOfPayments.htm?pageIndex=' + n;
+        }
+    });
+</script>
+</body>

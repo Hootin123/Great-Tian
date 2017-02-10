@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>薪太软 - 登录</title>
+    #parse("comm/head.vm")
+##    <base target="_blank">
+    <!--[if lt IE 8]>
+    <meta http-equiv="refresh" content="0;ie.html"/>
+    <![endif]-->
+    <script>if (window.top !== window.self) {
+        window.top.location = window.location;
+    }</script>
+</head>
+
+<body class="gray-bg">
+
+<div class="middle-box loginscreen  animated fadeInDown">
+    <div>
+        <div>
+            <h1 class="logo-name text-center">薪</h1>
+        </div>
+        <h3 class="text-center">欢迎使用 薪太软</h3>
+        <form id="loginForm" class="m-t" role="form">
+            <div class="form-group">
+                <input id="username" name="username" type="text" class="form-control" placeholder="用户名" aria-required="true"
+                       aria-invalid="true" class="error">
+            </div>
+            <div class="form-group">
+                <input id="password" name="password" type="password" class="form-control" placeholder="密码" aria-required="true"
+                       aria-invalid="true" class="error">
+            </div>
+            <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
+
+            <p class="text-muted text-center"><a href="login.htm">
+                <small>忘记密码了？</small>
+            </a> | <a href="register.htm">注册一个新账号</a>
+            </p>
+
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+<script src="#springUrl('/resource/js/hui/content.min.js?v=1.0.0')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/validate/jquery.validate.min.js')"></script>
+<script src="#springUrl('/resource/js/sys/login.js')"></script>
+</body>
+
+</html>

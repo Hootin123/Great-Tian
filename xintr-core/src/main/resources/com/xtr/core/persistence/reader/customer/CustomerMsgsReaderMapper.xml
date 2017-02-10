@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xtr.core.persistence.reader.customer.CustomerMsgsReaderMapper" >
+  <resultMap id="BaseResultMap" type="com.xtr.api.domain.customer.CustomerMsgsBean" >
+    <id column="msg_id" property="msgId" jdbcType="BIGINT" />
+    <result column="msg_title" property="msgTitle" jdbcType="VARCHAR" />
+    <result column="msg_cont" property="msgCont" jdbcType="VARCHAR" />
+    <result column="msg_type" property="msgType" jdbcType="INTEGER" />
+    <result column="msg_addtime" property="msgAddtime" jdbcType="TIMESTAMP" />
+    <result column="msg_customer_id" property="msgCustomerId" jdbcType="BIGINT" />
+    <result column="msg_customer_name" property="msgCustomerName" jdbcType="VARCHAR" />
+    <result column="msg_from_customer_id" property="msgFromCustomerId" jdbcType="BIGINT" />
+    <result column="msg_from_customer_name" property="msgFromCustomerName" jdbcType="VARCHAR" />
+    <result column="msg_sign" property="msgSign" jdbcType="INTEGER" />
+    <result column="msg_class" property="msgClass" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    msg_id, msg_title, msg_cont, msg_type, msg_addtime, msg_customer_id, msg_customer_name,
+    msg_from_customer_id, msg_from_customer_name, msg_sign, msg_class
+  </sql>
+
+  <sql id="Example_Where_Clause">
+    <if test="msgType != null">
+      AND msg_type = #{msgType,jdbcType=INTEGER}
+    </if>
+    <if test="msgSign != null">
+      AND msg_sign = #{msgSign,jdbcType=INTEGER}
+    </if>
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from customer_msgs
+    where msg_id = #{msgId,jdbcType=BIGINT}
+  </select>
+
+<!-- 根据客户过滤条件获取信息列表-->
+  <select id="selectMsgByCustomerCondition" resultMap="BaseResultMap" parameterType="com.xtr.api.domain.customer.CustomerMsgsBean" >
+    select
+    <include refid="Base_Column_List" />
+    from customer_msgs
+    where
+    msg_customer_id=#{msgCustomerId,jdbcType=BIGINT}
+    <include refid="Example_Where_Clause"/>
+  </select>
+
+  <!-- 根据客户编码获取各种消息状态的消息列表-->
+  <select id="selectNoReaderMsgByCustomerId" resultMap="BaseResultMap" parameterType="com.xtr.api.domain.customer.CustomerMsgsBean" >
+    select
+    <include refid="Base_Column_List" />
+    from customer_msgs
+    where
+    msg_customer_id=#{msgCustomerId,jdbcType=BIGINT}
+    and msg_sign=#{msgSign,jdbcType=INTEGER}
+  </select>
+</mapper>

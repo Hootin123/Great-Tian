@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/account/rechargeStep2.css')" rel="stylesheet">
+</head>
+
+<body>
+<div class="content">
+    <div class="recharge_header"><a href="#springUrl('/account.htm')">账户资产></a><a href="#springUrl('/recharge.htm')">充值></a><span>充值支付</span></div>
+        <div class="nav">
+        <div class="left">
+            <p class="leftP1">
+                <span class="leftP1_span1">充值金额：</span>
+                <span class="leftP1_span2">$!{xtr.money($rechargeData.rechargeMoney)}</span>
+                <span class="leftP1_span3">元</span>
+            </p>
+            <p class="leftP2">
+                <span class="leftP2_span1">订单类型：</span>
+                <span class="leftP2_span2">充值订单</span>
+            </p>
+        </div>
+        <div class="right">
+            <p class="rightP1">
+                <span class="rightP1_span1">订单编号:</span>
+                <span class="rightP1_span2">$!{rechargeData.rechargeNumber}</span>
+            </p>
+            <p class="rightP2">
+                <span class="rightP2_span1">订单创建时间：</span>
+                <span class="rightP2_span2">$!date.format('yyyy-MM-dd HH:mm:ss',$rechargeData.rechargeAddtime)</span>
+            </p>
+        </div>
+    </div>
+    <div class="hint">
+        <h2>重要提示请仔细阅读，阅读完毕后点击“我已阅读完毕”，显示收款银行账户</h2>
+        <p>1、请复制订单编号到汇款备注栏中：<span>$!rechargeData.rechargeNumber</span></p>
+        <p>2、如果对多个订单进行合并付款，则复制多个订单编号到汇款备注栏中，且将多个订单用逗号隔开</p>
+        <p>如：412616000622151,412616400632153</p>
+        <p>3、一般线下汇款确认到账时间为<span>一至两个工作日，节假日除外</span>请耐心等待，如有疑问请联系400-175-8090</p>
+        <div class="end"><input type="checkbox" id="ckbox"><label for="ckbox">我已阅读完毕</label></div>
+    </div>
+    <div class="message">
+        <div class="bank" style="padding-top:30px;">
+            <div class="bank1">银行：</div>
+            <div class="bank2">中国银行</div>
+        </div>
+        <div class="bank">
+            <div class="bank1">账户名称：</div>
+            <div class="bank2">网银在线（北京）科技有限公司客户备付金</div>
+        </div>
+        <div class="bank">
+            <div class="bank1">账号：</div>
+            <div class="bank2">341561371394</div>
+        </div>
+        <div class="bank">
+            <div class="bank1">开户支行：</div>
+            <div class="bank2">中国银行股份有限公司北京奥运村支行</div>
+        </div>
+    </div>
+    <div class="bottom"><input type="button" value="确定" id="btn" disabled="disabled" style="background:#ccc;"></div>
+    <form>
+
+    </form>
+</div>
+</body>
+<script>
+
+
+    RechargeStep2Extend = {
+        submitForm : function(){
+            window.location.href = BASE_PATH + '/rechargeSuccess.htm?rechargeId=' + $!{rechargeData.rechargeId};
+        }
+    }
+    $(function() {
+
+        $("#ckbox").click(function() {
+            if ($('#ckbox').prop('checked')) {
+                $('.message').show();
+                $("#btn").removeAttr("disabled").css('background','#0696fa');
+            } else {
+                $('.message').hide();
+                $("#btn").attr({"disabled":"disabled"}).css('background','#ccc');
+            }
+        })
+
+        $("#btn").click(function() {
+            RechargeStep2Extend.submitForm();
+        });
+
+    })
+
+
+
+</script>
+</html>

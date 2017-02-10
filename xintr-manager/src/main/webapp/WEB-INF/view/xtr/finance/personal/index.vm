@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>个人提现查询</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-table/bootstrap-table.min.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-datepicker/css/bootstrap-datetimepicker.css')" rel="stylesheet">
+</head>
+
+<body>
+<div class="col-sm-12">
+    <div class="container-fluid">
+        <div class="row-fluid">
+
+            <div class="ibox-content">
+                <div class="row">
+                    <form id="searchForm" class="form-inline" role="form" method="post" style="line-height: 40px;">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <input type="text" id="date_str" name="date_str" class="form-control dateTime" placeholder="开始时间" value="$!{date_str}"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 15px;">
+                            <label class="col-sm-6 control-label">提现状态</label>
+                            <div class="col-sm-6">
+                                <select id="state" name="state" class="form-control m-b">
+                                    <option value="">请选择</option>
+                                    <option value="0" #if($!{companyRecharge.rechargeState} == 0)selected #end>未审批</option>
+                                    <option value="2" #if($!{companyRecharge.rechargeState} == 2)selected #end>已审批</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">财务审核人</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="auditName" name="auditName" class="form-control" placeholder="请输入财务审核人" value="$!{companyRecharge.nickName}"/>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" type="button" id="queryBtn"><i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;捞取</button>
+                        <a href="index.htm#modal-form" class="btn btn-danger" data-toggle="modal">关闭审核</a>
+                    </form>
+
+                </div>
+            </div>
+
+            <table id="data-list"></table>
+
+        </div>
+    </div>
+
+    <div id="modal-form" class="modal fade" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3 class="m-t-none m-b">关闭审核</h3>
+                            <hr/>
+                            <h3 style="color:red;">请注意！</h3>
+                            <h3>关闭审核会导致所有的个人提现都直接成功！</h3>
+                            <div>
+                                <button class="btn btn-primary" onclick="closeAudit();" type="button">确认</button>
+                                <button data-dismiss="modal" class="btn btn-white" type="button">取消</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="audit-form" class="modal fade" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3 class="m-t-none m-b">个人提现审批</h3>
+                            <hr/>
+                            <h3>请注意！</h3>
+                            <h3>审批前，请关注资金进出是否正常！</h3>
+                            <div>
+                                <input type="hidden" id="batchNumber" />
+                                <button class="btn btn-primary" onclick="auditWith();" type="button">确认</button>
+                                <button data-dismiss="modal" class="btn btn-white" type="button">取消</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+<script src="#springUrl('/resource/js/hui/content.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table-mobile.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-datepicker/js/bootstrap-datetimepicker.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-datepicker/locales/bootstrap-datetimepicker.zh-CN.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/validate/jquery.validate.min.js')"></script>
+<script src="#springUrl('/resource/js/comm/jdatagrid.js')"></script>
+<script src="#springUrl('/resource/js/finance/personal/index.js')"></script>
+</html>

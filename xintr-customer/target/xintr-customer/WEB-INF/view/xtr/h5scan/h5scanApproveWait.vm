@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" id='html'>
+<head>
+    <meta charset="UTF-8">
+    <title>等待审核</title>
+    #parse("comm/head.vm")
+    <meta name="viewport" content="width=divce-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/scanCode/wait.css')">
+</head>
+<body>
+<section>
+    <input type="hidden" value="$!{companyId}" id="companyId">
+    <h3>等待审核</h3>
+    <div class="pic"></div>
+    <div class="txt">
+        <p>您的资料已提交成功</p>
+        <p>我们将在7个工作日内给出回复</p>
+        <p>请耐心等待</p>
+    </div>
+</section>
+</body>
+</html>

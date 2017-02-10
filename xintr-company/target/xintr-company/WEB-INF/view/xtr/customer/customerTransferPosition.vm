@@ -1,0 +1,230 @@
+##员工调岗页
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>调岗</title>
+    #parse("comm/head.vm")
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/customer/customerTransferPosition.css')"/>
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/js/plugins/laydate/need/laydate.css')"/>
+    <script src="#springUrl('/resource/js/plugins/laydate/laydate.js')"></script>
+    <script src="#springUrl('/resource/js/comm/validateUtil.js')"></script>
+</head>
+<body>
+<div class="header">
+    <h2 class='title2'><span>$!{trueUserName}</span><b>&nbsp;—&nbsp;</b>调岗</h2>
+    <img src="#springUrl('/resource/img/salary/guanbi.png')" alt="" id="closeDetailBtn">
+</div>
+
+<form id="transferForm">
+    <!-- 页面隐藏域 员工id-->
+    <input name="customerId" type="hidden" id="customerId" value="$!{customerId}"/>
+<section>
+    <div class="top">
+        <p>部门 ：<span>$!{depName}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;职务：<span>$!{stationName}</span></p>
+    </div>
+    <div class="cont1">
+        <ul class='left'>
+            <li>
+                <span>*</span>部门
+            </li>
+            <li>
+                <span>*</span>岗位
+            </li>
+            <li>
+                <span>*</span>点击选择到岗时间
+            </li>
+            <li>
+                <span></span>调岗原因
+            </li>
+        </ul>
+        <ul class='right'>
+            <li class='customerDepName rightLi'>
+                <input type="text" id="customerDepName" name="customerDepName" readonly="readonly" />
+                <input type="hidden" id="depId" name="customerDepId" />
+##                <b></b>
+                <div class="branch" style="display: none">
+##                    <h4>部门</h4>
+                    <div id="dep-base">
+                    ##                            <span>产品部</span>
+##                            <li>
+##                                <span>视觉设计师</span>
+##                                <ul>
+##                                    <li class="show"><span>视觉设计师</span></li>
+##                                </ul>
+##                            </li>
+##                            <li>交互设计师</li>
+                    </div>
+                </div>
+
+            </li>
+            <li class="rightLi">
+                <input type="text" name="customerPlace"  id="customerPlace"/>
+            </li>
+            <li class="time rightLi">
+                <input type="text" name="recordArriveTime" id ="recordArriveTime"  class="laydate-icon" onclick="laydate()"
+                       readonly="readonly" style="width:290px" placeholder="
+点击选择调岗时间"/>
+
+                <span>只处理一个月以内的调岗</span>
+            </li>
+            <li class='txtarea rightLi'>
+                <textarea cols=43 rows=4 name="recordStationReason" placeholder="请输入调岗原因"></textarea>
+            </li>
+
+        </ul>
+    </div>
+</section>
+</form>
+<footer>
+    <div class="bottom">
+        <div class="bottomBtn">
+            <input type="button" name="" id="updateBtn"  value='更新设置'>
+            <input type="button" name="" class='btnClose' value='取消'>
+        </div>
+    </div>
+</footer>
+<script type="text/javascript">
+    //取消
+    $('#closeDetailBtn').click(function(){
+        onCancelDialog()
+    })
+    function onCancelDialog() {
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    }
+
+    $(".title2 em").on('click',function(){
+        $('#transfer-position-content').hide();
+        $('.mengban2').hide()
+        $('.transfer-position').show();
+    });
+
+    /**部门的数据接口 start**/
+    $.get(BASE_PATH + '/dept/tree.htm', {}, function(data){
+        if (data.success) {
+            // DeptExtend.initTree(data.data);
+            console.log(data.date);
+            dg($("#dep-base"), data.data)
+        } else {
+            showWarning(data.message);
+        }
+    });
+    /**部门的数据接口 end**/
+    function dg(parent, data){
+        var title = '<span class="dep-item" data-depid="'+data.depId+'" style="display: block; width: 100%;">' + data.depName + '</span>';
+        parent.append(title);
+        if(data.children && data.children.length > 0){
+            var ul = $("<ul class='addLi'>");
+            $.each(data.children, function(index, item){
+                var li =$("<li style='position: relative'>")
+                var i=$("<i class='show'>")
+                li.append(i)
+                dg(li, item)
+                ul.append(li);
+            })
+            parent.append(ul);
+            $('li').not(':has(ul)').find('i').removeClass('show')
+            $('.show').html('+');
+            $('.show').parent().find('ul').hide();
+        };
+        $('.branch span:first').removeClass('dep-item')
+        $('.dep-item').unbind("click").on('click',function(){
+            $('#customerDepName').val($(this).html());
+            $('#depId').val($(this).data("depid"));
+//            $('.customerDepName b').click();
+//            $('.branch').toggle();
+            $('.branch').hide();
+            $('.show').off('click')
+        })
+    }
+
+
+
+    $('.customerDepName').on('click',function(e){
+//        $('.branch').toggle();
+//        $('.branch li').toggle();
+//        $('.branch').find("li").toggle();
+//        $(this).siblings().on('click',function(){
+//            console.log(2)
+//            $('.branch').hide();
+//        })
+        e.stopPropagation();
+        $('.show').off('click');
+        $('.branch').toggle();
+        // 判断 是否有子元素
+        $('.show').on('click',function(){
+
+            if($(this).html()=='+'){
+                console.log(22)
+                $(this).siblings('ul').toggle(200)
+                $(this).html('-');
+            }else{
+                console.log(111)
+                $(this).siblings('ul').toggle(200);
+                $(this).html('+');
+            }
+
+        })
+    })
+    // 去除冒泡
+    $(document).on('click',function(){
+        $('.branch').hide();
+        $('.show').off('click')
+    })
+    $('.branch').on('click',function(e){
+        e.stopPropagation()
+    })
+
+
+    //关闭按钮
+$(".btnClose").click(function(){
+    var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+    parent.layer.close(index);
+})
+
+   //更新调岗
+    $("#updateBtn").click(function(){
+       var depName = $("#customerDepName").val();//部门名称
+       var customerPlace =$("#customerPlace").val();//岗位名称
+       var  recordArriveTime = $("#recordArriveTime").val();//到岗时间
+       if(depName==null||depName==""){
+           layer.alert("请选择部门");
+           return false;
+       }else if(customerPlace==null||customerPlace==""){
+           layer.alert("请输入岗位")
+           return false;
+       }else if(recordArriveTime==null||recordArriveTime==""){
+           layer.alert("请选择到岗时间")
+           return  false;
+       }
+        $.ajax({
+            url:'customerTransferPosition.htm',
+            type:'POST',
+            data: $("#transferForm").serialize(),
+            dataType:'json',
+            success:function(resultResponse){
+                if(resultResponse.success){
+                    layer.alert('操作成功',{
+                        title:'处理结果',
+                    },function(index){
+                        parent.loadCustomerList();
+                        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+                        parent.layer.close(index);
+                    });
+
+                }else{
+                    layer.alert(resultResponse.message);
+                }
+            },
+            error:function(){
+                layer.alert("网络错误")
+            }
+
+        });
+
+    });
+
+</script>
+</body>
+</html>

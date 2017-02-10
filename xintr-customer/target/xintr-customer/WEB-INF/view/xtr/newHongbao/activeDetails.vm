@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" id='html'>
+<head>
+	#parse("comm/head.vm")
+	<meta charset="UTF-8">
+	<title>活动详情页</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/newHongbao/activeDetail.css')">
+</head>
+<body>
+	<div class="sign">
+		<div class="logo">
+            <img src="#springUrl('/resource/img/newHongbao/logo.png')" alt="">
+		</div>
+		<div class="logo-text">
+            <img src="#springUrl('/resource/img/newHongbao/logo-text.png')" alt="">
+		</div>
+	</div>
+	<header>-薪资代发、垫发、高效人力资源服务-</header>
+	<footer class="grabPacket">立即抢红包</footer>
+    <input type="hidden" name="mmtoken" id="mmtoken" value="$!{mmtoken}"/>
+    <input type="hidden" name="companyContactPlace" id="companyContactPlace" value="$!{companyContactPlace}"/>
+</body>
+<script type="text/javascript">
+	$('.grabPacket').on('click',function(){
+		//跳转至注册页面
+        var mmtoken = $('#mmtoken').val();
+        var companyContactPlace = $('#companyContactPlace').val();
+		var path = BASE_PATH+"/newHongbao/toActivityRegister.htm?mmtoken="+mmtoken+"&companyContactPlace="+companyContactPlace;
+		window.location = path;
+	})
+</script>
+</html>

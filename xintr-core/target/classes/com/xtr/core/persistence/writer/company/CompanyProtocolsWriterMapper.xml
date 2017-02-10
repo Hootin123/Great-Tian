@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtr.core.persistence.writer.company.CompanyProtocolsWriterMapper">
+    <!-- 根据企业ID查询协议 -->
+    <update id="updateByCompanyAndType" parameterType="com.xtr.api.domain.company.CompanyProtocolsBean">
+        update company_protocol
+        <set >
+        <if test="protocolPaperNo != null ">
+            protocol_paper_no = #{protocolPaperNo,jdbcType=VARCHAR},
+        </if>
+        <if test="protocolStatus != null  ">
+            protocol_status = #{protocolStatus,jdbcType=INTEGER}
+        </if>
+        </set>
+        where protocol_company_id = #{protocolCompanyId,jdbcType=BIGINT} and protocol_contract_type=#{protocolContractType,jdbcType=INTEGER}
+    </update>
+
+    <!--新增企业协议 -->
+    <insert id="insert" parameterType="com.xtr.api.domain.company.CompanyProtocolsBean">
+        insert into company_protocol ( protocol_company_id, protocol_contract_type, protocol_paper_no,protocol_status,
+        protocol_contract_time,protocol_expire_time,protocol_create_time,protocol_update_time,protocol_current_status,
+        protocol_business_manager,protocol_linkman_name,protocol_linkman_phone,protocol_code,protocol_rate,protocol_serve_rate,protocol_scale)
+        values (#{protocolCompanyId,jdbcType=BIGINT}, #{protocolContractType,jdbcType=INTEGER}, #{protocolPaperNo,jdbcType=VARCHAR},
+        #{protocolStatus,jdbcType=INTEGER}, #{protocolContractTime,jdbcType=TIMESTAMP}, #{protocolExpireTime,jdbcType=TIMESTAMP},
+         #{protocolCreateTime,jdbcType=TIMESTAMP} , #{protocolUpdateTime,jdbcType=TIMESTAMP}, #{protocolCurrentStatus,jdbcType=INTEGER},
+         #{protocolBusinessManager,jdbcType=VARCHAR} , #{protocolLinkmanName,jdbcType=VARCHAR}, #{protocolLinkmanPhone,jdbcType=VARCHAR},
+        #{protocolCode,jdbcType=VARCHAR},#{protocolRate,jdbcType=DECIMAL},#{protocolServeRate,jdbcType=DECIMAL},#{protocolScale,jdbcType=DECIMAL} )
+    </insert>
+
+    <!-- 根据协议ID更新协议状态 -->
+    <update id="updateCurrentStateById" parameterType="com.xtr.api.domain.company.CompanyProtocolsBean" >
+        update company_protocol
+        set  protocol_current_status = #{protocolCurrentStatus}
+        where  protocol_id = #{protocolId}
+    </update>
+
+    <update id="updateCurrentStateByIdList" parameterType="java.util.List" >
+            update company_protocol
+            set  protocol_current_status = 4
+            where
+                protocol_id in
+            <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+                #{item.protocolId}
+            </foreach>
+    </update>
+
+    <!-- 根据协议ID更新协议 -->
+    <update id="updateProtocolInfoById" parameterType="com.xtr.api.domain.company.CompanyProtocolsBean" >
+        update company_protocol
+        <set >
+            <if test="protocolCurrentStatus != null ">
+                protocol_current_status = #{protocolCurrentStatus,jdbcType=INTEGER},
+            </if>
+            <if test="protocolLinkmanName != null  ">
+                protocol_linkman_name = #{protocolLinkmanName,jdbcType=VARCHAR},
+            </if>
+            <if test="protocolLinkmanPhone != null  ">
+                protocol_linkman_phone = #{protocolLinkmanPhone,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where  protocol_id = #{protocolId}
+    </update>
+    <!-- 续约-->
+    <update id="renewSureProtocol" parameterType="java.util.Map">
+      update company_protocol
+      SET
+      protocol_create_time = NOW(),
+      protocol_update_time =NOW(),
+      protocol_contract_time=NOW(),
+      protocol_expire_time=NULL,
+      protocol_current_status= 2
+      where  protocol_company_id =#{companyId}
+      and protocol_contract_type=#{contractType}
+    </update>
+</mapper>

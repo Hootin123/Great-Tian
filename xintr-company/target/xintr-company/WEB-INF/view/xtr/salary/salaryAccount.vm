@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>薪酬核算</title>
+    #parse("comm/head.vm")
+    <script src="#springUrl('/resource/js/plugins/laypage/laypage.js')"></script>
+    <script src="#springUrl('/resource/js/salary/salaryAccount.js')"></script>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        .paymentTop {
+            width: 100%;
+            height: 60px;
+            background: #f0f0f0;
+        }
+
+        .payTitle {
+            width: 95%;
+            margin: 0 auto;
+            line-height: 60px;
+            height: 100%;
+            min-width: 1200px
+        }
+
+        .payTitleText {
+            font-size: 18px;
+            color: #333;
+            font-weight: 600;
+            float: left;
+        }
+
+        .payTitleImg {
+            width: 105px;
+            height: 100%;
+            background: url(#springUrl('/resource/img/salary/topBack.png')) no-repeat center 21px;
+            float: left;
+            padding-left: 15px;
+            font-weight: 600;
+            padding-top: 1px;
+            color: #324a5e;
+        }
+
+        .paymentAll {
+            width: 95%;
+            margin: 0 auto;
+            min-width: 1200px
+        }
+
+        .payTop {
+            width: 100%;
+            height: 80px;
+            position: relative
+        }
+
+        .payNaw {
+            width: 90px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            background: #314a5e;
+            color: #fff;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+            position: absolute;
+            top: 20px;
+        }
+
+        .payAudit {
+            width: 90px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            background: #ff7058;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 12px;
+            position: absolute;
+            top: 20px;
+            left: 125px;
+        }
+
+        .patTest {
+            width: 90px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            background: #314a5e;
+            color: #fff;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+            position: absolute;
+            top: 20px;
+            left: 155px;
+            left: 250px;
+        }
+
+        .paySalary {
+            width: 90px;
+            height: 30px;
+            line-height: 30px;
+            background: #314a5e;
+            color: #fff;
+            border-radius: 3px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 12px;
+            position: absolute;
+            top: 20px;
+            left: 155px;
+            left: 375px;
+        }
+
+        .paySeek {
+            width: 218px;
+            height: 30px;
+            position: absolute;
+            top: 20px;
+            right: 0;
+            border: 1px solid #999;
+            border-radius: 3px;
+            background: #fff;
+        }
+
+        .paySeek img {
+            margin: 6px 20px 0 20px;
+        }
+
+        .paySeek input {
+            width: 100px;
+            height: 20px;
+            border: none;
+            border-right: 1px solid #999;
+            margin-top: 4px;
+            font-family: "微软雅黑"
+        }
+
+        .paySeek span {
+            border: none;
+            background: #fff;
+            cursor: pointer;
+            margin-left: 7px;
+        }
+
+        .table {
+            width: 100%;
+            overflow: auto
+        }
+
+        .tableTitle {
+            white-space: nowrap;
+        }
+
+        .tableTitle1 li {
+            background: #f1f9ff;
+        }
+
+        .tableTitle li {
+            position: relative;
+            width: 100px;
+            border-top: 1px solid #999;
+            border-left: 1px solid #999;
+            display: inline-block;
+            text-align: center;
+            height: 40px;
+            line-height: 40px;
+            vertical-align: text-top;
+            white-space: pre-line;
+            font-size: 12px;
+        }
+
+        .table .tableTitle .tableTitle1 {
+            width: 200px;
+        }
+
+        .tableTitle li input {
+            width: 70px;
+            height: 25px;
+            text-align: center
+        }
+
+        .tableTitle li span {
+            font-size: 20px;
+            font-weight: 600;
+            position: absolute;
+            color: #f86d53;
+            bottom: 0px;
+            right: 0px;
+            line-height: 20px;
+            cursor: pointer
+        }
+
+    </style>
+</head>
+<body>
+<input type="hidden" id="payCycleId" value="$!{payCycle.id}"/>
+<input type="hidden" id="isSocialSecurity" value="$!{isSocialSecurity}"/>
+##<div class="paymentTop">
+##    <div class="payTitle">
+##        <div class="payTitleText">薪酬核算</div>
+##        <div class="payTitleImg">
+##            <span></span>
+##        </div>
+##    </div>
+##</div>
+<div class="paymentAll">
+    <div class="payTop">
+        <div class="payNaw">新 建</div>
+        <div class="payAudit">审 核</div>
+        <div class="patTest" onclick="onBatchUpload('../customerSalary/toBatchUpload.htm?type=4',' ')">导入考勤</div>
+        <div class="paySalary">导入工资明细</div>
+        <div class="paySeek">
+            <img src="#springUrl('/resource/img/salary/paySeek.png')" alt="">
+            <input id="userName" type="text" placeholder="搜索员工">
+            <span onclick="onSearch()">搜索</span>
+        </div>
+    </div>
+    <div class="table" id="tableSalary">
+        <img src="#springUrl('/resource/img/salary/paySet.png')" alt="">
+    </div>
+
+</div>
+</body>
+<script>
+    $(function () {
+        var click = "window.iframe0.onAllowance('../../salary_setting/allowance.htm','')";
+        //设置标题
+        parent.setTitle('薪酬核算' + '<span>$!date.format('MM.dd',$!{payCycle.startDate}) ~ $!date.format(
+                    'MM.dd',$!{payCycle.endDate})</span><img class="setTitleImg" src="#springUrl(
+                    '/resource/img/salary/blueRight.png')" alt=""><img class="paySet" src="#springUrl(
+                    '/resource/img/salary/paySet.png')" onclick="'+click+'">');
+    });
+
+    /**
+     * 跳转到薪资设置页面
+     */
+    function onAllowance(url, title) {
+        var index = layer.open({
+            type: 2,
+            title: false,
+            closeBtn: 0,
+            maxmin: false,
+            shadeClose: false, //点击遮罩关闭层
+            area: ['650px', '380px'],
+            content: url,
+            cancel: function () {
+                //initData();
+                location.reload();
+            }
+        });
+        //窗口最大化
+        layer.full(index);
+    }
+</script>
+</html>

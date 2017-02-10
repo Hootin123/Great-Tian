@@ -1,0 +1,149 @@
+#####完善信息页面
+<!DOCTYPE html>
+<html lang="en" id='html'>
+<head>
+    #parse("comm/head.vm")
+    <meta charset="UTF-8">
+    <title>企业信息完善</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1"/>
+    <script type="text/javascript" src=#springUrl('/resource/js/hongbao/info.js')></script>
+    <script type="text/javascript" src="#springUrl('/resource/js/hongbao/ajaxfileupload.js')"></script>
+    <link rel="stylesheet" type="text/css" href=#springUrl('/resource/css/hongbao/info.css')>
+</head>
+<body>
+<header>
+    企业完善信息
+</header>
+<section>
+    <form id="perfectInfoForm">
+        <input type="hidden" name="companyLogo" value="$!{companyLogo}"/>
+        <input type="hidden" name="companyOrganizationImg" value="$!{companyOrganizationImg}"/>
+    <ul>
+        <li id='companyName'>
+            <label><em>*</em>公司名称</label><input type="text" name="companyName" value="$!{companyName}" placeholder='请输入公司名称'>
+            <b></b>
+            <i></i>
+        </li>
+        <li id="companyLog">
+            <label>公司Logo</label>
+            <div class="logo-pic pic">
+              #if($!{companyLogo} == "")
+                +<img src=  #springUrl('/resource/img/hongbao/error.png')  id="uploadLogo"/>
+              #else
+                  <img src= "$!{companyLogoUrl}"  id="uploadLogo"/>
+                  #end
+                <input type="file"  name="file" id="companyLogoFile"/>
+            </div>
+            <b></b>
+
+        </li>
+        <li id='companyAddress'>
+            <label><em>*</em>公司地址</label><input type="text" name="companyAddress" value="$!{companyAddress}" placeholder ='请输入公司地址'>
+            <b></b>
+            <i></i>
+        </li>
+        <li id='companyNumber'>
+            <label><em>*</em>营业执照编号</label>
+            <input type="text" name="companyNumber" value="$!{companyNumber}" placeholder="请输入营业执照编号">
+            <b></b>
+            <i></i>
+        </li>
+        <li id='permit'>
+            <label><em>*</em>营业执照扫描件</label>
+            <div class="permit-pic  pic">
+                #if($!{companyOrganizationImg}=="")
+                    +<img  #springUrl('/resource/img/hongbao/error.png')  id="uploadOrgImage"/>
+                #else
+                    <img src="$!{companyOrganizationImgUrl}"  id="uploadOrgImage"/>
+                #end
+
+                <input type="file"  name="file" id="companyOrganizationImgFile" />
+            </div>
+            <div class="require">
+                支持jpg.jpeg.png.
+                bmp格式照片，大小不超过5M.
+            </div>
+            <b></b>
+            <i></i>
+        </li>
+        <li id='corporate'>
+            <label>法人代表</label><input type="text" name="companyCorporation" value="$!{companyCorporation}" placeholder ='请输入法人代表'>
+            <b></b>
+            <i></i>
+        </li>
+        <li id='linkPhone'>
+            <label><em>*</em>联系电话</label><input type="text" value="$!{companyCorporationPhone}" name="companyCorporationPhone" placeholder ='请输入联系电话'>
+            <b></b>
+            <i></i>
+        </li>
+        <li id='asset'>
+            <label>公司规模</label>
+            <span class="identity-span checkt1">请选择</span>
+            <input type="hidden" name='companyScale'  id="companyScale" value="$!{companyScale}"/>
+            <ol id='show1'>
+                <li>50人以下</li>
+                <li>50-100人</li>
+                <li>100-200人</li>
+                <li>200-500人</li>
+                <li>500人以上</li>
+            </ol>
+            <b></b>
+            <i></i>
+        </li>
+        <li id='invol'>
+            <label>所属行业</label>
+            <span class="identity-span checkt2">请选择</span>
+            <input type="hidden" name='companyBelongIndustry' value="$!{companyBelongIndustry}" id="companyBelongIndustry" />
+            <ol id='show2'>
+                <li>互联网/游戏/软件</li>
+                <li>电子/通信/硬件</li>
+                <li>房地产/建筑/物业</li>
+                <li>金融</li>
+                <li>消费品</li>
+                <li>汽车/机械/制造</li>
+                <li>服务/外包/中介</li>
+                <li>广告/传媒/教育/文化</li>
+                <li>交通/贸易/物理</li>
+                <li>广告/传媒/教育/文化</li>
+            </ol>
+            <b></b>
+            <i></i>
+        </li>
+        <li id='channel'>
+            <label><em>*</em>了解渠道</label>
+            <span class="identity-span checkt3" >请选择</span>
+            <input type="hidden" name='companyChannel'id="companyChannel"  />
+            <ol id='show3'>
+                <li inde="1">百度360，等搜索引擎</li>
+                <li inde="2">微信，QQ等社交平台</li>
+                <li inde="3">推销</li>
+                <li inde="4">广告</li>
+                <li inde="5">朋友介绍</li>
+                <li inde="6">其他</li>
+            </ol>
+            <b></b>
+            <i></i>
+        </li>
+    </ul>
+    </form>
+    <div class="hint" style='display: none'>信息错误</div>
+    <div class="submit">提交审核</div>
+    <div class="titInfo">
+        已有<span>$!{counts}</span>位HR领取了完善信息的红包
+    </div>
+</section>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

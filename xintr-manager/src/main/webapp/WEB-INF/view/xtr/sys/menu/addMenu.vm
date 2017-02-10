@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>新增菜单</title>
+    <script src="#springUrl('/resource/js/sys/menu/addMenu.js')"></script>
+</head>
+
+
+<div class="ibox" style="padding-top: 0px">
+    <div class="ibox-title">
+        <h5>新增菜单</h5>
+        <div class="ibox-tools">
+            <a class="close right" data-dismiss="modal" onclick="resetMenuValidateForm()">×</a>
+        </div>
+    </div>
+
+    <div class="ibox-content">
+        <form class="form-horizontal m-t" id="addMenuForm">
+            #if($menu)##修改数据
+                <input type="text" name="id" class="hidden" value="$menu.id"/>
+                <input type="text" name="parentId" class="hidden" value="#if($menu.parentId)$menu.parentId#end"/>
+                <input type="text" name="isDelete" class="hidden" value="$menu.isDelete"/>
+                <input type="text" name="createDateTime" class="hidden" value="$menu.createDateTime"/>
+                <input type="text" name="updateDateTime" class="hidden" value="#if($menu.updateDateTime)$menu.updateDateTime#end"/>
+                <input type="text" name="actions" class="hidden" value="$menu.actions"/>
+            #elseif($parentId)##新增数据
+                <input type="text" id="parentId" name="parentId" class="hidden" value="$parentId"/>
+            #end
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">菜单名称：</label>
+                <div class="col-sm-8">
+                    <input id="menuName" name="menuName" class="form-control" type="text"
+                           aria-required="true" aria-invalid="false" class="error" #if($menu)value="$menu.menuName" #end>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">系统url：</label>
+                <div class="col-sm-8">
+                    <input id="url" name="url" class="form-control" type="text" #if($menu && $menu.url)value="$menu.url" #end>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">菜单图标：</label>
+                <div class="col-sm-8">
+                ##                    <input id="menuIcon" name="menuIcon" class="form-control" type="text"
+                ##                           aria-required="true" aria-invalid="false" class="error">
+                    <div class="input-group">
+                        <input id="menuIcon" name="menuIcon" type="text" class="form-control" readonly placeholder="请选择图标"
+                               aria-required="true" aria-invalid="false" class="error" #if($menu && $menu.menuIcon)value="$menu.menuIcon" #end>
+                        <span class="input-group-btn">
+                            <a type="button" class="btn btn-primary" data-toggle="modal"
+                               data-target="#myMenuIconModal" href="icon.htm">查找图标</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">排序：</label>
+                <div class="col-sm-8">
+                    <input id="sort" name="sort" class="form-control" type="text" value="#if($menu)$menu.sort#end#if($parentId)0#end">
+                </div>
+            </div>
+            <div class="modal-footer" style="padding-top: 30px">
+                <button type="button" class="btn btn-white" data-dismiss="modal" onclick="resetMenuValidateForm()">关闭</button>
+                <button id="addMenuBtn" type="submit"
+                        class="btn btn-primary">保存
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+</html>

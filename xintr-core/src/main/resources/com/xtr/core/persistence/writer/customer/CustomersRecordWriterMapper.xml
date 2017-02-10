@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xtr.core.persistence.writer.customer.CustomersRecordWriterMapper" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from customers_record
+    where record_id = #{recordId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xtr.api.domain.customer.CustomersRecordBean" >
+    insert into customers_record (record_id, record_customer_id, record_operation_type, 
+      record_operation_time, record_dept_id, record_dept_name, 
+      record_arrive_time, record_station_reason, 
+      record_dimissing_type, record_dimissing_time, 
+      record_compensation, record_dimissing_reason, 
+      record_create_time, record_update_time,record_dept_id_before,record_station_name_before,record_station_name_after,record_salary_before,record_salary_after)
+    values (#{recordId,jdbcType=BIGINT}, #{recordCustomerId,jdbcType=BIGINT}, #{recordOperationType,jdbcType=INTEGER}, 
+      #{recordOperationTime,jdbcType=TIMESTAMP}, #{recordDeptId,jdbcType=BIGINT}, #{recordDeptName,jdbcType=VARCHAR}, 
+      #{recordArriveTime,jdbcType=TIMESTAMP}, #{recordStationReason,jdbcType=VARCHAR}, 
+      #{recordDimissingType,jdbcType=INTEGER}, #{recordDimissingTime,jdbcType=TIMESTAMP}, 
+      #{recordCompensation,jdbcType=DECIMAL}, #{recordDimissingReason,jdbcType=VARCHAR}, 
+      #{recordCreateTime,jdbcType=TIMESTAMP}, #{recordUpdateTime,jdbcType=TIMESTAMP},
+      #{recordDeptIdBefore,jdbcType=BIGINT}, #{recordStationNameBefore,jdbcType=VARCHAR},
+      #{recordStationNameAfter,jdbcType=VARCHAR}, #{recordSalaryBefore,jdbcType=TIMESTAMP},
+      #{recordSalaryAfter,jdbcType=TIMESTAMP})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.xtr.api.domain.customer.CustomersRecordBean" >
+    insert into customers_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="recordId != null" >
+        record_id,
+      </if>
+      <if test="recordCustomerId != null" >
+        record_customer_id,
+      </if>
+      <if test="recordOperationType != null" >
+        record_operation_type,
+      </if>
+      <if test="recordOperationTime != null" >
+        record_operation_time,
+      </if>
+      <if test="recordDeptId != null" >
+        record_dept_id,
+      </if>
+      <if test="recordDeptName != null" >
+        record_dept_name,
+      </if>
+      <if test="recordArriveTime != null" >
+        record_arrive_time,
+      </if>
+      <if test="recordStationReason != null" >
+        record_station_reason,
+      </if>
+      <if test="recordDimissingType != null" >
+        record_dimissing_type,
+      </if>
+      <if test="recordDimissingTime != null" >
+        record_dimissing_time,
+      </if>
+      <if test="recordCompensation != null" >
+        record_compensation,
+      </if>
+      <if test="recordDimissingReason != null" >
+        record_dimissing_reason,
+      </if>
+      <if test="recordCreateTime != null" >
+        record_create_time,
+      </if>
+      <if test="recordUpdateTime != null" >
+        record_update_time,
+      </if>
+      <if test="recordDeptIdBefore != null" >
+        record_dept_id_before,
+      </if>
+      <if test="recordStationNameBefore != null" >
+        record_station_name_before,
+      </if>
+      <if test="recordStationNameAfter != null" >
+        record_station_name_after,
+      </if>
+      <if test="recordSalaryBefore != null" >
+        record_salary_before,
+      </if>
+      <if test="recordSalaryAfter != null" >
+        record_salary_after,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="recordId != null" >
+        #{recordId,jdbcType=BIGINT},
+      </if>
+      <if test="recordCustomerId != null" >
+        #{recordCustomerId,jdbcType=BIGINT},
+      </if>
+      <if test="recordOperationType != null" >
+        #{recordOperationType,jdbcType=INTEGER},
+      </if>
+      <if test="recordOperationTime != null" >
+        #{recordOperationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recordDeptId != null" >
+        #{recordDeptId,jdbcType=BIGINT},
+      </if>
+      <if test="recordDeptName != null" >
+        #{recordDeptName,jdbcType=VARCHAR},
+      </if>
+      <if test="recordArriveTime != null" >
+        #{recordArriveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recordStationReason != null" >
+        #{recordStationReason,jdbcType=VARCHAR},
+      </if>
+      <if test="recordDimissingType != null" >
+        #{recordDimissingType,jdbcType=INTEGER},
+      </if>
+      <if test="recordDimissingTime != null" >
+        #{recordDimissingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recordCompensation != null" >
+        #{recordCompensation,jdbcType=DECIMAL},
+      </if>
+      <if test="recordDimissingReason != null" >
+        #{recordDimissingReason,jdbcType=VARCHAR},
+      </if>
+      <if test="recordCreateTime != null" >
+        #{recordCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recordUpdateTime != null" >
+        #{recordUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recordDeptIdBefore != null" >
+        #{recordDeptIdBefore,jdbcType=BIGINT},
+      </if>
+      <if test="recordStationNameBefore != null" >
+        #{recordStationNameBefore,jdbcType=VARCHAR},
+      </if>
+      <if test="recordStationNameAfter != null" >
+        #{recordStationNameAfter,jdbcType=VARCHAR},
+      </if>
+      <if test="recordSalaryBefore != null" >
+        #{recordSalaryBefore,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recordSalaryAfter != null" >
+        #{recordSalaryAfter,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.xtr.api.domain.customer.CustomersRecordBean" >
+    update customers_record
+    <set >
+      <if test="recordCustomerId != null" >
+        record_customer_id = #{recordCustomerId,jdbcType=BIGINT},
+      </if>
+      <if test="recordOperationType != null" >
+        record_operation_type = #{recordOperationType,jdbcType=INTEGER},
+      </if>
+      <if test="recordOperationTime != null" >
+        record_operation_time = #{recordOperationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recordDeptId != null" >
+        record_dept_id = #{recordDeptId,jdbcType=BIGINT},
+      </if>
+      <if test="recordDeptName != null" >
+        record_dept_name = #{recordDeptName,jdbcType=VARCHAR},
+      </if>
+      <if test="recordArriveTime != null" >
+        record_arrive_time = #{recordArriveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recordStationReason != null" >
+        record_station_reason = #{recordStationReason,jdbcType=VARCHAR},
+      </if>
+      <if test="recordDimissingType != null" >
+        record_dimissing_type = #{recordDimissingType,jdbcType=INTEGER},
+      </if>
+      <if test="recordDimissingTime != null" >
+        record_dimissing_time = #{recordDimissingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recordCompensation != null" >
+        record_compensation = #{recordCompensation,jdbcType=DECIMAL},
+      </if>
+      <if test="recordDimissingReason != null" >
+        record_dimissing_reason = #{recordDimissingReason,jdbcType=VARCHAR},
+      </if>
+      <if test="recordCreateTime != null" >
+        record_create_time = #{recordCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recordUpdateTime != null" >
+        record_update_time = #{recordUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recordDeptIdBefore != null" >
+        record_dept_id_before = #{recordDeptIdBefore,jdbcType=BIGINT},
+      </if>
+      <if test="recordStationNameBefore != null" >
+        record_station_name_before = #{recordStationNameBefore,jdbcType=VARCHAR},
+      </if>
+      <if test="recordStationNameAfter != null" >
+        record_station_name_after = #{recordStationNameAfter,jdbcType=VARCHAR},
+      </if>
+      <if test="recordSalaryBefore != null" >
+        record_salary_before = #{recordSalaryBefore,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recordSalaryAfter != null" >
+        record_salary_after = #{recordSalaryAfter,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where record_id = #{recordId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xtr.api.domain.customer.CustomersRecordBean" >
+    update customers_record
+    set record_customer_id = #{recordCustomerId,jdbcType=BIGINT},
+      record_operation_type = #{recordOperationType,jdbcType=INTEGER},
+      record_operation_time = #{recordOperationTime,jdbcType=TIMESTAMP},
+      record_dept_id = #{recordDeptId,jdbcType=BIGINT},
+      record_dept_name = #{recordDeptName,jdbcType=VARCHAR},
+      record_arrive_time = #{recordArriveTime,jdbcType=TIMESTAMP},
+      record_station_reason = #{recordStationReason,jdbcType=VARCHAR},
+      record_dimissing_type = #{recordDimissingType,jdbcType=INTEGER},
+      record_dimissing_time = #{recordDimissingTime,jdbcType=TIMESTAMP},
+      record_compensation = #{recordCompensation,jdbcType=DECIMAL},
+      record_dimissing_reason = #{recordDimissingReason,jdbcType=VARCHAR},
+      record_create_time = #{recordCreateTime,jdbcType=TIMESTAMP},
+      record_dept_id_before = #{recordDeptIdBefore,jdbcType=BIGINT},
+      record_station_name_before = #{recordStationNameBefore,jdbcType=VARCHAR},
+      record_station_name_after = #{recordStationNameAfter,jdbcType=VARCHAR},
+      record_salary_before = #{recordSalaryBefore,jdbcType=TIMESTAMP},
+      record_salary_after = #{recordSalaryAfter,jdbcType=TIMESTAMP},
+      record_update_time = #{recordUpdateTime,jdbcType=TIMESTAMP}
+    where record_id = #{recordId,jdbcType=BIGINT}
+  </update>
+<!-- 删除的员工不更新-->
+  <update id="updateByCustomerId" parameterType="com.xtr.api.domain.customer.CustomersRecordBean">
+    update customers_record
+    <set >
+
+      <if test="recordOperationType != null" >
+        record_operation_type = #{recordOperationType,jdbcType=INTEGER},
+      </if>
+      <if test="recordOperationTime != null" >
+        record_operation_time = #{recordOperationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recordDeptId != null" >
+        record_dept_id = #{recordDeptId,jdbcType=BIGINT},
+      </if>
+      <if test="recordDeptName != null" >
+        record_dept_name = #{recordDeptName,jdbcType=VARCHAR},
+      </if>
+      <if test="recordArriveTime != null" >
+        record_arrive_time = #{recordArriveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recordStationReason != null" >
+        record_station_reason = #{recordStationReason,jdbcType=VARCHAR},
+      </if>
+      <if test="recordDimissingType != null" >
+        record_dimissing_type = #{recordDimissingType,jdbcType=INTEGER},
+      </if>
+      <if test="recordDimissingTime != null" >
+        record_dimissing_time = #{recordDimissingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recordCompensation != null" >
+        record_compensation = #{recordCompensation,jdbcType=DECIMAL},
+      </if>
+      <if test="recordDimissingReason != null" >
+        record_dimissing_reason = #{recordDimissingReason,jdbcType=VARCHAR},
+      </if>
+      <if test="recordCreateTime != null" >
+        record_create_time = #{recordCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recordUpdateTime != null" >
+        record_update_time = #{recordUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recordDeptIdBefore != null" >
+        record_dept_id_before = #{recordDeptIdBefore,jdbcType=BIGINT},
+      </if>
+      <if test="recordStationNameBefore != null" >
+        record_station_name_before = #{recordStationNameBefore,jdbcType=VARCHAR},
+      </if>
+      <if test="recordStationNameAfter != null" >
+        record_station_name_after = #{recordStationNameAfter,jdbcType=VARCHAR},
+      </if>
+      <if test="recordSalaryBefore != null" >
+        record_salary_before = #{recordSalaryBefore,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recordSalaryAfter != null" >
+        record_salary_after = #{recordSalaryAfter,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where record_customer_id = #{recordCustomerId,jdbcType=BIGINT}
+    AND
+    record_operation_type!=4;
+  </update>
+  <!--批量插入员工记录信息-->
+  <insert id="insertBatch" parameterType="java.util.List" >
+    insert into customers_record (record_id, record_customer_id, record_operation_type,
+    record_operation_time, record_dept_id, record_dept_name,
+    record_arrive_time, record_station_reason,
+    record_dimissing_type, record_dimissing_time,
+    record_compensation, record_dimissing_reason,
+    record_create_time, record_update_time,record_dept_id_before,record_station_name_before,record_station_name_after,record_salary_before,record_salary_after)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.recordId,jdbcType=BIGINT}, #{item.recordCustomerId,jdbcType=BIGINT}, #{item.recordOperationType,jdbcType=INTEGER},
+      #{item.recordOperationTime,jdbcType=TIMESTAMP}, #{item.recordDeptId,jdbcType=BIGINT}, #{item.recordDeptName,jdbcType=VARCHAR},
+      #{item.recordArriveTime,jdbcType=TIMESTAMP}, #{item.recordStationReason,jdbcType=VARCHAR},
+      #{item.recordDimissingType,jdbcType=INTEGER}, #{item.recordDimissingTime,jdbcType=TIMESTAMP},
+      #{item.recordCompensation,jdbcType=DECIMAL}, #{item.recordDimissingReason,jdbcType=VARCHAR},
+      #{item.recordCreateTime,jdbcType=TIMESTAMP}, #{item.recordUpdateTime,jdbcType=TIMESTAMP},
+      #{item.recordDeptIdBefore,jdbcType=BIGINT}, #{item.recordStationNameBefore,jdbcType=VARCHAR},
+      #{item.recordStationNameAfter,jdbcType=VARCHAR}, #{item.recordSalaryBefore,jdbcType=TIMESTAMP},
+      #{item.recordSalaryAfter,jdbcType=TIMESTAMP})
+    </foreach>
+  </insert>
+
+</mapper>

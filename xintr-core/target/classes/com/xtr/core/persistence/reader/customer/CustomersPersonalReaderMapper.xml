@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xtr.core.persistence.reader.customer.CustomersPersonalReaderMapper" >
+  <resultMap id="BaseResultMap" type="com.xtr.api.domain.customer.CustomersPersonalBean" >
+    <id column="personal_id" property="personalId" jdbcType="BIGINT" />
+    <result column="personal_customer_id" property="personalCustomerId" jdbcType="BIGINT" />
+    <result column="personal_relationer_name" property="personalRelationerName" jdbcType="VARCHAR" />
+    <result column="personal_relationer_phone" property="personalRelationerPhone" jdbcType="VARCHAR" />
+    <result column="personal_domicile_place" property="personalDomicilePlace" jdbcType="VARCHAR" />
+    <result column="personal_nation" property="personalNation" jdbcType="VARCHAR" />
+    <result column="personal_politics_status" property="personalPoliticsStatus" jdbcType="VARCHAR" />
+    <result column="personal_current_place" property="personalCurrentPlace" jdbcType="VARCHAR" />
+    <result column="personal_education_high" property="personalEducationHigh" jdbcType="INTEGER" />
+    <result column="personal_graduate_school" property="personalGraduateSchool" jdbcType="VARCHAR" />
+    <result column="personal_major" property="personalMajor" jdbcType="VARCHAR" />
+    <result column="personal_resume" property="personalResume" jdbcType="VARCHAR" />
+    <result column="personal_create_time" property="personalCreateTime" jdbcType="TIMESTAMP" />
+    <result column="personal_update_time" property="personalUpdateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    personal_id, personal_customer_id, personal_relationer_name, personal_relationer_phone, 
+    personal_domicile_place, personal_nation, personal_politics_status, personal_current_place, 
+    personal_education_high, personal_graduate_school, personal_major, personal_resume, 
+    personal_create_time, personal_update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from customers_personal
+    where personal_id = #{personalId,jdbcType=BIGINT}
+  </select>
+
+  <!-- 根据用户id查询用户-->
+  <select id="selectByCustomerId"  resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select
+    <include refid="Base_Column_List" />
+    from customers_personal
+    where personal_customer_id = #{personalCustomerId,jdbcType=BIGINT}
+  </select>
+
+</mapper>

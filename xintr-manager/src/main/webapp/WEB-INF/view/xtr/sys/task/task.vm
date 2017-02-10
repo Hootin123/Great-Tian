@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>薪太软 任务管理</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-table/bootstrap-table.min.css')" rel="stylesheet">
+</head>
+
+<body>
+<div class="col-sm-12">
+    <div class="container-fluid">
+        <div class="row-fluid">
+
+            <div id="toolbar" class="btn-group">
+                <button id="addBtn" type="button" class="btn btn-primary fa fa-plus-square">
+                    新增
+                </button>
+                <button id="deleteBtn" type="button" class="btn btn-primary fa fa-minus-square">
+                    删除
+                </button>
+                <button id="editBtn" type="button" class="btn btn-primary fa fa-edit">
+                    编辑
+                </button>
+            </div>
+
+            <table id="data-list" class="table table-bordered table-hover"></table>
+        </div>
+    </div>
+
+</div>
+
+
+
+</body>
+<script src="#springUrl('/resource/js/hui/content.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table-mobile.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/validate/jquery.validate.min.js')"></script>
+<script src="#springUrl('/resource/js/comm/jdatagrid.js')"></script>
+<script src="#springUrl('/resource/js/sys/task/task.js')"></script>
+
+
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+    #parse("comm/head.vm")
+    <link rel="stylesheet" type="text/css" href="resource/css/comm/comm.css" />
+    <link rel="stylesheet" type="text/css" href="resource/css/login/login.css" />
+    <link rel="stylesheet" type="text/css" href="resource/css/login/phonebox.css" />
+    <link rel="stylesheet" href="resource/css/comm/mainPage.css" />
+    <script src="resource/js/login/jquery-1.11.0.min.js"></script>
+    <script src="resource/js/login/indexlogin.js"></script>
+    <script src="resource/js/login/placeholder.js"></script>
+</head>
+
+<body>
+<div class="header">
+    <div class="hdlg">
+        <a class="homepage" href="/indextop.htm">薪太软首页</a>
+    </div>
+</div>
+<div id="lgbdy">
+    <div class="lgbdy_logon">
+        <div class="lgbdy_bg"></div>
+        <div class="lgbdy_logon_left">
+            <form id="loginChangeForm">
+                <div class="table1">
+                    <div id="table1_h3">
+                        <h3>登录企业账号</h3>
+                    </div>
+                    <div id="username">
+                        <ul>
+                            <li id="">用户名</li>
+                            <li style="height: 52px"></li>
+                            <li id="unit">手机号码</li>
+                            <li id="verify">短信验证码</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 存放隐藏字段-->
+                <input name="memberLogname"  id="memberLogname" type="hidden" value="${memberLogname}"/>
+                <input name="memberId" id="memberId" type="hidden" value="${memberid}"/>
+                <input name="code" id="codeValue" type="hidden"/>
+                <div id="input_box">
+                    <ul>
+
+                       <li>${memberLogname}</li>
+                        <li style="width: 365px;height: 52px"><span style="display:inline-block;color: red;font-size: 12px;line-height:26px;height: 26px">为了提供更好的服务，薪太软用户名称将会替换为手机号码的形式，请设定手机号码</span></li>
+                        <li style="position: relative">
+                            <input class="logtext" type="text" maxlength="11" id="memberPhone" name="memberPhone" placeholder="请输入手机号码" style="width:180px;float:left;margin-top:10px;" />
+                            <div class="v_code1" style="width:110px;height:34px;line-height:34px; cursor:pointer;background:#0696fa;text-align:center;line-hehight:36px;border:0;color:#fff;margin-left:20px;float:left;margin-top:10px;">获取验证码</div>
+                            <img class="login-img login-img1" style="position: absolute;right:198px ; top: 0" src="resource/img/wrrong.png">
+                            <img class="login-img login-img2" src="resource/img/right.png">
+                            <span style="margin-left: 40px" class="login-wrrong">请输入正确的手机号码！</span>
+                        </li>
+                        <li style="position: relative">
+                            <input class="logtext" type="text" maxlength="6" name="smscode" id="smscode" placeholder="输入短信验证码" />
+                            <img class="login-img login-img1" style="position: absolute;right:198px ; top: 0" src="resource/img/wrrong.png">
+                            <img class="login-img login-img2" src="resource/img/right.png">
+                            <span style="margin-left: 40px" class="login-wrrong">短信验证码错误！</span>
+                        </li>
+                        <li><span style="color: red; font-size: 12px;display:none" id="error_show"></span></li>
+                    </ul>
+                </div>
+
+                <div style="margin-top: 34px;margin-left:220px;">
+
+                    <div>
+                        <input  type="button" class="logon_sbm" value="登录" />
+                    </div>
+                </div>
+
+                <div class="sign_vfct" style="top:35%">
+                    <h3>发送短信验证码</h3>
+
+                    <div class="signtb">
+                        <div class="sign-tr" style="margin:60px 0 4px 30px;">
+                            <span style="padding-right:35px;">图形验证码</span>
+                            <input class="lgip1" placeholder="请输入图形验证码" maxlength="4" type="text" />
+                            <img style="" class="btn-code lgip2" id="vcodeimg" name ="vcodeimg" src="generateImages.htm"  onclick="$(this).attr('src','generateImages.htm?'+(new Date()).getTime())"/>
+                        </div>
+                        <div class="sign-tr" style="color:red;height:20px;padding-left:140px;" class="lgremind">
+                            <div class="lgmintd"></div>
+                        </div>
+                        <div class="sign-tr">
+                            <div class="sign-trBtn">
+                                <input class="lgsubm lgsubm1" type="button" value="完成" />
+                                <input class="lgsubm lgsubm2" type="button" value="取消" />
+                            </div>
+                        </div>
+
+                    </div>
+                    <span class="vfct_close"></span>
+                </div>
+            </form>
+
+        </div>
+        <div class="lgbdy_logon_right">
+            <a href="#" class="lg_head"><img src="resource/img/lg_head.png" />
+                <br />点击登录</a>
+        </div>
+    </div>
+    <div class="sign_shade" style="background: #000000; opacity: 0.7;filter:alpha(opacity=70);"></div>
+</div>
+<div class="footer" id="footer">薪太软（上海）科技发展有限公司 | 沪ICP备16018294号 |<img src="resource/img/police.png" style="margin: 28px 5px 0 5px;" />沪公网安备 31010602000188号</div>
+</body>
+
+</html>

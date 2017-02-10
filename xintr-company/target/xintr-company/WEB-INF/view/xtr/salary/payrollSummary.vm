@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发工资汇总</title>
+    #parse("comm/head.vm")
+    <script src="#springUrl('/resource/js/plugins/laypage/laypage.js')"></script>
+    <script src="#springUrl('/resource/js/salary/payrollSummary.js')"></script>
+    <style>
+        body, html {
+            width: 100%;
+        }
+
+        .collectAll {
+            width: 95%;
+            margin: 0px auto;
+            min-width: 1200px;
+            padding-top: 20px;
+        }
+
+        .collectAllCon {
+            width: 100%;
+            height: 100px;
+            border-radius: 3px;
+            margin-top: 10px;
+        }
+
+        .collectAllCon1 {
+            width: 5%;
+            height: 100%;
+            border: 2px solid #ddd;
+            float: left;
+            box-sizing: border-box;
+            background: url(../resource/img/salary/checkTransparent.png) no-repeat center;
+            cursor: pointer;
+            float: left;
+        }
+
+        .collectAllCon2 {
+            width: 30%;
+            height: 100%;
+            float: left;
+            position: relative
+        }
+
+        .collect2Text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #ff7058;
+            padding: 20px 0 0 20px;
+        }
+
+        .collect2Figure {
+            font-size: 10px;
+            font-weight: 600;
+            padding: 10px 0 0 20px;
+        }
+
+        .collectAllConRight {
+            width: 95%;
+            height: 100%;
+            float: left;
+            border: 2px solid #ddd;
+            border-left: none;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .collectAllCon3 {
+            width: 10%;
+            height: 100%;
+            float: left;
+        }
+
+        .collectAllCon4 {
+            width: 10%;
+            height: 100%;
+            float: left;
+        }
+
+        .collectAllCon5 {
+            width: 30%;
+            height: 100%;
+            float: left;
+        }
+
+        .collectAllCon6 {
+            width: 15%;
+            height: 100%;
+            float: left;
+        }
+
+        .collectNum {
+            font-size: 20px;
+            font-weight: 600;
+            color: #ff7058;
+            padding-top: 10px;
+        }
+
+        .collectConText {
+            font-size: 20px;
+            font-weight: 600;
+            padding-top: 20px;
+        }
+
+        .collectAllCon11 {
+            height: 130px;
+            width: 5%;
+            background: url(../resource/img/salary/checkTransparent1.png) no-repeat center;
+            border-right: 2px solid #ddd;
+        }
+
+        .collect2Text1 {
+            width: 25%;
+            height: 50%;
+            float: left;
+        }
+
+        .collect2Figure1 {
+            width: 45%;
+            height: 50%;
+            padding-top: 28px;
+            float: left;
+        }
+
+        .collectAllConPayroll {
+            position: absolute;
+            width: 100px;
+            height: 25px;
+            line-height: 25px;
+            text-align: center;
+            bottom: 10px;
+            left: 10px;
+            font-size: 16px;
+            color: #0696fa;
+            display: none;
+            cursor: pointer
+        }
+
+        .collectAllCon2Tax {
+            position: absolute;
+            width: 100px;
+            height: 25px;
+            line-height: 25px;
+            text-align: center;
+            bottom: 10px;
+            left: 130px;
+            font-size: 16px;
+            color: #0696fa;
+            display: none;
+            cursor: pointer
+        }
+
+        .collectAllCon2Tax img {
+            display: none
+        }
+
+        .collectDerive {
+            width: 100%;
+            height: 30px;
+            position: absolute;
+            right: -2px;
+            bottom: -32px;
+            border-right: 2px solid #ddd;
+            border-bottom: 2px solid #ddd;
+            line-height: 30px;
+            display: none
+        }
+
+        .collectDerive1 {
+            position: absolute;
+            left: 20px;
+            font-weight: 600
+        }
+
+        .collectDerive1 span {
+            color: #ff7058;
+            cursor: pointer
+        }
+
+        .collectDerive2 span {
+            color: #ff7058;
+            cursor: pointer
+        }
+
+        .collectDerive2 {
+            position: absolute;
+            left: 100px;
+            font-weight: 600
+        }
+
+        .collectDerive3 {
+            position: absolute;
+            right: 20px;
+            color: #0696fa;
+            text-decoration: underline;
+            font-weight: 600;
+            cursor: pointer
+        }
+
+        .tablePay {
+            width: 100%;
+            display: none
+        }
+
+        .tablePay tr td {
+            border: 1px solid #b8dae5;
+            line-height: 48px;
+            text-align: center;
+        }
+
+        .tablePay thead {
+            background: #f1f9ff;
+        }
+
+        .tableTax {
+            width: 100%;
+            display: none
+        }
+
+        .tableTax tr td {
+            border: 1px solid #b8dae5;
+            line-height: 48px;
+            text-align: center;
+        }
+
+        .tableTax thead {
+            background: #f1f9ff;
+        }
+
+        .collectConPay {
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            margin-top: 25px;
+            background: #f1543f;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+        }
+
+        .quicAll {
+            width: 95%;
+            height: 97%;
+            margin: 0 auto;
+            min-width: 1200px;
+        }
+
+        .quiAllCon {
+            width: 100%;
+            height: 100px;
+            border-radius: 3px;
+            border: 2px solid #ddd;
+            margin-top: 10px;
+        }
+
+        .quiAllCon1 {
+            width: 5%;
+            height: 100%;
+            float: left;
+            box-sizing: border-box;
+            background: url(../resource/img/salary/checkTransparent.png) no-repeat center;
+            cursor: pointer;
+            float: left;
+            border-right: 2px solid #ddd;
+        }
+
+        .quiAllCon11 {
+            width: 5%;
+            background: url(../resource/img/salary/checkTransparent1.png) no-repeat center;
+            border-right: 2px solid #ddd;
+        }
+
+        .quiAllCon2 {
+            width: 30%;
+            height: 100%;
+            float: left;
+            position: relative
+        }
+
+        .quiAll2Text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #ff7058;
+            padding: 20px 0 0 20px;
+        }
+
+        .quiAll2Text img {
+            padding: 4px 0 0 10px;
+        }
+
+        .quiAll2Figure {
+            font-size: 10px;
+            font-weight: 600;
+            padding: 10px 0 0 20px;
+        }
+
+        .quiAllCon3 {
+            width: 10%;
+            height: 100%;
+            float: left;
+        }
+
+        .quiAllCon4 {
+            width: 35%;
+            height: 100%;
+            float: left;
+        }
+
+        .quiAll3Text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #999;
+            padding: 20px 0 0 20px;
+        }
+
+        .quiAll3Figure {
+            font-size: 20px;
+            font-weight: 600;
+            padding: 10px 0 0 20px;
+            color: #ff7058;
+        }
+
+        .quiAllCon5 {
+            width: 20%;
+            height: 100%;
+            float: left;
+        }
+
+        .quiAllCon5Not {
+            font-size: 20px;
+            color: #ff7058;
+            padding: 40px 0 0 20px;
+            font-weight: 600
+        }
+
+        .quiAllCon5Fut {
+            padding: 10px 0 0 20px;
+            font-weight: 600
+        }
+
+        .quiAllCon5Fut a {
+            text-decoration: underline;
+            color: #0696fa;
+            cursor: pointer
+        }
+
+        .table {
+            width: 100%;
+            color: #333;
+            /*display: none*/
+        }
+
+        .table thead {
+            background: #f1f9ff;
+        }
+
+        .table tr td {
+            border: 1px solid #b8dae5;
+            line-height: 48px;
+            text-align: center;
+        }
+
+        .quiAllCon5End {
+            color: #333;
+            font-size: 20px;
+            padding: 40px 0 0 20px;
+            font-weight: 600
+        }
+
+        .quiAllCon5Time {
+            padding: 10px 0 0 20px;
+            font-weight: 600
+        }
+    </style>
+</head>
+<body>
+    <div class="collectAll">
+
+    </div>
+</body>
+    <script>
+        parent.yearTitle('<div class="yearTime"><img class="yearImg1" src="../resource/img/salary/leftSan.png" alt=""><div>2016</div><img class="yearImg2" src="../resource/img/salary/rightSan.png" alt=""></div>')
+
+    </script>
+</html>

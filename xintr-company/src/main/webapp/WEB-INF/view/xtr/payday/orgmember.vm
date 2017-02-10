@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title></title>
+    #parse("comm/head.vm")
+##    <link href="#springUrl('/resource/css/payday/payday.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/payday/payoff.css')" rel="stylesheet">
+    <script src="#springUrl('/resource/js/payday/orgmember.js')"></script>
+
+</head>
+
+
+<body>
+<div class=" main_right payoff_two clear">
+
+    <div class="member">
+        <dl id="companyTree">
+            #if($!{companyTree} && $!{companyTree.size()} > 0)
+                #set($count=0)
+                <dt><span id="companyId" data-companyId="$!companyTree.get(0).companyId"
+                          data-companyName="$!companyTree.get(0).companyName"></span>$!companyTree.get(0).companyName
+                </dt>
+                #foreach($data in $!{companyTree})
+                    #if($!{data.depId})
+                        #if($count == 0 && $count == $!{companyTree.size()} - 1)
+                            <dd class="dd_active"  style="position:relative; top: 9px; margin-top: 23px;" data-deptName="$!{data.depName}"
+                                data-deptId="$!{data.depId}" data-count="$!{data.customerCount}"
+                                onclick="onClickCompanyTree($(this))">
+                                <em></em><span></span>$!{data.depName}($!{data.customerCount})
+                            </dd>
+                        #elseif($count == 0)
+                            <dd class="dd_active" style="margin-top: 37px;" data-deptName="$!{data.depName}"
+                                data-deptId="$!{data.depId}" data-count="$!{data.customerCount}"
+                                onclick="onClickCompanyTree($(this))">
+                                <em></em><span></span>$!{data.depName}($!{data.customerCount})
+                            </dd>
+                        #elseif($count == $!{companyTree.size()} - 1)
+                            <dd style="position:relative; top: 9px; margin-top: 23px;" data-deptName="$!{data.depName}"
+                                data-deptId="$!{data.depId}" data-count="$!{data.customerCount}"
+                                onclick="onClickCompanyTree($(this))">
+                                <em></em><span></span>$!{data.depName}($!{data.customerCount})
+                            </dd>
+                        #else
+                            <dd data-deptName="$!{data.depName}" data-deptId="$!{data.depId}"
+                                data-count="$!{data.customerCount}" onclick="onClickCompanyTree($(this))">
+                                <em></em><span></span>$!{data.depName}($!{data.customerCount})
+                            </dd>
+                        #end
+                        #set($count=$count+1)
+                    #end
+                #end
+            #end
+        </dl>
+    </div>
+
+
+    <div class="pwrit">
+
+        <ol class="payoff_two_nav">
+            <a href="payroll.htm">
+                <li class="nav_first">发工资</li>
+            </a>
+            <li class="payoff_two_active">维护组织成员</li>
+            <li class="payoff_two_logo"><img src="resource/img/help.png"/><br/>帮助</li>
+        </ol>
+
+        <div class="paoff_twhd">
+            <em class="triangle1"></em>
+
+            <div class="paoff_twdv clear">
+                #if($!{companyTree} && $!{companyTree.size()} > 0)
+                    <p class="word" id="selectDeptName">$!companyTree.get(0).depName（<em
+                            id="customerCount">$!companyTree.get(0).customerCount</em>人）<span
+                            class="payoff_two_p1">编号：<i id="selectDeptId">$!companyTree.get(0).depId</i></span></p>
+                #end
+                <div class="paoff_twhd_lf">
+                    <a id="updateDeptName" style="margin-left:40px ;" href="#">修改名字</a>
+                    <a id="addDept" href="#">新建子部门</a>
+                    <a id="deleteDept" href="#">删除部门</a>
+                </div>
+            </div>
+        </div>
+
+
+        <form action="#">
+            <div class="pwtbtns">
+                <div class="pwtbninp"><input style="margin: 0 10px 0 33px;" type="checkbox" id="checkbox1" name="">全选
+                </div>
+                <div class="pwtbtn" colspan="5">
+                    <a id="addMembers" class="pwtbtn1">新增成员</a>
+                    <a id="editMember" class="pwtbtn1">编辑</a>
+                    <a href="batchImport.htm" class="pwtbtn2">批量导入新成员</a>
+                    <a id="moveDept" class="pwtbtn3">移到其他单位</a>
+                    <a id="frozenCustomers" class="pwtbtn4">冻结</a>
+                    <a id="enableCustomers" class="pwtbtn5">启用</a></div>
+            </div>
+            <div id="customerTable">
+                <table class="paftwlst">
+                ##                    <tr>
+                ##                        <th><input style="margin: 0 10px 0 33px;" type="checkbox" id="checkbox1" name="">全选</th>
+                ##                        <th colspan="5">
+                ##                            <a id="addMembers" class="pwtbtn1">新增成员</a>
+                ##                            <a href="batchImport.htm" class="pwtbtn2">批量导入新成员</a>
+                ##                            <a id="moveDept" class="pwtbtn3">移到其他单位</a>
+                ##                            <a id="frozenCustomers" class="pwtbtn4">冻结</a>
+                ##                            <a id="enableCustomers" class="pwtbtn5">启用</a>
+                ##                        </th>
+                ##                    </tr>
+                    #if($!{customerData} && $!{customerData.size()} > 0)
+                        #foreach($data in $!{customerData})
+                            <tr>
+                                <td><input type="checkbox" id="checkbox1" value="$!{data.customerId}"></td>
+                                <td><img src="resource/img/man.png"/>$!{data.customerTurename}</td>##姓名
+                                <td>$!{data.customerCompanyName} / $!{data.customerDepName}</td>##公司部门
+                                <td>$!{data.customerPlace}</td>
+                                <td>联系电话：$!{data.customerPhone}</td>
+                                <td> #if($!{data.customerSign} == 1)
+                                    已启用
+                                #else
+                                    未启用
+                                #end</td>
+                            </tr>
+                        #end
+                    #end
+
+                </table>
+            </div>
+
+        </form>
+
+        <div id="kkpager"></div>
+    </div>
+##    <div class="shade"></div>
+##
+##    <div class="pacity" style="opacity: 0.3;background: #000000;"></div>
+##    <div class="pacity">
+</div>
+</div>
+
+</body>
+
+
+</html>
+
+<script type="text/javascript">
+    //生成分页控件
+    kkpager.generPageHtml({
+        pno: '$!{paginator.page}',
+        mode: 'click', //可选，默认就是link
+        //总页码
+        total: '$!{paginator.totalPages} ',
+        //总数据条数
+        totalRecords: '$!{paginator.totalCount} ',
+        //链接前部
+        hrefFormer: '${hrefFormer}',
+        //链接尾部
+        hrefLatter: '${hrefLatter}',
+        isShowFirstPageBtn:false,
+        isShowLastPageBtn:false,
+        currPageBeforeText:'第',
+        //链接算法
+//        getLink: function (n) {
+//            return 'orgmember.htm?pageIndex=' + n;
+//        }
+        click: function (n) {
+            //这里可以做自已的处理
+            //...
+            //处理完后可以手动条用selectPage进行页码选中切换
+            onLoadCustomer(n);
+        },
+        //getHref是在click模式下链接算法，一般不需要配置，默认代码如下
+        getHref: function (n) {
+            return '#';
+        }
+    }, true);
+</script>

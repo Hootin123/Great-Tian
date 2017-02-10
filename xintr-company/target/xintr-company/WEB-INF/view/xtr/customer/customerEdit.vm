@@ -1,0 +1,670 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title></title>
+    #parse("comm/head.vm")
+##    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/customer/customerAdd.css')"/>
+##    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/customer/customerEdit.css')"/>
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/js/plugins/laydate/need/laydate.css')"/>
+    <link href="#springUrl('/resource/css/customer/dropzone.css')" rel="stylesheet" />
+    <script src="#springUrl('/resource/js/plugins/laydate/laydate.js')"></script>
+    <script src="#springUrl('/resource/js/customer/customerEdit.js')"></script>
+    <script src="#springUrl('/resource/js/comm/validateUtil.js')"></script>
+    <script src="#springUrl('/resource/js/customer/dropzone.js')"></script>
+
+
+    <style>
+        .base-content form{float:left;width:70%;overflow: hidden}
+        table tr{width:100%;height:40px;}
+        table tr td{color:#666;border:1px solid #dbe9ee;position: relative}
+        em{color:#f99b15;vertical-align: middle;margin-right: 2px;}
+        .error{display: none;opacity: 1;filter: alpha(opacity=100); max-width: 500px;min-height: 7px;position: absolute;top:5px; left: 650px;background-color: #ffe9eb;  padding: 10px 20px;z-index: 10;border-radius: 5px;color: #fc2736;font-size: 12px;line-height: 14px  }
+        .data{position: relative; }
+        .pt{ position: absolute; top:13px;left:240px; display: flex; -webkit-align-items: center;-moz-align-items: center;-ms-align-items: center;  -o-align-items: center;  align-items: center;  }
+        #isRegular{  width:15px;  height: 15px;  margin-left: 2px;  }
+        .sex{  -webkit-align-items: center;  -moz-align-items: center;  -ms-align-items: center;  -o-align-items: center;  align-items: center;  padding-left:4%;  }
+        .sex input{vertical-align:top;margin-top:4px;}
+        body,html{width:100%;height:100%;}
+        .all{width:90%;margin:0 auto;min-width: 1200px;padding-top:40px;}
+        .contt{border-bottom:2px solid #dbe9ee;width:100%;height:48px;position: relative}
+        .contt div{text-align: center;cursor: pointer;width:138px;height:45px;border-top:3px solid #fff;border-left:1px solid #fff;border-right:1px solid #fff;line-height: 40px;font-size: 18px;float: left;}
+        .contt .conttTop{border-top:3px solid #b0ccd7;border-left:1px solid #b0ccd7;border-right:1px solid #b0ccd7;font-weight:600}
+        .conttBottom1{width:138px;height:3px;background:#fff;display: block;position: absolute;top:47px;left:1px;}
+        .conttBottom2{width:138px;height:3px;background:#fff;display: block;position: absolute;top:47px;left:141px;display:none}
+        .conttBottom3{width:138px;height:3px;background:#fff;display:block;position: absolute;top:47px;left:281px;display:none}
+        .base-content{width:100%;height:100%;margin:20px auto 0;}
+        .base-content table{width:100%;height:100%;overflow: hidden}
+        .tableTd1{width:20%;text-align: center;background:#f1f9fc;color:#666666;height:44px;border:1px solid #dbe9ee;}
+        .username{margin-left:10px;}
+         table .birthday{margin-left:30px;}
+        .birthdayBtn{border:0;width:100px;padding-left:30px;}
+        .tableTd2{width:100%;height:44px;padding-left:5%;box-sizing: border-box;color:#666;line-height: 44px;border:0;}
+        select{ width: 150px;   padding-left: 4%;  color: #666;  border: 0; font-family:"微软雅黑"}
+        .front1{float:left;width:120px;height:100px;border:1px #cce1e9 dashed; position: relative; text-align: center;margin-left:40px;border-radius:10px}
+        .front1 b{line-height: 100px;font-size: 50px;color: #cce1e9}
+        .front1 p{position: absolute;left:21px;top:100px;color: #666;padding-top:8px;}
+        .front1Img1{position: absolute;top:0;left:0;width:120px;height:100px;cursor:pointer}
+        .front1Img2{position: absolute;top:0;left:0;width:120px;height:100px;cursor:pointer}
+        .contrary{float:left;width:120px;height:100px;border:1px #cce1e9 dashed; margin-left: 50px;position: relative; text-align: center;border-radius:10px}
+        .contrary b{line-height: 100px;font-size: 50px;color: #cce1e9}
+        .contrary p{position: absolute;left:26px;top:100px;color: #666;padding-top:8px;}
+        .contraryImg1{position: absolute;top:0;left:0;width:120px;height:100px;cursor:pointer}
+        .contraryImg2{position: absolute;top:0;left:0;width:120px;height:100px;cursor:pointer}
+        .front .frontHint{margin-top:93px;margin-left:400px;display: block;color:#f9a225;}
+        .frontCon{height:130px;padding-bottom:20px;}
+        .basicBtn{width:100%;height:80px;overflow: hidden;margin:20px auto 40px;background:#f1f9fc;border:1px solid #dbe9ee;float:left;}
+        .basicBtn1{width:400px;height:40px;margin:20px auto;}
+        .okBtn{display: block;float:left;width:240px;height:40px;background:#0696fa;font-family:"微软雅黑";border:0;color:#fff;font-size:18px;border-radius: 6px;cursor: pointer}
+        .cancelBtn{display: block;float:right;width:140px;height:38px;background:#fff;color:#0696fa;border:1px solid #0696fa;font-size:18px;font-family: "微软雅黑";border-radius:6px;cursor: pointer}
+        .historyTop span{width:100%;font-size:18px;color:#333;padding-left:5px;}
+        .history{width: 25%;height: 100%;float: right;background:#f1f9fc;border:1px solid #dbe9ee;padding:30px 30px;box-sizing: border-box;overflow: auto;max-height:600px}
+         /*---------*/
+        .station-content form table{width:100%;height:100%;overflow: hidden}
+        .station-content table{margin-top:20px;}
+        .postType{width:14%;text-align:center;line-height:45px;height:45px;background:#f1f9fc;}
+        .enterData input{width: 120px;height:100%;border:0;padding-left:60px;color:#666;}
+        .hire{padding-left:60px;}
+        .hire input{vertical-align: top;margin-top: 4px;}
+        .data input{width: 120px;height:100%;border:0;padding-left:60px;color:#666;}
+        .customerNumber input{width: 120px;height:100%;border:0;padding-left:60px;color:#666;}
+        .siLing,.entry,.probationaryWage,.becomeSalary{padding-left:60px;}
+        .customerDepName1 input{width: 120px;height:100%;border:0;padding-left:60px;color:#666;font-family:"微软雅黑"}
+        .stations input{width: 120px;height:100%;border:0;padding-left:60px;color:#666;}
+        .customerHd a{padding-left:60px;color:#0696fa;text-decoration:underline;cursor: pointer}
+        .customerHd  span{padding-left:200px;color:#ffa200;}
+        .birthday input{width:120px;border:0;padding-left:45px;color:#0696fa;text-decoration:underline;cursor: pointer}
+        /*---*/
+        .personal-content form table{width:100%;height:100%;overflow: hidden}
+        .personal-content table{margin-top:20px;}
+        .personage{width:14%;text-align:center;line-height:45px;height:45px;background:#f1f9fc;}
+        .linkman input,.emphone input,.nation input,.chart input,.state input,.place input,.school input,.zy input{width: 120px;height:100%;border:0;padding-left:60px;color:#666;}
+        .customerLn a{padding-left:60px;color:#0696fa;text-decoration:underline;cursor: pointer}
+        /*.branch{height:150px;width:150px;overflow:auto;background:#fff;border:1px solid #dbe9ee;box-shadow:#dbe9ee 1px 1px 5px 1px;position: absolute;left: 60px;  top: 45px;  z-index: 2;}*/
+        /*.branch span{display:block;cursor:pointer}*/
+        /*.branch h4{color:#333;text-align:center;height:30px;line-height:30px;border-bottom:1px solid #dbe9ee;}*/
+        /*.branch li{padding-left:20px}*/
+        /*.customerDepName b{  width:25px;  height:25px;  background:url(/resource/img/customer/list.png) 0 0 no-repeat;  position: absolute;  left: 173px;  top:13px; cursor: pointer }*/
+        .customerDepName{  position: relative; }
+        .customerDepName input{background:url(/resource/img/customer/list.png) 150px center no-repeat; cursor: pointer;}
+        .customerDepName .branch{width: 240px; position: absolute;  left: 0; top: 47px;  background: #fff;  border: 1px solid #d3e0f1;  line-height: 26px;  z-index: 10;box-shadow: 1px 3px 10px 0 #b0ccd7;}
+        .customerDepName .branch h4{ min-width:150px;  height:30px;  border-bottom: 1px solid #ccc;  line-height: 30px; text-indent: 5px;  font-size: 15px;  font-weight: 600;  background: #f1f9fc;  color: #666;  }
+        .customerDepName .branch #dep-base{  margin-left: 10px;  height: 180px; overflow-y: auto; }
+        .customerDepName .branch ul{  padding-left: 10px;  margin-bottom: 2px;  cursor: pointer;  }
+        .customerDepName .branch ul li{  width:100%;  padding-left: 16px; color: #666;  cursor: pointer;  box-sizing: border-box;  }
+        .customerDepName .branch ul li .show{  position: absolute;  left: 0px;  top: 6px;  border: 1px solid #f8d37a;  display: block;  width: 13px;  height: 13px;  text-align: center;  line-height: 13px;  color: #0696fa;  }
+        .customerDepName .branch ul li span:hover{ color: #fff; background: #0696fa;  }
+        .customerDepName .branch span:first-child{ color: #333; font-weight: 600; }
+        .historyCon{width:100%;height:100%;margin-top:20px;color:#666;}
+        .messageTop {width: 100%; height: 80px;position: relative }
+        .messageTop h2 { text-align: center;line-height: 80px; border-bottom: 1px solid #dbe9ee }
+        .messageTop img {position: absolute; top: 0;bottom: 0; margin: auto;right: 30px; cursor: pointer }
+    </style>
+</head>
+<body>
+<section>
+    <div class="messageTop">
+        <h2>员工信息</h2>
+        <img src="#springUrl('/resource/img/salary/guanbi.png')" alt="" id="closeDetailBtn">
+    </div>
+    <div class="all">
+        <div>
+            <div class="contt">
+                <div class="base ali conttTop">基本信息<span class="conttBottom1"></span></div>
+                <div class="station ali ">岗位信息<span class="conttBottom2"></span></div>
+                <div class="personal ali ">个人信息<span class="conttBottom3"></span></div>
+            </div>
+        </div>
+        <input id="ffCount"  type="hidden" value="$!{ffCount}">
+        <!-- ***********基本信息页***********-->
+        <div class="base-content" style="min-width: 1200px">
+            <form id="editBaseForm">
+                <!-- 页面隐藏域-->
+                <input id="customerId" name="customerId" type="hidden" value="$!{customerId}">
+                <input id="companyCheckId" name="companyCheckId" type="hidden" value="$!{companyCheckId}">
+                <table>
+                    <tr>
+                        <td class="tableTd1"><em>*</em>姓名</td>
+                        <td class="username"><input class="tableTd2" id="customerTurename" type="text" name="customerTurename" required value="$!{customersDto.customerTurename}" />
+                        <span></span></td>
+                    </tr>
+                    <tr>
+                        <td class="tableTd1" ><em></em>英文名</td>
+                        <td class="englishName"><input placeholder="请输入英文名" class="tableTd2" type="text" id="customerEnglishName" name="customerEnglishName" required  value="$!{customersDto.customerEnglishName}" /><span></span></td>
+                    </tr>
+                    <tr>
+                        <td class="tableTd1" ><em>*</em>性别</td>
+                        <td class="sex">
+                            #if($!{customersDto.customerSex}==1)
+                                <input type="radio" name="customerSex" value="1" checked class="m"> 男 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" name="customerSex" value="0" class="m"> 女
+                            #elseif($!{customersDto.customerSex}==0)
+                                <input type="radio" name="customerSex" value="1" class="m"> 男&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" name="customerSex" value="0" checked class="m"> 女
+                            #else
+                                <input type="radio" name="customerSex" value="1" class="m"> 男&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" name="customerSex" value="0" class="m"> 女
+                            #end
+                            <span></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tableTd1" ><em>*</em>手机号</td>
+                        <td class="phone"><input class="tableTd2" type="text" id="customerPhone" name="customerPhone" required value="$!{customersDto.customerPhone}" />
+                        <span></span></td>
+                    </tr>
+                    <tr>
+                        <td class="tableTd1" ><em>*</em>生日</td>
+                        <td class="birthday">
+##                            <input class="tableTd2" type="text" name="customerBirthdayMonth" class="birthdayBtn" placeholder="请输入员工生日  示例 0223"/>
+                            <input type="text" name="customerBirthdayMonth" class="laydate-icon" onclick="laydate({choose:birtDateCallBack})"
+                                   readonly="readonly" value="$!{customersDto.customerBirthdayMonth}" placeholder="请输入生日" />
+                            <span></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tableTd1"  ><em></em>年龄</td>
+                        <td class="age" style="padding-left:40px;">
+
+                            $!{ageStr}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tableTd1" ><em></em>婚姻状况</td>
+                        <td>
+                            <select name="customerMarriage">
+                                #if($!{customersDto.customerMarriage}=='1')
+                                    <option value="1" selected>未婚</option>
+                                    <option value="2">已婚</option>
+                                    <option value="3">离异</option>
+                                #elseif($!{customersDto.customerMarriage}=='2')
+                                    <option value="1">未婚</option>
+                                    <option value="2" selected>已婚</option>
+                                    <option value="3">离异</option>
+                                #elseif($!{customersDto.customerMarriage}=='3')
+                                    <option value="1">未婚</option>
+                                    <option value="2">已婚</option>
+                                    <option value="3" selected>离异</option>
+                                #else
+                                    <option value="1">未婚</option>
+                                    <option value="2">已婚</option>
+                                    <option value="3">离异</option>
+                                #end
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tableTd1" >
+                            #if($!{ffCount}>0)
+                                <em>*</em>
+                            #end
+                            身份证号</td>
+                        <td class="card"><input placeholder="请输入身份证号" class="tableTd2" type="text" id="customerIdcard" name="customerIdcard" required value="$!{customersDto.customerIdcard}" />
+                            <span></span>
+                        </td>
+                    </tr>
+                    <tr class="front">
+                        <td class="tableTd1"><em>*</em>身份证照</td>
+                        <td class="frontCon">
+                            <div class="pic front1">
+                                <b>+</b>
+
+                                #if($!{customersDto.customerIdcardImgFront})
+                                    <img class="front1Img1" src="http://xintairuan-img.oss-cn-hangzhou.aliyuncs.com/$!{customersDto.customerIdcardImgFront}" onerror="this.src='/resource/img/error1.png';"  id="preImg">
+                                #else
+                                    <img class="front1Img2" src="" onerror="this.src='/resource/img/error1.png';"  id="preImg" >
+                                #end
+                                <p>身份证正面</p>
+                            </div>
+
+                            <div class="pic contrary">
+                                <b>+</b>
+
+                                #if($!{customersDto.customerIdcardImgBack})
+                                    <img class="contraryImg1" src="http://xintairuan-img.oss-cn-hangzhou.aliyuncs.com/$!{customersDto.customerIdcardImgBack}" onerror="this.src='/resource/img/error1.png';" id="backImg" >
+                                #else
+                                    <img class="contraryImg2" src="" onerror="this.src='/resource/img/error1.png';" id="backImg" >
+                                #end
+                                <p>身份证反面</p>
+                            </div>
+                            <span></span>
+                            <div class="frontHint">图片格式为JPG/JPEG/PNG/大小在2MB以内</div>
+                        </td>
+                        <input class="tableTd2" type="hidden" id="customerIdcardImgFront" name="customerIdcardImgFront" required value="$!{customersDto.customerIdcardImgFront}" />
+                        <input class="tableTd2" type="hidden" id="customerIdcardImgBack" name="customerIdcardImgBack" required value="$!{customersDto.customerIdcardImgBack}" />
+
+                    </tr>
+                    <tr>
+                        <td class="tableTd1" >
+                            #if($!{ffCount}>0)
+                                <em>*</em>
+                            #end
+                            工资卡卡号</td>
+                        <td class="banknumber"><input placeholder="请输入工资卡卡号" class="tableTd2" type="text" id="customerBanknumber" name="customerBanknumber" required value="$!{customersDto.customerBanknumber}" />
+                        <span></span></td>
+                    </tr>
+                    <tr>
+                        <td class="tableTd1" >
+                            #if($!{ffCount}>0)
+                                <em>*</em>
+                            #end
+                            工资卡开户行</td>
+                        <td class="openbank"><input placeholder="请输入开户银行名称" class="tableTd2" type="text" id="customerBank" name="customerBank" required value="$!{customersDto.customerBank}" />
+                        <span></span></td>
+                    </tr>
+                </table>
+
+
+            </form>
+            <div class="history">
+                <div class="historyTop">
+                    <img src="/resource/img/history.png" alt="">
+                    <span>历史记录</span>
+                </div>
+                <div class="historyCon">
+                #if($!{recordList} && $!{recordList.size()} > 0)
+                    #foreach($data in $!{recordList})
+                        #if($!{data.recordOperationType}=='1')
+                            $!date.format('yyyy-MM-dd',$!{data.stationEnterTime})&nbsp; | &nbsp;入职(基本工资:$!{data.customerProbationSalary})</br>
+                        #elseif($!{data.recordOperationType}=='2')
+                            $!date.format('yyyy-MM-dd',$!{data.stationRegularTime})&nbsp; | &nbsp;转正(基本工资:$!{data.customerRegularSalary})</br>
+                        #elseif($!{data.recordOperationType}=='5')
+                            $!date.format('yyyy-MM-dd',$!{data.recordOperationTime})&nbsp; | &nbsp;调岗(由$!{data.beforeDepName}调到$!{data.afterDepName})</br>
+                        #elseif($!{data.recordOperationType}=='6')
+                            $!date.format('yyyy-MM-dd',$!{data.recordCreateTime})&nbsp; | &nbsp;调薪(基本工资:$!{data.recordSalaryAfter})</br>
+                        #elseif($!{data.recordOperationType}=='3')
+                            $!date.format('yyyy-MM-dd',$!{data.recordDimissingTime})&nbsp; | &nbsp;离职<br/>
+                        #end
+                    #end
+                #end
+                </div>
+
+            </div>
+            #if($!{customersDto.stationCustomerState}==3 or $!{customersDto.stationCustomerState}==4 or $!{customersDto.willLeaveState}==1)
+
+            #else
+                <div class="basicBtn">
+                    <div class="basicBtn1">
+                        <input class="okBtn" id="baseInfoBtn" type="button" value="确认修改"/>
+                        <input class="cancelBtn" type="button" id="baseInfoEditBtn" value="取消">
+                    </div>
+                </div>
+            #end
+
+
+##            <div>
+
+##            </div>
+        </div>
+
+        <!-- ***********岗位信息页***********-->
+        <div class="station-content" style="display: none">
+            <form class="infon-comm" id="stationForm">
+                <input id="stationId" name="stationId" type="hidden" value="$!{customersDto.stationId}">
+                <input id="customerId" name="stationCustomerId" type="hidden" value="$!{customerId}">
+                <input id="companyCheckStationId" name="companyCheckStationId" type="hidden" value="$!{companyCheckId}">
+                <!-- 页面隐藏域-->
+                <table>
+                    <tr>
+                        <td class="postType"><em>*</em>入职日期:</td>
+                        <td class="enterData">
+    ##                        <input id="customerTurename" type="text" name="customerTurename" required value="" />
+                            <input type="text" name="stationEnterTime" class="laydate-icon" onclick="laydate({choose:beginDateCallBack})"
+                                   readonly="readonly" value="$!date.format('yyyy-MM-dd',$!{customersDto.stationEnterTime})" placeholder="请输入入职日期" /><span></span>
+                        </td>
+                    </tr>
+    ##                {max:'$!date.format('yyyy-MM-dd HH:mm:ss ',$date.getDate())'}
+                    <tr>
+                        <td class="postType"><em>*</em>聘用形式</td>
+                        <td class="hire">
+                            #if($!{customersDto.stationEmployMethod}==1)
+                                <input type="radio" name="stationEmployMethod" value="1" checked class="m"> 正式&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" name="stationEmployMethod" value="2" class="m"> 劳务
+                            #elseif($!{customersDto.stationEmployMethod}==2)
+                                <input type="radio" name="stationEmployMethod" value="1" class="m"> 正式&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" name="stationEmployMethod" value="2" checked class="m"> 劳务
+                            #else
+                                <input type="radio" name="stationEmployMethod" value="1" class="m"> 正式&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" name="stationEmployMethod" value="2" class="m"> 劳务
+                            #end
+                            <span></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="postType">转正日期:</td>
+                        <td class="data">
+                            <input type="text" name="stationRegularTime" class="laydate-icon" onclick="laydate({choose:function(datas){dateChange(datas)}})"
+                                   readonly="readonly" value="$!date.format('yyyy-MM-dd',$!{customersDto.stationRegularTime})" placeholder="请选择转正日期"/>
+                            &nbsp;&nbsp;
+                            #if($!{customersDto.stationCustomerState}==1)
+                                <div class="pt"><input  type="checkbox"   id="isRegular" />已转正</div></td>
+                            #elseif($!{customersDto.stationCustomerState}==2)
+                            <div class="pt"><input  type="checkbox"  id="isRegular" checked/>已转正</div></td>
+                            #else
+                            <div class="pt"><input  type="checkbox"  id="isRegular" />已转正</div></td>
+                            #end
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="postType"><em></em>工号:</td>
+                        <td class="customerNumber"><input type="text"  name="stationCustomerNumber" required value="$!{customersDto.stationCustomerNumber}" placeholder="请输入员工工号"/><span></span></td>
+                    </tr>
+                    <tr>
+                        <td class="postType"><em></em>司龄(月):</td>
+                        <td class="siLing">
+                            $!{diffYear}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="postType"><em></em>员工状态:</td>
+                        <td class="entry">
+                            #if($!{customersDto.stationCustomerState}==1)
+                                入职
+                            #elseif($!{customersDto.stationCustomerState}==2)
+                                转正
+                            #elseif($!{customersDto.stationCustomerState}==3)
+                                离职
+                            #elseif($!{customersDto.stationCustomerState}==4)
+                                删除
+                            #end
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="postType"><em>*</em>部门:</td>
+                        <td class="customerDepName1 customerDepName department">
+    ##                        <input type="text">
+                            <input type="text" id="stationDeptName" readonly value="$!{customersDto.depName}"/>
+                            <input type="hidden" id="stationDeptId" name="stationDeptId" value="$!{customersDto.stationDeptId}"/>
+                            <span></span>
+                            <b></b>
+                            <div class="branch" style="display: none">
+##                                    <h4>部门</h4>
+                                <div id="dep-base"></div>
+                            </div>
+                            <span id="departmentSpan"></span>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td class="postType"><em>*</em>岗位:</td>
+                        <td class="stations"><input type="text"  name="stationStationName" required value="$!{customersDto.stationStationName}" />
+                            <span></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="postType"><em></em>合同文件:</td>
+                        <td class="customerHd">
+                            <p><a id="uploadContract">上传合同文件</a><span>文件格式为 doc/docx/pdf/zip/rar 大小在2MB之间</span></p>
+
+                            <input type="hidden" name="stationContractFile">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="postType"><em></em>试用期工资:</td>
+                        <td class="probationaryWage">$!{customersDto.customerProbationSalary}</td>
+                    </tr>
+                    <tr>
+                        <td class="postType"><em></em>转正工资基数:</td>
+                        <td class="becomeSalary">$!{customersDto.customerRegularSalary}</td>
+                    </tr>
+                </table>
+                #if($!{customersDto.stationCustomerState}==3 or $!{customersDto.stationCustomerState}==4 or $!{customersDto.willLeaveState}==1)
+
+                #else
+                <div class="basicBtn">
+                    <div class="basicBtn1">
+                        <input class="okBtn" type="button" value="确认修改"/>
+                        <input class="cancelBtn" type="button" value="取消">
+                    </div>
+                </div>
+                #end
+            </form>
+        </div>
+        <!-- ***********个人信息页***********-->
+        <div class="personal-content" style="display: none">
+        <form class="infon-comm" id="personalForm">
+            <!-- 页面隐藏域-->
+            <input id="customerId" name="personalCustomerId" type="hidden" value="$!{customerId}">
+            <input id="personalId" name="personalId" type="hidden" value="$!{customersDto.personalId}">
+            <input id="companyCheckPersonalId" name="companyCheckPersonalId" type="hidden" value="$!{companyCheckId}">
+            <table>
+                <tr>
+                    <td class="personage"><em>*</em>紧急联系人:</td>
+                    <td class="linkman"><input  type="text" name="personalRelationerName" required value="$!{customersDto.personalRelationerName}" />
+                        <span></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="personage" ><em>*</em>紧急联系人电话</td>
+                    <td class="emphone"><input type="text"  name="personalRelationerPhone" required  value="$!{customersDto.personalRelationerPhone}" />
+                        <span></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="personage" ><em>*</em>户籍所在地:</td>
+                    <td class="chart"><input type="text"  name="personalDomicilePlace" required value="$!{customersDto.personalDomicilePlace}" />
+                    <span></span></td>
+                </tr>
+                <tr>
+                    <td class="personage" ><em></em>民族:</td>
+                    <td class="nation">
+                        <input type="text" name="personalNation" placeholder="请输入民族" value="$!{customersDto.personalNation}" style="width: 272px;height: 26px"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="personage" ><em></em>政治面貌:</td>
+                    <td class="state"><input type="text"  name="personalPoliticsStatus" placeholder="请输入政治面貌" required value="$!{customersDto.personalPoliticsStatus}" /><span></span></td>
+                </tr>
+                <tr>
+                    <td class="personage" ><em></em>现居住地:</td>
+                    <td class="place">
+                        <input type="text" name="personalCurrentPlace" placeholder="请输入现居住地址" value="$!{customersDto.personalCurrentPlace}"><span></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="personage" ><em></em>最高学历:</td>
+                    <td class="txtNone">
+                        <select name="personalEducationHigh">
+                            #if($!{customersDto.personalEducationHigh}==1)
+                                <option value=""></option>
+                                <option value="1" selected>高中及以下</option>
+                                <option value="2">大专</option>
+                                <option value="3">本科</option>
+                                <option value="4">硕士</option>
+                                <option value="5">博士</option>
+                            #elseif($!{customersDto.personalEducationHigh}==2)
+                                <option value=""></option>
+                                <option value="1">高中及以下</option>
+                                <option value="2" selected>大专</option>
+                                <option value="3">本科</option>
+                                <option value="4">硕士</option>
+                                <option value="5">博士</option>
+                            #elseif($!{customersDto.personalEducationHigh}==3)
+                                <option value=""></option>
+                                <option value="1">高中及以下</option>
+                                <option value="2">大专</option>
+                                <option value="3" selected>本科</option>
+                                <option value="4">硕士</option>
+                                <option value="5">博士</option>
+                            #elseif($!{customersDto.personalEducationHigh}==4)
+                                <option value=""></option>
+                                <option value="1">高中及以下</option>
+                                <option value="2">大专</option>
+                                <option value="3">本科</option>
+                                <option value="4" selected>硕士</option>
+                                <option value="5">博士</option>
+                            #elseif($!{customersDto.personalEducationHigh}==5)
+                                <option value=""></option>
+                                <option value="1">高中及以下</option>
+                                <option value="2">大专</option>
+                                <option value="3">本科</option>
+                                <option value="4">硕士</option>
+                                <option value="5" selected>博士</option>
+                            #else
+                                <option value=""></option>
+                                <option value="1">高中及以下</option>
+                                <option value="2">大专</option>
+                                <option value="3">本科</option>
+                                <option value="4">硕士</option>
+                                <option value="5">博士</option>
+                            #end
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="personage"><em></em>毕业学校:</td>
+                    <td class="school">
+                        <input type="text" name="personalGraduateSchool" placeholder="请输入毕业学校" value="$!{customersDto.personalGraduateSchool}"><span></span>
+##                        <b></b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="personage" ><em></em>专业:</td>
+                    <td class="zy"><input type="text" name="personalMajor" placeholder="请输入专业" required value="$!{customersDto.personalMajor}" /><span></span></td>
+                </tr>
+                <tr>
+                    <td class="personage" ><em></em>简历:</td>
+                    <td class="customerLn">
+                        <p><a id="uploadResume">上传简历文件</a></p>
+##                        <span class="bar">
+##						<em class="bar_1"></em>
+##					    </span>
+                        <input type="hidden" name="personalResume" value="$!{customersDto.personalResume}">
+                    </td>
+                </tr>
+            </table>
+            #if($!{customersDto.stationCustomerState}==3 or $!{customersDto.stationCustomerState}==4 or $!{customersDto.willLeaveState}==1)
+
+            #else
+                <div class="basicBtn">
+                    <div class="basicBtn1">
+                        <input class="okBtn" type="button" value="确认修改"/>
+                        <input class="cancelBtn" type="button" value="取消">
+                    </div>
+                </div>
+            #end
+##        </form>
+</form>
+    </div>
+    </div>
+</section>
+
+
+
+
+
+<script>
+    ##    table切换
+        $(function(){
+            $('.base').on('click',function(){
+                $('.base-content').show();
+                $('.station-content').hide();
+                $('.personal-content').hide();
+
+            });
+
+            $('.station').on('click',function(){
+                $('.base-content').hide();
+                $('.station-content').show();
+                $('.personal-content').hide();
+
+            });
+            $('.personal').on('click',function(){
+                $('.base-content').hide();
+                $('.station-content').hide();
+                $('.personal-content').show();
+
+            });
+            $('.contt').find('div').click(function(){
+                  $(this).addClass('conttTop').siblings('div').removeClass('conttTop');
+                  $(this).find('span').show().parent('div').siblings().find('span').hide()
+            })
+
+            /**部门的数据接口 start**/
+            $.get(BASE_PATH + '/dept/tree.htm', {}, function(data){
+                if (data.success) {
+                    // DeptExtend.initTree(data.data);
+                    console.log(data.date);
+                    dg($("#dep-base"), data.data)
+                } else {
+                    showWarning(data.message);
+                }
+            });
+            /**部门的数据接口 end**/
+            function dg(parent, data){
+                var title = '<span class="dep-item" data-depid="'+data.depId+'" style="display: block; width: 100%;">' + data.depName + '</span>';
+                parent.append(title);
+                if(data.children && data.children.length > 0){
+                    var ul = $("<ul>");
+                    $.each(data.children, function(index, item){
+                        var li =$("<li style='position: relative'>")
+                        var i=$("<i class='show'>")
+                        li.append(i)
+                        dg(li, item)
+                        ul.append(li);
+                    })
+                    parent.append(ul);
+                    $('li').not(':has(ul)').find('i').removeClass('show')
+                    $('.show').html('+');
+                    $('.show').parent().find('ul').hide();
+                };
+                $('.branch span:first').removeClass('dep-item')
+                $('.dep-item').unbind("click").on('click',function(){
+                    $('#stationDeptName').val($(this).html());
+                    $('#stationDeptId').val($(this).data("depid"));
+                    testDepartment()
+//                    $('.customerDepName1 b').click();
+                    $('.branch').hide();
+                    $('.show').off('click')
+                });
+            }
+
+
+
+            $('.customerDepName input').live('click',function(e){
+//                $('.branch').toggle();
+//                $('.branch li').toggle();
+//                $('.branch').find("li").toggle();
+//                $(this).
+//                $(this).parent().siblings().find('td').on('click',function(){
+//                    $('.branch').hide();
+                e.stopPropagation();
+                $('.show').off('click');
+                $('.branch').toggle();
+                // 判断 是否有子元素
+                $('.show').on('click',function(){
+
+                    if($(this).html()=='+'){
+                        console.log(22)
+                        $(this).siblings('ul').toggle(200)
+                        $(this).html('-');
+                    }else{
+                        console.log(111)
+                        $(this).siblings('ul').toggle(200);
+                        $(this).html('+');
+                    }
+
+                })
+
+            });
+            // 去除冒泡
+            $(document).on('click',function(){
+                $('.branch').hide();
+                $('.show').off('click')
+            })
+            $('.branch').on('click',function(e){
+                e.stopPropagation()
+            })
+            $('#closeDetailBtn').click(function(){
+                onCancelDialog()
+            })
+            function onCancelDialog() {
+                var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+                parent.layer.close(index);
+            }
+        });
+</script>
+</body>
+</html>

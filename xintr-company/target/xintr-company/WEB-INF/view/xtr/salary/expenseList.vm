@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>报销管理</title>
+    #parse("comm/head.vm")
+    <script src="#springUrl('/resource/js/salary/expense.js')"></script>
+    <script src="#springUrl('/resource/js/plugins/laypage/laypage.js')"></script>
+    <link href="#springUrl('/resource/css/salary/expense.css')" rel="stylesheet">
+    <style>
+        .salaset-box {
+            width: 7%;
+        }
+        .seekResult{width:100%;display: none}
+        .text{float:left;padding-left:20px;color:#999999;line-height:62px}
+        .result{float:left;}
+        .result li{padding:5px 10px;background:#f1f9fc;vertical-align: inherit;margin-top:16px;border-radius:6px;color:#666;float:left;margin-left:20px;border:1px solid #dbe9ee;}
+        .result li img{margin-top:6px;cursor: pointer}
+        .cancel{float:left;margin-left:20px;line-height:62px;color:#0696fa;cursor: pointer}
+        .layer-anim{border-radius: 3px !important;}
+        .layui-layer-shade{background: #d1d1d1!important;}
+    </style>
+
+</head>
+<body>
+<div class="salaset">
+    <input type="hidden" id="payCycleId" value="$!{payCycle.id}"/>
+
+
+    <div class="salaset-brie">
+        <i class="salaset-brie1">报销周期（$!{payCycle.currentPayCycle}）</i>
+				<span class="salaset-brie-span">
+					<i onclick="searchAll()">共&nbsp;
+                    #if($!{allCount})
+                        $!{allCount}
+                    #else
+                        0
+                    #end&nbsp;
+                        人</i> &nbsp;
+					<i onclick="searchWDE()" style="cursor: pointer;">未定额&nbsp;<span style="color:#0696fa">
+                    #if($!{unsetCount})
+                        $!{unsetCount}
+                    #else
+                        0
+                    #end&nbsp;</span>人</i>
+				</span>
+				<span class="salaset-brie-span1">
+					<a class="salaset-sh" href="javascript:;"><img src="#springUrl('/resource/img/salary/screen.png')"/>筛选员工</a>
+					<a class="salaset-ss" href="javascript:;"><img src="#springUrl('/resource/img/salary/search.png')"/>搜索员工</a>
+    <a class="salaset-co" href="javascript:openBatchUpdateExpense();"><img
+            src="#springUrl('/resource/img/salary/operation.png')"/>批量调额</a>
+				</span>
+        <!--筛选-->
+
+        <div class="salaset-seach">
+            <ul style="z-index: 5;">
+                <img class="salaset-down" src="#springUrl('/resource/img/salary/drop-down.png')">
+                <li class="list">聘用形式</li>
+                <li data-value="1">正式</li>
+                <li data-value="2">劳务</li>
+            </ul>
+            <ul style="z-index: 4;">
+                <img class="salaset-down" src="#springUrl('/resource/img/salary/drop-down.png')">
+                <li class="list">员工状态</li>
+##                <li data-value="1">试用期</li>
+                <li data-value="2">在职</li>
+                <li data-value="3">离职</li>
+            </ul>
+            <ul style="z-index: 3;">
+                <img class="salaset-down" src="#springUrl('/resource/img/salary/drop-down.png')">
+                <li class="list">报销状态</li>
+                <li id="un_expense_li" data-value="0">未定额</li>
+                <li data-value="1">已定额</li>
+            </ul>
+            <ul style="z-index: 2;">
+                <img class="salaset-down" src="#springUrl('/resource/img/salary//drop-down.png')">
+                <li class="list"><input class="salaset-down-input" type="text" placeholder="请输入部门名称"/></li>
+                <li class="salaset-down-list" style="padding-left: 0;">
+                </li>
+            </ul>
+
+            <input class="salaset-seach-btn" type="button" value="确定"/>
+
+        </div>
+        <!--end-->
+
+        <!--搜索-->
+        <div class="salaset-seach1">
+            <input id="userName" type="text" placeholder="输入员工姓名"/>
+            <input type="button" value="确定" onclick="onScreen()"/>
+        </div>
+        <!--end-->
+    </div>
+
+    <div class="seekResult">
+        <div class='text'>搜索结果：找到<span id="count">1</span>个关键词为</div>
+        <ul id="searchTj" class='result'>
+
+
+        </ul>
+        <div class='cancel' onclick="resetQuery()">取消筛选</div>
+    </div>
+
+    <div class="salaset-list clear">
+
+    </div>
+##    <div id="kkpager" style="width:100%;margin-top:30px;"></div>
+    <!-- 分页器 -->
+    <div class="pagePay">
+        <div id="pagePayroll"></div>
+    </div>
+
+</div>
+</body>
+</html>
+

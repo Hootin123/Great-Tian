@@ -1,0 +1,221 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="renderer" content="webkit" />
+	<title>政策薪解_HR知识库_互联网人力资源前沿资讯-薪太软</title>
+	<meta name="keywords" content="薪太软，政策薪解，HR知识库，人力资源资讯，人力资源政策，薪酬资讯，财税咨询，人事政策，劳动合同，企业招聘，员工培训方案，员工管理制度，职业发展，社保政策，公积金政策，薪太软产品"/>
+	<meta name="description" content="薪太软HR中心发布互联网人力资源前沿资讯，为HR提供薪酬资讯、人力资源政策解读、招聘培训方案、员工管理、职业发展等最新信息。 "/>
+	
+	<meta name="360-site-verification" content="340aa1b20cd239bb3ce0f0c7c2514fe7" />
+	
+	<link rel="shortcut icon" href="/img/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="/201607/css/xtr2.css"/>
+	<link rel="stylesheet" type="text/css" href="/201607/css/font-awesome.min.css"/>
+	<script src="/201607/js/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/201607/js/custom2.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+<body>
+     #parse("/201607/top.vm")
+	
+	<div class="x-container" style="background: url(/201607/img/xtr2/bg3_02.jpg) no-repeat center 0;padding: 100px 0;">
+		<div class="x-content" style="width:1000px;">
+			<div class="crumb">
+				<a href="/">首页</a>
+				<i class="icon-angle-right"></i>
+				<a href="/hrcenter.htm">HR中心</a>
+				<i class="icon-angle-right"></i>
+				<span class="blue" id="abdc">HR知识库</span>
+			</div>
+		</div>
+		<div class="x-content" style="width:1000px;border: 1px solid #e2e2e2;box-shadow: 0 7px 20px rgba(0,0,0,.15);background: #fff;border-radius: 10px;">
+			<div style="padding: 100px 80px 50px;font-size: 14px;color: #404040;">
+				<ul class="clifx xtr-cutbar half" style="margin-bottom: 50px;">
+					<li class="active" ta="2"><span>HR知识库</span></li>
+					<li ta="3"><span>政策薪解</span></li>
+				</ul>
+				<div class="news-list">
+					<ul id="newslist">
+						
+					</ul>
+				</div>
+				<div id="page" class="page" style="margin-right: 40px;">
+					
+				</div>
+			</div>
+			
+		</div>
+	</div>
+     #parse("/201607/footer.vm")
+</body>
+</html>
+<script type="text/javascript">
+$(function () {
+	addBlcol();
+	$(".xtr-cutbar li").click(function () {
+		$(this).addClass("active").siblings("li").removeClass("active");
+		if($(this).index()==0){
+			$("#abdc").html('HR知识库');
+		}else{
+			$("#abdc").html('政策薪解');
+		}
+		uploadRecord(1,5,$(this).attr('ta'));
+	});
+	
+	$(".xtr-cutbar li").eq(0).click();
+});
+
+	
+	//uploadRecord(1,10);
+
+var scflag=false;
+var tt1=1;
+function uploadRecord(pidx,pnum,type){
+	
+	if(isNaN(pidx))
+		return;
+	
+	if(pidx*1<1)
+		pidx=1;
+	
+	if(pidx*1>tt1*1)
+		pidx=tt1*1;
+	
+	$.ajax({
+		type:"POST",  
+        url:"newslist.htm",
+        dataType:"json",
+        data:{
+        	'pidx':pidx
+        	,'pnum':pnum
+        	,'type':type
+        },
+        async: true,
+		success: function(data){
+			$('#newslist').html('<li style="text-align: center;font-size: 18px;color: #7c7c7c;">暂无数据	</li>');
+			$('#page').html('');
+			
+			if(data==null){
+				window.console?window.console.log('data is null'):'';
+				return;
+			}
+			
+			//if(data.code!='0'){
+			//	window.console?window.console.log(data.msg):'';
+			//	return;
+			//}
+			
+			if(data.data.data==null || data.data.data.length<1)
+				return;
+			
+			var str='';
+			for(var i=0;i<data.data.data.length;i++){
+				
+				var contt=data.data.data[i].news_content==null?'':data.data.data[i].news_content;
+				
+				
+				var cont=$('<div>'+contt+'</div>');				
+				contt=cont.text();
+
+				var date = new Date(data.data.data[0].news_releasetime);
+				Y = date.getFullYear() + '-';
+				M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+                M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+                if(M.length == 2){
+                    M = "0"+M;
+                }
+
+                D = date.getDate() + ' ';
+                if(D.length == 2){
+                    D = "0"+D;
+                }
+                h = date.getHours() + ':';
+                if(h.length == 2){
+                    h = "0"+h;
+                }
+                m = date.getMinutes() + ':';
+                if(m.length == 2){
+                    m = "0"+m;
+                }
+                s = date.getSeconds() + "";
+                if(s.length == 1){
+                    s = "0"+s;
+                }
+				var news_releasetime=Y+M+D+h+m+s;
+				
+				str+='<li>';
+				str+='	<img src="'+(data.data.data[i].news_img==null?'':data.data.data[i].news_img)+'"/>';
+				str+='	<p class="title word-inline">'+((data.data.data[i].news_class_name=="" || data.data.data[i].news_class_name==null)?'':('【'+data.data.data[i].news_class_name+'】'))+(data.data.data[i].news_title==null?'':data.data.data[i].news_title)+'</p>';
+				str+='	<p class="ly">'+(news_releasetime==null?'':news_releasetime.split('.')[0])+'   来源：'+(data.data.data[i].news_ly==null?'':data.data.data[i].news_ly)+'</p>';
+				str+='	<p class="info">'+contt+'</p>';
+				str+='	<div>';
+				str+='		<a href="/newsdetailpage.htm?id='+data.data.data[i].news_id+'" class="btn">详情<i class="icon-angle-right"></i></a>';
+				str+='	</div>';
+				str+='</li>';
+			}
+			
+			$('#newslist').html(str);
+			
+			var str1='';
+			if(data.data.pages.pagelist){
+				
+				
+				
+				str1+='<a href="javascript:void(0);" class="leftbar icon-angle-left" onclick="uploadRecord('+data.data.pages.pre+','+pnum+','+type+');"></a>';
+			
+				/*
+				for(var i=0;i<data.pages.pagelist.length;i++){
+					var s='';
+					
+					var cls='';
+					if(data.pages.pagelist[i].idx=='1')
+						cls='class="active"';
+					
+					s='<a href="javascript:void(0);" '+cls+' onclick="uploadRecord('+data.pages.pagelist[i].page+','+pnum+',type);">'+data.pages.pagelist[i].page+'</a>';
+				
+					
+					str1+=s;
+				}
+				*/
+			
+				str1+='<span style="margin: 0 5px 0 5px;">第</span>';
+				str1+='<input type="text" id="pageto" ta="'+pnum+'" tb="'+type+'" value="'+pidx+'" />';
+				str1+='<span style="margin: 0 15px 0 5px;">页</span>';
+				str1+='<span>共'+data.data.pages.last+'页</span>';
+				str1+='<a href="javascript:void(0);" class="rightbar icon-angle-right" onclick="uploadRecord('+data.data.pages.next+','+pnum+','+type+');"></a>';
+				
+				
+							
+				
+				tt1=data.data.pages.last*1;
+				
+				
+				
+			}
+			
+			
+			$('#page').html(str1);
+			
+			if(scflag)
+				$('body,html').animate({ scrollTop: 260 }, 500);
+			
+			scflag=true;
+		}
+	});
+	
+}
+
+
+window.onkeydown=function(e){
+	console.log(e.keyCode)
+	if(e.keyCode==13){
+		var pt=$('#pageto');
+		uploadRecord(pt.val(),pt.attr('ta'),pt.attr('tb'));
+	}
+}
+
+</script>

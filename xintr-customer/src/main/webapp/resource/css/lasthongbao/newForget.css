@@ -1,0 +1,126 @@
+body{
+	width: 100%;
+	height: 100%;
+	background:#f4df2f url(../../img/lasthongbao/register.png) 0 0 no-repeat;
+	background-size: 100%;
+}
+.logo{
+	width: 1.92rem;
+	height: 0.7rem;
+	margin: 0.35rem 0 0 0.35rem;
+}
+.logo img{
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+ul{
+	width: 5.8rem;
+	margin:0 auto;
+	margin-top: 4.08rem;
+}
+ul li{
+	width: 100%;
+	height: 1.2rem;
+	position: relative;
+}
+ul li b{
+	height: 0.78rem;
+	position: absolute;
+	right:0.05rem;
+	top:0.05rem;
+	font-size: 0.26rem;
+	line-height: 0.78rem;
+	color: #f00
+}
+ul li input{
+	display: block;
+	width: 100%;
+	height: 0.8rem;
+	border:2px solid #030719;
+	border-radius: 0.1rem;
+	font-size: 0.28rem;
+	color: #666;
+	text-indent: 0.18rem;
+	font-weight: 600;
+}
+.loginPwd{
+	height: 1.1rem;
+}
+.forgetPhone input{
+	width: 3.7rem;
+	float: left;
+}
+.forgetPhone span{
+	display: block;
+	width: 1.74rem;
+	height: 0.8rem;
+	border:2px solid #030719;
+	border-radius: 0.1rem;
+	float: right;
+	font-size:0.23rem;
+	background: #f04848;
+	text-align: center;
+	line-height: 0.8rem;
+	color: #fff;
+}
+.reset{
+	width: 5.8rem;
+	height: 0.88rem;
+	margin:0 auto;
+	margin-bottom: 0.43rem;
+	margin-top:0.4rem;
+	background: url(../../img/lasthongbao/footer-bg.png) 0 0 no-repeat;
+	background-size: 100% 100%;
+	font-size: 0.28rem;
+	color: #fff;
+	text-align: center;
+	line-height: 0.8rem;
+	text-shadow:2px 0px 2px #f16f3c,-2px 0px 2px #f16f3c, 0px 2px 2px #f16f3c, 0px -2px 2px #f16f3c;
+}
+.returnLogin{
+	margin-bottom: 0.4rem;
+	width: 100%;
+	font-size: 0.28rem;
+	color: #030719;
+	text-align: center;
+	font-weight: 600;
+	text-decoration:underline;
+}
+.hint{
+	width: 50%;
+	height: 0.6rem;
+	position:absolute;
+	left:25%;
+	top:9.7rem;
+	background:rgba(6,150,250,0.8);
+	border-radius:0.4rem;
+	font-size:0.28rem;
+	text-align: center;
+	line-height: 0.6rem;
+	color: #f00;
+	font-weight: 600;
+
+}
+.introduce{
+	width:4.65rem;
+	height: 2.03rem;
+	margin: 0 auto;
+	margin-top: 0.6rem;
+}
+.introduce img{
+	display: block;
+	width:100%;
+	height:100%;
+}
+.text{
+	margin-top: 0.6rem;
+	color: #030719;
+	font-size: 0.2rem;
+	text-align: center;
+	margin-bottom: 0.4rem;
+}
+.text a{
+	color: #f04848;
+	text-decoration: underline;
+}

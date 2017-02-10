@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>404</title>
+    <link href="#springUrl('/resource/css/comm/comm.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/comm/404.css')" rel="stylesheet">
+    <script src="#springUrl('/resource/js/comm/jquery-1.8.3.min.js')"></script>
+</head>
+
+<body>
+<div class="content">
+    <div><img src="#springUrl('/resource/img/comm/error404.png')" alt=""></div>
+    <div class="content1">页面未找到</div>
+    <div class="content2">抱歉，页面好像断电了</div>
+    <div class="content3">全国服务热线： 400-175-8090</div>
+    <div class="content4"><a href="home.htm">返回首页</a></div>
+</div>
+</body>
+</html>

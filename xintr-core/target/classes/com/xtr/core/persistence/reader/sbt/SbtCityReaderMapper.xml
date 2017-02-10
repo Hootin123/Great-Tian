@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtr.core.persistence.reader.sbt.SbtCityReaderMapper">
+
+  <resultMap id="BaseResultMap" type="com.xtr.comm.sbt.api.City">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="cname" jdbcType="VARCHAR" property="cname" />
+    <result column="pname" jdbcType="VARCHAR" property="pname" />
+    <result column="prov" jdbcType="VARCHAR" property="prov" />
+    <result column="region" jdbcType="VARCHAR" property="region" />
+    <result column="rule" jdbcType="INTEGER" property="rule" />
+    <result column="subdl" jdbcType="INTEGER" property="subdl" />
+    <result column="last_date" jdbcType="VARCHAR" property="lastDate" />
+    <result column="month" jdbcType="VARCHAR" property="month" />
+    <result column="timestamp" jdbcType="BIGINT" property="timestamp" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, city, cname, pname, prov, region, rule, subdl, last_date, month, timestamp
+  </sql>
+
+  <select id="selectCities" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" /> from sbt_city order by prov, city
+  </select>
+
+</mapper>

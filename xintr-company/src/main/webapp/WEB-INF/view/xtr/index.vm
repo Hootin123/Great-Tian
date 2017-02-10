@@ -1,0 +1,668 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+#parse("/201607/meta.vm")
+<script src="#springUrl('/resource/js/login/login.js')" type="text/javascript" charset="utf-8"></script>
+<script src="#springUrl('/resource/js/comm/validateUtil.js')" type="text/javascript" charset="utf-8"></script>
+<style type="text/css">
+.content {margin: 0 auto;}
+</style>
+</head>
+
+<body>
+
+ #parse("/201607/top.vm")
+
+##<div id=""></div>
+
+<div class="banner">
+<div class="x-content" style="z-index: 2;">
+ #if(!${xtr.isLogin($session)})
+    <div class="index-login" >
+    <div class="opacity" style=""></div>
+
+    <div class="index-login-content" style="">
+    <h2 style="">登录薪太软</h2>
+    <form id="loginForm">
+    <table border="0" cellspacing="0" cellpadding="0" style="">
+    <tr>
+    <td>
+    <input type="text" name="memberLogname" id="memberLogname"  autocomplete="off" placeholder="输入电子邮箱或手机"/><span id="memberLognameTip" style="color:red" ></span>
+    </td>
+    </tr>
+    <tr>
+    <td>
+        <input type="password" style="opacity: 0; filter:alpha(opacity:0);position: absolute; z-index: -1"/>
+    <input type="password" name="memberPassword" id="memberPassword"  autocomplete="off"   placeholder="输入登录密码"/><span id="memberPasswordTip" style="color:red" ></span>
+    </td>
+    </tr>
+    <tr>
+    <td>
+
+    <img class="btn-code" id="vcodeimg" name ="vcodeimg" src="#springUrl('/generateImages.htm')"  />
+    <input  type="text" maxlength="4" id="verifycode" name="verifycode" placeholder="图形验证码" style="width: 110px;"><span id="verifycodeTip" style="color:red" ></span>
+    </td>
+    </tr>
+    <tr>
+    <td>
+        <div>
+            #*<a href="#springUrl('/toRetrievePwdFirstPage.htm')" style="color:#ffffff;float:left;">忘记密码？</a>*#
+            <a href="#springUrl('/toRetrievePwdByPhoneFirstPage.htm')" style="color:#ffffff;float:left;">忘记密码？</a>
+        </div>
+        <div>
+        <p class="err"></p>
+        <button type="button" class="btn-checkVerifycodecheckVerifycode" id="login" style="color:#fff;">登录</button>
+        <a href="#springUrl('/registerInit.htm')">注册</a>
+           #* &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="#springUrl('/toRetrievePwdFirstPage.htm')">忘记密码</a>*#
+        </div>
+
+    </td>
+    </tr>
+    </table>
+    </form>
+    </div>
+    </div>
+#else
+    <div class="index-login" style="height: 250px;top: 100px;">
+        <div class="opacity" style=""></div>
+        <div class="index-login-content" style="text-align: center;">
+
+            <p style="color: #fff;font-size: 18px;padding: 60px 0 10px;">欢迎来到薪太软</p>
+            <p style="color: #ffbc6e;font-size: 14px;padding: 0 0 55px;">$!{xtr.getLoginName($session)}</p>
+            <div style="padding: 0 23px;">
+##                <a href="#springUrl('/newHome.htm')" class="ui-btn btn-blue" style="width: 200px; float: left;border-radius: 10px;">进入前台</a>
+    <a href="#springUrl('/home.htm')" class="ui-btn btn-blue" style="width: 200px; float: left;border-radius: 10px;">进入前台</a>
+                <a href="#springUrl('/logout.htm')" style="color: #0696fa;font-size: 14px;">退出</a>
+
+            </div>
+        </div>
+
+    </div>
+#end
+
+</div>
+<div  id="banner">
+<div class="swiper-wrapper" style="height: 450px;">
+<div class="swiper-slide" style="background-image: url(/201607/img/xtr2/banner1.jpg);"></div>
+<div class="swiper-slide" style="background-image: url(/201607/img/xtr2/banner2.jpg);"><a href="http://www.xintairuan.com/newsdetailpage.htm?id=58" target="_blank" style="display: block;height: 100%;"></a></div>
+<div class="swiper-slide" style="background-image: url(/201607/img/xtr2/banner3.jpg);"></div>
+</div>
+<div class="swiper-pagination"></div>
+<span class="l"></span>
+<span class="r"></span>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="/201607/css/swiper.min.css"/>
+<script src="/201607/js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+var mySwiper = new Swiper('#banner', {
+			autoplay: 5000,//可选选项，自动滑动
+			pagination : '.swiper-pagination',
+			paginationClickable: true,
+			prevButton:'.banner .l',
+			nextButton:'.banner .r',
+		})
+</script>
+<div class="x-container" style="background: #fff;">
+<div id="product" style="position:absolute;top:-50px;left:0;"></div>
+<div class="indx-title-wrap" style="z-index: 1;">
+<p class="inde-title"><img src="/201607/img/xtr2/en1.png" style="margin-bottom: 20px;position: relative;z-index: 3;"/></p>
+</div>
+<div class="x-container" style="background: url(/201607/img/xtr2/bgg_02.jpg) no-repeat center bottom;z-index: 0;">
+<div class="x-content">
+<div class="inde-fun-wrap">
+<div class="left"></div>
+<ul>
+    <li class="a1 active"><a href="#springUrl('/beha.htm')">
+<p>工资代发</p></a>
+</li>
+    <li class="a2"><a href="#springUrl('/pad.htm')">
+<p>工资垫付</p></a>
+</li>
+    <li class="a3"><a href="#springUrl('/social.htm')">
+<p>社保及公积金代缴</p></a>
+</li>
+<!--<li class="a4" style="display: none;">
+<p>居住证</p>
+</li>-->
+    <li class="a5"><a href="#springUrl('/physical.htm')">
+<p>员工体检</p></a>
+</li>
+</ul>
+<div class="right"></div>
+</div>
+<div class="case-item-wrap">
+<div style="display: block;" class="clfix case-item">
+    <a href="#springUrl('/beha.htm')"><img src="/201607/img/xtr2/g1_03.jpg"  style="cursor:pointer;"/></a>
+<div class="r" style="" >
+<p class="title">工资代发</p>
+<p class="info">
+<span>·</span> 批量代发，省时省力。<br/>
+<span>·</span> 实时对账，安全放心。<br/>
+<span>·</span> APP电子工资单，随时随地查工资。<br/>
+<span>·</span> 帮助HR告别纸质发工资的传统方式。
+</p>
+</div>
+</div>
+<div class="clfix case-item">
+    <a href="#springUrl('/pad.htm')"><img src="/201607/img/xtr2/g2_03.jpg" style="cursor:pointer;"/></a>
+<div class="r" style="" >
+<p class="title">工资垫付</p>
+<p class="info">
+<span>·</span> 零门槛零负担零差异，垫付资金一步到位。<br/><span>·</span> 30分钟内即刻响应，24小时内给出反馈。<br/><span>·</span> 费率低至年化5%。
+</p>
+</div>
+</div>
+<div class="clfix case-item">
+    <a href="#springUrl('/social.htm')"><img src="/201607/img/xtr2/g3_03.jpg"  style="cursor:pointer;"/></a>
+<div class="r" style="" >
+<p class="title">社保及公积金代缴</p>
+<p class="info">
+<span>·</span> 全国通缴，价格低至29.8元。<br/><span>·</span> 订单状态可视化，随时随地随心查。<br/><span>·</span> 全线上操作，审核、申报、缴纳、帐户合并及转移、保险理赔，一键搞定，改善传统复杂的缴纳流程，提升人力资源办公效率。
+</p>
+</div>
+</div>
+<!--<div class="clfix case-item" style="display: none;">
+<img src="/201607/img/xtr2/g4_03.jpg" />
+<div class="r" style="">
+<p class="title">居住证</p>
+<p class="info">
+联合多家医院、体检机构，为您提供最具性价比的体检套餐。<br />确保员工身体健康，营造良好的工作生活环境，完善员工福利体系。
+</p>
+</div>
+</div>-->
+<div class="clfix case-item">
+    <a href="#springUrl('/physical.htm')"><img src="/201607/img/xtr2/g5_03.jpg" style="cursor:pointer;"/></a>
+<div class="r" style="" >
+<p class="title">员工体检</p>
+<p class="info">
+<span>·</span> 联合多家医院、体检机构，为您提供最具性价比的体检套餐。<br /><span>·</span> 确保员工身体健康，营造良好的工作生活环境，完善员工福利体系。
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="" class="x-container" style="background: #fff;">
+<div id="safeInfo" style="position:absolute;top:-50px;left:0;"></div>
+<div class="indx-title-wrap" style="z-index: 1;">
+<p class="inde-title"><img src="/201607/img/xtr2/en2.png" style="margin-bottom: 20px;position: relative;z-index: 3;"/></p>
+</div>
+<div class="x-container" style="padding-top: 70px">
+<div class="x-content clfix">
+<div class="xtr2-fck" style="margin: 0 20px 0 10px;">
+<img class="img2" src="/201607/img/xtr2/fuck_03.jpg"/>
+<img class="img3" src="/201607/img/xtr2/sf_03.jpg"/>
+<div class="img1 imghover">
+<div class="opacity"></div>
+<p>信息全程加密</p>
+<span>Information encryption</span>
+<i>对客户信息采用全程加密，所有客户信息进行加密存储，从根本上保证原始信息的安全性。</i>
+</div>
+</div>
+<div class="xtr2-fck">
+<img class="img2" src="/201607/img/xtr2/fuck_05.jpg"/>
+<img class="img3" src="/201607/img/xtr2/sf_05.jpg"/>
+<div class="img1 imghover">
+<div class="opacity"></div>
+<p>分布式存储</p>
+<span>Distributed storage</span>
+<i>数据保存在云存储体系中，分布在多级数据中心，并进行二次加密，保证数据不丢失、不泄露。</i>
+</div>
+</div>
+<div class="xtr2-fck">
+<img class="img2" src="/201607/img/xtr2/fuck_07.jpg"/>
+<img class="img3" src="/201607/img/xtr2/sf_07.jpg"/>
+<div class="img1 imghover">
+<div class="opacity"></div>
+<p>分级权限管理</p>
+<span>Hierarchical rights management</span>
+<i>企业端进行权限分级操作，支持针对不同员工设置相应的访问级别，并可对操作日志进行回溯。保障信息使用的安全性。</i>
+</div>
+</div>
+<div class="xtr2-fck" style="margin: 0">
+<img class="img2" src="/201607/img/xtr2/fuck_09.jpg"/>
+<img class="img3" src="/201607/img/xtr2/sf_09.jpg"/>
+<div class="img1 imghover">
+<div class="opacity"></div>
+<p>服务器安全巡检</p>
+<span>Server security patrol</span>
+<i>基于大数据威胁情报保障服务器安全，通过实时监控、审计登录日志和定期的安全基线巡检，避免黑客攻击导致的数据泄露，守护住最后一道安全防线。</i>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="x-container" style="background: #fff;">
+<div id="succCase" style="position:absolute;top:-50px;left:0;"></div>
+<div class="indx-title-wrap" style="z-index: 1;">
+<p class="inde-title"><img src="/201607/img/xtr2/en3.png" style="margin-bottom: 20px;position: relative;z-index: 3;"/></p>
+</div>
+<div class="x-container" style="padding-top: 75px">
+<div class="x-content" style="background: url(/201607/img/xtr2/companycut_03.jpg) no-repeat center 0;height: 704px;">
+<ul class="xtr-map">
+<li style="left: 53px;top: 11px;"  n="来财街" t="来财街致力于为中小企业用户提供安全性好、收益率高和稳定性强的金融服务的公司。" c="薪太软是我们重要的合作伙伴，来财街为薪太软的员工提供安全、优质的金融产品，为薪太软平台的小伙伴实现‘涨工资’的梦想。">
+<img src="/201607/img/xtr2/dading_06.png">
+<div style="left: -131px;top: -31px;"><img src="/201607/img/xtr2/hzl.png"></div>
+</li>
+<li style="left: 22px;top: 68px;" n="随你花" t="随你花是由世界500强公司、银行、互联网巨头出身的管理及产品研发人员组成的，专门为年轻人提供专业的互联网金融咨询服务的公司。" c="我们与薪太软携手，努力打造完善的个人信用体系。双方利用自身大数据平台优势，通过自主研发系统和信用评价模，实现快速、及时、精准的用户信用价值评估。为薪太软用户带来更多基于个人信用价值的优质产品。">
+<img src="/201607/img/xtr2/dading_06.png">
+<div style="left: -127px;top: 7px;"><img src="/201607/img/xtr2/hzs.png"></div>
+</li>
+<li style="left: 114px;top: 24px;" n="91人气" t="91人气是一家为广大互联网商家用户提供企业级服务的互联网公司。" c="在大众创业，万众创新的时代背景下。薪太软为我们的广大创业者提供强大的人力资源服务和支持，更好的帮助创业者的萌芽与成长。是我们的坚实盟友与后盾。">
+<img src="/201607/img/xtr2/dading_06.png">
+<div style="left: 29px;top: -31px;"><img src="/201607/img/xtr2/hz9.png"></div>
+</li>
+<li class="active" style="left: 73px;top: 62px;" n="中崇集团有限公司" t="中崇集团是一家国际贸易、综合物流、建设投资、金融服务四业联动的大型企业集团。" c="与薪太软合作，不仅仅因为他可以很好地满足我们企业在社保管理上“易用、专业”的需求，解放了我们人力资源管理者很大一部分的时间和精力，让管理者专注于企业核心人力资源工作，更因为他们认真负责的服务态度，也让我们放心把业务交给他。">
+<img src="/201607/img/xtr2/dading_06.png">
+<div style="left: 29px;top: 14px;"><img src="/201607/img/xtr2/hzz.png"></div>
+</li>
+<li style="left: 78px;top: 110px;" n="冠生园（集团）有限公司" t="冠生园是一家有着近百年历史的中华民族名牌老字号企业，也是中国食品工业二十大杰出企业之一。" c="薪太软是我们战略合作伙伴，为我们企业订制专属的互联网薪资福利平台，我们和薪太软的合作更着眼于未来，双方将会共同推荐业务发展，实现互利共赢。">
+<img src="/201607/img/xtr2/dading_06.png">
+<div style="left: 27px;top: 16px;"><img src="/201607/img/xtr2/hzg.png"></div>
+</li>
+<li style="left: -1px;top: 159px;" n="西宁特钢股份有限公司" t="西宁特钢集团是宁夏回族自治区最大的现代化钢铁企业。" c="薪太软团队为我们提供了工资代发、工资垫付服务及人力资源大数据分析。通过系统对接、自动化处理、云端多地多时操作、大数据等技术，形成一套标准化的技术方案，重塑企业的人力资源管理流程，并且性价比相对传统的人力资源服务高很多。">
+<img src="/201607/img/xtr2/dading_06.png">
+<div style="left: -127px;top: 7px;"><img src="/201607/img/xtr2/hzx.png"></div>
+</li>
+</ul>
+<div style="width: 490px;height: 350px;position: absolute;left: 80px;top: 142px;">
+<div class="inde-title-wrap">
+<p class="name">企业介绍</p>
+<p class="info" id="titleXTR">中崇集团是一家国际贸易、综合物流、建设投资、金融服务四业联动的大型企业集团。</p>
+</div>
+<div class="inde-title-wrap">
+<p class="name">合作案例</p>
+<p class="info" id="infoXTR">与薪太软合作，不仅仅因为他可以很好地满足我们企业在社保管理上“易用、专业”的需求，解放了我们人力资源管理者很大一部分的时间和精力，让管理者专注于企业核心人力资源工作，更因为他们认真负责的服务态度，也让我们放心把业务交给他。</p>
+</div>
+<p id="nameXTR" style="font-size: 12px;font-weight: bold;color: #333;text-align: right;">—— 中崇集团有限公司</p>
+</div>
+</div>
+</div>
+</div>
+<div class="x-container" style="margin-top: -134px;">
+<div id="hr" style="position:absolute;top:-50px;left:0;"></div>
+<div class="indx-title-wrap" style="z-index: 1;">
+<p class="inde-title"><img src="/201607/img/xtr2/en4.png" style="margin-bottom: 20px;position: relative;z-index: 3;"/></p>
+</div>
+<div class="x-container" style="padding: 75px 0 100px;">
+<div class="x-content clfix">
+<div style="font-size: 14px;color: #404040;width: 550px;float: right;margin-right: 130px;">
+<ul class="clifx xtr-cutbar half" style="margin-bottom: 50px;width: 300px;float: right;">
+<li class="active" ta="2"><span>HR知识库</span></li>
+<li ta="3"><span>政策薪解</span></li>
+</ul>
+<div class="clfix"></div>
+<div class="news-list inde" >
+<ul id="newslist">
+
+<li>
+<div>
+<a href="hrcenter.htm" class="btn">更多<i class="icon-angle-right"></i></a>
+</div>
+</li>
+</ul>
+
+</div>
+
+</div>
+<div style="float: left;width: 320px;margin: 110px 0 0 130px;">
+<div class="news-list" style="padding: 0;">
+<ul id="newsfirst">
+
+</ul>
+</div>
+</div>
+
+
+</div>
+</div>
+</div>
+
+<div class="x-container" style="background: #fff;">
+<div class="x-content">
+
+</div>
+</div>
+
+ #parse("/201607/footer.vm")
+
+</body>
+</html>
+<script src="/201607/js/scrollReveal.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+
+
+$(function () {
+
+
+$(".xtr-map li").hover(function(){
+$(this).addClass("active").siblings("li").removeClass("active");
+},function(){
+
+	});
+$(".index-login input").click(function () {
+if($(this).val()==$(this).attr("placeholder")){
+$(this).val('').focus();
+}
+});
+$("#pass").click(function  () {
+$(this).attr("type","password");
+});
+if(!isLessIE10()){
+$(".index-login input").val('');
+$("#to_top input").val('');
+}
+
+//薪太软为您提供一站式薪酬福利解决方案   切换
+var inde_fun_i = 0;
+$(".inde-fun-wrap ul li").hover(function () {
+inde_fun_i = $(this).index()
+indeFun_click(inde_fun_i);
+});
+$(".inde-fun-wrap .left").click(function () {
+inde_fun_i--;
+if(inde_fun_i<0){
+inde_fun_i=$(".inde-fun-wrap ul li").length-1;
+}
+indeFun_click(inde_fun_i);
+});
+$(".inde-fun-wrap .right").click(function () {
+inde_fun_i++;
+if(inde_fun_i>=$(".inde-fun-wrap ul li").length){
+inde_fun_i=0;
+}
+indeFun_click(inde_fun_i);
+});
+function indeFun_click(i){
+$(".inde-fun-wrap ul li").eq(i).addClass("active").siblings("li").removeClass("active");
+$(".case-item-wrap	.case-item").eq(i).stop().fadeIn(300).siblings(".case-item").hide();
+}
+
+$(".xtr-map li").hover(function(){
+$("#nameXTR").html('—— '+$(this).attr('n'));
+$("#titleXTR").html($(this).attr('t'));
+$("#infoXTR").html($(this).attr('c'));
+});
+$(window).scroll(function () {
+//console.log($(document).scrollTop()+",hengith:"+$("#product").offset().top+",window-heiht:"+$(window).height())
+var st = $(document).scrollTop(),wh=$(window).height();
+var ph = $("#product").offset().top-30,safeInfoh=$("#safeInfo").offset().top-30
+																		,succh=$("#succCase").offset().top-30,hrh=$("#hr").offset().top-30;
+if(ph>st){
+$(".nav ul li").eq(0).addClass("active").siblings('li').removeClass("active");
+}if(ph<st&&ph>st-wh){
+$(".nav ul li").eq(1).addClass("active").siblings('li').removeClass("active");
+}if(safeInfoh<st&&safeInfoh>st-wh){
+$(".nav ul li").eq(2).addClass("active").siblings('li').removeClass("active");
+}if(succh<st&&succh>st-wh){
+$(".nav ul li").eq(3).addClass("active").siblings('li').removeClass("active");
+}
+if(hrh<st&&hrh>st-wh){
+$(".nav ul li").eq(4).addClass("active").siblings('li').removeClass("active");
+}
+});
+$(".nav ul li").click(function () {
+$(".nav ul li").eq($(this).index()).addClass("active").siblings('li').removeClass("active");
+});
+
+
+
+
+
+window.scrollReveal = new scrollReveal({ reset: true, move: '50px',easing   : 'ease'});
+
+$(".hzheb a").hover(function(){
+var i = $(this).index();
+$("#cuts").find(".qd-wrods").eq(i).stop().fadeIn(300).siblings(".qd-wrods").hide();
+$(this).addClass("active").siblings("a").removeClass("active");
+});
+});
+
+
+
+
+
+$(function () {
+$(".xtr-cutbar li").click(function () {
+uploadRecord(1,5,$(this).attr('ta'));
+});
+
+$(".xtr-cutbar li").eq(0).click();
+});
+
+
+
+
+function login(){
+
+if($('#btn_log').attr('ta')=='1')
+return;
+
+$('#btn_log').attr('ta','1');
+
+
+var logname=$('#loginname').val();
+var pwd=$('#pwd').val();
+var yzcode=$('#yzcode').val();
+
+$.ajax({
+		type:"POST",
+        url:"/action/ax/login",
+        dataType:"json",
+        data:{
+        	'loginname':logname
+        	,'password':pwd
+        	,'verifycode':yzcode
+        },
+        async: true,
+		success: function(data){
+$('#btn_log').removeAttr('ta');
+
+if(data==null){
+window.console?window.console.log('data is null or empty'):'';
+return;
+}
+
+if(data.code!='0'){
+
+if(data.code=='3' || data.code=='4')
+$('#vcodeimg').attr('src','/action/ax/authImages?'+(new Date()).getTime());
+
+
+$('#btn_log').prev().html(data.msg);
+return;
+}
+
+$('#btn_log').prev().html('');
+
+var ref=document.referrer;
+ref='';
+if(null!=ref && ref.length>0){
+window.location.href=ref;
+return;
+}
+window.location.href='/action/web/manageIndex';
+
+}
+});
+
+}
+
+
+
+var tt1=1;
+function uploadRecord(pidx,pnum,type){
+
+if(isNaN(pidx))
+return;
+
+if(pidx*1<1)
+pidx=1;
+
+if(pidx*1>tt1*1)
+pidx=tt1*1;
+
+$.ajax({
+		type:"POST",
+        url:"newslist.htm",
+        dataType:"json",
+        data:{
+        	'pidx':pidx
+        	,'pnum':pnum
+        	,'type':type
+        },
+        async: true,
+		success: function(data){
+$('#newslist').html('<li style="text-align: center;font-size: 16px;color: #7c7c7c;padding: 50px 0 36px;">暂无数据</li>');
+$('#newsfirst').html('');
+
+if(data==null){
+window.console?window.console.log('data is null'):'';
+return;
+}
+
+//if(data.code!='0'){
+//	window.console?window.console.log(data.msg):'';
+//	return;
+//}
+
+if(data.data.data==null || data.data.data.length<1)
+return;
+
+var len=data.data.data.length;
+
+var fnewstr='';
+if(len>0){
+
+var contt=data.data.data[0].news_content==null?'':data.data.data[0].news_content;
+
+
+var cont=$('<div>'+contt+'</div>');
+contt=cont.text();
+
+var date = new Date(data.data.data[0].news_releasetime);
+Y = date.getFullYear() + '-';
+M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+    if(M.length == 2){
+        M = "0"+M;
+	}
+
+D = date.getDate() + ' ';
+    if(D.length == 2){
+        D = "0"+D;
+    }
+h = date.getHours() + ':';
+    if(h.length == 2){
+        h = "0"+h;
+    }
+m = date.getMinutes() + ':';
+    if(m.length == 2){
+        m = "0"+m;
+    }
+s = date.getSeconds() + "";
+    if(s.length == 1){
+        s = "0"+s;
+    }
+
+var news_releasetime=Y+M+D+h+m+s;
+fnewstr+='<li style="padding: 0;border: 0;">';
+fnewstr+='	<img src="'+(data.data.data[0].news_img==null?'':data.data.data[0].news_img)+'" style="float: none;margin: 0;">';
+fnewstr+='	<p class="title" style="margin: 20px 0 15px;height: 24px;overflow: hidden;">'+((data.data.data[0].news_class_name=="" || data.data.data[0].news_class_name==null)?'':('【'+data.data.data[0].news_class_name+'】'))+(data.data.data[0].news_title==null?'':data.data.data[0].news_title)+'</p>';
+fnewstr+='	<p class="ly">'+(news_releasetime==null?'':news_releasetime.split('.')[0])+'  来源：'+(data.data.data[0].news_ly==null?'':data.data.data[0].news_ly)+'</p>';
+fnewstr+='	<p class="info" style="height: 84px;color: #666;margin-bottom: 35px;line-height: 28px;">'+contt+'</p>';
+fnewstr+='	<a href="/newsdetailpage.htm?id='+data.data.data[0].news_id+'" target="_blank" style="color: #999;">';
+fnewstr+='		<img src="/201607/img/xtr2/readoldacticl.png" style="vertical-align: bottom;width: auto;height: auto;margin-right: 5px;">阅读原文';
+fnewstr+='	</a>';
+fnewstr+='</li>';
+
+}
+
+$('#newsfirst').html(fnewstr);
+
+
+
+var str='';
+
+if(len>1){
+for(var i=1;i<data.data.data.length;i++){
+
+var contt=data.data.data[i].news_content==null?'':data.data.data[i].news_content;
+
+
+var cont=$('<div>'+contt+'</div>');
+contt=cont.text();
+
+var date = new Date(data.data.data[i].news_releasetime);
+Y = date.getFullYear() + '-';
+M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+    M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+    if(M.length == 2){
+        M = "0"+M;
+    }
+
+    D = date.getDate() + ' ';
+    if(D.length == 2){
+        D = "0"+D;
+    }
+    h = date.getHours() + ':';
+    if(h.length == 2){
+        h = "0"+h;
+    }
+    m = date.getMinutes() + ':';
+    if(m.length == 2){
+        m = "0"+m;
+    }
+    s = date.getSeconds() + "";
+    if(s.length == 1){
+        s = "0"+s;
+    }
+var news_releasetime=Y+M+D+h+m+s;
+str+='<li>';
+str+='	<a href="/newsdetailpage.htm?id='+data.data.data[i].news_id+'" target="_blank">';
+str+='		<img src="'+(data.data.data[i].news_img==null?'':data.data.data[i].news_img)+'">';
+str+='		<p class="title">'+((data.data.data[i].news_class_name =="" || data.data.data[i].news_class_name ==null)?'':('【'+data.data.data[i].news_class_name+'】'))+(data.data.data[i].news_title==null?'':data.data.data[i].news_title)+'</p>';
+str+='		<p class="ly">'+(news_releasetime==null?'':news_releasetime.split('.')[0])+'   来源：'+(data.data.data[i].news_ly==null?'':data.data.data[i].news_ly)+'</p>';
+str+='	</a>';
+str+='</li>';
+
+
+}
+
+str+='<li>';
+str+='	<div>';
+str+='		<a href="#springUrl('/hrcenter.htm')" class="btn">更多<i class="icon-angle-right"></i></a>';
+str+='	</div>';
+str+='</li>';
+
+$('#newslist').html(str);
+
+}
+
+
+
+}
+});
+
+}
+
+</script>
+<script>
+
+var _hmt = _hmt || [];
+(function() {
+    //初始化时清除之前的用户及密码
+    $("#memberPassword").val("");
+    $("#memberLogname").val("");
+    $("#verifycode").val("");
+
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?9d23af52536a65262d401db7a24004fa";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>

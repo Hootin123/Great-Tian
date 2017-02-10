@@ -1,0 +1,371 @@
+#####员工首页
+<!DOCTYPE html>
+<html lang="en" id='html'>
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    #parse("comm/head.vm")
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1">
+    <script type="text/javascript" src="#springUrl('/resource/js/wechatCustomer/index.js')" ></script>
+    <script type="text/javascript" src="#springUrl('/resource/js/hongbao/ajaxfileupload.js')" ></script>
+    <link rel="stylesheet" type="text/css"  href="#springUrl('/resource/css/wechatCustomer/index.css')">
+</head>
+<body>
+<header>
+    <div class="logo">
+        <dl>
+            <dt>
+                #if($!{customerImg}=="")
+                    <img src="#springUrl('/resource/img/wechatCustomer/user-pic.png')" id="customerImgUrl"/><em class='manage'></em>
+                    #else
+                        <img src="$!{customerImgUrl}" id="customerImgUrl"/><em class='manage'></em>
+                #end
+                <input type="file"  name="file" id="customerImgFile"/>
+            </dt>
+            <dd>$!{customerTurename}</dd>
+        </dl>
+    </div>
+    <div class="text">
+        <p>距下个月发工资还有 </p><span class='day'>$!{days}</span><p>天</p>
+    </div>
+</header>
+<section>
+
+    <!-- 隐藏域-->
+    <input name="customerId" type="hidden" value="$!{customerId}"/>
+    <input name="companyId" type="hidden" value="$!{companyId}"/>
+    <input name="customerImg" type="hidden"/>
+    <input name="payCycleId" type="hidden" value="$!{payCycleId}"/>
+    <input name="payrollid" type="hidden" value="$!{payrollId}"/>
+    <input type="hidden" id="hiddenMonth" value="$!{month}"/>
+    <input type="hidden" name="searchMonth" value="$!{month}"/>
+    <div class="sec-top">
+        <div class="sec-year"><span>$!{currentYear}</span>年
+            <em class='clickLeft'></em>
+            <em class='clickRight'></em>
+        </div>
+        <div class="sec-pay">
+            <p><span class='month' id="searchMonth">$!{month}月</span><span>工资</span></p>
+            <p id="baseWages">$!{baseWages}元</p>
+        </div>
+    </div>
+    <div class="sec-time">
+        <ul class='clickMonth'>
+            <li ><a href="javascript:;" index="1" >1月</a></li>
+            <li  ><a href="javascript:;" index="2">2月</a></li>
+            <li ><a href="javascript:;" index="3">3月</a></li>
+            <li class='sit' ><a href="javascript:;" index="4">4月</li>
+            <li > <a href="javascript:;" index="5">5月</a></li>
+            <li ><a href="javascript:;" index="6" >6月</a></li>
+            <li ><a href="javascript:;" index="7">7月</a></li>
+            <li class='sit' ><a href="javascript:;" index="8" >8月</a></li>
+            <li ><a href="javascript:;" index="9">9月</a></li>
+            <li ><a href="javascript:;" index="10">10月</a></li>
+            <li ><a href="javascript:;" index="11">11月</a></li>
+            <li class='sit' ><a href="javascript:;" index="12">12月</a></li>
+
+        </ul>
+    </div>
+</section>
+<script type="text/javascript">
+    // 年份变化(减)
+    $('.clickLeft').on('click',function(){
+
+        var timer=$('.sec-year span').text()
+        Compart()
+       // console.log(timer)
+        timer--
+        if(timer<$!{currentYear}){
+            return;
+        }else{
+            $('.sec-year span').text(timer)
+            judYear()
+            Compart()
+        }
+        //查询当前月的工资
+        //准备参数
+        var customerId = $("input[name='customerId']").val();
+        //var payrollId = $("input[name='payrollId']").val();
+        var year = $('.sec-year span').text();
+        var month = $(this).attr("index");
+        var payCycleId = $("input[name='payCycleId']").val();
+        var companyId=$("input[name='companyId']").val();
+        //获取当前的年份
+        $.ajax({
+            url:BASE_PATH+'/wechatCustomerBind/getNextYearJanSalary.htm',
+            type:'post',
+            data:{"customerId":customerId,"year":year,"month":month,"payCycleId":payCycleId,"companyId":companyId},
+            dataType:'json',
+            success:function(resultResponse){
+                if(resultResponse.success){
+                    //保存参数
+                    var payCycleIdValue = resultResponse.data.payCycleIdValue;
+                    var baseWagesValue =resultResponse.data.baseWages;//基本工资
+                    var payrollid = resultResponse.data.payrollid;
+                    $("input[name='payrollid']").val(payrollid);
+                    $("input[name='payCycleId']").val(payCycleIdValue);
+                    $("#baseWages").val(baseWagesValue);
+                    var returnMonth = resultResponse.data.month;
+                    $("")
+                    //判断
+                    var obj=$('.clickMonth li').find('a')
+                    for (var i = 0; i < obj.length; i++) {
+                        // console.log(parseInt(obj[i].text))
+                        if(parseInt(obj[i].getAttribute('index'))==returnMonth){
+                            obj[i].style.color='#0696fa';
+                        };
+
+                    }
+
+                    //alert("操作成功")
+                }else{
+                    $("#baseWages").text("0元");
+                    //layer.alert("没有查询到工资");
+                }
+            },
+            error:function(){
+                layer.alert("网络错误，请刷新");
+
+            }
+
+        });
+
+
+    });
+    // 年份变化(加)
+    $('.clickRight').on('click',function(){
+       Compart();
+
+        var timer=$('.sec-year span').text()
+        timer++
+        $('.sec-year span').text(timer)
+        judYear();
+        //准备参数
+        var customerId = $("input[name='customerId']").val();
+        //var payrollId = $("input[name='payrollId']").val();
+        var year = $('.sec-year span').text();
+        var month = $(this).attr("index");
+        var payCycleId = $("input[name='payCycleId']").val();
+        var companyId=$("input[name='companyId']").val();
+        //获取当前的年份
+        $.ajax({
+           url:BASE_PATH+'/wechatCustomerBind/getNextYearJanSalary.htm',
+           type:'post',
+            data:{"customerId":customerId,"year":year,"month":month,"payCycleId":payCycleId,"companyId":companyId},
+            dataType:'json',
+            success:function(resultResponse){
+              if(resultResponse.success){
+                   //保存参数
+                  var payCycleIdValue = resultResponse.data.payCycleIdValue;
+                  var baseWagesValue =resultResponse.data.baseWages;//基本工资
+                  var payrollid = resultResponse.data.payrollid;
+                  $("input[name='payrollid']").val(payrollid);
+                  $("input[name='payCycleId']").val(payCycleIdValue);
+                  $("#baseWages").val(baseWagesValue);
+                  //返回当前的月份 month  TODO
+                  var month = resultResponse.data.month;
+                  //判断
+                  var obj=$('.clickMonth li').find('a')
+                  for (var i = 0; i < obj.length; i++) {
+                      // console.log(parseInt(obj[i].text))
+                      if(parseInt(obj[i].getAttribute('index'))==month){
+                          obj[i].style.color='#0696fa';
+                      };
+
+                  }
+                  //alert("操作成功")
+              }else{
+                  $("#baseWages").text("0元");
+                  //layer.alert("没有查询到工资");
+              }
+            },
+            error:function(){
+                layer.alert("网络错误，请刷新");
+
+            }
+
+        });
+
+
+    })
+    // 点击具体的月份
+    $('.clickMonth li').find('a').on('click',function(){
+        if($(this).attr('data')==2){
+            return false;
+        }else{
+            var month=$(this).html();
+            $(".month").html(month);
+
+            // 月份赋值
+            $(this).css('color','#0696fa').parent().siblings().find('a').css('color','#333')
+            Compart1();
+            //准备参数
+            var customerId = $("input[name='customerId']").val();
+            //var payrollId = $("input[name='payrollId']").val();
+            var year = $('.sec-year span').text();
+            var month = $(this).attr("index");
+            $("input[name='searchMonth']").val(month);
+            //alert(month);
+            var payCycleId = $("input[name='payCycleId']").val();
+            var companyId=$("input[name='companyId']").val();
+            //查询当前月的工资
+            $.ajax({
+                url:BASE_PATH+'/wechatCustomerBind/searchMonthSalary.htm',
+                type:'post',
+                dataType:'json',
+                data:{"customerId":customerId,"year":year,"month":month,"payCycleId":payCycleId,"companyId":companyId},
+                success:function(data){
+                    if(data.success){
+                        //成功返回信息
+                        //更新工资
+                        //更新工资Id
+                        //计薪周期id
+                        var payCycleIdValue = data.data.payCycleId;
+                        var baseWagesValue =data.data.baseWages;//基本工资
+                        //alert(baseWagesValue)
+                        var payrollid = data.data.payrollid;
+                       // alert(payrollid);
+                        $("input[name='payrollid']").val(payrollid);
+                        $("input[name='payCycleId']").val(payCycleIdValue);
+                        $("#baseWages").text(baseWagesValue+"元");
+                       // alert("操作成功")
+                    }else{
+                        $("#baseWages").text("0元");
+                        //layer.alert(data.message);
+                    }
+
+
+                },
+                error:function(){
+                    layer.alert("网络错误，请重新刷新")
+                }
+
+            });
+
+
+
+        }
+    });
+
+
+    Compart()
+
+    // 与当前时间比较
+    function Compart(){
+        var obj=$('.clickMonth li').find('a')
+        for (var i = 0; i < obj.length; i++) {
+          //  console.log(parseInt(obj[i].text))
+            if(parseInt(obj[i].text)>Add($!{month}) && $('.sec-year span').html()==$!{currentYear}){
+                obj[i].style.color='#ccc';
+                obj[i].setAttribute('data','2')
+            };
+            if(parseInt(obj[i].text)==Add($!{month}) && $('.sec-year span').html()==$!{currentYear}){
+                obj[i].style.color='#0696fa';
+            }
+
+        }
+    }
+
+    function Compart1(){
+        var obj=$('.clickMonth li').find('a')
+        for (var i = 0; i < obj.length; i++) {
+           // console.log(parseInt(obj[i].text))
+            if(parseInt(obj[i].text)>Add($!{month}) && $('.sec-year span').html()==$!{currentYear}){
+                obj[i].style.color='#ccc';
+                obj[i].setAttribute('data','2')
+            };
+
+        }
+    }
+
+    // 判断是否是当前的年份
+    function judYear() {
+        if ($('.sec-year span').html() >$!{currentYear}) {
+           // console.log($!{currentYear})
+            $(".month").html('1月')
+            $('.clickMonth li').find('a').css({'border': '0', 'color': '#ccc'})
+            $('.clickMonth li').find('a').attr('data', '2')
+        }
+
+        if ($('.sec-year span').html() <=$!{currentYear}) {
+            if ($('.sec-year span').html() <=$!{currentYear}) {
+                $(".month").html(Add($!{month}) + '月')
+                $('.clickMonth li').find('a').css({'border': '0', 'color': '#333'})
+                $('.clickMonth li').find('a').attr('data', '1')
+
+            }
+        }
+    }
+        // 个位数加零
+        function Add(n) {
+            if (n < 10) {
+                return '0' + n;
+            } else {
+                return n
+            }
+        }
+        //   距离发工资的天数
+            var Day=$('.day').html()
+            $('.day').html(Add(Day))
+        // 进入基本信息页
+        $('.manage').on('click', function () {
+            var customerId = $("input[name='customerId']").val();
+            var companyId = $("input[name='companyId']").val();
+            window.location = BASE_PATH + "/wechatCustomerInfo/toWechatCustomerManagerInfoPage.htm?customerId=" + customerId+"&companyId="+companyId
+        })
+        // 进入薪资详情
+        $('.sec-pay').on('click', function () {
+            var month = $("#searchMonth").text().substr(0,1);
+            //准备参数
+            var customerId = $("input[name='customerId']").val();
+            var payrollId = $("input[name='payrollid']").val();
+            var year = $('.sec-year span').text();
+            var payCycleId = $("input[name='payCycleId']").val();
+            var companyId =$("input[name='companyId']").val();
+            if(payrollId==null||payrollId==undefined||payrollId==""){
+                layer.alert("还没有工资单，查看不了工资详情");
+                return false;
+            }
+            window.location = BASE_PATH + "/wechatCustomerBind/toCustomerSalaryDetail.htm?customerId=" + customerId + "&payrollId=" + payrollId + "&year=" + year + "&month=" + month + "&payCycleId=" + payCycleId+"&companyId="+companyId
+        });
+
+        //点击上传图像
+        $("#customerImgFile").on('change', uploadCustomerImg);
+        //图片上传
+        function uploadCustomerImg() {
+            var a = BASE_PATH + "/resource/img/h5wallet/load.gif";
+            $("#customerImgUrl").attr('src', a);
+            $.ajaxFileUpload({
+                url: BASE_PATH + '/wechatCustomerBind/customerBindUpload.htm', //用于文件上传的服务器端请求地址
+                fileElementId: 'customerImgFile', //文件上传域的ID
+                dataType: 'json', //返回值类型 一般设置为json
+                success: function (data, status) {
+                    if (data.success) {
+                        $("#customerImgUrl").attr("src", "http://xintairuan-img.oss-cn-hangzhou.aliyuncs.com/" + data.data);
+                        $("[name=customerImg]").val(data.data);
+
+                    } else {
+
+                        layer.alert(data.message);
+                    }
+                    $("#customerImgFile").unbind('change').bind('change', uploadCustomerImg);
+                },
+                error: function (data, status, e) {
+                    layer.alert("上传失败");
+                    $("#customerImgFile").unbind('change').bind('change', uploadCustomerImg);
+                }
+            });
+
+        }
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
+

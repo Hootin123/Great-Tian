@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>订单提交异常</title>
+    #parse("comm/head.vm")
+    <style type="text/css">
+        .abnormalOrdersHeader{
+            width: 100%;
+            min-width: 1000px;
+            height: 80px;
+            font-size: 24px;
+            font-family: '微软雅黑';
+            text-align: center;
+            line-height: 80px;
+            border-bottom: 1px solid #dbe9ee;
+        }
+        .abnormalOrders-main{
+            margin: 30px 3% 0 3%;
+            color: #666666;
+            min-width: 960px;
+        }
+        .abnormalOrders-main table{
+            width: 100%;
+            font-size: 12px;
+        }
+        .abnormalOrders-main table tr:nth-child(1){
+            width:100%;
+            height:40px;
+            background:#5b7798;
+            color: #fff;
+        }
+        .abnormalOrders-main table tr:nth-child(1) td{
+            border-right:1px solid #fff;
+        }
+        .abnormalOrders-main table tr{
+            width: 100%;
+            text-align: center;
+        }
+        .abnormalOrders-main table tr td{
+            border:1px solid #dbe9ee;
+            line-height:50px;
+        }
+        .abnormalOrders-main table tr td p{
+            line-height: 50px;
+        }
+        .abnormalOrders-main table tr td .list-border{
+            border-top:1px solid #dbe9ee;
+        }
+        .abnormalOrders-main .abnormalOrders-main-hint{
+            text-align: center;
+            line-height: 80px;
+            color: #f99b15;
+        }
+        .abnormalOrders-footer{
+            width: 100%;
+            height: 80px;
+            margin:0 auto;
+            margin-top: 50px;
+            background:#f1f9fc;
+        }
+        .abnormalOrders-footer .abnormalOrdersButton{
+            width: 440px;
+            height: 40px;
+            margin:0 auto;
+        }
+        .abnormalOrders-footer .abnormalOrdersButton input{
+            width: 240px;
+            height: 100%;
+            float: left;
+            background:#0696fa;
+            color: #fff;
+            border:0;
+            margin-top: 20px;
+            border-radius:6px;
+            text-align:center;
+            line-height: 40px;
+            font-size: 18px;
+            font-family: '微软雅黑';
+            cursor: pointer;
+        }
+        .abnormalOrders-footer .abnormalOrdersButton a{
+            display: block;
+            width: 140px;
+            height: 100%;
+            float: right;
+            background:#fff;
+            color: #0696fa;
+            border:1px solid #0696fa;
+            margin-top: 20px;
+            border-radius:6px;
+            text-align:center;
+            line-height: 40px;
+            font-size: 18px;
+            font-family: '微软雅黑';
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="abnormalOrdersHeader">订单提交异常</div>
+<div class="abnormalOrders-main">
+    <table>
+        <tr>
+            <td>序号</td>
+            <td>姓名</td>
+            <td>部门</td>
+            <td>手机号</td>
+            <td>参保种类</td>
+            <td>异常详情</td>
+            <td>失败原因</td>
+        </tr>
+        #set ($i=0)
+        #foreach($data in $!{errorOrders})
+            #set($i=$i+1)
+            <tr>
+                <td rowspan="2">$i</td>
+                <td rowspan="2">$!{data.memberName}</td>
+                <td rowspan="2">$!{data.deptName}</td>
+                <td rowspan="2">$!{data.telphone}</td>
+                <td>
+                    社保
+                </td>
+                <td>
+##                    <p>
+##                        #if($!{data.sbHjText})
+##                            <p>汇缴$!{data.sbHjText}</p>
+##                        #end
+##                        #if($!{data.sbTjText})
+##                            <p>调基$!{data.sbTjText}</p>
+##                        #end
+##                        #if($!{data.sbStopText})
+##                            <p>停缴$!{data.sbStopText}</p>
+##                        #end
+##                        #if($!{data.sbBjText})
+##                            <p>补缴$!{data.sbBjText}</p>
+##                        #end
+                        $!{data.sbErrorText}
+##                    </p>
+##                    <p class='list-border'>
+####                        #if($!{data.gjjHjText})
+####                            <p>汇缴$!{data.gjjHjText}</p>
+####                        #end
+####                        #if($!{data.gjjTjText})
+####                            <p>调基$!{data.gjjTjText}</p>
+####                        #end
+####                        #if($!{data.gjjStopText})
+####                            <p>停缴$!{data.gjjStopText}</p>
+####                        #end
+####                        #if($!{data.gjjBjText})
+####                            <p>补缴$!{data.gjjBjText}</p>
+####                        #end
+##                            $!{data.gjjErrorText}
+##                    </p>
+                </td>
+                <td>
+##                    <p>
+                        $!{data.sbErrorReason}
+##                    </p>
+##                    <p>
+##                        $!{data.gjjErrorReason}
+##                    </p>
+##                    $!{data.orderErrorText}
+                </td>
+            </tr>
+            <tr>
+                <td>公积金</td>
+                <td>$!{data.gjjErrorText}</td>
+                <td> $!{data.gjjErrorReason}</td>
+            </tr>
+        #end
+    </table>
+    #if($!{isCurrent} == 1)
+        <div class="abnormalOrders-main-hint">
+            温馨提示：请修改异常人员的缴纳需求后再提交账单
+        </div>
+    #else
+        <div class="abnormalOrders-main-hint">
+            温馨提示：请修改异常人员的缴纳需求后再提交账单
+        </div>
+    #end
+
+</div>
+<div class="abnormalOrders-footer">
+    #if($!{isCurrent} == 1)
+    <div class="abnormalOrdersButton">
+        <input order_id="$!{orderId}" type="button" onclick="resubmit(this)" value="继续提交">
+        <a href="#springUrl('/shebao/shebaoIndex.htm')">修改订单</a>
+    </div>
+    #else
+    <div class="abnormalOrdersButton">
+        <input type="button" value="确定">
+    </div>
+    #end
+</div>
+
+<script>
+    function resubmit(obj){
+        var orderId = $(obj).attr('order_id');
+        $.post(BASE_PATH + '/shebao/submit_order.htm',{
+            orderId : orderId,
+            type: 'resubmit'
+        },function (result) {
+            if(result.success){
+                layer.alert('订单提交成功',{
+                    title:'处理结果',
+                    cancel:function(){
+                        location.href = BASE_PATH+"/shebao/shebaoIndex.htm";
+                    }
+                },function(index){
+                    location.href = BASE_PATH+"/shebao/shebaoIndex.htm";
+                    layer.close(index);
+                });
+            } else{
+                if("fail"===result.message){//跳转到异常信息
+                    location.href = BASE_PATH + '/shebao/order_error.htm?is_current=1&orderId=' + orderId;
+//                    layer.alert("订单提交失败",{title:'提示信息'});
+                }else{
+                    layer.alert(result.message,{title:'提示信息'});
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

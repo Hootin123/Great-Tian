@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>H+ 菜单管理</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-table/bootstrap-table.min.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css')" rel="stylesheet">
+</head>
+
+<body>
+<div class="col-sm-12">
+    <div class="container-fluid">
+        <div class="row-fluid">
+
+            <div class="ibox-content">
+                <div class="row">
+                    <form id="searchForm" class="form-inline" role="form" method="post">
+                        <input type="hidden" name="memberId" id="memberId" />
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <input type="text" id="uname" name="uname" class="form-control" placeholder="搜索：用户名/姓名" value="$!{uname}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <input type="text" id="date_str" name="date_str" class="form-control dateTime" placeholder="选择日期" value="$!{date_str}"/>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" type="button" id="queryBtn"><i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;查询</button>
+                        <button class="btn" type="button" id="cleanBtn">清空查询</button>
+                    </form>
+                </div>
+            </div>
+
+            <table id="data-list"></table>
+
+        </div>
+    </div>
+
+    <div id="modal-form" class="modal fade" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3 class="m-t-none m-b">充值审核</h3>
+                            <hr/>
+                            <form id="auditForm" role="form" method="post">
+                                <div class="form-group">
+                                    <div class="col-sm-10">
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="state" value="2" checked>该充值申请通过（金额与银行打款金额相符）</label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="state" value="1">驳回该充值申请（金额与打款金额不相符）</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input name="rechargeId" id="rechargeId" type="hidden"/>
+                                <div class="form-group">
+                                    <table class="table" id="tabInfo">
+                                        <tbody>
+                                            <tr>
+                                                <td>企业名称</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>付款银行名称</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>付款银行账号</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>银行交易流水号</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>金额</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>备注</td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div>
+                                    <button class="btn btn-primary audit-btn" type="button">确认</button>
+                                    <button data-dismiss="modal" class="btn btn-white" type="button">取消</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+<script src="#springUrl('/resource/js/hui/content.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table-mobile.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/validate/jquery.validate.min.js')"></script>
+<script src="#springUrl('/resource/js/comm/jdatagrid.js')"></script>
+<script src="#springUrl('/resource/js/admin/logs/index.js')"></script>
+</html>

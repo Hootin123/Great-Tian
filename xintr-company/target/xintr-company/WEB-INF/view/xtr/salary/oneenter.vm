@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>第一次进入</title>
+    <link href="#springUrl('/resource/css/comm/comm.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/salary/salaset.css')" rel="stylesheet">
+    <script src="#springUrl('/resource/js/comm/jquery-1.8.3.min.js')"></script>
+    <script src="#springUrl('/resource/js/comm/tools.js')"></script>
+    <script src="#springUrl('/resource/js/plugins/laydate/laydate.js')"></script>
+    <script src="#springUrl('/resource/js/plugins/layer/layer.js')"></script>
+    <script src="#springUrl('/resource/js/comm/validateUtil.js')"></script>
+    <script src="#springUrl('/resource/js/comm/swalDialog.js')"></script>
+    <script src="#springUrl('/resource/js/salary/oneenter.js')"></script>
+    #parse("comm/head.vm")
+</head>
+<style>
+    .laydate_body .laydate_table {
+        width: 230px;
+        margin: 0 5px;
+        border-collapse: collapse;
+        border-spacing: 0;
+        display: none
+    }
+
+    .laydate_choose cite {
+        display: none
+    }
+
+    .laydate_body .laydate_choose {
+        width: 0;
+        height: 0;
+    }
+
+    .laydate_body .laydate_y input {
+        margin-left: 10px;
+    }
+
+    .laydate_body .laydate_m input {
+        margin-left: 10px;
+    }
+
+    .laydate_clear {
+        display: none
+    }
+
+    .laydate_clear {
+        visibility: hidden
+    }
+
+</style>
+<script>
+    var reloadUrl = '$!{reloadUrl}';
+
+
+
+</script>
+<body id="body">
+
+<div class="conter">
+    <div class="oneTop">
+        <span>从</span>
+        <input class="laydate-icon" id="payday" type="text" onclick="laydate()"
+               value="$!date.format('yyyy-MM',$!date.getDate())">
+    ##        <input class="laydate-icon" id="payday" type="text" onclick="laydate()" value="2016年7月">
+        <span>开始算工资</span>
+    </div>
+    <div class="oneBegin">
+        <div class="oneBegin1">计薪开始日期</div>
+        <div class="oneBegin2">当月</div>
+        <div class="oneBegin3"><span class="oneBegin3Span">1</span><span>日</span></div>
+
+    </div>
+    <div class="oneFinish">
+        <div class="oneFinish1">计薪结束日期</div>
+        <div class="oneFinish2">当月</div>
+        <div class="oneFinish3">月底</div>
+        <span id="endDaySpan"></span>
+    </div>
+    <div class="onCon">
+        提示1：设定从X月开始算工资，系统以X月为核算工资的起始月。例如，设置从2016年5月开始算工资，核算页面抓取的为5月工资数据，存档后，方可进入6月核算。<br/>提示2：计薪开始日期一旦设置不可修改。
+    </div>
+    <div class="onfou">立即使用</div>
+    <ul class="oneBeginLi">
+
+    </ul>
+</div>
+</body>
+
+</html>

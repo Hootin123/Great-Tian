@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" id='html'>
+<head>
+    <meta charset="UTF-8">
+    <title>个人信息</title>
+    <meta name="viewport" content="
+	width=device-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1">
+    #parse("comm/head.vm")
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/wechatCustomer/wechatCustomerMainInfo.css')">
+    <script type="text/javascript" src="#springUrl('/resource/js/wechatCustomer/wechatCustomerMainInfo.js')"></script>
+    <script type="text/javascript" src="#springUrl('/resource/js/h5wallet/ajaxfileupload.js')"></script>
+
+</head>
+</head>
+<body>
+<section>
+    <div class="main-left">
+        <ul>
+            <li>姓名</li>
+            <li>英文名</li>
+            <li>手机</li>
+            <li><em>*</em>性别</li>
+            <li><em>*</em>生日</li>
+            <li>婚姻状况</li>
+            <li><em>*</em>工资卡卡号</li>
+            <li><em>*</em>工资卡开户行</li>
+            <li><em>*</em>户籍所在地</li>
+            <li><em>*</em>紧急联系人</li>
+            <li><em>*</em>紧急联系人电话</li>
+            <li><em>*</em>身份证号</li>
+            <li class='idCard'><em>*</em>身份证照</li>
+            <li>入职日期</li>
+            <li>部门</li>
+            <li>岗位</li>
+        </ul>
+    </div>
+    <div class="main-right">
+        <form id="wechatMainInfoForm">
+            <input  name="customerId" type="hidden" value="$!{customerId}">
+            <input  id="companyId" type="hidden" value="$!{companyId}">
+            <input  name="personalId" type="hidden" value="$!{customersDto.personalId}">
+            <ul>
+                <li>$!{customersDto.customerTurename}</li>
+                <li class='EnglishName'>
+                    <input type="" name="customerEnglishName" placeholder="输入英文名" value="$!{customersDto.customerEnglishName}">
+                    <span></span>
+                </li>
+                <li>$!{customersDto.customerPhone}</li>
+                <li class='sex'>
+                    <select name="customerSex">
+                        #if($!{customersDto.customerSex}==0)
+                            <option value=''>请选择性别</option>
+                            <option value='1'>男</option>
+                            <option value='0' selected="selected">女</option>
+                        #elseif($!{customersDto.customerSex}==1)
+                            <option value=''>请选择性别</option>
+                            <option value='1' selected="selected">男</option>
+                            <option value='0'>女</option>
+                        #else
+                            <option value=''>请选择性别</option>
+                            <option value='1'>男</option>
+                            <option value='0'>女</option>
+                        #end
+                    </select>
+                    <span></span>
+                </li>
+                <li class='birthday'>
+                    #*value="$!date.format('yyyy-MM-dd',$!{customersDto.customerBirthdayMonth})"*#
+                    <input type="date" name="customerBirthdayMonth" placeholder="选择你的出生年月" value="$!{customersDto.customerBirthdayMonth}"  style="height:0.6rem;padding-top:0.26rem">
+                    <span></span>
+                    <!-- <input type="hidden" name=""> -->
+                </li>
+                <li>
+                    <select name="customerMarriage">
+                        #if($!{customersDto.customerMarriage}==1)
+                            <option value="">选择婚姻状况</option>
+                            <option value="1" selected="selected">未婚</option>
+                            <option value="2">已婚</option>
+                            <option value="3">离异</option>
+                        #elseif($!{customersDto.customerMarriage}==2)
+                            <option value="">选择婚姻状况</option>
+                            <option value="1">未婚</option>
+                            <option value="2" selected="selected">已婚</option>
+                            <option value="3">离异</option>
+                        #elseif($!{customersDto.customerMarriage}==3)
+                            <option value="">选择婚姻状况</option>
+                            <option value="1">未婚</option>
+                            <option value="2">已婚</option>
+                            <option value="3" selected="selected">离异</option>
+                        #else
+                            <option value="">选择婚姻状况</option>
+                            <option value="1">未婚</option>
+                            <option value="2">已婚</option>
+                            <option value="3">离异</option>
+                        #end
+                    </select>
+                </li>
+                <li class='banknumber'>
+                    <input type="" name="customerBanknumber" placeholder="输入你的工资卡卡号" id='banknumber' value="$!{customersDto.customerBanknumber}">
+                    <span></span>
+                </li>
+                <li class='openbank'>
+                    <input type="" name="customerBank" placeholder="输入工资卡开户行" value="$!{customersDto.customerBank}">
+                    <span></span>
+                </li>
+                <li class='chart'>
+                    <input type="" name="personalDomicilePlace" placeholder="输入你的户籍所在地" value="$!{customersDto.personalDomicilePlace}">
+                    <span></span>
+                </li>
+                <li class='linkman'>
+                    <input type="" name="personalRelationerName" placeholder="输入你的紧急联系人" value="$!{customersDto.personalRelationerName}">
+                    <span></span>
+                </li>
+                <li class='emphone'>
+                    <input type="" name="personalRelationerPhone" placeholder="紧急联系人电话" value="$!{customersDto.personalRelationerPhone}">
+                    <span></span>
+                </li>
+                <li class='card'>
+                    <input type="" name="customerIdcard" placeholder="输入你的身份证号" value="$!{customersDto.customerIdcard}">
+                    <span></span>
+                </li>
+                <li class='idCard'>
+                    <dl>
+                        <dt >+
+                            #if($!{customersDto.customerIdcardImgFront} and $!{customersDto.customerIdcardImgFront}!="")
+                                <img src="http://xintairuan-img.oss-cn-hangzhou.aliyuncs.com/$!{customersDto.customerIdcardImgFront}" id="frontIdCard">
+                            #else
+                                <img src="/resource/img/wechatCustomer/error.png"  id="frontIdCard">
+                            #end
+                            <input type="file"  name="file"  onchange="uploadWebchatIdCardImg(1);" id="frontFile"/>
+                            <input  name="customerIdcardImgFront" type="hidden" value="$!{customersDto.customerIdcardImgFront}">
+                        </dt>
+                        <dd>
+                            身份证正面
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt >+
+                            #if($!{customersDto.customerIdcardImgBack} and $!{customersDto.customerIdcardImgBack}!="")
+                                <img src="http://xintairuan-img.oss-cn-hangzhou.aliyuncs.com/$!{customersDto.customerIdcardImgBack}" id="backIdCard">
+                            #else
+                                <img src="/resource/img/wechatCustomer/error.png"  id="backIdCard">
+                            #end
+                            <input type="file"  name="file"  onchange="uploadWebchatIdCardImg(2);" id="backFile"/>
+                            <input  name="customerIdcardImgBack" type="hidden" value="$!{customersDto.customerIdcardImgBack}">
+                        </dt>
+                        <dd>
+                            身份证反面
+                        </dd>
+                    </dl>
+                    <span></span>
+                </li>
+                <li>$!date.format('yyyy-MM-dd',$!{customersDto.stationEnterTime})</li>
+                <li>$!{customersDto.depName}</li>
+                <li>$!{customersDto.stationStationName}</li>
+            </ul>
+        </form>
+    </div>
+</section>
+<footer>
+    <div class="affirm" id="wechatSureBtn">确认</div>
+</footer>
+</body>
+</html>

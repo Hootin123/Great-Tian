@@ -1,0 +1,175 @@
+<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<jsp:include page="/201607/meta.jsp"></jsp:include>
+</head>
+<body>
+	<jsp:include page="/201607/top.jsp"></jsp:include>
+	
+	<div class="x-container" style="background: url(/201607/img/xtr2/bg3_02.jpg) no-repeat center 0;padding: 100px 0;">
+		<div class="x-content">
+			<div class="crumb">
+				<a href="/">首页</a>
+				<i class="icon-angle-right"></i>
+				<a href="/about.jsp">关于我们</a>
+				<i class="icon-angle-right"></i>
+				<span class="blue">企业动态</span>
+			</div>
+		</div>
+		<div class="x-content" style="border: 1px solid #e2e2e2;box-shadow: 0 7px 20px rgba(0,0,0,.15);background: #fff;border-radius: 10px;">
+			<div style="padding: 100px 80px 50px;font-size: 14px;color: #404040;">
+				
+				<div class="news-list">
+					<ul id="newslist">
+						
+					</ul>
+				</div>
+				<div id="page" class="page" style="margin-right: 40px;">
+					
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	
+	<jsp:include page="/201607/footer.jsp"></jsp:include>
+</body>
+</html>
+
+<script type="text/javascript">
+$(function () {
+	
+	showidx(5);
+	uploadRecord(1,5,1);
+});
+
+	
+	//uploadRecord(1,10);
+
+var scflag=false;
+var tt1=1;
+function uploadRecord(pidx,pnum,type){
+	
+	if(isNaN(pidx))
+		return;
+	
+	if(pidx*1<1)
+		pidx=1;
+	
+	if(pidx*1>tt1*1)
+		pidx=tt1*1;
+	
+	$.ajax({
+		type:"POST",  
+        url:"/action/st/newslist",
+        dataType:"json",
+        data:{
+        	'pidx':pidx
+        	,'pnum':pnum
+        	,'type':type
+        },
+        async: true,
+		success: function(data){
+			$('#newslist').html('<li style="text-align: center;font-size: 18px;color: #7c7c7c;">暂无数据	</li>');
+			$('#page').html('');
+			
+			if(data==null){
+				window.console?window.console.log('data is null'):'';
+				return;
+			}
+			
+			if(data.code!='0'){
+				window.console?window.console.log(data.msg):'';
+				return;
+			}
+			
+			if(data.data==null || data.data.length<1)
+				return;
+			
+			var str='';
+			for(var i=0;i<data.data.length;i++){
+				
+				var contt=data.data[i].news_content==null?'':data.data[i].news_content;
+				
+				
+				var cont=$('<div>'+contt+'</div>');				
+				contt=cont.text();
+				
+				
+				
+				str+='<li>';
+				str+='	<img src="'+(data.data[i].news_img==null?'':data.data[i].news_img.replace('/upload/','/uploadimg/'))+'"/>';
+				str+='	<p class="title word-inline">'+(data.data[i].news_class_name==null?'':('【'+data.data[i].news_class_name+'】'))+(data.data[i].news_title==null?'':data.data[i].news_title)+'</p>';
+				str+='	<p class="ly">'+(data.data[i].news_releasetime==null?'':data.data[i].news_releasetime.split('.')[0])+'   来源：'+(data.data[i].news_ly==null?'':data.data[i].news_ly)+'</p>';
+				str+='	<p class="info">'+contt+'</p>';
+				str+='	<div>';
+				str+='		<a href="/action/newsDetail/'+data.data[i].news_id+'" class="btn">详情<i class="icon-angle-right"></i></a>';
+				str+='	</div>';
+				str+='</li>';
+			}
+			
+			$('#newslist').html(str);
+			
+			var str1='';
+			if(data.pages.pagelist){				
+				
+				
+				
+				str1+='<a href="javascript:void(0);" class="leftbar icon-angle-left" onclick="uploadRecord('+data.pages.pre+','+pnum+','+type+');"></a>';
+			
+				/*
+				for(var i=0;i<data.pages.pagelist.length;i++){
+					var s='';
+					
+					var cls='';
+					if(data.pages.pagelist[i].idx=='1')
+						cls='class="active"';
+					
+					s='<a href="javascript:void(0);" '+cls+' onclick="uploadRecord('+data.pages.pagelist[i].page+','+pnum+',type);">'+data.pages.pagelist[i].page+'</a>';
+				
+					
+					str1+=s;
+				}
+				*/
+			
+				str1+='<span  style="margin: 0 5px 0 5px;">第</span>';
+				str1+='<input type="text" id="pageto" ta="'+pnum+'" tb="'+type+'" value="'+pidx+'"  />';
+				str1+='<span style="margin: 0 15px 0 5px;">页</span>';
+				str1+='<span>共'+data.pages.last+'页</span>';
+				str1+='<a href="javascript:void(0);" class="rightbar icon-angle-right" onclick="uploadRecord('+data.pages.next+','+pnum+','+type+');"></a>';
+				
+				
+							
+				
+				tt1=data.pages.last*1;
+				
+				
+				
+			}
+			
+			
+			$('#page').html(str1);
+			
+			if(scflag)
+				$('body,html').animate({ scrollTop: 260 }, 500);
+			
+			scflag=true;
+		}
+	});
+	
+}
+
+
+window.onkeydown=function(e){
+	console.log(e.keyCode)
+	if(e.keyCode==13){
+		var pt=$('#pageto');
+		uploadRecord(pt.val(),pt.attr('ta'),pt.attr('tb'));
+	}
+}
+
+</script>

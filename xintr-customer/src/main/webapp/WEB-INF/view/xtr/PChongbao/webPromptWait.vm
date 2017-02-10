@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	#parse("comm/head.vm")
+	<meta charset="UTF-8">
+	<title>等待审核</title>
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/pchongbao/webPromptWait.css')">
+</head>
+
+<body>
+	<div class="waitHeader">
+        <div class="logo">
+            <img  src="#springUrl('/resource/img/pchongbao/web-logo1.png')"/>
+        </div>
+        <div class="logo-text">
+            <img  src="#springUrl('/resource/img/pchongbao/web-text1.png')" />
+        </div>
+	</div>
+	<div class="waitMain">
+		<div class="waitMain-title">客服妹子正拼命审核，请耐心等待！</div>
+		<p> 薪太软</p>
+		<p>免费Saas系统——员工管理、薪资社保计算 </p>
+		<p>自动完成工资代发、社保代缴</p>
+		<p>炫酷人事工具等你开撩<em style='line-height: 70px;vertical-align: top;'>~</em></p>
+	</div>
+	<div class="waitFoot">
+		<div class="submit">
+			立即体验
+			<img   src="#springUrl('/resource/img/pchongbao/wait.png')"/></div>
+		</div>
+	</div>
+</body>
+<script>
+	$(".submit").click(function(){
+		window.location="http://www.xintairuan.com";
+	});
+</script>
+</html>

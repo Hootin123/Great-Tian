@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>H+ 用户管理</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-table/bootstrap-table.min.css')" rel="stylesheet">
+</head>
+
+<body>
+<div class="col-sm-12">
+    <div class="container-fluid">
+        <div class="row-fluid">
+
+        ##            <div id="toolbar" class="btn-group">
+        ##                <button id="addBtn" type="button" class="btn btn-primary fa fa-plus-square">
+        ##                    新增
+        ##                </button>
+        ##                <button id="deleteBtn" type="button" class="btn btn-primary fa fa-minus-square">
+        ##                    删除
+        ##                </button>
+        ##                <button id="editBtn" type="button" class="btn btn-primary fa fa-edit">
+        ##                    编辑
+        ##                </button>
+        ##                <button id="authBtn" type="button" class="btn btn-primary fa fa-graduation-cap">
+        ##                    授权
+        ##                </button>
+        ##            </div>
+
+            <div class="tabs-container">
+                <ul class="nav nav-tabs" id="logTabs">
+                    <li class="active" id="task"><a data-toggle="tab" href="#tab-1" aria-expanded="true">任务日志</a>
+                    </li>
+                    <li class="" id="operation"><a data-toggle="tab" href="#tab-2" aria-expanded="false"> 操作日志</a>
+                    </li>
+                    <li class="" id="exception"><a data-toggle="tab" href="#tab-3" aria-expanded="false">异常日志</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane active">
+                        <div class="panel-body">
+                            <div id="taskBar" class="btn-group">
+                                <button id="taskDeleteBtn" type="button" class="btn btn-primary fa fa-minus-square">
+                                    删除
+                                </button>
+                                <button id="taskRefreshBtn" type="button" class="btn btn-primary fa fa-refresh">
+                                    刷新
+                                </button>
+                            </div>
+                            <table id="task-list" class="table table-bordered table-hover"></table>
+                        </div>
+                    </div>
+                    <div id="tab-2" class="tab-pane">
+                        <div class="panel-body">
+                            <div id="operationBar" class="btn-group">
+                                <button id="operationDeleteBtn" type="button"
+                                        class="btn btn-primary fa fa-minus-square">
+                                    删除
+                                </button>
+                                <button id="operationRefreshBtn" type="button"
+                                        class="btn btn-primary fa fa-refresh">
+                                    刷新
+                                </button>
+                            </div>
+                            <table id="operation-list" class="table table-bordered table-hover"></table>
+                        </div>
+                    </div>
+                    <div id="tab-3" class="tab-pane">
+                        <div class="panel-body">
+                            <div id="exceptionBar" class="btn-group">
+                                <button id="exceptionDeleteBtn" type="button"
+                                        class="btn btn-primary fa fa-minus-square">
+                                    删除
+                                </button>
+                                <button id="exceptionRefreshBtn" type="button"
+                                        class="btn btn-primary fa fa-refresh">
+                                    刷新
+                                </button>
+                            </div>
+                            <table id="exception-list" class="table table-bordered table-hover"></table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+<script src="#springUrl('/resource/js/hui/content.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table-mobile.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js')"></script>
+<script src="#springUrl('/resource/js/comm/jdatagrid.js')"></script>
+<script src="#springUrl('/resource/js/sys/log/log.js')"></script>
+
+
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>订单详情</title>
+    #parse("comm/head.vm")
+    <script src="#springUrl('/resource/js/salary/salaryOrderDetail.js')"></script>
+    <style>
+        body,
+        html {width: 100%;height: 100%; }
+        .indentAll { width: 100%;height: 100%;}
+        .indentTop {width: 100%; height: 80px;position: relative }
+        .indentTop h2 { text-align: center;line-height: 80px; border-bottom: 1px solid #dbe9ee }
+        .indentTop img {position: absolute; top: 0;bottom: 0; margin: auto;right: 100px; cursor: pointer }
+        .indentContent {width: 80%;margin: 50px auto 0 ;min-width:1200px;}
+        .indentType {width: 100%;height: 80px;border: 1px solid #dbe9ee;color:#333;background:#f1f9fc;box-sizing: border-box}
+        .indentPledge { width: 100%; height: 100px;border: 1px solid #dbe9ee;margin-top: -1px;box-sizing: border-box}
+        .indentTypeLeft{width:40%;height:100%;float:left}
+        .indentTypeRight{width:60%;height:100%;float:left;}
+        .indentTypeMon,.indentTypeNum{margin:15px 0 0 20px;}
+        .indentTypeTyp,.indentTypeTime{margin:10px 0 0 20px;}
+        .indentSpan{color:#666;}
+        .indentTypeMon1{color:#fa5f5f;font-weight:600}
+        .indentPledge p{font-size:20px;color:#666;margin:20px 0 0 20px;}
+        .indentPledge img{margin-top:3px;margin-left:20px;}
+        .indentPledgeLeft{width:40%;float:left;line-height:20px;margin-top:20px;}
+        .indentPledgeRight{width:60%;float:left;line-height:20px;margin-top:20px;}
+        .indentPledge1{font-weight:600;color:#333}
+        .indentPledgeLeftcheck{color:#0696fa;cursor:pointer;}
+        .gpfdPayment{width:100%;height:80px;overflow: hidden;margin-top:20px;border:1px solid #dbe9ee;background:#f1f9fc;}
+        .gpfdPaymentBtn{width:400px;height:40px;margin:20px auto;}
+        .gpfdPaymentBtn1{width: 240px;height: 40px;float: left; line-height: 40px;text-align: center;border-radius: 6px;color: #fff; background: #0696fa;cursor: pointer;}
+        .gpfdPaymentBtn2{width: 140px;height: 40px;float: right;line-height: 40px; text-align: center;border-radius: 6px;background: #fff;border: 1px solid #0696fa;cursor: pointer;color: #0696fa;}
+        .gpfdPay{width:100%;height:650px;overflow: hidden;position: relative;}
+        .payWay{width:100%;height:100px;border:1px solid #dbe9ee;margin-top:30px;box-sizing: border-box;}
+        .accountPay{width:100%;overflow: auto;}
+        .bankRemit{width:100%;display:none}
+        .indentPay{width:100%;position:relative;display:none}
+        .indentBtn{width:100%;height:80px;margin:20px auto 40px;overflow: hidden;border:1px solid #dbe9ee;background:#f1f9fc;}
+        .indentB{width:400px;margin:20px auto;}
+        .indentBtn1{width: 240px;height: 40px;float: left; line-height: 40px;text-align: center;border-radius: 6px;color: #fff; background: #0696fa;cursor: pointer;}
+        .indentBtn2{width: 140px;height: 40px;float: right;line-height: 40px; text-align: center;border-radius: 6px;background: #fff;border: 1px solid #0696fa;cursor: pointer;color: #0696fa;}
+        .gpfdPaySpan{box-sizing: border-box;width:100%;font-size:25px;height:100px;border:1px solid #dbe9ee;line-height:100px;margin-top:20px;color:#666}
+        .gpfdPaySpan1{margin-left:20px;}
+        .gpfdPaySpan2{color:#fa5f5f;}
+        .payWay1{height:50px;line-height:50px;width:30%;float:left;margin-top:25px;}
+        .payWay1 img{vertical-align:top;margin-top:9px;margin-left:15px;}
+        .payWay1 input{margin-left:20px;}
+        .payWay2{height:50px;line-height:50px;width:70%;float:left;margin-top:25px;}
+        .payWay2 img{vertical-align:top;margin-top:13px;margin-left:15px}
+        .payWay2 input{margin-left:20px;}
+        .accountPayRepay{width:100%;height:100px;font-size:25px;line-height:100px;}
+        .accountPayRepay span{float:right;color:#666;}
+        .accountPayRepay .accountPayRepay1{color:#fa5f5f;font-weight:600}
+        .accountPayBalance{width:99.8%;height:100px;border:1px dashed #ffdca9;margin-top:50px;line-height:100px;font-size:18px;color:#666}
+        .accountPayBalance img{vertical-align:top;margin:38px 0 0 20px;}
+        .bankRemit h3{margin:20px 0 0 20px;color:#ffa200;}
+        .bankRemitOne{box-sizing: border-box; width:100%;height:80px;background:url(/resource/img/salary/stepBack1.png) no-repeat 50px center;border:1px solid #dbe9ee;line-height:80px;padding-left:70px;font-weight:600;color:#666;margin-top:20px;}
+        .bankRemitOne1{width:100%;height:100px;border:1px solid #dbe9ee;box-sizing: border-box;margin-top:-1px;background:#f1f9fc;}
+        .bankRemitOne1Left{width:20%;height:100px;float:left;border-right:1px solid #dbe9ee;box-sizing: border-box}
+        .bankRemitOne1Left div{line-height:32px;padding-left:50px;color:#666}
+        .bankRemitOne1Right{width:80%;height:100px;float:left;}
+        .bankRemitOne1Right div{line-height:32px;padding-left:30px;color:#666;}
+        .bankRemitToTable{width:100%;height:250px;border:1px solid #dbe9ee;box-sizing:border-box;margin-top:-1px;}
+        .bankRemitTo{box-sizing: border-box; width:100%;height:80px;background:url(/resource/img/salary/stepBack2.png) no-repeat 50px center;border:1px solid #dbe9ee;line-height:80px;padding-left:70px;font-weight:600;color:#666;margin-top:20px;}
+        .bankRemitToTable tr{height:50px;}
+        .bankRemitToTable tr td{border:1px solid #dbe9ee;text-align:center}
+        .bankRemitToTable tr td span{color:red;display: none}
+        .bankRemitToTable1{width:20%;text-align:center;color:#666;}
+        .bankRemitToTable2 input{width:80%;height:50px;padding-left:20px;border:0;}
+
+    </style>
+</head>
+
+<body>
+<input type="hidden" value="$!{companyRechargesBean.excelId}" id="excelId">
+<input type="hidden" value="$!{companyRechargesBean.rechargeType}" id="rechargeType">
+<input type="hidden" value="$!{companyRechargesBean.rechargeId}" id="rechargeId">
+<input type="hidden" value="$!{salaryOrderFlag}" id="salaryOrderFlag">
+<div class="indentAll">
+    <div class="indentTop">
+        <h2>订单详情</h2>
+        <img src="#springUrl('/resource/img/salary/guanbi.png')" alt="" id="closeDetailBtn">
+    </div>
+    <div class="indentContent">
+        <div class="indentType">
+            <div class="indentTypeLeft">
+                <div class="indentTypeMon">
+                    <span class="indentSpan">订单金额：</span>
+                    <span class="indentTypeMon1" id="rechargeMoney">$!{companyRechargesBean.rechargeMoney}</span>
+                    <span class="indentSpan">元</span>
+                </div>
+                <div class="indentTypeTyp">
+                    <span class="indentSpan">订单类型：</span>
+                    <span>
+                        #if($!{companyRechargesBean.rechargeType}==1)
+                            充值订单
+                        #elseif($!{companyRechargesBean.rechargeType}==2)
+                            提现订单
+                        #elseif($!{companyRechargesBean.rechargeType}==3)
+                            代发工资
+                        #elseif($!{companyRechargesBean.rechargeType}==8)
+                            代缴社保
+                        #end
+                    </span>
+                </div>
+            </div>
+            <div class="indentTypeRight">
+                <div class="indentTypeNum">
+                    <span class="indentSpan">订单编号：</span>
+                    <span>$!{companyRechargesBean.rechargeNumber}</span>
+                </div>
+                <div class="indentTypeTime">
+                    <span class="indentSpan">创建时间：</span>
+                    <span>$!date.format('yyyy-MM-dd HH:mm:ss',$!{companyRechargesBean.rechargeAddtime})</span>
+                </div>
+            </div>
+        </div>
+        <div class="indentPledge">
+            <p>订单抵扣：</p>
+            #*<div class="indentPledgeLeft">
+                <img src="#springUrl('/resource/img/salary/greenWin.png')" alt="">
+                <span class="indentSpan">可用红包：</span>
+                <span class="indentPledge1">500</span>
+                <span class="indentSpan">元&nbsp;&nbsp;</span>
+                <span class="indentPledgeLeftcheck">[查看详情]</span>
+            </div>*#
+            <div class="indentPledgeRight">
+                <img src="#springUrl('/resource/img/salary/greenWin.png')" alt="">
+                <span class="indentSpan">垫付金额：</span>
+                <span class="indentPledge1" id="rechargePaymentAmount">$!{companyRechargesBean.rechargePaymentAmount}</span>
+                <span class="indentSpan">元</span>
+            </div>
+        </div>
+        <!--            还需支付-->
+        <div class="gpfdPay">
+            <div class="gpfdPaySpan">
+                <span class="gpfdPaySpan1">还需支付：</span>
+                <span class="gpfdPaySpan2">$!{companyRechargesBean.rechargeRealAmount}</span>
+                <span class="gpfdPaySpan1">元</span>
+            </div>
+            <div class="gpfdPayment">
+                <div class="gpfdPaymentBtn">
+                    <div class="gpfdPaymentBtn1">前去付款</div>
+                    <div class="gpfdPaymentBtn2">取消</div>
+                </div>
+            </div>
+        </div>
+        <!--            账户余额支付-->
+        <div class="indentPay">
+            <div class="payWay">
+                <div class="payWay1"><input class="radio1" type="radio" name="btn" checked="checked"><img src="#springUrl('/resource/img/salary/balance.png')" alt="">&nbsp;&nbsp;&nbsp;&nbsp;账户余额支付</div>
+                <div class="payWay2"><input class="radio2" type="radio" name="btn"><img src="#springUrl('/resource/img/salary/Unionpay.png')" alt="">&nbsp;&nbsp;&nbsp;&nbsp;银行汇款</div>
+            </div>
+            <div class="accountPayRepay">
+                <span>元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <span class="accountPayRepay1">$!{companyRechargesBean.rechargeRealAmount}&nbsp;</span>
+                <span>还需支付：</span>
+            </div>
+            <div class="accountPay">
+
+                <div class="accountPayBalance">
+                    <img src="#springUrl('/resource/img/salary/bulb.png')" alt="">
+                    <span>当前可用余额:</span>
+                    <span id="cashAmout">$!{cashAmout}</span>
+                    <span>元，点击“确认付款”订单金额将从账户余额中扣除</span>
+                </div>
+            </div>
+            <!--            银行汇款给-->
+            <div class="bankRemit">
+                <h3>请按照如下步骤完成充值：</h3>
+                <div class="bankRemitOne">第一步：通过银行柜台或网银转账转账到如下账户</div>
+                <div class="bankRemitOne1">
+                    <div class="bankRemitOne1Left">
+                        <div>账户名称：</div>
+                        <div>账号：</div>
+                        <div>开户支行：</div>
+                    </div>
+                    <div class="bankRemitOne1Right">
+                        <div>网银在线（北京）科技有限公司客户备付金</div>
+                        <div>341561371394</div>
+                        <div>中国银行股份有限公司北京奥运村支行</div>
+                    </div>
+
+                </div>
+                <div class="bankRemitTo">第二步：将网银转账信息填入对话框，财务审核后会帮助您完成充值</div>
+                <form id="salaryOrderForm">
+                    <input type="hidden" value="$!{companyRechargesBean.excelId}" name="excelId">
+                    <input type="hidden" value="$!{companyRechargesBean.rechargeType}" name="rechargeType">
+                    <input type="hidden" value="${companyRechargesBean.rechargeRealAmount}" name="rechargeRealAmount">
+                    <input type="hidden" value="$!{companyRechargesBean.rechargeRealAmount}" name="rechargeMoney">
+                    <input type="hidden" value="$!{cashAmout}" name="canUserCashAmount">
+                    <input type="hidden" value="$!{companyRechargesBean.rechargePaymentAmount}" name="rechargePaymentAmount">
+                    <table class="bankRemitToTable">
+                        <tr>
+                            <td class="bankRemitToTable1">付款银行名称：</td>
+                            <td class="bankRemitToTable2"><input class="tableText1" type="text" name="rechargeBank" placeholder="请输入转账所用银行账户的银行名称"><span class="tableSpan1">请输入正确的银行名称</span></td>
+                        </tr>
+                        <tr>
+                            <td class="bankRemitToTable1">付款银行账号：</td>
+                            <td class="bankRemitToTable2"><input class="tableText2" type="text" name="rechargeBanknumber" placeholder="请输入转账所用的银行账号"><span class="tableSpan2">请输入正确的银行账号</span></td>
+                        </tr>
+                        <tr>
+                            <td class="bankRemitToTable1">银行交易流水号：</td>
+                            <td class="bankRemitToTable2"><input class="tableText3" type="text" name="rechargeSerialNumber" placeholder="请输入银行交易流水号"><span class="tableSpan3">请输入正确的银行交易流水号</span></td>
+                        </tr>
+                        #*<tr>
+                            <td class="bankRemitToTable1">充值金额：</td>
+                            <td class="bankRemitToTable2"><input type="text" placeholder="转账金额（元）"></td>
+                        </tr>*#
+                        <tr>
+                            <td class="bankRemitToTable1">备注：</td>
+                            <td class="bankRemitToTable2"><input class="tableText4" type="text" name="rechargeBak" placeholder="您在转账时填写的备注信息"><span class="tableSpan4">请输入备注</span></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <div class="indentBtn">
+                <div class="indentB">
+                    <div class="indentBtn1" id="surePayBtn">确认付款</div>
+                    <div class="indentBtn2">取消</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+<script>
+</script>

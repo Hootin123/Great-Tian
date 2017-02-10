@@ -1,0 +1,28 @@
+####员工入职须知
+<!DOCTYPE html>
+<html lang="en" id='html'>
+<head>
+    <meta charset="UTF-8">
+    <title>入职须知</title>
+    #parse("comm/head.vm")
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1">
+    <script type="text/javascript" src="#springUrl('/resource/js/wechatCustomer/entry.js')"></script>
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/wechatCustomer/entry.css')">
+</head>
+<body>
+<section>
+    <input type="hidden" name="customerId" value="$!{customerId}"/>
+    <input type="hidden" name="companyId" value="$!{companyId}"/>
+
+    <div class="content">
+        <h3>
+            <em></em>
+        </h3>
+        <textarea>$!{companyEnterRequire}</textarea>
+    </div>
+</section>
+<footer>
+    <div class="complete">完成</div>
+</footer>
+</body>
+</html>

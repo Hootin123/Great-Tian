@@ -1,0 +1,65 @@
+.batchImport {
+	margin: 3.15% 2.5% 3.15%;
+	color: #484848;
+	min-width: 890px;
+}
+
+.batchImport p {
+	background: #e7edf5;
+	line-height: 22px;
+	padding: 15px 11px 11px 15px;
+	color: #5b7798;
+}
+
+.batchImport .batchImport_tb {
+	margin-top: 2%;
+	height: 80px;
+	width: 20%;
+	min-width: 400px;
+}
+
+.batchImport_tb tr td {
+	text-align: center;
+}
+
+.batchImport_tb a {
+	display: block;
+	width: 100px;
+	height: 30px;
+	background: #3ba2f9;
+	border-radius: 6px;
+	color: #FFFFFF;
+	line-height: 30px;
+	text-align: center;
+}
+
+.batchImport_tb .a_return {
+	margin-left: 20px;
+	border: 1px solid #8598af;
+	background: #FFFFFF;
+	color: #8598af;
+}
+
+.batchImport dl {
+	margin-top: 5%;
+}
+
+.batchImport dl a {
+	display: inline-block;
+	width: 100px;
+	text-align: center;
+	height: 28px;
+	border-bottom: 1px solid #3ba2f9;
+	color: #3ba2f9;
+}
+
+.batchImport dl em {
+	position: relative;
+	top: 3px;
+	color: #ff473f;
+}
+
+.batchImport dl dd {
+	height: 30px;
+	line-height: 30px;
+}

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>H+ 菜单管理</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-table/bootstrap-table.min.css')" rel="stylesheet">
+</head>
+
+<body>
+<div class="col-sm-12">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <input id="isChild" class="hidden" type="text" value="$isChild"/>
+            <input id="parentId" class="hidden" type="text" value="$parentId"/>
+
+            <div id="toolbar" class="btn-group">
+                <a type="button" class="btn btn-primary fa fa-plus-square" data-toggle="modal"
+                   data-target="#myAddMenuModal" href="addMenuPage.htm#if($parentId)?parentId=$parentId#end">
+                    新增
+                </a>
+                <button type="button" class="btn btn-primary fa fa-minus-square" onclick="onDelete()">
+                    删除
+                </button>
+                <a id="editMenuBtn" type="button" class="btn btn-primary fa fa-edit" onclick="onEdit()">
+                    编辑
+                </a>
+                #if($isChild == 1)
+                    <a type="button" class="btn btn-primary fa fa-reply" onclick="onChildMenu('')">
+                        返回
+                    </a>
+                #end
+            </div>
+            <table id="menuTable" data-toggle="table" class="table table-bordered table-hover" contenteditable="true"
+                   data-show-columns="true"
+                   data-click-to-select="true"
+                   data-single-select="true"
+                   data-pagination="true"
+                   data-search="true"
+                   data-show-refresh="true"
+                   data-show-toggle="true"
+                   data-show-columns="true"
+                   data-toolbar="#toolbar">
+                <thead>
+                <tr>
+                    <th data-field="state" data-checkbox="true"></th>
+                    <th data-field="serialno">序号</th>
+                    <th data-field="id" data-visible="false">主键</th>
+                    <th data-field="menuName">名称</th>
+                    <th data-field="url">系统url</th>
+                    <th data-field="sork">排序</th>
+                    <th data-field="parentId" data-visible="false">父ID</th>
+                    <th data-field="isDelete" data-visible="false">是否删除</th>
+                    <th data-field="createDateTime">创建时间</th>
+                    <th data-field="updateDateTime">修改时间</th>
+                    <th data-field="actions" data-visible="false">注册Action</th>
+                    #if($isChild == 0)
+                        <th>操作</th>
+                    #end
+                </tr>
+                </thead>
+                <tbody>
+                    #set ($i=0)
+                    #foreach($menu in $!{listMenu})
+                    <tr data-uniqueid="$i">
+                        #set($i=$i+1)
+                        <td></td>
+                        <td>$i</td>
+                        <td>$menu.id</td>
+                        <td>$menu.menuName</td>
+                        <td>#if($menu.url)$menu.url#end</td>
+                        <td>$menu.sort</td>
+                        <td>#if($menu.parentId)$menu.parentId#end</td>
+                        <td>$menu.isDelete</td>
+                        <td>$!date.format('yyyy-MM-dd HH:mm:ss ',$menu.createTime)</td>
+                        <td>#if($menu.updateTime)$!date.format('yyyy-MM-dd HH:mm:ss ',$menu.updateTime)#end</td>
+                        <td>#if($menu.actions)$menu.actions#end</td>
+                        #if($isChild == 0)
+                            <td>
+                                <button class="btn btn-warning glyphicon glyphicon-cog" type="button"
+                                        onclick="onChildMenu(this,'$menu.id')">子菜单管理($menu.childCount)
+                                </button>
+                            </td>
+                        #end
+
+                    </tr>
+                    #end
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<!-- 新增或修改弹窗-->
+<div class="ibox">
+    <div class="ibox-content">
+        <div id="myAddMenuModal" class="modal inmodal" role="dialog" style="display: none; " aria-hidden="true"
+             data-backdrop="static">
+            <div class="modal-dialog">
+                <div class="modal-content animated bounceInRight">
+
+                </div>
+            </div>
+        </div>
+        <div id="myMenuIconModal" class="modal inmodal" role="dialog" style="display: none; " aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content animated bounceInRight">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+<script src="#springUrl('/resource/js/hui/content.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table-mobile.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/validate/jquery.validate.min.js')"></script>
+<script src="#springUrl('/resource/js/sys/menu/menu.js')"></script>
+
+
+</html>

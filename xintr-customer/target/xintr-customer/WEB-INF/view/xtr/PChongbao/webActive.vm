@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	#parse("comm/head.vm")
+	<meta charset="UTF-8">
+	<title>活动</title>
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/pchongbao/webActive.css')">
+</head>
+<body>
+	<div class="activeHeader">
+		<div class="logo">
+			<img src="#springUrl('/resource/img/pchongbao/web-logo.png')"/>
+		</div>
+		<div class="logo-text">
+			<img src="#springUrl('/resource/img/pchongbao/web-text.png')" />
+		</div>
+	</div>
+	<div class="activeMain">
+		<input type="hidden" name="companyContactPlace" value="$!{companyContactPlace}"/>
+		<div class="activeMain-left">
+			<div class="text">
+				<img   src="#springUrl('/resource/img/pchongbao/text1.png')" />
+			</div>
+			<div class="activeRule">
+				<div class="title">活动规则：</div>
+				<p>1.点击“立领红包”按提示进行操作</p>
+				<p>2.操作完成我们会在1-2个工作日内给出审核回复，</p>
+				<p>审核通过后红包将发放至预留账户并以短信告知。</p>
+				<p>活动时间：<span>2016.10.9-2016.11.9</span></p>
+				<p>本活动最终解释权归薪太软所有</p>
+			</div>
+		</div>	
+		<div class="activeMain-right">
+			<div class="activeMain-right-title">-薪资代发、垫发、社保代缴、高效人力资源服务-
+			</div>
+			<div class="activeMain-right-pic">
+				<div class="getPacket">立领红包</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+	$(function(){
+		$(".getPacket").on('click',function(){
+			var companyContactPlace = $("input[name='companyContactPlace']").val();
+            window.location=BASE_PATH+"/web/jumpToRegisterPage.htm?companyContactPlace="+companyContactPlace;
+
+		})
+	});
+
+</script>
+</html>

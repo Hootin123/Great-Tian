@@ -1,0 +1,344 @@
+#####新版 首页
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    #parse("comm/head.vm")
+    <script src="#springUrl('/resource/js/plugins/echarts.common.min.js')"></script>
+    <script src="#springUrl('/resource/js/homeIndex/homeIndex.js')"></script>
+    <style>
+        body,
+        html {
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            min-width: 1000px;
+        }
+
+        .indexAll {
+            height:100%;
+            width:95%;
+            margin:0 auto;
+            overflow: hidden;
+            min-height: 700px;
+
+        }
+
+        .indexTop {
+             height:16%;
+             overflow: hidden;
+             padding-top:20px;
+         }
+        .indexTop  img{
+            cursor:pointer;
+        }
+
+        .indexTop ul li {
+            width: 135px;
+            float: left;
+            text-align: center;
+            color: #333;
+        }
+
+        .indexTop ul li p {
+            margin-top: 12px;
+        }
+
+        .indexCon {
+            height:25%;
+            overflow: hidden;
+        }
+
+        .indexCon .indexConFundNav {
+            height: 48px;
+            font-size: 18px;
+            color: #333;
+            line-height: 48px;
+            border-bottom: 1px solid #daeaf3;
+            background: #f1f9ff;
+            padding-left: 30px;
+        }
+
+        .indexConPersonnel,
+        .indexConFund,
+        .indexConPending {
+            width: 30%;
+            height: 150px;
+            float: left;
+            border: 1px solid #daeaf3;
+            box-sizing: border-box;
+        }
+
+        .indexConPersonnelP {
+            padding-left: 30px;
+            font-size: 12px;
+            overflow: hidden;
+            padding-top: 13px;
+            position: relative
+        }
+
+        .indexConPersonnelP2 {
+            position: absolute;
+            right: 30px;
+        }
+
+        .indexConPersonnelP1 {
+            position: absolute;
+            right: 50px;
+        }
+
+        .indexConFund,
+        .indexConPending {
+            margin-left: 5%;
+        }
+
+        .indexConFundNav1 {
+            position: relative
+        }
+
+        .indexConFundSpan {
+            display: block;
+            width: 60px;
+            height: 30px;
+            line-height: 30px;
+            font-size: 14px;
+            position: absolute;
+            right: 30px;
+            top: 10px;
+            background: #ff7058;
+            line-height: 30px;
+            text-align: center;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer
+        }
+
+        #main {
+            padding-top: 2%;
+            height: 50%;
+            border: 1px solid #daeaf3;
+            box-shadow: #f1f9ff 1px 1px 1px 1px;
+            margin-bottom: 5%;
+            box-sizing: border-box;
+            width:100%;
+        }
+    </style>
+</head>
+
+<body>
+<!-- 页面隐藏域-->
+<input name="firstVisitHomePage" type="hidden" id="firstVisitHomePage" value="$!{firstVisitHomePage}"/>
+<input type="hidden" name="payCycleId" id="payCycleId"  value="$!{payCycleId}" />
+<input type="hidden" name="companyId" value="$!{companyId}"/>
+<!-- 快捷按钮的权限判断 隐藏域-->
+<input type="hidden" name="customerAuth" value="$!{customerAuth}"/>
+<input type="hidden" name="shebaoAuth" value="$!{shebaoAuth}"/>
+<input type="hidden" name="expenseAuth" value="$!{expenseAuth}"/>
+<div class="indexAll">
+    <div class="indexTop">
+        <ul>
+            <li style="margin-left:-38px;" id="addCustomer-li">
+                <img id="addCustomer" src="#springUrl('/resource/img/newHome/2.2tianjiayuangong.png')" alt="" />
+                <p>添加员工</p>
+            </li>
+            <li id="orgFramework-li">
+                <img id="orgFramework"  src="#springUrl('/resource/img/newHome/2.2zuzhijiagou.png')" alt=""/>
+                <p>组织架构</p>
+            </li>
+            <li id="sendPay-li">
+                <img  id="sendPay" src="#springUrl('/resource/img/newHome/2.2fagongzi.png')"  alt=""/>
+                <p>发工资</p>
+            </li>
+            <li id="setBonus-li">
+                <img id="setBonus"  src="#springUrl('/resource/img/newHome/2.2jiangjinjintie.png')" alt="">
+                <p>设置奖金津贴</p>
+            </li>
+            <li id="sbOrder-li">
+                <img id="sbOrder" src="#springUrl('/resource/img/newHome/2.2shebaozhangdan.png')"  alt="">
+                <p>社保账单</p>
+            </li>
+            <li id="expenseInput-li">
+                <img  id="expenseInput" src="#springUrl('/resource/img/newHome/2.2baoxiaolur.png')"  alt="">
+                <p>报销录入</p>
+            </li>
+        </ul>
+    </div>
+    <div class="indexCon">
+        <div class="indexConPersonnel">
+            <div class="indexConFundNav">人事信息</div>
+            <p class="indexConPersonnelP">
+                <span>在职员工</span>
+                <span class="indexConPersonnelP1">$!{allCount}</span>
+                <span class="indexConPersonnelP2">人</span>
+            </p>
+            <p class="indexConPersonnelP">
+                <span>本月入职</span>
+                <span class="indexConPersonnelP1">$!{enterCount}</span>
+                <span class="indexConPersonnelP2">人</span>
+            </p>
+            <p class="indexConPersonnelP">
+                <span>本月离职</span>
+                <span class="indexConPersonnelP1">$!{dimissCount}</span>
+                <span class="indexConPersonnelP2">人</span>
+            </p>
+        </div>
+        <div class="indexConFund">
+            <div class="indexConFundNav indexConFundNav1">
+                <span>资金账户</span>
+                <span class="indexConFundSpan">充值</span>
+            </div>
+            <p class="indexConPersonnelP">
+                <span>账户金额</span>
+                <span class="indexConPersonnelP1">$!{xtr.money($!{cashAmount})}</span>
+                <span class="indexConPersonnelP2">元</span>
+            </p>
+            <p class="indexConPersonnelP">
+                <span>借款金额</span>
+                <span class="indexConPersonnelP1">$!{xtr.money($!{uncashAmount})}</span>
+                <span class="indexConPersonnelP2">元</span>
+            </p>
+
+        </div>
+        <div class="indexConPending">
+            <div class="indexConFundNav">待处理财务单</div>
+            <p class="indexConPersonnelP">
+                <span>待付款账单</span>
+                <span class="indexConPersonnelP1">$!{noPayCount}</span>
+                <span class="indexConPersonnelP2">条</span>
+            </p>
+##            <p class="indexConPersonnelP">
+##                <span>距发薪日还剩</span>
+##                <span class="indexConPersonnelP1">18</span>
+##                <span class="indexConPersonnelP2">天</span>
+##            </p>
+            <p class="indexConPersonnelP">
+                <span>距$!{joinCityName}社保账单关闭日</span>
+                <span class="indexConPersonnelP1">$!{diffCount}</span>
+                <span class="indexConPersonnelP2">天</span>
+            </p>
+        </div>
+    </div>
+    <div id="main">
+
+        <script>
+            var myChart = echarts.init(document.getElementById('main'));
+            // 指定图表的配置项和数据
+            var colors = ['#ff7f66', '#4cdbc4'];
+            myChart.setOption({
+                color: colors,
+                title: {
+                    text: '         数据统计',
+                    //                subtext: '纯属虚构'
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data: ['人数', '成本']
+                },
+
+                calculable: true,
+                xAxis: [{
+                    type: 'category',
+                    data: []
+                }],
+
+                yAxis: [{
+                    type: 'value',
+                    name: '人数',
+                    position: 'left',
+                    minInterval: 1,
+                    axisLine: {
+                        lineStyle: {
+                            color: colors[0]
+                        }
+                    },
+                    axisLabel: {
+                        formatter: '{value} 人',
+                    },
+                    splitLine : {
+                        show: true
+                    }
+                }, {
+                    type: 'value',
+                    name: '成本',
+                    position: 'right',
+                    minInterval: 1,
+                    axisLine: {
+                        lineStyle: {
+                            color: colors[1]
+                        }
+                    },
+                    axisLabel: {
+                        formatter: '{value} 元',
+                    },
+                    splitLine : {
+                        show: false
+                    },
+                    axisTick:{
+
+                        show:false
+                    }
+
+                }],
+                series: [{
+                    name: '人数',
+                    type: 'bar',
+                    data:[]
+
+                }, {
+                    name: '成本',
+                    type: 'bar',
+                    data:[]
+
+                }]
+            })
+
+//            myChart.setOption(option);
+            //异步加载数据
+            $.ajax({
+               url:BASE_PATH+'/testDatas.htm',
+               dataType:'json',
+               data:{},
+               type:'post',
+               success:function(data){
+                 if(data.success){
+                     var countArr = data.data.leftYAxis;
+                     var accountArr=data.data.rightYAxis;
+                     var monthArr=data.data.category;
+                     myChart.setOption({
+                         xAxis: [{
+                             type: 'category',
+                             data:monthArr
+                         }],
+                         series: [{
+                             name: '人数',
+                             type: 'bar',
+                             data:countArr
+
+                         }, {
+                             name: '成本',
+                             type: 'bar',
+                             yAxisIndex: 1,
+                             data:accountArr
+
+                         }]
+                     });
+
+                 }
+
+               },
+               error:function(){
+                   alert("网络错误");
+               }
+
+
+            });
+
+
+        </script>
+    </div>
+</div>
+</body>
+</html>

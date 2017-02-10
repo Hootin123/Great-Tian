@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	#parse("comm/head.vm")
+	<meta charset="UTF-8">
+	<title>资料审核失败</title>
+    <script src="#springUrl('/resource/js/plugins/fileupload/ajaxfileupload.js')"></script>
+    <script src="#springUrl('/resource/js/shebao/promptDefeat.js')"></script>
+</head>
+<style type="text/css">
+	.promptDefeatHeader{
+		width: 100%;
+	    min-width: 1000px;
+	    height: 80px;
+	    font-size: 24px;
+	    font-family: '微软雅黑';
+	    text-align: center;
+	    line-height: 80px;
+	    border-bottom: 1px solid #dbe9ee;
+	    position: relative;
+	    }
+	    .promptDefeatHeader img{
+	    	position: absolute;
+		    top: 0;
+		    bottom: 0;
+		    right: 30px;
+		    margin: auto;
+		    cursor: pointer;
+	    }
+	    .promptDefeatMain{
+	    	margin: 0 auto;
+			margin-top: 50px;
+			width: 90%;
+		    color: #666666;
+		    min-width: 960px;
+		    font-size: 14px;
+    		font-family: "微软雅黑";
+	    }
+	     .promptDefeatMain table{
+			width: 100%;
+	    }
+	    .promptDefeatMain table .tableTd1{
+	    	width: 20%;
+		    text-align: center;
+		    background: #f1f9fc;
+		    color: #666666;
+		    height: 44px;
+		    border: 1px solid #dbe9ee;
+	    }
+	    .promptDefeatMain table td{
+	    	color: #666;
+		    border: 1px solid #dbe9ee;
+		    position: relative;
+	    }
+	    .promptDefeatMain table td .tableTd2{
+	    	width: 100%;
+		    height: 44px;
+		    padding-left: 5%;
+		    box-sizing: border-box;
+		    color: #666;
+		    line-height: 44px;
+		    border: 0;
+	    }
+	   .promptDefeatMain table .tableTd1 em {
+	    	color: #f99b15;
+		    vertical-align: middle;
+		    margin-right: 2px;
+	    }
+	    .promptDefeatMain table td .m{
+	    	vertical-align: top;
+    		margin-top: 4px;
+	    }
+	     .promptDefeatMain table .sex{
+	     	padding-left: 4%;
+	     	box-sizing: border-box;
+	     }
+
+	    .front1{
+	    	float:left;
+	    	width:120px;
+	    	height:100px;
+	    	border:1px #cce1e9 dashed;
+	    	position: relative; 
+	    	text-align: center;
+	    	margin-left:40px;
+	    	border-radius:10px
+	    }
+        .front1 b{
+        	line-height: 100px;
+        	font-size: 50px;
+        	color: #cce1e9
+        }
+        .front1 p{
+        	position: absolute;
+        	left:21px;
+        	top:100px;
+        	color: #666;
+        	padding-top:8px;
+        }
+        .front1Img1{
+        	position: absolute;
+        	top:0;
+        	left:0;
+        	width:120px;
+        	height:100px;
+        	cursor:pointer
+        }
+        .front1Img2{
+        	position: absolute;
+        	top:0;
+        	left:0;
+        	width:120px;
+        	height:100px;
+        	cursor:pointer
+        }
+        .contrary{
+        	float:left;
+        	width:120px;
+        	height:100px;
+        	border:1px #cce1e9 dashed;
+        	margin-left: 50px;
+        	position: relative;
+        	text-align: center;
+        	border-radius:10px;
+        }
+        .contrary b{
+        	line-height: 100px;
+        	font-size: 50px;
+        	color: #cce1e9
+        }
+        .contrary p{
+        	position: absolute;
+        	left:26px;
+        	top:100px;
+        	color: #666;
+        	padding-top:8px;
+        }
+        .contraryImg1{
+        	position: absolute;
+        	top:0;
+        	left:0;
+        	width:120px;
+        	height:100px;
+        	cursor:pointer
+        }
+        .contraryImg2{
+        	position: absolute;
+        	top:0;
+        	left:0;
+        	width:120px;
+        	height:100px;
+        	cursor:pointer
+        }
+        .frontHint{
+        	margin-top:93px;
+        	margin-left:400px;
+        	display: block;
+        	color:#f9a225;
+        }
+        .frontCon{
+        	height:130px;
+        	padding-bottom:20px;
+        }
+        .promptDefeatFooter{
+        	width: 90%;
+	    	height: 80px;
+	    	margin:0 auto;
+	    	margin-top: 50px;
+	    	background:#f1f9fc;
+        }
+        .promptDefeatFooter .button{
+        	width: 240px;
+    		height: 40px;
+    		margin:0 auto;
+        }
+        .promptDefeatFooter input{
+        	width: 100%;
+    		height:100%;
+    		background:#0696fa;
+    		color: #fff;
+    		border:0;	
+    		margin-top: 20px;
+    		border-radius:6px;
+    		text-align:center;
+    		line-height: 40px;
+    		font-size: 18px;
+    		font-family: '微软雅黑';
+    		cursor: pointer;
+        }
+        .error{
+        	opacity: 1;
+		    filter: alpha(opacity=100);
+		    max-width: 500px;
+		    min-height: 7px;
+		    position: absolute;
+		    top: 5px;
+		    left: 700px;
+		    background-color: #ffe9eb;
+		    padding: 10px 20px;
+		    z-index: 10;
+		    border-radius: 5px;
+		    color: #fc2736;
+		    font-size: 12px;
+		    line-height: 14px;
+        }
+    #front1 input{
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        right: 0;
+        top: 0;
+        opacity: 0;
+        filter: alpha(opacity=0);
+	}
+  #front1 img{
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      height: 100%;
+  }
+ #contrary1 input{
+     display: block;
+     position: absolute;
+     width: 100%;
+     height: 100%;
+     right: 0;
+     top: 0;
+     opacity: 0;
+     filter: alpha(opacity=0);
+ }
+#contrary1 img{
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    height: 100%;
+}
+
+
+</style>
+<body>
+	<div class="promptDefeatHeader">资料审核失败
+		<b><img src="/resource/img/salary/guanbi.png"></b>
+	</div>
+	<form id="approveForm">
+    <!--隐藏域部分-->
+	<input type="hidden" name="customerIdcardImgFront"/>
+    <input type="hidden" name="customerIdcardImgBack"/>
+    <input type="hidden" name="customerId" value="$!{customerId}"/>
+	<div class="promptDefeatMain">
+		<table>
+			<tbody>
+				<tr>
+					<td class="tableTd1"><em>*</em>姓名</td>
+					<td class="username">
+						<input type="text"  readonly="readonly" name="customerTruename" value="$!{customerTruename}" class="tableTd2"/>
+						<span></span>
+					</td>
+				</tr>
+				<tr>
+					<td class="tableTd1"><em>*</em>性别</td>
+					<td class='sex'>
+						<input type="radio" name="customerSex"   value="1"
+							   #if($!{customerSex}==1)
+								   checked="checked"
+							   #end
+							   class="m"/> 男 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="customerSex"  value="0"
+							#if($!{customerSex}==0)
+                               checked="checked"
+							#end
+							   class="m"/> 女
+                      	<span></span>
+					</td>
+				</tr>
+				<tr>
+					<td class="tableTd1"><em>*</em>手机号</td>
+					<td class="phone">
+						<input class="tableTd2" type="text" readonly="readonly" name="customerPhone" required="" value="$!{customerPhone}"/>
+						<span></span>
+					</td>
+				</tr>
+				<tr>
+					<td class="tableTd1"><em>*</em>身份证号码</td>
+					<td class="card">
+						<input placeholder="请输入身份证号" class="tableTd2" type="text" name="customerIdcard" required="" value="$!{customerIdcard}"/>
+						<span></span>
+					</td>
+				</tr>
+				<tr class="front">
+					<td class="tableTd1"><em>*</em>身份证照</td>
+					<td class="frontCon">
+						<div class="pic front1" id="front1">
+                            <b>+</b>
+							     #if($!{imgFront}=="")
+                                     <img class="front1Img1" src="#springUrl('/resource/img/error1.png')" id="imgFront">
+							      #else
+                                      <img class="front1Img1" src="$!{imgFrontUrl}" id="imgFront">
+								 #end
+                                <input type="file" name="file" id="imgFrontFile" />
+                            <p>身份证正面</p>
+                        </div>
+
+                       	<div class="pic contrary" id="contrary1">
+                            <b>+</b>
+							    #if($!{imgBack}=="")
+                                    <img class="contraryImg1" src="#springUrl('/resource/img/error1.png')" id="imgBack" >
+									#else
+                                        <img class="contraryImg1" src="$!{imgBackUrl}" id="imgBack" >
+								#end
+                                <input type="file" name="file" id="imgBackFile"/>
+                            <p>身份证反面</p>
+                        </div>
+                        <span></span>
+                        <div class="frontHint">图片格式为JPG/JPEG/PNG/大小在2M以内</div>
+					</td>
+				</tr>
+				<tr>
+					<td class="tableTd1">失败原因</td>
+					<td>
+						<input type="text" name="approveFailReason" value="$!{reason}"  readonly="readonly" class="tableTd2" style='background: #fff;color:#f00'>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+    </form>
+	<div class="promptDefeatFooter">
+		<div class="button">
+			<input type="button" name="reSubmit" value='重新提交' class='submit'/>
+		</div>
+		
+	</div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/account/repayment.css')" rel="stylesheet">
+    <script src="#springUrl('/resource/js/account/repayment.js')"></script>
+    <script src="#springUrl('/resource/js/comm/validateUtil.js')"></script>
+</head>
+
+<body>
+<div class="main_right repayment">
+    <div class="repayment_header"><a href="borrow.htm">应还款></a><i>还款</i></div>
+    <form id="repaymentForm" action="borrowBills.htm" method="post" onsubmit="return checkSubmit();">
+        <div class="repayment_show">
+            <p>还款金额：<span class="span_red">1,000,000.00元</span></p>
+            <p>本金：<span class="span_red">900,000.00元</span>利息：<span class="span_red">900,000.00元</span></p>
+        </div>
+        <div class="repayment_show_tw clear">
+            <span>使用账户余额</span><span><input type="text" />&nbsp;&nbsp;元<em>你当前的可用余额为：<i>1,900,000.00元</i></em></span>
+        </div>
+        <div class="repayment_show_tr">
+            <p>还需银行转账还款：<span class="span_red" style="font-weight: bold;">1,000.00元</span></p>
+            <p><input class="chebox" type="checkbox" />银行转账还款</p>
+        </div>
+        <div class="repayment_show_fth">
+            <h3>请按照如下步骤完成还款</h3>
+            <dl>
+                <dt>第一步：通过银行柜台或网银转账转账到如下账户</dt>
+                <dd>• 账户名称：网银在线（北京）科技有限公司客户备付金</dd>
+                <dd>• 账号：341561371394</dd>
+                <dd>• 开户行：中国银行股份有限公司北京奥运村支行</dd>
+                <dt>第二步：将网银转账信息填入对话框，财务审核后会帮助您完成充值</dt>
+            </dl>
+        </div>
+        <ul class="repayment_show_fv">
+            <li><span>付款银行名称</span><input type="text" placeholder="您转账所用银行账户的银行名称" /></li>
+            <li><span>付款银行账号</span><input type="text" placeholder="您转账所用的银行账号" /></li>
+            <li><span>银行交易流水号</span><input type="text" placeholder="您完成转账后，银行给到您的交易号" /></li>
+            <li><span>还款现金</span><input type="text" placeholder="转账金额" /></li>
+            <li><span>备注</span><input type="text" placeholder="您在转账时填写的备注信息" /></li>
+        </ul>
+        <div class="repayment_show_sx"><input type="submit" value="提交" /><a href="javscript:viod(0);" onclick="jascript:history.go(-1);">取消</a></div>
+    </form>
+</div>
+</body>
+
+</html>

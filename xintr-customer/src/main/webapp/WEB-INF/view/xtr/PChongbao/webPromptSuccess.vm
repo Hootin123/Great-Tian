@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	#parse("comm/head.vm")
+	<meta charset="UTF-8">
+	<title>审核成功</title>
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/pchongbao/webPromptSuccess.css')">
+</head>
+<body>
+	<div class="successHeader">
+		<div class="logo">
+			<img  src="#springUrl('/resource/img/pchongbao/web-logo1.png')"/>
+		</div>
+		<div class="logo-text">
+			<img  src="#springUrl('/resource/img/pchongbao/web-text1.png')" />
+		</div>
+	</div>
+	<div class="successMain">
+		<div class="successMain-title"> 恭喜您审核通过，红包哒哒哒来啦<em style='line-height: 70px;vertical-align: top;'>~</em></div>
+		<p>现金将尽快发放至您的指定账户，请注意查收！</p>
+		<p> 体验薪太软人事Saas系统，开启人事管理全薪旅程！</p>
+	</div>
+	<div class="successFoot">
+		<div class="submit">立即体验
+			<img src="#springUrl('/resource/img/pchongbao/success.png')"</div>
+		</div>
+	</div>
+</body>
+<script>
+	$(".submit").click(function(){
+        window.location="http://www.xintairuan.com";
+	});
+
+</script>
+</html>

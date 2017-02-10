@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title></title>
+
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/comm/comm.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/payfor1.css')" rel="stylesheet">
+    <script src="#springUrl('/resource/js/payday/payforamount.js')"></script>
+<style>
+ .cause{
+     width:100%;
+     height:85px;
+     overflow: hidden
+ }
+.causeBack{
+    width:100%;
+    height:15px;
+    position: relative
+}
+.causeBack img{
+    position: absolute;
+    left:38%;
+    top:6px;
+    z-index: 20
+}
+.causeText{
+    width:95%;
+    height:70px;
+    line-height: 70px;
+    background:#e7edf5;
+    color:#5b7798;
+    padding-left:5%;
+    overflow: hidden;
+    border:1px solid #d3e0f1;
+    position: relative
+}
+.tu{
+    width:20px;
+    height:3px;
+    position: absolute;
+    left:38%;
+    top:-20px;
+    z-index: 30
+}
+.bank{
+    width:400px;
+    margin:90px auto 0;
+}
+.bank1{
+    width:400px;
+    height:60px;
+
+}
+.bank1 span{
+    width:100px;
+    float:left;
+    line-height:30px;
+    color:#666;
+}
+.bank1 input{
+    width:250px;
+    float:right;
+    height:30px;
+    line-height:30px;
+    padding-left:20px;
+    border:1px solid #e3e3e3;
+}
+.bottom{
+    width:100%;
+    height:100px;
+    float:left;
+}
+.bottom input{
+    display: block;
+    width:300px;
+    height:40px;
+    border:0;
+    border-radius:6px;
+    font-size:16px;
+    color:#fff;
+    background:#0696fa;
+    margin:150px  auto 100px;
+    cursor: pointer
+}
+
+</style>
+</head>
+
+<body>
+<div class="container hide" id="identity" style="padding: 60px 5% 40px; min-width: 1000px">
+<div class="identity-wrap">
+<div class="bg"></div>
+#if($!{paytype} == "1")
+<div class="it active" style="width:15%;">1
+<p>完善信息</p>
+    <p style="font-size:12px;">填写公司基本信息</p>
+</div>
+<div class="it active" style="width:15%;">2
+<p>实名认证</p>
+    <p style="font-size:12px;">对公银行账户验证</p>
+</div>
+<div class="it" style="width:15%;">3
+<p>上传资料</p>
+    <p style="font-size:12px;">提交企业征信资料</p>
+</div>
+<div class="it" style="width:15%;">4
+<p>审核通过</p>
+    <p style="font-size:12px;">风控审核并完成签约</p>
+</div>
+#else
+<div class="it active">1
+<p>完善信息</p>
+    <p style="font-size:12px;">填写公司基本信息</p>
+</div>
+<div class="it active">2
+<p>实名认证</p>
+    <p style="font-size:12px;">对公银行账户验证</p>
+</div>
+<div class="it">3
+<p>认证成功</p>
+</div>
+#end
+</div>
+<div class="cause">
+<div class="causeBack"><img src="resource/img/grayArrows.png" alt=""></div>
+<div class="causeText">
+<div class="tu"></div>
+<h3>薪太软将向此对公账户汇入一笔1元以下资金，作为实名认证依据，若对公账户开户名不正确，将汇入失败</h3>
+</div>
+</div>
+<div class="content">
+<form id="payforForm" name="payforForm" action="payforamount.htm?paytype=$!{paytype}" method="post" onsubmit="return checkSubmit();">
+<div class="bank">
+<div class="bank1">
+<span>银行开户名</span>
+<input type="text" name="companyDepositBankAccountName" id="companyDepositBankAccountName" placeholder="银行开户名" class="bankImport1" value="$!{companyDepositBankAccountName}">
+</div>
+<div class="bank1">
+<span>开户银行</span>
+<input type="text" name="companyDepositBank" id="companyDepositBank" placeholder="银行名：如招商银行" class="bankImport2" value="$!{companyDepositBank}"">
+</div>
+<div class="bank1">
+<span>对公银行账号</span>
+<input type="text" name="companyDepositBankNo" id="companyDepositBankNo" placeholder="输入对公银行账号" class="bankImport3" value="$!{companyDepositBankNo}">
+</div>
+<div class="bank1">
+<span>联行号</span>
+<input type="text" name="companyAssociatedCode" id="companyAssociatedCode" placeholder="输入对联行号" class="bankImport5" value="$!{companyAssociatedCode}">
+</div>
+<div class="bank1">
+<span>开户支行名称</span>
+<input type="text" name="companyDepositBankaddress" id="companyDepositBankaddress" placeholder="开户支行名称，如：招商银行某某支行" class="bankImport4" value="$!{companyDepositBankaddress}">
+</div>
+    #if($!{error})
+        <font color="red">${error}</font>
+    #end
+</div>
+<div class="bottom"><input type="submit" value="下一步"></div>
+</form>
+</div>
+</div>
+</body>
+</html>

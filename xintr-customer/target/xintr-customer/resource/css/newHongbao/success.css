@@ -1,0 +1,61 @@
+html{
+    width:100%;
+    height: 100%;
+    overflow: hidden;
+
+}
+body{
+    width:100%;
+    height:100%;
+    overflow: hidden;
+    background: url(../../img/newHongbao/success-bg.png) 0 0 no-repeat;
+    background-size: 100%;
+}
+.pic{
+    margin:0 auto;
+    margin-top: 1.5rem;
+    width: 1.3rem;
+    height: 1.3rem;
+    background: url(../../img/newHongbao/success.png) 0 0 no-repeat;
+    background-size:100% 100%;
+}
+h3{
+    width: 100%;
+    height:1.44rem;
+    margin-top: 0.1rem;
+    font-size: 0.48rem;
+    font-family: '微软雅黑';
+    color: #333;
+    text-align: center;
+    font-weight: 300;
+
+}
+.txt p{
+    width: 100%;
+    height: 0.56rem;
+    text-align: center;
+    font-size: 0.32rem;
+    font-family: '微软雅黑';
+    color: #333;
+}
+.txt p:nth-child(3){
+    height: 1.18rem;
+    width: 100%;
+    font-size: 0.36rem;
+    color: #0696fa;
+    text-align: center;
+    line-height: 1.18rem;
+}
+footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 0.9rem;
+    background:#0696fa;
+    font-size:0.34rem;
+    font-family: '微软雅黑';
+    color: #fff;
+    text-align: center;
+    line-height: 0.9rem;
+}

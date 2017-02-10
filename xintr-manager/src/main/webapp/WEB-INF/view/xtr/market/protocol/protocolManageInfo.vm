@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>H+ 客户签约管理</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-table/bootstrap-table.min.css')" rel="stylesheet">
+</head>
+
+<body>
+<div class="col-sm-12">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <form class="form-group" id="queryForm">
+                <div class="col-sm-3">
+                    <label style="margin-top:10px;" class="col-sm-3" control-label">协议类型</label>
+                    <div class="col-sm-9">
+                        <select class="form-control m-b" id="protocolContractType">
+                            <option value="">不选择</option>
+                            #foreach($item in $protocolTypeMap.entrySet())
+                                <option value="$item.key">$item.value</option>
+                            #end
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <label style="margin-top:10px;" class="col-sm-3" control-label">协议状态</label>
+                    <div class="col-sm-9">
+                        <select class="form-control m-b" id="protocolCurrentStatus">
+                            <option value="">不选择</option>
+                            #*<option value="1">待审批</option>*#
+                            <option value="2">签约</option>
+                            <option value="3">即将到期</option>
+                            <option value="4">合约到期</option>
+                            <option value="5">冻结</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <label style="margin-top:10px;" class="col-sm-3" control-label">业务经理</label>
+                    <div class="col-sm-9">
+                        <input type="text" placeholder="后台账户名" class="form-control" id="protocolBusinessManager">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" placeholder="根据企业名或企业编号或手机号模糊检索" class="form-control"  id="companyName">
+                </div>
+                <div class="col-sm-1">
+                    <button class="btn btn-primary " type="button" id="queryBtn"><i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;搜索
+                    </button>
+                </div>
+            </form>
+            <table id="data-list"></table>
+
+            <hr/>
+
+            <form class="form-group" id="addProtocolForm">
+                <div class="col-sm-2">
+                    <input type="text" placeholder="根据企业名或企业编号或手机号模糊检索" class="form-control"  id="companyNameByAddProtocol">
+                </div>
+                <div class="col-sm-1">
+                    <button class="btn btn-primary " type="button" id="addProtocolBtn"><i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;搜索
+                    </button>
+                </div>
+            </form>
+            <br/>
+            <br/>
+            <table id="addProtocolTab"></table>
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+<script src="#springUrl('/resource/js/hui/content.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table-mobile.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/validate/jquery.validate.min.js')"></script>
+<script src="#springUrl('/resource/js/comm/jdatagrid.js')"></script>
+<script src="#springUrl('/resource/js/market/protocol/protocolManageInfo.js')"></script>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的账户页面的订单详情</title>
+    #parse("comm/head.vm")
+    <script src="#springUrl('/resource/js/account/salaryDetail.js')"></script>
+</head>
+<style>
+    body,
+    html {width: 100%;height: 100%;min-height:800px}
+    .payoffDetails { width: 100%;height: 100%;min-width:1200px;min-height:800px}
+    .payoffTop {width: 100%; height: 80px;position: relative;font-weight: 600;font-size:20px;}
+    .payoffTop .payoffHeadline { text-align: center;line-height: 80px; border-bottom: 1px solid #dbe9ee }
+    .payoffTop img {position: absolute; top: 0;bottom: 0; margin: auto;right: 30px; cursor: pointer }
+    .payoffCon{width:90%;margin:0 auto;}
+    .payoffCon h3{margin-top:50px;color:#666;}
+    table{width:100%;margin-top:10px;font-size: 12px;color: #333;}
+    table tr td{border:1px solid #b8dae6;text-align: center}
+    .payoffCon1{height:50px;background:#f1f8fe;color:#333;text-align: center;font-weight: 600;}
+    .payoffCon2{height:50px;background: #feebe7;}
+    .payoffConTd1{width:14%;}
+    .payoffConTd2{width:14%;}
+    .payoffConTd3{width:12%;}
+    .payoffConTd4{width:15%;}
+    .payoffConTd5{width:15%;}
+    .payoffConTd6{width:15%;}
+    .payoffConTd7{width:15%;}
+    .payoffBtn{width:90%;height:80px;background:#f1f9fc;border:1px solid #dbe9ee;margin:11% auto 0;}
+    .payoffB{width:400px;height:40px;margin:20px auto;}
+    .payoffBtn1{width:250px;height:40px;text-align: center;line-height: 40px;background:#0696fa;color:#fff;border-radius:6px;cursor:pointer;float:left;}
+    .payoffBtn2{width:128px;height:38px;text-align: center;line-height: 40px;background:#fff;color:#0696fa;border-radius:6px;cursor:pointer;float:right;border:1px solid #0696fa;}
+    .payoffContent{width:90%;height:100px;border:1px solid #dbe9ee;margin:30px auto 0;}
+    .payoffContentLeft{width:45%;height:100px;float:left;}
+    .payoffContentRight{width:55%;height:100px;float:left;}
+    .payoffContentLeft1{margin-top:25px;padding-left:20px;}
+    .payoffContentLeft2{margin-top:10px;padding-left:20px;}
+    .payoffContentSpan{color:#666;}
+    .payoffContentLeft1Sum{font-weight:600;color:#333;padding-left:40px;}
+    .payoffContentLeft2Time{padding-left:14px;}
+    .payoffContentRight1{margin-top:25px;padding-left:20px;}
+    .payoffContentRight2{margin-top:25px;padding-left:20px;}
+    .payoffContentRight1Sum{font-weight:600;color:#333;}
+    .payoffContentRight2Sum{font-weight:600;color:#333;}
+    .payoffContentRight1Check{color:#0696fa;cursor:pointer;padding-left:20px;}
+    .payoffRepay{width:80%;height:100px;margin:0 auto;line-height:100px; font-size:20px;font-weight:600}
+    .payoffRepay span{float:right;}
+    .payoffRepay1{color:#fa5f5f;}
+    .payoffContentRight1 img,.payoffContentRight2 img{margin-top:4px;}
+</style>
+<body>
+<input type="hidden" value="$!{rechargesBean.rechargeState}" id="rechargeState">
+<input type="hidden" value="$!{rechargesBean.rechargeId}" id="rechargeId">
+<input type="hidden" value="$!{isDedit}" id="isDedit">
+<div class="payoffDetails">
+    <div class="payoffTop">
+        <div class="payoffHeadline">$!{rechargesBean.rechargeName}</div>
+##        <img src="#springUrl('/resource/img/salary/guanbi.png')" id="closeSalaryDetail" alt="">
+    </div>
+    <div class="payoffCon">
+        <h3>订单状态：
+        #if($!{rechargesBean.rechargeState}==0)
+            订单提交
+        #elseif($!{rechargesBean.rechargeState}==2)
+            交易成功
+        #end
+        </h3>
+        <table>
+            <tr class="payoffCon1">
+                #if($!{rechargesBean.rechargeStation}==6)
+                    <td style="width:10%;">订单创建时间</td>
+                    <td style="width:10%;">订单号</td>
+                    <td style="width:10%;">金额（元）</td>
+                    <td style="width:10%;">发工资人数</td>
+                    <td style="width:10%;">支付方式</td>
+                    <td style="width:10%;">付款银行名称</td>
+                    <td style="width:10%;">付款银行账号</td>
+                    <td style="width:10%;">银行交易流水</td>
+                    <td style="width:10%;">备注</td>
+                    <td style="width:10%;">工资发放日期</td>
+                #else
+                    <td class="payoffConTd1">订单创建时间</td>
+                    <td class="payoffConTd2">订单号</td>
+                    <td class="payoffConTd3">金额（元）</td>
+                    <td class="payoffConTd4">发工资人数</td>
+                    <td class="payoffConTd5">支付方式</td>
+                    <td class="payoffConTd6">工资发放日期</td>
+                #end
+            </tr>
+            <tr class="payoffCon2">
+                <td>$!date.format('yyyy-MM-dd HH:mm:ss',$!{rechargesBean.rechargeAddtime})</td>
+                <td>$!{rechargesBean.rechargeNumber}</td>
+                <td>$!{rechargesBean.rechargeMoney}</td>
+                <td>$!{payCycleBean.peopleNumber}</td>
+                <td>
+                    #if($!{rechargesBean.rechargeStation}==5)
+                        账户余额支付
+                    #elseif($!{rechargesBean.rechargeStation}==6)
+                        银行汇款
+                    #end
+                </td>
+                #if($!{rechargesBean.rechargeStation}==6)
+                    <td>$!{rechargesBean.rechargeBank}</td>
+                    <td>$!{rechargesBean.rechargeBanknumber}</td>
+                    <td>$!{rechargesBean.rechargeSerialNumber}</td>
+                    <td>$!{rechargesBean.rechargeBak}</td>
+                #end
+                <td>$!date.format('yyyy-MM-dd HH:mm:ss',$!{payCycleBean.payDay})</td>
+            </tr>
+        </table>
+    </div>
+    <div class="payoffContent">
+        <div class="payoffContentLeft">
+            <div class="payoffContentLeft1">
+                <span class="payoffContentSpan">订单金额：</span>
+                <span class="payoffContentLeft1Sum">$!{rechargesBean.rechargeMoney}</span>
+                <span class="payoffContentSpan">元</span>
+            </div>
+            <div class="payoffContentLeft2">
+                <span class="payoffContentSpan">最后支付日期：</span>
+                <span class="payoffContentLeft2Time">$!date.format('yyyy-MM-dd HH:mm:ss',$!{rechargesBean.rechargeRecallTime})</span>
+            </div>
+        </div>
+        <div class="payoffContentRight">
+##            <div class="payoffContentRight1">
+##                <img src="#springUrl('/resource/img/salary/greenWin.png')" alt="">
+##                <span class="payoffContentSpan">可用红包：</span>
+##                <span class="payoffContentRight1Sum">500</span>
+##                <span class="payoffContentSpan">元</span>
+##                <span class="payoffContentRight1Check">[查看详情]</span>
+##            </div>
+            <div class="payoffContentRight2">
+                <img src="#springUrl('/resource/img/salary/greenWin.png')" alt="">
+                <span class="payoffContentSpan">垫付金额：</span>
+                <span class="payoffContentRight2Sum">$!{rechargesBean.rechargePaymentAmount}</span>
+                <span class="payoffContentSpan">元</span>
+            </div>
+        </div>
+    </div>
+    <div class="payoffRepay">
+        <span>元 &nbsp;&nbsp;&nbsp;</span>
+        <span class="payoffRepay1">$!{rechargesBean.rechargeRealAmount}</span>
+        <span id="rechargePaymentAmount">还需支付：</span>
+    </div>
+    <div class="payoffBtn">
+        <div class="payoffB">
+            <a class="payoffBtn1" id="myAccountDeailBtn">前去付款</a>
+            <div class="payoffBtn2" id="myAccountDeailCancelBtn">取消</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

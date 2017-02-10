@@ -1,0 +1,158 @@
+body{
+			min-width: 1440px;
+			min-height: 930px;
+			background: url(../../img/pchongbao/register-bg.png) 0 0 no-repeat;
+		}
+		
+		.loginHeader{
+			width:100%;
+			padding: 40px 115px 0;
+			height: 110px;
+			box-sizing: border-box;
+		}
+		.loginHeader .logo{
+			float: left;
+		}
+		.loginHeader .logo-text{
+			float: right;
+		}
+		.loginMain{
+			width: 635px;
+			height: 456px;
+			margin:0 auto;
+			margin-top: 40px;
+			position: relative;
+		}
+		.loginMain-title{
+			width: 100%;
+			height: 70px;
+			font-family: '微软雅黑';
+			font-size: 28px;
+			color: #000;
+			font-weight: bold;
+		}
+		.loginMain ul{
+			width: 100%;
+		}
+		.loginMain ul li{
+			width: 100%;
+			height: 48px;
+			position: relative;
+		}
+		.loginMain ul li label{
+			width: 133px;
+			height: 100%;
+			float: left;
+			line-height: 34px;
+			font-size: 18px;
+			font-family: '微软雅黑';
+			color: #000;
+			font-weight: bold;
+		}
+		.loginMain ul li input{
+			width: 500px;
+			height: 34px;
+			float: left;
+			border:1px solid #000;
+			border-radius: 50px;
+			font-size: 14px;
+			color: #000;
+			text-indent: 30px;
+			line-height: 34px;
+			background: #fa7979;
+			font-family: '微软雅黑';
+			font-weight: bold;
+
+		}
+		.loginMain ul li input::-webkit-input-placeholder{
+			color: #222;
+			font-family: '微软雅黑';
+		}
+		.loginMain ul li .error{
+			max-width: 500px;
+		    min-height: 20px;
+		    position: absolute;
+		    right: -240px;
+		    top: -2px;
+		    background: #f99b15;
+		    padding: 2px 18px;
+		    z-index: 10;
+		    border-radius: 5px;
+		    color: #f00;
+		    font-size: 14px;
+		    line-height: 26px;
+		}
+		.loginMain ul li .error:before{
+			content: "";
+		    display: block;
+		    border-width: 12px 24px;
+		    position: absolute;
+		    top: 4px;
+		    left: -35px;
+		    border-style: solid dashed dashed;
+		    border-color: transparent #f99b15 transparent transparent;
+		    font-size: 0;
+		    line-height: 0;
+		}
+		
+		.loginMain .LoginCode input{
+			width: 300px;
+		}
+		.loginMain .LoginCode p{
+			width: 160px;
+			height: 34px;
+			border:1px solid #000;
+			border-radius: 50px;
+			font-size: 14px;
+			color: #fff;
+			text-align: center;
+			line-height: 34px;
+			float: right;
+			cursor: pointer;
+			background: #26a1a2;
+		}
+		.loginMain .LoginCode p img{
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+		.loginFooter {
+			width: 635px;
+			height: 50px;
+			margin:0 auto;
+		}
+		.loginFooter .register{
+			width: 90px;
+			height: 100%;
+			background: #ffdd46;
+			float: left;
+			font-family: '微软雅黑';
+			font-size: 18px;
+			color: #222;
+			line-height: 50px;
+			text-align: center;
+			font-weight: 600;
+			cursor: pointer;
+		}
+		.loginFooter .login{
+			width: 500px;
+			height: 100%;
+			float: right;
+			background: #26a1a2;
+			font-size: 18px;
+			color: #222;
+			line-height: 50px;
+			text-align: center;
+			font-weight: 600;
+			cursor: pointer;
+		}
+		.prompt1{
+			position: absolute;
+			left: -300px;
+			top:346px;
+		}
+		.prompt2{
+			position: absolute;
+			right: -318px;
+			top:52px;
+		}

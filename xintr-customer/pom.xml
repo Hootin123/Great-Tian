@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.xtr</groupId>
+    <artifactId>xintr</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <groupId>com.xtr</groupId>
+  <artifactId>xintr-customer</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+  <name>xintr-customer</name>
+  <url>http://maven.apache.org</url>
+  <dependencies>
+
+    <dependency>
+      <groupId>com.xtr</groupId>
+      <artifactId>xintr-api</artifactId>
+      <version>${parent.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.xtr</groupId>
+      <artifactId>xintr-common</artifactId>
+      <version>${parent.version}</version>
+    </dependency>
+
+    <!-- velocity begin -->
+    <dependency>
+      <groupId>org.apache.velocity</groupId>
+      <artifactId>velocity</artifactId>
+      <version>1.7</version>
+    </dependency>
+    <dependency>
+      <groupId>velocity-tools</groupId>
+      <artifactId>velocity-tools</artifactId>
+      <version>1.4</version>
+    </dependency>
+
+    <!--<dependency>-->
+      <!--<groupId>javax.validation</groupId>-->
+      <!--<artifactId>validation-api</artifactId>-->
+      <!--<version>1.0.0.GA</version>-->
+    <!--</dependency>-->
+    <!-- velocity end -->
+
+    <dependency>
+      <groupId>commons-digester</groupId>
+      <artifactId>commons-digester</artifactId>
+      <version>1.7</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>4.5.1</version>
+    </dependency>
+
+  </dependencies>
+  <build>
+    <finalName>xintr-customer</finalName>
+  </build>
+</project>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <!-- mybatis config -->
+    <bean id="writerSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="writerDataSource"/>
+        <property name="typeAliasesPackage" value="com.xtr.api.domain"/>
+        <!--<property name="configLocation" value="classpath:spring/mybatis-config.xml"/>-->
+    </bean>
+
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="writerDataSource"/>
+    </bean>
+
+    <!--<tx:advice id="txAdvice" transaction-manager="transactionManager">-->
+        <!--<tx:attributes>-->
+            <!--<tx:method name="delete*" propagation="REQUIRED" read-only="false"-->
+                       <!--rollback-for="java.lang.Exception" no-rollback-for="java.lang.RuntimeException"/>-->
+            <!--<tx:method name="insert*" propagation="REQUIRED" read-only="false"-->
+                       <!--rollback-for="java.lang.RuntimeException"/>-->
+            <!--<tx:method name="update*" propagation="REQUIRED" read-only="false"-->
+                       <!--rollback-for="java.lang.Exception"/>-->
+
+            <!--<tx:method name="find*" propagation="SUPPORTS"/>-->
+            <!--<tx:method name="get*" propagation="SUPPORTS"/>-->
+            <!--<tx:method name="select*" propagation="SUPPORTS"/>-->
+        <!--</tx:attributes>-->
+    <!--</tx:advice>-->
+
+    <!--<aop:config>-->
+        <!--<aop:pointcut id="pc" expression="execution(public * com.xtr.core.service.*.*(..))"/> &lt;!&ndash;把事务控制在Service层&ndash;&gt;-->
+        <!--<aop:advisor pointcut-ref="pc" advice-ref="txAdvice"/>-->
+    <!--</aop:config>-->
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.xtr.task.persistence.writer"/>
+        <property name="sqlSessionFactoryBeanName" value="writerSqlSessionFactory"/>
+    </bean>
+</beans>

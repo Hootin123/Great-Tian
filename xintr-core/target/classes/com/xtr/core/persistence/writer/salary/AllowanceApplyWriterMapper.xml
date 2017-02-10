@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtr.core.persistence.writer.salary.AllowanceApplyWriterMapper">
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from allowance_apply
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+    <delete id="deleteByAllowanceId" parameterType="java.lang.Long">
+    delete from allowance_apply
+    where allowance_id = #{allowanceId,jdbcType=BIGINT}
+  </delete>
+
+    <insert id="insert" parameterType="com.xtr.api.domain.salary.AllowanceApplyBean">
+    insert into allowance_apply (id, allowance_id, type,
+      create_time, user_data)
+    values (#{id,jdbcType=BIGINT}, #{allowanceId,jdbcType=BIGINT}, #{type,jdbcType=TINYINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{userData,jdbcType=LONGVARCHAR})
+  </insert>
+
+    <insert id="insertSelective" parameterType="com.xtr.api.domain.salary.AllowanceApplyBean">
+        insert into allowance_apply
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="allowanceId != null">
+                allowance_id,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="userData != null">
+                user_data,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="allowanceId != null">
+                #{allowanceId,jdbcType=BIGINT},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userData != null">
+                #{userData,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+
+</mapper>

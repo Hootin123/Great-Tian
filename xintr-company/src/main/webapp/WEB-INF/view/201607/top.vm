@@ -1,0 +1,57 @@
+	<div class="x-container x-nav-wrap">
+		<div class="x-content">
+			<div class="logo-wrap">
+				<a href="/">
+					<img src="/201607/img/xtr2/logo.png" alt="薪太软" title="薪太软"/>
+					<img src="/img/xtr/logo2.png" style="display: none;" alt="薪太软" title="薪太软"/>
+				</a>
+			</div>
+			<div class="nav">
+				<ul>
+					<li><a href="#springUrl('/indextop.htm')">首页</a></li>
+					<li><a href="#springUrl('/#product')">产品介绍</a></li>
+					<li><a href="#springUrl('/#safeInfo')">信息安全</a></li>
+					<li><a href="#springUrl('/#succCase')">成功案例</a></li>
+					<li><a href="#springUrl('/#hr')">HR中心</a></li>
+					<li><a href="#springUrl('/about.htm')">关于我们</a></li>
+					<li class="split"><span>|</span></li>
+					#if(!${xtr.isLogin($session)})
+                        <li class="try"><a href="#springUrl('/registerInit.htm')" class="btn-blue">试用</a></li>
+                        <li class="login"><a href="#springUrl('/loginInit.htm')">登录</a></li>
+					#else
+                        <li class="try"><a href="#springUrl('/home.htm')" class="btn-blue">进入前台</a></li>
+                        <li class="login"><a href="#springUrl('/logout.htm')">退出</a></li>
+					#end
+				</ul>
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript">
+
+$(function(){
+	
+	if(window.location.pathname!=null && window.location.pathname.length>0){
+		if(window.location.pathname.indexOf('/hrcenter.htm')>-1){
+			showidx(4);
+		}else if(window.location.pathname.indexOf('/product.htm')>-1){
+			showidx(1);
+		}else if(window.location.pathname.indexOf('/safeInfo.htm')>-1){
+			showidx(2);
+		}else if(window.location.pathname.indexOf('/succCase.htm')>-1){
+			showidx(3);
+		}else if(window.location.pathname.indexOf('/about.htm')>-1){
+			showidx(5);
+		}else{
+			showidx(0);
+		}
+	}
+	
+});
+
+function showidx(idx){
+	var lis=$('.nav ul li');
+	lis.removeClass('active');
+	lis.eq(idx).addClass('active');
+}
+</script>

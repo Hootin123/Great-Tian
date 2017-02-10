@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" id='html'>
+<head>
+	<meta charset="UTF-8">
+	<title>绑定</title>
+	#parse("comm/head.vm")
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/wechatCustomerNew/bindSuccess.css')">
+</head>
+<body>
+    <input type="hidden"  name="customerId" value="$!{customerId}"/>
+    <input type="hidden" name="companyId" value="$!{companyId}"/>
+	<input type="hidden" name="from" value="$!{from}"/>
+	<input type="hidden" name="phone" value="$!{phone}"/>
+	<div class="bindPic">
+		<img  src="#springUrl('/resource/img/wechatCustomerNew/bindSuccess.png')"/>
+	</div>
+	<div class="bindText"><span>$!{customerName}</span>，恭喜您绑定成功</div>
+	<footer>
+		<div class="enterIn">进入</div>
+	</footer>	
+</body>
+<script type="text/javascript">
+	//点击进入 工资单页面
+	$(function(){
+
+		//获取值
+		var customerId = $("input[name='customerId']").val();
+		var companyId = $("input[name='companyId']").val();
+		var phone = $("input[name='phone']").val();
+		//根据from的来源
+        var  from  = $("input[name='from']").val();
+		$(".enterIn").click(function(){
+                  if(from=="seePayOrder"){
+					  //跳转至工资单接口
+					  var path = BASE_PATH+"/wechatCustomer/toPayOrderPage.htm?customerId="+customerId+"&companyId="+companyId;
+                      window.location.href = path;
+				  }
+
+				  if(from=="personInfo"){
+					  //个人信息
+					  var  path = BASE_PATH+"/wechatCustomer/afterBindToPersonInfo.htm?customerId="+customerId+"&companyId="+companyId+"&phone="+phone;
+                      window.location.href=path;
+				  }
+		})
+
+	})
+
+</script>
+</html>

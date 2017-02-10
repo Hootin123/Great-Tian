@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" id='html'>
+<head>
+	<meta charset="UTF-8">
+	<title>红包页</title>
+	<meta name="viewport" content="width=divce-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1">
+	#parse("comm/head.vm")
+	<link rel="stylesheet" type="text/css" href="./resource/css/h5wallet/pachet.css">
+</head>
+<body>
+	<header>
+		<div class="logo"></div>
+		<em></em>
+		<div class="txt">
+			<p>有<span>「薪」</span>事</p>
+			<p>找薪太软</p>
+		</div>
+	</header>
+	<section>
+		<p>登录薪太软官网</p>
+		<p>www.xintairuan.com</p>
+		<p>体验工资代发</p>
+		<p>工资垫发</p>
+		<p>社保代缴智能服务</p>
+		<p><span>完成企业认证还能获得</span><em><img src="(/resource/img/h5wallet/pachet.png"></em><span>现金红包</span></p>
+
+	</section>
+	<footer>
+		<div class="attest">立即认证</div>
+	</footer>
+</body>
+</html>

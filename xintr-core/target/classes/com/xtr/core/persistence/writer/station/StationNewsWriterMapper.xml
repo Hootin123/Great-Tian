@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtr.core.persistence.writer.station.StationNewsWriterMapper">
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from station_news
+    where news_id = #{newsId,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="com.xtr.api.domain.station.StationNewsBean">
+    insert into station_news (news_id, news_title, news_addtime,
+      news_add_member, news_releasetime, news_release_member, 
+      news_chick, news_sort, news_type, 
+      news_class_id, news_class_name, news_intro, news_keywords, news_description,
+      news_ly, news_img, news_mtname, 
+      news_url, news_state, news_istop, 
+      news_content)
+    values (#{newsId,jdbcType=BIGINT}, #{newsTitle,jdbcType=VARCHAR}, #{newsAddtime,jdbcType=TIMESTAMP}, 
+      #{newsAddMember,jdbcType=BIGINT}, #{newsReleasetime,jdbcType=TIMESTAMP}, #{newsReleaseMember,jdbcType=BIGINT}, 
+      #{newsChick,jdbcType=INTEGER}, #{newsSort,jdbcType=INTEGER}, #{newsType,jdbcType=INTEGER}, 
+      #{newsClassId,jdbcType=INTEGER}, #{newsClassName,jdbcType=VARCHAR}, #{newsIntro,jdbcType=VARCHAR},
+      #{newsKeywords,jdbcType=VARCHAR},#{newsDescription,jdbcType=VARCHAR},
+      #{newsLy,jdbcType=VARCHAR}, #{newsImg,jdbcType=VARCHAR}, #{newsMtname,jdbcType=VARCHAR}, 
+      #{newsUrl,jdbcType=VARCHAR}, #{newsState,jdbcType=INTEGER}, #{newsIstop,jdbcType=INTEGER}, 
+      #{newsContent,jdbcType=LONGVARCHAR})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.xtr.api.domain.station.StationNewsBean">
+    insert into station_news
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="newsId != null">
+        news_id,
+      </if>
+      <if test="newsTitle != null">
+        news_title,
+      </if>
+      <if test="newsAddtime != null">
+        news_addtime,
+      </if>
+      <if test="newsAddMember != null">
+        news_add_member,
+      </if>
+      <if test="newsReleasetime != null">
+        news_releasetime,
+      </if>
+      <if test="newsReleaseMember != null">
+        news_release_member,
+      </if>
+      <if test="newsChick != null">
+        news_chick,
+      </if>
+      <if test="newsSort != null">
+        news_sort,
+      </if>
+      <if test="newsType != null">
+        news_type,
+      </if>
+      <if test="newsClassId != null">
+        news_class_id,
+      </if>
+      <if test="newsClassName != null">
+        news_class_name,
+      </if>
+      <if test="newsIntro != null">
+        news_intro,
+      </if>
+      <if test="newsKeywords != null">
+        news_keywords,
+      </if>
+      <if test="newsDescription != null">
+        news_description,
+      </if>
+      <if test="newsLy != null">
+        news_ly,
+      </if>
+      <if test="newsImg != null">
+        news_img,
+      </if>
+      <if test="newsMtname != null">
+        news_mtname,
+      </if>
+      <if test="newsUrl != null">
+        news_url,
+      </if>
+      <if test="newsState != null">
+        news_state,
+      </if>
+      <if test="newsIstop != null">
+        news_istop,
+      </if>
+      <if test="newsContent != null">
+        news_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="newsId != null">
+        #{newsId,jdbcType=BIGINT},
+      </if>
+      <if test="newsTitle != null">
+        #{newsTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="newsAddtime != null">
+        #{newsAddtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="newsAddMember != null">
+        #{newsAddMember,jdbcType=BIGINT},
+      </if>
+      <if test="newsReleasetime != null">
+        #{newsReleasetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="newsReleaseMember != null">
+        #{newsReleaseMember,jdbcType=BIGINT},
+      </if>
+      <if test="newsChick != null">
+        #{newsChick,jdbcType=INTEGER},
+      </if>
+      <if test="newsSort != null">
+        #{newsSort,jdbcType=INTEGER},
+      </if>
+      <if test="newsType != null">
+        #{newsType,jdbcType=INTEGER},
+      </if>
+      <if test="newsClassId != null">
+        #{newsClassId,jdbcType=INTEGER},
+      </if>
+      <if test="newsClassName != null">
+        #{newsClassName,jdbcType=VARCHAR},
+      </if>
+      <if test="newsIntro != null">
+        #{newsIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="newsKeywords != null">
+        #{newsKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="newsDescription != null">
+        #{newsDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="newsLy != null">
+        #{newsLy,jdbcType=VARCHAR},
+      </if>
+      <if test="newsImg != null">
+        #{newsImg,jdbcType=VARCHAR},
+      </if>
+      <if test="newsMtname != null">
+        #{newsMtname,jdbcType=VARCHAR},
+      </if>
+      <if test="newsUrl != null">
+        #{newsUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="newsState != null">
+        #{newsState,jdbcType=INTEGER},
+      </if>
+      <if test="newsIstop != null">
+        #{newsIstop,jdbcType=INTEGER},
+      </if>
+      <if test="newsContent != null">
+        #{newsContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.xtr.api.domain.station.StationNewsBean">
+    update station_news
+    <set>
+      <if test="newsTitle != null">
+        news_title = #{newsTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="newsAddtime != null">
+        news_addtime = #{newsAddtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="newsAddMember != null">
+        news_add_member = #{newsAddMember,jdbcType=BIGINT},
+      </if>
+      <if test="newsReleasetime != null">
+        news_releasetime = #{newsReleasetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="newsReleaseMember != null">
+        news_release_member = #{newsReleaseMember,jdbcType=BIGINT},
+      </if>
+      <if test="newsChick != null">
+        news_chick = #{newsChick,jdbcType=INTEGER},
+      </if>
+      <if test="newsSort != null">
+        news_sort = #{newsSort,jdbcType=INTEGER},
+      </if>
+      <if test="newsType != null">
+        news_type = #{newsType,jdbcType=INTEGER},
+      </if>
+      <if test="newsClassId != null">
+        news_class_id = #{newsClassId,jdbcType=INTEGER},
+      </if>
+      <if test="newsClassName != null">
+        news_class_name = #{newsClassName,jdbcType=VARCHAR},
+      </if>
+      <if test="newsIntro != null">
+        news_intro = #{newsIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="newsKeywords != null">
+        news_keywords = #{newsKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="newsDescription != null">
+        news_description = #{newsDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="newsLy != null">
+        news_ly = #{newsLy,jdbcType=VARCHAR},
+      </if>
+      <if test="newsImg != null">
+        news_img = #{newsImg,jdbcType=VARCHAR},
+      </if>
+      <if test="newsMtname != null">
+        news_mtname = #{newsMtname,jdbcType=VARCHAR},
+      </if>
+      <if test="newsUrl != null">
+        news_url = #{newsUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="newsState != null">
+        news_state = #{newsState,jdbcType=INTEGER},
+      </if>
+      <if test="newsIstop != null">
+        news_istop = #{newsIstop,jdbcType=INTEGER},
+      </if>
+      <if test="newsContent != null">
+        news_content = #{newsContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where news_id = #{newsId,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.xtr.api.domain.station.StationNewsBean">
+    update station_news
+    set news_title = #{newsTitle,jdbcType=VARCHAR},
+      news_content = #{newsContent,jdbcType=LONGVARCHAR},
+      news_addtime = #{newsAddtime,jdbcType=TIMESTAMP},
+      news_add_member = #{newsAddMember,jdbcType=BIGINT},
+      news_releasetime = #{newsReleasetime,jdbcType=TIMESTAMP},
+      news_release_member = #{newsReleaseMember,jdbcType=BIGINT},
+      news_chick = #{newsChick,jdbcType=INTEGER},
+      news_sort = #{newsSort,jdbcType=INTEGER},
+      news_type = #{newsType,jdbcType=INTEGER},
+      news_class_id = #{newsClassId,jdbcType=INTEGER},
+      news_class_name = #{newsClassName,jdbcType=VARCHAR},
+      news_intro = #{newsIntro,jdbcType=VARCHAR},
+      news_keywords = #{newsKeywords,jdbcType=VARCHAR},
+      news_description = #{newsDescription,jdbcType=VARCHAR},
+      news_ly = #{newsLy,jdbcType=VARCHAR},
+      news_img = #{newsImg,jdbcType=VARCHAR},
+      news_mtname = #{newsMtname,jdbcType=VARCHAR},
+      news_url = #{newsUrl,jdbcType=VARCHAR},
+      news_state = #{newsState,jdbcType=INTEGER},
+      news_istop = #{newsIstop,jdbcType=INTEGER}
+    where news_id = #{newsId,jdbcType=BIGINT}
+  </update>
+</mapper>

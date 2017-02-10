@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../css/comm.css" />
+		<link rel="stylesheet" type="text/css" href="../css/activated.css" />
+		<link rel="stylesheet" href="../css/mainPage.css" />
+		<script src="../js/jquery-1.11.0.min.js"></script>
+        <script src="resource/js/login/login.js"></script>
+	</head>
+	<body>
+	<div class="header"></div>
+	<div id="lgbdy">
+		<div class="activated">
+			<div class="activated" style="opacity: 0.3;filter:alpha(opacity=30); z-index: -1; background: #FFFFFF; position: absolute; margin: 0;"></div>
+			<span>激活企业账号</span>
+			<p><em>链接已失效，<a href="#">点击重新获取激活邮件</a>。</em></p>
+			
+		</div>
+	</div>
+	<div class="footer" id="footer">薪太软（上海）科技发展有限公司|沪ICP备15039445号-9</div>
+	</body>
+</html>

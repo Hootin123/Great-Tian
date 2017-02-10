@@ -1,0 +1,79 @@
+######红包目录页面
+<!DOCTYPE html>
+<html lang="en" id='html'>
+<head>
+    <meta charset="UTF-8">
+    <title>目录页</title>
+    #parse("comm/head.vm")
+    <meta name="viewport" content="width=divce-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1">
+    <script type="text/javascript" src= #springUrl('/resource/js/hongbao/catalogue.js')></script>
+    <link rel="stylesheet" type="text/css" href= #springUrl('/resource/css/hongbao/catalogue.css')>
+</head>
+<body>
+<header></header>
+<section>
+    <!-- 提示信息 -->
+    <div class="hint">
+        <!-- 从注册页面过来的标识-->
+        <input type="hidden" name="registerFrom" id="registerFrom" value="$!{registerFrom}"/>
+        <!-- 公司审核的状态-->
+        <input type="hidden" name="auditStatus" id="auditStatus" value="$!{auditStatus}"/>
+        <!-- 注册成功后 -->
+        <div class="blind-success" style='display: block'>
+            <p>注册成功</p>
+            <p>恭喜您<span>$!{memberName}</span>注册成功！您的账号为：<span>$!{memberPhone}</span></p>
+            <p>管理员工，计算社保、工资，更多免费功能尽在薪太软平台（www.xintairuan.com）！</p>
+        </div>
+        <!-- 未关注 -->
+        <div class="unbound" style="display: none">
+            <p id="first-one">未关注</p>
+            <p id="first-two">领取红包，请先关注薪太软公众号.</p>
+            <div class="cord"><img src=#springUrl('/resource/img/hongbao/code1.png')></div>
+        </div>
+        <!-- 提交审核 -->
+        <div class="audit" style='display: none'>
+            <p>提交审核</p>
+            <p>恭喜您提交成功，我们将在2个工作日内</p>
+            <p>通过您的信息审核，请耐心等待……</p>
+        </div>
+        <!-- 审核通过 -->
+        <div class="approve" style='display: none'>
+            <p>审核通过</p>
+            <p>您的公司信息审核已通过！</p>
+            <p>快快领取20元现金红包吧！</p>
+        </div>
+        <!-- 审核未通过 -->
+        <div class="unapprove" style='display: none'>
+            <p>审核未通过</p>
+            <p>很遗憾您的公司信息没有通过审核！！</p>
+            <p>未通过原因是:<span>$!{approveReason}</span></p>
+            <p>请修改这些地方再审核哦！</p>
+        </div>
+        <!-- 红包领取 -->
+        <div class="getPacket" style='display: none'>
+            <p><span id="picketRedInfo">20</span>元现金红包已经发到您微信上！</p>
+        </div>
+    </div>
+    <ul>
+        <li class='packet-reg' id="packet-reg">
+            <span class='reg'>立即注册</span>
+        </li>
+        <li class='packet-info' id="packet-info">
+            <span class='info'>完善信息</span>
+        </li>
+    </ul>
+    <div class="packet">
+        <div class="packet-five">
+            <span id="five">领红包</span>
+        </div>
+        <div class="packet-twenty">
+            <span id="twenty">领红包</span>
+        </div>
+    </div>
+    <div class="text">
+        你已获得了<span>$!{account}</span>元，还有<span>#set($a=25-$account)$!{a}</span>元未领取
+    </div>
+</section>
+<footer></footer>
+</body>
+</html>

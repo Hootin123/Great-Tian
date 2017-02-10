@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>H+ 合作意向处理</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-table/bootstrap-table.min.css')" rel="stylesheet">
+</head>
+
+<body>
+<div class="col-sm-12">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <form class="form-group" id="handleForm">
+                <input type="radio" checked="checked" value="2" name="sign">暂存合作意向：并将自己标记为该意向的跟进人<br/>
+                <input type="radio" value="4" name="sign">关闭合作意向：不再关注该意向，<font color="red">对于融资意向，意味着驳回用户的请求！</font>
+                <div class="panel panel-default" style="margin-top: 10px;">
+                    <input type="hidden" value="$!{stationCollaborationBean.itemId}" name="itemId">
+
+                    <table data-mobile-responsive="true" class="table table-hover table-bordered">
+                        <tr>
+                            <td style="width:15%;">企业名称</td>
+                            <td style="width:30%;">
+                                #if($stationCollaborationBean.collaborationCompanyId)
+                                    $!{stationCollaborationBean.companyName}
+                                #else
+                                    <input type="text" class="logtext"  name="itemName" value="$!{stationCollaborationBean.itemName}">
+                                #end
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:15%;">联系手机</td>
+                            <td style="width:30%;">
+                                #if($stationCollaborationBean.collaborationCompanyId)
+                                    $!{stationCollaborationBean.memberPhone}
+                                #else
+                                    <input type="text" class="form-control" name="itemMobile" value="$!{stationCollaborationBean.itemMobile}">
+                                #end
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:15%;">意向类型</td>
+                            <td style="width:30%;">
+                                #if($stationCollaborationBean.itemType==1)
+                                    商务合作
+                                #elseif($stationCollaborationBean.itemType==2)
+                                    新用户注册
+                                #elseif($stationCollaborationBean.itemType==3)
+                                    提交工资单
+                                #elseif($stationCollaborationBean.itemType==4)
+                                    签约到期前30天
+                                #elseif($stationCollaborationBean.itemType==5)
+                                    融资意向
+                                #elseif($stationCollaborationBean.itemType==6)
+                                    明确期望签约
+                                    #if($stationCollaborationBean.collaborationContractType==1)
+                                        (代发协议)
+                                    #elseif($stationCollaborationBean.collaborationContractType==2)
+                                        (垫发协议)
+                                    #elseif($stationCollaborationBean.collaborationContractType==3)
+                                        (社保代缴协议)
+                                    #elseif($stationCollaborationBean.collaborationContractType==4)
+                                        (报销管理协议)
+                                    #end
+                                #else
+                                    -
+                                #end
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>首次发起时间</td>
+                            <td style="width:30%;">$!date.format('yyyy-MM-dd',$!{stationCollaborationBean.adddate})</td>
+                        </tr>
+                        <tr>
+                            <td style="width:15%;">发起次数</td>
+                            <td style="width:30%;">$!{stationCollaborationBean.itemTimes}</td>
+                        </tr>
+                        <tr>
+                            <td style="width:15%;">合同邮寄地址</td>
+                            <td style="width:30%;">
+                                <input type="text" class="form-control" name="collaborationContractAddress" value="$!{stationCollaborationBean.collaborationContractAddress}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:15%;">期望意向联系人</td>
+                            <td style="width:30%;">
+                                <input type="text" class="form-control" name="collaborationRelationerName" value="$!{stationCollaborationBean.collaborationRelationerName}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:15%;">期望意向联系人电话</td>
+                            <td style="width:30%;">
+                                <input type="text" class="form-control" name="collaborationRelationerPhone" value="$!{stationCollaborationBean.collaborationRelationerPhone}">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="text-center" style="20px;">
+                    <button type="button" class="btn btn-w-m btn-success" id="sureBtn">确定</button>
+                    <button type="button" class="btn btn-w-m btn-white" onclick="cancelCooperationIntentHandle()">取消</button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+<script src="#springUrl('/resource/js/hui/content.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table-mobile.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/validate/jquery.validate.min.js')"></script>
+<script src="#springUrl('/resource/js/comm/jdatagrid.js')"></script>
+<script src="#springUrl('/resource/js/market/intent/cooperationIntentHandle.js')"></script>
+</html>

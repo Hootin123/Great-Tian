@@ -1,0 +1,9 @@
+<div id="header" class="clear header">
+    <img class="logo" src="resource/img/logo.png" />
+    <a class="a1" href="#"><em>9</em>消息内容内容内容内容内容消息内容内容内...</a>
+    <div class="header_left">
+        <a class="a2" href="#">线上测试_2016060101</a>
+        <a class="a3" href="#">账户设置</a>
+        <a class="a4" href="#">退出</a>
+    </div>
+</div>

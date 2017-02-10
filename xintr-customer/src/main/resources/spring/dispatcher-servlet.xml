@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!-- 启用spring mvc 注解 -->
+    <context:annotation-config/>
+
+    <context:component-scan base-package="com.xtr.customer,com.xtr.wechat">
+        <context:include-filter type="regex"
+                                expression="com.xtr.customer.*"/>
+    </context:component-scan>
+
+    <mvc:resources location="/resource/css/" mapping="/resource/css/**"/>
+    <mvc:resources location="/resource/js/" mapping="/resource/js/**"/>
+    <mvc:resources location="/resource/img/" mapping="/resource/img/**"/>
+
+    <bean
+            class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+        <property name="order" value="1"/>
+    </bean>
+
+    <bean
+            class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="customArgumentResolvers">
+            <list>
+                <bean class="com.xtr.comm.custom.BeanArgumentResolver"/>
+            </list>
+        </property>
+        <property name="messageConverters">
+            <list>
+                <bean
+                        class="org.springframework.http.converter.StringHttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>text/plain;charset=UTF-8</value>
+                        </list>
+                    </property>
+                </bean>
+                <bean
+                        class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                    <property name="supportedMediaTypes" value="application/json;charset=UTF-8"/>
+                    <property name="objectMapper">
+                        <bean class="com.github.miemiedev.mybatis.paginator.jackson2.PageListJsonMapper"/>
+                    </property>
+                </bean>
+                <!--<bean-->
+                        <!--class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">-->
+                    <!--<property name="supportedMediaTypes" value="application/json;charset=UTF-8"/>-->
+                <!--</bean>-->
+            </list>
+        </property>
+    </bean>
+
+    <!-- 访问路径拦截配置 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- mvc 安全过滤路径 -->
+            <mvc:mapping path="/**/*.htm"/>
+            <bean class="com.xtr.customer.web.SecurityInterceptor">
+                <property name="excludedUrls">
+                    <list>
+                        <!-- 不需要拦截的url地址 -->
+                        <value>.*/sbtcode.htm</value>
+                        <value>.*/toH5walletWelcomePage.htm</value>
+                        <value>.*/toH5walletLoginPage.htm</value>
+                        <value>.*/toH5walletRegisterPage.htm</value>
+                        <value>.*/generateH5ValidatorImages.htm</value>
+                        <value>.*/sendPhoneMsgByH5.htm</value>
+                        <value>.*/h5Login.htm</value>
+                        <value>.*/h5Register.htm</value>
+                        <value>.*/toH5walletAgreePage.htm</value>
+                        <!--<value>.*/toProduct.htm</value>-->
+                        <!--<value>.*/toShareGift.htm</value>-->
+                        <!--<value>.*/toH5walletAgreePage.htm</value>-->
+
+                        <value>.*/toH5ScanLoginPage.htm</value>
+                        <value>.*/toH5ScanRegisterPage.htm</value>
+                        <value>.*/sendPhoneMsgByScanCode.htm</value>
+                        <value>.*/h5ScanApproveCheck.htm</value>
+                        <value>.*/toAuthenticationPage.htm</value>
+                        <value>.*/toh5scanApproveWait.htm</value>
+                        <value>.*/toh5scanApproveSuccess.htm</value>
+                        <value>.*/toh5scanApproveFailed.htm</value>
+                        <value>.*/toScanApprove.htm</value>
+                        <value>.*/h5ScanLogin.htm</value>
+                        <value>.*/h5ScanRegister.htm</value>
+                        <value>.*/generateScanH5ValidatorImages.htm</value>
+                        <value>.*/toSuccessPage.htm</value>
+                        <value>.*/h5ScanUploadOrganizeImg.htm</value>
+                        <value>.*/toH5ScanAgreePage.htm</value>
+                        <value>.*/wechat/checkSignature.htm</value>
+                        <value>.*/wechat/qhb.htm</value>
+
+                        <!-- 红包不需要拦截的页面-->
+                        <value>.*/toHongbaoRegisterPage.htm</value>
+                        <value>.*/toMenuPage.htm</value>
+                        <value>.*/toFreeGuidePage.htm</value>
+                        <value>.*/toHongbaoForgertPasswordPage.htm</value>
+                        <value>.*/toPerfectInformationPage.htm</value>
+                        <value>.*/sendMsgByHongbao.htm</value>
+                        <value>.*/generateH5HongbaoValidatorImages.htm</value>
+                        <value>.*/hongbaoRegister.htm</value>
+                       <value>.*/hongbaoLogin.htm</value>
+                        <value>.*/returnLogin.htm</value>
+                        <value>.*/hongbaoResetPasswor.htm</value>
+                        <value>.*/h5HongbaoUploadOrganizeImg.htm</value>
+                        <value>.*/hasPerfectInfo.htm</value>
+                        <value>.*/receiveHongbao.htm</value>
+                        <value>.*/saveCompanyPhone.htm</value>
+
+                        <!--员工微信端不需要拦截的页面-->
+                        <value>.*/toWechatCustomerManagerInfoPage.htm</value>
+                        <value>.*/modifyEditBaseInfo.htm</value>
+                        <value>.*/modifyEditPersonalInfo.htm</value>
+                        <value>.*/toWechatCustomerMainInfoPage.htm</value>
+                        <value>.*/modifyMainInfo.htm</value>
+                        <value>.*/wechatCustomerUploadIdCard.htm</value>
+                        <value>.*/toCustomerIndex.htm</value>
+                        <value>.*/toCustomerBind.htm</value>
+                        <value>.*/toJoinTask.htm</value>
+                        <value>.*/toCustomerSalaryDetail.htm</value>
+                       <value>.*/customerBindEntrance.htm</value>
+                        <value>.*/error.htm</value>
+                        <value>.*/sendPhoneMsg.htm</value>
+                        <value>.*/customerBindUpload.htm</value>
+                        <value>.*/testIndex.htm</value>
+                        <value>.*/editCustomerImg.htm</value>
+                        <value>.*/customerBind.htm</value>
+                        <value>.*/searchMonthSalary.htm</value>
+                        <value>.*/getNextYearJanSalary.htm</value>
+                        <value>.*/testBindSendMsg.htm</value>
+                        <!-- 新版红包-->
+                        <value>.*/toActivityDetail.htm</value>
+                        <value>.*/toActivityRegister.htm</value>
+                        <value>.*/activityRegister.htm</value>
+                        <value>.*/activityLogin.htm</value>
+                        <value>.*/toActivityApprove.htm</value>
+                        <value>.*/activityApprove.htm</value>
+                        <value>.*/infoCollect.htm</value>
+                        <value>.*/infoCollectSubmit.htm</value>
+                        <value>.*/commonlyRegister.htm</value>
+                        <value>.*/toCommonlyRegister.htm</value>
+                        <value>.*/sendMsgByHongbao.htm</value>
+                        <value>.*/judgePhoneNumber.htm</value>
+                        <value>.*/getImgCode.htm</value>
+                        <value>.*/sendMsgByNewHongbao.htm</value>
+                        <value>.*/uploadFile.htm</value>
+                        <value>.*/toPromptSuccess.htm</value>
+                        <value>.*/toRegisterSuccess.htm</value>
+                        <value>.*/toPromptDefeat.htm</value>
+                        <value>.*/toPromptWait.htm</value>
+
+                        <!-- pc红包不需要拦截的链接-->
+                        <value>.*/jumpToWebActivePage.htm</value>
+                        <value>.*/jumpToWebCollectionInfoPage.htm</value>
+                        <value>.*/jumpToCompanyInfoPage.htm</value>
+                        <value>.*/jumpToLoginPage.htm</value>
+                        <value>.*/jumpToRegisterPage.htm</value>
+                        <value>.*/jumpToPromptDefeat.htm</value>
+                        <value>.*/jumpToPromptSuccess.htm</value>
+                        <value>.*/jumpToPromptWait.htm</value>
+                        <value>.*/webLogin.htm</value>
+                        <value>.*/webRegister.htm</value>
+
+                        <!-- 新版员工微信-->
+                        <value>.*/payOrderEntrance.htm</value>
+                        <value>.*/personalInfoEntrance.htm</value>
+                        <value>.*/bind.htm</value>
+                        <value>.*/bindFail.htm</value>
+                        <value>.*/bindSuccess.htm</value>
+                        <value>.*/queryYearOrders.htm</value>
+                        <value>.*/toPayOrderDetail.htm</value>
+                        <value>.*/personInfoCollect.htm</value>
+                        <value>.*/toPayOrderPage.htm</value>
+                        <value>.*/afterBindToPersonInfo.htm</value>
+                        <value>.*/hasCollectionInfo.htm</value>
+                    </list>
+                </property>
+
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <!-- velocity config -->
+    <bean id="velocityConfigurer"
+          class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+        <property name="resourceLoaderPath">
+            <value>WEB-INF/view</value>
+        </property>
+        <property name="velocityProperties">
+            <props>
+                <prop key="input.encoding">UTF-8</prop>
+                <prop key="output.encoding">UTF-8</prop>
+                <prop key="velocimacro.library">comm/macros.vm</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- 处理velocity布局 -->
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+        <property name="cache" value="true"/>
+        <property name="prefix" value=""/>
+        <property name="suffix" value=".vm"/>
+        <property name="contentType" value="text/html; charset=utf-8"></property>
+        <property name="exposeSpringMacroHelpers" value="true"/>
+        <property name="requestContextAttribute" value="rc"/>
+        <property name="toolboxConfigLocation" value="/WEB-INF/velocity_toolbox.xml"/>
+    </bean>
+
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 设置上传文件大小的参数 -->
+        <property name="maxUploadSize" value="10000000"/>
+    </bean>
+
+</beans>

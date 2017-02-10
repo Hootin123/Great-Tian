@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0035)http://www.xintairuan.com/about.htm -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>社保大厅</title>
+
+    <link rel="stylesheet" type="text/css" href="/201607/css/xtr2.css">
+    <link rel="stylesheet" type="text/css" href="/201607/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/resource/css/comm/comm.css">
+    <link rel="stylesheet" href="/201607/css/social.css">
+    <link rel="icon" href="/resource/img/20160731/logo1.png">
+    <script src="/201607/js/jquery-1.11.1.min.js"></script>
+    <script src="/201607/js/custom2.js"></script>
+
+</head>
+
+
+<body style="padding-top: 0px;">
+    <div class="x-container x-nav-wrap">
+        <div class="x-content">
+            <div class="logo-wrap">
+                <a href="http://www.xintairuan.com/">
+                    <img src="/resource/img/20160731/logo.png" alt="薪太软" title="薪太软">
+                    <img src="/resource/img/20160731/logo2.png" style="display: none;" alt="薪太软" title="薪太软">
+                </a>
+            </div>
+            <div class="nav">
+                <ul>
+                    <li>
+                        <a href="#springUrl('/indextop.htm')">首页</a>
+                    </li>
+                    <li class="active">
+                        <a href="">社保大厅</a>
+                    </li>
+                    <li>
+                        <a href="#springUrl('/beha.htm')">工资代发</a>
+                    </li>
+                    <li>
+                        <a href="#springUrl('/pad.htm')">工资垫付</a>
+                    </li>
+                    <li>
+                        <a href="#springUrl('/physical.htm')">员工体检</a>
+                    </li>
+                    <li>
+                        <a href="#springUrl('/about.htm')">关于我们</a>
+                    </li>
+                    <li class="split" style="display: list-item;"><span>|</span></li>
+                    <li class="try" style="display: list-item;">
+                        <a href="#springUrl('/registerInit.htm')" class="btn-blue">试用</a>
+                    </li>
+                    <li class="login" style="display: list-item;">
+                        <a href="#springUrl('/loginInit.htm')">登录</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="banner"></div>
+    <div id="banner_to"><div></div></div>
+    <div id="content"></div>
+    <div id="footer_banner"></div>
+        #parse("/201607/footer.vm")
+
+
+</body>
+
+</html>

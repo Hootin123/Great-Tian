@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/account/payoff.css')" rel="stylesheet">
+</head>
+<body>
+#if($!{rechargeData})
+<div class="main_right payoff_two salaryDetails clear" id="salaryDetails">
+    <p><span style="cursor: pointer;" onclick="jascript:history.go(-1);">收支记录</span>&gt;<label>充值详情</label></p>
+    <strong>
+        #if($!{rechargeData.rechargeState} == 0)
+        充值中
+        #elseif($!{rechargeData.rechargeState} == 1)
+        充值失败
+        #elseif($!{rechargeData.rechargeState} == 2)
+        充值成功
+        #end
+    </strong>
+    <table class="payoff_two_list" >
+        <tr class="payoff_two_list_first">
+            <td>充值流水号</td>
+            <td>申请时间</td>
+            <td>确认时间</td>
+            <td>充值金额（元）</td>
+        </tr>
+        <tr class="payoff_two_list_last">
+            <td>$!{rechargeData.rechargeNumber}</td>
+            <td>$!date.format('yyyy-MM-dd HH:mm:ss',$!{rechargeData.rechargeAddtime})</td>
+            <td>
+                #if($!{rechargeData.rechargeAuditFirstTime})
+                $!date.format('yyyy-MM-dd HH:mm:ss',$!{rechargeData.rechargeAuditFirstTime})
+                #else
+                待确认
+                #end
+            </td>
+            <td>$xtr.money($!{rechargeData.rechargeMoney})</td>
+        </tr>
+    </table>
+    <strong>描述</strong>
+    <table class="payoff_two_list">
+        <tr class="payoff_two_list_first">
+            <td>付款银行名称</td>
+            <td>付款银行账号</td>
+            <td>银行交易流水</td>
+            <td>备注</td>
+        </tr>
+        <tr class="payoff_two_list_last">
+            <td>$!{rechargeData.rechargeBank}</td>
+            <td>$!{rechargeData.rechargeBanknumber}</td>
+            <td>$!{rechargeData.rechargeSerialNumber}</td>
+            <td>$!{rechargeData.rechargeBak}</td>
+        </tr>
+    </table>
+    <a href="#springUrl('/balanceOfPayments.htm')">确定</a>
+</div>
+#end
+</body>
+</html>

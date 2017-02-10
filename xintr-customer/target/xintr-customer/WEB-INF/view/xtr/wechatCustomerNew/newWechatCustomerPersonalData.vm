@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" id='html'>
+<head>
+	<meta charset="UTF-8">
+	<title>个人资料</title>
+	#parse("comm/head.vm")
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/wechatCustomerNew/personalData.css')">
+</head>
+<body>
+
+	<form id="personInfoForm">
+		<input type="hidden" name="Flag" value="$!{Flag}"/>
+
+		<ul class='baseInfo'>
+			<li class="firstLi">基本信息</li>
+			<li>
+				<span>姓名</span>
+				<span class='rightSpan'>$!{customerWechatDto.name}</span>
+			</li>
+			<li>
+				<span>手机</span>
+				<span class='rightSpan'>$!{customerWechatDto.customerPhone}</span>
+			</li>
+			<li>
+				<span>性别</span>
+				<span class='rightSpan'>
+					#if($!{customerWechatDto.customerSex}==0)
+						女
+						#elseif($!{customerWechatDto.customerSex}==1)
+						  男
+						#else
+
+					#end
+				</span>
+			</li>
+			<li>
+				<span>出生日期</span>
+				<span class='rightSpan'>$!{customerWechatDto.customerBirthdayMonth}</span>
+			</li>
+		</ul>
+		<ul class='stationInfo'>
+			<li class="firstLi">岗位信息</li>
+			<li>
+				<span>工号</span>
+				<span class='rightSpan'>$!{customerWechatDto.customerNumber}</span>
+			</li>
+			<li>
+				<span>部门</span>
+				<span class='rightSpan'>$!{customerWechatDto.depName}</span>
+			</li>
+			<li>
+				<span>岗位</span>
+				<span class='rightSpan'>$!{customerWechatDto.stationStationName}</span>
+			</li>
+			<li>
+				<span>入职时间</span>
+				<span class='rightSpan'>$!date.format("yyyy.MM.dd",$!{customerWechatDto.stationEnterTime})</span>
+			</li>
+			<li>
+				<span>基本工资</span>
+				<span class='rightSpan'>$!{customerWechatDto.customerCurrentSalary}</span>
+			</li>
+		</ul>
+		<ul class='socialInfo'>
+			<li class="firstLi">社保公积金</li>
+			<li>
+				<span>参保地区</span>
+				<span class='rightSpan'>$!{customerWechatDto.joinCityName}</span>
+			</li>
+			<li>
+				<span>社保基数</span>
+				<span class='rightSpan'>$!{customerWechatDto.sbBase}</span>
+			</li>
+			<li>
+				<span>公积金基数</span>
+				<span class='rightSpan'>$!{customerWechatDto.gjjBase}</span>
+			</li>
+		</ul>
+		<ul class='stateInfo'>
+			<li>
+				<span>身份证号码</span>
+				<span class='rightSpan'>$!{customerWechatDto.customerIdcard}</span>
+			</li>
+			<li>
+				<span>工资卡号</span>
+				<span class='rightSpan'>$!{customerWechatDto.customerBanknumber}</span>
+			</li>
+			<li>
+				<span>工资卡开户行</span>
+				<span class='rightSpan'>$!{customerWechatDto.customerBank}</span>
+			</li>
+		</ul>
+		<div class="card"  style="display:none">
+			<div class="pic">
+				#if($!{customerWechatDto.customerIdcardImgFront}=="")
+                    <img  src="#springUrl('/resource/img/wechatCustomerNew/error.png')"/>
+					#else
+						<img  src="$!{customerWechatDto.customerIdcardImgFront}"/>
+				#end
+
+				<b>身份证正面</b>
+##				<i><img  src="#springUrl('/resource/img/wechatCustomerNew/add.png')"></i>
+			</div>
+			<div class="pic pic1">
+				#if($!{customerWechatDto.customerIdcardImgBack}=="")
+                    <img  src="#springUrl('/resource/img/wechatCustomerNew/error.png')"/>
+				#else
+                    <img  src="$!{customerWechatDto.customerIdcardImgBack}"/>
+				#end
+##				<img src="#springUrl('/resource/img/wechatCustomerMew/error.png')" id="upload">
+				<b>身份证反面</b>
+##				<i><img  src="#springUrl('/resource/img/wechatCustomerMew/add.png')"></i>
+			</div>	
+		</div>
+		<div class="card-text">图片格式为JPG/JPEG/PNG大小在3MB内</div>
+	</form>
+</body>
+
+<script>
+	$(function(){
+          var a = $("input[name='Flag']").val();
+		  if(a=="noprotocol-buquan" || a=="protocol-buquan"){
+
+			  $(".stateInfo").show();
+			  $(".card").show();
+			  $(".card-text").show();
+		  }else{
+              $(".stateInfo").hide();
+              $(".card").hide();
+			  $(".card-text").hide();
+		  }
+
+	})
+
+</script>
+</html>

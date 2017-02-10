@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>上传工资表</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/plugins/webuploader/webuploader.css')" rel="stylesheet">
+    <script src="#springUrl('/resource/js/plugins/webuploader/webuploader.nolog.min.js')"></script>
+    <script src="#springUrl('/resource/js/salary/rapidlyPayrollExcel.js')"></script>
+    <style>
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden
+        }
+
+        .upAll {
+            height: 100%;
+            width: 95%;
+            margin: 0 auto;
+        }
+
+        .upTop {
+            height: 28px;
+            width: 100%;
+            text-align: center;
+            line-height: 28px;
+            padding-top: 20px;
+        }
+
+        .upTop1 {
+            width: 50%;
+            border: 1px solid #333;
+            float: left;
+            box-sizing: border-box;
+            border-radius: 3px;
+            color: #333;
+        }
+
+        .upTop1 img, .upTop2 img {
+            margin-top: 3px;
+        }
+
+        .upTop2 {
+            width: 50%;
+            border: 1px solid #999;
+            float: left;
+            box-sizing: border-box;
+            border-left: none;
+            border-radius: 0 3px 3px;
+            color: #999;
+            cursor: pointer;
+            background: #ddd;
+        }
+
+        .upBatch {
+            height: 30px;
+            overflow: hidden;
+            text-align: center;
+            margin-top: 50px;
+            position: relative;
+        }
+
+        .upFile {
+            width: 117px;
+            height: 30px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            margin: auto;
+            z-index: 3;
+            opacity: 0;
+            cursor: pointer
+        }
+
+        .upText {
+            width: 117px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            background: #1394ff;
+            color: #fff;
+            border-radius: 3px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            margin: auto;
+        }
+
+        .upAskFor {
+            width: 100%;
+            height: 178px;
+            margin-top: 20px;
+            position: relative
+        }
+
+        .upAsk {
+            width: 520px;
+            height: 178px;
+            border: 1px dashed #999;
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+
+        .upAsk p {
+            line-height: 35px;
+            padding-left: 30px;
+            color: #333;
+        }
+
+        .upAskP1 {
+            margin-top: 15px;
+            font-weight: 600
+        }
+
+        .upAsk p span {
+            text-decoration: underline;
+            cursor: pointer;
+            color: #1394ff;
+        }
+
+        table {
+            width: 595px;
+            height: 150px;
+            text-align: center;
+            margin: 20px auto 0;
+        }
+
+        table tr td {
+            border: 1px solid #b8dae5;
+            text-align: center;
+            font-size: 12px;
+            color: #333;
+        }
+
+        .preTan {
+            display: none;
+            width: 600px;
+            height: 110px;
+            background: #fff;
+            box-shadow: #ddd 2px 3px 30px 20px;
+            position: absolute;
+            left: 0;
+            top: 21%;
+            right: 0;
+            margin: auto;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .preTan p {
+            padding-top: 10px;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .preTan p span {
+            color: #1394ff;
+        }
+
+        .progress {
+            width: 90%;
+            margin: 0 auto;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+<div class="upAll">
+    <div class="upTop">
+        <div class="upTop1"><img src="#springUrl('/resource/img/salary/2.2up1.png')" alt="">&nbsp;上传工资表</div>
+        <div class="upTop2"><img src="#springUrl('/resource/img/salary/2.2up2.png')" alt="">&nbsp;预览并发工资</div>
+    </div>
+    <div id="picker">批量上传</div>
+    <div class="upAskFor">
+        <div class="upAsk">
+            <p class="upAskP1">上传要求</p>
+            <p>1、支持WPS、excel2003以上版本文件。</p>
+            <p>2、按照模板格式录入正确的信息。</p>
+            <p>3、支持格式见示例 <span><a href="$!{BatchRapidlyTemplate}">下载模板文件</a></span></p>
+        </div>
+    </div>
+    <table class="upFooter">
+        <tr>
+            <td colspan='5'>示例</td>
+        </tr>
+        <tr>
+            <td>姓名</td>
+            <td>身份证号</td>
+            <td>工资卡开户行</td>
+            <td>工资卡卡号</td>
+            <td>实发金额（元）</td>
+        </tr>
+        <tr>
+            <td>汪洋</td>
+            <td>111111111111111111</td>
+            <td>工商银行</td>
+            <td>111111111111111111</td>
+            <td>5000</td>
+        </tr>
+    </table>
+    <div class="preTan">
+        <p>批量上传 <span></span><span id="uploadProgres">0%</span></p>
+        <div>
+            <!--用来存放文件信息-->
+            <div id="thelist" class="uploader-list">
+            ##                    <p class="state">上传中</p>
+                <div class="progress progress-striped active">
+                    <div class="progress-bar" role="progressbar" style="width: 14%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

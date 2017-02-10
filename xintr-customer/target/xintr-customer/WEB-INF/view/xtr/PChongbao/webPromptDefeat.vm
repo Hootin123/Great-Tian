@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	#parse("comm/head.vm")
+	<meta charset="UTF-8">
+	 <title>审核未通过</title>
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/pchongbao/webPromptDefeat.css')">
+</head>
+<body>
+    <input type="hidden" name="companyId" value="$!{companyId}"/>
+	<div class="defeatHeader">
+		<div class="logo">
+			<img  src=" #springUrl('/resource/img/pchongbao/web-logo1.png')"/>
+		</div>
+		<div class="logo-text">
+			<img src=" #springUrl('/resource/img/pchongbao/web-text1.png')" />
+		</div>
+	</div>
+	<div class="defeatMain">
+		<div class="defeatMain-title">很抱歉，您的审核未通过</div>
+		<p>原因： $!{reason} </p>
+		<p>您可以点击下方按钮重新完善企业信息</p>
+	</div>
+	<div class="defeatFoot">
+		<div class="preSubmit">重新提交
+		<img src=" #springUrl('/resource/img/pchongbao/defeat.png')"></div>
+	</div>
+	
+</body>
+<script>
+  $(".preSubmit").click(function(){
+      var editFlag ="editFlag";
+	  var companyId = $("input[name='companyId']").val();
+      window.location =BASE_PATH+"/web/jumpToCompanyInfoPage.htm?editFlag="+editFlag+"&companyId="+companyId;
+  });
+
+</script>
+</html>

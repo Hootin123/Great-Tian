@@ -1,0 +1,65 @@
+body{
+    min-width: 1440px;
+    min-height: 930px;
+    background: url(../../img/pchongbao/collectionInfo-bg.png) 0 0 no-repeat;
+}
+.defeatHeader{
+    width:100%;
+    padding: 40px 115px 0;
+    height: 110px;
+    box-sizing: border-box;
+}
+.defeatHeader .logo{
+    float: left;
+}
+.defeatHeader .logo-text{
+    float: right;
+}
+.defeatMain{
+    width: 100%;
+    height: 260px;
+    margin:0 auto;
+    margin-top: 153px;
+    text-align: center;
+
+}
+.defeatMain-title{
+    width: 100%;
+    height: 60px;
+    font-size: 36px;
+    color: #fff;
+    font-family: '宋体';
+    letter-spacing: -4px;
+    font-weight: bold;
+    font-variant:inherit;
+}
+.defeatMain p{
+    width: 100%;
+    line-height: 40px;
+    font-family: '宋体';
+    color:#fff;
+    letter-spacing: -3px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.defeatFoot .preSubmit{
+    width: 273px;
+    height: 70px;
+    margin:0 auto;
+    background: url(../../img/pchongbao/getPacket.png) 0 0 no-repeat;
+    font-size: 36px;
+    text-align: center;
+    line-height: 60px;
+    color: #000;
+    font-family: '宋体';
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+}
+.defeatFoot .preSubmit img{
+    position: absolute;
+    left: 300px;
+    top: 20px;
+
+}

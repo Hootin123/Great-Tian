@@ -1,0 +1,144 @@
+@charset "UTF-8";
+body {
+    height: 100%;
+    background: #fff;
+    position: relative; }
+
+.header{
+    min-width: 1200px;
+    width: 100%;
+    height: 80px;
+    font-family: '微软雅黑';
+    text-align: center;
+    line-height: 80px;
+    border-bottom: 1px solid #dbe9ee;
+    color: #333;
+    position:relative;
+    overflow: hidden;
+}
+.header img{
+    position: absolute;
+    top:0;
+    bottom:0;
+    right:30px;
+    margin:auto;
+    cursor:pointer;
+}
+.header h2 b {
+    color: #000; }
+.header h2 em {
+    display: block;
+    width: 25px;
+    height: 25px;
+    background: url(../../img/close.png) 0 0 no-repeat;
+    position: absolute;
+    right: 20px;
+    top: 28px; }
+
+section {
+    width: 80%;
+    margin: 20px auto; }
+section .top {
+    width: 100%;
+    height: 100px; }
+section .top p {
+    width: 560px;
+    margin: 0 auto;
+    line-height: 40px;
+    font-size: 15px;
+    color: #333;
+    font-weight: 800;
+    font-family: '微软雅黑'; }
+section .top span {
+    color: #f99b15; }
+section .cont2 {
+    width: 500px;
+    margin: 0 auto;
+    min-height: 360px; }
+section .cont2 .left {
+    width: 25%;
+    float: left; }
+section .cont2 .left li {
+    height: 60px;
+    font-size: 14px;
+    color: #666;
+    line-height: 60px;
+    font-family: '微软雅黑';
+     }
+section .cont2 .left .check,section .cont2 .right .check{
+    height: 40px;
+    line-height: 40px;
+}
+section .cont2 .left li span {
+    color: #ff473f;
+    margin-right: 5px; }
+section .cont2 .right {
+    width: 75%;
+    float: right; }
+section .cont2 .right li {
+    height: 60px;
+    font-size: 14px;
+    line-height: 60px;
+    color: #666;
+
+    font-family: '微软雅黑'; }
+section .cont2 .right li input {
+    width: 320px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #b9cce1;
+    text-indent: 6px; }
+section .cont2 .right li select {
+    width: 320px;
+    border: 1px solid #b9cce1;
+    height: 30px; }
+section .cont2 .right .txtarea {
+    margin-top: 20px; }
+section .cont2 .right .txtarea textarea {
+    line-height: 30px;
+    border: 1px solid #b9cce1;
+    text-indent: 6px; }
+
+footer .bottom {
+    overflow: hidden;
+    width: 100%;
+    height: 80px;
+    position: fixed;
+    bottom:0;
+    background:#f1f9fc;
+}
+footer .bottomBtn{
+    width:400px;
+    height:40px;
+    margin:20px auto;
+
+}
+footer .bottomBtn #updateBtn {
+    display: block;
+    width: 240px;
+    height: 40px;
+    border: 0;
+    border-radius: 6px;
+    font-size: 18px;
+    color: #fff;
+    background: #0696fa;
+    float: left;
+    cursor: pointer;
+    text-indent: 10px;
+    font-family: "微软雅黑";
+
+}
+footer .bottomBtn .btnClose {
+    width:140px;
+    height:40px;
+    background: #FFFFFF;
+    border: 1px solid #0696fa;
+    color: #0696fa;
+    float:right;
+    font-size:18px;
+    border-radius: 6px;
+    font-family: "微软雅黑";
+    cursor: pointer;
+
+}
+/*# sourceMappingURL=dimission.css.map */

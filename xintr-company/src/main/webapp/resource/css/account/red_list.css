@@ -1,0 +1,44 @@
+.top{width:120px; margin:50px auto 0;color:#333;}
+.close{width:30px;height:30px;position: absolute;right:50px;top:50px;cursor:pointer}
+.con{width:1150px;margin:0 auto;margin-top:50px;min-width:1150px}
+.con ul li{float:left;width:200px; height:200px;background:url(../../img/red.png) no-repeat;margin:70px 0 0 70px;background-size:cover;filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+        src='../../img/red.png', sizingMethod='scale');position:relative;}
+.red{color:#ffec14;position: absolute;left:70px;top:10px;}
+.details{display: block;width:60px;height:20px;background:#fe7155;line-height:20px;text-align: center;color:#fff;position: absolute;left:70px;top:108px;border-radius:5px;font-size:12px;cursor: pointer}
+.eight {font-size:20px;color:#333333;position: absolute;left:65px;top:60px;font-weight:600}
+.be{position: absolute;left:80px;bottom:28px;color:#ffc7bc;font-size:12px;}
+.time{position: absolute;left:35px;bottom:8px;color:#ffc7bc;font-size:12px;}
+.footer1{width:250px;height:40px;
+    position:absolute;bottom:50px;left:40%;}
+.footer1 a{width:250px;height:40px;background:#0696fa;border:0;border-radius:10px;font-size:16px;color:#fff;font-family: "微软雅黑";
+    display:block;text-align: center;
+    line-height:40px}
+.pacity{width:100%;height:100%;opacity:0.7;background: #000000; position: absolute;left: 0;top: 0; filter:alpha(opacity=70);display: none}
+.aboxbg{width:540px;height:500px;position: absolute;left:36%;top:20%;display: none}
+.abox{width:500px;height:460px;background:#fff;position: absolute;top:40px;left:0;border-radius:20px;}
+.abImg {position: absolute;right: 20px;top: 20px;cursor: pointer;z-index: 10;}
+.abox_head{	overflow: hidden;height: 59px;}
+.abox_head h3{text-align: center;margin-top:30px;font-size: 20px;}
+.span1{position:absolute;left:42px;top:80px;}
+.span2{position: absolute;left:42px;top:130px;font-size:16px;}
+.span3{position: absolute;left:42px;top:180px;}
+.span4{position: absolute;left:42px;top:210px;}
+.span5{position: absolute;left:42px;top:240px;}
+.span6{position: absolute;left:52px;top:270px;}
+.span7{position: absolute;left:42px;top:300px;}
+.span8{position: absolute;left:42px;top:330px;}
+.abox i {display: block;width: 300px;height: 40px;border-radius: 6px;background: #0696fa;color: #FFFFFF;text-align: center;line-height: 40px;cursor: pointer;position:absolute;left:100px;top:390px;}
+
+.red_desc{
+    padding-top: 150px;
+}
+.red_desc{
+    padding-top: 150px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.red_desc ol li {
+    list-style-type: decimal;
+    padding-top: 10px;
+}

@@ -1,0 +1,51 @@
+
+html{
+    width:100%;
+    height: 100%;
+    overflow: hidden;
+
+}
+
+body{
+    width:100%;
+    height:100%;
+    overflow: hidden;
+    background: url(../../img/h5wallet/defeated-bg.png) 0 0 no-repeat;
+    background-size: 100%;
+}
+h3{
+    width: 2.06rem;
+    margin: 0 auto;
+    margin-top:1.96rem;
+    height:1.5rem;
+    font-size: 0.48rem;
+    font-family: '微软雅黑';
+    color: #333;
+    font-weight: 300;
+
+}
+.txt p{
+    width:3.74rem;
+    height:0.56rem;
+    margin:0 auto;
+    font-size:0.32rem;
+    font-family: '微软雅黑';
+    color: #333;
+
+}
+.txt p:nth-child(2){
+    color: #ff6142;
+}
+footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 0.9rem;
+    background:#ff6142;
+    font-size:0.34rem;
+    font-family: '微软雅黑';
+    color: #fff;
+    text-align: center;
+    line-height: 0.9rem;
+}

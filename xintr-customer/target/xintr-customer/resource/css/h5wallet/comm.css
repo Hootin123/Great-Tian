@@ -1,0 +1,42 @@
+	/* reset */
+	body,h1,h2,h3,h4,h5,p,dl,dd,ul,ol,form,input,textarea,th,td,select { margin:0; padding:0; }
+	em,i { font-style:normal; }
+	li { list-style:none; }
+	a { text-decoration:none; color: inherit; }
+	img { border:none; vertical-align:top; }
+	table { border-collapse:collapse; }
+	input,textarea { outline:none; }
+	textarea { resize:none; overflow:auto; }
+	body { font-size:14px; font-family:"微软雅黑"; }
+	strong{ font-weight: normal;}
+	/*end reset*/
+	.clear:after{ content: ''; display: block; clear: both; }
+	.promt {
+		position: absolute;
+		z-index: 10;
+		left: 2.6rem;
+		top: 4.5rem;
+		width: 2.2rem;
+		height: 1.4rem;
+		border-radius: 0.2rem;
+		background: rgba(6, 150, 250, 0.6);
+		display: none; }
+	.promt h4 {
+		width: 100%;
+		height: 0.7rem;
+		font-size: 0.3rem;
+		line-height: 0.8rem;
+		text-align: center;
+		color: #fff;
+		font-weight: 300; }
+	.promt p {
+		width: 0.8rem;
+		height: 0.5rem;
+		background: rgba(43, 96, 215, 0.6);
+		margin: 0 auto;
+		margin-top: 0.1rem;
+		font-size: 0.3rem;
+		text-align: center;
+		line-height: 0.5rem;
+		border-radius: 0.1rem;
+		color: #e3e3e3; }

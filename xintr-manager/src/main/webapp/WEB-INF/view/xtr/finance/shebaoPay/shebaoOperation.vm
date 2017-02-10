@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>H+ 社保公积金订单操作</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-table/bootstrap-table.min.css')" rel="stylesheet">
+</head>
+
+<body>
+<div class="col-sm-12">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <form class="form-group" id="queryForm">
+                <div class="col-sm-6">
+                    <label style="margin-top:10px;" class="col-sm-3">订单编号</label>
+                    <div class="col-sm-4">
+                        <input type="text"  class="form-control" name="orderNumber" id="orderNumber"/>
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="button" value="取消订单" onclick="cancelOrder();">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+<script src="#springUrl('/resource/js/hui/content.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table-mobile.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/validate/jquery.validate.min.js')"></script>
+<script src="#springUrl('/resource/js/comm/jdatagrid.js')"></script>
+<script>
+    function cancelOrder(){
+        //565410114029561
+        var orderNumber=$("#orderNumber").val();
+        if(orderNumber==undefined || orderNumber==''){
+            layer.alert("请输入编号",{title:'提示信息'});
+        }
+        $.ajax({
+            type: 'post',
+            url: BASE_PATH+'/shebaoOperation/cancelOrder.htm',
+            data: {"orderStr":orderNumber},
+            success: function (data) {
+                if (data.success) {
+                    layer.alert("取消成功",{title:'提示信息'});
+                } else {
+                    layer.alert(data.message,{title:'提示信息'});
+                }
+            }
+        });
+    }
+
+</script>
+</html>

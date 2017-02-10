@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xtr.core.persistence.reader.customer.CustomersRecordReaderMapper" >
+  <resultMap id="BaseResultMap" type="com.xtr.api.domain.customer.CustomersRecordBean" >
+    <id column="record_id" property="recordId" jdbcType="BIGINT" />
+    <result column="record_customer_id" property="recordCustomerId" jdbcType="BIGINT" />
+    <result column="record_operation_type" property="recordOperationType" jdbcType="INTEGER" />
+    <result column="record_operation_time" property="recordOperationTime" jdbcType="TIMESTAMP" />
+    <result column="record_dept_id" property="recordDeptId" jdbcType="BIGINT" />
+    <result column="record_dept_name" property="recordDeptName" jdbcType="VARCHAR" />
+    <result column="record_arrive_time" property="recordArriveTime" jdbcType="TIMESTAMP" />
+    <result column="record_station_reason" property="recordStationReason" jdbcType="VARCHAR" />
+    <result column="record_dimissing_type" property="recordDimissingType" jdbcType="INTEGER" />
+    <result column="record_dimissing_time" property="recordDimissingTime" jdbcType="TIMESTAMP" />
+    <result column="record_compensation" property="recordCompensation" jdbcType="DECIMAL" />
+    <result column="record_dimissing_reason" property="recordDimissingReason" jdbcType="VARCHAR" />
+    <result column="record_create_time" property="recordCreateTime" jdbcType="TIMESTAMP" />
+    <result column="record_update_time" property="recordUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="record_dept_id_before" property="recordDeptIdBefore" jdbcType="BIGINT" />
+    <result column="record_station_name_before" property="recordStationNameBefore" jdbcType="VARCHAR" />
+    <result column="record_station_name_after" property="recordStationNameAfter" jdbcType="VARCHAR" />
+    <result column="record_salary_before" property="recordSalaryBefore" jdbcType="TIMESTAMP" />
+    <result column="record_salary_after" property="recordSalaryAfter" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <resultMap id="AllResultMap" type="com.xtr.api.dto.customer.CustomersDto" extends="BaseResultMap">
+    <result column="customer_current_salary" property="customerCurrentSalary" jdbcType="DECIMAL" />
+    <result column="customer_probation_salary" property="customerProbationSalary" jdbcType="DECIMAL" />
+    <result column="customer_regular_salary" property="customerRegularSalary" jdbcType="DECIMAL" />
+    <result column="beforeDepName" property="beforeDepName" jdbcType="VARCHAR" />
+    <result column="afterDepName" property="afterDepName" jdbcType="VARCHAR" />
+    <result column="station_enter_time" property="stationEnterTime" jdbcType="TIMESTAMP" />
+    <result column="station_regular_time" property="stationRegularTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    record_id, record_customer_id, record_operation_type, record_operation_time, record_dept_id, 
+    record_dept_name, record_arrive_time, record_station_reason, record_dimissing_type, 
+    record_dimissing_time, record_compensation, record_dimissing_reason, record_create_time, 
+    record_update_time,record_dept_id_before,record_station_name_before,record_station_name_after,record_salary_before,record_salary_after
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from customers_record
+    where record_id = #{recordId,jdbcType=BIGINT}
+  </select>
+
+
+  <!-- 根据用户id查询用户 不是删除的员工信息-->
+  <select id="selectByCustomerId"  resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select
+    <include refid="Base_Column_List" />
+    from customers_record
+    where record_customer_id = #{recordCustomerId,jdbcType=BIGINT}
+    AND
+    record_operation_type != 4
+  </select>
+  <!-- 根据用户id查询记录,不包括删除的记录-->
+  <select id="selectRecordByCustomerId"  resultMap="AllResultMap" parameterType="java.lang.Long">
+    select
+    <include refid="Base_Column_List" />,customers.customer_current_salary,customers.customer_probation_salary,customers.customer_regular_salary,
+    beforeDept.dep_name as beforeDepName,afterDept.dep_name as afterDepName,customers_station.station_enter_time,customers_station.station_regular_time
+    from customers_record
+    left join customers on customers_record.record_customer_id=customers.customer_id
+    left join company_deps as beforeDept on customers_record.record_dept_id_before=beforeDept.dep_id
+    left join company_deps as afterDept on customers_record.record_dept_id=afterDept.dep_id
+    left join customers_station on customers_record.record_customer_id=customers_station.station_customer_id
+    where record_customer_id = #{customerId,jdbcType=BIGINT}
+    AND record_operation_type != 4
+  </select>
+
+  <!--获取调薪人数-->
+  <select id="selectRecordCountBySaraly"  resultMap="AllResultMap" parameterType="com.xtr.api.dto.customer.CustomersDto">
+    select
+    <include refid="Base_Column_List" />
+    from customers_record
+    left join customers on customers.customer_id=customers_record.record_customer_id
+    where record_operation_type=6  and customer_company_id = #{customerCompanyId,jdbcType=BIGINT}
+    and record_create_time between #{startTime,jdbcType=TIMESTAMP} and #{endTime,jdbcType=TIMESTAMP}
+    group by record_customer_id
+  </select>
+
+  <!-- 查询所有的调岗且是入职状态或者是转正状态的员工-->
+  <select id="selectTranferPosition"  resultMap="BaseResultMap" parameterType="java.util.Map">
+
+    select <include refid="Base_Column_List" />
+    from customers_record a left join customers_station b on a.record_customer_id = b.station_customer_id
+    where a.record_operation_type = 5
+    -- and
+   -- a.record_arrive_time >=date('${startTimeStr}')
+    AND
+    a.record_arrive_time<![CDATA[ <=date('${endTimeStr}')]]>
+
+    AND   b.station_customer_state in(1,2)
+
+  </select>
+<!-- 离职待离职的员工-->
+  <select id="selectDimission" resultMap="BaseResultMap" parameterType="java.util.Map">
+
+    select <include refid="Base_Column_List" />
+    from customers_record a left join  customers_station  b  on  a.record_customer_id = b.station_customer_id
+    where a.record_operation_type = 3
+    -- and
+    -- a.record_dimissing_time  >=date('${startTimeStr}')
+    and
+    a.record_dimissing_time <![CDATA[ <=date('${endTimeStr}')]]>
+    AND
+    b.station_customer_state in(1,2);
+  </select>
+  <!-- 查询待调岗的员工-->
+  <select id="selectFutureTranferPosition" resultMap="BaseResultMap" parameterType="java.util.Map">
+
+    select <include refid="Base_Column_List" />
+
+    from customers_record a left join  customers_station  b  on  a.record_customer_id = b.station_customer_id
+    where a.record_operation_type = 5
+    and
+    b.station_customer_state in(1,2)
+    AND
+    a.record_customer_id =#{customerId} and  a.record_arrive_time >= date('${currentTimeStr}')
+
+  </select>
+  <!-- 批量获取待离职的员工-->
+  <select id="selectWillLeaveBatch" resultMap="BaseResultMap" parameterType="java.util.List">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM customers_record
+    left join customers_station on customers_station.station_customer_id=customers_record.record_customer_id
+    WHERE station_customer_state!=3 and  station_customer_state!=4 and record_operation_type=3 and record_dimissing_time>=#{nowTime,jdbcType=TIMESTAMP}
+    and record_customer_id IN
+    <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+    order by record_dimissing_time desc
+  </select>
+</mapper>

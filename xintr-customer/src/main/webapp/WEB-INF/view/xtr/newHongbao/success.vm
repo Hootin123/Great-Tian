@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" id="html">
+<head>
+	#parse("comm/head.vm")
+	<meta charset="UTF-8">
+	<title>审核成功</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/newHongbao/success.css')">
+</head>
+<body>
+    <div class="pic"></div>
+	<h3>恭喜您注册成功</h3>
+	<div class="txt">
+		<p>前往PC端登录薪太软官网</p>
+		<p>www.xintairuan.com</p>
+		<p>开启人事管理全薪旅程~</p>
+	</div>
+##	<footer>确定</footer>
+</body>
+</html>

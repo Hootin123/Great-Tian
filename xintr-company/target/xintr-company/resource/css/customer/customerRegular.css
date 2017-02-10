@@ -1,0 +1,127 @@
+@charset "UTF-8";
+body {
+    height: 100%;
+    background: #fff;
+    position: relative; }
+
+
+.header{
+    min-width: 1200px;
+    width: 100%;
+    height: 80px;
+    font-family: '微软雅黑';
+    text-align: center;
+    line-height: 80px;
+    border-bottom: 1px solid #dbe9ee;
+    color: #333;
+    font-weight: 300;
+    position: relative;
+}
+
+.header img{
+    position: absolute;
+    top:0;
+    bottom:0;
+    right:30px;
+    margin:auto;
+    cursor:pointer;
+}
+.header h2 em {
+    display: block;
+    width: 25px;
+    height: 25px;
+    background: url(../../img/customer/close.png) 0 0 no-repeat;
+    position: absolute;
+    right: 20px;
+    top: 28px; }
+
+section {
+    width: 80%;
+    margin: 30px auto; }
+section .top {
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    color: #f99b15;
+    font-size: 15px;
+    font-family: '微软雅黑';
+}
+section .cont {
+    width: 500px;
+    margin: 0 auto;
+    min-height: 360px;
+}
+section .cont .left {
+    width: 20%;
+    float: left;
+}
+section .cont .left li {
+    height: 50px;
+    font-size: 14px;
+    color: #666;
+    line-height: 50px;
+    font-family: '微软雅黑';
+}
+section .cont .left li span {
+    color: #ff473f;
+    margin-right: 5px; }
+section .cont .right {
+    width: 80%;
+    float: right; }
+section .cont .right li {
+    height: 50px;
+    font-size: 14px;
+    line-height: 50px; }
+section .cont .right li input {
+    width: 320px;
+    height: 30px;
+    line-height: 30px;
+    text-indent: 6px; }
+section .cont .right .txtarea {
+    margin-top: 20px; }
+section .cont .right .txtarea textarea {
+    line-height: 30px;
+    text-indent: 6px; }
+
+footer {
+    width: 90%;
+    margin: 20px auto 40px;
+    height: 80px;
+    overflow: hidden;
+    background:#f1f9fc;
+    border:1px solid #dbe9ee;
+}
+footer .bottomBtn {
+    width: 410px;
+    height: 40px;
+    margin: 20px  auto;
+}
+#updateBtn {
+    display: block;
+    width: 200px;
+    height: 40px;
+    border: 0;
+    border-radius: 6px;
+    font-size: 18px;
+    color: #fff;
+    background: #0696fa;
+    float: left;
+    cursor: pointer;
+    font-family: "微软雅黑";
+}
+.btnClose {
+    background: #FFFFFF;
+    border: 1px solid #0696fa;
+    color: #0696fa;
+    width: 200px;
+    float:right;
+    height:40px;
+    line-height: 40px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+    font-family: "微软雅黑";
+}
+
+/*# sourceMappingURL=regular.css.map */

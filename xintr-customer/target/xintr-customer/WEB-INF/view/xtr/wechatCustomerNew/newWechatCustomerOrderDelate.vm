@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" id='html'>
+<head>
+	<meta charset="UTF-8">
+	<title>工资单详情</title>
+	#parse("comm/head.vm")
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/wechatCustomerNew/customerOrder.css')">
+</head>
+<body>
+	<header>
+		<div class="pay">实发工资：<span>$!{detail.realWage}元</span></div>
+		<div class="payInfo">
+			<p>发放日期：<i>$!date.format('yyyy.MM.dd',$!{detail.payDay}) </i></p>
+			<p>工资卡：<i>$!{detail.customerBanknumber}</i></p>
+		</div>
+	</header>
+##	<div class="payHint">6月份社保公积金代缴失败，金额已退回你的工资卡内，请注意查收</div>
+	<section>
+		<table>
+			<tr class='commTr'>
+				<td class='payLeft'>基本工资</td>
+				<td>
+                <a>基本工资</a> <br>
+                <a>调薪后工资</a> <br>
+				</td>
+				<td class='payright'>
+					<a>$!{detail.baseWages}元</a><br>
+					<a>$!{detail.addWages}元</a>
+				</td>
+
+			</tr>
+			<tr class='commTr'>
+				<td class='payLeft'>津贴</td>
+				<td>
+					#foreach($item in $!allowanceList)
+                        <a>$!{item.detailName}</a> <br>
+					#end
+
+				</td>
+				<td class='payright'>
+					#foreach($item in $!allowanceList)
+                        <a>$!{item.detailValue}元</a> <br>
+					#end
+				</td>
+			</tr>
+			<tr>
+				<td class='payLeft'>奖金</td>
+				<td>绩效奖金</td>
+				<td class='payright'>$!{detail.totalBonus}元</td>
+			</tr>
+			<tr>
+				<td class='payLeft'>应发工资</td>
+				<td>应发工资</td>
+				<td class='payright mayPay'>$!{detail.shouldAmount}元</td>
+			</tr>
+		<!-- </table>
+		<table class="table1"> -->
+			<tr class='borderTr'></tr>
+			<tr class='commTr'>
+				<td class='payLeft'>出勤</td>
+				<td>
+					<a>缺勤天数</a> <br>
+					<a>缺勤扣款</a> <br>
+				</td>
+				<td class='payright'>
+					<a>$!{detail.absenceDayNumber}天</a><br>
+					<a class='cutPay'>- $!{detail.attendanceDeduction}元</a><br>
+				</td>
+			</tr>
+			<tr class='commTr'>
+				<td class='payLeft'>社保公积金</td>
+				<td>
+					<a>社保代扣（个人）</a> <br>
+					<a>公积金扣款（个人）</a> <br>
+				</td>
+				<td class='payright'>
+					<a class="cutPay">-$!{detail.socialSecurity}元</a><br>
+					<a class='cutPay'>-$!{detail.fund}元</a><br>
+				</td>
+			</tr>
+			<tr>
+				<td class='payLeft'>税前调整</td>
+				<td>税前补发/扣款</td>
+				<td class='payright'>$!{detail.pretax}元</td>
+			</tr>
+			<tr>
+				<td class='payLeft'>个人所得税</td>
+				<td>个人所得税</td>
+				<td class='payright'><a class='cutPay'>-$!{detail.personalTax}元</a></td>
+			</tr>
+			<tr>
+				<td class='payLeft'>税后调整</td>
+				<td>税后补发/扣款</td>
+				<td class='payright '>$!{detail.afterTax}元</td>
+			</tr>
+		</table>
+	</section>
+	<footer>$!{detail.companyName}</footer>
+</body>
+<script type="text/javascript">
+	
+</script>
+</html>

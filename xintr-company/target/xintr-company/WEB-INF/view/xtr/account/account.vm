@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>我的账户 - 应付款</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/account/account.css')" rel="stylesheet">
+    <script src="#springUrl('/resource/js/account/canvas.js')"></script>
+    <script src="#springUrl('/resource/js/account/iMove.js')"></script>
+</head>
+
+<body>
+
+<div class="main_right account">
+    <ol>
+        <li class="active1 account_nav_first">账户资产</li>
+        <li style="display: none;"><a style="display: block;" href="myaccount1.html">应付款</a></li>
+        <li><a style="display: block;" href="#springUrl('/balanceOfPayments.htm')">收支记录</a></li>
+    </ol>
+
+    <div>
+        <p class="balance">
+            <span class="balance_title">账户余额（元）</span>
+            #if($!{accountData.balance})
+            <span class="balance_cash">$!{xtr.money($!{accountData.balance})}</span>
+            #else
+            <span class="balance_cash">0.00</span>
+            #end
+        </p>
+        <p class="balance" style="margin-top: 10px;">
+            <span class="balance_title">红包余额（元）</span>
+            #if($!{accountData.redAmout})
+            <a href="#springUrl('/red_list.htm')" class="balance_cash">$!{xtr.money($!{accountData.redAmout})}</a>
+            #else
+            0.00
+            #end
+        </p>
+        <div class="balance_chart clear">
+            <div class="balance_rt">
+                <canvas width="300" height="300" id="cav"></canvas>
+                <span class="amount_balance">冻结总余额（元）<br />
+                    #if($!{accountData.block})
+                    <strong>$!{xtr.money($!{accountData.block})}</strong>
+                    #else
+                    <strong>0.00</strong>
+                    #end
+
+                </span>
+                <div class="balance_list">
+                    <!--#if($!{accountData.payDates})
+                    #foreach($data in $!{accountData.payDates})
+                    <span class=""><strong>$!{data.excelCostTotal}</strong><em>（$!date.format('MM月dd日',$!{data.excelPayday})）发工资</em></span>
+                    #end
+                    #end-->
+                </div>
+            </div>
+            <div class="balance_lf">
+                <span class="amount_balance1">可用余额（元）
+                    #if($!{accountData.available})
+                    <strong>$!{xtr.money($!{accountData.available})}</strong>
+                    #else
+                    <strong>0.00</strong>
+                    #end
+                </span>
+                <canvas width="300" height="300" id="cav1"></canvas>
+            </div>
+
+            <input type="hidden" id="blockPercent" value="$!{accountData.blockPercent}" />
+            <input type="hidden" id="availablePercent" value="$!{accountData.availablePercent}" />
+        </div>
+        <div class="balance_btn">
+            #if($!{nocontract} == 1)
+            <a href="javascript:void(0);" onclick="alertBox()">充值</a><a href="javascript:void(0);" onclick="alertBox()">提现</a>
+            #else
+            <a href="#springUrl('/recharge.htm')">充值</a><a href="#springUrl('/withdraw.htm')">提现</a>
+            #end
+        </div>
+    </div>
+
+    <div class="pacity" style="display: none;opacity: 0.7;background: #000000; position: absolute;left: 0;top: 0; filter:alpha(opacity=70);"></div>
+    <div style="display: none;" class="aboxbg" id="aboxbg">
+        <div class="abox" id="abox">
+            <div class="abox_head">
+                <span>提示</span>
+            </div>
+            <p>对不起，我们只对签约用户受理资金相关服务。<br />如果想了解我们的服务，请拨打客服电话<a style="color: #0696FA;">"400-175-8090"</a></p>
+            <i>确认</i>
+        </div>
+    </div>
+
+</div>
+<script src="#springUrl('/resource/js/account/account.js')"></script>
+</body>

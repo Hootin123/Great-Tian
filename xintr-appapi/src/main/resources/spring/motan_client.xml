@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:motan="http://api.weibo.com/schema/motan"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://api.weibo.com/schema/motan http://api.weibo.com/schema/motan.xsd">
+
+
+    <!--注册中心配置 使用不同注册中心需要依赖对应的jar包。-->
+    <motan:registry regProtocol="zookeeper" name="registry" address="${zookeeper.address}" connectTimeout="200000"/>
+
+    <!-- motan协议配置 -->
+    <motan:protocol default="true" name="motan" haStrategy="failover" requestTimeout="100000"
+                    loadbalance="roundrobin" maxClientConnection="10" minClientConnection="2"/>
+
+    <!-- 通用referer基础配置 -->
+    <motan:basicReferer group="motan-demo-rpc1" module="motan-demo-rpc" requestTimeout="200000"
+                        application="myMotanDemo" protocol="motan" registry="registry"
+                        id="motantestClientBasicConfig" check="true"/>
+
+    <!-- appapi client config start-->
+    <motan:referer id="appVersionService" interface="com.xtr.api.service.app.AppVersionService"
+                   basicReferer="motantestClientBasicConfig"/>
+
+    <motan:referer id="customerUserService"
+                   interface="com.xtr.api.service.app.CustomerUserService"
+                   basicReferer="motantestClientBasicConfig"/>
+
+    <motan:referer id="sendMsgService"
+                   interface="com.xtr.api.service.send.SendMsgService"
+                   basicReferer="motantestClientBasicConfig"/>
+
+    <motan:referer id="subAccountService"
+                   interface="com.xtr.api.service.account.SubAccountService"
+                   basicReferer="motantestClientBasicConfig"/>
+
+    <motan:referer id="customerRechargesService"
+                   interface="com.xtr.api.service.customer.CustomerRechargesService"
+                   basicReferer="motantestClientBasicConfig"/>
+
+    <motan:referer id="customerSalarysService"
+                   interface="com.xtr.api.service.customer.CustomerSalarysService"
+                   basicReferer="motantestClientBasicConfig"/>
+
+    <motan:referer id="customerMoneyRecordsService"
+                   interface="com.xtr.api.service.customer.CustomerMoneyRecordsService"
+                   basicReferer="motantestClientBasicConfig"/>
+
+    <motan:referer id="customerMsgsService"
+                   interface="com.xtr.api.service.customer.CustomerMsgsService"
+                   basicReferer="motantestClientBasicConfig"/>
+
+    <motan:referer id="appQuestionFeedbackService"
+                   interface="com.xtr.api.service.app.AppQuestionFeedbackService"
+                   basicReferer="motantestClientBasicConfig"/>
+
+    <motan:referer id="customersService"
+                   interface="com.xtr.api.service.customer.CustomersService"
+                   basicReferer="motantestClientBasicConfig"/>
+    <!-- appapi client config end-->
+
+    <!-- gateway service config start-->
+    <motan:referer id="jdPayService"
+                   interface="com.xtr.api.service.gateway.JdPayService"
+                   basicReferer="motantestClientBasicConfig"/>
+
+    <!-- gateway service config end-->
+
+    <!-- company service config start-->
+    <motan:referer id="companyRechargesService"
+                   interface="com.xtr.api.service.company.CompanyRechargesService"
+                   basicReferer="motantestClientBasicConfig"/>
+
+    <motan:referer id="companysService"
+                   interface="com.xtr.api.service.company.CompanysService"
+                   basicReferer="motantestClientBasicConfig"/>
+    <!-- company service config end-->
+
+    <motan:referer id="customerShebaoOrderService"
+                   interface="com.xtr.api.service.shebao.CustomerShebaoOrderService" basicReferer="motantestClientBasicConfig"/>
+
+    <motan:referer id="companyShebaoService"
+                   interface="com.xtr.api.service.shebao.CompanyShebaoService" basicReferer="motantestClientBasicConfig"/>
+
+    <motan:referer id="rapidlyPayrollService"
+                   interface="com.xtr.api.service.salary.RapidlyPayrollService" basicReferer="motantestClientBasicConfig"/>
+
+</beans>

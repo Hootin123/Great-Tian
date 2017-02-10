@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    #parse("comm/head.vm")
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/comm/comm.css')">
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/home/homePage.css')">
+</head>
+<body>
+<div class="allContent">
+    <div class="header">
+        <h4>$!{hourStr}<span>$!{userMemberName}</span></h4>
+        <input name="firstVisitHomePage" type="hidden" id="firstVisitHomePage" value="$!{firstVisitHomePage}"/>
+        <div class="titleInfo">
+            <p>当前员工 <span>$!{allCount} </span>&nbsp;&nbsp;&nbsp; |
+                &nbsp;&nbsp;&nbsp;本月$!{currentDayArea}：转正<span>$!{regularCount}</span> 离职<span>$!{dimissCount}</span>
+            </p>
+        </div>
+    </div>
+    <div class="section">
+        <input id="payCycleId" type="hidden" value="$!{payCycleId}">
+
+        <div class="struct">
+            <ul>
+                <li>
+                    <ul>
+                        <dt>
+                            <img id="addCustomer" src="#springUrl('/img/addUser.png')">
+                        </dt>
+                        <dd>新增员工</dd>
+                    </ul>
+                </li>
+                <li>
+                    <ul>
+                        <dt>
+                            <img id="toOrganizational" src="#springUrl('/img/organize.png')">
+                        </dt>
+                        <dd>组织架构</dd>
+                    </ul>
+                </li>
+                <li>
+                    <ul>
+                        <dt>
+                            <img id="toSetPay" src="#springUrl('/img/set.png')">
+                        </dt>
+                        <dd>薪酬设置</dd>
+                    </ul>
+                </li>
+                <li>
+                    <ul>
+                        <dt><img id="toPaySalary" src="#springUrl('/img/payoff.png')"></dt>
+                        <dd>发工资</dd>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div class="title">待办事项</div>
+    <div class="sheet">
+        <ul>
+            #if($!{list} && $!{list.size()} > 0)
+                #foreach($data in $!{list})
+                    #if($!{velocityCount} == 1)
+                        <li class='sheetAdd foundLi'>
+                            <h5></h5>
+                                    <textarea class="multiRow" id="$!{data.materId}"
+                                              placeholder="请输入内容">$!{data.materContent}</textarea>
+                            <img class="sheetAddLi" src="#springUrl('/resource/img/homeClose.png')" alt="">
+                            <em></em>
+                        </li>
+                    #else
+                        <li class='foundLi' count="$!{velocityCount}">
+                            <h5>
+                            </h5>
+                                    <textarea class="multiRow" id="$!{data.materId}"
+                                              placeholder="请输入内容">$!{data.materContent}</textarea>
+                            <img class='liImg' src="#springUrl('/resource/img/homeClose.png')" alt="">
+                        </li>
+                    #end
+                #end
+            #else
+                <li class='sheetAdd foundLi'>
+                    <h5>
+                    </h5>
+                    <textarea class="multiRow" id="" placeholder="请输入内容"></textarea>
+                    <img class="sheetAddLi" src="#springUrl('/resource/img/homeClose.png')" alt="">
+                    <em></em>
+                </li>
+            #end
+
+        </ul>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    $(function(){
+        var firstVisitHomePage = $("#firstVisitHomePage").val();
+      if(firstVisitHomePage!=null&&firstVisitHomePage!=undefined&&firstVisitHomePage!="")  {
+          parent.guideInfo();
+          $("#firstVisitHomePage").val("");
+      }
+
+    })
+
+    $(document).ready(function () {
+        $('.sheetAdd em').on('click', function () {
+            if ($('.sheet').find('li').size() > 2 || $('.multiRow').val() == "" || $('.multiRow').val() == "") {
+                return false;
+            } else {
+                $('.sheet ul').append("<li class='foundLi'><h5></h5> <textarea id='' class='multiRow' placeholder='请输入内容' ></textarea><img  class='liImg' src=#springUrl(
+                    '/resource/img/homeClose.png ')/></li>")
+            }
+
+            $('.foundLi').on('mouseover', function () {
+                $(this).find('.liImg').show();
+            })
+            $('.foundLi').on('mouseout', function () {
+                $(this).find('.liImg').hide();
+            })
+
+            //从模板中生成的进行逻辑删除
+            $('.liImg').on('click', function () {
+//            alert("是模板的")
+                //删除
+                var textVal = $(this).prev().attr("id")
+//            alert(textVal);
+                $(this).parents('.foundLi').remove();
+                if (textVal != null && textVal != "" && textVal != undefined) {
+                    $.ajax({
+                        url: BASE_PATH + '/deleteMater.htm',
+                        dataType: 'json',
+                        type: 'POST',
+                        data: {'materId': textVal},
+                        success: function (data) {
+                            if (data.success) {
+                                //删除节点标签
+//                            layer.alert("操作成功");
+                            } else {
+//                            layer.alert("操作失败");
+                            }
+                        },
+                        error: function () {
+//                        layer.alert("网络错误");
+                        }
+
+                    });
+                }
+
+
+            });
+        });
+
+        $('.foundLi').on('mouseover', function () {
+            $(this).find('.liImg').show();
+        });
+        $('.foundLi').on('mouseout', function () {
+            $(this).find('.liImg').hide();
+        });
+
+
+        //当前数据库查出来的待办事项进行删除
+        $('.liImg').on('click', function () {
+//        alert("不是模板的")
+            //删除
+            var textVal = $(this).prev().attr("id")
+            //逻辑删除
+            if (textVal == null || textVal == "" || textVal == undefined) {
+                return false;
+            }
+            $(this).parents('.foundLi').remove();
+            $.ajax({
+                url: BASE_PATH + '/deleteMater.htm',
+                dataType: 'json',
+                type: 'POST',
+                data: {'materId': textVal},
+                success: function (data) {
+                    if (data.success) {
+                        //删除节点标签
+                        // $(this).parents('.foundLi').remove();
+//                    layer.alert("操作成功")
+                    } else {
+//                    layer.alert("操作失败");
+                    }
+                },
+                error: function () {
+//                layer.alert("网络错误");
+                }
+
+            });
+        })
+
+
+        $('.sheetAdd').on('mouseover', function () {
+            $(this).find('img').show();
+        })
+        $('.sheetAdd').on('mouseout', function () {
+            $(this).find('img').hide();
+        })
+        //删除第一个里面的内容
+        $('.sheetAddLi').on('click', function () {
+            if ($('.sheet').find('li').size() == 1) {
+                $('.multiRow').val("");
+                var textVal = $(this).prev().attr("id");
+                if (textVal != null && textVal != "" && textVal != undefined) {
+                    $.ajax({
+                        url: BASE_PATH + '/deleteMater.htm',
+                        dataType: 'json',
+                        type: 'POST',
+                        data: {'materId': textVal},
+                        success: function (data) {
+                            if (data.success) {
+                                //删除节点标签
+                                // $(this).parents('.foundLi').remove();
+//                            layer.alert("操作成功")
+                            } else {
+//                            layer.alert("操作失败");
+                            }
+                        },
+                        error: function () {
+//                        layer.alert("网络错误");
+                        }
+
+                    });
+                }
+
+
+            } else {
+                return false;
+            }
+        })
+
+
+        //新增员工
+        $("#addCustomer").on("click", function () {
+            var menu = "员工管理";
+            //判断是否有权限
+            $.ajax({
+                url: BASE_PATH + '/hasAuthority.htm',
+                type: 'POST',
+                dataType: 'json',
+                data: {'menu': menu},
+                success: function (data) {
+                    if (data.success) {
+                        if (data.data) {
+                            //有权限
+                            var index = layer.open({
+                                type: 2,
+                                title: false,
+                                maxmin: false,
+                                closeBtn: 0,
+                                shadeClose: false, //点击遮罩关闭层
+                                area: ['650px', '380px'],
+                                content: BASE_PATH + '/customerManager/toCustomerAddPage.htm'
+                            });
+
+                            //窗口最大化
+                            layer.full(index);
+
+                        } else {
+                            //无权限
+                            window.location = BASE_PATH + "/toNoAuthorityPage.htm";
+                        }
+                    } else {
+                        layer.alert(data.message);
+                    }
+                }
+            });
+
+
+        });
+
+        //组织架构
+        $("#toOrganizational").on("click", function () {
+            var menu = "员工管理";
+            //判断是否有权限
+            $.ajax({
+                url: BASE_PATH + '/hasAuthority.htm',
+                type: 'POST',
+                dataType: 'json',
+                data: {'menu': menu},
+                success: function (data) {
+                    if (data.success) {
+                        if (data.data) {
+                            var index = layer.open({
+                                type: 2,
+                                title: false,
+                                maxmin: false,
+                                closeBtn: 0,
+                                shadeClose: false, //点击遮罩关闭层
+                                area: ['650px', '380px'],
+                                content: BASE_PATH + "/dept/deptIndex.htm"
+                            });
+
+                            //窗口最大化
+                            layer.full(index);
+                        } else {
+                            //无权限
+                            window.location = BASE_PATH + "/toNoAuthorityPage.htm";
+                        }
+                    } else {
+                        layer.alert(data.message);
+                    }
+                }
+
+            });
+
+
+        });
+        //薪酬设置
+        $("#toSetPay").click(function () {
+
+            //判断是否有权限
+            var menu = "工资核算";
+            $.ajax({
+                url: BASE_PATH + '/hasAuthority.htm',
+                type: 'POST',
+                dataType: 'json',
+                data: {'menu': menu},
+                success: function (data) {
+                    if (data.success) {
+                        if (data.data) {
+//                            var a = BASE_PATH + "/salary_setting/allowance.htm";
+//                            parent.allPop(a);
+                            var index = layer.open({
+                                type: 2,
+                                title: false,
+                                closeBtn: 0,
+                                maxmin: false,
+                                shadeClose: false, //点击遮罩关闭层
+                                area: ['650px', '380px'],
+                                content: BASE_PATH + "/salary_setting/allowance.htm"
+                            });
+                            //窗口最大化
+                            layer.full(index);
+                        } else {
+                            //无权限
+                            window.location = BASE_PATH + "/toNoAuthorityPage.htm";
+                        }
+                    } else {
+                        layer.alert(data.message);
+                    }
+                }
+
+            });
+
+        });
+        //发工资
+        $("#toPaySalary").click(function () {
+            var menu = "工资核算";
+            var payCycleId = $("#payCycleId").val();
+            //判断是否有权限
+            $.ajax({
+                url: BASE_PATH + '/hasAuthority.htm',
+                type: 'POST',
+                dataType: 'json',
+                data: {'menu': menu},
+                success: function (data) {
+                    if (data.success) {
+                        if (data.data) {
+                            //有权限
+                            //判断当前账户的记薪周期有没有设置
+                            if (payCycleId != null && payCycleId != undefined && payCycleId != "") {
+                                var index = layer.open({
+                                    type: 2,
+                                    title: false,
+                                    closeBtn: 0,
+                                    maxmin: false,
+                                    shadeClose: false, //点击遮罩关闭层
+                                    area: ['650px', '380px'],
+                                    content: BASE_PATH + "/monthlypayroll/monthlypayroll.htm"
+                                });
+                                //窗口最大化
+                                layer.full(index);
+                            } else {
+                                //跳转到薪资设置页面
+                                window.location = BASE_PATH + "/payrollAccount/toOneenter.htm"
+                            }
+                        } else {
+                            //无权限
+                            window.location = BASE_PATH + "/toNoAuthorityPage.htm";
+                        }
+                    } else {
+                        layer.alert(data.message);
+                    }
+                }
+
+            });
+
+
+        });
+        //新增 更新待办事项
+        $(document).on('blur', '.sheet textarea', function () {
+            //alert($(this).attr("id"));
+            //判断当前id属性是否有值 没值说明是添加   否则是更新
+            var obj = $(this);
+            var textVal = obj.attr("id");
+            var value = obj.val();
+            if (value == null || value == "" || value == undefined) {
+                return false;
+            }
+            if (textVal == null || textVal == "" || textVal == undefined) {
+                //新增
+                $.ajax({
+                    url: BASE_PATH + '/addTodoMater.htm',
+                    dataType: 'json',
+                    tyep: 'POST',
+                    data: {'materContent': value},
+                    success: function (data) {
+                        if (data.success) {
+                            obj.attr("id", data.data);
+//                        layer.alert("操作成功");
+                        } else {
+//                        layer.alert("操作失败");
+                        }
+                    },
+                    error: function () {
+                        layer.alert("网络错误");
+                    }
+                });
+            } else {
+                //更新操作
+                $.ajax({
+                    url: BASE_PATH + '/updateTodoMater.htm',
+                    dataType: 'json',
+                    tyep: 'POST',
+                    data: {'materId': textVal, 'content': value},
+                    success: function (data) {
+                        if (data.success) {
+//                        layer.alert("操作成功");
+                        } else {
+//                        layer.alert("操作失败");
+                        }
+                    },
+                    error: function () {
+//                    layer.alert("网络错误");
+                    }
+                });
+
+            }
+
+        })
+
+
+    })
+</script>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>H+ 添加协议</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-table/bootstrap-table.min.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-datepicker/css/bootstrap-datetimepicker.css')" rel="stylesheet" />
+</head>
+
+<body>
+<div class="col-sm-12">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <form  id="addProtocolForm">
+                1.请确保已经与客户签订纸质协议，此处为系统补签约<br/>
+                2.<font color="red">请点击企业名称，确认提现银行已设定，如未设定请联系财务设置，否则会造成用户无法提现！</font>
+                <div class="panel panel-default" style="margin-top: 10px;">
+                    <input type="hidden" value="$!{companyDetail.companyId}" name="protocolCompanyId">
+                    <input type="hidden" value="$!{protocolBusinessManager}" name="protocolBusinessManager">
+                    <input type="hidden" value="$!{operationShowState}" id="operationShowState">
+
+                    <table id="companyManageTab" data-mobile-responsive="true" class="table table-hover table-bordered">
+                        <tr>
+                            <td style="width:15%;">企业名称</td>
+                            <td style="width:30%;"><a href='#' onclick='onShowCompanyDetail($!{companyDetail.companyId})' >$!{companyDetail.companyName}</a></td>
+                            <td style="width:15%;"><font color="red">*</font>协议类型</td>
+                            <td style="width:30%;">
+                                <select class="form-control m-b" id="protocolCurrentStatus" name="protocolContractType">
+##                                    <option value="">不选择</option>
+##                                    #if($operationShowState==1)<option value="1">代发协议</option>#end
+##                                    #if($operationShowState==2)<option value="2">垫发协议</option>#end
+##                                    #if($operationShowState==3)<option value="3">代缴社保协议</option>#end
+##                                    #if(!$operationShowState==0)<option value="1">代发协议</option>#end
+                                    #foreach($item in $protocolTypeMap.entrySet())
+##                                        <option value="$item.key">$item.value</option>
+                                        #if($operationShowState==$item.key)<option value="$item.key">$item.value</option>#end
+                                    #end
+                                </select>
+                            </td>
+                        </tr>
+                        <tr><td><font color="red">*</font>生效时间</td>
+                            <td>
+                                <input id="protocolContractTime" name="protocolContractTime" type="text" class="form-control dateTime" required readonly placeholder="点击选择生效时间"/>
+                            </td>
+                            <td><font color="red">*</font>到期时间</td>
+                            <td>
+                                <input id="protocolExpireTime" name="protocolExpireTime" type="text" class="form-control dateTime" required readonly placeholder="点击选择到期时间"/>
+                            </td>
+                        </tr>
+                        <tr><td>业务联系人</td><td><input type="text" class="form-control" name="protocolLinkmanName"></td><td>业务联系人手机</td><td><input type="text" class="form-control" name="protocolLinkmanPhone"></td></tr>
+                        <tr><td>业务经理</td><td>$!{protocolBusinessManager}</td><td>纸质文件编号</td><td><input type="text" class="form-control" name="protocolPaperNo"></td></tr>
+                        #if($operationShowState==2)
+                        <tr><td colspan="4" style="text-align: center;background: #8c8c8c;"><Strong>签约补充信息</Strong></td></tr>
+                        <tr><td><font color="red">*</font>垫付利率(%)</td><td><input type="text" class="form-control" name="protocolRate"></td><td><font color="red">*</font>服务费利率(%)</td><td><input type="text" class="form-control" name="protocolServeRate"></td></tr>
+                        <tr><td><font color="red">*</font>垫付比例(%)</td><td><input type="text" class="form-control" name="protocolScale"></td><td></td><td></td></tr>
+                        #end
+                    </table>
+                </div>
+                <div class="text-center" style="20px;">
+                    <button type="button" class="btn btn-w-m btn-success" id="addPtorocolSureBtn">确定</button>
+                    <button type="button" class="btn btn-w-m btn-white" onclick="cancelAddProtocol()">取消</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+<script src="#springUrl('/resource/js/hui/content.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table-mobile.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/validate/jquery.validate.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-datepicker/js/bootstrap-datetimepicker.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-datepicker/locales/bootstrap-datetimepicker.zh-CN.js')"></script>
+<script src="#springUrl('/resource/js/comm/jdatagrid.js')"></script>
+<script src="#springUrl('/resource/js/market/protocol/addProtocol.js')"></script>
+</html>

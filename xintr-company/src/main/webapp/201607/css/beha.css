@@ -1,0 +1,123 @@
+
+.main-banner{
+	width: 100%;
+	height: 450px;
+	background: url(/resource/img/20160731/bebanner.png);
+    background-position: center 0;
+	min-width: 1200px
+}
+.main-nav{
+	width: 1200px;
+	height: 254px;
+	margin: 0 auto 0;
+	
+}
+.main-nav li{
+	width: 300px;
+	height: 254px;
+	float: left;
+	text-align: center;
+	position: relative;
+	
+}
+.main-nav li img {
+	position: absolute;;
+	left:0;
+	top:0;
+	right:0;
+	bottom:0;
+	margin:auto;
+}
+.main-list1{
+	width: 100%;
+	background: #f4f4f4;
+}
+.main-list1 div{
+	margin: 0 auto 0;
+	width: 1200px;
+	height: 638px;
+	background: url(/resource/img/20160731/beha8.png) no-repeat center 100px;
+}
+.main-listol{
+	color: #666666;
+	font-size: 18px;
+	line-height: 26px;
+}
+.main-listol li{
+	position: absolute;
+}
+.main-listol li:first-child{
+	font-size: 36px;
+	color: #333333;
+	left: 342px;
+	top: 60px;
+}
+.main-listol li:first-child +li{
+	top: 248px;
+	left: 60px;
+	text-align: right;
+}
+.main-listol li:first-child +li +li{
+	top: 400px;
+	left: 150px;
+	text-align: right;
+}
+.main-listol li:first-child +li +li +li{
+	top: 306px;
+	right: 110px;
+}
+.main-listol li:first-child +li +li +li +li{
+	top: 448px;
+	right: 130px;
+}
+.main-listol-title{
+	font-size: 24px;
+	margin-bottom: 25px;
+	line-height: 0;
+}
+.main-listol-tcolor1{
+	color: #0696fa;
+}
+.main-listol-tcolor2{
+	color: #f3d356;
+}
+.main-listol-tcolor3{
+	color: #2fe98f;
+}
+.main-listol-tcolor4{
+	color: #ef5e5e;
+}
+
+.main-listo4{
+	margin: 0 auto 0;
+	width: 1200px;
+	height: 440px;
+	background: url(/resource/img/20160731/beha.jpg) no-repeat center center;
+}
+.main-listo5{
+	width: 100%;
+	height: 574px;
+	background: #f4f4f4;
+	text-align: center;
+}
+.main-listo6{
+	width:100%;
+	height: 350px;
+	min-width: 1200px;
+	background:url(/resource/img/20160731/beha6.png);
+	background-position: center 0;
+}
+
+.main-nav p{
+	text-align: center;
+	font-size:17px;
+	color:#000;
+	padding-top:190px;
+}
+#con{
+	width:100%;
+	min-width: 1200px;
+	height:2245px;
+	background:url(/resource/img/20160731/daifa.png);
+	background-position: center 0;
+}

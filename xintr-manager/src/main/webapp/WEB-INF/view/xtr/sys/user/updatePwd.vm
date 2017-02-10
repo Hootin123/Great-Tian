@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>修改密码</title>
+    #parse("comm/head.vm")
+</head>
+
+
+<div class="ibox" style="padding-top: 0px">
+
+    <div class="ibox-content">
+        <form role="form" class="form-inline" id="editForm" autocomplete="off" >
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">原密码：</label>
+                <input id="oldPwd" name="oldPwd" class="form-control" type="password" autocomplete="off">
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">新密码：</label>
+                <input id="newPwd" name="newPwd" class="form-control" type="password" autocomplete="off">
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">确认新密码：</label>
+                <input id="configPwd" name="configPwd" class="form-control" type="password" autocomplete="off">
+            </div>
+
+        </form>
+    </div>
+</div>
+<script src="#springUrl('/resource/js/sys/user/updatePwd.js')"></script>
+</html>

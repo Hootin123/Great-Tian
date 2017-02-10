@@ -1,0 +1,155 @@
+body{
+    width: 100%;
+    background: #EBEBEB;
+}
+header{
+    width: 100%;
+    height: 0.88rem;
+    margin-top: 0.32rem;
+    margin-bottom: 0.32rem;
+    line-height: 0.88rem;
+    text-align: center;
+    color: #E45353;
+    font-size: 0.24rem;
+    background: #fff;
+}
+ul li{
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    border-bottom:2px solid #ddd;
+    padding:0 0.24rem;
+    box-sizing: border-box;
+    background: #fff;
+    font-family: '微软雅黑';
+    font-size: 0.28rem;
+    position: relative;
+}
+ul li span:last-child{
+    float: right;
+    font-size: 0.26rem;
+}
+.editUl{
+    margin-top: 0.32rem;
+}
+ul li label{
+    float: left;
+}
+ul li label em{
+    color: #E45353;
+}
+ul li input{
+    float: right;
+    width: 5rem;
+    margin-top: 0.22rem;
+    font-size: 0.28rem;
+    height: 0.44rem;
+    text-indent: 0.16rem;
+    border:0;
+    color: #000;
+
+}
+ul li .show{
+    text-align: right;
+}
+
+
+input::-webkit-input-placeholder {
+    color:#C8C8CE;
+}
+.error{
+    max-width: 5rem;
+    min-height: 15px;
+    position: absolute;
+    left: 50%;
+    top: -16px;
+    background: #f99b15;
+    padding: 5px 18px;
+    z-index: 10;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 12px;
+    line-height: 15px;
+
+}
+.error:before{
+    content: "";
+    display: block;
+    border-width: 12px 24px;
+    position: absolute;
+    top: 8px;
+    /*left: -20px;*/
+    border-style: solid dashed dashed;
+    border-color: transparent #f99b15 transparent transparent;
+    font-size: 0;
+    line-height: 0;
+    z-index: -1;
+}
+ul .card{
+    height: 2rem;
+}
+ul .card .pic{
+    width: 2.28rem;
+    height: 1.28rem;
+    border:1px dashed #bfbfbf;
+    float: left;
+    position: relative;
+    margin-top: 0.36rem;
+    margin-left: 0.5rem;
+}
+.card .pic img{
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+.card .pic input{
+    display: block;
+    position: absolute;
+    margin-top: 0;
+    width: 100%;
+    height: 100%;
+    right: 0;
+    top: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    z-index: 15;
+}
+.card .pic i img{
+    display: block;
+    width: 0.36rem;
+    height: 0.36rem;
+    position: absolute;
+    top:0.46rem;
+    left:0.96rem;
+    z-index: 5;
+}
+.card .pic span{
+    font-size: 0.18rem;
+    position: absolute;
+    left: 0.6rem;
+    top:0.66rem;
+    z-index: 5;
+    color: #555;
+}
+footer{
+    width:100%;
+    height:0.88rem;
+    margin-top:0.6rem;
+}
+footer .affirm{
+    width: 6.8rem;
+    height: 100%;
+    margin: 0 auto;
+    background: #1394FF;
+    border-radius: 6px;
+    font-family: '微软雅黑';
+    font-size: 0.28rem;
+    color: #FFFFFF;
+    line-height: 0.88rem;
+    text-align: center;
+}

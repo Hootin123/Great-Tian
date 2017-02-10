@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>员工首页</title>
+    #parse("comm/head.vm")
+    <script type="text/javascript" src="#springUrl('/resource/js/customer/new/jquery.page.js')"></script>
+    <script type="text/javascript" src="#springUrl('/resource/js/customer/new/customerCompletion.js')"></script>
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/customer/new/page.css')">
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/customer/new/customerCompletion.css')">
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/customer/new/webuploader.css')">
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/customer/new/jquery.treeview.css')">
+    <script type="text/javascript" src="#springUrl('/resource/js/customer/new/ajaxfileupload.js')"></script>
+    <script type="text/javascript" src="#springUrl('/resource/js/customer/new/jquery.treeview.js')"></script>
+    <script type="text/javascript" src="#springUrl('/resource/js/customer/new/webuploader.nolog.js')"></script>
+    <script src="#springUrl('/resource/js/plugins/laypage/laypage.js')"></script>
+    <style>
+        .preTan {
+            display: none;
+            width:500px;
+            height: 110px;
+            background: #fff;
+            /*box-shadow: #ddd 2px 3px 30px 20px;*/
+            position: absolute;
+            left: 0;
+            top: 31%;
+            right: 0;
+            margin: auto;
+            text-align: center;
+            border-radius: 5px;
+
+        }
+        .preTan p {
+            padding-top: 10px;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .preTan p span {
+            color: #1394ff;
+        }
+
+        .progress {
+            width: 90%;
+            margin: 0 auto;
+            margin-top: 30px;
+        }
+        .close{
+            position: absolute;
+            left: 110px;
+            top: 8px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<!-- 主页Table-->
+<div class="customerCompletion">
+    <div class="customerCompletion-title">
+        <div class="customerCompletion-title-left">
+            提示：您还可以用 <span onclick='onShortNote()'>员工自助补全</span> 或 <span onclick='onCustomerBatchUpload()'>批量上传</span> 的方式补全资料
+        </div>
+        <div class="customerCompletion-title-right">
+            <div class="section customerDepName">
+                <input type="text" name="depName" id="customerDepName" readonly="readonly">
+                <i style="display: none" class="close"><img src="#springUrl('/resource/img/close2.png')" alt=""></i>
+                <input type="hidden" id="depId" name="depId"/>
+                <div class="bumen">部门</div>
+
+                <div class="branch" style="display: none">
+                    <!-- <h4>部门</h4> -->
+                    <div id="dep-base" style="position: relative">
+
+                    </div>
+                </div>
+            </div>
+            <div class="search-name">
+                <input type="text" name="customerTurename" placeholder="搜索员工">
+                <div class="search" id="inPlemeteSearch">搜索</div>
+            </div>
+        </div>
+    </div>
+    <div class="customerCompletion-main">
+        <table id="showInCompleteCustomerTab">
+            <thead>
+            <tr>
+                <td style='width: 6%'>序号</td>
+                <td style='width: 9%'>姓名</td>
+                <td style='width: 12%'>手机</td>
+                <td style='width: 9%'>部门</td>
+                <td style='width: 15%'>工资卡号</td>
+                <td style='width: 13%'>工资卡开户行</td>
+                <td style='width: 15%'>身份证号</td>
+
+                <td class='lastTd' style='width: 21%'>身份证照片</td>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <div class="pagePay">
+            <div id="pagePayroll"></div>
+        </div>
+    </div>
+</div>
+<!-- 分页器 -->
+##<div class='tcdPageCode'></div>
+<!-- 蒙版 -->
+<div class="mengban" style="display:none"></div>
+<!-- 短信通知 -->
+<div class="shortNote" style="display:none">
+    <div class="shortNote-title">短信通知<b class='btnCloseShortNote' onclick="closeSendMsg();"></b></div>
+    <div class="shortNote-main">
+        <p>给未补全的员工发送提醒信息，引导员工在微信端补全资料，每天只会针对未补全的员工提醒一次哦！</p>
+        <span>本次通知员工（<i id="customerCount">5</i>）人</span>
+    </div>
+    <div class="shortNote-footer">
+        <input type="button" name="" value='发送短信' onclick="sendMsgSure();">
+
+    </div>
+</div>
+<!-- 批量上传信息 -->
+<div class="customerBatchUpload" style="display:none">
+    <div class="customerBatchUpload-title">批量上传信息<b class='btnCloseUpload'></b></div>
+    <div class="customerBatchUpload-hint">备注：请先下载模板文件，根据要求的格式添加内容。 <i><a href="#springUrl('/resource/upload/salaryfiles/template/inCompleteCustomerUpd.xlsx')">下载模板文件</a></i></div>
+    <div class="customerBatchUpload-main">
+        <div class="customerBatchUpload-content">
+            <div class="customerBatchUpload-mainShow" style="display:block">
+##                <div id="exportInCompleteFileDiv">上传信息</div>
+##                <div class="upload" onclick="onUpload()" data='1' id="showA">点击查看上传要求></div>
+                <div class="text" id="showB">
+                    上传要求：
+                    <p>1、支持WPS、excel2003以上版本文件。</p>
+                    <p>2、文件格式见示例 下载正式员工模板文件</p>
+                    <p>3、格式说明：
+                        <span>（1）姓名（必填），请填写员工真实姓名，应与身份证姓名一致。</span>
+                        <span>（2）手机号（选填），请填写常用的手机号。</span>
+                        <span>（3）身份证号（必填），填写合法的身份证号码。</span>
+                        <span>（4）工资卡开户行（必填），请填写正确的银行名称，如建设银行。</span>
+                    </p>
+
+                </div>
+                <div class="text1" style="display: none;" id="showC" style="display:none;">
+
+                </div>
+
+            </div>
+            <!-- 进度条 -->
+##            <div class="customerBatchUpload-mainHint"  style="display:none">
+##                <div class="progressBar-number">已上传<span></span></div>
+##                <div class="progressBar-main">
+##                    <div class="progressBar-box"></div>
+##                </div>
+##                <!--  -->
+##                <div class="progressBar-name">232.xls</div>
+##                <!-- 失败原因 -->
+##                <div class="progressBar-error" style="display:none">查看失败原因></div>
+##                <div class="progressBar-errorText" style="display:none">
+##                    <p>第三行，刘正，身份中号格式错误</p>
+##                    <p>第三行，刘正，身份中号格式错误</p>
+##                    <p>第三行，刘正，身份中号格式错误</p>
+##                    <p>第三行，刘正，身份中号格式错误</p>
+##
+##                </div>
+##
+##            </div>
+
+            <div class="preTan">
+                <p>批量上传 <span></span><span id="uploadProgres">0%</span></p>
+                <div>
+                    <!--用来存放文件信息-->
+                    <div id="thelist" class="uploader-list">
+                    ##                    <p class="state">上传中</p>
+                        <div class="progress progress-striped active">
+                            <div class="progress-bar" role="progressbar" style="width: 14%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="customerBatchUpload-footer">
+        <div id="exportInCompleteFileDiv">上传信息</div>
+##        <input type="button" name="" value='取消' id="closeUpload" style="display: none">
+##        <input type="button" name="" value='确认'>
+        <div class="button4" style="display:none;" id="showSure">
+            <input type="button" id="sureBatchUpload" value='确认' class='btnCloseBatchImport'>
+        </div>
+        <div class="button4" style="display:none;" id="showCancel">
+            <input type="button" name="" value='取消' class='btnCloseBatchImport' id="cancelUploadFile">
+        </div>
+    </div>
+</div>
+<!-- 提示弹窗 -->
+<div class="hint" style="display:none;" id="showInPlemeteDiv">员工<span>张三</span><i>离职设置成功</i></div>
+
+
+</body>
+<script type="text/javascript">
+//    // 分页
+//    $(".tcdPageCode").createPage({
+//        pageCount: 10, //总页数
+//        current:1, //当前页
+//        backFn:function(p){
+//            //单击回调方法，p是当前页码
+//        }
+//    });
+</script>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>添加部门</title>
+    #parse("comm/head.vm")
+    <style>
+        .row{
+            width: 100%;
+            margin-top: 15px;
+        }
+        .row > div{
+            float:left;
+            padding: 10px;
+        }
+        .row > div > label{
+            line-height: 36px
+        }
+        input, select{
+            padding: 0 20px;
+            width: 278px;
+            height: 34px;
+            border: 1px solid #e3e3e3;
+            position: relative;
+            top: -1px;
+            color: #666666;
+            width: 175px;
+        }
+        .footer{
+            width:100%;
+            height:35px;
+            position: absolute;
+            bottom:20px;
+        }
+        .footerBtn{
+            width:410px;
+            height:35px;
+            margin:0 auto;
+        }
+        .okbtn{
+            display: block;
+            width: 200px;
+            height: 35px;
+            line-height: 35px;
+            background: #0696fa;
+            color: #FFFFFF;
+            border: none;
+            float:left;
+            border-radius: 6px;
+            font-family: "微软雅黑";
+            cursor: pointer;
+        }
+        .cancelbtn{
+            width: 200px;
+            height: 35px;
+            line-height: 35px;
+            border: 1px solid #0696FA;
+            color: #0696FA;
+            background: #FFFFFF;
+            float:right;
+            border-radius: 6px;
+            font-family: "微软雅黑";
+            cursor: pointer;
+
+        }
+    </style>
+</head>
+
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <input type="hidden" id="depId" value="$!{deptId}"/>
+        <div style="width: 30%;text-align: right;"><label>
+            #if($isFirst)
+                责任人
+            #else
+                部门负责人
+            #end
+            </label></div>
+        <div style="width: 30%;">
+            <select id="leader">
+                <option value="">无</option>
+                #foreach($item in $customers)
+                    <option value="$!item.customerId"
+                    #if($leaderId == $item.customerId)
+                        selected
+                    #end
+                    >$!item.customerTurename</option>
+                #end
+            </select>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footerBtn">
+            <input class="okbtn btn" type="button" value="确定" onclick="SetLeaderExtend.save()">
+            <input class="cancelbtn btn" type="button" value="取消" onclick="SetLeaderExtend.close()">
+        </div>
+    </div>
+
+</div>
+
+</body>
+<script>
+
+    SetLeaderExtend = {
+        save:function(){
+            $.post(BASE_PATH + '/dept/updateLeader.htm', {"leaderId" : $("#leader").val(), "depId":$("#depId").val()}, function(data){
+                if (data.success) {
+                    parent.DeptExtend.refrehTree();
+                    SetLeaderExtend.close();
+                } else {
+                    showWarning(data.message);
+                }
+            });
+
+        },
+        close:function(){
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+        }
+    }
+
+</script>
+</html>

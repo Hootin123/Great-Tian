@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xtr.core.persistence.writer.customer.CustomerWechatWriterMapper" >
+<insert id="saveCustomerBind" parameterType="com.xtr.api.domain.customer.CustomerWechatBean" useGeneratedKeys="true">
+    INSERT  INTO
+      customer_wechat(wechat_customer_id,wechat_open_id,wechat_nick_name,wechat_bind_time,wechat_customer_phone,wechat_company_id)
+      values(#{wechatCustomerId},#{wechatOpenId},#{wechatNickName},#{wechatBindTime},#{wechatCustomerPhone},#{wechatCompanyId})
+</insert>
+
+</mapper>

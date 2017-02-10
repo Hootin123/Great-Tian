@@ -1,0 +1,357 @@
+@charset "UTF-8";
+.currentHeader {
+  width: 100%;
+  min-width: 1000px;
+  height: 80px;
+  font-size: 24px;
+  font-family: '微软雅黑';
+  text-align: center;
+  line-height: 80px;
+  border-bottom: 1px solid #dbe9ee;
+  position: relative;
+}
+.currentHeader img{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 30px;
+  margin: auto;
+  cursor: pointer;
+}
+
+.current {
+  font-size: 14px;
+  margin: 30px 3% 0 3%;
+  color: #666666;
+  min-width: 960px;
+}
+.current .current-title {
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  background: #f1f9fc;
+}
+.current .current-title span {
+  margin-left: 20px;
+}
+.current .current-title span i {
+  color: #0696fa;
+  cursor: pointer;
+}
+.current .current-title span:nth-child(2) {
+  float: right;
+  margin-right: 20px;
+}
+.current .current-title span:nth-child(2) select {
+  width: 150px;
+  height: 27px;
+  margin-left: 20px;
+  text-indent:10px;
+  border: 1px solid #dbe9ee;
+}
+.current .current-main {
+  width: 100%;
+  margin-top: 30px;
+}
+.current .current-main li {
+  width: 100%;
+  margin-bottom: 30px;
+}
+.current .current-main li .current-main-top {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  background: #f1f9fc;
+}
+.current .current-main li .current-main-top p {
+  float: left;
+  margin-left: 5px;
+}
+.current .current-main li .current-main-top p:nth-child(1) {
+  color: #333;
+  margin-right: 20px;
+}
+.current .current-main li .current-main-top .submit span {
+  margin-right: 10px;
+}
+.current .current-main li .current-main-top .nosubmit {
+  float: right;
+  margin-right: 200px;
+}
+.current .current-main li .current-main-table {
+  width: 100%;
+  text-align: center;
+  color: #666;
+  font-size: 12px;
+}
+.current .current-main li .current-main-table table {
+  width: 100%;
+}
+.current .current-main li .current-main-table table tr:nth-child(1) {
+  width: 100%;
+  height: 40px;
+  background: #5b7798;
+  color: #fff;
+}
+.current .current-main li .current-main-table table tr:nth-child(1) td {
+  border-right: 1px solid #fff;
+}
+.current .current-main li .current-main-table table tr {
+  width: 100%;
+  height: 80px;
+}
+.current .current-main li .current-main-table table tr td {
+  border: 1px solid #dbe9ee;
+}
+.current .current-main li .current-main-table table tr td p {
+  line-height: 20px;
+
+}
+.current .current-main li .current-main-table table tr td p span {
+  color: #f99b15;
+  cursor: pointer;
+}
+.current .current-main li .current-main-table table tr td p a{
+    color: #f99b15;
+  cursor: pointer;
+}
+.current .current-main li .current-main-table table tr .showTd {
+  color: #68bdf3;
+  cursor: pointer;
+}
+.mengban {
+  width: 100%;
+  height: 100%;
+  min-width: 1200px;
+  min-height: 930px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: #d1d1d1;
+  opacity: 0.3;
+  z-index: 2;
+}
+
+.service {
+  width: 600px;
+  height: 430px;
+  background: #fff;
+  border-radius: 3px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 6;
+  border:1px solid #ccc;
+}
+.service .service-title {
+  width: 100%;
+  margin-top: 20px;
+  text-indent: 20px;
+  font-size: 18px;
+  color: #333;
+  font-weight: 600;
+}
+.service .service-title b {
+  display: block;
+  width: 10px;
+  height: 10px;
+  background: url(../../img/customer/new/2.2close.png) 0 0 no-repeat;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
+}
+.service .service-main {
+  margin-top: 50px;
+  width: 100%;
+  padding: 0 40px;
+  box-sizing: border-box;
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+}
+.service .service-main table {
+  width: 100%;
+  margin-bottom: 30px;
+}
+.service .service-main table tr {
+  width: 100%;
+  height: 30px;
+}
+.service .service-main table tr td {
+  border: 0;
+  position: relative;
+}
+.service .service-main table tr td span {
+  position: absolute;
+  left: 180px;
+  top: 8px;
+}
+.service .service-main table tr td .cheng {
+  left: 140px;
+  top: 10px;
+}
+.service .service-main table tr:nth-child(1) {
+  background: #f1f9fc;
+}
+.service .service-main .list {
+  text-align: left;
+  line-height: 40px;
+  margin-left: 30px;
+}
+.service .service-main .pTitle {
+  font-size: 14px;
+  color: #f99b15;
+}
+.service .service-bottom {
+  width: 420px;
+  height: 80px;
+  margin: 0 auto;
+  margin-top: 50px;
+  /*background: #f1f9fc;*/
+}
+.service .service-bottom .button3 {
+  width: 200px;
+  height: 36px;
+  margin: 0 auto;
+}
+.service .service-bottom .button3 input {
+  width: 200px;
+  height: 100%;
+  background: #314a5e;
+  color: #fff;
+  border: 0;
+  margin-top: 20px;
+  border-radius: 6px;
+  text-align: center;
+  line-height: 36px;
+  font-size: 14px;
+  font-family: '微软雅黑';
+  cursor: pointer;
+  float: left;
+}
+
+.submitOrder {
+  width: 600px;
+  height: 380px;
+  background: #fff;
+  border-radius: 3px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 6;
+  border:1px solid #ccc;
+}
+.submitOrder .submitOrder-title {
+  width: 100%;
+  margin-top: 20px;
+  text-indent: 20px;
+  font-size: 18px;
+  color: #333;
+  font-weight: 600;
+}
+.submitOrder .submitOrder-title b {
+  display: block;
+  width: 10px;
+  height: 10px;
+  background: url(../../img/customer/new/2.2close.png) 0 0 no-repeat;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
+}
+.submitOrder .submitOrder-main {
+  margin-top: 50px;
+  width: 100%;
+  padding: 0 40px;
+  box-sizing: border-box;
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+}
+.submitOrder .submitOrder-main .submitOrder-main-title {
+  width: 100%;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  background: #f1f9fc;
+  font-size: 14px;
+  color: #333;
+}
+.submitOrder .submitOrder-main table {
+  width: 100%;
+}
+.submitOrder .submitOrder-main table tr:nth-child(1) {
+  width: 100%;
+  height: 30px;
+  background: #5b7798;
+  color: #fff;
+}
+.submitOrder .submitOrder-main table tr:nth-child(1) td {
+  border-right: 1px solid #fff;
+}
+.submitOrder .submitOrder-main table tr {
+  width: 100%;
+  height: 30px;
+}
+.submitOrder .submitOrder-main table tr td {
+  border: 1px solid #dbe9ee;
+}
+.submitOrder .submitOrder-main .submitOrder-main-hint {
+  margin-top: 30px;
+  color: #f99b15;
+  text-align: left;
+  text-indent: 32px;
+  line-height: 25px;
+  background: url(../../img/hint.png) 0 0 no-repeat;
+}
+.submitOrder .submitOrder-bottom {
+  width: 420px;
+  height: 80px;
+  margin: 0 auto;
+  margin-top: 20px;
+  /*background: #f1f9fc;*/
+}
+.submitOrder .submitOrder-bottom .button4 {
+  width: 410px;
+  height: 36px;
+  margin: 0 auto;
+  margin-top: 40px;
+}
+.submitOrder .submitOrder-bottom .button4 input {
+  width: 200px;
+  height: 100%;
+  background: #314a5e;
+  color: #fff;
+  border: 0;
+  margin-top: 20px;
+  border-radius: 6px;
+  text-align: center;
+  line-height: 36px;
+  font-family: '微软雅黑';
+  font-size: 14px;
+  cursor: pointer;
+  float: left;
+}
+.submitOrder .submitOrder-bottom .button4 .close{
+  width: 200px;
+  height: 100%;
+  background: #fff;
+  color: #314a5e;
+  border: 1px solid #314a5e;
+  margin-top: 20px;
+  border-radius: 6px;
+  text-align: center;
+  line-height: 36x;
+  font-family: '微软雅黑';
+  font-size: 14px;
+  cursor: pointer;
+  float: right;
+}
+/*# sourceMappingURL=currentBill.css.map */

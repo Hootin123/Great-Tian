@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title></title>
+
+    #parse("comm/head.vm")
+##    <link href="#springUrl('/resource/css/account/account.css')" rel="stylesheet">
+##    <script src="#springUrl('/resource/js/account/canvas.js')"></script>
+##    <script src="#springUrl('/resource/js/account/iMove.js')"></script>
+##    <script src="#springUrl('/resource/js/account/account.js')"></script>
+
+</head>
+
+<body>
+#*<div class="main_right payoff_two salaryDetails clear" id="salaryDetails">
+
+
+
+    <strong>缴纳社保公积金</strong>
+
+    <table class="payoff_two_list">
+        <tr class="payoff_two_list_first">
+            <td style="text-align:left; padding-left:15px;">要求薪太软按照此文件缴纳：<a href="#" id="upfile" style="height:auto; margin: 0px; background-color: transparent; font-size: 12px; color:blue; width:auto; line-height:25px; display:inline-flex;">上传文件</a>
+						<span class="bar">
+						<em class="bar_1"></em>
+					</span></td>
+        </tr>
+        <tr class="payoff_two_list_first">
+            <td style="text-align:left; padding-left:15px;">请使用通用模板上传订单（<a style="height:auto; margin: 0px; background-color: transparent; font-size: 12px; color:blue; width:auto; line-height:25px; display:inline-flex;" target="_blank" href="../resource/upload/salaryfiles/template/socialinfo.xls">点击下载</a>）</td>
+        </tr>
+
+    </table>
+
+
+
+
+    <a href="javascript:;" onclick="createorder($(this))">确定</a>
+
+</div>*#
+
+##<div class="pacity" style="opacity: 0.7;background: #000000; position: absolute;left: 0;top: 0; filter:alpha(opacity=70);"></div>
+##<div style="" class="aboxbg" id="aboxbg">
+##    <div class="abox" id="abox">
+##        <div><img src="#springUrl('/resource/img/check.png')" alt=""></div>
+##        <div class="abox_head">
+##            <span>缴纳社保公积金</span>
+##        </div>
+##        <p style="margin-top: 5px;">薪太软会在每月社保窗口开放日根据您导入的<br />
+##            员工资料自动帮您生成社保公积金代缴订单。</p>
+##        <p style="margin-top: 10px; ">您只需核查订单并付款即可完成缴纳。</p>
+##        <i>确认</i>
+##    </div>
+##</div>
+
+</body>
+
+</html>
+
+##<script type="text/javascript">
+##    /*
+##    $(function () {
+##        //文件上传
+##        onUpload();
+##    });
+##
+##    var orderid=0;
+##
+##    function onUpload() {
+##        Dropzone.prototype.submitRequest = function (xhr, formData, files) {
+##            //formData.append('orderType', 1);
+##            //formData.append('orderId', orderid);
+##            return xhr.send(formData);
+##        };
+##        //事件绑定
+##        $("#upfile").dropzone({
+##            url: "../social/uploadExcelFile.htm",
+##            //params: {payday: $('#payday').val()},
+##//        params: {payday: '2016-06-21'},
+##            params:{orderType:2},
+##            maxFiles: 10,
+##            maxFilesize: 512,
+##            acceptedFiles: ".xlsx,.xls",
+##            uploadprogress: function (file, progress, bytesSent) {
+##                //更新文件上传进度
+##                $('.bar_1').css('width', ($('.bar').width() * progress) / 100);
+##            },
+##            addedfile: function (file) {
+##            },
+##            complete: function (data) {
+##                var res = eval('(' + data.xhr.responseText + ')');
+##                if (res.success) {
+##                    //上传成功，刷新页面
+##                    orderid=res.data;
+##
+##                    layer.alert(res.message,{
+##                        title:'上传成功',
+##                    },function(index){
+##                        layer.close(index);
+##                    });
+##                    //layer.alert('上传成功', function (index) {
+##                    //    layer.close(index);
+##                    //    window.location.reload();
+##                    //});
+##                } else {
+##                    //上传失败
+##                    layer.alert(res.message, {title: '上传失败'}, function (index) {
+##                        layer.close(index);
+##                    });
+##                }
+##            }
+##        });
+##
+##
+##
+##    }
+##
+##
+##    function createorder(obj){
+##
+##        if(obj.attr('ta')=='1')
+##            return;
+##
+##        obj.attr('ta','1');
+##
+##        if(orderid==null || orderid==0){
+##            layer.alert('请先上传文件',{
+##                title:'温馨提示',
+##            },function(index){
+##                layer.close(index);
+##            });
+##
+##            obj.removeAttr('ta');
+##            return;
+##        }
+##
+##        $.ajax({
+##            type: 'post',
+##            url: '../social/creatSocialOrder.htm',
+##            data: {
+##                'filepath': orderid
+##                ,'orderType':2
+##                ,'orderBeginDate':''
+##                ,'orderEndDate':''
+##                ,'orderState':''
+##            },
+##            success: function (resultResponse) {
+##
+##                obj.removeAttr('ta');
+##
+##                if (resultResponse.success) {
+##                    layer.alert(resultResponse.message,{
+##                        title:'温馨提示',
+##                    },function(index){
+##                        layer.close(index);
+##                        window.location.reload();
+##                    });
+##
+##                } else {
+##                    showWarning(resultResponse.message);
+##                }
+##            }
+##        });
+##    }*/
+##
+##    /*弹窗*/
+##    var abox;
+##
+##    $(function() {
+##        var oCav = document.getElementById('cav');
+##        var oCav1 = document.getElementById('cav1');
+##
+##        var start1 = 180;
+##        var range1 = $("#blockPercent").val();
+##        var end1 = -(range1 - 50) * 3.6;
+##
+##        var start2 = 90;
+##        var range2 = $("#availablePercent").val();
+##        var end2 = 90 + (range2 * 3.6);
+##
+##        // move(oCav, {
+##        //     'start': start1,
+##        //     'target': end1,
+##        //     'beginColor': '#80c9fc',
+##        //     'overColor': '#0696fa'
+##        // }, true);
+##
+##        // move(oCav1, {
+##        //     'start': start2,
+##        //     'target': end2,
+##        //     'beginColor': '#8df8d4',
+##        //     'overColor': '#35e7ab'
+##        // }, false);
+##
+##        /*弹窗*/
+##        abox = $('.abox');
+##
+##        abox.find('i').click(function() {
+##            closeAbox();
+##        });
+##
+##    });
+##
+##
+##    function closeAbox() {
+##        abox.animate({
+##            'height': 0,
+##            'top': abox.height() / 2 + abox.position().top
+##        }, 300, function() {
+##            abox.css('overflow', 'hidden');
+##            $('.pacity').css('display', 'none');
+##        })
+##    }
+##
+##    function alertBox(){
+##        $('.pacity').css('display', 'block');
+##        $('.aboxbg').css('display', 'block');
+##        abox.css({
+##            'height': 250,
+##            'left': -abox.width() / 2,
+##            'top': -125
+##        }, 300, function() {
+##            abox.css('overflow', 'scroll');
+##        })
+##
+##    }
+##
+##    /*弹窗背景自适应*/
+##    window.onload = function() {
+##        window.onresize = function() {
+##            navlasLi();
+##        }
+##        navlasLi();
+##        var obj = new iMove('abox');
+##    }
+##
+##    function navlasLi() {
+##        $('.pacity').width($(document).width());
+##        $('.pacity').height($(document).height());
+##        $('.main_right').width($(window).width());
+##        $('.main_right').height($(window).height());
+##
+##    }
+##
+##
+##</script>

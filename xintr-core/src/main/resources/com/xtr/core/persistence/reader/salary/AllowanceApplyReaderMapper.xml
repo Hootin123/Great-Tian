@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtr.core.persistence.reader.salary.AllowanceApplyReaderMapper">
+
+    <resultMap id="BaseResultMap" type="com.xtr.api.domain.salary.AllowanceApplyBean">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="allowance_id" jdbcType="BIGINT" property="allowanceId"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="user_data" jdbcType="VARCHAR" property="userData"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, allowance_id, type, user_data, create_time
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from allowance_apply
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <!--根据津贴id查询适用人员-->
+    <select id="selectList" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from allowance_apply
+        where allowance_id = #{allowanceId,jdbcType=BIGINT}
+    </select>
+
+</mapper>

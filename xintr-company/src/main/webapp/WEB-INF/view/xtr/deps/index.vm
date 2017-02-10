@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style type="text/css">
+        body,html{  width:100%;}
+        .all{  width:100%; margin:0 auto; padding:0 30px;box-sizing: border-box; }
+        #tree-panel{  position: relative;  margin: 0 auto;  }
+        .tree-node {  text-align: center;  float: left;  }
+        .tree-con {  float: left;  position: relative;  }
+        .node-title > div {  display: inline-block;  padding: 0 5px;  height: 60px;  line-height: 24px;  border: 1px solid #ccc;  margin: 0 10px;  border-radius: 3px;  background: #f8f8f8  }
+        .tree-data {  position: relative;  display: inline-block;  padding: 0 5px;  height: 70px;  width:145px;  border: 1px solid #dbe9ee;  margin: 0 30px;  border-radius: 3px;  background: #f1f9fc;  font-size: 13px;  cursor: pointer;  padding-top: 20px;  border-radius:6px;  color:#666;  }
+        .tactiv {  background:#fef5e8;  border:1px solid #ffdca9;  }
+        .tree-data > img{  width: 17px;  position: absolute;  right: 2px;  top: 2px;  cursor: pointer;  }
+        .tree-con .line-v {  position: relative;  height: 40px;  width: 100%;  color:#666;  }
+        .tree-con .line-v span {  display: block;  background: #ccc;  position: absolute;  top: 0;  font-size: 0;  line-height: 1px;  width: 1px;  height: 40px;  left: 50%;  }
+        .tree-con .line-h-r {  width: 50%;  right: 0;  }
+        .tree-con .line-h-l {  width: 50%;  left: 0;  }
+        .tree-con .line-h-c {  width: 100%;  left: 0;  }
+        .tree-con .line-h {  height: 1px;  display: block;  background: #ccc;  position: absolute;  top: 0;  font-size: 0;  }
+        .node-settings-panel{  position: absolute;  right: -140px;  display:none;  top: 0px;  z-index: 2;  border:1px solid #b0ccd7;  box-shadow:#b0ccd7 2px 1px 8px 1px;  }
+        .node-settings-panel > img{  width: 20px;  margin: 2px;  cursor: pointer;  }
+        .top{  text-align: center;  height: 80px;  background-color: #fff;  line-height: 80px;  border-bottom:1px solid #dbe9ee;  color:#333;  position: relative;  }
+        .top img{  position: absolute;  top:0;  bottom:0;  right:30px;  margin:auto;  cursor:pointer;  }
+        .left{  width: 220px;  height: 500px;  float: right;  border:1px #dbe9ee solid;  position: relative;  overflow: auto; display:none }
+        .left > p {  font-size: 16px;  height:40px;  line-height:40px;  padding-left:40px;  background:#f1f9fc;  border-bottom:1px solid #dbe9ee;  color:#666;  }
+        .left > ul > li {  padding-left: 45px;  height: 30px;  line-height: 30px;  cursor: pointer;  color: #666;  border-bottom: 1px solid #dbe9ee;  }
+        .right{  overflow: auto;  margin-top:40px;;  position: relative;  }
+        #unassign{  padding-left:10px;  position: absolute;  z-index:100;  height: 30px;  top: 40px;  right: 260px;  padding:0;  line-height:30px;  margin-left:50px;  }
+        #unassign  p{  float:left;  }
+        .node-name{  padding-bottom: 5px;  }
+        .left .left-open{  position: absolute;  right: -20px;  display: none;  cursor: pointer;  }
+        .left-close{  position: absolute;  right:260px;  top:42px;  cursor: pointer;  z-index:2; display: none;  }
+        .left-open{  position:absolute;  right:10px;  top:42px;   z-index: 2;  cursor: pointer;  }
+        .left-framework{  position: absolute;  left:15px;  top:13px;  }
+        .node-settings-panel div{  text-align: justify;  width:130px;  height:22px;  line-height:22px;  background:#fff;  }
+        .node-settings-panel div:hover{  background:#0696fa;  color:#fff;  }
+        .node-settings-panel img{  width:18px;  }
+        .amend1 img{  border: none;  vertical-align: top;  margin: 4px 5px 0 10px;  }
+        .amend2 img{  border: none;  vertical-align: top;  margin: 2px 5px 0 10px;  }
+        .amend3 img{  border: none;  vertical-align: top;  margin: 1px 5px 0 10px;  }
+        .amend4 img{border: none;vertical-align: top; margin: 3px 5px 0 10px;  }
+        #tree-base{margin-bottom:30px;}
+        .layui-layer-title{font-size: 16px !important;font-weight: 600 !important;color:#333 !important;border:0 !important;background:none !important;font-family: '微软雅黑'}
+        .layer-anim{border-radius: 3px !important;}
+        .layui-layer-shade{background: #d1d1d1!important;}
+
+    </style>
+
+    #parse("comm/head.vm")
+
+</head>
+<body>
+
+##<div class="top">
+##    <h2>组织架构图</h2>
+##    <img src="#springUrl('/resource/img/salary/guanbi.png')" alt="" id="closeDetailBtn">
+##</div></div>
+<div class="all">
+<div class="left">
+    <img class="left-framework" src="#springUrl('/resource/img/framework.png')">
+    <p>总裁办</p>
+    <ul>
+        <li id="user1" draggable="true" ondragstart="DeptExtend.onDrag(event)">张三</li>
+        <li id="user2" draggable="true" ondragstart="DeptExtend.onDrag(event)">李四</li>
+        <li id="user3" draggable="true" ondragstart="DeptExtend.onDrag(event)">大牛</li>
+    </ul>
+</div>
+    <img class="left-close" src="#springUrl('/resource/img/dept/close.png')">
+    <img class="left-open" src="#springUrl('/resource/img/dept/open.png')">
+    <div id="unassign" ondrop="DeptExtend.onDrop(event)" ondragover="DeptExtend.onDragOver(event)" class="unassign tree-data" data-depid="">
+
+        <p class="node-name " style="padding-left:20px;">待分配</p>
+        <p class="node-name count" data-count="$!{unassign}">共：$!{unassign}人</p>
+    </div>
+<div class="right">
+    <div id="tree-panel">
+        <div class="tree-node">
+            <div id="tree-base" class="tree-con">
+##                <div ondrop="DeptExtend.onDrop(event)" ondragover="DeptExtend.onDragOver(event)" class="tree-data" data-depid="0">
+##                    <img class="node-settings" src="#springUrl('/resource/img/dept/settings.png')">
+##                    <div class="node-settings-panel">
+##                        <img onclick="DeptExtend.openAddDept(0)" src="#springUrl('/resource/img/dept/add.png')">
+##                        <img onclick="DeptExtend.openSetLeader(0)" src="#springUrl('/resource/img/dept/addLeader.png')">
+##                    </div>
+##                    <p class="node-name">$!{companyName}</p>
+##                    <p class="node-name" >部门负责人：薛武</p>
+##                    <p class="node-name count" data-count="$!{customerCount}">共：$!{customerCount}人</p>
+##                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+<script>
+//    关闭按钮
+//    $('#closeDetailBtn').click(function(){
+//        onCancelDialog()
+//    })
+//    function onCancelDialog() {
+//        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+//        parent.layer.close(index);
+//    }
+
+    jQuery.fn.isChildAndSelfOf = function(b){
+        return (this.closest(b).length > 0);
+    };
+
+    $(function(){
+        DeptExtend.init();
+        window.onresize = DeptExtend.initTreePosition;
+        $(".left-close").click(function(){
+            $(".left").hide(200);
+            $(".left-open").show();
+            $('.left-close').hide();
+            $('#unassign').animate({right:'10px'},200);
+//            $(".right").animate({left:'-200px'}, function(){
+//            });*/
+        })
+
+        $(".left-open").click(function(){
+            $(this).hide();
+            $(".left").show(200);
+            $('.left-close').show();
+            $('#unassign').animate({right:'260px'},200);
+
+//            $(".right").animate({left:'-0px'}, function(){
+//            });
+        })
+
+        $("#unassign").click();
+    })
+    var isFirst = true;
+    DeptExtend = {
+        treeData : $!{treeData},
+        vLine:"<div class='line-v'><span></span></div>",
+        treeCon:"<div class='tree-con'></div>",
+        curDepId: null,
+        curTreeData:null,
+        init : function(){
+            DeptExtend.initTree(DeptExtend.treeData);
+        },
+        refrehTree:function(){
+            isFirst = true;
+            $.get(BASE_PATH + '/dept/tree.htm', {"rd" : new Date().getTime()}, function(data){
+                if (data.success) {
+                    DeptExtend.initTree(data.data);
+                } else {
+                    showWarning(data.message);
+                }
+            });
+        },
+        initTree:function(treeData){
+            $("#tree-base").empty();
+
+            var c = DeptExtend.initTreeNode($("#tree-base"), treeData);
+
+            $(".node-settings").unbind("click").click(function(){
+                $(".p-opend").hide(200);
+                var panel = $(this).next(".node-settings-panel");
+                if(panel.is(":hidden")){
+                    panel.addClass("p-opend")
+                    panel.show(200);
+                }else{
+                    panel.removeClass("p-opend")
+                    panel.hide(200);
+                }
+            })
+
+            $(".tree-data").unbind("click").click(function(){
+                $(".left-open").click();
+                if(!$(this).hasClass("tactiv")){
+                    DeptExtend.curTreeData = $(this);
+                    DeptExtend.curDepId = $(this).data("depid");
+                    $(".tree-data").attr("class", "tree-data");
+                    $(this).addClass("tactiv ");
+
+                    DeptExtend.loadEmpl($(this).data("depid"), $(this));
+                }
+            })
+
+            DeptExtend.initTreePosition();
+
+        },
+        initTreePosition:function(){
+            //适应宽度
+            var width = $("#tree-base").find(".tree-data:first").width();;
+            $("#tree-base > .tree-con > .tree-con").each(function(data){
+                width += $(this).width();
+            })
+
+//            var rightWidth = $(".right").width();
+//            if(width < rightWidth) {
+//                var marginLeft = (rightWidth - width) / 2;
+////                $("#tree-panel").css("margin-left", marginLeft);
+//            }
+
+            $("#tree-panel").width(width);
+        },
+        initTreeNode: function(parentEle, data){
+            var count = 0;
+            _this = DeptExtend;
+            if(data) {
+                var treeData = '<div class="tree-data '+(DeptExtend.curDepId == data.depId ? 'tactiv' : '')+'" data-depId="' + data.depId + '" ondrop="DeptExtend.onDrop(event)" ondragover="DeptExtend.onDragOver(event)">' +
+                        '<img  class="node-settings" src="#springUrl('/resource/img/dept/settings.png')">'+
+
+                        '<div class="node-settings-panel">' +
+                        (data.depType == 4 ? '' : '<div onclick="DeptExtend.openEditDept('+data.depId+')" class="amend1"><img  src="#springUrl('/resource/img/dept/edit.png')">修改部门</div>') +
+                        '<div class="amend2" onclick="DeptExtend.openAddDept('+data.depId+')"><img  src="#springUrl('/resource/img/dept/add.png')">添加部门</div>' +
+                        ((data.children && data.children.length >0 || data.depType == 4) ? "" : '<div class="amend3" onclick="DeptExtend.deleteDept('+data.depId+',\''+ data.depName +'\')"><img  src="#springUrl('/resource/img/dept/delete.png')">删除</div>') +
+##                        '<div class="amend4" onclick="DeptExtend.openSetLeader('+data.depId+',' + isFirst + ')"><img  src="#springUrl('/resource/img/dept/addLeader.png')">设置部门负责人</div>' +
+                        '</div>' +
+
+                        '<p class="node-name">' + data.depName + '</p>' +
+//                        (data.leaderName ? '<p class="node-name">' + (isFirst ? '责任人' : '部门负责人') + '：' + data.leaderName + '</p>':'') +
+//                        '<p class="node-name count" data-count="' + data.depCustCount + '"><span class="zs">直属：' + data.depCustCount + '人</span>&nbsp;<span id="allCount'+data.depId+'" ></span></p>' +
+                        '<p class="node-name count" data-count="' + data.depCustCount + '"><span class="zs">' + data.depCustCount + '</span>&nbsp;<span id="allCount'+data.depId+'" ></span></p>' +
+                        '</div>';
+                if(isFirst) {
+                    isFirst = false;
+                }
+                count += parseInt(data.depCustCount);
+                parentEle.append(treeData);
+
+                if(data.children && data.children.length > 0){
+                    parentEle.append(_this.vLine);
+                    var childrenTreeCon = $(_this.treeCon);
+                    $.each(data.children, function(index, item){
+                        var treeCon = $(_this.treeCon);
+                        if(data.children.length == 1){
+
+                        }else if(index == 0){
+                            treeCon.append('<span class="line-h line-h-r"></span>');
+                            treeCon.append('<div class="line-v"><span></span></div>');
+                        }else if(index == data.children.length - 1) {
+                            treeCon.append('<span class="line-h line-h-l"></span>');
+                            treeCon.append('<div class="line-v"><span></span></div>');
+                        }else{
+                            treeCon.append('<span class="line-h line-h-c"></span>');
+                            treeCon.append('<div class="line-v"><span></span></div>');
+                        }
+
+                        var myCount =  _this.initTreeNode(treeCon, item);
+                        childrenTreeCon.append(treeCon);
+                        count +=  myCount;
+                    })
+                    $(parentEle).append(childrenTreeCon);
+                    parentEle.find("#allCount"+data.depId).html(" of "+count+"人");
+                }else{
+//                    parentEle.find("#allCount"+data.depId).hide();
+                    parentEle.find("#allCount"+data.depId).html(" of "+count+"人");
+                }
+            }
+            return count;
+        },
+        openAddDept:function(deptId){
+            layer.open({
+                type: 2,
+                title: '添加部门',
+                shadeClose: false, //点击遮罩关闭层
+                area: ['500px', '250px'],
+//                content: BASE_PATH + '/dept/addDept.htm?isEdit=0&deptId='+deptId,
+                content: BASE_PATH + '/dept/toAddDeptPage.htm?deptId='+deptId
+            });
+        },
+        openEditDept:function(deptId){
+            layer.open({
+                type: 2,
+                title: '修改部门',
+                shadeClose: false, //点击遮罩关闭层
+                area: ['500px', '250px'],
+//                content: BASE_PATH + '/dept/addDept.htm?isEdit=1&deptId='+deptId
+                content: BASE_PATH + '/dept/toEditDeptPage.htm?deptId='+deptId
+            });
+        },
+        openSetLeader:function(deptId, isFirst){
+            layer.open({
+                type: 2,
+                title: '设置部门负责人',
+                shadeClose: false, //点击遮罩关闭层
+                area: ['500px', '200px'],
+                content: BASE_PATH + '/dept/setLeader.htm?deptId='+deptId+'&isFirst='+isFirst,
+            });
+        },
+        deleteDept:function(depId, depName){
+//            layer.confirm('是否删除 '+depName+' ?', {icon: 3, title:'提示'}, function(index){
+//
+//                $.get(BASE_PATH + '/dept/delDept.htm', {"id":depId}, function(data){
+//                    if (data.success) {
+//                        DeptExtend.refrehTree();
+//                    } else {
+//                        showWarning(data.message);
+//                    }
+//                });
+//
+//                layer.close(index);
+//            });
+
+            layer.open({
+                type: 2,
+                title: '删除部门',
+                shadeClose: false, //点击遮罩关闭层
+                area: ['500px', '200px'],
+                content: BASE_PATH + '/dept/toDelDeptPage.htm?deptId='+depId,
+            });
+        },
+        onDrop:function(event){
+            event.preventDefault();
+            var ele = event.dataTransfer.getData("ele");
+            var empId = $("#"+ele).data("empid");
+            var depid = $(event.target).closest(".tree-data").data("depid");
+            if(empId){
+                $.get(BASE_PATH + '/dept/moveEmployees.htm', {"empId" : empId, "depId" : depid}, function(data){
+                    if (data.success) {
+                        if($(event.target).closest(".tree-data").attr("id") == "unassign"){
+                            //加数
+                            var count1 = $(event.target).closest(".tree-data").find(".count").data("count");
+                            count1++;
+                            $(event.target).closest(".tree-data").find(".count").data("count", count1);
+                            $(event.target).closest(".tree-data").find(".count").html("共：" + count1 +"人");
+
+
+                        }
+
+                        if(DeptExtend.curTreeData.attr("id") == "unassign"){
+                            //减数
+                            var count2 = DeptExtend.curTreeData.find(".count").data("count");
+                            count2--;
+                            DeptExtend.curTreeData.find(".count").data("count", count2);
+                            DeptExtend.curTreeData.find(".count").html("共：" + count2 +"人");
+                        }
+
+                        $("#"+ele).remove();
+                        DeptExtend.refrehTree();
+                    } else {
+                        showWarning(data.message);
+                    }
+                });
+            }
+
+        },
+        onDrag:function(ev){
+            ev.dataTransfer.setData("ele", $(ev.target).attr("id"));
+        },
+        onDragOver:function(ev){
+            var depid = $(ev.target).closest(".tree-data").data("depid");
+
+            if(DeptExtend.curDepId == null || depid === DeptExtend.curDepId){
+                return;
+            }
+
+
+            ev.preventDefault();
+        },
+        loadEmpl:function(depId, treeData){
+            $(".left").find("p:first").html(treeData.find(".node-name:first").html());
+            $(".left > ul:first").empty();
+            $.get(BASE_PATH + '/dept/employees.htm', {"depId" : depId}, function(data){
+                if (data.success) {
+                    console.info(data.data);
+                    $.each(data.data, function(index, item){
+                        var li = '<li id="user' + index + '" draggable="true" data-empId="' + item.customerId + '" ondragstart="DeptExtend.onDrag(event)">' + item.customerTurename + '(' + item.customerPhone + ')</li>';
+                        $(".left > ul:first").append(li);
+                    })
+                } else {
+                    showWarning(data.message);
+                }
+            });
+
+        }
+
+    }
+</script>
+</html>

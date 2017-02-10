@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>我的账户 - 账户资产</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/account/account.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/account/records.css')" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="main_right account">
+    <ol>
+        <li><a href="#springUrl('/account.htm')">账户资产</a></li>
+        <li style="display: none;"><a href="myaccount1.html">应付款</a></li>
+        <li class="active account_nav_first">收支记录</li>
+    </ol>
+
+    <div class="account_nav">
+        <em class="triangle1"></em>
+				<span class="acBtn">
+					<a href="?" #if(!$!{type}) class="ac_active" #end>全部</a>
+					<a href="?type=1" #if($!{type} == 1) class="ac_active" #end>充值</a>
+					<a href="?type=2" #if($!{type} == 2) class="ac_active" #end>提现</a>
+					<a href="?type=3" #if($!{type} == 3) class="ac_active" #end>工资</a>
+				</span>
+    </div>
+    <table class="account_list" id="a" style="margin-top: 20px;">
+        #if($!{rechargeData} && $!{rechargeData.size()} > 0)
+        #foreach($data in $!{rechargeData})
+
+        <tr id="${data.rechargeId}">
+            <td class="a"><span>$!date.format('yyyy-MM-dd',$!{data.rechargeAddtime})<em>$!date.format('HH:mm:ss',$!{data.rechargeAddtime})</em></span></td>
+            #if(${data.rechargeType} == 1)
+            <td style="background: url(#springUrl('/resource/img/recharge.png')) no-repeat 25% center;" class="seccond">
+                #if($!{data.rechargeState} == 1)
+                <font color="#fa5f5f">+$!{xtr.money($!{data.rechargeMoney})}</font>
+                #else
+                <font color="#fa5f5f">+$!{xtr.money($!{data.rechargeMoney})}</font>
+                #end
+                <em>账户充值</em>
+            </td>
+            <td class="third">$!{xtr.money($!{data.rechargeMoneynow})}<em>账户余额</em></td>
+            <td class="fourth">
+                #if($!{data.rechargeState} == 0)
+                提交申请
+                #elseif($!{data.rechargeState} == 1)
+                <font color="#fa5f5f">充值失败</font>
+                #elseif($!{data.rechargeState} == 2)
+                <font class="font_green">充值成功</font>
+                #else
+                <font color="#fa5f5f">充值异常</font>
+                #end
+            </td>
+            <td class="last">
+                <a href="rechargeDetail.htm?rechargeid=$!{data.rechargeId}" class="a2">详情</a>
+            </td>
+            #elseif(${data.rechargeType} == 2)
+            <td style="background: url(#springUrl('/resource/img/cash.png')) no-repeat 25% center;" class="seccond font_green">
+                - $!{xtr.money($!{data.rechargeMoney})}
+                <em>账户提现</em>
+            </td>
+            <td class="third">$!{xtr.money($!{data.rechargeMoneynow})}<em>账户余额</em></td>
+            <td class="fourth">
+                #if($!{data.rechargeState} == 0)
+                提交申请
+                #elseif($!{data.rechargeState} == 1)
+                申请异常
+                #elseif($!{data.rechargeState} == 2)
+                <font class="font_green">提现成功</font>
+                #end
+            </td>
+            <td class="last">
+                <a href="withdrawalsDetail.htm?rechargeid=$!{data.rechargeId}" class="a2">详情</a>
+            </td>
+            #elseif(${data.rechargeType} == 3)
+            <td style="background: url(resource/img/wages.png) no-repeat 25% center;" class="seccond font_green">
+                - $!{xtr.money($!{data.rechargeMoney})}
+                <em>发放工资</em>
+            </td>
+            <td class="third">$!{xtr.money($!{data.rechargeMoneynow})}<em>账户余额</em></td>
+            <td class="fourth">
+                #if($!{data.rechargeState} == 0)
+                待处理
+                #elseif($!{data.rechargeState} == 1)
+                发放中
+                #elseif($!{data.rechargeState} == 2)
+                <font class="font_green">已发放</font>
+                #elseif($!{data.rechargeState} == 3)
+                挂起
+                #elseif($!{data.rechargeState} == 4)
+                仅下发工资单
+                #elseif($!{data.rechargeState} == 5)
+                撤销
+                #end
+            </td>
+            <td class="last">
+                <a href="#springUrl('/paySalaryDetail.htm?excelId=')$!{data.excelId}" class="a2">详情</a>
+            </td>
+            #end
+        </tr>
+        #end
+        #end
+    </table>
+
+    <div id="kkpager" style="bottom: 60px;"></div>
+
+</div>
+
+<script type="text/javascript">
+    //生成分页控件
+    kkpager.generPageHtml({
+        pno: '$!{paginator.page}',
+        mode: 'link', //可选，默认就是link
+        //总页码
+        total: '$!{paginator.totalPages} ',
+        //总数据条数
+        totalRecords: '$!{paginator.totalCount} ',
+        //链接算法
+        isShowFirstPageBtn:false,
+        isShowLastPageBtn:false,
+        currPageBeforeText:'第',
+        getLink: function (n) {
+            return BASE_PATH + '/balanceOfPayments.htm?type=$!{type}&pageIndex=' + n;
+        }
+    });
+</script>
+
+</body>

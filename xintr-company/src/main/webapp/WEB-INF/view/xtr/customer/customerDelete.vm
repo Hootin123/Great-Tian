@@ -1,0 +1,123 @@
+##删除员工页<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>删除</title>
+    #parse("comm/head.vm")
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/js/plugins/laydate/need/laydate.css')"/>
+    <script src="#springUrl('/resource/js/plugins/laydate/laydate.js')"></script>
+    <script src="#springUrl('/resource/js/comm/validateUtil.js')"></script>
+    <style type="text/css">
+        header{
+            width: 100%;
+            height: 60px;
+
+        }
+        /*header h4,.layui-layer-title{*/
+            /*width: 500px;*/
+            /*height:60px;*/
+            /*border-bottom:1px solid  #dbe9ee;*/
+            /*text-align: center;*/
+            /*line-height: 60px;*/
+            /*font-size:22px;*/
+            /*font-family: '微软雅黑';*/
+            /*text-align:center;*/
+            /*font-weight: 300;*/
+            /*color: #666;*/
+        /*}*/
+        header h4 b{
+            display: block;
+            width: 38px;
+            height: 38px;
+            background:url(../img/close1.png) 0 0 no-repeat;
+            position:absolute;
+            right: -40px;
+            top:-40px;
+        }
+         .yu{
+            width: 460px;
+            margin: 60px auto;
+            line-height: 30px;
+            color: #666;
+        }
+         .btn1{
+            width: 400px;
+            margin: 60px auto;
+        }
+        .btn1 input{
+            display: block;
+            width: 180px;
+            height: 40px;
+            border: 0;
+            border-radius: 10px;
+            font-size: 16px;
+            color: #fff;
+            background: #0696fa;
+            float: left;
+            cursor: pointer;
+        }
+        .btn1 .btnqx1{
+            margin-left: 20px;
+            background:#fff;
+            border:1px solid #0696fa;
+            color: #0696fa
+        }
+    </style>
+</head>
+<body>
+##<header>
+##    <h4 class='title3'>删除员工<b></b></h4>
+##</header>
+    <div class="yu">本次操作将删除 $!{trueName} - $!{customerPhone}，删除后账号将不可恢复，您确认删除吗？</div>
+    <input type="hidden" name="cutomerId" id="customerId" value="$!{customerId}"/>
+    <div class="btn1">
+        <input type="button" name="" id="submitBtn" value='确认'>
+        <input type="button" name="" class='btnqx1' value='取消'>
+    </div>
+<script type="text/javascript">
+    $(".title3 b").on('click',function(){
+        $('#deleat-content').hide();
+        $('.mengban2').hide()
+        $('.deleat').show()
+    })
+
+    //点击关闭按钮
+    $(".btnqx1").click(function(){
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    });
+    //点击确定删除
+    $("#submitBtn").click(function(){
+
+        $.ajax({
+            type:'POST',
+            url:'customerDelete.htm',
+            data:{'customerId':$("#customerId").val()},
+            dataType:'json',
+            success:function(resultResponse){
+                if(resultResponse.success){
+                    layer.alert('操作成功',{
+                        title:'处理结果',
+                    },function(index){
+                        parent.loadCustomerList();
+                        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+                        parent.layer.close(index);
+                    });
+
+                }else{
+                    layer.alert(resultResponse.message);
+                }
+
+            },
+            error:function(){
+                layer.alert("网络错误");
+            }
+
+
+        }) ;
+
+    });
+</script>
+</body>
+</html>

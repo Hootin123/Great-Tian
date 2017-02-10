@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>新增用户</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/hui/plugins/treeview/bootstrap-treeview.min.css')" rel="stylesheet">
+</head>
+
+
+<div class="ibox" style="padding-top: 0px">
+
+
+    <div class="ibox-content">
+        <form role="form" class="form-inline" id="editForm">
+            #if($role)##修改数据
+                <input type="text" id="id" name="id" class="hidden" value="$role.id"/>
+            #end
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">角色名称：</label>
+
+            ##                <div class="col-sm-8">
+                <input id="roleName" name="roleName" class="form-control" type="text"
+                       #if($role)value="$role.roleName" #end>
+            ##                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">角色描述：</label>
+
+            ##                <div class="col-sm-8">
+                <input id="descr" name="descr" class="form-control" type="text"
+                       #if($role)value="$role.descr" #end>
+            ##                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">状态：</label>
+
+            ##                <div class="col-sm-10">
+                <select class="form-control m-b" id="state" name="state">
+                    <option value="0" #if(($role && $role.state == 0) || !$role)selected="selected"#end>可用</option>
+                    <option value="1" #if($role && $role.state == 1)selected="selected"#end>禁用</option>
+                </select>
+            ##                </div>
+            </div>
+        </form>
+        <label class="col-sm-3 control-label">功能节点：</label>
+        <button id="expandedBtn" type="button" class="btn btn-outline btn-primary btn-xs">
+            展开
+        </button>
+        <button id="unExpandedBtn" type="button" class="btn btn-outline btn-primary btn-xs">
+            收起
+        </button>
+        <button id="checkedAllBtn" type="button" class="btn btn-outline btn-primary btn-xs">
+            全选
+        </button>
+        <button id="unCheckedAllBtn" type="button" class="btn btn-outline btn-primary btn-xs">
+            全消
+        </button>
+
+        <div class="panel">
+            <div id="treeview"></div>
+        </div>
+    ##        <div class="panel panel-default">
+    ##            <div class="panel-heading">
+    ##                <h3 class="panel-title">功能节点</h3>
+    ##            </div>
+    ##            <div class="panel-body">
+    ##                <div id="treeview"></div>
+    ##            </div>
+    ##        </div>
+
+    </div>
+</div>
+
+
+<script src="#springUrl('/resource/js/hui/plugins/treeview/bootstrap-treeview.min.js')"></script>
+<script src="#springUrl('/resource/js/sys/role/addRole.js')"></script>
+</html>

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>当前账单详情</title>
+    #parse("comm/head.vm")
+    <script src="#springUrl('/resource/js/comm/jquery.freezeheader.js')"></script>
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/shebao/currentBillDetails.css')">
+</head>
+<body>
+<input type="hidden" value="$!{companyShebaoOrderId}" id="companyShebaoOrderId">
+<div class="currentBillDetailsHeader">$!{shebaoOrder.joinCityName}$!date.format('yyyyMM',$!{shebaoOrder.orderDate})账单 <b><img
+        src="/resource/img/salary/guanbi.png" alt="" onclick="cancelPayorderDetail();"></b></div>
+<div id="orders" class="currentBillDetails">
+    <div class="currentBillDetails-title">
+        <div class="dept">
+            部门：<select name="deptId" id="deptId">
+            <option value="">请选择部门</option>
+            #foreach($data in $!{companysDtos})
+                <option value="$!{data.depId}">$!{data.depName}</option>
+            #end
+        </select>
+        </div>
+        <div class="staff">
+            员工：<input type="text" id="memberName" class="search" name="memberName" placeholder="请输入员工姓名" value="$!{memberName}"/>
+        </div>
+        #*<button class="seach" type="button">搜索</button>*#
+        <div class="seach" id="detailSearch">搜索</div>
+    </div>
+    <div class="currentBillDetails-main">
+        <table id='table'>
+            <thead>
+            <tr>
+                <td>序号</td>
+                <td>姓名</td>
+                <td>部门</td>
+                <td>手机号</td>
+                <td>参保类型</td>
+                <td>基数（元）</td>
+                <td>业务需求</td>
+                <td>操作</td>
+            </tr>
+            </thead>
+            <tbody class="list" id="detailTbody">
+##            #foreach($item in $!{data})
+##            <tr memberid="$!{item.customerId}" orderId="$!{item.companyShebaoOrderId}">
+##                <td>1</td>
+##                <td class="memberName">$!{item.memberName}</td>
+##                <td class="deptName">$!{item.deptName}</td>
+##                <td >$!{item.telphone}</td>
+##                <td>
+##                    <p>社保：$!{item.shebaoBase}</p>
+##                    <p class='list-border'>
+##                        公积金：
+##                        #if($!{item.gjjBase})
+##                            $!{item.gjjBase}
+##                        #else
+##                            无
+##                        #end
+##                    </p>
+##                </td>
+##                <td>
+##                    <p>
+##                        <div class="jn-remit-title">
+##                            #if($!{item.sbHjText})
+##                                汇缴$!{item.sbHjText}
+##                            #end
+##                            #if($!{item.sbTjText})
+##                                调基$!{item.sbTjText}
+##                            #end
+##                            #if($!{item.sbStopText})
+##                                停缴$!{item.sbStopText}
+##                            #end
+##                        </div>
+##
+##                        #if($!{item.sbBjText})
+##                        <div class="sbbj-remit-title">
+##                            补缴$!{item.sbBjText}
+##                        </div>
+##                        #end
+##                    </p>
+##                    <p class='list-border'>
+##                        <div class="jn-remit-title">
+##                            #if($!{item.gjjHjText})
+##                                汇缴$!{item.gjjHjText}
+##                            #end
+##                            #if($!{item.gjjTjText})
+##                                调基$!{item.gjjTjText}
+##                            #end
+##                            #if($!{item.gjjStopText})
+##                                停缴$!{item.gjjStopText}
+##                            #end
+##                        </div>
+##
+##                        #if($!{item.gjjBjText})
+##                        <div class="gjjbj-remit-title">
+##                            补缴$!{item.gjjBjText}
+##                        </div>
+##                        #end
+##                    </p>
+##
+##                </td>
+##                <td class='lastTd'>
+##                    <p  class='btnSocialDetails'>详情</p>
+##                    <p class='list-border btnFundDetails'>详情</p>
+##                </td>
+##            </tr>
+##            #end
+            </tbody>
+        </table>
+    </div>
+    <div class="currentBillDetails-bottom">
+        <div class="button">
+            <input type="button" name="" id="payorderDetailSureBtn" value="确认">
+        </div>
+    </div>
+</div>
+
+<!-- 蒙版 -->
+<div class="mengban" style="display:none"></div>
+<!-- 社保详情 -->
+<div class="socialDetails" style="display: none">
+    <div class="socialDetails-title" id="shebaoDetailTile">社保详情<b></b></div>
+    <div class="socialDetails-main">
+        <!-- 汇缴详情 -->
+        <div class="socialDetails-main-remit">
+            <div class="remit-title"></div>
+            <table>
+                <thead>
+                    <tr>
+                        <td>险种</td>
+                        <td>基数（元）</td>
+                        <td>单位比例</td>
+                        <td>单位费用（元）</td>
+                        <td>个人比例</td>
+                        <td>个人费用（元）</td>
+                    </tr>
+                </thead>
+                <tbody>
+##                    <tr>
+##                        <td>养老</td>
+##                        <td></td>
+##                        <td></td>
+##                        <td></td>
+##                        <td></td>
+##                        <td></td>
+##
+##                    </tr>
+##                    <tr>
+##                        <td>医疗</td>
+##                        <td></td>
+##                        <td></td>
+##                        <td></td>
+##                        <td></td>
+##                        <td></td>
+##
+##                    </tr>
+##                    <tr>
+##                        <td>失业</td>
+##                        <td></td>
+##                        <td></td>
+##                        <td></td>
+##                        <td></td>
+##                        <td></td>
+##
+##                    </tr>
+##                    <tr>
+##                        <td>工伤</td>
+##                        <td></td>
+##                        <td></td>
+##                        <td></td>
+##                        <td></td>
+##                        <td></td>
+##
+##                    </tr>
+##                    <tr>
+##                        <td>生育</td>
+##                        <td></td>
+##                        <td></td>
+##                        <td></td>
+##                        <td></td>
+##                        <td></td>
+##
+##                    </tr>
+##                    <tr>
+##                        <td>残疾人保障金</td>
+##                        <td></td>
+##                        <td></td>
+##                        <td></td>
+##                        <td></td>
+##                        <td></td>
+##
+##                    </tr>
+##                    <tr>
+##                        <td>大病医疗</td>
+##                        <td></td>
+##                        <td></td>
+##                        <td></td>
+##                        <td></td>
+##                        <td></td>
+##
+##                    </tr>
+##                    <tr>
+##                        <td>总计</td>
+##                        <td colspan="3"></td>
+##                        <td colspan="2"></td>
+##                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- 补缴详情 -->
+##        <div class="socialDetails-main-payment">
+##            <div class="payment-title">
+##                补缴<span>201606-201607</span>
+##            </div>
+##            <table>
+##                <thead>
+##                    <tr>
+##                        <td>补缴月份</td>
+##                        <td>险种</td>
+##                        <td>基数（元）</td>
+##                        <td>单位比例</td>
+##                        <td>单位费用（元）</td>
+##                        <td>滞纳金（元）</td>
+##                        <td>个人比例</td>
+##                        <td>个人费用</td>
+##
+##                    </tr>
+##                </thead>
+##                <tbody>
+##                </tbody>
+##                <tfoot>
+##                    <!-- 总计 -->
+##                    <tr>
+##                        <td>总计</td>
+##                        <td colspan="5">单位费用总额：0.00</td>
+##                        <td colspan="2">个人费用总额：0.00</td>
+##                    </tr>
+##                </tfoot>
+##            </table>
+##        </div>
+
+        <!-- 补缴详情 -->
+        <div class="socialDetails-main-payment">
+            <div class="payment-title">
+                本月缴纳费用明细
+            </div>
+            <table>
+                <thead>
+                <tr>
+                    <td>缴费账单月</td>
+                    <td>缴纳说明</td>
+                    <td>单位费用（元）</td>
+                    <td>个人费用(元)</td>
+                    <td>滞纳金（元）</td>
+                    <td>小计(元)</td>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>总计</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+    </div>
+    <div class="socialDetails-footer">
+        <div class="button1">
+            <input type="button" name="" id="shebaoDetailSureBtn" value='确认'>
+        </div>
+    </div>
+</div>
+
+<!-- 公积金详情 -->
+<div class="fundDetails" style='display: none'>
+    <div class="fundDetails-title" id="gjjDetailTile">公积金详情<b></b></div>
+    <div class="fundDetails-main">
+        <!-- 汇缴详情 -->
+        <div class="fundDetails-main-remit">
+            <div class="fundRemit-title">续缴201608</div>
+            <table>
+                <thead>
+                    <tr>
+                        <td>险种</td>
+                        <td>基数（元）</td>
+                        <td>单位比例</td>
+                        <td>单位费用（元）</td>
+                        <td>个人比例</td>
+                        <td>个人费用（元）</td>
+                    </tr>
+                </thead>
+                <tbody>
+##                    <tr>
+##                        <td>公积金</td>
+##                        <td></td>
+##                        <td></td>
+##                        <td></td>
+##                        <td></td>
+##                        <td></td>
+##                    </tr>
+                </tbody>
+##                <tfoot>
+##                <tr>
+##                    <td>总计</td>
+##                    <td colspan="3">单位费用：0.00</td>
+##                    <td colspan="2">个人费用：0.00</td>
+##
+##                </tr>
+##                </tfoot>
+
+            </table>
+        </div>
+        <!-- 补缴详情 -->
+##        <div class="fundDetails-main-payment">
+##            <div class="fundPayment-title">补缴201606-201607</div>
+##            <table>
+##                <thead>
+##                    <tr>
+##                        <td>补缴月份</td>
+##                        <td>险种</td>
+##                        <td>基数（元）</td>
+##                        <td>单位比例</td>
+##                        <td>单位费用（元）</td>
+##                        <td>滞纳金（元）</td>
+##                        <td>个人比例</td>
+##                        <td>个人费用（元）</td>
+##                    </tr>
+##                </thead>
+##                <tbody>
+##
+##                </tbody>
+##                <tfoot>
+##                <tr>
+##                    <td>总计</td>
+##                    <td colspan="5">单位费用总额：0.00</td>
+##                    <td colspan="2">个人费用总额：0.00</td>
+##                </tr>
+##                </tfoot>
+##            </table>
+##        </div>
+
+        <div class="fundDetails-main-payment">
+            <div class="fundPayment-title">
+                本月缴纳费用明细
+            </div>
+            <table>
+                <thead>
+                <tr>
+                    <td>缴费账单月</td>
+                    <td>缴纳说明</td>
+                    <td>单位费用（元）</td>
+                    <td>个人费用(元)</td>
+                    <td>滞纳金（元）</td>
+                    <td>小计(元)</td>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td>总计</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <div class="fundDetails-footer">
+        <div class="button2">
+            <input type="button" name="" id="gjjDetailSureBtn" value='确认'>
+        </div>
+    </div>
+</div>
+
+
+</div>
+<!-- 提交订单 -->
+<div class="submitOrder" style="display: none">
+    <div class="submitOrder-title">提交账单<b></b></div>
+    <div class="submitOrder-main">
+        <div class="submitOrder-main-title">201608上海账单费用总额：30156.00元</div>
+        <table>
+            <tr>
+                <td>社保费用（元）</td>
+                <td>公积金费用（元）</td>
+                <td>补差费用（元）</td>
+                <td>服务费用（元）</td>
+            </tr>
+            <tr>
+                <td>264.00</td>
+                <td>2646.00</td>
+                <td>-200.00</td>
+                <td>10人*29.80/人</td>
+            </tr>
+        </table>
+        <div class="submitOrder-main-hint">提交账单后，员工社保/公积金个人部分将自动从当月的工资计算中扣除请确认是否要提交，且提交后不可撤回</div>
+    </div>
+    <div class="submitOrder-bottom">
+        <div class="button4">
+            <input type="button" name="" value="确认">
+        </div>
+    </div>
+</div>
+<script src="#springUrl('/resource/js/comm/list.js')"></script>
+<script type="text/javascript" src="#springUrl('/resource/js/shebao/payorder_detail.js')"></script>
+</body>
+</html>

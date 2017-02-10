@@ -1,0 +1,159 @@
+body,
+html {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+.topHeadline{
+	min-width: 1200px;
+	width: 100%;
+	height: 80px;
+	font-family: '微软雅黑';
+	text-align: center;
+	line-height: 80px;
+	border-bottom: 1px solid #dbe9ee;
+	color: #333;
+	font-weight: 300;
+	position: relative;
+}
+.topHeadline img{
+	position: absolute;
+	top:0;
+	bottom:0;
+	right:30px;
+	margin:auto;
+	cursor:pointer;
+}
+.content {
+	width: 100%;
+	margin: 0 auto;
+	min-width: 1200px;
+	position: relative
+}
+
+.top {
+	width: 90%;
+	height: 60px;
+	background: #f1f9fc;
+	margin:40px auto 0;
+	color:#666;
+	border:1px solid #dbe9ee;
+
+}
+.top #curMoney{
+	color:#fa5f5f;
+}
+
+.top h3 {
+	line-height: 60px;
+	padding-left: 30px;
+}
+
+.sum {
+	width: 100%;
+	height: 45px;
+	margin-top: 20px;
+	border:1px solid #dbe9ee;
+	box-sizing: border-box;
+
+}
+
+.sum1 {
+	width: 10%;
+	line-height: 43px;
+	float: left;
+	color: #666;
+	background: #f1f9fc;
+	border-right: 1px solid #dbe9ee;
+	text-align: center;
+	border-bottom: 1px solid #dbe9ee;
+}
+
+.sum2 {
+	width: 89%;
+	line-height: 45px;
+	float: left;
+}
+
+input{
+	border:0;
+}
+.sum2 input {
+	width: 98%;
+	height: 100%;
+	padding-left: 2%;
+}
+.bank{
+	border:1px solid #dbe9ee;
+	border-top:0;
+	height:250px;
+}
+.bank h3 {
+	width: 500px;
+	height: 50px;
+	line-height: 50px;
+	padding-left:30px;
+	padding-top:20px;
+	margin-bottom:20px;
+}
+
+.name {
+	width: 500px;
+	height: 40px;
+	line-height: 30px;
+}
+
+.name1 {
+	width: 100px;
+	float: left;
+	padding-left:30px;
+	color:#999;
+}
+
+.name2 {
+	width: 330px;
+	height: 30px;
+	float: left;
+	padding-left: 20px;
+	color:#999;
+}
+
+.bottom {
+	width: 100%;
+	height: 80px;
+	background: #f1f9fc;
+	position: fixed;
+	bottom: 0;
+}
+
+.footer {
+	width: 400px;
+	height: 40px;
+	font-size: 18px;
+	margin:20px auto;
+}
+
+.footer_a1 {
+	display: block;
+	width: 240px;
+	height: 40px;
+	background: #0696fa;
+	line-height: 40px;
+	text-align: center;
+	color: #fff;
+	border-radius: 6px;
+	float: left;
+}
+
+.footer_a2 {
+	display: block;
+	width: 140px;
+	height: 38px;
+	background: #fff;
+	line-height: 38px;
+	text-align: center;
+	color: #0696fa;
+	border: 1px solid #0696fa;
+	border-radius: 6px;
+	float: right;
+}

@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0035)http://www.xintairuan.com/about.htm -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>工资代发</title>
+
+    <link rel="stylesheet" type="text/css" href="/201607/css/xtr2.css">
+    <link rel="stylesheet" type="text/css" href="/201607/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/resource/css/comm/comm.css">
+    <link rel="stylesheet" href="/201607/css/beha.css">
+    <link rel="icon" href="/resource/img/20160731/logo1.png">
+    <script src="/201607/js/jquery-1.11.1.min.js"></script>
+    <script src="/201607/js/custom2.js"></script>
+
+
+</head>
+
+	<body style="padding-top: 0px;">
+		<div class="x-container x-nav-wrap">
+			<div class="x-content">
+				<div class="logo-wrap">
+					<a href="http://www.xintairuan.com/">
+						<img src="/resource/img/20160731/logo.png" alt="薪太软" title="薪太软">
+						<img src="/resource/img/20160731/logo2.png" style="display: none;" alt="薪太软" title="薪太软">
+					</a>
+				</div>
+                <div class="nav">
+                    <ul>
+                        <li>
+                            <a href="#springUrl('/indextop.htm')">首页</a>
+                        </li>
+                        <li>
+                            <a href="#springUrl('/social.htm')">社保大厅</a>
+                        </li>
+                        <li class="active">
+                            <a href="">工资代发</a>
+                        </li>
+                        <li>
+                            <a href="#springUrl('/pad.htm')">工资垫付</a>
+                        </li>
+                        <li>
+                            <a href="#springUrl('/physical.htm')">员工体检</a>
+                        </li>
+                        <li>
+                            <a href="#springUrl('/about.htm')">关于我们</a>
+                        </li>
+                        <li class="split" style="display: list-item;"><span>|</span></li>
+                        <li class="try" style="display: list-item;">
+                            <a href="#springUrl('/registerInit.htm')" class="btn-blue">试用</a>
+                        </li>
+                        <li class="login" style="display: list-item;">
+                            <a href="#springUrl('/loginInit.htm')">登录</a>
+                        </li>
+                    </ul>
+                </div>
+			</div>
+		</div>
+		
+        
+        <div class="main">
+        	<div class="main-banner">
+        	</div>
+        	<ul class="main-nav">
+        		<li><img src="/resource/img/20160731/beha1.png" /><p>薪资结构设计</p></li>
+        		<li><img src="/resource/img/20160731/beha2.png" /><p>工资自动计算</p></li>
+        		<li><img src="/resource/img/20160731/beha3.png" /><p>工资批量发放</p></li>
+        		<li><img src="/resource/img/20160731/beha4.png" /><p>电子工资单</p></li>
+        	</ul>
+        	<div class="main-list1">
+        		<div style="position: relative;">
+        			<ol class="main-listol">
+        				<li>发工资那些事，让HR操碎了心</li>
+        				<li>
+        					<p class="main-listol-title main-listol-tcolor1">复杂的薪酬结构设计</p>
+        					<p>不同的部门，需要设计不同的薪资结构<br />不同的岗位，薪资考核标准也不同</p>
+        				</li>
+        				<li>
+        					<p class="main-listol-title main-listol-tcolor2">耗时的薪资信息更新</p>
+        					<p>员工入离职，信息变更<br />员工转正、调岗，薪资调整</p>
+        				</li>
+        				<li>
+        					<p class="main-listol-title main-listol-tcolor3">繁琐的工资计算</p>
+        					<p>考勤和请假扣款      绩效考核<br />社保公积金扣款      个人所得税扣款</p>
+        				</li>
+        				<li>
+        					<p class="main-listol-title main-listol-tcolor4">低效的工资发放</p>
+        					<p>制作员工薪资EXCEL表<br />与银行进行工资发放业务对接<br />打印纸质工资条，向员工发放</p>
+        				</li>
+        			</ol>
+        		</div>
+        	</div>
+       
+
+
+			<div id="con"></div>
+        </div>
+		<div class="main-listo4">
+			
+		</div>
+		<div class="main-listo5">
+			<img src="/resource/img/20160731/beha1.jpg" />
+		</div>
+        <div class="main-listo6"></div>
+			#parse("/201607/footer.vm")
+
+		
+	</body>
+
+</html>

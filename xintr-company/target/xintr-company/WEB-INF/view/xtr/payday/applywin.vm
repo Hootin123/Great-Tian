@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>申请成功</title>
+#parse("comm/head.vm")
+<link href="#springUrl('/resource/css/comm/comm.css')" rel="stylesheet">
+<style>
+h2{width:100px;margin:50px auto;}
+h3{width:490px;margin:70px auto 50px;color:#333;}
+.con{width:500px;margin:0 auto;position:relative}
+.con div{width:500px;height:60px;line-height:60px;font-size:16px;}
+.conSpan1{position:absolute;right:260px;}
+.conSpan2{position:absolute;left:260px;}
+.btn a{width:300px;height:50px;display: block;text-align: center;line-height:50px;margin:0 auto;background:#0696fa;font-size:16px;color:#fff;border-radius:6px;margin-top:100px;}
+</style>
+</head>
+
+<body>
+<h2>申请垫付</h2>
+<h3>您申请的工资垫付已提交成功，薪太软会在3个工作日内与您联系</h3>
+<div class="con">
+<div>
+<span class="conSpan1">垫付金额</span>
+<span class="conSpan2">$!{orderMoneyValue} 元</span>
+</div>
+<div>
+<span class="conSpan1">服务费</span>
+<span class="conSpan2">$!{orderActualServer} 元</span>
+</div>
+<div>
+<span class="conSpan1">计息方式</span>
+<span class="conSpan2">
+    #if($!{orderInterestType} == '1')
+        按天
+    #elseif($!{orderInterestType} == '2')
+        按月
+    #else
+        $!{orderInterestType}
+    #end
+</span>
+</div>
+<div>
+<span class="conSpan1">垫付期限</span>
+<span class="conSpan2">
+    #if($!{orderInterestType} == '1')
+        $!{orderInterestCycle}天
+    #elseif($!{orderInterestType} == '2')
+        $!{orderInterestCycle}个月
+    #else
+        $!{orderInterestCycle}
+    #end
+</span>
+</div>
+<div>
+<span class="conSpan1">还款方式</span>
+<span class="conSpan2">
+    #if($!{orderRepayType} == '1')
+        一次性还本付息
+    #elseif($!{orderRepayType} == '2')
+        一次性还本按月付息
+    #elseif($!{orderRepayType} == '3')
+        一次性还本按天付息
+    #elseif($!{orderRepayType} == '4')
+        按月分期还本付息
+    #elseif($!{orderRepayType} == '5')
+        按天还本分期付息
+    #else
+        $!{orderRepayType}
+    #end
+</span>
+</div>
+<div>
+<span class="conSpan1">利率</span>
+<span class="conSpan2">$!{orderRate}%</span>
+</div>
+<div>
+<span class="conSpan1">期望到账日</span>
+<span class="conSpan2">$!date.format('yyyy.MM.dd',$!{orderExpectDay})</span>
+</div>
+</div>
+<div class="btn"><a href="#springUrl('/paysecurity.htm')">确认</a></div>
+</body>
+</html>

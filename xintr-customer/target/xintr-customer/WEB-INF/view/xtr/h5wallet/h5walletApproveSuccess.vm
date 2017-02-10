@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" id="html">
+<head>
+    <meta charset="UTF-8">
+    <title>审核成功</title>
+    #parse("comm/head.vm")
+    <meta name="viewport" content="width=divce-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1">
+    <style type="text/css">
+        html{
+            width:100%;
+            height: 100%;
+            overflow: hidden;
+
+        }
+        body{
+            width:100%;
+            height:100%;
+            overflow: hidden;
+            background: url(../img/success-bg.png) 0 0 no-repeat;
+            background-size: 100%;
+        }
+        h3{
+            width: 2.06rem;
+            margin: 0 auto;
+            margin-top:1.9rem;
+            height:1.44rem;
+            font-size: 0.48rem;
+            font-family: '微软雅黑';
+            color: #333;
+            font-weight: 300;
+
+        }
+        .txt p{
+            width: 2.2rem;
+            height: 0.56rem;
+            margin: 0 auto;
+            font-size: 0.32rem;
+            font-family: '微软雅黑';
+            color: #333;
+        }
+        .txt p:nth-child(2){
+            height: 1.18rem;
+            width: 100%;
+            padding-left: 0.4rem;
+            font-size: 0.36rem;
+            color: #0696fa;
+            line-height: 1.18rem;
+        }
+        .txt p:nth-child(3){
+            height: 1.18rem;
+            width: 4.26rem;
+            font-size: 0.36rem;
+            color: #0696fa;
+            line-height: 1.18rem;
+        }
+        footer{
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 0.9rem;
+            background:#0696fa;
+            font-size:0.34rem;
+            font-family: '微软雅黑';
+            color: #fff;
+            text-align: center;
+            line-height: 0.9rem;
+        }
+    </style>
+
+</head>
+<body>
+<input type="hidden" value="$!{companyId}" id="companyId">
+<h3>审核成功</h3>
+<div class="txt">
+    <p>恭喜审核成功!</p>
+    <p>请前往薪太软官网（www.xintairuan.com）</p>
+    <p>开启人力资源一站式服务</p>
+</div>
+<footer>确定</footer>
+</body>
+</html>

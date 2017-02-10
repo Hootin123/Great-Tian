@@ -1,0 +1,100 @@
+body{
+			min-width: 1440px;
+			min-height: 930px;
+			background: url(../../img/pchongbao/collectionInfo-bg.png) 0 0 no-repeat;
+		}
+		.webHeader{
+			width:100%;
+			padding: 40px 115px 0;
+			box-sizing: border-box;
+		}
+		.logo{
+			width: 192px;
+			height: 70px;
+			float: left;
+		}
+		.logo-text{
+			width: 295px;
+			height: 36px;
+			float: right;
+			margin-top: 12px;
+		}
+		form{
+			margin:0 auto;
+			margin-top: 20px;
+			width: 589px;
+			height: 523px;
+			padding-top: 250px;
+			box-sizing: border-box;
+			background: url(../../img/pchongbao/text.png) 0 0 no-repeat
+
+		}
+		ul{
+			width: 520px;
+			margin:0 auto;
+		}
+		ul li{
+			width: 100%;
+			height: 80px;
+			position: relative;
+		}
+		ul li input{
+			width: 100%;
+			height: 48px;
+			text-indent: 60px;
+			line-height: 48px;
+			color: #222;
+			font-size: 20px;
+			font-family: '微软雅黑';
+			border:1px solid #000;
+			background:#ffdd46;
+			border-radius: 50px;
+		}
+		ul li .error{
+			max-width: 500px;
+		    min-height: 20px;
+		    position: absolute;
+		    right: -245px;
+		    top: 6px;
+		    background: #f99b15;
+		    padding: 5px 18px;
+		    z-index: 10;
+		    border-radius: 5px;
+		    color: #f00;
+		    font-size: 14px;
+		    line-height: 26px;
+		}
+		ul li .error:before{
+			content: "";
+		    display: block;
+		    border-width: 12px 24px;
+		    position: absolute;
+		    top: 6px;
+		    left: -35px;
+		    border-style: solid dashed dashed;
+		    border-color: transparent #f99b15 transparent transparent;
+		    font-size: 0;
+		    line-height: 0;
+		}
+		ul li input::-webkit-input-placeholder{
+			color: #222;
+
+		}
+		.webFooter{
+			width: 520px;
+			margin:0 auto;
+		/*	margin-bottom: 300px;*/
+		}
+		.webFooter .submit{
+			width: 100%;
+			height: 57px;
+			font-size: 28px;
+			color: #222;
+			line-height: 48px;
+			text-align: center;
+			font-family: '微软雅黑';
+			font-weight: 600;
+			cursor: pointer;
+			border:0;
+			background:url(../../img/pchongbao/webFooter.png) 0 0 no-repeat;
+		}

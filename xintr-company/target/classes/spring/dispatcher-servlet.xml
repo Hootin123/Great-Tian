@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 启用spring mvc 注解 -->
+    <context:annotation-config/>
+    <!--通知spring使用cglib而不是jdk的来生成代理方法 AOP可以拦截到Controller -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+
+    <context:component-scan base-package="com.xtr.company">
+        <context:include-filter type="regex"
+                                expression="com.xtr.company.*"/>
+    </context:component-scan>
+
+
+    <mvc:resources location="/resource/css/" mapping="/resource/css/**"/>
+    <mvc:resources location="/resource/js/" mapping="/resource/js/**"/>
+    <mvc:resources location="/resource/img/" mapping="/resource/img/**"/>
+    <mvc:resources location="/resource/upload/" mapping="/resource/upload/**"/>
+    <mvc:resources location="/201607/" mapping="/201607/**"/>
+    <mvc:resources location="/img/" mapping="/img/**"/>
+
+
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+        <property name="order" value="1"/>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="customArgumentResolvers">
+            <list>
+                <bean class="com.xtr.comm.custom.BeanArgumentResolver"/>
+            </list>
+        </property>
+        <property name="messageConverters">
+            <list>
+                <bean
+                        class="org.springframework.http.converter.StringHttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>text/plain;charset=UTF-8</value>
+                        </list>
+                    </property>
+                </bean>
+                <bean
+                        class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                    <property name="supportedMediaTypes" value="application/json;charset=UTF-8"/>
+                    <property name="objectMapper">
+                        <bean class="com.github.miemiedev.mybatis.paginator.jackson2.PageListJsonMapper"/>
+                    </property>
+                </bean>
+                <!--<bean class="com.xtr.company.web.DistinctJacksonHttpMessageConverter">-->
+                <!--<property name="supportedMediaTypes" value="application/json;charset=UTF-8"/>-->
+                <!--</bean>-->
+            </list>
+        </property>
+    </bean>
+
+    <!-- 访问路径拦截配置 -->
+    <!-- 访问路径拦截配置 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- mvc 安全过滤路径 -->
+            <mvc:mapping path="/**/*.htm"/>
+            <bean class="com.xtr.company.web.SecurityInterceptor">
+                <property name="excludedUrls">
+                    <list>
+                        <!-- 不需要拦截的url地址 -->
+                        <value>.*/about.htm</value>
+                        <value>.*/footer.htm</value>
+                        <value>.*/registerInit.htm</value>
+                        <value>.*/loginInit.htm</value>
+                        <value>.*/login.htm</value>
+                        <value>.*/hrcenter.htm</value>
+                        <value>.*/index.htm</value>
+                        <value>.*/news.htm</value>
+                        <value>.*/getCheckCode.htm</value>
+                        <value>.*/news_detail.htm</value>
+                        <value>.*/newsdetail.htm</value>
+                        <value>.*/news_detailD.htm</value>
+                        <value>.*/news_detailF.htm</value>
+                        <value>.*/top.htm</value>
+                        <value>.*/head.htm</value>
+                        <value>.*/register.htm</value>
+                        <value>.*/registerSuccess.htm</value>
+                        <value>.*/login.htm</value>
+                        <value>.*/activeInfo.htm</value>
+                        <value>.*/activateInfo.htm</value>
+                        <value>.*/activeRegister.htm</value>
+                        <value>.*/sendMShortMessageCompanyRegist.htm</value>
+                        <value>.*/checkMSMRandomNum.htm</value>
+                        <value>.*/checkVerifycode.htm</value>
+                        <value>.*/authImages.htm</value>
+                        <value>.*/checkMemberLogname.htm</value>
+                        <value>.*/generateImages.htm</value>
+                        <value>.*/addCollaboration.htm</value>
+                        <value>.*/newslist.htm</value>
+                        <value>.*/newsdetailpage.htm</value>
+                        <value>.*/indextop.htm</value>
+                        <value>.*/agree.htm</value>
+                        <value>.*/againregister.htm</value>
+                        <value>.*/toRetrievePwdFirstPage.htm</value>
+                        <value>.*/toRetrievePwdSecondPage.htm</value>
+                        <value>.*/toRetrievePwdThirdPage.htm</value>
+                        <value>.*/generateMailValidatorImages.htm</value>
+                        <value>.*/sendEmailByRetrievePwd.htm</value>
+                        <value>.*/emailCodeValidator.htm</value>
+                        <value>.*/modifyPwdAgain.htm</value>
+                        <value>.*/toRetrievePwdByPhoneFirstPage.htm</value>
+                        <value>.*/checkVcodeimgByPhone.htm</value>
+                        <value>.*/modifyPwdByPhone.htm</value>
+
+                        <value>.*/beha.htm</value>
+                        <value>.*/pad.htm</value>
+                        <value>.*/physical.htm</value>
+                        <value>.*/social.htm</value>
+                        <value>.*/registerByPhone.htm</value>
+
+
+
+                        <value>.*/test.htm</value>
+                        <value>.*/jd_notify.htm</value>
+                        <value>.*/query.htm</value>
+                        <value>.*/jd_tools.htm</value>
+                       <!-- 不需要拦截的地址-->
+                       <value>.*/getUnReadMsgsCount.htm</value>
+                       <value>.*/seeMessageBox.htm</value>
+                       <value>.*/findMessageDetail.htm</value>
+                        <value>.*/deleteMessage.htm</value>
+
+                    </list>
+                </property>
+
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <!--velocity config-->
+    <bean id="velocityConfigurer"
+          class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+        <property name="resourceLoaderPath">
+            <value>WEB-INF/view</value>
+        </property>
+        <property name="velocityProperties">
+            <props>
+                <prop key="input.encoding">UTF-8</prop>
+                <prop key="output.encoding">UTF-8</prop>
+                <prop key="velocimacro.library">comm/macros.vm</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- 处理velocity布局 -->
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+        <property name="cache" value="true"/>
+        <property name="prefix" value=""/>
+        <property name="suffix" value=".vm"/>
+        <property name="contentType" value="text/html; charset=utf-8"></property>
+        <property name="exposeSpringMacroHelpers" value="true"/>
+        <property name="requestContextAttribute" value="rc"/>
+        <property name="toolboxConfigLocation" value="/WEB-INF/velocity_toolbox.xml"/>
+    </bean>
+
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 设置上传文件大小的参数 -->
+        <property name="maxUploadSize" value="10000000"/>
+    </bean>
+
+</beans>

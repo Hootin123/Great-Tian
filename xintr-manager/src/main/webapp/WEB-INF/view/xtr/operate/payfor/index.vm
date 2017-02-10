@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>借款申请管理</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-table/bootstrap-table.min.css')" rel="stylesheet">
+<style>
+ .clear:after{
+     content: '';
+     display: block;
+     clear: both;
+ }
+.sparent-box{
+    margin-bottom: 20px;
+}
+.s-box{
+    padding: 20px;
+    width: 100%;
+    border: 1px solid #999999;
+    margin-bottom: 10px;
+}
+.sparent-box .s-box div{
+    width: 80px;
+    height: 200px;
+    text-align: center;
+    float: left;
+    line-height: 200px;
+}
+.s-box table{
+    width: 400px;
+    float: left;
+}
+.s-box table td{
+    height: 40px;
+}
+.s-box table td input{
+    width: 300px;
+    padding: 0 20px 0 20px;
+    height: 30px;
+}
+.add-sbox{
+    display: block;
+    width:100%;
+    height: 40px;
+    /*background: red;*/
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 40px;
+}
+</style>
+</head>
+
+<body>
+<div class="col-sm-12">
+    <div class="container-fluid">
+        <div class="row-fluid">
+
+            <div class="ibox-content">
+                <div class="row">
+                    <form class="form-inline" role="form" method="post" style="line-height: 40px;" action="dataList.htm">
+                        <div class="form-group" style="margin-top: 10px;width:250px;">
+                            <label class="col-sm-5 control-label" >借款单状态</label>
+                            <div class="col-sm-7">
+                                <select id="orderStateType" name="orderState" class="form-control m-b" style="margin-top: 5px;">
+                                    <option value="">不选择</option>
+                                    <option value="0">审核中</option>
+                                    <option value="1">撤销</option>
+                                    <option value="2">驳回</option>
+                                    <option value="3">已受理</option>
+                                    <option value="4">融资失败</option>
+                                    <option value="5">待出款</option>
+                                    <option value="6">已放款</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                        <label class="col-sm-4 control-label" >借款受理人</label>
+                        <div class="col-sm-8">
+                        <input type="text" id="auditName" name="auditName" class="form-control" placeholder="请输入借款受理人"/>
+                        </div>
+                        </div>
+                        <div class="form-group">
+                        <label class="col-sm-4 control-label" >融资处理人</label>
+                        <div class="col-sm-8">
+                        <input type="text" id="auditName" name="auditName" class="form-control" placeholder="请输入融资处理人"/>
+                        </div>
+                        </div>
+                        <div class="form-group">
+                        <label class="col-sm-4 control-label" >财务审核人</label>
+                        <div class="col-sm-8">
+                        <input type="text" id="auditName" name="auditName" class="form-control" placeholder="请输入财务审核人"/>
+                        </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <input type="text" style="width:244px;" id="companyName" name="companyName" class="form-control" placeholder="根据企业名或手机号模糊检索" />
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" type="button" id="queryBtn"><i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;搜索</button>
+
+                    </form>
+
+                </div>
+            </div>
+
+            <table id="data-list"></table>
+
+        </div>
+    </div>
+	<div id="modal-form" class="modal fade" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3 class="m-t-none m-b">借款受理</h3>
+                            <hr/>
+                            <form id="auditForm" role="form" method="post">
+                                <input type="radio" name="borrowType" id="borrowType1" checked="checked" value="0" name="sign">受理借款：已经与企业签订借款协议！<br/>
+                                 <input type="hidden" id="orderState" name="orderState"  value="">
+                                 <input type="hidden" id="orderId" name="orderId"  value="">
+                                <input type="radio" name="borrowType" id="borrowType2" value="1" name="sign">驳回借款：驳回该借款申请<br/><br/>
+                                <input id="orderAuditRemark"  name="orderAuditRemark" style="height:65px;display:none" type="text" class="form-control" required="" aria-required="true" placeholder="驳回原因"><br/>
+                                <div class="text-center" style="20px;">
+                                    <button class="btn btn-w-m btn-success" type="button" onclick="borrowTypeUpdateSubmit()">确认</button>
+                                    <button data-dismiss="modal" class="btn btn-w-m btn-white" type="button">取消</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	<div id="modal-form1" class="modal fade" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3 class="m-t-none m-b">资产融资结果</h3>
+                            <hr/>
+                            <form id="borrowInfoForm" role="form" method="post">
+                                <h3 class="m-t-none m-b">请根据资产方反馈填写融资结果：</h3>
+                                融资结果：<input type="radio" name="equityType" id="equityType1" checked="checked" value="0" name="sign">融资成功，资金到账 &nbsp;&nbsp;<input type="radio" name="equityType" id="equityType2" value="1" name="sign">资产包流产<br/>
+                                <hr/>
+                                <div id="borrowShow">
+                                <h3 class="m-t-none m-b">借款总金额：<span id="orderMoneyShow"></span>元</h3>
+                                <h3 class="m-t-none m-b">请填写资金到账信息：</h3>
+                                <div class="sparent-box">
+                                </div>
+                                <a class="add-sbox" href="javascript:;">添加新渠道</a>
+                                </div>
+                                <div id="borrowNone" style="display:none">
+                                <h3>将告知用户融资失败！</h3><br/>
+                                </div>
+                                <div class="text-center" style="20px;">
+                                    <button class="btn btn-w-m btn-success" id="payOperatequery" onclick="checkSubmit()" type="button">确认</button>
+                                    <button data-dismiss="modal" class="btn btn-w-m btn-white" type="button">取消</button>
+                                </div>
+                                <input type="hidden" name="borrowOrderNumber" id="borrowOrderNumber"  value="">
+                                <input type="hidden" id="orderIdVlaue" name="orderId"  value="">
+                                <input type="hidden" id="orderStateValue" name="orderState"  value="">
+                                <input type="hidden"  id="orderMoney" name="orderMoney"  value="">
+                                <input type="hidden"  id="orderInterestType" name="orderInterestType"  value="">
+                                <input type="hidden"  id="orderInterestCycle" name="orderInterestCycle"  value="">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+</body>
+<script src="#springUrl('/resource/js/hui/content.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table-mobile.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/validate/jquery.validate.min.js')"></script>
+<script src="#springUrl('/resource/js/comm/jdatagrid.js')"></script>
+<script src="#springUrl('/resource/js/operate/payfor/index.js')"></script>
+<script src="#springUrl('/resource/js/operate/payfor/canals.js')"></script>
+</html>

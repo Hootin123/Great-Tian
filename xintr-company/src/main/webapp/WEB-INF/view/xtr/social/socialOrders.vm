@@ -1,0 +1,337 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title></title>
+
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/payday/payday.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/account/account.css')" rel="stylesheet">
+    <script src="#springUrl('/resource/js/plugins/dropzone/dropzone.js')"></script>
+    <script src="#springUrl('/resource/js/payday/payday.js')"></script>
+    <script src="#springUrl('/resource/js/plugins/laydate/laydate.js')"></script>
+##    <script src="#springUrl('/resource/js/account/iMove.js')"></script>
+</head>
+
+<body>
+<div class="main_right payoff_two clear">
+
+
+
+
+    <div class="wages">
+        <div class="payoff_two_header">
+            <div style="height:20px;"></div>
+            <div><a class="wagesA1" href="socil/socialInfoUp.htm" >员工资料导入</a></div>
+            <div><a class="wagesA2" href="javascript:void(0);"onclick="alertBox()" >缴纳社保公积金</a></div>
+            <div><a class="wagesA3" href="socil/socialPayUpSup.htm" >补缴社保公积金</a></div>
+            <div><a class="wagesA4" href="socil/socialInfoStop.htm" >停缴社保公积金</a></div>
+            <div><a class="wagesA5" href="socil/socialInfoEdit.htm" >调整基数</a></div>
+        </div>
+
+        <ol class="payoff_two_nav">
+            <a href="socialOrders.htm" class="payoff_two_active">
+            <li class="payoff_two_active nav_first" style="width:16%;">全部</li>
+            </a>
+            <a href="socialOrders.htm?type=1" class="payoff_two_active">
+            <li style="width:16%; border-radius: 0px;">资料导入</li>
+            </a>
+            <a href="socialOrders.htm?type=2" class="payoff_two_active">
+            <li style="width:16%; border-radius: 0px;">缴纳社保公积金</li>
+            </a>
+            <a href="socialOrders.htm?type=3" class="payoff_two_active">
+            <li style="width:16%; border-radius: 0px;">补缴社保公积金</li>
+            </a>
+            <a href="socialOrders.htm?type=4" class="payoff_two_active">
+            <li style="width:16%; border-radius: 0px;">停缴社保公积金</li>
+            </a>
+            <a href="socialOrders.htm?type=5" class="payoff_two_active">
+            <li style="width:16%;">调整基数</li>
+            </a>
+        </ol>
+
+        <table class="payoff_two_list">
+            <tr class="first_list">
+                <td>时间</td>
+                <td>订单类型</td>
+                <td>订单编号</td>
+                <td>订单详情</td>
+                <td>状态</td>
+                <td>操作</td>
+            </tr>
+
+            #if($!{orderDate} && $!{orderDate.size()} > 0)
+                #foreach($data in $!{orderDate})
+                    <tr class="first_last">
+                        <td>$!date.format('yyyyMMdd',$!{data.orderAddtime})</td>
+                        <td>
+                            #if($!{data.orderType} == '1')
+                                员工资料导入
+                            #elseif($!{data.orderType} == '2')
+                                缴纳社保公积金
+                            #elseif($!{data.orderType} == '3')
+                                补缴社保公积金
+                            #elseif($!{data.orderType} == '4')
+                                停缴社保公积金
+                            #elseif($!{data.orderType} == '5')
+                                调整基数
+                            #end
+                        </td>
+                        <td>
+                            $!{data.orderNumber}
+                        </td>
+                        <td>
+                            #if($!{data.orderDetail.length()}>0 && $!{data.orderStatus}>0)
+
+                                #set ($detailArray = $data.orderDetail.split("\|"))
+                                #set ($detailstr="")
+
+                                #if($!{data.orderType} == '1')
+                                    #set ($detailstr=$detailstr+"导入成功："+$detailArray[0])
+                                    #set ($detailstr=$detailstr+"<br />材料有误："+$detailArray[1])
+                                    $!{detailstr}
+                                #elseif($!{data.orderType} == '2' || $!{data.orderType} == '3')
+                                    <table style="border-collapse: collapse; border-spacing: 1px; width:100%;">
+                                        <tr style="height:auto;">
+                                            <td style="border:1px solid black; width:10%">社保</td>
+                                            <td style="border:1px solid black; width:35%;">$detailArray[0]</td>
+                                            <td style="border:1px solid black; width:10%">$detailArray[1]人</td>
+                                            <td style="border:1px solid black; width:10%">${xtr.money($detailArray[2])}元</td>
+                                            <td style="border:1px solid black; width:35%;" rowspan="2">
+                                                订单金额：$!{xtr.money($!{data.orderMoney})}元<br />
+                                                #if($!{data.redMoney})
+                                                #set($relmoney = $!{data.orderMoney} - $!{data.redMoney})
+                                                    #if($!{relmoney} < 0)
+                                                        #set($relmoney = 0)
+                                                    #end
+                                                实付金额：$!{xtr.money($!{relmoney})}元<br />
+                                                红包折扣：$!{xtr.money($!{data.redMoney})}元<br />
+                                                #else
+                                                实付金额：$!{xtr.money($!{data.orderMoney})}元<br />
+                                                #end
+
+                                                薪太软服务费：$!{xtr.money($!{data.orderMoneyServer})}元 （<a href="javascript:void(0)" onclick="showDetail($!{data.orderId})">详情</a>）<br />
+
+                                                最后付费日：$!date.format('yyyyMMdd',$!{data.orderPaydate})
+                                            </td>
+                                        </tr>
+                                        <tr style="height:auto;">
+                                            <td style="border:1px solid black;">公积金</td>
+                                            <td style="border:1px solid black;">$detailArray[3]</td>
+                                            <td style="border:1px solid black;">$detailArray[4]人</td>
+                                            <td style="border:1px solid black;">$!{xtr.money($detailArray[5])}元</td>
+                                        </tr>
+                                    </table>
+                                #elseif($!{data.orderType} == '4')
+                                    #set ($detailstr=$detailstr+"审核通过："+$detailArray[0])
+                                    #set ($detailstr=$detailstr+"<br />审核失败："+$detailArray[1])
+                                    $!{detailstr}
+                                #elseif($!{data.orderType} == '5')
+                                    #set ($detailstr=$detailstr+"审核通过："+$detailArray[0])
+                                    #set ($detailstr=$detailstr+"<br />审核失败："+$detailArray[1])
+                                    $!{detailstr}
+                                #end
+
+                            #end
+                        </td>
+                        <td>
+
+                            #if($!{data.orderStatus} == '1')
+                                待审核
+                            #elseif($!{data.orderStatus} == '2')
+                                资料有误
+                            #elseif($!{data.orderStatus} == '3')
+                                #if($!{data.orderType} == '2'|| $!{data.orderType} == '3')
+                                    待付款
+                                #else
+                                    审核通过
+                                #end
+                            #elseif($!{data.orderStatus} == '4')
+                                已撤销
+                            #elseif($!{data.orderStatus} == '5')
+                                订单关闭
+                            #elseif($!{data.orderStatus} == '6')
+                                已付款
+                            #end
+
+                        </td>
+                        <td>
+                            #if($!{data.orderStatus} == '1')
+                                <a href="#springUrl('/socil/download.htm?type=2&orderId=')$!{data.orderId}" target="_blank">下载</a>
+                                <a onclick="cancelorder($!{data.orderId})" href="javascript:;" class="cancel">撤销</a>
+                            #elseif($!{data.orderStatus} == '2')
+                            <a href="#springUrl('/socil/download.htm?type=1&orderId=')$!{data.orderId}" target="_blank">下载</a>
+                            #elseif($!{data.orderStatus} == '3')
+                                <a href="#springUrl('/socil/download.htm?type=2&orderId=')$!{data.orderId}" target="_blank">下载</a>
+
+                                #if($!{data.orderType} == '2'|| $!{data.orderType} == '3')
+                                    <a href="socil/orderPay.htm?orderId=$!{data.orderId}" >付款</a>
+                                #end
+                            #elseif($!{data.orderStatus} == '4')
+                                <a href="#springUrl('/socil/download.htm?type=2&orderId=')$!{data.orderId}" target="_blank">下载</a>
+                            #elseif($!{data.orderStatus} == '5')
+                                <a href="#springUrl('/socil/download.htm?type=2&orderId=')$!{data.orderId}" target="_blank">下载</a>
+                            #elseif($!{data.orderStatus} == '6')
+                                <a href="#springUrl('/socil/download.htm?type=2&orderId=')$!{data.orderId}" target="_blank">下载</a>
+
+                            #end
+                        </td>
+                    </tr>
+                #end
+            #end
+
+        </table>
+        <div id="kkpager" style="width:90%;margin:0 auto;margin-top:30px;"></div>
+        <div class="pacity" style="width:100%;height:100%;display:none;opacity: 0.6;background: #000000; position: absolute;left: 0;top: 0; filter:alpha(opacity=60);"></div>
+        <div class="aboxbg" id="aboxbg">
+##            <img class="aboxbgImg" src="#springUrl('/resource/img/check.png')" alt="">
+            <h3>缴纳社保公积金</h3>
+            <p>薪太软会在每月社保窗口开放日根据您导入的员工资料自动帮您生成社保公积金代缴订单。您只需核查订单并付款即可完成缴纳。</p>
+            <div class="aboxbgBtn">
+                <div class="aboxbgBtn1">确认</div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
+
+<script type="text/javascript">
+
+
+    function showDetail(orderid) {
+        layer.open({
+            type: 2,
+            title: '服务费详情',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['400px', '180px'],
+            content: 'socil/socialInfoDetail.htm?orderId=' + orderid
+        });
+
+    }
+    
+    $(function(){
+        var tp=getQueryString('type');
+
+        $('ol.payoff_two_nav li').removeClass('payoff_two_active');
+        if(tp*1==1){
+            $('ol.payoff_two_nav li').eq(1).addClass('payoff_two_active');
+        }else if(tp*1==2){
+            $('ol.payoff_two_nav li').eq(2).addClass('payoff_two_active');
+        }else if(tp*1==3){
+            $('ol.payoff_two_nav li').eq(3).addClass('payoff_two_active');
+        }else if(tp*1==4){
+            $('ol.payoff_two_nav li').eq(4).addClass('payoff_two_active');
+        }else if(tp*1==5){
+            $('ol.payoff_two_nav li').eq(5).addClass('payoff_two_active');
+        }else{
+            $('ol.payoff_two_nav li').eq(0).addClass('payoff_two_active');
+        }
+    });
+
+
+    //生成分页控件
+    kkpager.generPageHtml({
+        pno: '$!{paginator.page}',
+        mode: 'link', //可选，默认就是link
+        //总页码
+        total: '$!{paginator.totalPages} ',
+        //总数据条数
+        totalRecords: '$!{paginator.totalCount} ',
+        //链接前部
+        hrefFormer: '${hrefFormer}',
+        //链接尾部
+        hrefLatter: '${hrefLatter}',
+        //链接算法
+        isShowFirstPageBtn:false,
+        isShowLastPageBtn:false,
+        currPageBeforeText:'第',
+        getLink: function (n) {
+            //这里是默认算法，算法适用于比如：
+            //hrefFormer=http://www.xx.com/news/20131212
+            //hrefLatter=.html
+            //那么首页（第1页）就是http://www.xx.com/news/20131212.html
+            //第2页就是http://www.xx.com/news/20131212_2.html
+            //第n页就是http://www.xx.com/news/20131212_n.html
+//            if (n == 1) {
+//                return this.hrefFormer + this.hrefLatter;
+//            }
+//            return this.hrefFormer + '_' + n + this.hrefLatter;
+            return 'socialOrders.htm?pageIndex=' + n+'&type=$!{type}';
+        }
+
+    });
+
+
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return null;
+    }
+
+    function cancelorder(orderId) {
+        showConfirm('您确定要撤销这条信息吗', function () {
+            $.ajax({
+                type: 'post',
+                url: 'social/orderCancel.htm?orderId=' + orderId,
+                //data: {'excelId': excelId},
+                success: function (resultResponse) {
+                    if (resultResponse.success) {
+                        window.location.reload();
+                    } else {
+                        showWarning(resultResponse.message);
+                    }
+                }
+            });
+        });
+    }
+
+    var abox;
+    $(function() {
+        /*弹窗*/
+        abox = $('.aboxbg');
+        abox.find('.aboxbgBtn1').click(function() {
+            closeAbox();
+        });
+
+    });
+
+
+    function closeAbox() {
+//        abox.animate({
+//            'height': 0,
+//            'top': abox.height() / 2 + abox.position().top
+//        }, 300, function() {
+//            abox.hide()
+//            $('.pacity').hide();
+//        })
+        abox.hide(300)
+        $('.pacity').hide();
+    }
+
+    function alertBox(){
+        $('.pacity').show();
+        $('.aboxbg').show(300);
+    }
+
+//    /*弹窗背景自适应*/
+//    window.onload = function() {
+//        window.onresize = function() {
+//            navlasLi();
+//        }
+//        navlasLi();
+//        var obj = new iMove('abox');
+//    }
+//
+//    function navlasLi() {
+//        $('.pacity').width($(document).width());
+//        $('.pacity').height($(document).height());
+//        $('.main_right').width($(window).width());
+//        $('.main_right').height($(window).height());
+//    }
+</script>

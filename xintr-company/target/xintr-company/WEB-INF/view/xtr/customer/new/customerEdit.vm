@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>员工信息</title>
+    #parse("comm/head.vm")
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/customer/new/customerEdit.css')">
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/js/plugins/laydate/need/laydate.css')"/>
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/customer/new/jquery.treeview.css')">
+    <script src="#springUrl('/resource/js/plugins/laydate/laydate.js')"></script>
+    <script type="text/javascript" src="#springUrl('/resource/js/customer/new/customerEdit.js')"></script>
+    <script type="text/javascript" src="#springUrl('/resource/js/customer/new/ajaxfileupload.js')"></script>
+    <script type="text/javascript" src="#springUrl('/resource/js/customer/new/jquery.treeview.js')"></script>
+</head>
+<body>
+<div class="info">
+    <div class="baseInfo comm">
+        <div class="baseInfo-title comm-title">
+            <span>基本信息</span>
+            #if($!{customersDto.stationCustomerState}!=3 and $!{customersDto.stationCustomerState}!=4 and $!{customersDto.willLeaveState}!=1)
+                <a class='onEditBase' data='0'>编辑</a>
+            #end
+        </div>
+        <div class="baseInfo-main comm-main">
+            <form id="editBaseForm">
+                <input id="customerId" name="customerId" type="hidden" value="$!{customerId}">
+                <div class="commP">
+                        <div class='userName commSpan lit'>
+                            <label><em>*</em>姓名：</label><input type="text" disabled="disabled" name="customerTurename"  value="$!{customersDto.customerTurename}"  placeholder="请输入员工姓名">
+                            <b></b>
+                        </div>
+                    <div class='sex commSpan lit'>
+                            <label>性别：</label>
+                                <i>
+                                    #if($!{customersDto.customerSex}==1)
+                                        <input type="radio" name="customerSex" value="1" class="m" checked disabled="disabled"> 男&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" name="customerSex" value="0" class="m" disabled="disabled"> 女
+                                    #elseif($!{customersDto.customerSex}==0)
+                                        <input type="radio" name="customerSex" value="1" class="m" disabled="disabled"> 男&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" name="customerSex" value="0" class="m" checked disabled="disabled"> 女
+                                    #else
+                                        <input type="radio" name="customerSex" value="1" class="m" disabled="disabled"> 男&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" name="customerSex" value="0" class="m" disabled="disabled"> 女
+                                    #end
+                                </i>
+                               <b></b>
+                        </div>
+                </div>
+                <div class="commP">
+                        <div class='phone commSpan lit'>
+                            <label><em>*</em>手机号：</label><input type="text" disabled="disabled" name="customerPhone" value="$!{customersDto.customerPhone}" placeholder="请输入手机号">
+                            <b></b>
+                        </div>
+                    <div class='birthday commSpan'>
+                            <label>出生日期：</label><input type="text" disabled="disabled" name="customerBirthdayMonth" style='width: 270px;' value="$!{customersDto.customerBirthdayMonth}" placeholder="请选择出生日期" readonly="readonly" class="laydate-icon" onclick="laydate({choose:function(datas){dateChange(datas)}})">
+                            <b></b>
+                        </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="stationInfo comm">
+        <div class="stationInfo-title comm-title">
+            <span>岗位信息</span>
+            #if($!{customersDto.stationCustomerState}!=3 and $!{customersDto.stationCustomerState}!=4 and $!{customersDto.willLeaveState}!=1)
+                <a class='onEditStation' data='0'>编辑</a>
+            #end
+        </div>
+        <div class="bstationInfo-main comm-main">
+            <form id="editStationForm">
+                <input id="stationCustomerId" name="stationCustomerId" type="hidden" value="$!{customerId}">
+                <input id="stationCustomerState" name="stationCustomerState" type="hidden" value="$!{customersDto.stationCustomerState}">
+                <input id="stationEnterTime" name="stationEnterTime" type="hidden" value="$!date.format('yyyy-MM-dd',$!{customersDto.stationEnterTime})">
+                <div class="commP">
+                        <div class='customerNumber bit commSpan lit'>
+                            <label><em></em>工号：</label><input type="text" disabled="disabled" name="stationCustomerNumber" value="$!{customersDto.stationCustomerNumber}" placeholder="请输入工号">
+                            <b></b>
+                        </div>
+                        <div class='enterData commSpan'>
+                            <label><em>*</em>入职日期：</label><input type="text" id='enterData' style='width: 270px;' value="$!date.format('yyyy-MM-dd',$!{customersDto.stationEnterTime})" readonly="readonly"  class="laydate-icon" >
+                            <b></b>
+                        </div>
+                </div>
+
+                #if($!{customersDto.stationCustomerState}==1)
+                    <div class="commP">
+                        <div class='bit commSpan customerDepName lit'>
+                            <label><em>*</em>部门：</label><input type="text" id="customerDepName"  disabled="disabled"  value="$!{customersDto.depName}" readonly="readonly">
+                            <input type="hidden" id="depId" name="stationDeptId" value="$!{customersDto.stationDeptId}" readonly="readonly" />
+                            <b></b>
+                            <div class="branch" style="display: none">
+                                <!-- <h4>部门</h4> -->
+                                <div id="dep-base" style="position: relative">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class='positiveData bit commSpan'>
+                            <label><em>*</em>转正日期：</label><input type="text" disabled="disabled" style='width: 270px;' name="stationRegularTime" value="$!date.format('yyyy-MM-dd',$!{customersDto.stationRegularTime})" placeholder="请选择转正日期" readonly="readonly" class="laydate-icon" onclick="laydate({choose:function(datas){dateChange(datas)}})">
+                            <b></b>
+                        </div>
+
+                    </div>
+                    <div class="commP">
+                        <div class='stations bit commSpan lit'>
+                            <label><em></em> 岗位：</label><input type="text" disabled="disabled" name="stationStationName" placeholder="请输入岗位" value="$!{customersDto.stationStationName}">
+                            <b></b>
+                        </div>
+                        <div class="commSpan lit">
+                            #if($!{customersDto.customerProbationSalary})
+                                <label><em>*</em>基本工资：</label><input type="text" disabled="disabled"  value='$!{customersDto.customerProbationSalary}元（转正后 $!{customersDto.customerRegularSalary} 元）'>
+                            #else
+                                <label><em>*</em>基本工资：</label><input type="text" disabled="disabled"  value=''>
+                            #end
+                        ##                            <label><em>*</em>基本工资：</label><input type="text" disabled="disabled"  value='$!{customersDto.customerProbationSalary}元（转正后 $!{customersDto.customerRegularSalary} 元）'>
+                            <b></b>
+                        </div>
+                    </div>
+                #else
+                    <div class="commP">
+                        <div class='bit commSpan customerDepName lit'>
+                            <label><em>*</em>部门：</label><input type="text" id="customerDepName" disabled="disabled"  value="$!{customersDto.depName}" readonly="readonly">
+                            <input type="hidden" id="depId" name="stationDeptId" value="$!{customersDto.stationDeptId}"/>
+                            <b></b>
+                            <div class="branch" style="display: none">
+                                <!-- <h4>部门</h4> -->
+                                <div id="dep-base" style="position: relative">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="commSpan lit">
+                            #if($!{customersDto.currentSalary})
+                                <label><em>*</em>基本工资：</label><input type="text" readonly="readonly"  value='$!{customersDto.currentSalary}元'>
+                            #else
+                                <label><em>*</em>基本工资：</label><input type="text" readonly="readonly"  value=''>
+                            #end
+
+                            <b></b>
+                        </div>
+
+                    </div>
+                    <div class="commP">
+                        <div class='stations bit commSpan lit'>
+                            <label><em></em> 岗位：</label><input type="text" disabled="disabled" name="stationStationName" placeholder="请输入岗位" value="$!{customersDto.stationStationName}">
+                            <b></b>
+                        </div>
+                    </div>
+                #end
+            </form>
+        </div>
+    </div>
+    <div class="cardInfo comm">
+        <div class="cardInfo-title comm-title lit">
+            <span>身份证工资卡</span>
+            #if($!{customersDto.stationCustomerState}!=3 and $!{customersDto.stationCustomerState}!=4 and $!{customersDto.willLeaveState}!=1)
+                <a  class='onEditCard' data='0'>编辑</a>
+            #end
+
+        </div>
+        <div class="cardInfo-main comm-main">
+            <form id="editIdcardForm">
+                <input  name="customerId" type="hidden" value="$!{customerId}">
+                <div class="commP">
+                        <div class='card commSpan lit'>
+                            <label>
+                                #if($!{userFulCount}>0)
+                                    <em>*</em>
+                                #end
+                                身份证号：</label><input type="text" disabled="disabled" name="customerIdcard" value='$!{customersDto.customerIdcard}' placeholder="请输入身份证号码">
+                            <b></b>
+                        </div>
+                    <div class='banknumber commSpan lit'>
+                            <label>
+                                #if($!{userFulCount}>0)
+                                    <em>*</em>
+                                #end
+                                工资卡号：</label><input type="text" disabled="disabled" name="customerBanknumber" value='$!{customersDto.customerBanknumber}' placeholder="请输入工资卡卡号">
+                            <b></b>
+                        </div>
+                </div>
+                <div class='cardPhoto commP'>
+                        <div class='testFront commSpan' id="idCardImagId">
+                            <label>
+                                #if($!{userFulCount}>0)
+                                    <em>*</em>
+                                #end
+                                身份证照：</label>
+                            <i class="pic front1">
+                                +
+                                #if($!{customersDto.customerIdcardImgFront})
+                                    <img src="http://xintairuan-img.oss-cn-hangzhou.aliyuncs.com/$!{customersDto.customerIdcardImgFront}"  id="preImg">
+                                #else
+                                    <img src="#springUrl('/resource/img/customer/new/2.2error1.png')"  id="preImg">
+                                #end
+                                <input type="file"  name="file" id="approveFilePre" disabled="disabled" onchange="uploadApproveImg('approveFilePre','preImg','customerIdcardImgFront');"/ >
+                                <input type="hidden" id="customerIdcardImgFront" name="customerIdcardImgFront" value="$!{customersDto.customerIdcardImgFront}">
+                                <s>身份证正面</s>
+                            </i>
+
+                            <i class="pic contrary">
+                                +
+                                #if($!{customersDto.customerIdcardImgBack})
+                                    <img src="http://xintairuan-img.oss-cn-hangzhou.aliyuncs.com/$!{customersDto.customerIdcardImgBack}"  id="backImg">
+                                #else
+                                    <img src="#springUrl('/resource/img/customer/new/2.2error1.png')"  id="backImg">
+                                #end
+                                <input type="file"  name="file" id="approveFileBack"  disabled="disabled" onchange="uploadApproveImg('approveFileBack','backImg','customerIdcardImgBack');"/ >
+                                 <input type="hidden" id="customerIdcardImgBack" name="customerIdcardImgBack" value="$!{customersDto.customerIdcardImgBack}">
+                                <s>身份证反面</s>
+                             </i>
+
+                                <i class="frontHint">图片格式为JPG/JPEG/PNG/大小在2MB以内</i>
+                                <b></b>
+                        </div>
+                    <div class='openbank commSpan lit'>
+                            <label>
+                                #if($!{userFulCount}>0)
+                                    <em>*</em>
+                                #end
+                                工资卡开户行：</label><input type="text" disabled="disabled" name="customerBank" value='$!{customersDto.customerBank}' placeholder="请输入工资卡开户行">
+                            <b></b>
+                        </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="socialInfo comm">
+        <div class="socialInfo-title comm-title">
+            <span>社保公积金</span>
+        </div>
+        <div class="socialInfo-main comm-main">
+            #if($!{shebaoBean})
+                #if($!{shebaoBean.isSbKeep}==0 and $!{shebaoBean.isGjjKeep}==0)
+                    <div class="commP">
+					<div class="commSpan lit">
+						<label> 社保缴纳：</label><input type="text" disabled="disabled"  value='未缴纳'>
+					</div>
+                        <div class="commSpan">
+						<label>公积金缴纳基数：</label><input type="text" disabled="disabled"  value='未缴纳'>
+					</div>
+                    </div>
+                #elseif($!{shebaoBean.isSbKeep}==1 and $!{shebaoBean.isGjjKeep}==0)
+                    <div class="commP">
+					<div class="commSpan lit">
+						<label>参保地区：</label><input type="text" disabled="disabled"  value='$!{shebaoBean.joinCityName}'>
+					</div>
+                    </div>
+                    <div class="commP">
+					<div class="commSpan lit">
+						<label> 社保缴纳类型：</label><input type="text" disabled="disabled"  value='$!{shebaoBean.sbTypeName}'>
+					</div>
+                        <div class="commSpan lit">
+						<label>公积金缴纳基数：</label><input type="text" disabled="disabled"  value='未缴纳'>
+					</div>
+                    </div>
+                    <div class="commP">
+					<div class="commSpan lit">
+						<label> 社保缴纳基数：</label><input type="text" disabled="disabled"  value='$!{shebaoBean.sbBase}'>
+					</div>
+                    </div>
+                #elseif($!{shebaoBean.isSbKeep}==0 and $!{shebaoBean.isGjjKeep}==1)
+                    <div class="commP">
+					<div class="commSpan lit">
+						<label>参保地区：</label><input type="text" disabled="disabled"  value='$!{shebaoBean.joinCityName}'>
+					</div>
+                    </div>
+                    <div class="commP">
+					<div class="commSpan lit">
+						<label> 社保缴纳基数：</label><input type="text" disabled="disabled"  value='未缴纳'>
+					</div>
+                        <div class="commSpan lit">
+						<label>公积金缴纳类型：</label><input type="text" disabled="disabled"  value='$!{shebaoBean.gjjTypeName}'>
+					</div>
+                    </div>
+                    <div class="commP">
+                    <div class="commSpan">
+
+					</div>
+                        <div class="commSpan lit">
+						<label>公积金缴纳基数：</label><input type="text" disabled="disabled"  value='$!{shebaoBean.gjjBase}'>
+					</div>
+                    </div>
+                #elseif($!{shebaoBean.isSbKeep}==1 and $!{shebaoBean.isGjjKeep}==1)
+                    <div class="commP">
+					<div class="commSpan lit">
+						<label>参保地区：</label><input type="text" disabled="disabled"  value='$!{shebaoBean.joinCityName}'>
+					</div>
+                    </div>
+                    <div class="commP">
+					<div class="commSpan lit">
+						<label> 社保缴纳类型：</label><input type="text" disabled="disabled"  value='$!{shebaoBean.sbTypeName}'>
+					</div>
+                        <div class="commSpan lit">
+						<label>公积金缴纳类型：</label><input type="text" disabled="disabled"  value='$!{shebaoBean.gjjTypeName}'>
+					</div>
+                    </div>
+                    <div class="commP">
+					<div class="commSpan lit">
+						<label> 社保缴纳基数：</label><input type="text" disabled="disabled"  value='$!{shebaoBean.sbBase}'>
+					</div>
+                        <div class="commSpan lit">
+						<label>公积金缴纳基数：</label><input type="text" disabled="disabled"  value='$!{shebaoBean.gjjBase}'>
+					</div>
+                    </div>
+                #end
+            #else
+                <div class="commP">
+					<div class="commSpan lit">
+						<label> 社保缴纳：</label><input type="text" disabled="disabled"  value='未缴纳'>
+					</div>
+                    <div class="commSpan lit">
+						<label>公积金缴纳基数：</label><input type="text" disabled="disabled"  value='未缴纳'>
+					</div>
+                </div>
+            #end
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

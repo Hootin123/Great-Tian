@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtr.core.persistence.writer.company.CompanyMemberLogsWriterMapper">
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from company_member_logs
+    where log_id = #{logId,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="com.xtr.api.domain.company.CompanyMemberLogsBean">
+    insert into company_member_logs (log_id, log_company_id, log_dep_id,
+      log_member_id, log_des, log_type, 
+      log_addtime, log_member_logintime, log_member_logouttime, 
+      log_ip)
+    values (#{logId,jdbcType=BIGINT}, #{logCompanyId,jdbcType=BIGINT}, #{logDepId,jdbcType=BIGINT}, 
+      #{logMemberId,jdbcType=BIGINT}, #{logDes,jdbcType=VARCHAR}, #{logType,jdbcType=INTEGER}, 
+      #{logAddtime,jdbcType=TIMESTAMP}, #{logMemberLogintime,jdbcType=TIMESTAMP}, #{logMemberLogouttime,jdbcType=TIMESTAMP}, 
+      #{logIp,jdbcType=VARCHAR})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.xtr.api.domain.company.CompanyMemberLogsBean">
+    insert into company_member_logs
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="logId != null">
+        log_id,
+      </if>
+      <if test="logCompanyId != null">
+        log_company_id,
+      </if>
+      <if test="logDepId != null">
+        log_dep_id,
+      </if>
+      <if test="logMemberId != null">
+        log_member_id,
+      </if>
+      <if test="logDes != null">
+        log_des,
+      </if>
+      <if test="logType != null">
+        log_type,
+      </if>
+      <if test="logAddtime != null">
+        log_addtime,
+      </if>
+      <if test="logMemberLogintime != null">
+        log_member_logintime,
+      </if>
+      <if test="logMemberLogouttime != null">
+        log_member_logouttime,
+      </if>
+      <if test="logIp != null">
+        log_ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="logId != null">
+        #{logId,jdbcType=BIGINT},
+      </if>
+      <if test="logCompanyId != null">
+        #{logCompanyId,jdbcType=BIGINT},
+      </if>
+      <if test="logDepId != null">
+        #{logDepId,jdbcType=BIGINT},
+      </if>
+      <if test="logMemberId != null">
+        #{logMemberId,jdbcType=BIGINT},
+      </if>
+      <if test="logDes != null">
+        #{logDes,jdbcType=VARCHAR},
+      </if>
+      <if test="logType != null">
+        #{logType,jdbcType=INTEGER},
+      </if>
+      <if test="logAddtime != null">
+        #{logAddtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logMemberLogintime != null">
+        #{logMemberLogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logMemberLogouttime != null">
+        #{logMemberLogouttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logIp != null">
+        #{logIp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.xtr.api.domain.company.CompanyMemberLogsBean">
+    update company_member_logs
+    set log_company_id = #{logCompanyId,jdbcType=BIGINT},
+      log_dep_id = #{logDepId,jdbcType=BIGINT},
+      log_member_id = #{logMemberId,jdbcType=BIGINT},
+      log_des = #{logDes,jdbcType=VARCHAR},
+      log_type = #{logType,jdbcType=INTEGER},
+      log_addtime = #{logAddtime,jdbcType=TIMESTAMP},
+      log_member_logintime = #{logMemberLogintime,jdbcType=TIMESTAMP},
+      log_member_logouttime = #{logMemberLogouttime,jdbcType=TIMESTAMP},
+      log_ip = #{logIp,jdbcType=VARCHAR}
+    where log_id = #{logId,jdbcType=BIGINT}
+  </update>
+</mapper>

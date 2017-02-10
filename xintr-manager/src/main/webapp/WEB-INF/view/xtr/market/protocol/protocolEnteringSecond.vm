@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>H+ 协议录入2</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-table/bootstrap-table.min.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-datepicker/css/bootstrap-datetimepicker.css')" rel="stylesheet" />
+</head>
+
+<body>
+<div class="col-sm-12">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <form  id="protocolForm">
+                <div class="panel panel-default" style="margin-top: 10px;">
+                    <input type="hidden" value="$!{companysBean.companyId}" name="companyId" id="companyIdSecondHid">
+                    <input type="hidden" value="$!{protocolCode}" name="protocolCode">
+                    <input type="hidden" value="$!{protocolBusinessManager}" name="protocolBusinessManager">
+                    <input type="hidden" value="$!{companysBean.companyName}" name="companyName">
+                    <input type="hidden" value="$!date.format('yyyy-MM-dd',$!{companysBean.companyOpenEndtime})" name="companyOpenEndtime">
+##                    <input type="hidden" value="$!{companysBean.companyNumber}" name="companyNumber">
+                    <input type="hidden" value="$!{companysBean.companyNumber}" name="companyNumber">
+                    <input type="hidden" value="$!{companysBean.companyAddress}" name="companyAddress">
+                    <input type="hidden" value="$!{companysBean.companyCorporation}" name="companyCorporation">
+                    <input type="hidden" value="$!{companysBean.companyCorporationIdcard}" name="companyCorporationIdcard">
+                    <input type="hidden" value="$!{companysBean.companyEmployCount}" name="companyEmployCount">
+                    <input type="hidden" value="$!{companysBean.companySalaryDivide}" name="companySalaryDivide">
+                    <input type="hidden" value="$!{companysBean.companyBank}" name="companyBank">
+                    <input type="hidden" value="$!{companysBean.companyBanknumber}" name="companyBanknumber">
+                    <input type="hidden" value="$!{companysBean.companyDepositBankAccountName}" name="companyDepositBankAccountName">
+                    <input type="hidden" value="$!{companysBean.companyDepositBankNo}" name="companyDepositBankNo">
+                    <input type="hidden" value="$!{companysBean.companyRechargeChannel}" name="companyRechargeChannel">
+                    <input type="hidden" value="$!{companysBean.companyBankaddress}" name="companyBankaddress">
+
+
+    ##                <input type="hidden" value="$!{companysBean.companyId}" id="operationShowStateSecondHid">
+                ##                <div class="panel-heading"><strong>企业信息</strong></div>
+                    <table id="companyManageTab" data-mobile-responsive="true" class="table table-hover table-bordered">
+
+                        <tr><td style="width:15%;">协议编号</td><td style="width:30%;">$!{protocolCode}</td>
+                            <td style="width:15%;"><font color="red">*</font>协议类型</td>
+                            <td style="width:30%;">
+                                <select class="form-control m-b" id="protocolCurrentStatus" name="protocolContractType">
+                                    <option value="">不选择</option>
+                                    #if($operationShowState==1)<option value="1">代发协议</option>#end
+                                    #if($operationShowState==2)<option value="2">垫发协议</option>#end
+                                    #if(!$operationShowState==0)<option value="1">代发协议</option>#end
+                                </select>
+                            </td>
+                        </tr>
+                        <tr><td style="width:15%;">企业编号</td><td style="width:30%;">$!{companysBean.companyNumber}</td><td style="width:15%;">企业名称</td><td style="width:30%;">$!{companysBean.companyName}</td></tr>
+                        <tr><td><font color="red">*</font>生效时间</td>
+                            <td>
+                                <input id="protocolContractTime" name="protocolContractTime" type="text" class="form-control dateTime" required readonly placeholder="点击选择生效时间"/>
+##                                <input type="text" class="form-control" name="protocolContractTime">
+                            </td>
+                            <td><font color="red">*</font>到期时间</td>
+                            <td>
+                                <input id="protocolExpireTime" name="protocolExpireTime" type="text" class="form-control dateTime" required readonly placeholder="点击选择到期时间"/>
+                            </td>
+                        </tr>
+                        <tr><td>业务联系人</td><td><input type="text" class="form-control" name="protocolLinkmanName"></td><td>业务联系人手机</td><td><input type="text" class="form-control" name="protocolLinkmanPhone"></td></tr>
+                        <tr><td>业务经理</td><td>$!{protocolBusinessManager}</td><td>纸质文件编号</td><td><input type="text" class="form-control" name="protocolPaperNo"></td></tr>
+                    </table>
+                </div>
+                <div class="text-center" style="20px;">
+                    <button type="button" class="btn btn-w-m btn-success" id="sureBtn">确定</button>
+                    <button type="button" class="btn btn-w-m btn-white" onclick="cancelProtocolEnteringSecond()">取消</button>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+<script src="#springUrl('/resource/js/hui/content.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table-mobile.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/validate/jquery.validate.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-datepicker/js/bootstrap-datetimepicker.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-datepicker/locales/bootstrap-datetimepicker.zh-CN.js')"></script>
+<script src="#springUrl('/resource/js/comm/jdatagrid.js')"></script>
+<script src="#springUrl('/resource/js/market/protocol/protocolEnteringSecond.js')"></script>
+</html>

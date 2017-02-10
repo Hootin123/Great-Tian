@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>异常账单详情</title>
+    #parse("comm/head.vm")
+    <script src="#springUrl('/resource/js/comm/jquery.freezeheader.js')"></script>
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/shebao/errorOrderDetail.css')">
+</head>
+<body>
+<input type="hidden" value="$!{companyShebaoOrderId}" id="companyShebaoOrderId">
+<div class="currentBillDetailsHeader">$!{shebaoOrder.joinCityName}$!date.format('yyyyMM',$!{shebaoOrder.orderDate})异常账单 <b><img
+        src="/resource/img/salary/guanbi.png" alt="" onclick="cancelErrorOrderDetail();"></b></div>
+<div id="orders" class="currentBillDetails">
+
+    <div class="currentBillDetails-main">
+        <table id='table'>
+            <thead>
+            <tr>
+                <td style="width:10%">序号</td>
+                <td style="width:10%">姓名</td>
+                <td style="width:10%">部门</td>
+                <td style="width:10%">手机号</td>
+                <td style="width:10%">参保类型</td>
+                <td style="width:10%">基数（元）</td>
+                <td style="width:15%">异常详情</td>
+                <td style="width:25%">原因</td>
+            </tr>
+            </thead>
+            <tbody class="list" id="detailTbody">
+            </tbody>
+        </table>
+    </div>
+##    <div class="errorTip">温馨提示：异常账单的费用将在次月的账单中进行补退/补收</div>
+    <div class="currentBillDetails-bottom">
+        <div class="button">
+            <input type="button" name="" id="payorderDetailSureBtn" value="确认">
+        </div>
+    </div>
+</div>
+<script src="#springUrl('/resource/js/comm/list.js')"></script>
+<script type="text/javascript" src="#springUrl('/resource/js/shebao/errorOrderDetail.js')"></script>
+</body>
+</html>

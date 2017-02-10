@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtr.core.persistence.reader.station.StationNewsReaderMapper">
+
+  <resultMap id="BaseResultMap" type="com.xtr.api.domain.station.StationNewsBean">
+    <id column="news_id" jdbcType="BIGINT" property="newsId" />
+    <result column="news_title" jdbcType="VARCHAR" property="newsTitle" />
+    <result column="news_content" jdbcType="LONGVARCHAR" property="newsContent" />
+    <result column="news_addtime" jdbcType="TIMESTAMP" property="newsAddtime" />
+    <result column="news_add_member" jdbcType="BIGINT" property="newsAddMember" />
+    <result column="news_releasetime" jdbcType="TIMESTAMP" property="newsReleasetime" />
+    <result column="news_release_member" jdbcType="BIGINT" property="newsReleaseMember" />
+    <result column="news_chick" jdbcType="INTEGER" property="newsChick" />
+    <result column="news_sort" jdbcType="INTEGER" property="newsSort" />
+    <result column="news_type" jdbcType="INTEGER" property="newsType" />
+    <result column="news_class_id" jdbcType="INTEGER" property="newsClassId" />
+    <result column="news_class_name" jdbcType="VARCHAR" property="newsClassName" />
+    <result column="news_intro" jdbcType="VARCHAR" property="newsIntro" />
+    <result column="news_keywords" jdbcType="VARCHAR" property="newsKeywords" />
+    <result column="news_description" jdbcType="VARCHAR" property="newsDescription" />
+    <result column="news_ly" jdbcType="VARCHAR" property="newsLy" />
+    <result column="news_img" jdbcType="VARCHAR" property="newsImg" />
+    <result column="news_mtname" jdbcType="VARCHAR" property="newsMtname" />
+    <result column="news_url" jdbcType="VARCHAR" property="newsUrl" />
+    <result column="news_state" jdbcType="INTEGER" property="newsState" />
+    <result column="news_istop" jdbcType="INTEGER" property="newsIstop" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    news_id, news_title, news_addtime, news_add_member, news_releasetime, news_release_member,
+    news_chick, news_sort, news_type, news_class_id, news_class_name, news_intro, news_keywords, news_description,
+    news_ly, news_img, news_mtname, news_url, news_state, news_istop
+  </sql>
+
+  <sql id="All_Column_List">
+    news_id, news_title, news_content, news_addtime, news_add_member, news_releasetime, news_release_member,
+    news_chick, news_sort, news_type, news_class_id, news_class_name, news_intro, news_keywords, news_description, news_ly,
+    news_img, news_mtname, news_url, news_state, news_istop
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="All_Column_List" />
+    from station_news
+    where news_id = #{newsId,jdbcType=BIGINT}
+  </select>
+
+  <sql id="Example_Where_Clause">
+    <if test="newsTitle != null and newsTitle != ''">
+      and news_title like CONCAT('%',#{newsTitle},'%')
+    </if>
+    <if test="newsAddtime != null">
+      and news_addtime = #{newsAddtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="newsAddMember != null">
+      and news_add_member = #{newsAddMember,jdbcType=BIGINT}
+    </if>
+    <if test="newsReleasetime != null">
+      and news_releasetime = #{newsReleasetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="newsReleaseMember != null">
+      and news_release_member = #{newsReleaseMember,jdbcType=BIGINT}
+    </if>
+    <if test="newsChick != null">
+      and news_chick = #{newsChick,jdbcType=INTEGER}
+    </if>
+    <if test="newsSort != null">
+      and news_sort = #{newsSort,jdbcType=INTEGER}
+    </if>
+    <if test="newsType != null">
+      and news_type = #{newsType,jdbcType=INTEGER}
+    </if>
+    <if test="newsClassId != null">
+      and news_class_id = #{newsClassId,jdbcType=INTEGER}
+    </if>
+    <if test="newsClassName != null">
+      and news_class_name = #{newsClassName,jdbcType=VARCHAR}
+    </if>
+    <if test="newsIntro != null">
+      and news_intro = #{newsIntro,jdbcType=VARCHAR}
+    </if>
+    <if test="newsKeywords != null">
+      and news_keywords = #{newsKeywords,jdbcType=VARCHAR}
+    </if>
+    <if test="newsDescription != null">
+      and news_description = #{newsDescription,jdbcType=VARCHAR}
+    </if>
+    <if test="newsLy != null">
+      and news_ly = #{newsLy,jdbcType=VARCHAR}
+    </if>
+    <if test="newsImg != null">
+      and news_img = #{newsImg,jdbcType=VARCHAR}
+    </if>
+    <if test="newsMtname != null">
+      and news_mtname = #{newsMtname,jdbcType=VARCHAR}
+    </if>
+    <if test="newsUrl != null">
+      and news_url = #{newsUrl,jdbcType=VARCHAR}
+    </if>
+    <if test="newsState != null">
+      and news_state = #{newsState,jdbcType=INTEGER}
+    </if>
+    <if test="newsIstop != null">
+      and news_istop = #{newsIstop,jdbcType=INTEGER}
+    </if>
+  </sql>
+
+  <!--查询新闻列表 -->
+  <select id="selectList" resultMap="BaseResultMap" parameterType="com.xtr.api.domain.station.StationNewsBean">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM station_news
+    WHERE news_state &lt; 2
+    <include refid="Example_Where_Clause"/>
+  </select>
+
+  <!--分页查询新闻 -->
+  <select id="selectPageList" resultMap="BaseResultMap" parameterType="com.xtr.api.domain.station.StationNewsBean">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM station_news
+    WHERE news_state &lt; 2
+    <include refid="Example_Where_Clause"/>
+  </select>
+
+
+</mapper>

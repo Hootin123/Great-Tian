@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xtr.core.persistence.reader.company.CompanyShebaoOrderReaderMapper" >
+
+  <resultMap id="BaseResultMap" type="com.xtr.api.domain.company.CompanyShebaoOrderBean" >
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="company_id" jdbcType="BIGINT" property="companyId" />
+    <result column="order_number" jdbcType="VARCHAR" property="orderNumber" />
+    <result column="join_city_name" jdbcType="VARCHAR" property="joinCityName" />
+    <result column="join_city_code" jdbcType="VARCHAR" property="joinCityCode" />
+    <result column="order_date" jdbcType="DATE" property="orderDate" />
+    <result column="update_base_date" jdbcType="DATE" property="updateBaseDate" />
+    <result column="order_sb_detail" jdbcType="VARCHAR" property="orderSbDetail" />
+    <result column="order_gjj_detail" jdbcType="VARCHAR" property="orderGjjDetail" />
+    <result column="price_sum" jdbcType="DECIMAL" property="priceSum" />
+    <result column="price_sb" jdbcType="DECIMAL" property="priceSb" />
+    <result column="price_gjj" jdbcType="DECIMAL" property="priceGjj" />
+    <result column="price_addtion" jdbcType="DECIMAL" property="priceAddtion" />
+    <result column="price_service" jdbcType="DECIMAL" property="priceService" />
+    <result column="price_var1" jdbcType="DECIMAL" property="priceVar1" />
+    <result column="price_single" jdbcType="DECIMAL" property="priceSingle" />
+    <result column="customer_count" jdbcType="INTEGER" property="customerCount" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="last_time" jdbcType="TIMESTAMP" property="lastTime" />
+    <result column="require_last_time" jdbcType="TIMESTAMP" property="requireLastTime" />
+    <result column="order_last_time" jdbcType="TIMESTAMP" property="orderLastTime" />
+    <result column="is_current" jdbcType="INTEGER" property="isCurrent" />
+    <result column="submit_time" jdbcType="TIMESTAMP" property="submitTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="shebaotong_total_amount" jdbcType="DECIMAL" property="shebaotongTotalAmount" />
+    <result column="shebaotong_service_amount" jdbcType="DECIMAL" property="shebaotongServiceAmount" />
+    <result column="shebaotong_receive_amount" jdbcType="DECIMAL" property="shebaotongReceiveAmount" />
+    <result column="shebaotong_back_amount" jdbcType="DECIMAL" property="shebaotongBackAmount" />
+    <result column="shebaotong_overdue_amount" jdbcType="DECIMAL" property="shebaotongOverdueAmount" />
+    <result column="shebaotong_shebao_amount" jdbcType="DECIMAL" property="shebaotongShebaoAmount" />
+    <result column="shebaotong_gjj_amount" jdbcType="DECIMAL" property="shebaotongGjjAmount" />
+    <result column="shebaotong_service_number" jdbcType="VARCHAR" property="shebaotongServiceNumber" />
+    <result column="shebaotong_pay_bank_name" jdbcType="VARCHAR" property="shebaotongPayBankName" />
+    <result column="shebaotong_pay_company_account" jdbcType="VARCHAR" property="shebaotongPayCompanyAccount" />
+    <result column="shebaotong_pay_bank_no" jdbcType="VARCHAR" property="shebaotongPayBankNo" />
+    <result column="shebaotong_pay_batch" jdbcType="VARCHAR" property="shebaotongPayBatch" />
+    <result column="shebaotong_pay_state" jdbcType="INTEGER" property="shebaotongPayState" />
+    <result column="shebaotong_pay_operator" jdbcType="BIGINT" property="shebaotongPayOperator" />
+      <result column="shebaotong_pay_img" jdbcType="VARCHAR" property="shebaotongPayImg" />
+    <result column="shebao_fail_msg" jdbcType="VARCHAR" property="shebaoFailMsg" />
+    <result column="shebao_customer_pay_status" jdbcType="INTEGER" property="shebaoCustomerPayStatus" />
+    <result column="shebao_finance_user" jdbcType="VARCHAR" property="shebaoFinanceUser" />
+    <result column="shebao_remark" jdbcType="VARCHAR" property="shebaoRemark" />
+  </resultMap>
+
+  <resultMap id="CompanyShebaoOrderDtoMap" type="com.xtr.api.dto.company.CompanyShebaoOrderDto" extends="BaseResultMap">
+    <result column="order_error_text" jdbcType="VARCHAR" property="orderErrorText" />
+    <result column="sb_error_text" jdbcType="VARCHAR" property="sbErrorText" />
+    <result column="gjj_error_text" jdbcType="VARCHAR" property="gjjErrorText" />
+    <result column="number"  jdbcType="INTEGER" property="number"></result>
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+  </resultMap>
+
+  <resultMap id="PayInfoMap" type="com.xtr.api.dto.company.CompanyShebaoOrderDto" extends="BaseResultMap">
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="recharge_number" jdbcType="VARCHAR" property="rechargeNumber" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, company_id, order_number, join_city_name, join_city_code, order_date, update_base_date, order_sb_detail,
+    order_gjj_detail, price_sum, price_sb, price_gjj, price_addtion, price_service, price_var1,
+    price_single, customer_count, status, last_time, require_last_time, order_last_time, is_current,
+    submit_time, create_time,shebaotong_total_amount,shebaotong_service_amount,shebaotong_receive_amount,
+    shebaotong_back_amount,shebaotong_overdue_amount,shebaotong_shebao_amount,shebaotong_gjj_amount,
+    shebaotong_service_number,shebaotong_pay_bank_name,shebaotong_pay_company_account,shebaotong_pay_bank_no,shebaotong_pay_batch,shebaotong_pay_state,shebaotong_pay_operator,
+    shebaotong_pay_img,shebao_fail_msg,shebao_customer_pay_status,shebao_finance_user,shebao_remark
+  </sql>
+
+  <sql id="Condition_Column_List" >
+    company_shebao_order.id, company_shebao_order.company_id, order_number, join_city_name, join_city_code, order_date, update_base_date, order_sb_detail,
+    order_gjj_detail, price_sum, price_sb, price_gjj, price_addtion, price_service, price_var1,
+    price_single, customer_count, status, last_time, require_last_time, order_last_time, is_current,
+    submit_time, company_shebao_order.create_time,shebaotong_total_amount,shebaotong_service_amount,shebaotong_receive_amount,
+    shebaotong_back_amount,shebaotong_overdue_amount,shebaotong_shebao_amount,shebaotong_gjj_amount,
+    shebaotong_service_number,shebaotong_pay_bank_name,shebaotong_pay_company_account,shebaotong_pay_bank_no,shebaotong_pay_batch,shebaotong_pay_state,shebaotong_pay_operator,
+    shebaotong_pay_img
+  </sql>
+
+  <!-- 查询企业提现账户信息过滤条件 -->
+  <sql id="Pay_Where_Clause">
+    <if test="companyId != null">
+      AND  company_shebao_order.company_id =#{companyId,jdbcType=BIGINT}
+    </if>
+    <if test="orderNumber != null and orderNumber != '' ">
+      AND (company_recharges.recharge_number like   concat('%',#{orderNumber,jdbcType=VARCHAR},'%')
+      or shebaotong_service_number  like   concat('%',#{orderNumber,jdbcType=VARCHAR},'%'))
+    </if>
+  </sql>
+  <!--AND (order_number like   concat('%',#{orderNumber,jdbcType=VARCHAR},'%')-->
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from company_shebao_order
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <!--查询账单数据-->
+  <select id="selectPayOrder" resultMap="BaseResultMap">
+    select a.*, b.order_error_text from company_shebao_order a
+    left join customer_shebao_order_desc b on a.id = b.`company_shebao_order_id`
+    where a.company_id = #{company_id}
+    <if test="null != city">
+      and a.join_city_code = #{city}
+    </if>
+    <if test="null != isCurrent">
+      and a.is_current = #{isCurrent}
+    </if>
+    GROUP BY b.company_shebao_order_id
+    order by a.id desc
+  </select>
+
+  <!-- 查询已有企业订单 -->
+  <select id="selectOrderByCityAndMonth" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from company_shebao_order a
+    where
+    a.company_id = #{pCompanyId}
+    and
+    a.join_city_code = #{pCity}
+    and
+    date_format(a.order_date, '%Y%m') = #{pMonth}
+    limit 1
+  </select>
+
+    <select id="selectCompanyShebaoOrderCount" resultType="java.lang.Integer">
+      select count(id) from company_shebao_order where company_id = #{comapnyId} and status = #{status} and is_current=1
+    </select>
+
+  <select id="selectOrderCities" resultMap="BaseResultMap" parameterType="Long">
+    select join_city_code,join_city_name from company_shebao_order where company_id = #{comapnyId} group by join_city_code
+  </select>
+
+  <select id="selectOrderTimeOrder" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM
+    company_shebao_order
+    WHERE
+    DATE_FORMAT(require_last_time, '%m-%d-%Y') &lt; DATE_FORMAT(NOW(), '%m-%d-%Y')
+    and DATE_FORMAT(NOW(), '%m-%d-%Y') &lt;= DATE_FORMAT(order_last_time, '%m-%d-%Y')
+    and is_current = 1
+    and status = 0
+  </select>
+  <select id="selectTimeOutOrder" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM
+    company_shebao_order
+    WHERE
+    DATE_FORMAT(last_time, '%m-%d-%Y') &lt; DATE_FORMAT(NOW(), '%m-%d-%Y')
+    and is_current = 1
+  </select>
+
+  <!--查询当前账单列表-->
+  <select id="selectCurrentOrderList" resultMap="CompanyShebaoOrderDtoMap">
+    select <include refid="Base_Column_List" />,b.number
+    from company_shebao_order a
+    left join ( select count(1) as number,company_shebao_order_id
+    from customer_shebao_order where sbt_status =2 or sbt_status=3
+    group by company_shebao_order_id)  b
+    on a.id =b.company_shebao_order_id
+    where 1=1
+    and a.company_id = #{company_id} and status>0
+    <if test="null != city and city!='' ">
+      and a.join_city_code = #{city}
+    </if>
+    <if test="null != isCurrent">
+      and a.is_current = #{isCurrent}
+    </if>
+    <if test="null != flag and flag!='' ">
+      and status = 1
+    </if>
+    order by a.id desc
+  </select>
+
+  <!--查询当前账单数量-->
+  <select id="selectCurrentOrderCount" resultType="java.lang.Integer">
+    select count(1)
+    from company_shebao_order a
+    where a.company_id = #{company_id} and a.is_current = 1 and status>0
+  </select>
+  <!-- 查询历史账单列表 如果有异常账单的话就显示-->
+  <select id="selectHistoryBills" parameterType="java.util.Map" resultMap="CompanyShebaoOrderDtoMap">
+
+    SELECT
+    a.*, b.number
+    FROM
+    company_shebao_order a
+    LEFT JOIN (
+    SELECT
+    count(1) AS number,
+    company_shebao_order_id
+    FROM
+    customer_shebao_order
+    WHERE
+    sbt_status = '2' or sbt_status='3'
+    GROUP BY
+    company_shebao_order_id
+    ) b ON a.id = b.company_shebao_order_id
+    WHERE
+    a.company_id = #{companyId}
+
+    <if test="joinCityCode!=null and joinCityCode!=''">
+      and a.join_city_code = #{joinCityCode}
+    </if>
+    <if test="orderDate!=null and orderDate!=''">
+      and a.order_date =#{orderDate}
+    </if>
+    AND a.is_current = 0
+    ORDER BY
+    a.id DESC;
+
+  </select>
+  <!-- 查询公司账单是否提交了-->
+  <select id="selectShebaoOrderByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from company_shebao_order where
+    company_id=#{companyId}
+    and join_city_code=#{joinCityCode}
+    and DATE_FORMAT(order_date, '%Y-%m') = DATE_FORMAT(#{orderDate}, '%Y-%m')
+    limit 1
+  </select>
+
+  <select id="selectByOrderNumber" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from
+    company_shebao_order
+    where
+    shebaotong_service_number = #{orderNumber}
+  </select>
+
+  <!--根据过滤条件获取所有用户财务付款的订单-->
+  <select id="selectPayInfoByCondition" parameterType="com.xtr.api.dto.company.CompanyShebaoOrderDto" resultMap="PayInfoMap">
+    select <include refid="Condition_Column_List" />,companys.company_name,sys_user.user_name,company_recharges.recharge_number
+    from company_shebao_order
+    left join companys on company_shebao_order.company_id=companys.company_id
+    left join sys_user on company_shebao_order.shebaotong_pay_operator=sys_user.id
+    left join company_recharges on company_shebao_order.id=company_recharges.excel_id and company_recharges.recharge_type=8 and company_recharges.recharge_state=2
+    where status in(4,5,6,8)
+    <include refid="Pay_Where_Clause"/>
+  </select>
+
+  <!--获取所有用户财务付款的订单数量-->
+  <select id="selectPayInfoCount"  resultType="java.lang.Integer">
+    select count(1)
+    from company_shebao_order
+    left join companys on company_shebao_order.company_id=companys.company_id
+    left join sys_user on company_shebao_order.shebaotong_pay_operator=sys_user.id
+    left join company_recharges on company_shebao_order.id=company_recharges.excel_id and company_recharges.recharge_type=8 and company_recharges.recharge_state=2
+    where status in(4,5,6,8)
+  </select>
+
+  <!--获取所有用户财务未付款的订单数量-->
+  <select id="selectPayInfoNoPayCount"  resultType="java.lang.Integer">
+    select count(1)
+    from company_shebao_order
+    left join companys on company_shebao_order.company_id=companys.company_id
+    left join sys_user on company_shebao_order.shebaotong_pay_operator=sys_user.id
+    left join company_recharges on company_shebao_order.id=company_recharges.excel_id and company_recharges.recharge_type=8 and company_recharges.recharge_state=2
+    where status =4
+  </select>
+
+  <!--根据过滤条件获取所有用户财务未付款的订单-->
+  <select id="selectPayInfoNoPayByCondition" resultMap="PayInfoMap">
+    select <include refid="Condition_Column_List" />,companys.company_name,sys_user.user_name,company_recharges.recharge_number
+    from company_shebao_order
+    left join companys on company_shebao_order.company_id=companys.company_id
+    left join sys_user on company_shebao_order.shebaotong_pay_operator=sys_user.id
+    left join company_recharges on company_shebao_order.id=company_recharges.excel_id and company_recharges.recharge_type=8 and company_recharges.recharge_state=2
+    where status =4
+  </select>
+
+  <!--根据所有财务付款的企业信息-->
+  <select id="selectPayInfoWithCompanyInfo"  resultMap="PayInfoMap">
+    select company_shebao_order.company_id,companys.company_name,sys_user.user_name
+    from company_shebao_order
+    left join companys on company_shebao_order.company_id=companys.company_id
+    left join sys_user on company_shebao_order.shebaotong_pay_operator=sys_user.id
+    where status in(4,5,6,8)
+    group by company_shebao_order.company_id
+  </select>
+
+  <!-- 查询所有的社保公积金账单  后台管理使用-->
+  <select id="selectAllOrdersByMap" parameterType="java.util.Map" resultMap="CompanyShebaoOrderDtoMap">
+       SELECT
+    c.company_id,c.company_name,b.number,a.*
+     FROM
+	company_shebao_order a
+    LEFT JOIN (
+	    SELECT
+		count(1) AS number,
+		company_shebao_order_id
+	   FROM
+		customer_shebao_order
+	  WHERE
+		sbt_status = '2' OR  sbt_status='3'
+	   GROUP BY
+		company_shebao_order_id
+   ) b ON a.id = b.company_shebao_order_id
+   left  join companys c  on a.company_id=c.company_id
+   where  1=1
+
+    <if test="joinCityName!=null and joinCityName!=''">
+      and a.join_city_name = #{joinCityName}
+    </if>
+    <if test="companyName!=null and companyName!=''">
+      and c.company_name  like CONCAT('%',#{companyName},'%')
+    </if>
+    <if test="orderDate!=null and orderDate!=''">
+      and a.order_date =#{orderDate}
+    </if>
+   and a.status>1
+    order by a.order_date desc
+  </select>
+
+    <select id="selectNoReadOrderCount" parameterType="java.lang.Long" resultType="java.lang.Long">
+      select count(1) from company_shebao_order where
+      company_id=#{companyId} and read_status='0'  and  is_current=1 and status>0
+    </select>
+    <!-- 查询该公司当前未付款的账单数量-->
+    <select id="selectUnpayOrders" resultType="java.lang.Long" parameterType="java.lang.Long">
+      select count(1) from company_shebao_order where company_id=#{companyId} and is_current='1' and status='2'
+    </select>
+    <!-- 查询该公司的初始化及待提交账单-->
+    <select id="selectLastOrder" parameterType="java.lang.Long" resultMap="CompanyShebaoOrderDtoMap">
+      select <include refid="Base_Column_List" />
+      from  company_shebao_order  where is_current ='1'
+      and (status='0' or status='1') and company_id=#{companyId}
+    </select>
+</mapper>

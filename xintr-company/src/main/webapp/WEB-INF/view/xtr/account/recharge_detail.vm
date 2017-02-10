@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+    #parse("comm/head.vm")
+    <style type="text/css">
+        body,
+        html {width: 100%;height: 100%;overflow: auto}
+        .rechargeDetails { width: 100%;height: 100%;min-width:1200px;min-height:800px;}
+        .rechargeTop {width: 100%; height: 80px;position: relative;}
+        .rechargeTop h2 { text-align: center;line-height: 80px; border-bottom: 1px solid #dbe9ee }
+        .rechargeTop img {position: absolute; top: 0;bottom: 0; margin: auto;right: 100px; cursor: pointer }
+        .rechargeCon{width:80%;margin:0 auto;}
+        .rechargeCon h3{margin-top:50px;color:#666;}
+        table{width:100%;margin-top:10px;font-size: 12px;}
+        table tr td{border:1px solid #b8dae6;text-align: center;}
+        .rechargeCon1{height:50px;background:#f1f8fe;color:#333;text-align: center;font-weight: 600;}
+        .rechargeCon2{height: 50px; background: #feebe7;}
+        .rechargeConTd1{width:15%;}
+        .rechargeConTd2{width:13%;}
+        .rechargeConTd3{width:14%;}
+        .rechargeConTd4{width:13%;}
+        .rechargeConTd5{width:15%;}
+        .rechargeConTd6{width:15%;}
+        .rechargeConTd7{width:15%;}
+        .rechargeBtn{width:80%;height:80px;background:#f1f9fc;border:1px solid #dbe9ee;margin:20px auto 40px;}
+        .rechargeBtn1{display: block;width:240px;height:40px;text-align: center;line-height: 40px;background:#0696fa;color:#fff;border-radius:6px;margin:20px auto;cursor:pointer}
+    </style>
+</head>
+<body>
+    <div class="rechargeDetails">
+        <div class="rechargeTop">
+            <h2>充值详情</h2>
+        </div>
+        <div class="rechargeCon">
+            <h3>订单状态：
+                #if($!{rechargeData.rechargeState} == 2)
+                    充值成功
+                #elseif($!{rechargeData.rechargeState} == 1)
+                    已关闭
+                #elseif($!{rechargeData.rechargeState} == 0)
+                    提交订单
+                #end
+            </h3>
+            <table>
+                <tr class="rechargeCon1">
+                    <td class="rechargeConTd1">订单提交时间</td>
+                    <td class="rechargeConTd2">订单号</td>
+                    <td class="rechargeConTd3">充值金额</td>
+                    <td class="rechargeConTd4">付款银行名称</td>
+                    <td class="rechargeConTd5">付款银行账号</td>
+                    <td class="rechargeConTd6">银行交易流水</td>
+                    <td class="rechargeConTd7">备注</td>
+                </tr>
+                <tr class="rechargeCon2">
+                    <td>$!date.format('yyyy-MM-dd HH:mm',$!{rechargeData.rechargeAddtime})</td>
+                    <td>$!{rechargeData.rechargeNumber}</td>
+                    <td>$!{xtr.money($!{rechargeData.rechargeMoney})}</td>
+                    <td>$!{rechargeData.rechargeBank}</td>
+                    <td>$!{rechargeData.rechargeBanknumber}</td>
+                    <td>$!{rechargeData.rechargeSerialNumber}</td>
+                    <td>$!{rechargeData.rechargeBak}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="rechargeBtn">
+            <a class="rechargeBtn1" href="javascript:void(0);" onclick="closeBox();">确认</a>
+        </div>
+    </div>
+
+<script type="text/javascript">
+    $(function(){
+//        $('.popupbox').hide();
+        $(".popupbox-closed").hide();
+//        $(".popupbox-closed").click(function(){
+//            console.log(111);
+//            allPopClose();
+//            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+//            parent.layer.close(index);
+//        });
+    });
+    function closeBox(){
+//        allPopClose();
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+        parent.layer.close(index);
+    }
+</script>
+</body>
+</html>

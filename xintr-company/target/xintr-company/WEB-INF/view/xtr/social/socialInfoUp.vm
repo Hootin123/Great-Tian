@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title></title>
+
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/payday/payday.css')" rel="stylesheet">
+    <script src="#springUrl('/resource/js/plugins/dropzone/dropzone.js')"></script>
+    <script src="#springUrl('/resource/js/plugins/laydate/laydate.js')"></script>
+</head>
+
+<body>
+<div class="main_right payoff_two salaryDetails clear" id="salaryDetails">
+
+
+
+    <div class="clearTop"><strong>员工资料导入</strong></div>
+
+    <table class="payoff_two_list">
+        <tr class="payoff_two_list_first">
+            <td style="text-align:left; padding-left:15px;">成员信息上传<a href="#" id="upfile" style="height:auto; margin: 0px; background-color: transparent; font-size: 12px; color:blue; width:auto; line-height:25px; display:inline-flex;">上传新增成员</a>
+						<span class="bar">
+						<em class="bar_1"></em>
+					</span></td>
+        </tr>
+        <tr class="payoff_two_list_first">
+            <td style="text-align:left; padding-left:15px;">成员新增导入模板下载（<a style="height:auto; margin: 0px; background-color: transparent; font-size: 12px; color:blue; width:auto; line-height:25px; display:inline-flex;" target="_blank" href="../resource/upload/salaryfiles/template/socialinfo.xls">点击下载</a>）</td>
+        </tr>
+        <tr class="payoff_two_list_last">
+            <td align="left">
+
+                <p><label style="color: #0066FF;">提示</label></p>
+                <p>1.下载模版，按照模板进行数据整理</p>
+                <p>2.如果已经整理完数据，点击“上传新增成员”按钮选择整理好数据的文件上传</p>
+                <p>3.如果出现错误信息，请根据错误信息内容重新整理数 据；已经导入成功的数据不用再次导入</p>
+                <p>4.导入完成员信息后，还需导入成员身份证材料信息页面</p>
+                <p> </p>
+
+            </td>
+        </tr>
+    </table>
+
+    <div class="clearTop"><strong>身份证上传</strong></div>
+
+    <table class="payoff_two_list">
+        <tr class="payoff_two_list_first">
+            <td style="text-align:left; padding-left:15px;">导入文件<a href="#" id="upimg" style="height:auto; margin: 0px; background-color: transparent; font-size: 12px; color:blue; width:auto; line-height:25px; display:inline-flex;">上传身份证</a></td>
+        </tr>
+        <tr class="payoff_two_list_last">
+            <td align="left">
+                <p><label style="color: #0066FF;">提示</label></p>
+                <p>1.每个身份证需分别上传<label style="color: #0066FF;">正反两张照片</label></p>
+                <p>2.身份证图片命名方式：身份证号-A(A：正面，B：反面)<br />如：11000*************-A、11000*************-B</p>
+                <p>3.请上传<label style="color: blue;">扫描的图片文件</label>，手机或相机拍摄的照片不可用</p>
+                <p>4.上传身份证照片前，请确保该身份证信息已录入系统</p>
+                <p> </p>
+            </td>
+        </tr>
+    </table>
+
+</div>
+</body>
+
+</html>
+
+<script type="text/javascript">
+
+    $(function () {
+        //文件上传
+        onUpload();
+    });
+
+    var orderid=0;
+
+    function onUpload() {
+        Dropzone.prototype.submitRequest = function (xhr, formData, files) {
+            formData.append('orderType', 1);
+            formData.append('orderId', orderid);
+            return xhr.send(formData);
+        };
+        var ii;
+        //事件绑定
+        $("#upfile").dropzone({
+                url: "../social/uploadExcel.htm",
+                //params: {payday: $('#payday').val()},
+                //params: {payday: '2016-06-21'},
+                //params:{orderType:1},
+                maxFiles: 10,
+                maxFilesize: 512,
+                acceptedFiles: ".xlsx,.xls",
+                dictInvalidFileType: "上传的文件格式错误",
+                uploadprogress: function (file, progress, bytesSent) {
+                    //更新文件上传进度
+                    $('.bar_1').css('width', ($('.bar').width() * progress) / 100);
+                },
+                addedfile: function (file) {
+                    ii = layer.load();
+                },
+                complete: function (data) {
+                    layer.close(ii);
+                    if(data && data.xhr && data.xhr.responseText){
+                        var res = eval('(' + data.xhr.responseText + ')');
+                        if (res && res.success) {
+                            //上传成功，刷新页面
+                            orderid=res.data;
+                            layer.alert(res.message,{
+                                title:'上传成功',
+                            },function(index){
+                                layer.close(index);
+                            });
+                            //layer.alert('上传成功', function (index) {
+                            //    layer.close(index);
+                            //    window.location.reload();
+                            //});
+                        } else {
+                            //上传失败
+                            layer.alert(res.message, {title: '上传失败'}, function (index) {
+                                layer.close(index);
+                            });
+                        }
+                    } else {
+                        //上传失败
+                        layer.alert("文件上传失败", {title: '上传失败'}, function (index) {
+                            layer.close(index);
+                        });
+                    }
+                }
+            });
+
+
+        //事件绑定
+        $("#upimg").dropzone({
+            url: "../social/uploadImg.htm",
+            //params: {payday: $('#payday').val()},
+//        params: {payday: '2016-06-21'},
+            //params:{orderType:1,orderId:orderid},
+            maxFiles: 10,
+            maxFilesize: 512,
+            acceptedFiles: ".rar,.zip,.7z",
+            dictInvalidFileType: "上传的文件格式错误",
+            uploadprogress: function (file, progress, bytesSent) {
+                //更新文件上传进度
+                $('.bar_1').css('width', ($('.bar').width() * progress) / 100);
+            },
+            addedfile: function (file) {
+                ii = layer.load();
+            },
+            complete: function (data) {
+                layer.close(ii);
+                if(data && data.xhr && data.xhr.responseText){
+                    var res = eval('(' + data.xhr.responseText + ')');
+                    if (res && res.success) {
+                        //上传成功，刷新页面
+                        orderid=res.data;
+                        layer.alert(res.message,{
+                            title:'上传成功',
+                        },function(index){
+                            layer.close(index);
+                        });
+                        //layer.alert('上传成功', function (index) {
+                        //    layer.close(index);
+                        //    window.location.reload();
+                        //});
+                    } else {
+                        //上传失败
+                        layer.alert(res.message, {title: '上传失败'}, function (index) {
+                            layer.close(index);
+                        });
+                    }
+                } else {
+                    //上传失败
+                    layer.alert("文件上传失败", {title: '上传失败'}, function (index) {
+                        layer.close(index);
+                    });
+                }
+
+            }
+        });
+    }
+
+</script>

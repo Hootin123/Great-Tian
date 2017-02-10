@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>垫发申请管理</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-table/bootstrap-table.min.css')" rel="stylesheet">
+</head>
+
+<body>
+<div style="padding: 10px" class="container-fluid">
+
+    <div class="row">
+        <form class="form-inline form-horizontal" role="form" method="post" id="queryForm">
+            <div class="form-group">
+                <label class="col-sm-4  control-label">处理类型</label>
+                <div class="col-sm-1">
+                    <select name="opeationType" class="form-control">
+                        <option value="">全部</option>
+                        <option value="1">发工资</option>
+                        <option value="2">极速发工资</option>
+                        <option value="3">社保公积金个人补退</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-5 col-sm-offset-1 control-label">处理状态</label>
+                <div class="col-sm-1">
+                    <select name="rechargeState" class="form-control">
+                        <option value="4">处理未完成</option>
+                        <option value="">全部</option>
+                        <option value="1">发薪异常</option>
+                        <option value="0">等待回调</option>
+                        <option value="3">系统处理中</option>
+                        <option value="2">处理成功</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-5 col-sm-offset-3 control-label">订单状态</label>
+                <div class="col-sm-1">
+                    <select name="payStatus" class="form-control">
+                        <option value="1">失败过订单</option>
+                        <option value="2">全部</option>
+                        <option value="">未失败订单</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 col-sm-offset-3 control-label">发工资订单号</label>
+                <div class="col-sm-1">
+                    <input name="rechargeBumber" class="form-control"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 col-sm-offset-4 control-label">财务处理人</label>
+                <div class="col-sm-1">
+                    <input name="financeUser" class="form-control"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 col-sm-offset-7">
+                    <input name="companyName" class="form-control" placeholder="根据企业名称模糊检索"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 col-sm-offset-12">
+                    <button class="btn btn-primary" type="button" id="queryBtn">
+                        <i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;搜索
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <table id="data-list"></table>
+
+
+</div>
+
+</body>
+<script src="#springUrl('/resource/js/hui/content.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table-mobile.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/validate/jquery.validate.min.js')"></script>
+<script src="#springUrl('/resource/js/comm/jdatagrid.js')"></script>
+<script src="#springUrl('/resource/js/customer/pay/list.js')"></script>
+</html>

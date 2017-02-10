@@ -1,0 +1,1048 @@
+body{
+    width: 100%;
+    min-width: 1000px;
+    background: #fff;
+
+}
+.customer{
+    width: 100%;
+    padding:20px 30px 0;
+    box-sizing: border-box;
+}
+.customer-title{
+    width: 100%;
+    height: 60px;
+    /*background: #f00;*/
+}
+.customer-title-left{
+    float: left;
+}
+.customer-title-left span{
+    display: block;
+    width: 116px;
+    height: 30px;
+    margin-right: 28px;
+    background: #314a5e;
+    border-radius: 3px;
+    float: left;
+    font-size: 14px;
+    color: #fff;
+    line-height: 30px;
+    font-family: '微软雅黑';
+    text-align: center;
+    cursor: pointer;
+}
+.customer-title-left span:nth-child(1){
+    width: 90px;
+}
+.customer-title-left .active{
+    background: #fe7058;
+}
+.customer-title-left span:hover{
+    background: #fe7058;
+}
+.customer-title-right{
+    float: right;
+}
+.search-name{
+    width: 218px;
+    height: 28px;
+    border:1px solid #979797;
+    float: left;
+    padding:4px 0;
+    box-sizing: border-box;
+    margin-left:20px;
+    border-radius: 3px;
+}
+.search-name input{
+    width: 152px;
+    height: 100%;
+    float: left;
+    border:0;
+    border-right: 1px solid #979797;
+    text-indent: 50px;
+    background:url(/resource/img/customer/new/2.2newSearch.png) 20px 0 no-repeat;
+}
+.search-name .search{
+    width: 60px;
+    height: 100%;
+    float: left;
+    color: #333;
+    font-family: '微软雅黑';
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+    cursor: pointer;
+
+}
+.section{
+    width: 152px;
+    height: 28px;
+    box-sizing: border-box;
+    padding:4px 0;
+    border:1px solid #979797;
+    float: left;
+    border-radius: 3px;
+}
+.section input{
+    width: 90px;
+    height: 100%;
+    border:0;
+    border-right: 1px solid #979797;
+    text-indent: 20px;
+    float: left;
+}
+.section .bumen{
+    width: 58px;
+    height: 100%;
+    line-height: 18px;
+    float: left;
+    color: #333;
+    font-family: '微软雅黑';
+    font-size: 14px;
+    text-indent: 10px;
+    cursor: pointer;
+    background:url(/resource/img/customer/new/2.2newLit.png) 40px center no-repeat;
+}
+.customer-main{
+    width: 100%;
+}
+.customer-main-top{
+    width:580px;
+    height: 35px;
+    border-radius: 3px 3px 0 0;
+    background:#314a5e;
+}
+.customer-main-top span{
+    display: block;
+    width: 116px;
+    height: 100%;
+    float: left;
+    background: url(/resource/img/customer/new/2.2newLit1.png) right center no-repeat;
+    line-height: 35px;
+    color: #fff;
+    font-family: '微软雅黑';
+    font-size: 12px;
+    text-align: center;
+    cursor: pointer;
+}
+.customer-main-top span a{
+    color: #4ddbc5;
+    margin-left:5px;
+}
+.customer-main-top .lastSpan{
+    background: none;
+}
+.customer-main-top .active1{
+    margin-top: -2px;
+    height: 37px;
+    border-radius: 3px 3px 0 0;
+    background: #ff7058;
+
+}
+.customer-main-top .active1 a{
+    color: #314a5e;
+}
+.customer-main table{
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    font-family: '微软雅黑';
+    color: #333;
+}
+.customer-main table thead tr{
+    width: 100%;
+    height: 50px;
+    background: #f1f8fe;
+
+}
+.customer-main table thead tr td{
+    border:1px solid #b8dae6;
+}
+.customer-main table thead tr td img{
+    vertical-align: middle;
+}
+.customer-main table tbody td{
+    height: 50px;
+    border:1px solid #b8dae6;
+}
+.customer-main table tbody tr:nth-child(even){
+    background: #feebe7;
+}
+.customer-main table tbody td a{
+    color: #0696fa;
+    margin-left: 5px;
+    cursor: pointer;
+}
+.customer-main table .customerName{
+    color: #0696fa;
+    cursor:pointer;
+}
+/*提示信息*/
+.hint{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom:0;
+    margin:auto;
+    top: 0;
+    width: 300px;
+    height: 58px;
+    border-radius: 3px;
+    background: rgba(0,0,0,0.7) url(/resource/img/customer/new/2.2successHint.png) 10px center no-repeat;
+    line-height: 58px;
+    font-size: 16px;
+    color: #f1f1f1;
+    padding-left: 60px;
+    box-sizing: border-box;
+}
+.hint i{
+    color: #FFFF00
+}
+/*蒙版*/
+.mengban {
+    width: 100%;
+    height: 100%;
+    min-width: 1200px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #d1d1d1;
+    opacity: 0.3;
+    z-index: 2;
+}
+/*离职*/
+.customerDimission{
+    width: 600px;
+    height: 435px;
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: 1px 1px 50px rgba(0,0,0,.3);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 6;
+}
+.customerDimission .customerDimission-title {
+    width: 100%;
+    margin-top: 20px;
+    text-indent:20px;
+    font-size: 18px;
+    color: #333;
+    font-weight: 600;
+}
+.customerDimission .customerDimission-title b {
+    display: block;
+    width: 10px;
+    height: 10px;
+    background: url(/resource/img/customer/new/2.2close.png) 0 0 no-repeat;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+}
+.customerDimission-hint{
+    width: 100%;
+    margin-top: 30px;
+    text-align: center;
+    color: #f99b15;
+}
+.customerDimission .customerDimission-main{
+    margin-top: 30px;
+    width: 100%;
+    height: 200px;
+    padding: 0 40px;
+    box-sizing: border-box;
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+}
+
+.customerDimission .left {
+    width: 35%;
+    float: left; }
+.customerDimission .left li {
+    height: 70px;
+    font-size: 14px;
+    color: #666;
+    line-height: 70px;
+    font-family: '微软雅黑';
+}
+.customerDimission .left li em {
+    color: #ff473f;
+    margin-right: 5px; }
+.customerDimission .right {
+    width: 65%;
+    float: right; }
+.customerDimission .right li {
+    height: 70px;
+    font-size: 14px;
+    line-height: 60px;
+    position: relative;
+    color: #666;
+    font-family: '微软雅黑'; }
+.customerDimission .right li b{
+    color: #f00;
+    line-height: 30px;
+    position: absolute;
+    top:45px;
+    left:45px;
+    font-weight: 300;
+    font-size: 14px;
+}
+
+.customerDimission .right li input {
+    width: 250px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #ddd;
+    text-indent: 10px;
+    border-radius: 3px;
+}
+.customerDimission .right li input:hover{
+    border: 1px solid #324a5e;
+}
+.customerDimission .right .error{
+    border:1px solid #f00;
+}
+.customerDimission .right .check input{
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+.customerDimission-hint1{
+    width: 100%;
+    line-height:120px;
+    text-align: center;
+    color: #666;
+
+}
+.customerDimission-hint1 i{
+    color: #ff473f
+}
+.customerDimission-footer{
+    width: 200px;
+    height: 80px;
+    margin: 0 auto;
+    margin-top: 50px;
+    /*background: #f1f9fc;*/
+}
+.customerDimission-footer .button{
+    width: 100%;
+    height: 40px;
+    margin: 0 auto;
+}
+.customerDimission-footer .button input {
+    width: 200px;
+    height: 100%;
+    background: #314a5e;
+    color: #fff;
+    border: 0;
+    /*margin-top: 20px;*/
+    border-radius: 6px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 14px;
+    font-family: '微软雅黑';
+    cursor: pointer;
+    float: left;
+}
+/*.customerDimission-footer .button .btnCloseDimission{*/
+    /*background: #fff;*/
+    /*color: #0696fa;*/
+    /*float: right;*/
+    /*border: 1px solid #0696fa;*/
+/*}*/
+/*调薪*/
+.customerUpdateSalary{
+    width: 600px;
+    height: 435px;
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: 1px 1px 50px rgba(0,0,0,.3);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 10;
+}
+.customerUpdateSalary-title{
+    width: 100%;
+    /* 	height: 48px*/;
+    text-indent: 20px;
+    margin-top: 20px;
+    font-size: 18px;
+    color: #333;
+    font-weight: 600;
+}
+.customerUpdateSalary-title b{
+    display: block;
+    width: 10px;
+    height: 10px;
+    background: url(/resource/img/customer/new/2.2close.png) 0 0 no-repeat;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+}
+.customerUpdateSalary-hint{
+    width: 100%;
+    margin-top: 30px;
+    text-align: center;
+    color: #f99b15;
+}
+.customerUpdateSalary-main{
+    margin-top: 30px;
+    width: 100%;
+    height: 200px;
+    padding: 0 100px;
+    box-sizing: border-box;
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+}
+.customerUpdateSalary .left {
+    width: 35%;
+    float: left; }
+.customerUpdateSalary .left li {
+    height: 70px;
+    font-size: 14px;
+    color: #666;
+    line-height: 70px;
+    font-family: '微软雅黑';
+}
+.customerUpdateSalary .left li em {
+    color: #ff473f;
+    margin-right: 5px; }
+.customerUpdateSalary .right {
+    width: 65%;
+    float: right; }
+.customerUpdateSalary .right li {
+    height: 70px;
+    font-size: 14px;
+    line-height: 60px;
+    position: relative;
+    color: #666;
+    font-family: '微软雅黑'; }
+.customerUpdateSalary .right li b{
+    color: #f00;
+    line-height: 30px;
+    position: absolute;
+    top:45px;
+    left:45px;
+    font-weight: 300;
+    font-size: 14px;
+}
+
+.customerUpdateSalary .right li input {
+    width: 200px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+    text-indent: 10px;
+}
+.customerUpdateSalary .right li input:hover{
+    border: 1px solid #324a5e;
+}
+.customerUpdateSalary .right .error{
+    border:1px solid #f00;
+}
+.customerUpdateSalary .right li span{
+    position: absolute;
+    /*right: -6px;*/
+    top:0;
+    color: #f90;
+    margin-left: 6px;
+}
+.customerUpdateSalary-footer{
+    width: 200px;
+    height: 80px;
+    margin: 0 auto;
+    margin-top: 50px;
+
+}
+.customerUpdateSalary-footer .button1{
+    width: 100%;
+    height: 40px;
+    margin: 0 auto;
+}
+.customerUpdateSalary-footer .button1 input {
+    width: 200px;
+    height: 100%;
+    background: #314a5e;
+    color: #fff;
+    border: 0;
+    border-radius: 6px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 14px;
+    font-family: '微软雅黑';
+    cursor: pointer;
+}
+/*.customerUpdateSalary-footer .button1 .btnCloseUpdateSalary{*/
+    /*background: #fff;*/
+    /*color: #0696fa;*/
+    /*float: right;*/
+    /*border: 1px solid #0696fa;*/
+/*}*/
+/*转正*/
+.customerRegular{
+    width: 600px;
+    height: 435px;
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: 1px 1px 50px rgba(0,0,0,.3);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 6;
+}
+.customerRegular-title{
+    width: 100%;
+    margin-top: 20px;
+    text-indent: 20px;
+    font-size: 18px;
+    color: #333;
+    font-weight: 600;
+}
+
+.customerRegular-title b{
+    display: block;
+    width: 10px;
+    height: 10px;
+    background: url(/resource/img/customer/new/2.2close.png) 0 0 no-repeat;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+}
+.customerRegular-hint{
+    width: 100%;
+    margin-top: 30px;
+    text-align: center;
+    color: #f99b15;
+}
+.customerRegular-main{
+    margin-top: 30px;
+    width: 100%;
+    height: 200px;
+    padding: 0 100px;
+    box-sizing: border-box;
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+}
+.customerRegular .left {
+    width: 35%;
+    float: left; }
+.customerRegular .left li {
+    height: 70px;
+    font-size: 14px;
+    color: #666;
+    line-height: 70px;
+    font-family: '微软雅黑';
+}
+.customerRegular .left li em {
+    color: #ff473f;
+    margin-right: 5px;
+}
+.customerRegular .right {
+    width: 65%;
+    float: right;
+}
+.customerRegular .right li {
+    height: 70px;
+    font-size: 14px;
+    line-height: 60px;
+    position: relative;
+    color: #666;
+    font-family: '微软雅黑'; }
+.customerRegular .right li b{
+    color: #f00;
+    line-height: 30px;
+    position: absolute;
+    top:45px;
+    left:45px;
+    font-weight: 300;
+    font-size: 14px;
+}
+.customerRegular .right li input {
+    width: 200px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+    text-indent: 10px;
+}
+.customerRegular .right li input:hover{
+    border:1px solid #324a5e;
+}
+.customerRegular .right .error{
+    border:1px solid #f00;
+}
+.customerRegular .right li span{
+    position: absolute;
+    right: -20px;
+    top:0;
+    color: #f90;
+}
+.customerRegular-footer{
+    width: 200px;
+    height: 80px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+.customerRegular-footer .button2{
+    width: 100%;
+    height: 40px;
+    margin: 0 auto;
+}
+.customerRegular-footer .button2 input {
+    width: 200px;
+    height: 100%;
+    background: #314a5e;
+    color: #fff;
+    border: 0;
+    border-radius: 6px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 14px;
+    font-family: '微软雅黑';
+    cursor: pointer;
+
+}
+/*.customerRegular-footer .button2 .btnCloseRegular{*/
+    /*background: #fff;*/
+    /*color: #0696fa;*/
+    /*float: right;*/
+    /*border: 1px solid #0696fa;*/
+/*}*/
+/*新增员工*/
+.customerAdd{
+    width: 800px;
+    height: 555px;
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: 1px 1px 50px rgba(0,0,0,.3);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 6;
+}
+.customerAdd-title{
+    width: 100%;
+    margin-top: 20px;
+    text-indent: 20px;
+    font-size: 18px;
+    color: #333;
+    font-weight: 600;
+}
+.customerAdd-title b{
+    display: block;
+    width: 10px;
+    height: 10px;
+    background: url(/resource/img/customer/new/2.2close.png) 0 0 no-repeat;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+}
+.customerAdd-hint{
+    width: 100%;
+    margin-top: 30px;
+    text-align: center;
+    color: #333;
+}
+.customerAdd-hint i{
+    color: #f99b15;
+}
+.customerAdd-main{
+    margin-top: 30px;
+    width: 100%;
+    height: 320px;
+    padding: 0 40px;
+    box-sizing: border-box;
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+}
+.customerAdd-main table{
+    width: 100%;
+}
+.customerAdd-main table tr{
+    line-height: 60px;
+
+}
+.customerAdd-main table tr .firstTd{
+    width: 124px;
+    /*text-align: right;*/
+
+}
+.customerAdd-main table tr .firstTd em{
+    color: #ff473f;
+    margin-right: 5px;
+}
+.customerAdd-main table tr td{
+    border:0;
+    position: relative;
+}
+.customerAdd-main table tr b{
+    color: #f00;
+    line-height: 30px;
+    position: absolute;
+    top:45px;
+    left:45px;
+    font-weight: 300;
+    font-size: 14px;
+    z-index: 2;
+}
+.customerAdd-main table tr .error{
+    border:1px solid #f00;
+}
+.customerAdd-main table tr td input{
+    width: 200px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    text-indent: 10px;
+}
+.customerAdd-main table tr td input:hover{
+    border:1px solid #324a5e;
+}
+.customerAdd-main table .Cstatue{
+    background: #f1f9fc;
+}
+.customerAdd-main table tr .AddState {
+    position: relative;
+
+}
+
+.customerAdd-main table tr .AddState input{
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+    vertical-align: middle;
+}
+.customerAdd-main table tr .AddState span{
+    position: absolute;
+    right: -333px;
+    padding-right: 130px;
+    background: #f1f9fc;
+}
+.customerAdd-main table tr .customerDepName input{
+    background: url(/resource/img/customer/new/2.2bumen.png) 160px center no-repeat;
+    cursor: pointer;
+}
+.customerDepName .branch{
+    width: 200px;
+    position: absolute;
+    left: 9px;
+    top: 45px;
+    background: #fff;
+    border: 1px solid #d3e0f1;
+    line-height: 20px;
+    box-shadow: 1px 3px 10px 0 #b0ccd7;
+    z-index: 10;
+    text-align: left;
+;}
+.customerDepName .branch h4{
+    min-width:150px;
+    height:30px;
+    border-bottom: 1px solid #ccc;
+    line-height: 30px;
+    text-indent: 5px;
+    font-size: 15px;
+    font-weight: 600;
+    background: #f1f9fc;
+    color: #666;
+
+}
+.customerDepName .branch #dep-base{
+    margin-left: 10px;
+    height: 210px;
+    overflow-y: auto;
+
+}
+.customerDepName .branch ul{
+
+    padding-left: 10px;
+    margin-bottom: 2px;
+    cursor: pointer;
+
+
+}
+/*.customerDepName .branch ul li{*/
+    /*width:100%;*/
+    /*padding-left: 16px;*/
+    /*color: #666;*/
+    /*cursor: pointer;*/
+    /*box-sizing: border-box;*/
+/*}*/
+/*.customerDepName .branch ul li .show{*/
+    /*position: absolute;*/
+    /*left: 0;*/
+    /*top: 6px;*/
+    /*border: 1px solid #f8d37a;*/
+    /*display: block;*/
+    /*width: 13px;*/
+    /*height: 13px;*/
+    /*text-align: center;*/
+    /*line-height: 13px;*/
+    /*color: #0696fa;*/
+/*}*/
+.customerDepName .branch ul li span:hover{
+    color: #fff;
+    background: #0696fa;
+}
+.customerDepName .branch  span:hover{
+    color: #fff;
+    background: #0696fa;
+}
+.customerDepName .branch span:first-child{
+    color: #333;
+    font-weight: 600;
+    cursor: pointer;
+}
+.customerAdd-main table tr .AddState span i{
+    color: #ff473f;
+}
+.customerAdd-main .AddTryPay i,.customerAdd-main .AddTakePay i{
+    position: absolute;
+    right: 30px;
+    color: #333
+}
+.customerAdd-footer{
+    width: 200px;
+    height: 80px;
+    margin: 0 auto;
+    margin-top: 50px;
+
+}
+.customerAdd-footer .button2{
+    width: 100%;
+    height: 40px;
+    margin: 0 auto;
+}
+.customerAdd-footer .button3 input {
+    width: 200px;
+    height: 100%;
+    background: #314a5e;
+    color: #fff;
+    border: 0;
+    /*margin-top: 20px;*/
+    border-radius: 6px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 14px;
+    font-family: '微软雅黑';
+    cursor: pointer;
+    float: left;
+}
+/*.customerAdd-footer .button3 .btnCloseAdd{*/
+    /*background: #fff;*/
+    /*color: #0696fa;*/
+    /*float: right;*/
+    /*border: 1px solid #0696fa;*/
+/*}*/
+/*批量导入员工*/
+.customerBatchImport{
+    width: 600px;
+    height: 585px;
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: 1px 1px 50px rgba(0,0,0,.3);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 6;
+}
+.customerBatchImport-title{
+    width: 100%;
+    margin-top: 20px;
+    text-indent: 20px;
+    font-size: 18px;
+    color: #333;
+    font-weight: 600;
+}
+.customerBatchImport-title b{
+    display: block;
+    width: 10px;
+    height: 10px;
+    background: url(/resource/img/customer/new/2.2close.png) 0 0 no-repeat;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+}
+.customerBatchImport-hint{
+    width: 100%;
+    margin-top: 30px;
+    text-align: center;
+    color: #f1543f;
+}
+.customerBatchImport-hint i{
+    color: #0696FA;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.customerBatchImport-main{
+    margin-top: 30px;
+    width: 100%;
+    height: 320px;
+    padding: 0 40px;
+    box-sizing: border-box;
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+
+}
+.customerBatchImport-main-content{
+    width: 100%;
+    height:350px;
+    border:1px dashed #ccc;
+    position: relative;
+}
+
+.customerBatchImportShow {
+    width: 100%;
+    position: absolute;
+    left:0;
+    top:30px;
+}
+.customerBatchImportShow .into{
+    width: 200px;
+    height: 36px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    background: #0696FA;
+    color: #FFFFFF;
+    border-radius: 6px;
+    margin:0 auto;
+    /* margin-top: 140px;*/
+    cursor: pointer;
+    font-size: 18px;
+    font-family: '微软雅黑';
+}
+.customerBatchImportShow .upload{
+    line-height: 30px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.customerBatchImportShow .upload i{
+    color: #222;
+    font-weight: 600;
+    font-size: 18px;
+
+}
+.progressBar{
+    position: absolute;
+    left: 75px;
+    top: 175px;
+}
+.progressBar-main{
+    width: 400px;
+    height: 20px;
+    -webkit-appearance: none;
+    border-radius: 10px;
+    border:1px solid #ccc;
+    overflow: hidden;
+    margin-bottom: 10px;
+
+
+}
+.progressBar-main .progressBar-box{
+    width: 0px;
+    height: 100%;
+    background: #0696fa;
+}
+
+.customerBatchImportShow  .text{
+    text-align: left;
+
+}
+.customerBatchImportShow .text1{
+    text-align: center;
+    color: #f00;
+    font-size: 14px;
+}
+.customerBatchImportShow .text p{
+    line-height: 25px;
+    text-indent: 6px;
+}
+.customerBatchImportShow .text p span{
+    display: block;
+    line-height: 25px;
+    text-indent: 20px;
+}
+.customerBatchImport-footer {
+    width: 200px;
+    height: 80px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.customerBatchImport-footer .button4{
+    width: 100%;
+    height: 40px;
+    margin: 0 auto;
+}
+.customerBatchImport-footer .button4 input {
+    width: 200px;
+    height: 100%;
+    background: #314a5e;
+    color: #fff;
+    border: 0;
+    /*margin-top: 30px;*/
+    border-radius: 6px;
+    text-align: center;
+    line-height: 36px;
+    font-size: 14px;
+    font-family: '微软雅黑';
+    cursor: pointer;
+    float: left;
+}
+/*#exportFileDiv div:nth-child(2){*/
+    /*width: 100% !important;*/
+    /*height: 100% !important;*/
+
+/*}*/
+#exportFileDiv{
+    width: 86px !important;
+}
+.noUserName{
+    width: 460px;
+    height: 56px;
+    position: absolute;
+    left: 382px;
+    top: 287px;
+    background:url(/resource/img/customer/new/2.2successHint1.png) no-repeat 20px center;
+    color: #333;
+    font-size: 30px;
+    text-align: center;
+    line-height: 56px;
+    font-family: '微软雅黑';
+    font-weight: 600;
+}
+.noUserName img{
+    position: absolute;
+    left: -310px;
+    top: -236px;
+}

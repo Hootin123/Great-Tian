@@ -1,0 +1,182 @@
+.repayment {
+	min-width: 890px;
+}
+
+.repayment_header {
+	margin: 17px 3.15% 0 3.15%;
+}
+
+.repayment_show {
+	margin: 30px 3.15% 0 3.15%;
+}
+
+.repayment {
+	color: #666666;
+}
+
+.repayment_header {
+	color: #666666;
+}
+
+.repayment_header i {
+	color: #5b7798;
+}
+
+.repayment_show {
+	padding: 30px 40px 0 40px;
+	height: 98px;
+	border: 1px solid #d3e0f1;
+	background: #e7edf5;
+	color: #5b7798;
+	font-weight: bold;
+}
+
+.span_red {
+	color: #fa5f5f;
+}
+
+.repayment_show p:first-child {
+	margin-bottom: 17px;
+}
+
+.repayment_show p:nth-child(2) span {
+	margin-right: 20px;
+}
+
+.repayment_show_tw {
+	margin: 40px 3.15% 0 3.15%;
+	border-bottom: 1px dotted #e3e3e3;
+}
+
+.repayment_show_tw span {
+	float: left;
+}
+
+.repayment_show_tw span:nth-child(1) {
+	min-width: 148px;
+	text-align: center;
+	line-height: 35px;
+	width: 10%;
+}
+
+.repayment_show_tw span:nth-child(2) {
+	width: 80%;
+}
+
+.repayment_show_tw span:nth-child(2) input[type=text] {
+	width: 32.0%;
+	height: 34px;
+	border: 1px solid #e3e3e3;
+	padding-left: 5px;
+}
+
+.repayment_show_tw span:nth-child(2) em {
+	margin: 21px 0 20px 0;
+	display: block;
+	font-size: 12px;
+}
+
+.repayment_show_tw span:nth-child(2) em i {
+	color: #333333;
+}
+
+.repayment_show_tr {
+	height: 117px;
+	margin: 0 3.15% 0 3.15%;
+	padding: 21px 0 0 40px;
+}
+
+.repayment_show_tr p:last-child {
+	color: #333333;
+	font-weight: bold;
+	margin-top: 50px;
+}
+
+.repayment_show_tr .chebox {
+	border-radius: 2px;
+	border-color: #e3e3e3;
+	margin-right: 10px;
+	position: relative;
+	top: 2px;
+}
+
+.repayment_show_fth {
+	min-width: 886px;
+	height: 206px;
+	border: 2px dashed #faf4e5;
+	margin: 0 3.15% 40px 3.15%;
+	padding: 35px 0 0 38px;
+	background: #fdfdf1;
+}
+
+.repayment_show_fth dl {
+	margin-top: 26px;
+}
+
+.repayment_show_fth dd,
+.repayment_show_fth dt {
+	height: 28px;
+	font-size: 12px;
+}
+
+.repayment_show_fth dd {
+	font-weight: bold;
+	margin-left: 46px;
+}
+
+.repayment_show_fv {
+	margin: 0 3.15% 73px 3.15%;
+	padding-left: 40px;
+}
+
+.repayment_show_fv li {
+	height: 36px;
+	line-height: 34px;
+	margin-bottom: 20px;
+}
+
+.repayment_show_fv li span {
+	display: inline-block;
+	width: 10%;
+	min-width: 120px;
+}
+
+.repayment_show_fv li input[type=text] {
+	width: 475px;
+	height: 34px;
+	border: 1px solid #e3e3e3;
+	color: #cccccc;
+	padding-left: 25px;
+}
+
+.repayment_show_sx {
+	width: 510px;
+	margin: 0 auto 50px
+}
+
+.repayment_show_sx input,
+.repayment_show_sx a {
+	border-radius: 6px;
+	font-size: 18px;
+}
+
+.repayment_show_sx input[type=submit] {
+	width: 240px;
+	height: 50px;
+	border: none;
+	color: #FFFFFF;
+	background: #0696fa;
+	margin-right: 30px;
+	cursor: pointer;
+}
+
+.repayment_show_sx a {
+	display: inline-block;
+	width: 238px;
+	height: 48px;
+	border: 1px solid #0696fa;
+	color: #0696fa;
+	background: none;
+	line-height: 48px;
+	text-align: center;
+}

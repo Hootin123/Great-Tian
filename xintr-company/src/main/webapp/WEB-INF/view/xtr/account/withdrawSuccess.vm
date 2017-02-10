@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title></title>
+    <link href="#springUrl('/resource/css/comm/comm.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/account/payoff_withdraw.css')" rel="stylesheet">
+</head>
+<div class="topHeadline">
+    <h2>账户提现</h2>
+    <img onclick="history.back();" src="#springUrl('/resource/img/salary/guanbi.png')" alt="" id="closeDetailBtn">
+</div>
+<div class="content">
+    <div class="top">
+        <div class="topHint">
+            <div class="topHint1">提交申请提交成功，正在提现中...</div>
+            <div class="topHint2">我们会在<span>一至二个工作日</span>内完成提现。<span>节假日除外</span></div>
+            <img src="#springUrl('/resource/img/check.png')" alt="">
+        </div>
+    </div>
+    <div class="sum">
+        <span class="sum1">提现金额：</span>
+        <span class="sum2"><i>$!{xtr.money($rechargeData.rechargeMoney)}</i>&nbsp;元</span>
+    </div>
+    <div class="bank">
+        <h3>提现银行：</h3>
+
+        <div class="name">
+            <div class="name1">银行：</div>
+            <div class="name2">$!rechargeData.rechargeBank</div>
+        </div>
+        <div class="name">
+            <div class="name1">账户名称：</div>
+            <div class="name2">$!rechargeData.bankAccountName</div>
+        </div>
+        <div class="name">
+            <div class="name1">账号：</div>
+            <div class="name2">$!rechargeData.rechargeBanknumber</div>
+        </div>
+        <div class="name">
+            <div class="name1">开户支行：</div>
+            <div class="name2">$!rechargeData.bankSubbranch</div>
+        </div>
+    </div>
+
+
+</div>
+<div class="bottom"><input type="button" value="确定" onclick="window.location.href='#springUrl('/account/index.htm')'" id="btn"></div>
+</body>
+</html>

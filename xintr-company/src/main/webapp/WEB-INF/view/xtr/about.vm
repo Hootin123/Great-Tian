@@ -1,0 +1,232 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+	<title>薪太软简介_人力资源一站式服务平台_薪太软</title>
+	#parse("comm/head.vm")
+	<meta name="keywords" content="薪太软，薪太软简介,薪太软新闻，薪太软合作，人力资源服务平台。"/>
+	<meta name="description" content="薪太软，总部位于国际金融中心上海，是“互联网+”时代下诞生的专注于企业人力资源的一站式服务平台，变革人力资源模式、优化企业资金配置，以“帮天下企业活得更好”为使命。"/>
+	<meta name="360-site-verification" content="340aa1b20cd239bb3ce0f0c7c2514fe7" />
+	<link rel="shortcut icon" href="#springUrl('/resource/img/favicon.ico')"/>
+	<link rel="stylesheet" type="text/css" href="#springUrl('/201607/css/xtr2.css')"/>
+	<link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/homeIndex/font-awesome.min.css')"/>
+	<script src="#springUrl('/resource/js/homeIndex/custom2.js')" type="text/javascript" charset="utf-8"></script>
+
+</head>
+<body>
+ #parse("/201607/top.vm")
+	<div class="x-container" style="height: 690px;background: url('#springUrl('/resource/img/xtr2/bg2_02.jpg')') no-repeat center 0;">
+		<div class="x-content" style="padding-top: 110px;width: 1100px;">
+			<div class="send-title-wrap">ABOUT US<p>关于我们</p></div>
+			<div class="i-detail" style="padding: 0 50px;box-shadow: none ;height: 425px;position: relative;background: url('#springUrl('/resource/img/xtr2/opbg_03.png')')  no-repeat 0 0;background-size: 100% 100%;margin: 0;" >
+				<p class="xtr-tt" style="margin-bottom:50px;">平台简介</p>
+				<div style="line-height: 30px;font-size: 14px;color: #fff;position: relative;z-index: 2; text-indent: 2em;text-align: justify;">
+					<p>薪太软，总部位于国际金融中心上海。是“互联网+”时代下诞生的专注于企业薪酬福利解决方案提供商。以“帮天下企业活得更好”为使命，开创互联网全面薪酬管理先河。</p>
+					<p>薪太软拥有来自世界500强，著名产业基金，著名互联网公司和知名律师事务所的创始团队，并已获得零加壹基金、木根投资以及舒展控股的千万级投资。与苏河湾控股集团形成战略合作关系，于2016年4月成为政府引进示范项目，并入驻"中国上海人力资源服务产业园区"。</p>
+					<p style="text-indent: 20px;">“善的循环”是薪太软的核心理念。公司通过专业的技术团队，从“薪”出发，构建泛人力资源服务平台体系，以薪酬管理为基点，独立研发专业管理系统，为每一家企业用户定制全生命线薪酬管理决方案。优化企业资金配置结构、变革人力资源模式、促进劳资关系和谐，提升员工认同感, 共享企业成长价值，实现“企业 - 员工 - 企业”善的循环。</p>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="x-container" style="background: #f4f4f4;padding-bottom: 30px;display:none;">
+		<div class="xtr-tt">管理团队</div>
+		<div class="x-content ">
+			<table class="gt-table" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td>
+						<div class="gt-item">
+							<img src="#springUrl('/resource/img/xtr2/t32.png')"/>
+							<p class="p1"><b>李昭君</b>/首席执行官</p>
+							<p class="p2">原阿里路亚公司/阿里微公司，来财街&任分期创始人/总裁。<br />消费金融、供应链金融等领域专家。<br />CCTV“2015年度十大新锐人物”，上海市互联网金融行业协会理事，中国中小企业协会理事，全球创业周导师。</p>
+						</div>
+					</td>
+					<td>
+						<div class="gt-item">
+							<img src="#springUrl('/resource/img/xtr2/t33.png')"/>
+							<p class="p1"><b>王量</b>/副总裁</p>
+							<p class="p2">7年金融方向律师从业经验，擅长金融风控和法律规范，<br />分管公司风控及内部行政事务。<br />同济大学法律专业，邦信阳中建中汇律师事务所持牌律师。</p>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="gt-item">
+							<img src="#springUrl('/resource/img/xtr2/t34.png')"/>
+							<p class="p1"><b>李硕云</b>/风控总监</p>
+							<p class="p2">17年企业和个人信贷风控从业经历，<br />分别任职于银行、商业保理、融资租赁等金融机构，<br />具备丰富的风控理论及实操经验，<br />国际注册内部审计师。</p>
+						</div>
+					</td>
+					<td>
+						<div class="gt-item">
+							<img src="#springUrl('/resource/img/xtr2/t35.png')"/>
+							<p class="p1"><b>郑波</b>/技术总监</p>
+							<p class="p2">14年互联网技术开发与架构设计经验，技术通才。<br />重庆大学计算机专业。<br />曾担任多家互联网公司CTO，负责技术整体架构。</p>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="x-container" style="background: #fff;padding-bottom: 90px;">
+		<div id="dynamic" style="position:absolute;top:-80px;left:0;"></div>
+		<div class="xtr-tt">动态推送</div>
+		<div class="x-content xtr-dynic">
+			<ul id="newslist">
+				
+			</ul>
+		</div>
+	</div>	
+	<div class="x-container" style="background: #f4f4f4;padding-bottom: 47px;">
+		<div class="xtr-tt">合作伙伴</div>
+		<div class="hzheb clfix">
+			<a style="background-image: url(#springUrl('/resource/img/xtr2/otherlogo/hzhb_03.jpg'));"></a>
+			<a style="background-image: url(#springUrl('/resource/img/xtr2/otherlogo/hzhb_05.jpg'));"></a>
+			<a style="background-image: url(#springUrl('/resource/img/xtr2/otherlogo/hzhb_07.jpg'));"></a>
+			<a style="background-image: url(#springUrl('/resource/img/xtr2/otherlogo/hzhb_08.jpg'));"></a>
+			<a style="background-image: url(#springUrl('/resource/img/xtr2/otherlogo/hzhb_13.jpg'));"></a>
+			<a style="background-image: url(#springUrl('/resource/img/xtr2/otherlogo/hzhb_16.jpg'));"></a>
+		</div>
+	</div>
+	<div class="x-container" style="height: 523px;padding: 0 0 245px;">
+		<div class="xtr-tt">联系我们</div>
+		<div class="x-content" style="background: #fff;border: 1px solid #e3e3e3;">
+			<div style="background: url('#springUrl('/resource/img/xtr2/dt_05.jpg')') no-repeat 0 0;height: 371px;padding: 90px 10px 0 811px;">
+				<div style="" class="contactus">
+					<div class="item">
+						<p class="title">商务合作</p>
+						<p class="info">全国服务热线：021-60346012（9:00-18:00）<br />邮箱地址：bd@xintairuan.com</p>
+					</div>
+					<div class="item">
+						<p class="title" style="background-position: 0px -129px;">诚聘英才</p>
+						<p class="info">全国服务热线：021-61551626（9:00-18:00）<br />邮箱地址：amanda.zhao@xintairuan.com</p>
+					</div>
+##					<div class="item" style="margin-bottom: 0;">
+##						<p class="title" style="background-position: 0px -254px;">渠道合作</p>
+##						<p class="info">全国服务热线：021-60346221（9:00-18:00）<br />邮箱地址：bd@xintairuan.com</p>
+##					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+		#parse("/201607/footer.vm")
+</body>
+</html>
+
+<script type="text/javascript">
+
+$(function(){
+	addBlcol();
+	uploadRecord(1,3,1);
+});
+
+var tt1=1;
+function uploadRecord(pidx,pnum,type){
+	if(isNaN(pidx))
+		return;
+	
+	if(pidx*1<1)
+		pidx=1;
+	
+	if(pidx*1>tt1*1)
+		pidx=tt1*1;
+
+	$.ajax({
+		type:"POST",  
+        url:"newslist.htm",
+        dataType:"json",
+        data:{
+        	'pidx':pidx
+        	,'pnum':pnum
+        	,'type':type
+        },
+        async: true,
+		success: function(data){
+
+			var date=new Date();
+			var year=date.getFullYear();
+			
+			var firstr='<li class="year"><div class="name">'+year+'年</div><div class="info"></div></li>'
+			
+			$('#newslist').html(firstr);
+			
+			if(data==null){
+				window.console?window.console.log('data is null'):'';
+				return;
+			}
+			
+			//if(data.code!='0'){
+				//window.console?window.console.log(data.msg):'';
+				//return;
+			//}
+
+			if(data.data.data==null || data.data.data.length<1)
+				return;
+
+			var len=data.data.data.length;
+			
+			
+			
+			
+
+			
+			var str='';
+			
+			str+=firstr;
+
+
+			for(var i=0;i<data.data.data.length;i++){
+
+				var contt=data.data.data[i].news_content==null?'':data.data.data[i].news_content;
+				
+				var cont=$('<div>'+contt+'</div>');				
+				contt=cont.text();
+
+				var dstr='';
+                var rlsdate='';
+				if (data.data.data[i].news_releasetime==null){
+                    rlsdate = '';
+				}
+				else{
+                    var date = new Date(data.data.data[i].news_releasetime);
+                    Y = date.getFullYear() + '-';
+                    M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+                    D = date.getDate() + ' ';
+                    h = date.getHours() + ':';
+                    m = date.getMinutes() + ':';
+                    s = date.getSeconds();
+                    rlsdate=Y+M+D+h+m+s;
+				}
+
+				if(null!=rlsdate){
+					var dd=new Date(rlsdate.replace(/-/g,'/'));
+					dstr=dd.getFullYear()+'年'+(dd.getMonth()+1)+'月'+dd.getDate()+'日';
+				}
+
+				str+='<li class="day">';
+				str+='	<div class="name">'+dstr+'</div>';
+				str+='	<div class="info"><a href="/newsdetailpage.htm?id='+data.data.data[i].news_id+'">'+((data.data.data[i].news_class_name==null || data.data.data[i].news_class_name=='')?'':('【'+data.data.data[i].news_class_name+'】'))+(data.data.data[i].news_title==null?'':data.data.data[i].news_title)+'</a></div>';
+				str+='</li>';
+				
+				
+				
+				
+			}
+			
+			$('#newslist').html(str);	
+			
+			
+			
+			
+			
+		}
+	});
+	
+}
+
+</script>

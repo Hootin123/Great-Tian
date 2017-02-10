@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" id='html'>
+<head>
+    #parse("comm/head.vm")
+    <meta charset="UTF-8">
+    <title>出错页</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/wechatCustomer/error.css')">
+</head>
+<body>
+<div class="error-pic"></div>
+<div class="error-text">抱歉，页面好像断电了</div>
+<div class="linkPhone">全国服务热线：<span>400-175-8090</span></div>
+</body>
+</html>

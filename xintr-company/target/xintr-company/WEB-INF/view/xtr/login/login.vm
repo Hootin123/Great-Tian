@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title></title>
+<link rel="stylesheet" type="text/css" href="resource/css/comm/comm.css" />
+<link rel="stylesheet" type="text/css" href="resource/css/login/login.css" />
+<link rel="stylesheet" href="resource/css/comm/mainPage.css" />
+<script src="resource/js/login/jquery-1.11.0.min.js"></script>
+<script src="resource/js/login/logintest.js"></script>
+#parse("comm/head.vm")
+</head>
+<body>
+<div class="header">
+<div class="hdlg">
+<a class="homepage" href="#springUrl('/indextop.htm')">薪太软首页</a>
+</div>
+</div>
+<div id="lgbdy">
+<div class="lgbdy_logon">
+<div class="lgbdy_bg"></div>
+<div class="lgbdy_logon_left">
+<form id ="loginForm" action="login.htm">
+<div class="table1" style="width:400px;">
+<div id="headline" style="margin-left:95px;">
+<h3>企业管理员账号登录</h3>
+</div>
+<div id="newFound_user" style="margin-top:60px;padding-left:100px;">
+    <input type="password" style="opacity: 0; filter:alpha(opacity:0);position: absolute;"/>
+<span>用户名</span>
+<input class="logtext" type="text" name="memberLogname" id="memberLogname" autocomplete="off" placeholder="输入手机号或电子邮箱"/>
+<img id="user_img_no" class="login-img1" src="resource/img/wrrong.png" style="display: none;" >
+<img id="user_img_yes" class="login-img2" src="resource/img/right.png" style="display: none;">
+<span class="user-wrrong" id="user_text"style="display: none;">用户名输入不正确</span>
+</div>
+
+<div id="newFound_user" style="margin-top:20px;padding-left:100px;">
+<span>登录密码</span>
+<input class="logtext"  type="password" name="memberPassword" id="memberPassword" autocomplete="off"  placeholder="输入登录密码"/>
+<img id="poss_img_yes" class="login-img1" src="resource/img/wrrong.png"  style="display: none;">
+<img id="poss_img_no" class="login-img2" src="resource/img/right.png"  style="display: none;">
+<span class="user-wrrong" id="poss_text"style="display: none;">密码输入错误</span>
+</div>
+<div id="newFound_verify" style="margin-top:20px;padding-left:100px;">
+<div><span>图形验证码</span></div>
+<input class="logtext" maxlength="4" style="width: 100px;float:left" type="text" id="verifycode" name="verifycode" placeholder="图形验证码"/>
+<img class="btn-code" style="cursor:pointer;float: left" id="vcodeimg" name ="vcodeimg" src="generateImages.htm"  onclick="$(this).attr('src','generateImages.htm?'+(new Date()).getTime())"/>
+<span class="blue" style="height: 40px;display: block;line-height: 40px;margin-left: 15px;" ><span onclick="$(vcodeimg).attr('src','generateImages.htm?'+(new Date()).getTime())" style="cursor: pointer;">换一张</span></span><span id="verifycodeTip" style="color:red" class="onShow"></span>
+<img id="code_img_yes" class="login-img1" src="resource/img/wrrong.png"  style="display: none;">
+<img id="code_img_no" class="login-img2" src="resource/img/right.png"  style="display: none;">
+<span class="user-wrrong" class="user-wrrong"id="code_text"style="display: none;">验证码错误</span>
+</div>
+<div style="margin:80px 0 40px 220px">
+<a style="color: #5b7798; font-weight: bold;"  href="#springUrl('/toRetrievePwdByPhoneFirstPage.htm')">忘记密码？</a>
+</div>
+<div style="margin-left:220px;">
+<a class="logon_sbm">登录</a>
+</div>
+</div>
+
+</form>
+</div>
+<div class="lgbdy_logon_right">
+<a href="registerInit.htm" class="lg_head"><img src="resource/img/lg_head.png" /><br />点击注册</a>
+</div>
+</div>
+</div>
+<div class="footer" id="footer">薪太软（上海）科技发展有限公司  |  沪ICP备16018294号  |<img src="resource/img/police.png" style="margin: 28px 5px 0 5px;" />沪公网安备 31010602000188号</div>
+</body>
+<script>
+   $(function(){
+       $("#memberPassword").val("");
+       $("#memberLogname").val("");
+       $("#verifycode").val("");
+   })
+
+</script>
+</html>

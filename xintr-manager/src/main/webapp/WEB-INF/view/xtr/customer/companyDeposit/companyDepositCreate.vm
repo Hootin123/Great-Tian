@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>H+ 添加提现账户</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-table/bootstrap-table.min.css')" rel="stylesheet">
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-datepicker/css/bootstrap-datetimepicker.css')" rel="stylesheet" />
+</head>
+
+<body>
+<div class="col-sm-12">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <form  id="addDepositForm">
+##                1.请确保已经与客户签订纸质协议，此处为系统补签约<br/>
+##                2.<font color="red">请点击企业名称，确认提现银行已设定，如未设定请联系财务设置，否则会造成用户无法提现！</font>
+                <div class="panel panel-default" style="margin-top: 10px;">
+                    <input type="hidden" value="$!{memberId}" name="depositMemberId">
+                    <input type="hidden" value="$!{companyId}" name="depositCompanyId">
+
+                    <table id="companyManageTab" data-mobile-responsive="true" class="table table-hover table-bordered">
+                        <tr><td style="width:20%;"><font color="red">*</font>银行</td><td style="width:60%;"><input type="text" class="form-control" name="depositBankName"></td></tr>
+                        <tr><td><font color="red">*</font>账户名称</td><td><input type="text" class="form-control" name="depositBankAccountName"></td></tr>
+                        <tr><td><font color="red">*</font>账号</td><td><input type="text" class="form-control" name="depositBankNumber"></td></tr>
+                        <tr><td><font color="red">*</font>开户支行</td><td><input type="text" class="form-control" name="depositSubBankName"></td></tr>
+                    </table>
+                </div>
+                <div class="text-center" style="20px;">
+                    <button type="button" class="btn btn-w-m btn-success" id="addDepositSureBtn">确定</button>
+                    <button type="button" class="btn btn-w-m btn-white" onclick="cancelAddDeposit()">取消</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+<script src="#springUrl('/resource/js/hui/content.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table-mobile.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/validate/jquery.validate.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-datepicker/js/bootstrap-datetimepicker.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-datepicker/locales/bootstrap-datetimepicker.zh-CN.js')"></script>
+<script src="#springUrl('/resource/js/comm/jdatagrid.js')"></script>
+<script src="#springUrl('/resource/js/customer/companyDeposit/companyDepositCreate.js')"></script>
+</html>

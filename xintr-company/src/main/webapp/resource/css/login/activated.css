@@ -1,0 +1,97 @@
+body{
+	background: url(../../img/lobg.png) no-repeat;
+}
+.activated{
+	overflow: hidden;
+	margin: 60px auto 0;
+	width: 800px;
+	height: 500px;
+	font-size: 18px;
+	color: #666666;
+	border-radius:6px;
+	position: relative;
+}
+.activated span{
+	display: block;
+	height: 17px;
+	line-height: 17px;
+	font-size: 18px;
+	color: #333333;
+	border-left:4px solid #5b7798;
+	margin: 66px 0 0 56px;
+	padding-left: 10px;
+}
+.activated p{
+	margin: 70px 69px 69px 69px;
+	font-weight:bold ;
+}
+.activated p em, .activated dl dd{
+	font-size: 14px;
+
+}
+.activated a{
+	color: #0696fa;
+	text-decoration: underline;
+}
+.activated dl{
+	margin: 70px 0 0 55px;
+}
+.activated dt{
+	margin:0 0 15px 15px;
+}
+.activated dd{
+	height: 40px;
+}
+
+.activated .actd_login{
+	display: block;
+	width: 300px;
+	height: 50px;
+	text-decoration: none;
+	background: #0696fa;
+	color: #FFFFFF;
+	border-radius:6px ;
+	line-height: 50px;
+	text-align: center;
+	margin: 0 auto;
+}
+.activated table{
+	font-size: 14px;
+	margin-left: 70px;
+}
+.activated table tr{
+	height: 50px;
+}
+.activated table tr td:first-child{
+	
+	width: 180px;
+}
+.activated input[type=text]{
+	width: 150px;
+	height: 36px;
+	padding-left: 5px;
+	border: 1px solid #e3e3e3;
+	
+}
+.activated input[type=button]{
+	width: 120px;
+	height: 40px;
+	border: none;
+	background: #0696fa;
+	border-radius:6px ;
+	color: #FFFFFF;
+	cursor: pointer;
+}
+
+.acetpasucesbtn {
+	display: block;
+	width: 300px;
+	height: 50px;
+	line-height: 50px;
+	border-radius: 6px;
+	background: #0696FA;
+	text-align: center;
+	color: #FFFFFF;
+	margin: 60px 0 0 70px;
+	font-size: 18px;
+}

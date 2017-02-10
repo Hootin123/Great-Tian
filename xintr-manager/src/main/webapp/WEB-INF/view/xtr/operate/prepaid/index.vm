@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>垫发申请管理</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-table/bootstrap-table.min.css')" rel="stylesheet">
+</head>
+
+<body>
+<div style="padding: 10px" class="container-fluid">
+
+    <div class="row">
+        <form class="form-inline" role="form" method="post" id="queryForm">
+            <div class="form-group col-sm-3">
+                <label>签约状态</label>
+                <select name="companyDatumStatus" class="form-control">
+                    <option value="">全部</option>
+                    <option value="0">申请</option>
+                    <option value="1">驳回</option>
+                    <option value="2">通过</option>
+                </select>
+            </div>
+            <div class="form-group  col-sm-3">
+                <label>实名认证</label>
+                <select name="companyIsauth" class="form-control">
+
+                    <option value="">全部</option>
+                    <option value="0">未认证</option>
+                    <option value="1">已认证</option>
+                    <option value="2">待认证</option>
+                    <option value="3">认证失败</option>
+                </select>
+            </div>
+            <div class="form-group col-sm-3 ">
+                <input type="text" name="kw" class="form-control" placeholder="根据企业名或手机号模糊检索"/>
+            </div>
+            <div class="form-group col-sm-3 ">
+                <button class="btn btn-primary" type="button" id="queryBtn">
+                    <i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;搜索
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <table id="data-list"></table>
+
+
+</div>
+
+</body>
+<script src="#springUrl('/resource/js/hui/content.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table-mobile.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/validate/jquery.validate.min.js')"></script>
+<script src="#springUrl('/resource/js/comm/jdatagrid.js')"></script>
+<script src="#springUrl('/resource/js/operate/prepaid/index.js')"></script>
+</html>

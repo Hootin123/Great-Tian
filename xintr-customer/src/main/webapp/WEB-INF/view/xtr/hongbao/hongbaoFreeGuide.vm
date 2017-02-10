@@ -1,0 +1,16 @@
+####红包指南页面
+<!DOCTYPE html>
+<html lang="en" id='html'>
+
+<head>
+    <meta charset="UTF-8">
+    <title>免费指南</title>
+    #parse("comm/head.vm")
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/hongbao/guide.css')">
+</head>
+<body>
+<div class="top"></div>
+<div class="bottom"></div>
+</body>
+</html>

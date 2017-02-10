@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>H+ 合作意向管理</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-table/bootstrap-table.min.css')" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/js/hui/plugins/layer/laydate/need/laydate.css')"/>
+    <script src="#springUrl('/resource/js/hui/plugins/layer/laydate/laydate.js')"></script>
+</head>
+
+<body>
+<div class="col-sm-12">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <form class="form-group" id="queryForm">
+                <div class="col-sm-3" style="width:20%;">
+                    <label style="margin-top:10px;" class="col-sm-4">企业名称</label>
+                    <div class="col-sm-8">
+                        <input type="text"  name="companyName" class="form-control" placeholder="请输入公司名称进行模糊查询" />
+                    </div>
+                </div>
+                <div class="col-sm-3" style="width:20%;">
+                    <label style="margin-top:10px;" class="col-sm-4">账单地区</label>
+                    <div class="col-sm-8">
+                        <input type="text"  name="city" class="form-control" placeholder="请输入地区名称或者地区拼音进行精确查询" />
+                    </div>
+                </div>
+                <div class="col-sm-3" style="width:20%;">
+                    <label style="margin-top:10px;" class="col-sm-4">账单时间</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="time"  class="laydate-icon" readonly="readonly" onclick="laydate()"
+                               style="width: 200px" placeholder="请输入账单时间"/>
+                    </div>
+                </div>
+                <div class="col-sm-1" style="width:8%;">
+                    <button class="btn btn-primary " type="button" id="queryBtn"><i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;搜索
+                    </button>
+                </div>
+            </form>
+             <div id="start">
+                 <ul>
+                     <li>
+                         <div class="historyBill-main-top">
+                    <p><span>$!{data.joinCityName}$!date.format('yyyyMM',$!{data.orderDate})</span>账单</p>
+                    <p class='submit'>订单编号：<span>$!{data.orderNumber}</span>提交时间：<span>$!date.format('yyyy-MM-dd HH:mm:ss',$!{data.submitTime})</span></p>
+                    <p class='abnormal' >账单异常详情</p>
+                </div>
+                <div class="historyBill-main-table">
+                    <table>
+                        <tr>
+                            <td>缴费月份</td>
+                            <td>缴费类型</td>
+                            <td>详情</td>
+                            <td>费用总额</td>
+                            <td>账单状态</td>
+                            <td>操作</td>
+                        </tr>
+                        <tr>
+                            <td>$!date.format('yyyyMM',$!{data.orderDate})</td>
+                            <td>社保</td>
+                            <td>$!{data.orderSbDetail}</td>
+                            <td rowspan="2">
+                                <p>$!{xtr.money($!{data.priceSum})}元</p>
+                                #if($!{data.priceService})
+                                    <p>含服务费：<span price_service="$!{data.priceService}" customer_count="$!{data.customerCount}"
+                                                  price_single="$!{data.priceSingle}" onclick="showService(this)">$!{xtr.money($!{data.priceService})}元</span></p>
+                                #end
+                                #if($!{data.priceAddtion})
+                                    <p>含补差费用：<a href="#springUrl('/shebao/addtion_detail.htm')">-$!{xtr.money($!{data.priceAddtion})}元</a></p>
+                                #end
+                            </td>
+                            <td rowspan="2">
+                                #if($!{data.status} == 0)
+                                    待提交
+                                #elseif($!{data.status} == 1)
+                                    已提交
+                                #end
+                            </td>
+                            <td rowspan="2" class='showTd1'>
+                                <a href="#springUrl('/shebao/payorder_detail.htm?orderId=')$!{data.id}">账单详情</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>$!date.format('yyyyMM',$!{data.orderDate})</td>
+                            <td>公积金</td>
+                            <td>$!{data.orderGjjDetail}</td>
+                        </tr>
+                    </table>
+                </div>
+            </li>
+            <!-- 结束-->
+                 </ul>
+
+
+             </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+<script src="#springUrl('/resource/js/hui/content.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table-mobile.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/validate/jquery.validate.min.js')"></script>
+<script src="#springUrl('/resource/js/comm/jdatagrid.js')"></script>
+<script src="#springUrl('/resource/js/operate/shebao/shebaoInfo.js')"></script>
+</html>

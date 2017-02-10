@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title></title>
+#parse("comm/head.vm")
+<link href="#springUrl('/resource/css/payday/payday.css')" rel="stylesheet">
+<link href="#springUrl('/resource/css/comm/comm.css')" rel="stylesheet">
+<link href="#springUrl('/resource/css/payfor1.css')" rel="stylesheet">
+<script src="#springUrl('/resource/js/payday/jquery-1.11.0.min.js')"></script>
+<script src="#springUrl('/resource/js/payday/test.js')"></script>
+<script src="#springUrl('/resource/js/plugins/dropzone/dropzone.js')"></script>
+<script src="#springUrl('/resource/js/plugins/laydate/laydate.js')"></script>
+<script>
+$(function(){
+  showImageCount();
+})
+</script>
+</head>
+
+<body>
+<div class="container hide" id="identity" style="width:90%;margin:2% auto 0;">
+<div class="identity-wrap">
+<div class="bg"></div>
+<div class="it active" style="width:15%;">1
+<p>完善信息</p>
+    <p style="font-size:12px;">填写公司基本信息</p>
+</div>
+<div class="it active" style="width:15%;">2
+<p>实名认证</p>
+    <p style="font-size:12px;">对公银行账户验证</p>
+</div>
+<div class="it active" style="width:15%;">3
+<p>上传资料</p>
+    <p style="font-size:12px;">提交企业征信资料</p>
+</div>
+<div class="it" style="width:15%;">4
+    <p>审核通过</p>
+    <p style="font-size:12px;">风控审核并完成签约</p>
+</div>
+</div>
+<div class="identity-content">
+<div class="xtr3-btns clfix" style="padding: 20px 40px;">
+<i class="icon-caret-up" style="left: 61%;"></i>
+<div style="color: #8fa9c7;line-height: 20px;font-size: 12px;">
+<p style="font-size: 14px;color: #5b7798;margin-bottom: 5px;">恭喜您实名认证成功！请提交您的征信资料，以便风控经理对您的授信额度进行评价。</p>薪太软会在5个工作日内完成审核，并以短信、邮件的方式通知您审核结果，在此期间请耐心等待。</div>
+</div>
+<div style="padding: 10px 0 0;">
+<h2 class="xtr2-h2"><font>完善一下资料，以增加您的授信额度</font></h2>
+##    #if($companyBean.companyDatumStatus == 1)
+##        <h3 class="xtr2-h2"><font>审核失败 $!companyBean.companyDatumDismissreason</font></h3>
+##    #end
+</div>
+<div class="identity-content-boxes clear">
+<!--<div class="identity-content-boxs">
+<div class="identity-content-box identity-content-box1">
+<a href="test3.html">查看文件</a>
+<input class="identity-content-file" type="file" />
+</div>
+<p>公司简介、公司章程</p>
+</div>-->
+</div>
+</tbody>
+</table>
+</div>
+</div>
+</body>
+
+#if($companyBean.companyDatumStatus == 1)
+    <script>
+        $(function () {
+            alert("审核失败:" + '$!companyBean.companyDatumDismissreason');
+        })
+    </script>
+#end
+</html>

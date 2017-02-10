@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" id='html'>
+<head>
+    <meta charset="UTF-8">
+    <title>审核</title>
+    #parse("comm/head.vm")
+    <meta name="viewport" content="width=divce-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/h5wallet/audit.css')">
+    <script type="text/javascript" src="#springUrl('/resource/js/h5wallet/ajaxfileupload.js')"></script>
+    <script type="text/javascript" src="#springUrl('/resource/js/h5wallet/approve.js')"></script>
+
+</head>
+<body>
+<section>
+    <form id="approveForm">
+        <input type="hidden" value="$!{companyId}" id="companyId" name="companyId">
+        <input type="hidden"  name="companyOrganizationImg">
+        <h3>信息审核</h3>
+        <ul>
+            <li id="compName">
+                <input type="text" name="companyName" placeholder="公司名称">
+                <b></b>
+                <em></em>
+            </li>
+            <li id="compAddress">
+                <input type="text" name="companyAddress" placeholder="公司地址">
+                <b></b>
+                <em></em>
+            </li>
+            <li id="linkPhone">
+                <input type="text" name="companyContactTel" placeholder="联系电话">
+                <b></b>
+                <em></em>
+            </li>
+            <li id="busNum">
+                <input type="text" name="companyNumber" placeholder="营业执照编号">
+                <b></b>
+                <em></em>
+            </li>
+        </ul>
+        <div class="permit">
+            <dl>
+                <dt >+<img src="/resource/img/h5wallet/error1.png"  id="upload">
+                    <input type="file"  name="file" id="approveFile" onchange="uploadApproveImg();"/>
+                </dt>
+                <dd>
+                    111请上传带有公章的营业执照数码照，营业执照须在有效期内且年检齐全（当年成立可无年检）。
+                </dd>
+            </dl>
+        </div>
+        <div class="hint" style="display: none;">信息错误</div>
+     </form>
+</section>
+<div class="sub">提交</div>
+</body>
+<script>
+
+    function uploadApproveImg(){
+        $("#upload").attr('src','/resource/img/h5wallet/load.gif')
+        $.ajaxFileUpload({
+            url: '../h5wallet/h5UploadOrganizeImg.htm', //用于文件上传的服务器端请求地址
+            fileElementId: 'approveFile', //文件上传域的ID
+            dataType: 'json', //返回值类型 一般设置为json
+            success: function (data, status){
+                if(data.success) {
+                    $("#upload").attr("src","http://xintairuan-img.oss-cn-hangzhou.aliyuncs.com/"+data.data);
+                    $("[name=companyOrganizationImg]").val(data.data);
+                    $(".hint").text("");
+                    $(".hint").css("display","none");
+                    fimg=true;
+
+                }else{
+                    $(".hint").text(data.message);
+                    $(".hint").css("display","block");
+                    fimg=false;
+                }
+                //$("#approveFile").unbind('change').bind('change',uploadApproveImg);
+            },
+            error: function (data, status, e){
+                $(".hint").text("上传失败");
+                $(".hint").css("display","block");
+                fimg=false;
+                //$("#approveFile").unbind('change').bind('change',uploadApproveImg);
+            }
+        });
+    }
+</script>
+</html>

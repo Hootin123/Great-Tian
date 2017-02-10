@@ -1,0 +1,209 @@
+@charset "UTF-8";
+body {
+  width: 100%;
+  height: 100%;
+  background: #f4f4f4 url(../../img/newHongbao/approve-bg.png) 0 0 no-repeat;
+  background-size: 100%;
+}
+
+header {
+  width: 100%;
+  height: 0.64rem;
+  margin-top: 3.56rem;
+  text-indent: 0.2rem;
+  line-height: 0.64rem;
+  font-size: 0.28rem;
+  color: #999;
+}
+
+.sign{
+  position: absolute;
+  width:6rem;
+  height: 0.7rem;
+  left:0.75rem;
+  top:0.15rem;
+
+}
+.sign .logo{
+  width: 1.93rem;
+  height:0.7rem;
+  float: left;
+}
+.logo img,.logo-text img{
+  display: block;
+  width:100%;
+  height: 100%;
+}
+.logo-text {
+  width: 2.95rem;
+  height: 0.36rem;
+  margin-top: 0.17rem;
+  float: right;
+}
+section {
+  width: 100%;
+}
+section ul {
+  width: 100%;
+  border-top: 1px solid #e3e3e3;
+  border-bottom: 1px solid #e3e3e3;
+  background: #fff;
+}
+section ul li {
+  width: 7.28rem;
+  margin-left: 0.22rem;
+  height: 0.98rem;
+  border-bottom: 1px solid #e3e3e3;
+  line-height: 0.98rem;
+  font-size: 0.3rem;
+  color: #333;
+  position: relative;
+}
+section ul li label {
+  width: 2.52rem;
+  float: left;
+}
+section ul li label em {
+  color: #e94a48;
+  margin-right: 0.05rem;
+}
+section ul li input {
+  display: block;
+  float: left;
+  width: 4.76rem;
+  height: 100%;
+  border: 0;
+  text-indent: 0.4rem;
+  font-size: 0.26rem;
+  color: #333;
+}
+section ul li b {
+  height: 0.78rem;
+  position: absolute;
+  right: 0.28rem;
+  top: 0.1rem;
+  font-size: 0.26rem;
+  line-height: 0.78rem;
+  color: #f00;
+}
+section ul .companyLogo {
+  height: 1.98rem;
+}
+section ul .companyLogo .pic1 {
+  width: 1.2rem;
+  height: 1.2rem;
+  float: left;
+  margin-left: 2.9rem;
+  margin-top: 0.4rem;
+  border: 1px dashed #b9d2dc;
+  font-size: 0.8rem;
+  vertical-align: middle;
+  text-align: center;
+  color: #b9d2dc;
+  border-radius: 0.1rem;
+  position: relative;
+}
+section ul .companyLogo .pic1 input {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  right: 0;
+  top: 0;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+section ul .companyLogo .pic1 img {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+section ul .companyAddress {
+  border-bottom: 0;
+}
+section .permit {
+  margin-top: 0.4rem;
+}
+section .permit .businessLicensePic {
+  height: 1.98rem;
+  border: 0;
+}
+section .permit .businessLicensePic .pic2 {
+  width: 1.8rem;
+  height: 1.2rem;
+  float: left;
+  margin-left: 2.3rem;
+  margin-top: 0.4rem;
+  border: 1px dashed #b9d2dc;
+  font-size: 0.8rem;
+  vertical-align: middle;
+  text-align: center;
+  color: #b9d2dc;
+  border-radius: 0.1rem;
+  position: relative;
+}
+section .permit .businessLicensePic .pic2 input {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  right: 0;
+  top: 0;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+section .permit .businessLicensePic .pic2 img {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+section .personal {
+  margin-top: 0.4rem;
+}
+section .personal .legalPhone {
+  border-bottom: 0;
+}
+
+footer {
+  width: 100%;
+  margin-top: 0.7rem;
+}
+footer .subApprove {
+  width: 6.8rem;
+  height: 1rem;
+  margin: 0 auto;
+  margin-bottom: 0.3rem;
+  background: url(../../img/newHongbao/active-footer.png) 0 0 no-repeat;
+  background-size: 100% 100%;
+  font-weight: bold;
+  font-size: 0.36rem;
+  font-family: '微软雅黑';
+  color: #000;
+  line-height: 1rem;
+  text-align: center;
+}
+
+.hint {
+  width: 50%;
+  height: 0.6rem;
+  position: absolute;
+  left: 25%;
+  top: 14.1rem;
+  background: rgba(6, 150, 250, 0.8);
+  border-radius: 0.4rem;
+  font-size: 0.28rem;
+  text-align: center;
+  line-height: 0.6rem;
+  color: #f00;
+  font-weight: 600;
+}
+
+/*# sourceMappingURL=approve.css.map */

@@ -1,0 +1,112 @@
+body{
+    overflow: hidden;
+    background: #EBEBEB;
+}
+.logo{
+    width: 1.6rem;
+    height: 1.6rem;
+    margin:0.8rem auto;
+}
+.logo img{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+ul{
+    width: 6.8rem;
+    margin:0 auto;
+    border:1px solid #ddd;
+    border-radius: 0.12rem;
+    background: #fff;
+    overflow-x: hidden;
+}
+ul li{
+    width: 100%;
+    height: 0.88rem;
+    position: relative;
+
+}
+ul li:first-child{
+    border-bottom:1px solid #ddd;
+}
+ul li input{
+    width: 100%;
+    height: 100%;
+    color: #000;
+    font-size: 0.28rem;
+    text-indent: 0.16rem;
+    line-height: 0.34rem;
+    border:0;
+}
+input::-webkit-input-placeholder {
+    color:#C8C8CE;
+}
+.phoneCode span{
+    display: block;
+    width: 1.68rem;
+    height: 0.6rem;
+    position: absolute;
+    right: 0.2rem;
+    top:0.14rem;
+    background: #1394FF;
+    border-radius: 5px;
+    font-family: '微软雅黑';
+    font-size: 0.24rem;
+    color: #FFFFFF;
+    letter-spacing: -0.29px;
+    text-align: center;
+    line-height: 0.6rem;
+}
+footer{
+    width:100%;
+    height:0.88rem;
+    margin-top:1rem;
+
+}
+footer .bindPhone{
+    width: 6.8rem;
+    height: 100%;
+    margin: 0 auto;
+    background: #1394FF;
+    border-radius: 6px;
+    font-family: '微软雅黑';
+    font-size: 0.28rem;
+    color: #FFFFFF;
+    line-height: 0.88rem;
+    text-align: center;
+}
+ul li .show {
+    display: block;
+    width: 0.4rem;
+    height: 0.4rem;
+    background: url(../../img/wechatCustomerNew/icon1.png) 0 0 no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    right: 0.2rem;
+    top: 0.2rem;
+}
+ul li b {
+    height: 0.78rem;
+    position: absolute;
+    right: 0.2rem;
+    top: 0;
+    font-size: 0.16rem;
+    line-height: 0.78rem;
+    color: #f00;
+    font-weight: 100;
+}
+.hint{
+    width: 3.4rem;
+    height: 0.6rem;
+    position: absolute;
+    left: 25%;
+    top:5.2rem;
+    background: rgba(6,150,250,0.8);
+    border-radius: 0.1rem;
+    font-size: 0.28rem;
+    text-align: center;
+    line-height: 0.6rem;
+    color: #f00;
+    font-weight: 600;
+
+}

@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtr.core.persistence.reader.company.CompanysReaderMapper">
+    <resultMap id="BaseResultMap" type="com.xtr.api.domain.company.CompanysBean">
+        <id column="company_id" jdbcType="BIGINT" property="companyId"/>
+        <result column="company_name" jdbcType="VARCHAR" property="companyName"/>
+        <result column="company_number" jdbcType="VARCHAR" property="companyNumber"/>
+        <result column="company_address" jdbcType="VARCHAR" property="companyAddress"/>
+        <result column="company_open_address" jdbcType="VARCHAR" property="companyOpenAddress"/>
+        <result column="company_corporation" jdbcType="VARCHAR" property="companyCorporation"/>
+        <result column="company_corporation_phone" jdbcType="VARCHAR" property="companyCorporationPhone"/>
+        <result column="company_corporation_idcard" jdbcType="VARCHAR" property="companyCorporationIdcard"/>
+        <result column="company_corporation_idcard_img_front" jdbcType="VARCHAR" property="companyCorporationIdcardImgFront"/>
+        <result column="company_corporation_idcard_img_back" jdbcType="VARCHAR" property="companyCorporationIdcardImgBack"/>
+        <result column="company_organization_code" jdbcType="VARCHAR" property="companyOrganizationCode"/>
+        <result column="company_organization_img" jdbcType="VARCHAR" property="companyOrganizationImg"/>
+        <result column="company_logo" jdbcType="VARCHAR" property="companyLogo"/>
+        <result column="company_sign" jdbcType="INTEGER" property="companySign"/>
+        <result column="company_canapply" jdbcType="INTEGER" property="companyCanapply"/>
+        <result column="company_addime" jdbcType="TIMESTAMP" property="companyAddime"/>
+        <result column="company_editime" jdbcType="TIMESTAMP" property="companyEditime"/>
+        <result column="company_edit_member" jdbcType="BIGINT" property="companyEditMember"/>
+        <result column="company_audit_status" jdbcType="INTEGER" property="companyAuditStatus"/>
+        <result column="company_audit_time" jdbcType="TIMESTAMP" property="companyAuditTime"/>
+        <result column="company_audit_remark" jdbcType="VARCHAR" property="companyAuditRemark"/>
+        <result column="company_audit_member" jdbcType="BIGINT" property="companyAuditMember"/>
+        <result column="company_againAudit_time" jdbcType="TIMESTAMP" property="companyAgainauditTime"/>
+        <result column="company_againAudit_remark" jdbcType="VARCHAR" property="companyAgainauditRemark"/>
+        <result column="company_againAudit_member" jdbcType="BIGINT" property="companyAgainauditMember"/>
+        <result column="company_credit" jdbcType="INTEGER" property="companyCredit"/>
+        <result column="company_borrow_percent" jdbcType="DECIMAL" property="companyBorrowPercent"/>
+        <result column="company_contact_name" jdbcType="VARCHAR" property="companyContactName"/>
+        <result column="company_contact_tel" jdbcType="VARCHAR" property="companyContactTel"/>
+        <result column="company_contact_place" jdbcType="VARCHAR" property="companyContactPlace"/>
+        <result column="company_bank" jdbcType="VARCHAR" property="companyBank"/>
+        <result column="company_banknumber" jdbcType="VARCHAR" property="companyBanknumber"/>
+        <result column="company_bankaddress" jdbcType="VARCHAR" property="companyBankaddress"/>
+        <result column="company_bank_normal" jdbcType="VARCHAR" property="companyBankNormal"/>
+        <result column="company_banknumber_normal" jdbcType="VARCHAR" property="companyBanknumberNormal"/>
+        <result column="company_banknumber_borrow" jdbcType="VARCHAR" property="companyBanknumberBorrow"/>
+        <result column="company_borrow_rate" jdbcType="DECIMAL" property="companyBorrowRate"/>
+        <result column="company_borrow_server_rate" jdbcType="DECIMAL" property="companyBorrowServerRate"/>
+        <result column="company_borrow_deposit" jdbcType="DECIMAL" property="companyBorrowDeposit"/>
+        <result column="company_salary_date" jdbcType="INTEGER" property="companySalaryDate"/>
+        <result column="company_isauth" jdbcType="INTEGER" property="companyIsauth"/>
+        <result column="company_salary_paytype" jdbcType="INTEGER" property="companySalaryPaytype"/>
+        <result column="company_founded_time" jdbcType="TIMESTAMP" property="companyFoundedTime"/>
+        <result column="company_regist_money" jdbcType="DECIMAL" property="companyRegistMoney"/>
+        <result column="company_actual_money" jdbcType="DECIMAL" property="companyActualMoney"/>
+        <result column="company_open_endtime" jdbcType="TIMESTAMP" property="companyOpenEndtime"/>
+        <result column="company_main_business" jdbcType="VARCHAR" property="companyMainBusiness"/>
+        <result column="company_belong_industry" jdbcType="VARCHAR" property="companyBelongIndustry"/>
+        <result column="company_assets_nature" jdbcType="INTEGER" property="companyAssetsNature"/>
+        <result column="company_type" jdbcType="INTEGER" property="companyType"/>
+        <result column="company_employ_count" jdbcType="INTEGER" property="companyEmployCount"/>
+        <result column="company_salary_divide" jdbcType="DECIMAL" property="companySalaryDivide"/>
+        <result column="company_credit_status" jdbcType="INTEGER" property="companyCreditStatus"/>
+        <result column="company_financ_rate" jdbcType="DECIMAL" property="companyFinancRate"/>
+        <result column="company_financ_deposit" jdbcType="DECIMAL" property="companyFinancDeposit"/>
+        <result column="company_financ_server_rate" jdbcType="DECIMAL" property="companyFinancServerRate"/>
+        <result column="company_entrust_server_rate" jdbcType="DECIMAL" property="companyEntrustServerRate"/>
+        <result column="company_deposit_status" jdbcType="INTEGER" property="companyDepositStatus"/>
+        <result column="company_deposit" jdbcType="DECIMAL" property="companyDeposit"/>
+        <result column="company_quota" jdbcType="DECIMAL" property="companyQuota"/>
+        <result column="company_actual_quota" jdbcType="DECIMAL" property="companyActualQuota"/>
+        <result column="company_cooperate_starttime" jdbcType="TIMESTAMP" property="companyCooperateStarttime"/>
+        <result column="company_cooperate_endtime" jdbcType="TIMESTAMP" property="companyCooperateEndtime"/>
+        <result column="company_isupload" jdbcType="INTEGER" property="companyIsupload"/>
+        <result column="company_recharge_channel" jdbcType="INTEGER" property="companyRechargeChannel"/>
+        <result column="company_deposit_bankAccountName" jdbcType="VARCHAR" property="companyDepositBankAccountName"/>
+        <result column="company_deposit_bankNo" jdbcType="VARCHAR" property="companyDepositBankNo"/>
+        <result column="company_certification_amount" jdbcType="VARCHAR" property="companyCertificationAmount"/>
+        <result column="company_amount_number" jdbcType="INTEGER" property="amountNumber"/>
+        <result column="company_scale" jdbcType="VARCHAR" property="companyScale"/>
+        <result column="company_channel" jdbcType="INTEGER" property="companyChannel"/>
+        <result column="company_deposit_bank" jdbcType="VARCHAR" property="companyDepositBank"/>
+        <result column="company_deposit_bankaddress" jdbcType="VARCHAR" property="companyDepositBankaddress"/>
+        <result column="company_scale" jdbcType="VARCHAR" property="companyScale"/>
+        <result column="company_channel" jdbcType="INTEGER" property="companyChannel"/>
+        <result column="company_datum_status" jdbcType="INTEGER" property="companyDatumStatus"/>
+        <result column="company_datum_dismissreason" jdbcType="VARCHAR" property="companyDatumDismissreason"/>
+        <result column="company_datum_status" jdbcType="INTEGER" property="companyDatumStatus"/>
+        <result column="company_datum_dismissreason" jdbcType="VARCHAR" property="companyDatumDismissreason"/>
+        <result column="company_datum_time" jdbcType="TIMESTAMP" property="companyDatumTime"/>
+        <result column="company_datum_oper" jdbcType="BIGINT" property="companyDatumOper"/>
+        <result column="company_enter_require" jdbcType="VARCHAR" property="companyEnterRequire"/>
+        <result column="company_is_view_require" jdbcType="INTEGER" property="companyIsViewRequire"/>
+        <result column="company_associated_code" jdbcType="VARCHAR" property="companyAssociatedCode"/>
+        <result column="company_truename" jdbcType="VARCHAR" property="companyTruename"/>
+        <result column="company_alipay_number" jdbcType="VARCHAR" property="companyAlipayNumber"/>
+        <result column="company_is_collect_info" jdbcType="INTEGER" property="companyIsCollectInfo"/>
+    </resultMap>
+
+    <resultMap id="CompanyDetailResultMap" type="com.xtr.api.dto.company.CompanysDto" extends="BaseResultMap">
+        <result column="total_amount" property="totalAmount" jdbcType="DECIMAL"/>
+        <result column="member_logname" jdbcType="VARCHAR" property="memberLogname"/>
+        <result column="member_login_recent_time" jdbcType="TIMESTAMP" property="memberLoginRecentTime"/>
+    </resultMap>
+
+    <resultMap id="fileResourcesResultMap" type="com.xtr.api.domain.company.FileResourcesBean">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="file_type" jdbcType="INTEGER" property="fileType"/>
+        <result column="file_url" jdbcType="VARCHAR" property="fileUrl"/>
+        <result column="company_id" jdbcType="BIGINT" property="companyId"/>
+        <result column="member_id" jdbcType="BIGINT" property="memberId"/>
+        <result column="file_addime" jdbcType="TIMESTAMP" property="fileAddime"/>
+    </resultMap>
+    <resultMap id="companyActivityResultMap" type="com.xtr.api.domain.company.CompanyActivityBean">
+        <id column="activity_id" jdbcType="INTEGER" property="activityId"/>
+        <result column="activity_name" jdbcType="VARCHAR" property="activityName"/>
+        <result column="activity_member_id" jdbcType="BIGINT" property="activityMemberId"/>
+        <result column="activity_company_id" jdbcType="BIGINT" property="activityCompanyId"/>
+        <result column="activity_has_receive" jdbcType="INTEGER" property="activityHasReceive"/>
+        <result column="activity_create_time" jdbcType="TIMESTAMP" property="activityCreateTime"/>
+        <result column="activity_receive" jdbcType="INTEGER" property="activityReceive"/>
+        <result column="activity_number" jdbcType="VARCHAR" property="activityNumber"/>
+        <result column="activity_order_number" jdbcType="VARCHAR" property="activityOrderNumber"/>
+        <result column="activity_ip" jdbcType="VARCHAR" property="activityIp"/>
+        <result column="receive_account" jdbcType="INTEGER" property="receiveAccount"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        company_id, companys.company_name, company_number, company_address, company_open_address,
+        company_corporation, company_corporation_phone, company_corporation_idcard,
+        company_corporation_idcard_img_front,
+        company_corporation_idcard_img_back, company_organization_code, company_organization_img,
+        company_logo, company_sign, company_canapply, company_addime, company_editime, company_edit_member,
+        company_audit_status, company_audit_time, company_audit_remark, company_audit_member,
+        company_againAudit_time, company_againAudit_remark, company_againAudit_member, company_credit,
+        company_borrow_percent, company_contact_name, company_contact_tel, company_contact_place,
+        company_bank, company_banknumber, company_bankaddress, company_bank_normal, company_banknumber_normal,
+        company_banknumber_borrow, company_borrow_rate, company_borrow_server_rate, company_borrow_deposit,
+        company_salary_date, company_isauth, company_salary_paytype, company_founded_time,
+        company_regist_money, company_actual_money, company_open_endtime, company_main_business,
+        company_belong_industry, company_assets_nature, company_type, company_employ_count,
+        company_salary_divide, company_credit_status, company_financ_rate, company_financ_deposit,
+        company_financ_server_rate, company_entrust_server_rate, company_deposit_status,
+        company_deposit, company_quota, company_actual_quota, company_cooperate_starttime,
+        company_cooperate_endtime,
+        company_isupload,company_recharge_channel,company_deposit_bankAccountName,company_deposit_bankNo,company_certification_amount,
+        company_amount_number,company_scale,company_channel,company_deposit_bank,company_deposit_bankaddress,
+        company_datum_status, company_datum_dismissreason,
+        company_datum_time, company_datum_oper,company_enter_require,company_is_view_require, company_pay_status, company_pay_number, company_pay_reason, company_associated_code,
+        company_truename,company_alipay_number,company_is_collect_info
+    </sql>
+
+    <!--优化的-->
+    <sql id="Better_Column_List">
+        company_id, companys.company_name, company_address, company_contact_tel, company_contact_place,company_employ_count,company_isauth,company_certification_amount,company_audit_status,company_addime
+    </sql>
+    <!-- 查询公司信息过滤条件 -->
+    <sql id="CompanyManage_Where_Clause">
+        <if test="companyName != null and companyName != '' ">
+            AND (companys.company_name like concat('%',#{companyName,jdbcType=VARCHAR},'%')
+            or companys.company_contact_tel like concat('%',#{companyName,jdbcType=VARCHAR},'%')
+            or companys.company_contact_place like concat('%',#{companyName,jdbcType=VARCHAR},'%')
+            or companys.company_id like concat('%',#{companyName,jdbcType=VARCHAR},'%')
+            )
+        </if>
+        <if test="protocolStateInt != null ">
+            and company_protocol.protocol_contract_type=#{protocolStateInt,jdbcType=INTEGER} and
+            company_protocol.protocol_current_status in(2,3,5)
+        </if>
+        <if test="companyAuditStatus != null ">
+            and companys.company_audit_status=#{companyAuditStatus,jdbcType=INTEGER}
+        </if>
+        <if test="companyIsauth != null ">
+            and companys.company_isauth=#{companyIsauth,jdbcType=INTEGER}
+        </if>
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+        -->
+        select
+        <include refid="Base_Column_List"/>
+        from companys
+        where company_id = #{companyId,jdbcType=BIGINT}
+    </select>
+
+    <!-- 根据公司名称验证该公司是否存在-->
+    <select id="checkCompanyByName" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT company_id,company_name from companys
+    WHERE  company_name = #{companyName,jdbcType=VARCHAR}
+  </select>
+
+    <!--根据过滤条件获取员工信息 -->
+    <select id="selectCompanyInfoPageList" resultMap="CompanyDetailResultMap"
+            parameterType="com.xtr.api.dto.company.CompanysDto">
+        SELECT
+        <include refid="Base_Column_List"/>,sub_account.amout as
+        total_amount,company_members.member_logname,company_members.member_phone
+        FROM companys
+        left join sub_account on companys.company_id = sub_account.cust_id and sub_account.property=2
+        left join company_protocol on companys.company_id=company_protocol.protocol_company_id
+        left join company_members on companys.company_id=company_members.member_company_id and
+        company_members.member_isdefault=1
+        WHERE 1=1
+        <include refid="CompanyManage_Where_Clause"/>
+        GROUP BY companys.company_id
+        ORDER BY companys.company_addime DESC
+    </select>
+
+    <!--根据过滤条件获取员工信息(优化信息) -->
+    <select id="selectCompanyInfoBetter" resultMap="CompanyDetailResultMap"
+            parameterType="com.xtr.api.dto.company.CompanysDto">
+        SELECT
+        <include refid="Better_Column_List"/>,sub_account.amout as total_amount
+        FROM companys
+        left join sub_account on companys.company_id = sub_account.cust_id and sub_account.property=2
+        left join company_protocol on companys.company_id=company_protocol.protocol_company_id
+        WHERE 1=1
+        <include refid="CompanyManage_Where_Clause"/>
+        GROUP BY companys.company_id
+        ORDER BY companys.company_addime DESC
+    </select>
+
+    <!--根据过滤条件获取员工信息 -->
+    <select id="selectCountForCompanyList" resultType="java.lang.Integer"
+            parameterType="com.xtr.api.dto.company.CompanysDto">
+        select count(1) from (SELECT
+        count(1)
+        FROM companys
+        left join sub_account on companys.company_id = sub_account.cust_id and sub_account.property=2
+        left join company_protocol on companys.company_id=company_protocol.protocol_company_id
+        WHERE 1=1
+        <include refid="CompanyManage_Where_Clause"/>
+        GROUP BY companys.company_id)B
+    </select>
+
+    <!--获取员工详细信息 -->
+    <select id="selectCompanyInfoDetail" resultMap="CompanyDetailResultMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="Base_Column_List"/>,sub_account.amout as
+        total_amount,company_members.member_logname,company_members.member_phone,company_members.member_login_recent_time
+        FROM companys
+        left join sub_account on companys.company_id = sub_account.cust_id and sub_account.property=2
+        left join company_members on companys.company_id=company_members.member_company_id and
+        company_members.member_isdefault=1
+        WHERE
+        companys.company_id=#{companyId,jdbcType=BIGINT}
+    </select>
+
+    <select id="find" resultType="java.util.Map" parameterType="java.util.Map">
+        select * from station_news
+        where 1=1
+        <if test="news_id !=null">
+            and news_id=#{news_id}
+        </if>
+        <if test="news_state !=null">
+            and news_state=#{news_state}
+        </if>
+        limit 1
+    </select>
+
+    <update id="stationNewsClickAdd">
+    update station_news set news_chick = news_chick + #{nCount} where news_id = #{nId} and news_state = 1
+  </update>
+
+
+    <select id="findListPage" resultType="java.util.Map" parameterType="java.util.Map">
+        select * from station_news
+        where 1=1
+        <if test="news_type !=null">
+            <if test="news_type == 2">
+                and news_type in ('2','5')
+            </if>
+            <if test="news_type == 3">
+                and news_type in ('3','6')
+            </if>
+            <if test="news_type == 1">
+                and news_type in ('1','7')
+            </if>
+        </if>
+        <if test="news_state !=null">
+            and news_state=#{news_state}
+        </if>
+
+        <if test="orderby !=null">
+            <if test="orderby ==0">
+                order by news_istop desc,news_sort asc,news_releasetime asc
+            </if>
+            <if test="orderby ==1">
+                order by news_istop desc,news_sort asc,news_releasetime desc
+            </if>
+        </if>
+        <if test="pidx !=null and pnum !=null">
+            limit #{pidx},#{pnum}
+        </if>
+    </select>
+
+    <select id="findListPageCount" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(0) as total from station_news
+        where 1=1
+        <if test="news_type !=null">
+            <if test="news_type == 2">
+                and news_type in ('2','5')
+            </if>
+            <if test="news_type == 3">
+                and news_type in ('3','6')
+            </if>
+            <if test="news_type == 1">
+                and news_type in ('1','7')
+            </if>
+        </if>
+        <if test="news_state !=null">
+            and news_state=#{news_state}
+        </if>
+    </select>
+
+    <!-- 根据登录名查公司id-->
+    <select id="selectCompanyByCompanyNumber" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT company_id,company_name from companys
+    WHERE  company_number = #{companyNumber,jdbcType=VARCHAR}
+  </select>
+
+
+    <select id="stationCollaborationFind" resultType="java.util.Map" parameterType="java.util.Map">
+        select * from station_collaboration
+        where 1=1 and item_type = '1'
+        <if test="item_mobile !=null">
+            and item_mobile=#{item_mobile}
+        </if>
+        limit 1
+    </select>
+
+    <select id="getfileResources" resultType="java.util.Map" parameterType="java.util.Map">
+        select * from file_resources
+        where 1=1
+        <if test="fileType !=null">
+            and file_type=#{fileType}
+        </if>
+        <if test="companyId !=null">
+            and company_id=#{companyId}
+        </if>
+        <if test="memberId !=null">
+            and member_id=#{memberId}
+        </if>
+    </select>
+
+    <select id="getfileResourcesByFileType" resultType="java.util.Map" parameterType="java.util.Map">
+        select file_type from file_resources
+        where 1=1
+        <if test="companyId !=null">
+            and company_id=#{companyId}
+        </if>
+        <if test="memberId !=null">
+            and member_id=#{memberId}
+        </if>
+        GROUP BY file_type
+    </select>
+
+    <!--根据过滤条件获取员工信息 -->
+    <select id="selectPrepaidPage" resultType="java.util.Map">
+        SELECT
+        c.company_id,
+        c.company_name,
+        cm.member_name,
+        cm.member_logname,
+        c.company_scale,
+        c.company_isauth,
+        c.company_belong_industry,
+        c.company_datum_status
+        FROM
+            companys c
+        INNER JOIN company_members cm
+        on c.company_id = cm.member_company_id
+        WHERE
+            cm.member_isdefault = 1
+        and c.company_datum_status is not null
+        <if test="datumStatus != null">
+          and c.company_datum_status = #{datumStatus}
+        </if>
+        <if test="companyIsauth != null">
+          and c.company_isauth = #{companyIsauth}
+        </if>
+        <if test="kw != null">
+          and (c.company_name like CONCAT('%',#{kw},'%') or cm.member_phone like CONCAT('%',#{kw},'%'))
+        </if>
+        group by c.company_id
+
+  </select>
+    <!-- 查询领取红包的hr人数-->
+  <select id="selectActivityRedCounts" resultType="java.lang.Long">
+      select count(DISTINCT activity_member_id) from company_activity
+  </select>
+  <!-- 领取完善信息红包的人数-->
+  <select id="selectselectCountsOfPerfectInfo" resultType="java.lang.Long">
+      select count(DISTINCT activity_member_id) from company_activity where activity_receive= 2
+  </select>
+  <!-- 查询当前登录用户已领取的红包金额-->
+   <select id="selectHasReceiveAccount" parameterType="java.lang.Long"  resultType="java.lang.Long">
+      select COALESCE(SUM(receive_account),0) from company_activity  where activity_member_id= #{memberId}
+   </select>
+  <!-- 查询红包领取记录-->
+  <select id="selectReds" parameterType="java.util.Map" resultMap="companyActivityResultMap">
+      select *  from company_activity where activity_member_id =#{activityMemberId}
+      and activity_receive =#{activityReceive}
+  </select>
+
+    <!--查询今日红包订单量-->
+    <select id="getTodayWechatOrderNum" resultType="java.lang.Integer">
+        select count(activity_id) from company_activity
+      where to_days(activity_create_time) = to_days(now()) and activity_has_receive = #{activityReceive,jdbcType=INTEGER}
+
+    </select>
+
+    <!-- 查询公司的入职须知-->
+    <select id="selectCompanyEnterRequireById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+           select  company_enter_require  from companys where company_id =#{wechatCompanyId}
+    </select>
+
+    <!--根据企业ID批量获取信息-->
+    <select id="selectByPrimaryKeyBatch"  resultType="map">
+        select
+        companys.company_id,companys.company_name,company_members.member_phone
+        from companys
+        left join company_members on companys.company_id=company_members.member_company_id and member_isdefault=1 and company_members.member_phone is not null
+        where company_id in
+        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        group by companys.company_id
+    </select>
+</mapper>

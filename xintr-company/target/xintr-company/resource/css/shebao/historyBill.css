@@ -1,0 +1,336 @@
+@charset "UTF-8";
+.historyBillHeader {
+  width: 100%;
+  min-width: 1000px;
+  height: 80px;
+  font-size: 24px;
+  font-family: '微软雅黑';
+  text-align: center;
+  line-height: 80px;
+  border-bottom: 1px solid #dbe9ee;
+  position: relative;
+}
+.historyBillHeader img {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 30px;
+  margin: auto;
+  cursor: pointer;
+}
+
+.historyBill {
+  font-size: 14px;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 30px;
+  color: #666666;
+  min-width: 960px;
+}
+.historyBill .historyBill-title {
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  background: #f1f9fc;
+}
+.historyBill .historyBill-title span:nth-child(1) {
+  margin-left: 20px;
+  float: none;
+}
+.historyBill .historyBill-title span:nth-child(1) i {
+  color: #0696fa;
+  cursor: pointer;
+}
+.historyBill .historyBill-title .search1 {
+  width: 80px;
+  height: 26px;
+  background: #0696fa;
+  margin-top: 7px;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 26px;
+  color: #fff;
+  cursor: pointer;
+}
+.historyBill .historyBill-title span {
+  margin-right: 40px;
+  float: right;
+}
+.historyBill .historyBill-title span select, .historyBill .historyBill-title span input {
+  width: 162px;
+  height: 25px;
+  margin-left: 20px;
+  border: 1px solid #dbe9ee;
+  text-indent: 10px;
+  line-height: 25px;
+  background: #fff;
+  font-size: 12px;
+}
+.historyBill .historyBill-title span select{
+  width: 164px;
+  height: 27px;
+  color: #999;
+}
+.historyBill .historyBill-title span select option{
+  color: #333;
+}
+.historyBill .historyBill-title span:nth-child(3) {
+  position: relative;
+}
+.historyBill .historyBill-title span:nth-child(3) input{
+  color: #0696fa;
+}
+.historyBill .historyBill-title span:nth-child(3) em {
+  position: absolute;
+  left: 225px;
+  top: 13px;
+  cursor: pointer;
+}
+.historyBill .historyBill-title span:nth-child(3) .close {
+  position: absolute;
+  left: 200px;
+  top: 16px;
+  cursor: pointer;
+}
+.historyBill .historyBill-title span:nth-child(3) .dateMain {
+  width: 164px;
+  height: 206px;
+  position: absolute;
+  left: 89px;
+  top: 45px;
+  border: 1px solid #dbe9ee;
+  box-shadow: 1px 5px 7px #e6eff2;
+  background: #fff;
+}
+.historyBill .historyBill-title span:nth-child(3) .dateMain .date-title {
+  width: 100%;
+  height: 40px;
+  background: #0696fa;
+  text-align: center;
+  line-height: 40px;
+  position: relative;
+  color: #fff;
+}
+.historyBill .historyBill-title span:nth-child(3) .dateMain .date-title .date-left {
+  position: absolute;
+  left: 18px;
+  top: 15px;
+  cursor: pointer;
+}
+.historyBill .historyBill-title span:nth-child(3) .dateMain .date-title .date-right {
+  position: absolute;
+  right: 18px;
+  top: 15px;
+  cursor: pointer;
+}
+.historyBill .historyBill-title span:nth-child(3) .dateMain .date-content {
+  width: 100%;
+  height: 100%;
+  padding: 20px 20px 0;
+  box-sizing: border-box;
+}
+.historyBill .historyBill-title span:nth-child(3) .dateMain .date-content li {
+  float: left;
+  width: 22px;
+  height: 22px;
+  text-align: center;
+  line-height: 22px;
+  margin: 0 28px 13px 0;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.historyBill .historyBill-title span:nth-child(3) .dateMain .date-content .lit {
+  margin-right: 0;
+}
+.historyBill .historyBill-main {
+  width: 100%;
+  margin-top: 30px;
+}
+.historyBill .historyBill-main ul {
+  width: 100%;
+}
+.historyBill .historyBill-main ul li {
+  width: 100%;
+  margin-top: 30px;
+}
+.historyBill .historyBill-main ul li .historyBill-main-top {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  background: #f1f9fc;
+}
+.historyBill .historyBill-main ul li .historyBill-main-top p {
+  float: left;
+  margin-left: 5px;
+}
+.historyBill .historyBill-main ul li .historyBill-main-top p:nth-child(1) {
+  color: #333;
+  margin-right: 20px;
+}
+.historyBill .historyBill-main ul li .historyBill-main-top .submit span {
+  margin-right: 10px;
+}
+.historyBill .historyBill-main ul li .historyBill-main-top .abnormal {
+  float: right;
+  width: 150px;
+  height: 40px;
+  margin-top: 5px;
+  text-align: center;
+  line-height: 40px;
+  color: #fff;
+  border-radius: 15px;
+  background: #f99b15;
+  margin-right: 200px;
+  cursor: pointer;
+}
+.historyBill .historyBill-main ul li .historyBill-main-table {
+  width: 100%;
+  text-align: center;
+  color: #666;
+  font-size: 12px;
+}
+.historyBill .historyBill-main ul li .historyBill-main-table table {
+  width: 100%;
+}
+.historyBill .historyBill-main ul li .historyBill-main-table table tr:nth-child(1) {
+  width: 100%;
+  height: 40px;
+  background: #5b7798;
+  color: #fff;
+}
+.historyBill .historyBill-main ul li .historyBill-main-table table tr:nth-child(1) td {
+  border-right: 1px solid #fff;
+}
+.historyBill .historyBill-main ul li .historyBill-main-table table tr {
+  width: 100%;
+  height: 80px;
+}
+.historyBill .historyBill-main ul li .historyBill-main-table table tr td {
+  border: 1px solid #dbe9ee;
+}
+.historyBill .historyBill-main ul li .historyBill-main-table table tr td p {
+  line-height: 20px;
+}
+.historyBill .historyBill-main ul li .historyBill-main-table table tr td p span {
+  color: #f99b15;
+  cursor:pointer;
+}
+.historyBill .historyBill-main ul li .historyBill-main-table table tr .showTd1 {
+  color: #68bdf3;
+  cursor: pointer;
+}
+.service {
+  width: 600px;
+  height: 430px;
+  background: #fff;
+  border-radius: 3px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 6;
+  border:1px solid #ccc;
+}
+.service .service-title {
+  width: 100%;
+  margin-top: 20px;
+  text-indent: 20px;
+  font-size: 18px;
+  color: #333;
+  font-weight: 600;
+}
+.service .service-title b {
+  display: block;
+  width: 10px;
+  height: 10px;
+  background: url(../../img/customer/new/2.2close.png) 0 0 no-repeat;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
+}
+.service .service-main {
+  margin-top: 50px;
+  width: 100%;
+  padding: 0 40px;
+  box-sizing: border-box;
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+}
+.service .service-main table {
+  width: 100%;
+  margin-bottom: 30px;
+}
+.service .service-main table tr {
+  width: 100%;
+  height: 30px;
+}
+.service .service-main table tr td {
+  border: 0;
+  position: relative;
+}
+.service .service-main table tr td span {
+  position: absolute;
+  left: 180px;
+  top: 8px;
+}
+.service .service-main table tr td .cheng {
+  left: 140px;
+  top: 10px;
+}
+.service .service-main table tr:nth-child(1) {
+  background: #f1f9fc;
+}
+.service .service-main .list {
+  text-align: left ;
+  line-height: 40px;
+  margin-left: 30px;
+}
+
+.service .service-main .pTitle {
+  font-size: 14px;
+  color: #f99b15;
+}
+.service .service-bottom {
+  width: 420px;
+  height: 80px;
+  margin: 0 auto;
+  margin-top: 50px;
+  /*background: #f1f9fc;*/
+}
+.service .service-bottom .button3 {
+  width: 200px;
+  height: 36px;
+  margin: 0 auto;
+}
+.service .service-bottom .button3 input {
+  width: 200px;
+  height: 100%;
+  background: #314a5e;
+  color: #fff;
+  border: 0;
+  margin-top: 20px;
+  border-radius: 6px;
+  text-align: center;
+  line-height: 36px;
+  font-size: 14px;
+  font-family: '微软雅黑';
+  cursor: pointer;
+  float: left;
+}
+.mengban {
+  width: 100%;
+  height: 100%;
+  min-width: 1200px;
+  min-height: 930px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: #d1d1d1;
+  opacity: 0.3;
+  z-index: 2;
+}
+/*# sourceMappingURL=historyBill.css.map */

@@ -1,0 +1,523 @@
+/**首次进入*******************************/
+.conter {
+    width: 800px;
+    height: 500px;
+    margin: 0 auto;
+    position: relative
+}
+
+.oneTop {
+    width: 250px;
+    height: 50px;
+    line-height: 50px;
+    margin: 0 auto;
+    margin-top: 300px;
+}
+
+.oneTop input {
+    width: 80px;
+    height: 25px;
+    padding-left: 10px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+
+.oneBegin {
+    width: 340px;
+    height: 50px;
+    margin: 0 auto;
+    font-size: 16px;
+    color: #333;
+}
+
+.oneBegin2, .oneBegin3, .oneFinish2, .oneFinish3 {
+    padding-left: 30px;
+}
+
+.oneBegin div {
+    float: left;
+}
+
+.oneBegin3 {
+    width: 60px;
+    height: 25px;
+    border: 1px solid #ccc;
+    margin: 12px 0 0 10px;
+    background: url(../../img/salary/san.png) no-repeat 75px;
+    text-align: center
+}
+
+.oneBegin3 span {
+    line-height: 25px;
+    float: left;
+}
+
+.oneBegin1, .oneBegin2 {
+    line-height: 50px
+}
+
+.oneFinish div {
+    float: left;
+}
+
+.oneFinish {
+    width: 340px;
+    height: 50px;
+    line-height: 50px;
+    margin: 0 auto;
+    font-size: 16px;
+    color: #333;
+}
+
+.onCon {
+    width: 603px;
+    height: 60px;
+    margin: 0 auto;
+    font-size: 12px;
+    color: #666;
+    line-height: 20px;
+}
+
+.onfou {
+    width: 180px;
+    height: 40px;
+    background: #0696fa;
+    color: #fff;
+    margin: 100px auto 0;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 6px;
+    cursor: pointer
+}
+
+.oneBeginLi {
+    width: 92px;
+    height: 200px;
+    overflow: auto;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    position: absolute;
+    left: 398px;
+    top: 88px;
+    display: none
+}
+
+.oneBeginLi {
+    width: 92px;
+    height: 200px;
+    overflow: auto;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    position: absolute;
+    left: 398px;
+    top: 88px;
+    display: none
+}
+
+.oneBeginLi li {
+    text-align: center;
+    width: 72px;
+    height: 25px;
+    border: 1px solid #ccc;
+    margin-top: -1px;
+    line-height: 25px;
+    background: #fff;
+}
+
+.oneBeginLi li:hover {
+    background: #ccc;
+}
+/**首次进入*******************************/
+
+body{
+    min-width: 1000px;
+}
+.salaset {
+    width:90%;
+    font-size: 14px;
+    margin: 30px auto 0;
+    color: #666666;
+    min-width: 888px;
+}
+
+.salaset-title {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background: #f1f9fc;
+    border:1px solid #dbe9ee;
+}
+
+.salaset-title i:first-child {
+    margin-left: 20px;
+}
+
+.salaset-title i:first-child + i {
+    color: #0696fa;
+    margin-left: 25px;
+}
+
+.salaset-title a {
+    float: right;
+    width: 80px;
+    height: 26px;
+    line-height: 26px;
+    color: #FFFFFF;
+    margin: 6px 20px 0 0;
+    text-align: center;
+    border-radius: 7px;
+}
+
+.salaset-abtn1 {
+    background: #68bdf3;
+}
+
+.salaset-abtn2 {
+    background: #f8d37a;
+}
+
+.salaset-abtn3 {
+    background: #6ae6bc;
+}
+
+.salaset-brie {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid #dbe9ee;
+    margin-top:20px;
+    background:#f1f9fc;
+}
+
+.salaset-brie-span {
+    margin-left: 20px;
+}
+
+.salaset-brie-span i {
+    margin-right: 15px;
+}
+
+.salaset-brie-span i:first-child {
+    margin-right: 0
+}
+
+.salaset-brie-iactive {
+    color: #0696FA;
+}
+
+.salaset-brie-span1 {
+    float: right;
+    margin-right: 20px;
+}
+
+.salaset-brie-span1 a {
+    margin-left: 30px;
+}
+
+.salaset-brie-span1 img {
+    margin: 13px 10px 0 0;
+}
+
+/*新版样式*/
+.salaset-list {
+    width: 100%;
+    overflow: auto;
+    white-space: nowrap;
+    font-size:12px;
+}
+
+.salaset-list ul {
+    margin-top: -1px;
+}
+
+.salaset-list li {
+    display: inline-block;
+    width: 97px;
+    height: 50px;
+    text-align: center;
+    /*margin-right: -3.5px;*/
+    border-top: 1px solid #dbe9ee;
+    border-left: 1px solid #dbe9ee;
+    border-bottom: 1px solid #dbe9ee;
+    background: #f1f9fc;
+}
+
+.salaset-list input {
+    width: 80px;
+    color: #666666;
+    height: 30px;
+    text-align: center;
+    border: none;
+}
+
+.salaset-list .salaset-ttle {
+    margin-top: 30px;
+}
+
+.salaset-ttle li {
+    height: 40px;
+    background: #5b7798;
+    color: #FFFFFF;
+    vertical-align: text-top;
+    white-space: pre-line;
+    padding-top:20px;
+}
+
+.salaset-body li {
+    height: 45px;
+    line-height: 45px;
+}
+
+.btn1, .btn2, .btn3, .btn4, .btn5, .btn6 {
+    position: relative;
+}
+
+.btn1 span, .btn2 span, .btn3 span, .btn4 span, .btn5 span, .btn6 span {
+    display: block;
+    width: 40px;
+    height: 20px;
+    line-height: 20px;
+    position: absolute;
+    left: 0;
+    top: -20px;
+    background:#dbe9ee url(../../img/salary/opention1.png) no-repeat right;
+    color: #333333;
+    cursor: pointer;
+}
+
+.salaset-list .subitem {
+    display: none;
+}
+
+.salaset-list .idCard {
+    width: 150px;
+}
+
+.salaset-list .bankNumber {
+    width: 150px;
+}
+
+.salaset-bodylast {
+    border-right: 1px solid #dbe9ee;
+}
+
+.salaset-bodylast i {
+    color: #0696fa;
+    cursor: pointer;
+}
+
+/*end*/
+
+/*筛选*/
+
+.salaset-seach {
+    display: none;
+    position: absolute;
+    right: 260px;
+    top: 45px;
+    z-index: 2;
+    width: 298px;
+    border: 1px solid #dbe9ee;
+    font-size: 14px;
+    color: #333333;
+    box-shadow: 0 7px 9px 1px #dbe9ee;
+    background: #fff;
+}
+
+.salaset-seach ul {
+    position: relative;
+    width: 278px;
+    height: 38px;
+    line-height: 38px;
+    margin: 14px 0 0 8px;
+}
+
+.salaset-seach li {
+    border: 1px solid #dbe9ee;
+    margin-top: -1px;
+    padding-left: 20px;
+    cursor: pointer;
+    display: none;
+    background: #FFFFFF;
+}
+
+.salaset-seach .list,.salaset-seach .list1{
+    color: #cccccc;
+    display: block;
+}
+.salaset-seach .salaset-down-list1 span{
+    display: block;
+    text-indent: 20px;
+}
+.salaset-down {
+    position: absolute;
+    top: 18px;
+    right: 10px;
+}
+
+.salaset-seach-btn {
+    width: 280px;
+    height: 36px;
+    background: #0696fa;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 36px;
+    border: none;
+    border-radius: 6px;
+    margin: 10px 0 10px 10px;
+    cursor: pointer;
+}
+
+
+/*end*/
+
+
+/*搜索*/
+
+.salaset-seach1 {
+    position: absolute;
+    right: 110px;
+    top: 45px;
+    width: 298px;
+    border: 1px solid #dbe9ee;
+    box-shadow: 0 3px 7px 1px #dbe9ee;
+    font-size: 14px;
+    text-align: center;
+    background: #fff;
+    display: none;
+}
+
+.salaset-seach1 input:first-child {
+    width: 238px;
+    height: 38px;
+    border: 1px solid #dbe9ee;
+    margin-top: 10px;
+    background: url(../../img/salary/search1.png) no-repeat 10px center;
+    padding-left: 38px;
+    color: #666666;
+}
+
+
+/*placeholder样式*/
+
+:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: #CCCCCC;
+    font-size: 12px;
+}
+
+::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: #CCCCCC;
+    font-size: 12px;
+}
+
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+    color: #CCCCCC;
+    font-size: 12px;
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+    color: #CCCCCC;
+    font-size: 12px;
+}
+
+.salaset-seach1 input:first-child+input {
+    width: 280px;
+    height: 36px;
+    background: #0696FA;
+    border-radius: 6px;
+    color: #FFFFFF;
+    line-height: 36px;
+    text-align: center;
+    border: none;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+.salaset-down-input{
+    font-family: "微软雅黑";
+}
+
+/*批量操作*/
+
+.salaset-operate {
+    position: absolute;
+    display: none;
+    top: 45px;
+    right: 10px;
+    width: 178px;
+    border: 1px solid #dbe9ee;
+    box-shadow: 0px 7px 9px 1px #dbe9ee;
+    background: #fff;
+    z-index: 999;
+}
+
+.salaset-operate li {
+    height: 30px;
+    line-height: 30px;
+    color: #333;
+    font-size: 12px;
+    padding-left: 10px;
+    cursor: pointer;
+}
+
+.salaset-operate .sopactive {
+    background: #0696FA;
+    color: #FFF;
+}
+.list1{
+    border:1px solid red;
+}
+
+/*end*/
+
+/**/
+.salaset-down-list,.salaset-down-list1{
+    overflow: auto;
+    max-height:100px;
+}
+
+.salaset-down-list span{
+    display: block;
+    padding-left: 20px;
+}
+
+.salaset-down-input{
+    /*padding-left: 20px;*/
+    border: none;
+}
+/*.salaset .salaset-list .salaset-ttle .subitem5{*/
+    /*white-space: normal;*/
+    /*width: 77px;*/
+    /*line-height: 20px;*/
+    /*padding: 0px 10px;*/
+/*}*/
+.screen{
+    width: 100%;
+    font-size: 14px;
+    line-height: 10px;
+    text-indent: 20px;
+    margin: 20px auto;
+    color: #666;
+}
+.screenCon{
+    padding: 5px 10px;
+    background: #f1f9fc;
+    color: #666;
+    border-radius: 6px;
+    margin-left: 10px;
+    border: 1px solid #dbe9ee;
+}
+.screen a{
+    color: #0696fa;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.red{
+    color:#fa5f5f;
+}

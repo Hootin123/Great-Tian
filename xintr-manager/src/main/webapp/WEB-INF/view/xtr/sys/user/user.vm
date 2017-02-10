@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>H+ 用户管理</title>
+    #parse("comm/head.vm")
+    <link href="#springUrl('/resource/css/hui/plugins/bootstrap-table/bootstrap-table.min.css')" rel="stylesheet">
+</head>
+
+<body>
+<div class="col-sm-12">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <input id="isChild" class="hidden" type="text" value="$isChild"/>
+        ##            <input id="pkFiled" class="hidden" type="text" value="userId"/>
+
+            <div id="toolbar" class="btn-group">
+                <button id="addBtn" type="button" class="btn btn-primary fa fa-plus-square">
+                    新增
+                </button>
+                <button id="deleteBtn" type="button" class="btn btn-primary fa fa-minus-square">
+                    删除
+                </button>
+                <button id="editBtn" type="button" class="btn btn-primary fa fa-edit">
+                    编辑
+                </button>
+                <button id="authBtn" type="button" class="btn btn-primary fa fa-graduation-cap">
+                    授权
+                </button>
+                <button id="resetPwdBtn" type="button" class="btn btn-primary fa fa-key">
+                    重置密码
+                </button>
+            </div>
+
+            <table id="data-list" class="table table-bordered table-hover"></table>
+        ##            <table id="data-list" data-toggle="table" class="table table-bordered table-hover" contenteditable="true"
+        ##                   data-show-columns="true"
+        ##                   data-click-to-select="true"
+        ##                   data-single-select="true"
+        ##                   data-pagination="true"
+        ##                   data-search="true"
+        ##                   data-show-refresh="true"
+        ##                   data-show-toggle="true"
+        ##                   data-toolbar="#toolbar"
+        ##                   data-page-number="1"
+        ##                   data-page-size="10"
+        ##                   data-show-pagination-switch="true"
+        ##                   data-url="dataList.htm">
+        ##                <thead>
+        ##                <tr>
+        ##                    <th data-field="checkbox" data-checkbox="true"></th>
+        ##                    <th data-field="rowNo">序号</th>
+        ##                    <th data-field="userId" data-visible="false">主键</th>
+        ##                    <th data-field="nickName">昵称</th>
+        ##                    <th data-field="phone">手机号码</th>
+        ##                    <th data-field="email">邮箱地址</th>
+        ##                    <th data-field="pwd" data-visible="false">密码</th>
+        ##                    <th data-field="state" data-formatter="stateFormatter">状态</th>
+        ##                    <th data-field="loginCount">登录总次数</th>
+        ##                    <th data-field="loginTime">最后登录时间</th>
+        ##                    <th data-field="isDelete" data-visible="false">是否删除</th>
+        ##                    <th data-field="createTime">创建时间</th>
+        ##                    <th data-field="updateTime">修改时间</th>
+        ##                    <th data-field="createsUer" data-visible="false">创建人</th>
+        ##                    <th data-field="updateUser" data-visible="false">修改人</th>
+        ##                    <th data-field="superAdmin" data-visible="false">是否超级管理员</th>
+        ##                    <th data-field="salt" data-visible="false">salt</th>
+        ##                </tr>
+        ##                </thead>
+        ##            </table>
+        </div>
+    </div>
+
+</div>
+<div class="ibox">
+    <div class="ibox-content">
+        <div id="myAddMenuModal" class="modal inmodal" role="dialog" style="display: none; " aria-hidden="true"
+             data-backdrop="static">
+            <div class="modal-dialog">
+                <div class="modal-content animated bounceInRight">
+
+                </div>
+            </div>
+        </div>
+
+
+        <div id="myMenuIconModal" class="modal inmodal" role="dialog" style="display: none; " aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content animated bounceInRight">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+<script src="#springUrl('/resource/js/hui/content.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/bootstrap-table-mobile.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/validate/jquery.validate.min.js')"></script>
+<script src="#springUrl('/resource/js/comm/jdatagrid.js')"></script>
+<script src="#springUrl('/resource/js/sys/user/user.js')"></script>
+
+
+</html>

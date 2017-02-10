@@ -1,0 +1,288 @@
+@charset "UTF-8";
+body {
+  width: 100%;
+  height: 100%;
+  background: #f4f4f4;
+  background-size: 100% 100%; }
+
+header{
+  width:100%;
+  height:4rem;
+
+}
+.login1{
+  width: 100%;
+  height: 4rem;
+  background:url(../../img/hongbao/login.png) 0 0 no-repeat;
+  background-size:100% 100%;
+
+}
+
+
+section {
+  width: 100%;
+  margin-top: 0.96rem;
+  border-top: 1px solid #e3e3e3; }
+  section ul {
+    width: 100%;
+    height: 100%; }
+    section ul li {
+      width: 100%;
+      height: 0.96rem;
+      border-bottom: 1px solid #e3e3e3;
+      position: relative; }
+      section ul li input {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        line-height: 0.96rem;
+        text-indent: 0.2rem;
+        font-family: "微软雅黑";
+        font-size: 0.32rem;
+        color: #333; }
+      section ul li input::-webkit-input-placeholder {
+        color: #ccc; }
+      section ul li .show {
+        display: block;
+        width: 0.4rem;
+        height: 0.4rem;
+        background: url(../../img/hongbao/icon1.png) 0 0 no-repeat;
+        background-size: 100% 100%;
+        position: absolute;
+        right: 0.28rem;
+        top: 0.2rem; }
+      section ul li b {
+        height: 0.78rem;
+        position: absolute;
+        right: 0.28rem;
+        top: 0;
+        font-size: 0.28rem;
+        line-height: 0.78rem;
+        color: #f00; }
+    section ul li:nth-child(6) input {
+      display: block;
+      float: left;
+      width: 5.3rem; }
+    section ul li:nth-child(6) p {
+      width: 2rem;
+      height: 0.96rem;
+      background: #0696fa;
+      float: left;
+      margin-left: 0.2rem;
+      text-align: center;
+      line-height: 0.96rem;
+      font-size: 0.3rem;
+      font-family: '微软雅黑';
+      color: #fff; }
+    section ul li:nth-child(6) .show1 {
+      display: block;
+      width: 0.4rem;
+      height: 0.4rem;
+      background: url(../../img/hongbao/icon1.png) 0 0 no-repeat;
+      background-size: 100% 100%;
+      position: absolute;
+      right: 2.48rem;
+      top: 0.2rem; }
+    section ul li:nth-child(5) {
+      position: relative; }
+      section ul li:nth-child(5) p {
+        width: 2.06rem;
+        height: 0.8rem;
+        position: absolute;
+        right: 0.24rem;
+        top: 0;
+        display: flex;
+        align-items: center; }
+        section ul li:nth-child(5) p span {
+          margin-left: 0.26rem;
+          font-size: 0.3rem;
+          font-family: '微软雅黑';
+          color: #0696fa; }
+  section .reg {
+    height: 0.9rem;
+    width: 7rem;
+    margin: 0 auto;
+    margin-top: 1rem;
+    background: #0696fa;
+    border-radius: 0.4rem;
+    font-size: 0.34rem;
+    font-family: '微软雅黑';
+    color: #fff;
+    text-align: center;
+    line-height: 0.9rem; }
+  section .login {
+    width: 100%;
+    height: 0.4rem;
+    text-align: center;
+    margin-top: 0.1rem;
+    font-size: 0.28rem;
+    margin-bottom: 0.1rem;
+    font-family: '微软雅黑';
+    color: #0696fa;
+  }
+    section .login i {
+      display: block;
+      margin-right: 0.2rem;
+      width: 0.29rem;
+      height: 0.31rem;
+      float: left;
+      background: url(../../img/hongbao/login-lit.png) 0 0 no-repeat;
+      background-size: 100% 100%; }
+  section .hint {
+    width: 50%;
+    height: 0.8rem;
+    position: absolute;
+    left: 25%;
+    top: 11rem;
+    background: rgba(6, 150, 250, 0.8);
+    border-radius: 0.4rem;
+    font-size: 0.28rem;
+    text-align: center;
+    line-height: 0.8rem;
+    color: #f00;
+    font-weight: 600; }
+
+.mengban {
+  width: 100%;
+  height: 13.39rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: #000000;
+  opacity: 0.6;
+  z-index: 5; }
+
+.login-popup {
+  width: 7rem;
+  background: #fff;
+  position: absolute;
+  left: 0.25rem;
+  top: 1.36rem;
+  border-radius: 0.2rem;
+  z-index: 10; }
+  .login-popup .top {
+    width: 100%;
+    height: 2.96rem;
+    border-radius: 0.2rem 0.2rem 0 0;
+    background: url(../../img/hongbao/hongbao.png) 0 0 no-repeat;
+    background-size: 100% 100%;
+    position: relative; }
+    .login-popup .top em {
+      display: block;
+      width: 0.44rem;
+      height: 0.66rem;
+      background: url(../../img/hongbao/close.png) 0 0 no-repeat;
+      background-size: 100% 100%;
+      position: absolute;
+      top: -0.66rem;
+      right: 0; }
+  .login-popup .content {
+    width: 100%;
+    background: #f4f4f4; }
+    .login-popup .content h3 {
+      width: 100%;
+      height: 1.1rem;
+      text-align: center;
+      line-height: 1.1rem;
+      font-size: 0.34rem;
+      color: #333;
+      font-weight: 300; }
+    .login-popup .content ul {
+      width: 6.4rem;
+      height: 2.5rem;
+      background: #fff;
+      margin: 0 auto;
+      border-radius: 0.2rem;
+      border-top: 1px solid #ccc; }
+      .login-popup .content ul li {
+        width: 100%;
+        height: 1.17rem;
+        border-bottom: 1px solid #ccc;
+        position: relative; }
+        .login-popup .content ul li input {
+          width: 100%;
+          height: 100%;
+          border: 0;
+          text-indent: 1.07rem;
+          font-size: 0.32rem; }
+        .login-popup .content ul li .show {
+          display: block;
+          width: 0.4rem;
+          height: 0.4rem;
+          background: url(../../img/hongbao/icon1.png) 0 0 no-repeat;
+          background-size: 100% 100%;
+          position: absolute;
+          right: 0.28rem;
+          top: 0.2rem; }
+        .login-popup .content ul li b {
+          height: 0.78rem;
+          position: absolute;
+          right: 0.28rem;
+          top: 0.2rem;
+          font-size: 0.28rem;
+          line-height: 0.78rem;
+          color: #f00; }
+      .login-popup .content ul li:nth-child(1) i {
+        display: block;
+        width: 0.29rem;
+        height: 0.44rem;
+        background: url(../../img/hongbao/phone.png) 0 0 no-repeat;
+        background-size: 100% 100%;
+        position: absolute;
+        left: 0.3rem;
+        top: 0.4rem; }
+      .login-popup .content ul li:nth-child(2) i {
+        display: block;
+        width: 0.36rem;
+        height: 0.42rem;
+        background: url(../../img/hongbao/pwd.png) 0 0 no-repeat;
+        background-size: 100% 100%;
+        position: absolute;
+        left: 0.3rem;
+        top: 0.4rem; }
+    .login-popup .content .forget {
+      width: 100%;
+      height: 1rem;
+      line-height: 0.92rem;
+      font-size: 0.26rem;
+      text-indent: 0.3rem;
+      color: #333; }
+  .login-popup .footer {
+    width: 6.4rem;
+    height: 0.9rem;
+    background: #0696fa;
+    line-height: 0.9rem;
+    text-align: center;
+    color: #fff;
+    font-size: 0.34rem;
+    margin: 0 auto;
+    border-radius: 0.6rem; }
+  .login-popup .reg1 {
+    width: 100%;
+    height: 0.5rem;
+    text-align: center;
+    margin-top: 0.3rem;
+    color: #0696fa;
+    font-size: 0.26rem; }
+  .login-popup p {
+    width: 100%;
+    height: 0.6rem;
+    text-align: center;
+    font-size: 0.26rem;
+    color: #ef3f26; }
+
+  .login-error{
+    width: 50%;
+    height: 0.6rem;
+    position: absolute;
+    left: -10%;
+    top: 6.8rem;
+    background: rgba(6, 150, 250, 0.8);
+    border-radius: 0.4rem;
+    font-size: 0.28rem;
+    text-align: center;
+    line-height: 0.6rem;
+    color: #f00;
+    font-weight: 600;
+  }
+/*# sourceMappingURL=register.css.map */

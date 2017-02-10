@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/comm/comm.css')" />
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/comm/activated.css')" />
+    <link rel="stylesheet" href="#springUrl('/resource/css/comm/mainPage.css')" />
+    <script src="#springUrl('/resource/js/login/jquery-1.11.0.min.js')"></script>
+    <script src="#springUrl('/resource/js/login/login.js')"></script>
+</head>
+<body>
+<div class="header">
+    <div class="hdlg">
+        <a class="homepage" href="#">薪太软首页</a>
+    </div>
+</div>
+<div id="lgbdy">
+    <div class="activated foundpswrd">
+        <div class="activated" style="opacity: 0.7;filter:alpha(opacity=70); z-index: -1; background: #FFFFFF; position: absolute; margin: 0;"></div>
+        <form id="pwdSecondForm">
+            <span>邮箱验证</span>
+            <input type="hidden" value="$!{loginName}" name="loginName">
+            <input type="hidden" value="$!{memberEmail}" name="memberEmail">
+            <p class="mailp">薪太软将验证码已发送至您的注册邮箱：$!{memberEmail}。请进入邮箱查看验证码并填写。</p>
+            <div class="mailcode">邮箱验证码<input type="text" placeholder="输入收到的验证码" name="emailCode"/><label id="verifycodeTip" style="color:red;"></label></div>
+            <div class="actdlg"><a class="mailnext" href="#" id="secondNextBtn">下一步</a><a class="mailaway" href="#" onclick="history.go(-1)">取消</a></div>
+        </form>
+    </div>
+</div>
+<div class="footer" id="footer">薪太软（上海）科技发展有限公司|沪ICP备15039445号-9</div>
+</body>
+<script src="#springUrl('/resource/js/login/retrievePwd/retrievePwdByEmailSecond.js')"></script>
+</html>

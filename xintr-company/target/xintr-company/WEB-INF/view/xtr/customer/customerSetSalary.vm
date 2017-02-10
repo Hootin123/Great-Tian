@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>定薪</title>
+    #parse("comm/head.vm")
+    <style>
+        .row{width: 600px;float:left;margin-top:30px;color:#333;}
+        .row .divlabel{width: 180px;text-align: right;  }
+        .row > div{  float:left;  padding: 10px;  }
+        .row > div > label{  line-height: 36px  }
+        .footBtn{width:420px;height:35px;margin-left:80px;}
+        input{font-family: '微软雅黑'; padding: 0 20px;  width: 278px;  height: 34px;  border: 1px solid #e3e3e3;  position: relative;  top: -1px;  color: #666666;  width: 175px;  }
+        .okbtn{font-family: '微软雅黑';float:left;display: block;  width: 200px;  height: 35px;  line-height: 35px;  background: #0696fa;  color: #FFFFFF;  border: none;  float:left;  }
+        .cancelbtn{font-family: '微软雅黑';float:right;width: 200px;  height: 35px;  line-height: 35px;  border: 1px solid #0696FA;  color: #0696FA;  background: #FFFFFF;}
+        .btn{ text-align: center;  border-radius: 6px;  display: inline-block; font-size: 14px;  cursor: pointer;  }
+    </style>
+</head>
+
+<body>
+<div>
+    <div class="row"  >
+        <input id="customerId" value="$!customer.customerId" type="hidden"/>
+        <div class="divlabel"><label>姓名</label></div>
+        <div style="width: 370px;">
+            <label>$!{customer.customerTurename}
+                #if($station.stationCustomerState == 2)
+                    (正式)
+                #end
+
+            </label>
+        </div>
+    </div>
+    <div style="clear: both"></div>
+    <div class="row">
+        <div class="divlabel">
+            <label>
+                #if($station.stationCustomerState == 1)
+                    *
+                #end
+                试用期工资
+            </label>
+        </div>
+        <div style="width:370px;">
+            <input id="probationSalary" value="" onkeyup="SetSalaryExtend.checkZz()" placeholder="请输入试用期工资"/>
+            #if($station.stationCustomerState == 1)
+                $!date.format('yyyy-MM-dd',$!{station.stationEnterTime})~$!date.format('yyyy-MM-dd',$!{station.stationRegularTime})
+            #end
+        </div>
+    </div>
+    <div style="clear: both"></div>
+    <div class="row">
+        <div class="divlabel">
+            <label>
+                #if($station.stationCustomerState == 2)
+                    *
+                #end
+                转正后工资
+            </label>
+        </div>
+        <div style="width: 370px;">
+            <input id="regularSalary" onkeyup="SetSalaryExtend.checkZz()" value="" placeholder="请输入转正后工资"/>
+            $!date.format('yyyy-MM-dd',$!{station.stationRegularTime})
+            <span id="remind" style="color:red;display: block">&nbsp;</span>
+        </div>
+    </div>
+    <div style="clear: both"></div>
+    <div class="row">
+        <div class="divlabel"></div>
+        <div class="footBtn">
+            <input class="okbtn btn" type="button" value="确定" onclick="SetSalaryExtend.save()">
+            <input class="cancelbtn btn" type="button" value="取消" onclick="SetSalaryExtend.close()">
+        </div>
+    </div>
+</div>
+
+</body>
+<script>
+
+    SetSalaryExtend = {
+        checkZz:function(){
+            var jobState = "$station.stationCustomerState";
+
+            var syq = $("#probationSalary").val();
+            var zz = $("#regularSalary").val();
+
+            if(zz == ""){
+                $("#remind").html("&nbsp;");
+                return;
+            }
+
+            if(!isMoney(syq)){
+                syq = 0;
+            }
+            if(!isMoney(zz)){
+                zz = 0;
+            }
+
+            if(parseInt(syq) > parseInt(zz)) {
+                $("#remind").html("提醒：您的转正薪资低于试用期工资哦");
+            }else{
+                $("#remind").html("&nbsp;");
+            }
+
+        },
+        save:function(){
+            var jobState = "$station.stationCustomerState";
+            if(jobState == "1" && $("#probationSalary").val() == ""){
+                showWarning("请输入试用期工资");
+                return;
+            }
+
+            if(jobState == "1" && !isMoney($("#probationSalary").val())){
+                showWarning("试用期工资输入有误");
+                return;
+            }
+
+            if(jobState == "2" && $("#regularSalary").val() == ""){
+                showWarning("请输入转正后工资");
+                return;
+            }
+
+            if(jobState == "2" && !isMoney($("#regularSalary").val())){
+                showWarning("转正后工资输入有误");
+                return;
+            }
+            if(parseInt(jobState) > 2) {
+                showWarning("员工已离职");
+                return;
+            }
+            $.post(BASE_PATH + '/customerSalary/setSalary.htm', {"probationSalary" : $("#probationSalary").val(), "regularSalary" : $("#regularSalary").val(), "customerId":$("#customerId").val()}, function(data){
+                if (data.success) {
+                    layer.alert('定薪成功',{
+                        title:'处理结果',
+                    },function(index){
+                        var param = {'id': '$!payrollId', 'type': 100};
+                        //更新基本工资
+                        parent.updateBasePay('$!payrollId', param);
+                        SetSalaryExtend.close();
+                    });
+                } else {
+                    showWarning(data.message);
+                }
+            });
+
+        },
+        close:function(){
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+        }
+    }
+
+</script>
+</html>

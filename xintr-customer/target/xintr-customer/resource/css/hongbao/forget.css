@@ -1,0 +1,141 @@
+@charset "UTF-8";
+body {
+  width: 100%;
+  height: 100%;
+  background: #f4f4f4;
+  background-size: 100%; }
+
+header {
+  width: 100%;
+  height: 0.88rem;
+  margin-top: 0.4rem;
+  font-family: "微软雅黑";
+  font-size: 0.36rem;
+  color: #333;
+  line-height: 0.93rem;
+  text-align: center;
+  background: #fff; }
+
+section {
+  width: 100%;
+  margin-top: 0.4rem; }
+  section ul {
+    width: 100%;
+    height: 100%; }
+    section ul li {
+      width: 100%;
+      height: 0.96rem;
+      border-top: 1px solid #e3e3e3;
+      border-bottom: 1px solid #e3e3e3;
+      margin-bottom: 0.4rem;
+      position: relative;
+      background: #fff; }
+      section ul li label {
+        width: 2rem;
+        height: 100%;
+        text-indent: 0.2rem;
+        font-family: "微软雅黑";
+        font-size: 0.32rem;
+        color: #333;
+        line-height: 0.96rem;
+        float: left; }
+      section ul li input {
+        width: 5.3rem;
+        height: 100%;
+        border: 0;
+        line-height: 0.96rem;
+        text-indent: 0.2rem;
+        font-family: "微软雅黑";
+        font-size: 0.28rem;
+        color: #333;
+        float: left; }
+      section ul li input::-webkit-input-placeholder {
+        color: #ccc; }
+      section ul li .show {
+        display: block;
+        width: 0.4rem;
+        height: 0.4rem;
+        background: url(../../img/hongbao/icon1.png) 0 0 no-repeat;
+        background-size: 100% 100%;
+        position: absolute;
+        right: 0.77rem;
+        top: 0.26rem; }
+      section ul li b {
+        height: 0.78rem;
+        position: absolute;
+        right: 0.38rem;
+        top: 0.1rem;
+        font-size: 0.28rem;
+        line-height: 0.78rem;
+        color: #ef3f26; }
+    section ul li:nth-child(1) label {
+      float: left; }
+    section ul li:nth-child(1) input {
+      display: block;
+      float: left;
+      width: 3.3rem; }
+    section ul li:nth-child(1) p {
+      width: 2rem;
+      height: 0.86rem;
+      background: #0696fa;
+      margin-top: 0.05rem;
+      float: left;
+      text-align: center;
+      line-height: 0.86rem;
+      font-size: 0.3rem;
+      font-family: '微软雅黑';
+      color: #fff;
+      border-radius: 0.5rem; }
+    section ul li:nth-child(1) .show1 {
+      display: block;
+      width: 0.4rem;
+      height: 0.4rem;
+      background: url(../../img/hongbao/icon1.png) 0 0 no-repeat;
+      background-size: 100% 100%;
+      position: absolute;
+      right: 2.28rem;
+      top: 0.26rem; }
+  section .affirm {
+    height: 0.9rem;
+    width: 7rem;
+    margin: 0 auto;
+    margin-top: 1.2rem;
+    background: #0696fa;
+    border-radius: 0.4rem;
+    font-size: 0.34rem;
+    font-family: '微软雅黑';
+    color: #fff;
+    text-align: center;
+    line-height: 0.9rem; }
+  section .returnLogin {
+    width: 100%;
+    height: 0.4rem;
+    margin-top: 0.55rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.28rem;
+    font-family: '微软雅黑';
+    color: #0696fa; }
+    section .returnLogin i {
+      display: block;
+      margin-right: 0.2rem;
+      width: 0.29rem;
+      height: 0.31rem;
+      background: url(../../img/hongbao/login-lit.png) 0 0 no-repeat;
+      background-size: 100% 100%; }
+  section .hint {
+    width: 50%;
+    height: 0.8rem;
+    position: absolute;
+    left: 25%;
+    top: 7.2rem;
+    background: rgba(6, 150, 250, 0.8);
+    border-radius: 0.4rem;
+    font-size: 0.28rem;
+    text-align: center;
+    line-height: 0.8rem;
+    color: #f00;
+    font-weight: 600; }
+
+/*# sourceMappingURL=forget.css.map */

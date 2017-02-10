@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" id='html'>
+<head>
+	<meta charset="UTF-8">
+	<title>提交成功</title>
+	<meta name="viewport" content="width=divce-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1">
+	#parse("comm/head.vm")
+	<link rel="stylesheet" type="text/css" href="/resource/css/h5wallet/submit.css">
+</head>
+<body>
+	<header>
+		<div class="logo"></div>
+		<em></em>
+		<div class="txt">
+			<p>有<span>「薪」</span>事</p>
+			<p>找薪太软</p>
+		</div>
+	</header>
+	<section>
+		<p>提交成功</p>
+		<p>小薪会尽快审核哒！耐心等待一会吧~</p>
+		<p>登录薪太软官网</p>
+		<p>www.xintairuan.com</p>
+		<p> 体验工资代发、工资垫发、社保代缴智能服务</p>
+		<p>开启人力资源全新时代！</p>
+
+	</section>
+	
+</body>
+</html>

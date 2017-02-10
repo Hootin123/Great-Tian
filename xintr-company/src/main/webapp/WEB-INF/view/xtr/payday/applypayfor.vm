@@ -1,0 +1,518 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title></title>
+#parse("comm/head.vm")
+<link href="#springUrl('/resource/css/comm/comm.css')" rel="stylesheet">
+<script src="#springUrl('/resource/js/payday/jquery-1.11.0.min.js')"></script>
+<script src="#springUrl('/resource/js/payday/mini.js')"></script>
+<script src="#springUrl('/resource/js/plugins/laydate/laydate.js')"></script>
+<script src="#springUrl('/resource/js/payday/applypayfor.js')"></script>
+    <style>
+        .top{
+            width:100%;
+            height:80px;
+            border-bottom:1px solid #dbe9ee;
+            text-align: center;
+        }
+        h2 {
+            padding-top: 30px;
+        }
+        .con {
+            width: 500px;
+            min-width: 500px;
+            height: 700px;
+            margin: 0 auto;
+            position: relative;
+            color: #333;
+            font-size: 16px;
+        }
+        .span1 {
+            position: absolute;
+            right: 80%;
+            top: 40px;
+        }
+
+        .span2 {
+            position: absolute;
+            right: 80%;
+            top: 130px;
+        }
+
+        .span3 {
+            position: absolute;
+            left: 25%;
+            top: 130px;
+            color: #000;
+            font-weight: 600
+        }
+
+        .span4 {
+            position: absolute;
+            right: 80%;
+            top: 190px;
+        }
+
+        .span5 {
+            position: absolute;
+            right: 80%;
+            top: 250px;
+        }
+
+        .span6 {
+            position: absolute;
+            right: 80%;
+            top: 310px;
+        }
+
+        .span7 {
+            position: absolute;
+            right: 80%;
+            top: 370px;
+        }
+
+        .span8 {
+            position: absolute;
+            right: 80%;
+            top: 430px;
+        }
+
+        .span9 {
+            position: absolute;
+            right: 65%;
+            top: 430px;
+            color: #000;
+            font-weight: 600
+        }
+
+        .span10 {
+            position: absolute;
+            right: 80%;
+            top: 490px;
+        }
+
+        .span11 {
+            position: absolute;
+            left: 25%;
+            top: 80px;
+            font-size: 12px;
+            color: #f99b15;
+        }
+
+        .span12 {
+            font-size: 12px;
+            color: #f99b15;
+            position: absolute;
+            width: 100px;
+            height: 20px;
+            left: 475px;
+            top: 250px;
+            line-height: 20px;
+            display: none;
+        }
+
+        .span13 {
+            font-size: 12px;
+            color: #f99b15;
+            position: absolute;
+            width: 300px;
+            height: 20px;
+            left: 475px;
+            top: 370px;
+            line-height: 20px;
+            display: none
+        }
+        .span14 {
+            font-size: 12px;
+            color: #f99b15;
+            position: absolute;
+            width: 300px;
+            height: 20px;
+            left: 475px;
+            top: 370px;
+            line-height: 20px;
+            display: none
+        }
+        .span15{
+            font-size: 12px;
+            color: #f99b15;
+            position: absolute;
+            width: 300px;
+            height: 20px;
+            left: 475px;
+            top: 40px;
+            line-height: 20px;
+            display: none
+        }
+
+        .text1 {
+            position: absolute;
+            width: 300px;
+            height: 30px;
+            left: 25%;
+            top: 35px;
+            padding-left: 20px;
+            border:1px solid #ccc;
+        }
+
+        #text2 {
+            position: absolute;
+            width: 303px;
+            height: 32px;
+            left: 25%;
+            top: 185px;
+            padding-left: 20px;
+            border: 1px solid #ccc;
+            line-height: 32px;
+            font-size: 14px;
+            background: #f2f2f2;
+            color: #333;
+        }
+
+        #text3 {
+            position: absolute;
+            width: 300px;
+            height: 30px;
+            left: 25%;
+            top: 245px;
+            padding-left: 20px;
+            border:1px solid #ccc;
+        }
+
+        #text4 {
+            position: absolute;
+            width: 303px;
+            height: 32px;
+            left: 25%;
+            top: 305px;
+            line-height: 32px;
+            padding-left: 20px;
+            border: 1px solid #ccc;
+            background: #f2f2f2;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .text5 {
+            position: absolute;
+            width: 282px;
+            height: 30px;
+            left: 25%;
+            top: 365px;
+            padding-left: 20px;
+            border-radius:0;
+            border:1px solid #ccc;
+        }
+
+        .text6 {
+            position: absolute;
+            width: 300px;
+            height: 30px;
+            left: 25%;
+            top: 485px;
+            padding-left: 20px;
+            border:1px solid #ccc;
+        }
+
+        .btn {
+            width: 400px;
+            height: 130px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: auto;
+            top: 590px;
+        }
+
+        .sub {
+            width: 240px;
+            height: 40px;
+            cursor: pointer;
+            float: left;
+            color: #fff;
+            font-size: 16px;
+            border: 0;
+            background: #0696fa;
+            border-radius: 6px;
+            font-family: "微软雅黑"
+        }
+
+        .cancel {
+            width: 140px;
+            height: 40px;
+            cursor: pointer;
+            float: right;
+            border-radius: 6px;
+            border: 1px solid #0696fa;
+            background: #fff;
+            color: #0696fa;
+            font-size: 16px;
+            font-family: "微软雅黑"
+        }
+
+        .img1 {
+            width: 12px;
+            height: 8px;
+            position: absolute;
+            left: 420px;
+            top: 198px;
+            cursor: pointer
+        }
+
+        .img2 {
+            width: 12px;
+            height: 8px;
+            position: absolute;
+            left: 420px;
+            top: 318px;
+            cursor: pointer
+        }
+
+        .img3 {
+            width: 16px;
+            height: 16px;
+            position: absolute;
+            left: 420px;
+            top: 372px;
+            cursor: pointer
+        }
+
+        #text2_ul {
+            width: 303px;
+            height: 60px;
+            position: absolute;
+            top: 218px;
+            left: 125px;
+            background: #fff;
+            z-index: 2;
+            display: none;
+        }
+
+        #text2_ul li {
+            width: 303px;
+            height: 30px;
+            line-height: 30px;
+            padding-left: 20px;
+            font-size: 14px;
+            background: #fff;
+            border: 1px solid #a9a9a9;
+            color: #333;
+        }
+
+        #text2_ul li:hover {
+            background: #0696fa;
+            color:#fff;
+        }
+
+        #text4_ul {
+            width: 303px;
+            height: 150px;
+            position: absolute;
+            top: 338px;
+            left: 125px;
+            background: #fff;
+            z-index: 2;
+            display: none
+        }
+
+        #text4_ul li {
+            width: 303px;
+            height: 30px;
+            line-height: 30px;
+            padding-left: 20px;
+            font-size: 14px;
+            background: #fff;
+            border: 1px solid #a9a9a9;
+            border-bottom: 0;
+            color: #333;
+        }
+
+        #text4_ul li:hover {
+            background: #0696fa;
+            color:#fff;
+        }
+
+        #text2_ul #text2_ul1 {
+            border-bottom: 0;
+        }
+
+    </style>
+    <script>
+        window.onload = function() {
+            // 下拉
+            var nav1 = document.getElementById("text2");
+            var menu = document.getElementById('text2_ul');
+            var lists = menu.getElementsByTagName('li');
+            toolkit.addEvent(nav1, 'click', function() {
+                toolkit.toggle(menu);
+                toolkit.replaceClass(nav1, 'up', 'down');
+            });
+            for (var i = 0; i < lists.length; i++) {
+                toolkit.addEvent(lists[i], 'click', function(event) {
+                    toolkit.toggle(menu);
+                    var eventTarget = toolkit.getEventTarget(event);
+                    nav1.innerHTML = eventTarget.innerHTML;
+                    toolkit.replaceClass(nav1, 'down', 'up');
+                });
+            }
+
+            var nav2 = document.getElementById("text4");
+            var menu2 = document.getElementById('text4_ul');
+            var lists2 = menu2.getElementsByTagName('li');
+            toolkit.addEvent(nav2, 'click', function() {
+                toolkit.toggle(menu2);
+                toolkit.replaceClass(nav2, 'up2', 'down2');
+            });
+            for (var k = 0; k < lists2.length; k++) {
+                toolkit.addEvent(lists2[k], 'click', function(event2) {
+                    toolkit.toggle(menu2);
+                    var eventTarget2 = toolkit.getEventTarget(event2);
+                    nav2.innerHTML = eventTarget2.innerHTML;
+                    toolkit.replaceClass(nav2, 'down2', 'up2');
+                });
+            }
+            // 日历
+            laydate({
+                elem: '#hello',
+                event: 'focus'
+            });
+            //垫付期限
+            $('#text3').blur(function() {
+                if ($('#text3').attr('placeholder') == '请输入天数 1~180 天') {
+                    if ($('#text3').val() > 180) {
+                        $('.span12').show()
+                    } else if(isNaN($(this).val())){
+                        $('.span12').show()
+                    }else {
+                        $('.span12').hide()
+                    }
+                } else if ($('#text3').attr('placeholder') == '请输入月数 1~6 个月') {
+                    if ($('#text3').val() > 6) {
+                        $('.span12').show()
+                    } else if(isNaN($(this).val())){
+                        $('.span12').show()
+                    }else {
+                        $('.span12').hide()
+                    }
+                }
+            })
+            $('.text1').blur(function(){
+                if(isNaN($(this).val())){
+                    $('.span15').show()
+                }else{
+                $('.span15').hide()
+                }
+            })
+            //期望到账日期
+            $('#hello').blur(function() {
+                setTimeout(function() {
+                    var str = $('#hello').val();
+                    str = str.replace(/-/g, "/");
+                    var endTime = new Date(str)
+                    var nowTime = new Date();
+                    var time = endTime.getTime() - nowTime.getTime();
+                    if (time >= 864000000) { // 10天
+                        $('.span13').hide()
+                        $('.span14').hide()
+                    } else if(time<0){
+                        $('.span14').show()
+                        $('.span13').hide()
+                    }else{
+                        $('.span13').show()
+                        $('.span14').hide()
+                    }
+                }, 300)
+            })
+            $('.text1').blur(function() {
+                var num = Number($(this).val());
+                var serveRate=$("#protocol_serve_rate").val();
+                var num_s = (num * serveRate)/100;
+                $('.span3').html(parseFloat(num_s).toFixed(2)+"元");
+                $('#span33').val(parseFloat(num_s).toFixed(2));
+            })
+            var zhi = $('#protocol_serve_rate').val() + "%";
+            $('#valu').html(zhi)
+
+            $('#text2_ul1').click(function() {
+                $('#text3').attr('placeholder', '请输入天数 1~180 天').val("")
+                if ($('#text3').val() == "") {
+                    $('.span12').hide()
+                }
+            })
+            $('#text2_ul2').click(function() {
+                $('#text3').attr('placeholder', '请输入月数 1~6 个月').val("")
+                if ($('#text3').val() == "") {
+                    $('.span12').hide()
+                }
+            })
+            $('#text2_ul li').click(function() {
+                $('#text22').attr('value',$(this).attr('value'))
+            })
+            $('#text4_ul li').click(function() {
+                $('#text44').attr('value',$(this).attr('value'))
+            })
+
+
+        }
+
+    </script>
+</head>
+
+<body>
+<div class="top">
+    <h2>申请垫付</h2>
+</div>
+<div class="con">
+<form id="applypayForm" name="applypayForm" action="addapplypayfor.htm" method="post" onsubmit="return checkSubmit();">
+        <span class="span1">垫付金额</span>
+        <span class="span2">服务费</span>
+        <span class="span3" value="1">0元</span>
+        <span class="span4">计息方式</span>
+        <span class="span5">垫付期限</span>
+        <span class="span6">还款方式</span>
+        <span class="span7">期望到账日期</span>
+        <span class="span8">利率</span>
+        <span class="span9">$!{protocol_rate}%</span>
+        <span class="span10">借款用途</span>
+        <input type="hidden" id="protocol_serve_rate"  value="$!{protocol_serve_rate}" style="display:none;">
+        <span class="span11">垫付款到账后我们将一次性扣取垫付金额的<i id="valu">%</i>作为服务</span>
+        <span class="span12">请输入正确的时期</span>
+        <span class="span13">您选择的到账时机过早，可能会导致融资失败</span>
+        <span class="span14">你选择的时间不对</span>
+        <span class="span15">请输入正确金额</span>
+        <input class="text1" type="text" name="orderMoneyValue" id="orderMoneyValue" placeholder="请输入垫付金额">
+        <input type="hidden" id="span33" name="orderActualServerValue" id="orderActualServerValue"  value="">
+        <input id="text22" type="text" name="orderInterestType" id="orderInterestType" value="2" style="display:none">
+        <span id="text2" value="2">按月</span>
+        <ul id="text2_ul">
+            <li id="text2_ul1" value="1">按天</li>
+            <li id="text2_ul2" value="2">按月</li>
+        </ul>
+        <input id="text3" type="text" name="orderInterestCycle" id="orderInterestCycle" placeholder="请输入月数 1~6 个月">
+       <input id="text44" type="text" name="orderRepayType" id="orderRepayType" value="1" style="display:none">
+        <div id="text4">一次性还本付息</div>
+        <ul id="text4_ul">
+            <li value="1">一次性还本付息</li>
+            <li value="2">一次性还本按月付息</li>
+            <li value="3">一次性还本按天付息</li>
+            <li value="4">按月分期还本付息</li>
+            <li value="5" style="border-bottom:1px solid #a9a9a9;">按天还本分期付息</li>
+        </ul>
+        <input type="text" id="hello" class="laydate-icon text5" name="orderExpectDay" id="orderExpectDay" onclick="laydate()" placeholder="请选择日期">
+        <input type="hidden" name="orderRateValue" id="orderRateValue"  value="$!{protocol_rate}">
+        <input class="text6" type="text" name="orderFinanceResion" id="orderFinanceResion" placeholder="比如：垫发6月工资">
+        <img class="img1" src="/resource/img/subscript.png" alt="">
+        <img class="img2" src="/resource/img/subscript.png" alt="">
+        <div class="btn">
+            <input class="sub" type="submit">
+            <input class="cancel" type="button" value="取消" onclick="window.location.href='#springUrl('payfor.htm?paytype=1')'">
+        </div>
+    </form>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtr.core.persistence.writer.sbt.SbtCityWriterMapper">
+
+  <delete id="deleteAll">
+    delete from sbt_city
+  </delete>
+
+  <insert id="insert" parameterType="com.xtr.comm.sbt.api.City">
+    insert into sbt_city (id, city, cname,
+      pname, prov, region, 
+      rule, subdl, last_date, 
+      month, timestamp)
+    values (#{id,jdbcType=BIGINT}, #{city,jdbcType=VARCHAR}, #{cname,jdbcType=VARCHAR}, 
+      #{pname,jdbcType=VARCHAR}, #{prov,jdbcType=VARCHAR}, #{region,jdbcType=VARCHAR}, 
+      #{rule,jdbcType=INTEGER}, #{subdl,jdbcType=INTEGER}, #{lastDate,jdbcType=VARCHAR}, 
+      #{month,jdbcType=VARCHAR}, #{timestamp,jdbcType=BIGINT})
+  </insert>
+
+</mapper>

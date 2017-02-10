@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>预览并发工资</title>
+    #parse("comm/head.vm")
+    <script src="#springUrl('/resource/js/plugins/laypage/laypage.js')"></script>
+    <script src="#springUrl('/resource/js/salary/rapidlyPayroll.js')"></script>
+    <style>
+        .preAll {
+            height: 100%;
+            width: 95%;
+            margin: 0 auto;
+            min-width: 1200px
+        }
+
+        .preTop {
+            height: 28px;
+            width: 100%;
+            text-align: center;
+            line-height: 28px;
+            padding-top: 20px;
+        }
+
+        .preTop1 {
+            width: 50%;
+            border: 1px solid #999;
+            float: left;
+            box-sizing: border-box;
+            border-radius: 3px 0 0 3px;
+            color: #333;
+            /*cursor: pointer;*/
+            background: #ddd;
+        }
+
+        .preTop1 img, .preTop2 img {
+            margin-top: 3px;
+        }
+
+        .preTop2 {
+            width: 50%;
+            border: 1px solid #333;
+            float: left;
+            box-sizing: border-box;
+            color: #333;
+            border-radius: 3px;
+        }
+
+        .preNav {
+            width: 100%;
+            height: 70px;
+            line-height: 70px
+        }
+
+        .preNav div {
+            float: left;
+        }
+
+        .preNav1 {
+            width: 40%;
+        }
+
+        .preNav1 span {
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .preNav1 input {
+            width: 285px;
+            height: 30px;
+            margin-left: 15px;
+            padding-left: 10px;
+            border-radius: 3px;
+            border: 1px solid #999;
+        }
+
+        .preNav2 {
+            width: 20%;
+        }
+
+        .preNav21 {
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .preNav22 {
+            font-weight: 600;
+            color: #1394ff;
+            font-size: 18px;
+        }
+
+        .preNav3 {
+            width: 20%;
+        }
+
+        .preNav32 {
+            color: #f1543f;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .preNav4 {
+            width: 20%;
+            height: 70px;
+            position: relative
+        }
+
+        .preNav41 {
+            display: block;
+            width: 90px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            background: #324a5e;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            position: absolute;
+            right: 100px;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+
+        .preNav42 {
+            display: block;
+            width: 90px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            background: #ff7058;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        table tr td {
+            border: 1px solid #b8dae5;
+            color: #333;
+            line-height: 48px;
+            text-align: center
+        }
+
+        table thead {
+            background: #f1f9ff;
+        }
+
+        .pagePay {
+            width: 100%;
+            height: 25px;
+            border: 1px soldi red;
+            position: relative;
+        }
+
+        .pagePayroll {
+            position: absolute;
+            right: 0;
+        }
+
+    </style>
+</head>
+<body>
+<input type="hidden" id="excelPath"/>
+<div class="preAll">
+    <div class="preTop">
+        <div class="preTop1"><img src="#springUrl('/resource/img/salary/2.2up3.png')" alt="">&nbsp;上传工资表</div>
+        <div class="preTop2"><img src="#springUrl('/resource/img/salary/2.2up4.png')" alt="">&nbsp;预览并发工资</div>
+    </div>
+    <div class="preNav">
+        <div class="preNav1">
+            <span>工资表标题</span>
+            <input type="text" placeholder="请输入工资表名称，如果不输入将按照月份命名" id="excelTitle">
+        </div>
+        <div class="preNav2">
+            <span class="preNav21">发薪人数</span>
+            <span class="preNav22">0</span>
+        </div>
+        <div class="preNav3">
+            <span class="preNav21">发薪金额</span>
+            <span class="preNav32">0</span>
+        </div>
+        <div class="preNav4">
+            <span class="preNav41">重新上传</span>
+            <span class="preNav42">发工资</span>
+        </div>
+
+    </div>
+    <table id="tablePayroll"></table>
+    <div class="pagePay">
+        <div id="pagePayroll"></div>
+    </div>
+
+</div>
+</body>
+<script>
+    //加载界面数据
+    loadData($!{resultResponse});
+</script>
+</html>

@@ -1,0 +1,544 @@
+
+.salaset {
+    width:90%;
+    margin:0 auto;
+    font-size: 12px;
+    color: #666666;
+    min-width: 960px;
+}
+.salaset-title{
+    width: 100%; height: 80px;position: relative
+}
+.salaset-title h2{
+    text-align: center;
+    line-height: 80px;
+    border-bottom: 1px solid #dbe9ee;
+    color:#000;
+    font-size:25px
+}
+.salaset-title img{
+    position: absolute;
+    right:25px;
+    top:0;
+    bottom:0;
+    margin:auto;
+    cursor: pointer;
+}
+
+.salaset-brie {
+    width: 100%;
+    height: 49px;
+    line-height: 50px;
+    position: relative;
+    margin-top:30px;
+}
+
+.salaset-brie em {
+    display: block;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    cursor: pointer;
+    background: url(../../img/salary/close.png) 0 0 no-repeat;
+}
+
+.salaset-brie-span {
+    margin-left: 20px;
+    float: left;
+}
+
+.salaset-brie-span span {
+    margin-right: 32px;
+    /*display: block;*/
+    /*width: 136px;*/
+    float: left;
+    font-size: 14px;
+
+}
+
+.salaset-brie-span span b {
+    color: #f99b15
+}
+
+.salaset-brie-span span:nth-child(1) {
+    /*width: 90px;*/
+}
+
+.salaset-brie-span1 {
+    float: right;
+}
+
+.salaset-brie-span1 .der {
+    display: block;
+    margin-top: 5px;
+    width: 100px;
+    height: 35px;
+    float: left;
+    color:#fff;
+    border-radius: 5px;
+    line-height: 35px;
+    text-align: center;
+    background:#0696fa;
+}
+.salaset-brie-span1 .active{
+    display: block;
+    margin-top: 5px;
+    width: 98px;
+    height: 33px;
+    float: left;
+    color:#0696fa;
+    border-radius: 5px;
+    line-height: 33px;
+    text-align: center;
+    background:#fff;
+    border:1px solid #0696fa;
+}
+.active{
+    margin-left:20px;
+}
+.salaset-brie-span1 img {
+    margin: 18px 10px 0 0;
+}
+
+/*新版样式*/
+.salaset-list {
+    width: 100%;
+    overflow: auto;
+    white-space: nowrap;
+    margin-top:10px;
+    /*height: 400px;
+    overflow-y:scroll;*/
+
+}
+
+.salaset-list ul {
+    margin-top: -1px;
+}
+
+.salaset-list li {
+    display: inline-block;
+    width: 100px;
+    height: 50px;
+    text-align: center;
+    margin-right: -3.5px;
+    border-top: 1px solid #dbe9ee;
+    border-left: 1px solid #dbe9ee;
+    border-bottom: 1px solid #dbe9ee;
+    background: #f1f9fc;
+}
+
+.salaset-list input {
+    width: 80px;
+    color: #666666;
+    height: 30px;
+    text-align: center;
+    border: none;
+}
+
+.salaset-list .salaset-ttle {
+    /*	margin-top:30px;*/
+}
+
+.salaset-ttle li {
+    height: 60px;
+    background: #5b7798;
+    line-height: 60px;
+    color: #FFFFFF;
+
+}
+
+.salaset-body li {
+    height: 45px;
+    line-height: 45px;
+}
+
+.btn1, .btn2, .btn3, .btn4, .btn5, .btn6 {
+    position: relative;
+}
+
+.btn1 span, .btn2 span, .btn3 span, .btn4 span, .btn5 span, .btn6 span {
+    display: block;
+    width: 30px;
+    height: 20px;
+    line-height: 20px;
+    position: absolute;
+    left: 0;
+    top: -20px;
+    background: url(../../img/salary/opention.png) no-repeat center center;
+    color: #333333;
+    cursor: pointer;
+}
+
+.salaset-list .subitem {
+    display: none;
+}
+
+.salaset-list .idCard {
+    width: 150px;
+}
+
+.salaset-list .bankNumber {
+    width: 150px;
+}
+
+.salaset-bodylast {
+    border-right: 1px solid #dbe9ee;
+    color: #0696fa;
+    cursor: pointer;
+}
+
+
+.okBtn{
+    display: block;
+    width: 240px;
+    height: 40px;
+    border: 0;
+    border-radius: 6px;
+    font-size: 18px;
+    color: #fff;
+    background: #0696fa;
+    float: left;
+    cursor: pointer;
+    font-family: "微软雅黑";
+}
+
+.cancelBtn {
+    display: block;
+    width: 138px;
+    height: 38px;
+    border-radius: 6px;
+    font-size: 18px;
+    color: #0696fa;
+    border:1px solid #0696fa;
+    float: right;
+    cursor: pointer;
+    background:#fff;
+    font-family: "微软雅黑";
+}
+
+.payoff {
+    width: 400px;
+    height: 200px;
+    position: absolute;
+    margin: auto;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: #fff;
+    z-index: 20;
+}
+.foot{
+    background: #f1f9fc;
+    border: 1px solid #dbe9ee;
+    width: 100%;
+    height: 80px;
+    overflow: hidden;
+    margin: 20px auto 40px;
+}
+.payoff h4{
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    text-indent: 20px;
+    font-size: 20px;
+    color: #333;
+    position: relative;
+    font-weight: 300;
+}
+.deriver h3{
+  text-align: center;
+    margin-top:30px;
+    font-size:18px;
+    color:#333;
+}
+.payoff h4 b, .deriver h4 b {
+    display: block;
+    width: 25px;
+    height: 25px;
+    background: url(../../img/salary/close.png) 0 0 no-repeat;
+    position: absolute;
+    right: 6px;
+    top: 6px;
+    cursor: pointer;
+}
+
+.payoff p {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    text-indent: 20px;
+    font-size: 14px;
+    color: #333;
+}
+.foot1{
+    width:100%;
+    height:35px;
+    position: absolute;
+    bottom:20px;
+}
+.footBtn {
+    width: 410px;
+    height: 35px;
+    margin: 0 auto;
+}
+.footBtn1{
+    margin: 20px auto;
+}
+.oBt1 {
+    display: block;
+    width: 200px;
+    height: 35px;
+    border: 0;
+    border-radius: 6px;
+    color: #fff;
+    background: #0696fa;
+    float: left;
+    cursor: pointer;
+    text-align: center;
+    line-height: 35px;
+}
+
+.cBt2 {
+    display: block;
+    border: 1px solid #0696fa;
+    color: #0696fa;
+    width:198px;
+    height:33px;
+    border-radius: 6px;
+    color:#0696fa;
+    background:#fff;
+    border:1px solid #0696fa;
+    float:right;
+    text-align: center;
+    line-height: 33px;
+
+}
+
+.deriver {
+    width: 500px;
+    height: 400px;
+    position: absolute;
+    margin: auto;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: #fff;
+    z-index: 20;
+    border-radius: 20px;
+}
+
+.deriver ul {
+    width: 90%;
+    margin:20px auto;
+    height:250px;
+    overflow: auto;
+}
+.deriver{
+    /*text-align: center;*/
+}
+.deriver ul li {
+    width: 200px;
+    line-height: 30px;
+    font-size: 14px;
+    float: left;
+    color: #666;
+    /*display: flex;*/
+    /*-webkit-align-items: center;*/
+    /*-moz-align-items: center;*/
+    /*-ms-align-items: center;*/
+    /*-o-align-items: center;*/
+    /*align-items: center;*/
+    padding-left: 60px;
+    box-sizing: border-box;
+}
+
+.deriver ul li input {
+    margin-right: 3px;
+}
+
+.deriver .tit {
+    width: 145px;
+}
+
+.mengban {
+    width: 100%;
+    height: 100%;
+    min-width: 1200px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #000000;
+    opacity: 0.8;
+    z-index: 10
+}
+
+/*end*/
+
+.salaset-top {
+    width: 100%;
+    height: 330px;
+    margin: 40px auto 0;
+
+}
+
+.salaset-top .title-top {
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid #dbe9ee;
+}
+
+.salaset-top .title-top li {
+    width: 140px;
+    height: 100%;
+    font-size: 18px;
+    color: #666;
+    float: left;
+    line-height: 50px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.salaset-top .title-top .show {
+    border: 1px solid #dbe9ee;
+    border-bottom: 0;
+    border-top: 2px solid #dbe9ee;
+}
+
+.salaset-top .title-content {
+    min-width: 960px;
+    height: 580px;
+    margin-top: 10px;
+    overflow-y: auto;
+
+}
+
+.salaset-top .title-content .list {
+    margin-top: 10px;
+    width: 100%;
+    height: 78px;
+    padding-top: 20px;
+    box-sizing: border-box;
+    border: 1px solid #dbe9ee;
+    cursor: pointer;
+    background: #f1f9fc;
+    /*position: relative;*/
+}
+
+.salaset-top .title-content .list .ali {
+    width: 10%;
+    height: 100%;
+    float: left;
+    text-align: center;
+    background: url(../../img/salary/lit.png) right 0 no-repeat;
+
+}
+
+.salaset-top .title-content .list .ali:nth-child(1) {
+    line-height: 38px;
+    font-size: 18px;
+    color: #333;
+}
+
+.salaset-top .title-content .list .ali p:nth-child(1) {
+    line-height: 19px;
+    font-size: 12px;
+    color: #666;
+}
+
+.salaset-top .title-content .list .ali p:nth-child(2) {
+    line-height: 19px;
+    font-size: 14px;
+    color: #333;
+}
+
+.salaset-top .title-content .list .m {
+    background: none;
+    margin-left: 100px;
+    width: 200px;
+
+}
+
+.salaset-top .title-content .list .s {
+    display: block;
+    width: 80px;
+    height: 32px;
+    border-radius: 5px;
+    background: #fff;
+    text-align: center;
+    line-height: 32px;
+    color: #0696fa;
+    cursor: pointer;
+    float: left;
+    margin-left: 20px;
+}
+body .salaset-top .title-content .list .spanBtn {
+    display: block;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 32px;
+    color: #0696fa;
+    cursor: pointer;
+    float: left;
+    margin-left: 20px;
+    background: #f1f9fc;
+}
+
+.salaset-top .title-content .list .active {
+
+    background: #0696fa;
+    color: #fff;
+}
+
+.salaset-top .title-content .list .salaset-main {
+    width: 100%;
+    position: absolute;
+    top: 76px;
+    left: 0;
+    z-index: 10;
+    border: 1px solid #b0ccd7;
+    background: #fff;
+}
+
+.main {
+    width: 100%;
+    height: 200px;
+}
+.footer{
+    width:100%;
+    height:35px;
+    position: absolute;
+    bottom:20px;
+
+}
+.footerBtn{
+    width:410px;
+    height:35px;
+    margin: 0 auto;
+}
+.exportBtn{
+    display: block;
+    width:200px;
+    height:35px;
+    background:#0696fa;
+    color:#fff;
+    line-height:35px;
+    text-align: center;
+    border-radius:6px;
+    float:left;
+}
+.exportBtn1{
+    display: block;
+    width:200px;
+    height:35px;
+    background:#fff;
+    color:#0696fa;
+    border:1px solid #0696fa;
+    line-height:35px;
+    border-radius:6px;
+    text-align: center;
+    float:right;
+}

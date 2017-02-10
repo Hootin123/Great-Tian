@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" id="html">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    #parse("comm/head.vm")
+    <meta name="viewport" content="width=divce-width,initial-scale=1,user-scalable=no,minimum-scale=1,maximum-scale=1">
+    <script type="text/javascript" src="#springUrl('/resource/js/scanCode/login.js')"></script>
+    <link rel="stylesheet" type="text/css" href="#springUrl('/resource/css/scanCode/login.css')">
+
+</head>
+<body>
+<header>
+    <div class="logo"></div>
+    <em></em>
+    <div class="txt">
+        <p>有<span>「薪」</span>事</p>
+        <p>找薪太软</p>
+    </div>
+</header>
+<section>
+    <form id="loginForm" method="POST">
+        <ul>
+            <li id="phone">
+                <input type="text" name="memberPhone" placeholder='请输您的手机号码'>
+                <b></b>
+                <em></em>
+            </li>
+            <li id="pwd">
+                <input type="password" name="memberPassword" placeholder ='请设置您的登录密码'>
+                <b></b>
+                <em></em>
+            </li>
+            <li id="code">
+                <input type="text" name="h5Code" maxlength="4" placeholder='请输入验证码'>
+                <img  id="imageCode" src="#springUrl('/h5wallet/generateH5ValidatorImages.htm')"  onclick="changeCodeImg();"/>
+            </li>
+
+        </ul>
+    </form>
+    <div class="hint" style="display: none;"></div>
+    <div class="login">登录</div>
+    <div class="reg">
+        <i></i>
+        注册
+    </div>
+
+</section>
+</body>
+</html>

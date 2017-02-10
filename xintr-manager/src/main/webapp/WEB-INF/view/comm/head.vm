@@ -1,0 +1,27 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+<meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+<link rel="icon" href="#springUrl('/resource/img/favicon.ico')" type="image/x-icon"/>
+<link rel="shortcut icon" href="#springUrl('/resource/img/favicon.ico')" type="image/x-icon"/>
+
+<link href="#springUrl('/resource/css/hui/bootstrap.min14ed.css?v=3.3.6')" rel="stylesheet">
+<link href="#springUrl('/resource/css/hui/font-awesome.min93e3.css?v=4.4.0')" rel="stylesheet">
+<link href="#springUrl('/resource/css/hui/animate.min.css')" rel="stylesheet">
+<link href="#springUrl('/resource/css/hui/style.min862f.css?v=4.1.0')" rel="stylesheet">
+<link href="#springUrl('/resource/css/hui/plugins/sweetalert/sweetalert.css')" rel="stylesheet">
+<link href="#springUrl('/resource/css/hui/comm.css')" rel="stylesheet">
+
+<script src="#springUrl('/resource/js/hui/jquery.min.js?v=2.1.4')"></script>
+<script src="#springUrl('/resource/js/hui/bootstrap.min.js?v=3.3.6')"></script>
+<script src="#springUrl('/resource/js/hui/plugins/sweetalert/sweetalert.min.js')"></script>
+<script src="#springUrl('/resource/js/hui//plugins/layer/layer.js')"></script>
+<script src="#springUrl('/resource/js/comm/swalDialog.js')"></script>
+<script src="#springUrl('/resource/js/comm/DictUtil.js')"></script>
+<script src="#springUrl('/resource/js/comm/tools.js')"></script>
+<script src="#springUrl('/resource/js/comm/validate.js')"></script>
+<script src="#springUrl('/resource/js/comm/validateUtil.js')"></script>
+<script src="#springUrl('/resource/js/comm/date.format.min.js')"></script>
+<script>
+    var BASE_PATH = "#springUrl('')";
+</script>

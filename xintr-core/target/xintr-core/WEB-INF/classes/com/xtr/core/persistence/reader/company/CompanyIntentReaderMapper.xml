@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xtr.core.persistence.reader.company.CompanyIntentReaderMapper" >
+  <resultMap id="BaseResultMap" type="com.xtr.api.domain.company.CompanyIntentBean" >
+    <id column="intent_id" property="intentId" jdbcType="BIGINT" />
+    <result column="company_id" property="companyId" jdbcType="BIGINT" />
+    <result column="member_id" property="memberId" jdbcType="BIGINT" />
+    <result column="intent_type" property="intentType" jdbcType="INTEGER" />
+    <result column="first_init_time" property="firstInitTime" jdbcType="TIMESTAMP" />
+    <result column="exec_time" property="execTime" jdbcType="TIMESTAMP" />
+    <result column="exec_uid" property="execUid" jdbcType="BIGINT" />
+    <result column="init_count" property="initCount" jdbcType="INTEGER" />
+    <result column="intent_state" property="intentState" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="CompanyIntentResultMap" type="com.xtr.api.dto.company.CompanyIntentDto" >
+    <id column="intent_id" property="intentId" jdbcType="BIGINT" />
+    <result column="company_id" property="companyId" jdbcType="BIGINT" />
+    <result column="member_id" property="memberId" jdbcType="BIGINT" />
+    <result column="intent_type" property="intentType" jdbcType="INTEGER" />
+    <result column="first_init_time" property="firstInitTime" jdbcType="TIMESTAMP" />
+    <result column="exec_time" property="execTime" jdbcType="TIMESTAMP" />
+    <result column="exec_uid" property="execUid" jdbcType="BIGINT" />
+    <result column="init_count" property="initCount" jdbcType="INTEGER" />
+    <result column="intent_state" property="intentState" jdbcType="INTEGER" />
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="company_corporation_phone" jdbcType="VARCHAR" property="companyPhone" />
+    <result column="nick_name" jdbcType="VARCHAR" property="managerName" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    intent_id, company_intent.company_id, member_id, intent_type, first_init_time, exec_time, exec_uid,
+    init_count, intent_state
+  </sql>
+
+  <!-- 查询合作意向信息过滤条件 -->
+  <sql id="CompanyIntent_Where_Clause">
+    <if test="companyName != null and companyName != '' ">
+      AND (companys.company_name like   concat('%',#{companyName,jdbcType=VARCHAR},'%')
+      or companys.company_corporation_phone like   concat('%',#{companyName,jdbcType=VARCHAR},'%'))
+    </if>
+    <if test="managerName != null and managerName != '' ">
+      AND sys_user.nick_name like concat('%',#{managerName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="intentState != null">
+      AND company_intent.intent_state =#{intentState,jdbcType=INTEGER}
+    </if>
+    <if test="intentType != null ">
+      AND company_intent.intent_type =#{intentType,jdbcType=INTEGER}
+    </if>
+  </sql>
+  <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >-->
+    <!--select-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from company_intent-->
+    <!--where intent_id = #{intentId,jdbcType=BIGINT}-->
+  <!--</select>-->
+
+  <!--根据过滤条件获取合作意向信息 -->
+  <select id="selectCompanyIntentInfoPageList" resultMap="CompanyIntentResultMap" parameterType="com.xtr.api.dto.company.CompanyIntentDto">
+    SELECT
+    <include refid="Base_Column_List"/>,
+    companys.company_corporation_phone as company_corporation_phone,companys.company_name as company_name,sys_user.nick_name as nick_name
+    FROM company_intent
+    left join companys on company_intent.company_id=companys.company_id
+    left join sys_user on company_intent.exec_uid=sys_user.id
+    WHERE 1=1
+    <include refid="CompanyIntent_Where_Clause"/>
+    ORDER BY company_intent.exec_time DESC
+  </select>
+</mapper>
